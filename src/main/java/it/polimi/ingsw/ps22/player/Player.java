@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.model.Color;
+import it.polimi.ingsw.ps22.resource.BonusAbstract;
 import it.polimi.ingsw.ps22.resource.Point;
 import it.polimi.ingsw.ps22.resource.Resource;
 
@@ -54,7 +55,29 @@ public class Player {
 		return personalBoard;
 	}
 	
+	public void addResource(String type, Resource other){
+		this.resources.get(type).addResource(other);
+	}
 	
+	public void addPoint(String type, Point other){
+		this.points.get(type).addResource(other);
+	}
+	
+	public void addDevelopmentCard(String type, DevelopmentCard other){
+		this.cards.get(type).add(other);
+	}
+	
+	public void addBonusAcc(HashMap<String,BonusAbstract> bonus){
+		this.bonusAcc.addBonus(bonus);
+	}
+	
+	public int getSizeCard(String type){
+		return this.cards.get(type).size();
+	}
+	
+	public void addSpecBonus(String type){
+		this.specBonus.setSpecBonus(type);
+	}
 	
 
 }

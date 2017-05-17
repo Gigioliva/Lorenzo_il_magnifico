@@ -14,5 +14,9 @@ public class BonusAcc {
 	public BonusAbstract getBonus(String type){
 		return accumulator.get(type);
 	}
+	
+	public void addBonus(HashMap<String,BonusAbstract> bonus){
+		//estrarre i key da bonus e caricarli in accumulator
+	}
 
 }
