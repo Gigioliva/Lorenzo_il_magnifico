@@ -22,7 +22,39 @@ public class Player {
 	public Player(){
 	}
 
-	//Tutti i getters
+	public HashMap<String,Resource> getResources(){
+		return this.resources;
+	}
+	
+	public HashMap<String,Point> getPoints(){
+		return this.points;
+	}
+	
+	public ArrayList<DevelopmentCard> getDevelopmentCard(String type){
+		return this.cards.get(type);
+	}
+	
+	public BonusAcc getBonusAcc(){
+		return bonusAcc;
+	}
+	
+	public SpecBonus getSpecBonus(){
+		return specBonus;
+	}
+	
+	public Family getFamily(Color color){
+		return this.family.get(color);
+	}
+	
+	public String getUsername(){
+		return username;
+	}
+	
+	public PersonalBoard getPersonalBoard(){
+		return personalBoard;
+	}
+	
+	
 	
 
 }
