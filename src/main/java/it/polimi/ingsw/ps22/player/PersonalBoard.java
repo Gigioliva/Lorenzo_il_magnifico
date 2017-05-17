@@ -17,6 +17,19 @@ public class PersonalBoard {
 		//setta i vari campi a 0
 	}
 	
-	//getters
+	public HashMap<String, GainResource> getPersonalBonus(){
+		return personalBonus;
+	}
+	
+	public HashMap<Integer, VictoryPoint> getbonusCharacter(){
+		return bonusCharacter;
+	}
 
+	public HashMap<Integer, MilitaryPoint> getRequirementHarvest(){
+		return requirementHarvest;
+	}
+	
+	public HashMap<Integer, VictoryPoint> getBonusHarvest(){
+		return bonusHarvest;
+	}
 }

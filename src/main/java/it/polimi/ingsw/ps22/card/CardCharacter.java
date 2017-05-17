@@ -50,6 +50,13 @@ public class CardCharacter extends DevelopmentCard {
 		}
 	}
 	
+	@Override 
+	public boolean takeCardControl(Player player){
+		int requiredCost = this.cost.getQuantity();
+		int playerCoin = player.getResources().get("Coin").getQuantity();
+		return ( playerCoin >= requiredCost );
+	}
+	
 	/*
 	public void applyAllEffects(Player player, Board board){
 		applyPermanentEffects(player,board);
