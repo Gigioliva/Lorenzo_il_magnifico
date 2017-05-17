@@ -18,8 +18,8 @@ public class Model {
 		// FaithPointTrack temp = new FaithPointTrack();
 		// this.board = new Board(temp);
 		int turn=1;
-		this.players = new HashMap<String, Player>();
-		this.orderedPlayers = new ArrayList<Player>();
+		this.players = new HashMap<>();
+		this.orderedPlayers = new ArrayList<>();
 	}
 	
 	public Board getBoard(){
