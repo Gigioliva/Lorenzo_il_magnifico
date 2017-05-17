@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps22.resource;
 
-public class BonusAbstract {
+public abstract class BonusAbstract {
 private int quantity;
 	
 	public BonusAbstract(int quantity){
