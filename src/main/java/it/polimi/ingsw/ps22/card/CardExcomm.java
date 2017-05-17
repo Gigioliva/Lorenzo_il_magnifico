@@ -36,5 +36,6 @@ public class CardExcomm extends Card {
 	public String getName() {
 		return this.name;
 	}
+	
 
 }

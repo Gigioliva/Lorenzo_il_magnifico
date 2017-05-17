@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps22.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.Resource;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public abstract class DevelopmentCard extends Card {
 	private int era;
@@ -35,8 +36,12 @@ public abstract class DevelopmentCard extends Card {
 	public boolean takeCardControl(Player player) {
 		return false;
 	}
+	
+	public ArrayList<Integer> getPossibleChoices(Player player){
+		return null;
+	}
 
-	public void addRequisiteCost(HashMap<String, Resource> cost, HashMap<String, Resource> requisite) {
+	public void addRequisiteCost(HashMap<String, ResourceAbstract> cost, HashMap<String, ResourceAbstract> requisite) {
 
 	}
 

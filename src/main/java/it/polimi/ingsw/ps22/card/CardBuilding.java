@@ -54,5 +54,16 @@ public class CardBuilding extends DevelopmentCard {
 	public int getActionValue() {
 		return this.actionValue;
 	}
+	
+	@Override 
+	public boolean takeCardControl(Player player){
+		for(String type: cost.keySet()){
+			int costRequired = cost.get(type).getQuantity();
+			int playerResource = player.getResources().get(type).getQuantity();
+			if (costRequired > playerResource)
+				return false;
+		}
+		return true;
+	}
 
 }
