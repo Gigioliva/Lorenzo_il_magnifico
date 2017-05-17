@@ -4,10 +4,13 @@ import java.util.HashMap;
 
 public class SpecBonus {
 	private HashMap<String,Boolean> bonus;
-	//altri bool
 	
 	public SpecBonus(){
-		//setta a null tutti i bool;
+		bonus=new HashMap<String,Boolean>();
+		bonus.put("NotMarket",false);
+		bonus.put("DoubleServant",false);
+		bonus.put("SkipFirstMove",false);
+		bonus.put("GainTowers",false);
 	}
 	
 	public void setSpecBonus(String type){
