@@ -1,7 +1,7 @@
-package board;
+package it.polimi.ingsw.ps22.board;
 import java.util.HashMap;
 
-import resource.VictoryPoint;
+import it.polimi.ingsw.ps22.resource.VictoryPoint;
 
 public class FaithPointTrack {
 	private HashMap<Integer,VictoryPoint> track;

@@ -1,5 +1,5 @@
-package board;
-import card.DevelopmentCard;
+package it.polimi.ingsw.ps22.board;
+import it.polimi.ingsw.ps22.card.DevelopmentCard;
 
 public class TowerSpace extends ActionSpace {
 	

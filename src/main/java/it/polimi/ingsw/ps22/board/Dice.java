@@ -1,7 +1,8 @@
-package board;
+package it.polimi.ingsw.ps22.board;
 
 import java.util.HashMap;
-import model.Color;
+
+import it.polimi.ingsw.ps22.model.Color;
 
 public class Dice {
 	private HashMap<Color, Integer> dice; 

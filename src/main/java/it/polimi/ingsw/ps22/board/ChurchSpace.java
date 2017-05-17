@@ -1,8 +1,9 @@
-package board;
+package it.polimi.ingsw.ps22.board;
 
 import java.util.ArrayList;
-import card.CardExcomm;
-import player.Player;
+
+import it.polimi.ingsw.ps22.card.CardExcomm;
+import it.polimi.ingsw.ps22.player.Player;
 
 
 public class ChurchSpace {

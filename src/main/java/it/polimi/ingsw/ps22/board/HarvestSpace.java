@@ -1,4 +1,4 @@
-package board;
+package it.polimi.ingsw.ps22.board;
 
 public class HarvestSpace extends ActionSpace{
 	

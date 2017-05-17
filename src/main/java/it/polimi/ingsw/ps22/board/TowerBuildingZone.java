@@ -1,6 +1,5 @@
-package board;
-
-import player.Player;
+package it.polimi.ingsw.ps22.board;
+import it.polimi.ingsw.ps22.player.Player;
 
 public class TowerBuildingZone extends TowerZone {
 	

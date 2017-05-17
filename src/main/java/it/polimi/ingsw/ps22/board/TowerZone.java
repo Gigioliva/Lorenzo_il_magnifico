@@ -1,9 +1,10 @@
-package board;
+package it.polimi.ingsw.ps22.board;
 
-import player.Player;
 import java.util.ArrayList;
 import java.util.HashMap;
-import card.DevelopmentCard;
+
+import it.polimi.ingsw.ps22.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.player.Player;
 
 public class TowerZone extends Zone {
 	

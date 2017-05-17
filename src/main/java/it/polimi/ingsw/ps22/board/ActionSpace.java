@@ -1,11 +1,11 @@
-package board;
+package it.polimi.ingsw.ps22.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import player.Family;
-import player.Player;
-import resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.player.Family;
+import it.polimi.ingsw.ps22.player.Player;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public abstract class ActionSpace {
 	private final int actionCost;
