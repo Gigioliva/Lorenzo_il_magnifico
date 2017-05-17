@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps22.view;
 
 import java.util.Observable;
 import java.util.Observer;
-import move.Move;
+import it.polimi.ingsw.ps22.move.Move;
 
 public class View extends Observable implements Observer {
 	private String username;
