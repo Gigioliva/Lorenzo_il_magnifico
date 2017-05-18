@@ -46,9 +46,14 @@ public class CardTerritory extends DevelopmentCard {
 	@Override
 	public boolean takeCardControl(Player player){
 		int size = player.getSizeCard("Territory");
-		int requirementHarvest = player.getPersonalBoard().getRequirementHarvest().get(size+1).getQuantity();
-		int harvestPoint = player.getPoints().get("Territory").getQuantity();
-		return requirementHarvest <= harvestPoint;
+		//se il giocatore ha già raggiunto il limite di carte territorio non può prendere la carta
+		if (size >= player.getPersonalBoard().getRequirementHarvest().size())
+			return false;
+		else{
+			int requirementHarvest = player.getPersonalBoard().getRequirementHarvest().get(size+1).getQuantity();
+			int harvestPoint = player.getPoints().get("Territory").getQuantity();
+			return requirementHarvest <= harvestPoint;
+		}
 	}
 
 }

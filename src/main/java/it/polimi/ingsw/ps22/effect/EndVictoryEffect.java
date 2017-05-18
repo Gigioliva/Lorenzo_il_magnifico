@@ -12,6 +12,6 @@ public class EndVictoryEffect implements EndEffect {
 
 	@Override
 	public void performEffect(Player player, Board board) {
-		
+		player.addPoint("VictoryPoint", points);
 	}
 }

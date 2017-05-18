@@ -2,9 +2,21 @@ package it.polimi.ingsw.ps22.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import it.polimi.ingsw.ps22.resource.*;
-import it.polimi.ingsw.ps22.card.*;
+
+import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.effect.EndEffect;
 import it.polimi.ingsw.ps22.model.Color;
+import it.polimi.ingsw.ps22.resource.BonusAbstract;
+import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.FaithPoint;
+import it.polimi.ingsw.ps22.resource.MilitaryPoint;
+import it.polimi.ingsw.ps22.resource.Point;
+import it.polimi.ingsw.ps22.resource.Resource;
+import it.polimi.ingsw.ps22.resource.Servant;
+import it.polimi.ingsw.ps22.resource.Stone;
+import it.polimi.ingsw.ps22.resource.VictoryPoint;
+import it.polimi.ingsw.ps22.resource.Wood;
 
 public class Player {
 	private HashMap<String, Resource> resources;
@@ -12,9 +24,11 @@ public class Player {
 	private HashMap<String, ArrayList<DevelopmentCard>> cards; 
 	private BonusAcc bonusAcc;
 	private SpecBonus specBonus;
+	private ArrayList<EndEffect> endEffects;
 	private HashMap<Color, Family> family;
 	private PersonalBoard personalBoard;
 	private String username;
+	
 
 	public Player(String username) {
 		resources = new HashMap<String, Resource>();
@@ -40,6 +54,7 @@ public class Player {
 		family.put(Color.NEUTRAL, new Family(Color.NEUTRAL, this));
 		this.username = username;
 		personalBoard = new PersonalBoard();
+		endEffects = new ArrayList<EndEffect>();
 	}
 
 	public HashMap<String, Resource> getResources() {
@@ -96,6 +111,32 @@ public class Player {
 
 	public void addSpecBonus(String type) {
 		this.specBonus.setSpecBonus(type);
+	}
+	
+	public void applyEndEffects(Board board){
+		for(EndEffect effect: endEffects){
+			effect.performEffect(this, board);
+		}
+	}
+	
+	public ArrayList<EndEffect> getEndEffects(){
+		return endEffects;
+	}
+	
+	public boolean isResource(String type){
+		for(String string: resources.keySet()){
+			if (string.equalsIgnoreCase(type))
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean isPoint(String type){
+		for(String string: points.keySet()){
+			if (string.equalsIgnoreCase(type))
+				return true;
+		}
+		return false;
 	}
 
 }

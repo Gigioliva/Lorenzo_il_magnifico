@@ -45,6 +45,12 @@ public class CardVenture extends DevelopmentCard {
 	
 	public void loadEndEffects(Player player, Board board) {
 		//Accedi a player e caricali nel EndEffect Arraylist
+		try{
+			player.getEndEffects().addAll(endEffects);
+		}
+		catch (NullPointerException e){ //lancia eccezione se endEffect è vuota, in tal caso semplicemente ritorno al chiamante
+			return;
+		}
 	}
 	
 	@Override
