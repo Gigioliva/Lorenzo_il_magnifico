@@ -47,6 +47,17 @@ public class CardVenture extends DevelopmentCard {
 		//Accedi a player e caricali nel EndEffect Arraylist
 	}
 	
+	@Override
+	public ArrayList<Integer> getAffordableCosts(Player player){
+		ArrayList<Integer> affordableCosts = new ArrayList<Integer>();
+		for(RequisiteCost item: requisiteCost){
+			if (canAffordCostRequisite(item,player))
+				affordableCosts.add(requisiteCost.indexOf(item));
+		}
+		return affordableCosts;
+	}
+	
+	
 	private boolean controlType(ResourceAbstract type){
 		return (type instanceof Resource);
 	}

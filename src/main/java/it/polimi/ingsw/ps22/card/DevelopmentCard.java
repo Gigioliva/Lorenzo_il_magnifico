@@ -37,7 +37,8 @@ public abstract class DevelopmentCard extends Card {
 		return false;
 	}
 	
-	public ArrayList<Integer> getPossibleChoices(Player player){
+	//ritorna gli indici dei i costi compatibili con le risorse del giocatore
+	public ArrayList<Integer> getAffordableCosts(Player player){
 		return null;
 	}
 
