@@ -45,7 +45,24 @@ public class CardVenture extends DevelopmentCard {
 	
 	public void loadEndEffects(Player player, Board board) {
 		//Accedi a player e caricali nel EndEffect Arraylist
+		try{
+			player.getEndEffects().addAll(endEffects);
+		}
+		catch (NullPointerException e){ //lancia eccezione se endEffect è vuota, in tal caso semplicemente ritorno al chiamante
+			return;
+		}
 	}
+	
+	@Override
+	public ArrayList<Integer> getAffordableCosts(Player player){
+		ArrayList<Integer> affordableCosts = new ArrayList<Integer>();
+		for(RequisiteCost item: requisiteCost){
+			if (canAffordCostRequisite(item,player))
+				affordableCosts.add(requisiteCost.indexOf(item));
+		}
+		return affordableCosts;
+	}
+	
 	
 	private boolean controlType(ResourceAbstract type){
 		return (type instanceof Resource);
