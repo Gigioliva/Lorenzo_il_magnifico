@@ -13,7 +13,7 @@ public class ExtraAction implements ImmediateEffect {
 
 	@Override
 	public void performEffect(Player player, Board board) {
-		
+		action.applyAction(player, board);
 	}
 
 }
