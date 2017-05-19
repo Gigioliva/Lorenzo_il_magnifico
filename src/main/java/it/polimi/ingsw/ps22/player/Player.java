@@ -13,13 +13,14 @@ import it.polimi.ingsw.ps22.resource.FaithPoint;
 import it.polimi.ingsw.ps22.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.resource.Point;
 import it.polimi.ingsw.ps22.resource.Resource;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.resource.Servant;
 import it.polimi.ingsw.ps22.resource.Stone;
 import it.polimi.ingsw.ps22.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.resource.Wood;
 
 public class Player {
-	private HashMap<String, Resource> resources;
+	private HashMap<String, Resource> resources; //incluse risorse e punti
 	private HashMap<String, Point> points;
 	private HashMap<String, ArrayList<DevelopmentCard>> cards; 
 	private BonusAcc bonusAcc;
@@ -32,11 +33,11 @@ public class Player {
 
 	public Player(String username) {
 		resources = new HashMap<String, Resource>();
+		points = new HashMap<String, Point>();
 		resources.put("Coin", new Coin(0));
 		resources.put("Stone", new Stone(2));
 		resources.put("Wood", new Wood(2));
 		resources.put("Servant", new Servant(3));
-		points = new HashMap<String, Point>();
 		points.put("VictoryPoint", new VictoryPoint(0));
 		points.put("MilitaryPoint", new MilitaryPoint(0));
 		points.put("FaithPoint", new FaithPoint(0));
@@ -60,10 +61,11 @@ public class Player {
 	public HashMap<String, Resource> getResources() {
 		return this.resources;
 	}
-
-	public HashMap<String, Point> getPoints() {
+	
+	public HashMap<String, Point> getPoints(){
 		return this.points;
 	}
+
 
 	public ArrayList<DevelopmentCard> getDevelopmentCard(String type) {
 		return this.cards.get(type);
@@ -89,14 +91,14 @@ public class Player {
 		return personalBoard;
 	}
 
-	public void addResource(String type, Resource other) {
+	public void addResources(String type, Resource other) {
 		this.resources.get(type).addResource(other);
 	}
 
-	public void addPoint(String type, Point other) {
-		this.points.get(type).addResource(other);
+	public void addPoints(String type, Point other) {
+		this.resources.get(type).addResource(other);
 	}
-
+	
 	public void addDevelopmentCard(String type, DevelopmentCard other) {
 		this.cards.get(type).add(other);
 	}
@@ -123,20 +125,26 @@ public class Player {
 		return endEffects;
 	}
 	
-	public boolean isResource(String type){
-		for(String string: resources.keySet()){
-			if (string.equalsIgnoreCase(type))
-				return true;
-		}
-		return false;
+	private boolean isResource(String type){
+		return this.resources.containsKey(type);
 	}
 	
-	public boolean isPoint(String type){
-		for(String string: points.keySet()){
-			if (string.equalsIgnoreCase(type))
-				return true;
-		}
-		return false;
+	private boolean isPoint(String type){
+		return this.points.containsKey(type);
 	}
 
+	public ResourceAbstract getSpecificResource(String type){
+		if(this.isResource(type)){
+			return this.resources.get(type);
+		}
+		return this.points.get(type);
+	}
+	
+	public boolean isCard(String type){
+		return (cards.containsKey(type));
+	}
+	
+	public void addSpecificResource(String type, ResourceAbstract other){
+		this.getSpecificResource(type).addResource(other);
+	}
 }

@@ -7,7 +7,6 @@ import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.effect.EndEffect;
 import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.player.Player;
-import it.polimi.ingsw.ps22.resource.Resource;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class CardVenture extends DevelopmentCard {
@@ -20,6 +19,10 @@ public class CardVenture extends DevelopmentCard {
 		this.requisiteCost=new ArrayList<RequisiteCost>();
 		this.endEffects=new ArrayList<EndEffect>();
 		this.immediateEffects=new ArrayList<ImmediateEffect>();
+	}
+	
+	public ArrayList<RequisiteCost> getRequisiteCost(){
+		return this.requisiteCost;
 	}
 	
 	public void addRequisiteCost(HashMap<String, ResourceAbstract> cost, HashMap<String, ResourceAbstract> requisite){
@@ -64,41 +67,22 @@ public class CardVenture extends DevelopmentCard {
 	}
 	
 	
-	private boolean controlType(ResourceAbstract type){
-		return (type instanceof Resource);
-	}
-	
 	//controlla che un giocaotore possa soddisfare un singolo costo
 	private boolean controlSingleCost(RequisiteCost cost, String type, Player player){
-		if (controlType(cost.getCost().get(type))){
-			int playerResource = player.getResources().get(type).getQuantity();
-			int costResource = cost.getSpecificCost(type);
-			if (costResource>playerResource)
-				return false;
-		}
-		else{
-			int playerPoints= player.getPoints().get(type).getQuantity();
-			int costResource = cost.getSpecificCost(type);
-			if (costResource>playerPoints)
-				return false;
-		}
+		int playerResource = player.getSpecificResource(type).getQuantity();
+		int costResource = cost.getSpecificCost(type);
+		if (costResource>playerResource)
+			return false;
 		return true;
 	}
 	
 	//controlla che un certo requisito sia soddisfatto dal giocatore
 	private boolean controlSingleRequisite(RequisiteCost requisite, String type, Player player){
-		if (controlType(requisite.getRequisite().get(type))){
-			int playerResource = player.getResources().get(type).getQuantity();
-			int requisiteResource = requisite.getSpecificCost(type);
-			if (requisiteResource>playerResource)
-				return false;
-		}
-		else{
-			int playerPoints= player.getPoints().get(type).getQuantity();
-			int costResource = requisite.getSpecificRequisite(type);
-			if (costResource>playerPoints)
-				return false;
-		}
+
+		int playerResource = player.getSpecificResource(type).getQuantity();
+		int requisiteResource = requisite.getSpecificCost(type);
+		if (requisiteResource>playerResource)
+			return false;
 		return true;
 	}
 	

@@ -15,15 +15,8 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 
 	@Override
 	public void performEffect(Player player, Board board) {
-		if (player.isResource(multiplier)){
-			ResourceAbstract playerResource = player.getResources().get(multiplier);
-			playerResource.addResource(multiplicand);
-		}
-		else{
-			ResourceAbstract playerResource = player.getPoints().get(multiplier);
-			playerResource.addResource(multiplicand);
-		}
-		
+		ResourceAbstract playerResource = player.getSpecificResource(multiplier);
+		playerResource.addResource(multiplicand);
 	}
 
 }

@@ -18,8 +18,9 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 	
 	@Override
 	public void performEffect(Player player, Board board) {
-		
-
+		for(String type: gain.keySet()){
+			player.getSpecificResource(type).addResource(gain.get(type));
+		}
 	}
 	
 	

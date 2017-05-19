@@ -47,9 +47,13 @@ public abstract class DevelopmentCard extends Card {
 	}
 
 	public void addImmediateEffect(ImmediateEffect effect) {
-
+		
 	}
 
+	public ArrayList<RequisiteCost> getRequisiteCost(){
+		return null;
+	}
+	
 	public void addActionEffect(ActionEffect effect) {
 
 	}

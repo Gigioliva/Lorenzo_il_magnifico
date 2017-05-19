@@ -51,7 +51,7 @@ public class CardTerritory extends DevelopmentCard {
 			return false;
 		else{
 			int requirementHarvest = player.getPersonalBoard().getRequirementHarvest().get(size+1).getQuantity();
-			int harvestPoint = player.getPoints().get("Territory").getQuantity();
+			int harvestPoint = player.getResources().get("Territory").getQuantity();
 			return requirementHarvest <= harvestPoint;
 		}
 	}
