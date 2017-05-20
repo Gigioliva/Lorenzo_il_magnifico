@@ -50,7 +50,11 @@ public class CardBuilding extends DevelopmentCard {
 	}
 
 	public void applyActionEffect(Player player, Board board, int number) {
-		this.actionEffects.get(number).performEffect(player, board);
+		try{
+			this.actionEffects.get(number).performEffect(player, board);
+		}catch (IndexOutOfBoundsException e){
+			return;
+		}
 	}
 
 	public int getActionValue() {
