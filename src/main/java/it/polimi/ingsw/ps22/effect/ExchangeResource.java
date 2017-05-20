@@ -1,4 +1,5 @@
 package it.polimi.ingsw.ps22.effect;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
@@ -40,6 +41,7 @@ public class ExchangeResource implements ActionEffect{
 		for(String type: gain.keySet()){
 			player.getSpecificResource(type).addResource(gain.get(type));
 		}
+		player.addResources(new ArrayList<String>(gain.keySet()));
 	}
 	
 	@Override

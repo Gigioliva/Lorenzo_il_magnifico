@@ -91,8 +91,18 @@ public class Player {
 		return personalBoard;
 	}
 
-	public void addResources(String type, Resource other) {
-		this.resources.get(type).addResource(other);
+	public void addResources(ArrayList<String> resources) {
+		for(String type: resources){
+			BonusAbstract temp = this.bonusAcc.getBonus(type);
+			if(this.isPoint(type)){
+				this.points.get(type).addResource(temp);
+				//this.points.get(type).addResource(resources);
+			}
+			else{
+				this.resources.get(type).addResource(temp);
+				//this.resources.get(type).addResource(resources.get(type));
+			}
+		}
 	}
 	
 	public void subResources(String type, Resource other) {
