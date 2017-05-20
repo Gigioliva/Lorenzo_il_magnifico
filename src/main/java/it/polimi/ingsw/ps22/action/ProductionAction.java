@@ -11,7 +11,7 @@ public class ProductionAction extends Action {
 
 	@Override
 	public void applyAction(Player player, Board board) {
-
+			//ricordarsi che i gain devono essere fatti per ultimi e che gli scambi possono essere più di uno
 	}
 
 }

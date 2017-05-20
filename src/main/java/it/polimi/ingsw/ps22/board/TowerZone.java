@@ -58,13 +58,15 @@ public class TowerZone extends Zone {
 		boolean applyBonus=false;
 		boolean payCoin=false;
 		boolean result=false;
+		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))){
+			if(player.getSpecificResource("Coin").getQuantity()<3)
+				return false;
+			player.getSpecificResource("Coin").subResource(new Coin(3));
+			payCoin=true;
+		}
 		if(!(player.getSpecBonus().returnBool("NoGainTowers") && (towerSpace.getPlan()==3 || towerSpace.getPlan()==4))){
 			towerSpace.applyBonus(player);
 			applyBonus=true;
-		}
-		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))){
-			player.getSpecificResource("Coin").subResource(new Coin(3));
-			payCoin=true;
 		}
 		result=towerSpace.getCard().takeCardControl(player);
 		if(payCoin) player.getSpecificResource("Coin").addResource(new Coin(3));
