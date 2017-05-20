@@ -36,7 +36,7 @@ import it.polimi.ingsw.ps22.resource.VictoryPoint;
 
 public class ZoneBonusSaxParser {
 
-	public static void MarketParser(String pathname, ArrayList<HashMap<String, ResourceAbstract>> parsedData) 
+	public static void BonusParser(String pathname, ArrayList<HashMap<String, ResourceAbstract>> parsedData) 
 	{
 		try {
 		   SAXParserFactory factory = SAXParserFactory.newInstance();
