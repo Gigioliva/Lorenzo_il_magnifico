@@ -10,7 +10,6 @@ public class Board {
 	private HarvestZone harvestZone;
 	private CouncilPalaceSpace councilPalace;
 	private HashMap<Integer,ChurchSpace> church;
-	private FaithPointTrack faithTrack;
 	private Dice dice;
 	
 	public Board(FaithPointTrack faithTrack){
@@ -19,10 +18,9 @@ public class Board {
 		harvestZone=new HarvestZone();
 		councilPalace=new CouncilPalaceSpace();
 		church=new HashMap<Integer,ChurchSpace>();
-		church.put(1, new ChurchSpace());
-		church.put(2, new ChurchSpace());
-		church.put(3, new ChurchSpace());
-		this.faithTrack=faithTrack;
+		church.put(1, new ChurchSpace(1));
+		church.put(2, new ChurchSpace(2));
+		church.put(3, new ChurchSpace(3));
 		dice=new Dice();
 		towers=new HashMap<String,TowerZone>();
 		towers.put("Building", new TowerBuildingZone(this));
@@ -49,9 +47,7 @@ public class Board {
 	public ChurchSpace getChurchSpace(int era){
 		return church.get(era);
 	}
-	public FaithPointTrack getFaithTrack (){
-		return faithTrack;
-	}
+	
 	public int getDice(Color color){
 		return dice.getDice(color);
 	}

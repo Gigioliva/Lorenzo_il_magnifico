@@ -24,9 +24,9 @@ public class TowerBuildingZone extends TowerZone {
 			if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 				player.getSpecificResource("Coin").subResource(new Coin(3));
 			}
-			//pagare il costo
-			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
+			towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
 			player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 			return true;
 		}
 		return false;
