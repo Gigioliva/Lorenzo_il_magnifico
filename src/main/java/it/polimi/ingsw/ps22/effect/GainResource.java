@@ -12,7 +12,7 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 		gain=new HashMap<String, ResourceAbstract>();
 	}
 	
-	public void addExchange(String type, ResourceAbstract resource){
+	public void addGain(String type, ResourceAbstract resource){
 		gain.put(type, resource);
 	}
 	
