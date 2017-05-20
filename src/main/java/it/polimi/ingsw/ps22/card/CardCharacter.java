@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.player.Player;
-import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.Resource;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class CardCharacter extends DevelopmentCard {
 	private Coin cost;										//provare a usare tutto nel costruttore se XML permette
@@ -50,9 +51,24 @@ public class CardCharacter extends DevelopmentCard {
 		}
 	}
 	
+	private Coin getActualCost(Player player){
+		Coin reduction = player.getBonusAcc().getSaleCharacter();
+			if(reduction.getQuantity() > cost.getQuantity())
+				return new Coin(0);
+			else{
+				return new Coin(cost.getQuantity() - reduction.getQuantity());
+			}
+	}
+	
+	@Override
+	public void applyCostToPlayer(Player player) {
+		 Coin actualCost = getActualCost(player);
+		 player.getResources().get("Coin").subResource(actualCost);
+	}
+	
 	@Override 
 	public boolean takeCardControl(Player player){
-		int requiredCost = this.cost.getQuantity();
+		int requiredCost = getActualCost(player).getQuantity();
 		int playerCoin = player.getResources().get("Coin").getQuantity();
 		return ( playerCoin >= requiredCost );
 	}

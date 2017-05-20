@@ -21,5 +21,6 @@ public class BonusEffect implements PermanentEffect {
 	public void performEffect(Player player, Board board) {
 		player.getBonusAcc().addBonus(bonus);
 	}
+
 	
 }

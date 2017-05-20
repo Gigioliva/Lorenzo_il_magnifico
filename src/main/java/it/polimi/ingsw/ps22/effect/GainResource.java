@@ -16,6 +16,10 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 		gain.put(type, resource);
 	}
 	
+	public HashMap<String,ResourceAbstract> getGain(){
+		return gain;
+	}
+	
 	@Override
 	public void performEffect(Player player, Board board) {
 		for(String type: gain.keySet()){

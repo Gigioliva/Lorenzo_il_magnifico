@@ -21,7 +21,7 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 			multiplicand.addResource(new ResourceAbstract(numeroCarte*multiplicand.getQuantity()));
 		}
 		ResourceAbstract playerResource = player.getSpecificResource(multiplier);
-		playerResource.addResource(multiplicand);
+		playerResource.addResource(new ResourceAbstract(playerResource.getQuantity() * multiplicand.getQuantity()));
 	}
 
 }

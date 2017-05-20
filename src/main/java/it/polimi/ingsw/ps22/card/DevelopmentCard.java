@@ -38,7 +38,7 @@ public abstract class DevelopmentCard extends Card {
 	}
 	
 	//ritorna gli indici dei i costi compatibili con le risorse del giocatore
-	public ArrayList<Integer> getAffordableCosts(Player player){
+	public ArrayList<RequisiteCost> getAffordableCosts(Player player){
 		return null;
 	}
 
@@ -100,6 +100,14 @@ public abstract class DevelopmentCard extends Card {
 	
 	public HashMap<String, Resource> getCost() {
 		return null;
+	}
+	
+	public void applyCostToPlayer(Player player){
+		
+	}
+	
+	public void applyCostToPlayer(Player player, RequisiteCost chosenCost){
+		
 	}
 
 }

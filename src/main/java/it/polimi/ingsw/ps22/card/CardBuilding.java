@@ -2,11 +2,13 @@ package it.polimi.ingsw.ps22.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.player.Player;
-import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.resource.Resource;
-import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class CardBuilding extends DevelopmentCard {
 	private final int actionValue;
@@ -57,13 +59,36 @@ public class CardBuilding extends DevelopmentCard {
 	
 	@Override 
 	public boolean takeCardControl(Player player){
-		for(String type: cost.keySet()){
-			int costRequired = cost.get(type).getQuantity();
+		HashMap<String,ResourceAbstract> actualCosts = getActualCost(player);
+		for(String type: actualCosts.keySet()){
+			int costRequired = actualCosts.get(type).getQuantity();
 			int playerResource = player.getResources().get(type).getQuantity();
 			if (costRequired > playerResource)
 				return false;
 		}
 		return true;
+	}
+	 
+	private HashMap<String,ResourceAbstract> getActualCost(Player player){
+		HashMap<String, ResourceAbstract> actualCosts = new HashMap<String, ResourceAbstract>();
+		for(String type: cost.keySet()){
+			ResourceAbstract cardCost = cost.get(type);
+			ResourceAbstract reduction = player.getBonusAcc().getSaleBuilding().get(type);
+			if(reduction.getQuantity() > cardCost.getQuantity())
+				actualCosts.put(type, new ResourceAbstract(0));
+			else{
+				actualCosts.put(type, new ResourceAbstract(cardCost.getQuantity() - reduction.getQuantity()));
+			}
+		}
+		return actualCosts;
+	}
+	
+	@Override
+	public void applyCostToPlayer(Player player) {
+		 HashMap<String,ResourceAbstract> actualCosts = getActualCost(player);
+		 for(String type: actualCosts.keySet()){
+			 player.getSpecificResource(type).subResource(actualCosts.get(type));
+		 }
 	}
 
 }

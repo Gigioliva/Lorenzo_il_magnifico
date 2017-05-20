@@ -13,7 +13,7 @@ public class StrangeEffect implements PermanentEffect{
 
 	@Override
 	public void performEffect(Player player, Board board) {
-		
+		player.getSpecBonus().setSpecBonus(type);
 	}
 	
 

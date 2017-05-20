@@ -57,11 +57,11 @@ public class CardVenture extends DevelopmentCard {
 	}
 	
 	@Override
-	public ArrayList<Integer> getAffordableCosts(Player player){
-		ArrayList<Integer> affordableCosts = new ArrayList<Integer>();
+	public ArrayList<RequisiteCost> getAffordableCosts(Player player){
+		ArrayList<RequisiteCost> affordableCosts = new ArrayList<RequisiteCost>();
 		for(RequisiteCost item: requisiteCost){
 			if (canAffordCostRequisite(item,player))
-				affordableCosts.add(requisiteCost.indexOf(item));
+				affordableCosts.add(item);
 		}
 		return affordableCosts;
 	}
@@ -105,15 +105,47 @@ public class CardVenture extends DevelopmentCard {
 
 	}
 	
+	public ArrayList<RequisiteCost> getActualCost(Player player){
+		ArrayList<RequisiteCost> actualCosts = new ArrayList<RequisiteCost>();
+		for(RequisiteCost requisiteCost: requisiteCost){
+			HashMap<String,ResourceAbstract> newCost = new HashMap<String,ResourceAbstract>();
+			for(String type: requisiteCost.getCost().keySet()){
+				ResourceAbstract specificCost = requisiteCost.getCost().get(type);
+				ResourceAbstract reduction = player.getBonusAcc().getSaleVenture().get(type);
+				if(reduction.getQuantity() > specificCost.getQuantity()){
+					newCost.put(type, new ResourceAbstract(0));
+				}
+				else{
+					newCost.put(type, new ResourceAbstract(specificCost.getQuantity() - reduction.getQuantity()));
+				}
+			}
+			RequisiteCost newRequisiteCost = new RequisiteCost();
+			newRequisiteCost.addCost(newCost);
+			newRequisiteCost.addRequisite(requisiteCost.getRequisite());
+			actualCosts.add(newRequisiteCost);
+		}
+		return actualCosts;
+	}
+	
+	@Override
+	public void applyCostToPlayer(Player player, RequisiteCost chosenCost){
+		 for(String type: chosenCost.getCost().keySet()){
+			 player.getSpecificResource(type).subResource(chosenCost.getCost().get(type));
+		 }
+	}
+	
+	
 	//ritorna vero se esiste un costo-requisito che il player si può permettere
 	@Override
 	public boolean takeCardControl(Player player){
-		for(RequisiteCost item: requisiteCost){
+		ArrayList<RequisiteCost> actualCosts = getActualCost(player);
+		for(RequisiteCost item: actualCosts){
 			if (canAffordCostRequisite(item,player))
 				return true;
 		}
 		return false;
 	}
+	
 	
 	/*
 	public void applyAllEffects(Player player, Board board){

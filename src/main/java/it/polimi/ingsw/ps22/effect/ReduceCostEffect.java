@@ -5,15 +5,16 @@ import java.util.HashMap;
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Resource;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 
 //riduce costo di acquisto di una carta
 public class ReduceCostEffect implements PermanentEffect {
-	 private HashMap<String,Resource> bonus;  //accedere alla classe bonus di player e aggiungere
+	 private HashMap<String,ResourceAbstract> bonus;  //accedere alla classe bonus di player e aggiungere
 	 private String cardType;
 	 
 	 public ReduceCostEffect(String cardType){
-		 bonus=new HashMap<String,Resource>();
+		 bonus=new HashMap<String,ResourceAbstract>();
 		 this.cardType = cardType;
 	 }
 	 
@@ -23,7 +24,7 @@ public class ReduceCostEffect implements PermanentEffect {
 	 
 	@Override
 	public void performEffect(Player player, Board board) {
-		
+		player.getBonusAcc().addSales(bonus,cardType);
 	}
 	
 
