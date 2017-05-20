@@ -94,6 +94,10 @@ public class Player {
 	public void addResources(String type, Resource other) {
 		this.resources.get(type).addResource(other);
 	}
+	
+	public void subResources(String type, Resource other) {
+		this.resources.get(type).subResource(other);
+	}
 
 	public void addPoints(String type, Point other) {
 		this.resources.get(type).addResource(other);
