@@ -9,14 +9,14 @@ public class BonusAcc {
 	private HashMap<String,BonusAbstract> accumulator;
 	private HashMap<String,Resource> saleBuilding;
 	private HashMap<String,Coin> saleCharacter;
-	private HashMap<String,BonusAbstract> saleVenture;
+	private HashMap<String,ResourceAbstract> saleVenture;
 	
 	
 	public BonusAcc(){
 		accumulator=new HashMap<String,BonusAbstract>();
 		saleBuilding=new HashMap<String,Resource>();
 		saleCharacter=new HashMap<String,Coin>();
-		saleVenture=new HashMap<String,BonusAbstract>();
+		saleVenture=new HashMap<String,ResourceAbstract>();
 		accumulator.put("Coin", new Coin(0));
 		accumulator.put("Stone", new Stone(0));
 		accumulator.put("Wood", new Wood(0));
@@ -56,7 +56,8 @@ public class BonusAcc {
 			this.accumulator.get(el).addResource(bonus.get(el));;
 		}
 	}
-	public void addSales(HashMap<String,BonusAbstract> bonus, String type){
+	
+	public void addSales(HashMap<String,ResourceAbstract> bonus, String type){
 		if(type=="Building"){
 			addSaleBuilding(bonus);
 		}
@@ -69,21 +70,21 @@ public class BonusAcc {
 		
 	}
 	
-	private void addSaleBuilding(HashMap<String,BonusAbstract> bonus){
+	private void addSaleBuilding(HashMap<String,ResourceAbstract> bonus){
 		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
 		for(String el: temp){
 			this.saleBuilding.get(el).addResource(bonus.get(el));;
 		}
 	}
 	
-	private void addSaleCharacter(HashMap<String,BonusAbstract> bonus){
+	private void addSaleCharacter(HashMap<String,ResourceAbstract> bonus){
 		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
 		for(String el: temp){
 			this.saleCharacter.get(el).addResource(bonus.get(el));;
 		}
 	}
 	
-	private void addSaleVenture(HashMap<String,BonusAbstract> bonus){
+	private void addSaleVenture(HashMap<String,ResourceAbstract> bonus){
 		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
 		for(String el: temp){
 			this.saleVenture.get(el).addResource(bonus.get(el));;
@@ -98,7 +99,7 @@ public class BonusAcc {
 		return saleCharacter;
 	}
 
-	public HashMap<String, BonusAbstract> getSaleVenture() {
+	public HashMap<String, ResourceAbstract> getSaleVenture() {
 		return saleVenture;
 	}
 
