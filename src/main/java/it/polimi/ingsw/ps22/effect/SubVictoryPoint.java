@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.card.RequisiteCost;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.BonusAbstract;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
@@ -35,41 +36,58 @@ public class SubVictoryPoint implements EndEffect {
 		return sum;
 	}
 	
-	/*private HashMap<String,ResourceAbstract> getVentureCost(Player player){
-		for(DevelopmentCard card: player.getDevelopmentCard("CardVenture")){
-			
+	private HashMap<String,ResourceAbstract> getVentureCost(Player player){
+		HashMap<String,ResourceAbstract> costMap = new HashMap<String, ResourceAbstract>();
+		ArrayList<DevelopmentCard> playerCards = player.getDevelopmentCard("CardVenture");
+		for(DevelopmentCard card: playerCards){
+			ArrayList<RequisiteCost> costs = card.getRequisiteCost();
+			for(RequisiteCost cost: costs)
+				for(String type: cost.getCost().keySet())
+					if (!costMap.containsKey(type))
+						costMap.put(type, cost.getCost().get(type));
+						else 
+							costMap.get(type).addResource(cost.getCost().get(type));
 		}
+		
+		return costMap;
 			
 	}
 	
 	//ritorna il numero totale di punti vittoria da sottrarre (caso carta)
 	private int weightedSum(Player player, String cardType){
-		ArrayList<DevelopmentCard> cards =  player.getDevelopmentCard(cardType);
-		int sum = 0;
+	
 		if(!cardType.equals("CardVenture")){
+			ArrayList<DevelopmentCard> cards =  player.getDevelopmentCard(cardType);
+			int sum = 0;
 			for(DevelopmentCard card: cards){
 				for(String cost: card.getCost().keySet()){
 					if(weights.containsKey(cost))
-						sum = sum + player.getSpecificResource(cost).getQuantity() / weights.get(cost).getQuantity();
+						sum = sum + card.getCost().get(cost).getQuantity() / weights.get(cost).getQuantity();
 				}
 			}
 			return sum;
 		}
 		else{
-			
-		}
-	}*/
+			int sum = 0;
+			HashMap<String,ResourceAbstract> ventureCosts = getVentureCost(player);
+				for(String cost: ventureCosts.keySet()){
+					if(weights.containsKey(cost))
+						sum = sum + ventureCosts.get(cost).getQuantity() / weights.get(cost).getQuantity();
+				}
+			return sum;
+			}
+	}
 	
 	@Override
 	public void performEffect(Player player, Board board) {
-		/*if (player.isCard(loc)){
+		if (player.isCard(loc)){
 			VictoryPoint subPoints = new VictoryPoint(-weightedSum(player,loc));
 			player.getSpecificResource("VictoryPoint").addResource(subPoints);
 		}
 		else {
 			VictoryPoint subPoints = new VictoryPoint(-weightedSum(player));
 			player.getSpecificResource("VictoryPoint").addResource(subPoints);
-		}*/
+		}
 	}
 
 }
