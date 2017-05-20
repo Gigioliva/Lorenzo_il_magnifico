@@ -25,10 +25,16 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import it.polimi.ingsw.ps22.resource.*;
+import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
+import it.polimi.ingsw.ps22.resource.FaithPoint;
+import it.polimi.ingsw.ps22.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.resource.Servant;
+import it.polimi.ingsw.ps22.resource.Stone;
+import it.polimi.ingsw.ps22.resource.VictoryPoint;
 
-public class MarketZoneSaxParser {
+public class ZoneBonusSaxParser {
 
 	public static void MarketParser(String pathname, ArrayList<HashMap<String, ResourceAbstract>> parsedData) 
 	{
