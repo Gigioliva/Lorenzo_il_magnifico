@@ -55,10 +55,9 @@ public class SubVictoryPoint implements EndEffect {
 	
 	//ritorna il numero totale di punti vittoria da sottrarre (caso carta)
 	private int weightedSum(Player player, String cardType){
-	
+		int sum = 0;
 		if(!cardType.equals("CardVenture")){
 			ArrayList<DevelopmentCard> cards =  player.getDevelopmentCard(cardType);
-			int sum = 0;
 			for(DevelopmentCard card: cards){
 				for(String cost: card.getCost().keySet()){
 					if(weights.containsKey(cost))
@@ -68,7 +67,6 @@ public class SubVictoryPoint implements EndEffect {
 			return sum;
 		}
 		else{
-			int sum = 0;
 			HashMap<String,ResourceAbstract> ventureCosts = getVentureCost(player);
 				for(String cost: ventureCosts.keySet()){
 					if(weights.containsKey(cost))
