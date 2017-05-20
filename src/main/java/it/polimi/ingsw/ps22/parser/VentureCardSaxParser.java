@@ -61,7 +61,6 @@ public class VentureCardSaxParser {
 				CardVenture card = new CardVenture();
 				HashMap<String, ResourceAbstract> cost = new HashMap<String, ResourceAbstract>();
 				HashMap<String, ResourceAbstract> requisite = new HashMap<String, ResourceAbstract>();
-				StringBuffer lastName = new StringBuffer();
 				int lastEra = 0;
 				int lastCoincost = 0;
 				int lastStonecost = 0;
@@ -69,6 +68,8 @@ public class VentureCardSaxParser {
 				int lastServantcost = 0;
 				int lastMilitaryPointcost = 0;
 				int lastMilitaryPointrequest = 0;
+				boolean boolName = false;
+				boolean boolEra = false;
 				boolean boolCoincost = false;
 				boolean boolStonecost = false;
 				boolean boolWoodcost = false;
@@ -120,6 +121,17 @@ public class VentureCardSaxParser {
 
 				public void characters(char ch[], int start, int length) throws SAXException {
 
+					if (boolName) {
+						card.setName(new String(ch, start, length));
+						boolName = false;
+					}
+					
+					if (boolEra) {
+						lastEra = Integer.parseInt(new String(ch, start, length));
+						card.setEra(lastEra);
+						boolEra = false;
+					}
+					
 					if (boolCoincost) {
 						lastCoincost = Integer.parseInt(new String(ch, start, length));
 						cost.put("Coin", new Coin(lastCoincost));
