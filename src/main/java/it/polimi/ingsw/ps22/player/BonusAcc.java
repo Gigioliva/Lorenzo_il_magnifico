@@ -40,7 +40,6 @@ public class BonusAcc {
 		saleVenture.put("Coin", new Coin(0));
 		saleVenture.put("Stone", new Stone(0));
 		saleVenture.put("Wood", new Wood(0));
-		saleVenture.put("Servant", new Servant(0));
 		saleVenture.put("VictoryPoint", new VictoryPoint(0));
 		saleVenture.put("MilitaryPoint", new MilitaryPoint(0));
 		saleVenture.put("FaithPoint", new FaithPoint(0));
@@ -95,8 +94,8 @@ public class BonusAcc {
 		return saleBuilding;
 	}
 
-	public HashMap<String, Coin> getSaleCharacter() {
-		return saleCharacter;
+	public Coin getSaleCharacter() {
+		return saleCharacter.get("Coin");
 	}
 
 	public HashMap<String, ResourceAbstract> getSaleVenture() {
