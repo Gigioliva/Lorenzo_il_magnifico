@@ -19,8 +19,7 @@ public class BonusEffect implements PermanentEffect {
 	 
 	@Override
 	public void performEffect(Player player, Board board) {
-		
+		player.getBonusAcc().addBonus(bonus);
 	}
 	
-
 }

@@ -12,8 +12,9 @@ public class ReduceCostEffect implements PermanentEffect {
 	 private HashMap<String,Resource> bonus;  //accedere alla classe bonus di player e aggiungere
 	 private String cardType;
 	 
-	 public ReduceCostEffect(){
+	 public ReduceCostEffect(String cardType){
 		 bonus=new HashMap<String,Resource>();
+		 this.cardType = cardType;
 	 }
 	 
 	 public void addBonus(String type,Resource value){

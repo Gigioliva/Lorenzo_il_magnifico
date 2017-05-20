@@ -20,7 +20,7 @@ import it.polimi.ingsw.ps22.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.resource.Wood;
 
 public class Player {
-	private HashMap<String, Resource> resources; //incluse risorse e punti
+	private HashMap<String, Resource> resources; 
 	private HashMap<String, Point> points;
 	private HashMap<String, ArrayList<DevelopmentCard>> cards; 
 	private BonusAcc bonusAcc;
