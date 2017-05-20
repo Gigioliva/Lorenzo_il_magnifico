@@ -57,7 +57,6 @@ public class VentureCardSAXParser {
 
 					   System.out.println("Start Element :" + qName);
 
-					   if (qName.equalsIgnoreCase("id")) {boolId = true;}
 					   if (qName.equalsIgnoreCase("name")) {boolName = true;}
 					   if (qName.equalsIgnoreCase("era")) {boolEra = true;}
 				   		}
@@ -67,20 +66,20 @@ public class VentureCardSAXParser {
 					   if (qName.equalsIgnoreCase("card"))
 					   		{/*CardVenture toAdd = new CardVenture(lastId,lastName,lastEra);
 					   		parsedData.add(toAdd);*/
-					   		lastEra=new ArrayList<Integer>();
+					   		//lastEra=new ArrayList<Integer>();
 					   		lastName=new StringBuffer();}
 				   		}
 
 				   public void characters(char ch[], int start, int length) throws SAXException {
-					   if (boolId) 
+					   /*if (boolId) 
 					   		{lastId= Integer.parseInt(new String(ch, start, length));
-					   		boolId = false;}
+					   		boolId = false;}*/
 					   if (boolName) 
 					   		{lastName.append(new String(ch, start, length));
 					   		boolName = false;}
 					   if (boolEra)
-					   		{lastEra.add(Integer.parseInt(new String(ch, start, length)));
-					   		boolEra = false;}
+					   		//{lastEra.add(Integer.parseInt(new String(ch, start, length)));
+					   		boolEra = false;
 				   		}
 			   		};
 			   		
