@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.board;
 
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.model.Color;
 
 public class Board {
@@ -26,10 +25,10 @@ public class Board {
 		this.faithTrack=faithTrack;
 		dice=new Dice();
 		towers=new HashMap<String,TowerZone>();
-		towers.put("Building", new TowerZone());
-		towers.put("Character", new TowerZone());
-		towers.put("Territory", new TowerZone());
-		towers.put("Venture", new TowerZone());
+		towers.put("Building", new TowerBuildingZone(this));
+		towers.put("Character", new TowerCharacterZone(this));
+		towers.put("Territory", new TowerTerritoryZone(this));
+		towers.put("Venture", new TowerVentureZone(this));
 	}
 	
 	public TowerZone getTower(String type){
@@ -55,8 +54,5 @@ public class Board {
 	}
 	public int getDice(Color color){
 		return dice.getDice(color);
-	}
-	public void setDice(){
-		this.dice=new Dice();
 	}
 }

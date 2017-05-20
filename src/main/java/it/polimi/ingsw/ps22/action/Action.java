@@ -5,13 +5,17 @@ import it.polimi.ingsw.ps22.player.Player;
 
 public abstract class Action {
 	private int actionValue;
-	
-	public Action(int actionValue){
-		this.actionValue=actionValue;
+
+	public Action(int actionValue) {
+		this.actionValue = actionValue;
 	}
-	
-	public void applyAction(Player player, Board board){
-		
+
+	public void applyAction(Player player, Board board) {
+
+	}
+
+	public void applyAction(Player player) {
+
 	}
 
 }
