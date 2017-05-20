@@ -44,7 +44,7 @@ public abstract class ActionSpace {
 
 	public void addBonus(HashMap<String,ResourceAbstract> other) {
 		for(String type: other.keySet()){
-			bonus.addExchange(type, other.get(type));
+			bonus.addGain(type, other.get(type));
 		}
 	}
 
