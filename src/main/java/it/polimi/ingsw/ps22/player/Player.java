@@ -91,16 +91,15 @@ public class Player {
 		return personalBoard;
 	}
 
-	public void addResources(ArrayList<String> resources) {
+	//sottrae risorse o punti al giocatore se esso ha qualche effetto permanente che glielo impone
+	public void applyMalusResource(ArrayList<String> resources) {
 		for(String type: resources){
 			BonusAbstract temp = this.bonusAcc.getBonus(type);
 			if(this.isPoint(type)){
 				this.points.get(type).addResource(temp);
-				//this.points.get(type).addResource(resources);
 			}
 			else{
 				this.resources.get(type).addResource(temp);
-				//this.resources.get(type).addResource(resources.get(type));
 			}
 		}
 	}

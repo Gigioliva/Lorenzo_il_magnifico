@@ -26,7 +26,7 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 		for(String type: gain.keySet()){
 			player.getSpecificResource(type).addResource(gain.get(type));
 		}
-		player.addResources(new ArrayList<String>(gain.keySet()));
+		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
 	}
 	
 	
