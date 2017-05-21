@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps22.board;
 
+import it.polimi.ingsw.ps22.model.Ask;
+import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Servant;
@@ -21,7 +23,8 @@ public abstract class Zone {
 	}
 
 	protected boolean checkActionValue(ActionSpace actionSpace, Family family, int actionValue) {
-		int servant = askServant();
+		Ask ask=Model.getProva();
+		int servant = ask.askServant();
 		Player player=family.getPlayer();
 		if ((player.getSpecBonus().returnBool("DoubleServant"))
 				&& ((actionValue + servant / 2) > actionSpace.getActionCost())) {
@@ -36,10 +39,5 @@ public abstract class Zone {
 			return true;
 		}
 		return false;
-	}
-
-	protected int askServant() { // chiede all'utente quanti servitori vuole
-		// spendere
-		return 0;
 	}
 }
