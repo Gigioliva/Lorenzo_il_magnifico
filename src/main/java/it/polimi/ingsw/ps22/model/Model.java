@@ -49,7 +49,7 @@ public class Model {
 		this.orderedPlayers = orderedPlayers;
 	}
 	
-	public static Ask getProva(){
+	public static Ask getAsk(){
 		return ask;
 	}
 

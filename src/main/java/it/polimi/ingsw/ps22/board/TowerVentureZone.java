@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.card.RequisiteCost;
 import it.polimi.ingsw.ps22.controller.Ask;
@@ -8,12 +9,13 @@ import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class TowerVentureZone extends TowerZone {
 
 	public TowerVentureZone(Board board) {
 		super(board);
-		
+
 	}
 
 	@Override
@@ -30,9 +32,13 @@ public class TowerVentureZone extends TowerZone {
 			if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 				player.getSpecificResource("Coin").subResource(new Coin(3));
 			}
-			Ask ask=Model.getProva();
-			ArrayList<RequisiteCost> possibleCost=towerSpaces[actionSpace].getCard().getAffordableCosts(player);
-			int choice=ask.askCostVenture(possibleCost);
+			Ask ask = Model.getAsk();
+			ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
+			ArrayList<HashMap<String, ResourceAbstract>> cost=new ArrayList<HashMap<String, ResourceAbstract>>();
+			for(RequisiteCost el: possibleCost){
+				cost.add(el.getCost());
+			}
+			int choice = ask.askCosts(cost);
 			towerSpaces[actionSpace].getCard().applyCostToPlayer(player, possibleCost.get(choice));
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 			towerSpaces[actionSpace].getCard().loadEndEffects(player, board);

@@ -23,7 +23,7 @@ public abstract class Zone {
 	}
 
 	protected boolean checkActionValue(ActionSpace actionSpace, Family family, int actionValue) {
-		Ask ask=Model.getProva();
+		Ask ask=Model.getAsk();
 		Player player=family.getPlayer();
 		int servant = ask.askServant(player);
 		if ((player.getSpecBonus().returnBool("DoubleServant"))

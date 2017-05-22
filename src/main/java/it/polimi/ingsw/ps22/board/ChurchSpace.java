@@ -29,7 +29,7 @@ public class ChurchSpace {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {
 				cardExcomm.applyPermanentEffects(el, null);
 			} else {
-				Ask ask=Model.getProva();
+				Ask ask=Model.getAsk();
 				if (ask.askExcomm()) {
 					el.getSpecificResource("VictoryPoint").addResource(
 							faithPointTrack.getVictoryBonus(el.getSpecificResource("FaithPoint").getQuantity()));

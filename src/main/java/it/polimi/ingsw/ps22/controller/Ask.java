@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
-import it.polimi.ingsw.ps22.card.RequisiteCost;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
@@ -40,16 +38,15 @@ public class Ask extends Observable {
 		return 0;
 	}
 
-	public int askCostVenture(ArrayList<RequisiteCost> possibleCost) {
+	public int askCosts(ArrayList<HashMap<String, ResourceAbstract>> cost) {
 		boolean correct = true;
 		StringBuilder str = new StringBuilder();
 		do {
 			str.append("quale costo scegli? \n");
-			for (RequisiteCost x : possibleCost) {
-				HashMap<String, ResourceAbstract> cost = x.getCost();
-				for (String el : cost.keySet()) {
+			for (HashMap<String, ResourceAbstract> x : cost) {
+				for (String el : x.keySet()) {
 					str.append(el + ": ");
-					str.append(cost.get(el).getQuantity() + " ");
+					str.append(x.get(el).getQuantity() + " ");
 				}
 				str.append("\n");
 			}
@@ -61,7 +58,7 @@ public class Ask extends Observable {
 			int result;
 			try {
 				result = Integer.parseInt(str.toString());
-				if (result <= possibleCost.size() && result > 0) {
+				if (result <= cost.size() && result > 0) {
 					return result - 1;
 				} else {
 					str.delete(0, str.capacity());
