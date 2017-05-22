@@ -9,7 +9,8 @@ import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.card.CardVenture;
-import it.polimi.ingsw.ps22.card.RequisiteCost;
+import it.polimi.ingsw.ps22.effect.EndVictoryEffect;
+import it.polimi.ingsw.ps22.effect.GainResource;
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.resource.FaithPoint;
@@ -17,36 +18,36 @@ import it.polimi.ingsw.ps22.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.resource.Servant;
 import it.polimi.ingsw.ps22.resource.Stone;
-import it.polimi.ingsw.ps22.resource.VictoryPoint;
+import it.polimi.ingsw.ps22.resource.Wood;
 
 // Ottimizzazione possibile: una sola variabile per gestire i valori interi
 /*
     <card>
-        <name>BASE</name>
-        <era>0</era>
-        <cost>
-            <coincost>0</coincost>
-            <woodcost>0</woodcost>
-            <stonecost>0</stonecost>
-            <servantcost>0</servantcost>
-            <militarycost>0</militarycost>
-            <militaryrequirement>0</militaryrequirement>
-        </cost>
-        <gainEffect>
-            <coin>0</coin>
-            <wood>0</wood>
-            <stone>0</stone>
-            <servant>0</servant>
-            <militarypoint>0</militarypoint>
-            <faithpoint>0</faithpoint>
-            <councilpoint>0</councilpoint>
-        </gainEffect>
+        <name>BASE</name>													ok
+        <era>0</era>														ok
+        <cost>																ok
+            <coin>0</coin>													ok
+            <wood>0</wood>													ok
+            <stone>0</stone>												ok
+            <servant>0</servant>											ok
+            <military>0</military>											ok
+            <militaryrequirement>0</militaryrequirement>					ok
+        </cost>																ok
+        <gainEffect>														ok
+            <coin>0</coin>													ok
+            <wood>0</wood>													ok
+            <stone>0</stone>												ok
+            <servant>0</servant>											ok
+            <military>0</military>											ok
+            <faithpoint>0</faithpoint>										ok
+            <councilpoint>0</councilpoint>									ok
+        </gainEffect>														ok
         <immextraprod>0</immextraprod>
         <immextraharvest>0</immextraharvest>
         <immactionvalue>0</immactionvalue>
         <immediateactionincrement>0</immediateactionincrement>
         <immactionvaleuassociatedcard>all</immactionvaleuassociatedcard>
-        <victorypoint>0</victorypoint>
+        <victorypoint>0</victorypoint>										ok
     </card>
 
 */
@@ -61,111 +62,189 @@ public class VentureCardSaxParser {
 				CardVenture card = new CardVenture();
 				HashMap<String, ResourceAbstract> cost = new HashMap<String, ResourceAbstract>();
 				HashMap<String, ResourceAbstract> requisite = new HashMap<String, ResourceAbstract>();
-				int lastEra = 0;
-				int lastCoincost = 0;
-				int lastStonecost = 0;
-				int lastWoodcost = 0;
-				int lastServantcost = 0;
-				int lastMilitaryPointcost = 0;
-				int lastMilitaryPointrequest = 0;
+				GainResource gainEffect = new GainResource();
+				int lastInt = 0;
 				boolean boolName = false;
 				boolean boolEra = false;
-				boolean boolCoincost = false;
-				boolean boolStonecost = false;
-				boolean boolWoodcost = false;
-				boolean boolServantcost = false;
-				boolean boolMilitaryPointcost = false;
+				boolean boolCost = false;
+				boolean boolCoin = false;
+				boolean boolStone = false;
+				boolean boolWood = false;
+				boolean boolServant = false;
+				boolean boolMilitaryPoint = false;
 				boolean boolMilitaryPointrequest = false;
+				boolean boolCouncilPoint = false;
+				boolean boolFaithPoint = false;
+				boolean boolVictoryPoint = false;
 
+				// ridefinizione del metodo startElement all'interno del
+				// DefaultHandler
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
-					// System.out.println("Start Element :" + qName);
-					if (qName.equalsIgnoreCase("coincost")) {
-						boolCoincost = true;
-					}
-					if (qName.equalsIgnoreCase("stonecost")) {
-						boolStonecost = true;
-					}
-					if (qName.equalsIgnoreCase("woodcost")) {
-						boolWoodcost = true;
-					}
-					if (qName.equalsIgnoreCase("servantcost")) {
-						boolServantcost = true;
-					}
-					if (qName.equalsIgnoreCase("militarycost")) {
-						boolMilitaryPointcost = true;
-					}
-					if (qName.equalsIgnoreCase("militarycost")) {
-						boolMilitaryPointcost = true;
-					}
+
 					if (qName.equalsIgnoreCase("cost")) {
-						cost = new HashMap<String, ResourceAbstract>();
-						requisite = new HashMap<String, ResourceAbstract>();
+						boolCost= true;
+					}
+
+					if (qName.equalsIgnoreCase("coin")) {
+						boolCoin = true;
+					}
+
+					if (qName.equalsIgnoreCase("stone")) {
+						boolStone = true;
+					}
+
+					if (qName.equalsIgnoreCase("wood")) {
+						boolWood = true;
+					}
+
+					if (qName.equalsIgnoreCase("servant")) {
+						boolServant = true;
+					}
+
+					if (qName.equalsIgnoreCase("military")) {
+						boolMilitaryPoint = true;
+					}
+
+					if (qName.equalsIgnoreCase("councilpoint")) {
+						boolCouncilPoint = true;
+					}
+					
+					if (qName.equalsIgnoreCase("faithpoint")) {
+						boolFaithPoint = true;
+					}
+					
+					if (qName.equalsIgnoreCase("militaryrequirement")) {
+						boolMilitaryPointrequest = true;
+					}
+					
+					if (qName.equalsIgnoreCase("victorypoint")) {
+						boolVictoryPoint = true;
 					}
 
 				}
 
+				// ridefinizione del metodo endElement all'interno del
+				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
+					
 					if (qName.equalsIgnoreCase("cost")) {
 						card.addRequisiteCost(cost, requisite);
+						cost = new HashMap<String, ResourceAbstract>();
+						requisite = new HashMap<String, ResourceAbstract>();
+						boolCost = false;
 					}
+					
+					if (qName.equalsIgnoreCase("gaineffect")) {
+						card.addImmediateEffect(gainEffect);
+						gainEffect = new GainResource();
+					}
+					
 					if (qName.equalsIgnoreCase("card")) {
 						parsedData.add(card);
 						card = new CardVenture();
 					}
-					if (qName.equalsIgnoreCase("gaineffect")) {
-						//creazione effetto immediato
-					}
-					
 				}
 
+				// ridefinizione del metodo characters all'interno del
+				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
-
+					
+					//aggiunto nome alla carta
 					if (boolName) {
 						card.setName(new String(ch, start, length));
 						boolName = false;
 					}
-					
+
+					//aggiunta era alla carta
 					if (boolEra) {
-						lastEra = Integer.parseInt(new String(ch, start, length));
-						card.setEra(lastEra);
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						card.setEra(lastInt);
 						boolEra = false;
 					}
-					
-					if (boolCoincost) {
-						lastCoincost = Integer.parseInt(new String(ch, start, length));
-						cost.put("Coin", new Coin(lastCoincost));
-						boolCoincost = false;
+
+					// gestione monete
+					if (boolCoin) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							cost.put("Coin", new Coin(lastInt));
+						} else {
+							gainEffect.addGain("Coin", new Coin(lastInt));
+						}
+						boolCoin = false;
 					}
 
-					if (boolStonecost) {
-						lastStonecost = Integer.parseInt(new String(ch, start, length));
-						cost.put("Stone", new Stone(lastStonecost));
-						boolStonecost = false;
+					// gestione pietre
+					if (boolStone) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							cost.put("Stone", new Stone(lastInt));
+						} else {
+							gainEffect.addGain("Stone", new Stone(lastInt));
+						}
+						boolStone = false;
 					}
 
-					if (boolWoodcost) {
-						lastWoodcost = Integer.parseInt(new String(ch, start, length));
-						cost.put("Wood", new Coin(lastWoodcost));
-						boolWoodcost = false;
+					// gestione legni
+					if (boolWood) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							cost.put("Wood", new Wood(lastInt));
+						} else {
+							gainEffect.addGain("Wood", new Wood(lastInt));
+						}
+						boolWood = false;
 					}
 
-					if (boolServantcost) {
-						lastServantcost = Integer.parseInt(new String(ch, start, length));
-						cost.put("Servant", new Servant(lastServantcost));
-						boolServantcost = false;
+					// gestione servitori
+					if (boolServant) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							cost.put("Servant", new Servant(lastInt));
+						} else {
+							gainEffect.addGain("Servant", new Servant(lastInt));
+						}
+						boolServant = false;
 					}
 
-					if (boolMilitaryPointcost) {
-						lastMilitaryPointcost = Integer.parseInt(new String(ch, start, length));
-						cost.put("MilitaryPoint", new MilitaryPoint(lastMilitaryPointcost));
-						boolMilitaryPointcost = false;
+					// gestione punti militari
+					if (boolMilitaryPoint) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							cost.put("MilitaryPoint", new MilitaryPoint(lastInt));
+						} else {
+							gainEffect.addGain("MilitaryPoint", new MilitaryPoint(lastInt));
+						}
+						boolMilitaryPoint = false;
 					}
 
+					// requisito punti militari (non serve il contr che sia un
+					// cost, può essere solo quello)
 					if (boolMilitaryPointrequest) {
-						lastMilitaryPointrequest = Integer.parseInt(new String(ch, start, length));
-						requisite.put("MilitaryPoint", new MilitaryPoint(lastMilitaryPointrequest));
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						requisite.put("MilitaryPoint", new MilitaryPoint(lastInt));
 						boolMilitaryPointrequest = false;
+					}
+
+					// effetto immediato privilegio del consiglio
+					if (boolCouncilPoint) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						gainEffect.addGain("CouncilPrivilege", new CouncilPrivilege(lastInt));
+						boolCouncilPoint = false;
+					}
+
+					// effetto immediato punti fede
+					if (boolFaithPoint) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						gainEffect.addGain("FaithPoint", new FaithPoint(lastInt));
+						boolFaithPoint = false;
+					}
+
+					// effetto punti vittoria a fine partita
+					if (boolVictoryPoint) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						card.addEndEffect(new EndVictoryEffect(lastInt));
+						boolVictoryPoint = false;
 					}
 
 				}

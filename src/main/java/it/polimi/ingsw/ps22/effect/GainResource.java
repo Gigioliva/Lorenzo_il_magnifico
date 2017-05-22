@@ -29,6 +29,4 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
 	}
 	
-	
-
 }
