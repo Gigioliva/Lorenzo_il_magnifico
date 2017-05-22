@@ -8,8 +8,13 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import java.util.HashMap;
+
+import it.polimi.ingsw.ps22.action.CardAction;
+import it.polimi.ingsw.ps22.action.HarvestAction;
+import it.polimi.ingsw.ps22.action.ProductionAction;
 import it.polimi.ingsw.ps22.card.CardVenture;
 import it.polimi.ingsw.ps22.effect.EndVictoryEffect;
+import it.polimi.ingsw.ps22.effect.ExtraAction;
 import it.polimi.ingsw.ps22.effect.GainResource;
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
@@ -45,10 +50,9 @@ import it.polimi.ingsw.ps22.resource.Wood;
         <immextraprod>0</immextraprod>
         <immextraharvest>0</immextraharvest>
         <immactionvalue>0</immactionvalue>
-        <immediateactionincrement>0</immediateactionincrement>
         <immactionvaleuassociatedcard>all</immactionvaleuassociatedcard>
         <victorypoint>0</victorypoint>										ok
-    </card>
+    </card>																	ok
 
 */
 
@@ -64,6 +68,7 @@ public class VentureCardSaxParser {
 				HashMap<String, ResourceAbstract> requisite = new HashMap<String, ResourceAbstract>();
 				GainResource gainEffect = new GainResource();
 				int lastInt = 0;
+				int lastImmActionValue = 0;
 				boolean boolName = false;
 				boolean boolEra = false;
 				boolean boolCost = false;
@@ -76,6 +81,11 @@ public class VentureCardSaxParser {
 				boolean boolCouncilPoint = false;
 				boolean boolFaithPoint = false;
 				boolean boolVictoryPoint = false;
+				boolean boolImmHarvest = false;
+				boolean boolImmProd = false;
+				boolean boolImmActionValue = false;
+				boolean boolAssCard = false;
+				
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
@@ -120,6 +130,22 @@ public class VentureCardSaxParser {
 					
 					if (qName.equalsIgnoreCase("victorypoint")) {
 						boolVictoryPoint = true;
+					}
+					
+					if (qName.equalsIgnoreCase("immextraprod")) {
+						boolImmProd = true;
+					}
+					
+					if (qName.equalsIgnoreCase("immextraharvest")) {
+						boolImmHarvest = true;
+					}
+
+					if (qName.equalsIgnoreCase("immactionvalue")) {
+						boolImmActionValue = true;
+					}
+					
+					if (qName.equalsIgnoreCase("immactionvaleuassociatedcard")) {
+						boolAssCard = true;
 					}
 
 				}
@@ -246,12 +272,39 @@ public class VentureCardSaxParser {
 						card.addEndEffect(new EndVictoryEffect(lastInt));
 						boolVictoryPoint = false;
 					}
+					
+					// effetto nuova azione produzione aggiuntiva
+					if (boolImmProd) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						card.addImmediateEffect(new ExtraAction(new ProductionAction(lastInt)));
+						boolImmProd = false;
+					}
+					
+					// effetto nuova azione raccolto aggiuntiva
+					if (boolImmHarvest) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						card.addImmediateEffect(new ExtraAction(new HarvestAction(lastInt)));
+						boolImmHarvest = false;
+					}
+					
+					// effetto punti vittoria a fine partita
+					if (boolImmActionValue) {
+						lastImmActionValue = Integer.parseInt(new String(ch, start, length));
+						boolImmActionValue = false;
+					}
+					
+					// effetto punti vittoria a fine partita
+					if (boolAssCard) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						card.addImmediateEffect(new ExtraAction(new CardAction(lastInt)));
+						boolAssCard = false;
+					}
 
 				}
 			};
 
 			saxParser.parse(pathname, handler);
-
+ 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
