@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.card.CardExcomm;
+import it.polimi.ingsw.ps22.model.Ask;
+import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class ChurchSpace {
@@ -27,9 +29,8 @@ public class ChurchSpace {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {
 				cardExcomm.applyPermanentEffects(el, null);
 			} else {
-				boolean flag = false;
-				// chiedo al player se vuole spendere i punti fede
-				if (flag) {
+				Ask ask=Model.getProva();
+				if (ask.askExcomm()) {
 					el.getSpecificResource("VictoryPoint").addResource(
 							faithPointTrack.getVictoryBonus(el.getSpecificResource("FaithPoint").getQuantity()));
 					el.getSpecificResource("FaithPoint").subResource(el.getSpecificResource("FaithPoint"));

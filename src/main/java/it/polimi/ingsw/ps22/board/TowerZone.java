@@ -18,13 +18,13 @@ public class TowerZone extends Zone {
 
 	public TowerZone(Board board) {
 		towerSpaces = new TowerSpace[NUM_SPACES];
-		towerSpaces[0] = new TowerSpace(1, false,1);
-		towerSpaces[1] = new TowerSpace(3, false,2);
-		towerSpaces[2] = new TowerSpace(5, false,3);
-		towerSpaces[3] = new TowerSpace(7, false,4);
+		towerSpaces[0] = new TowerSpace(1, false, 1);
+		towerSpaces[1] = new TowerSpace(3, false, 2);
+		towerSpaces[2] = new TowerSpace(5, false, 3);
+		towerSpaces[3] = new TowerSpace(7, false, 4);
 		this.occupied = false;
 		cards = new HashMap<Integer, ArrayList<DevelopmentCard>>();
-		this.board=board;
+		this.board = board;
 		// leggere da file le carte e bonus azione
 	}
 
@@ -55,32 +55,35 @@ public class TowerZone extends Zone {
 	}
 
 	protected boolean checkResources(Player player, TowerSpace towerSpace) {
-		boolean applyBonus=false;
-		boolean payCoin=false;
-		boolean result=false;
-		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))){
-			if(player.getSpecificResource("Coin").getQuantity()<3)
+		boolean applyBonus = false;
+		boolean payCoin = false;
+		boolean result = false;
+		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
+			if (player.getSpecificResource("Coin").getQuantity() < 3)
 				return false;
 			player.getSpecificResource("Coin").subResource(new Coin(3));
-			payCoin=true;
+			payCoin = true;
 		}
-		if(!(player.getSpecBonus().returnBool("NoGainTowers") && (towerSpace.getPlan()==3 || towerSpace.getPlan()==4))){
+		if (!(player.getSpecBonus().returnBool("NoGainTowers")
+				&& (towerSpace.getPlan() == 3 || towerSpace.getPlan() == 4))) {
 			towerSpace.applyBonus(player);
-			applyBonus=true;
+			applyBonus = true;
 		}
-		result=towerSpace.getCard().takeCardControl(player);
-		if(payCoin) player.getSpecificResource("Coin").addResource(new Coin(3));
-		if(applyBonus) towerSpace.deapplyBonus(player);
+		result = towerSpace.getCard().takeCardControl(player);
+		if (payCoin)
+			player.getSpecificResource("Coin").addResource(new Coin(3));
+		if (applyBonus)
+			towerSpace.deapplyBonus(player);
 		return result;
 	}
-	
+
 	@Override
 	public void reset(int turn) {
-		ArrayList<DevelopmentCard> temp=cards.get(turn);
+		ArrayList<DevelopmentCard> temp = cards.get(turn);
 		for (int i = 0; i < NUM_SPACES; i++) {
 			towerSpaces[i].resetFamily();
 			towerSpaces[i].addCard(temp.get(i));
-			//aggiungo le carte nei vari piani
+			// aggiungo le carte nei vari piani
 		}
 	}
 

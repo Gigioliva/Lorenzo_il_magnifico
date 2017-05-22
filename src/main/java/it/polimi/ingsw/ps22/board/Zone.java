@@ -24,8 +24,8 @@ public abstract class Zone {
 
 	protected boolean checkActionValue(ActionSpace actionSpace, Family family, int actionValue) {
 		Ask ask=Model.getProva();
-		int servant = ask.askServant();
 		Player player=family.getPlayer();
+		int servant = ask.askServant(player);
 		if ((player.getSpecBonus().returnBool("DoubleServant"))
 				&& ((actionValue + servant / 2) > actionSpace.getActionCost())) {
 			player.getResources().get("Servant").subResource(new Servant((servant / 2) * 2));
