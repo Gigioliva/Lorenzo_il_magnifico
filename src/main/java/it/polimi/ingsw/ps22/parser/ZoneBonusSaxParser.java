@@ -43,14 +43,15 @@ public class ZoneBonusSaxParser {
 		   SAXParser saxParser = factory.newSAXParser();
 		   DefaultHandler handler = new DefaultHandler() {
 			   HashMap<String, ResourceAbstract> toAdd = new HashMap<String, ResourceAbstract>();
-			   int lastCoin = 0; 
+			   int lastInt=0;
+			   /*int lastCoin = 0; 
 			   int lastStone = 0; 
 			   int lastWood = 0; 
 			   int lastServant = 0; 
 			   int lastMilitaryPoint = 0; 
 			   int lastFaithPoint = 0; 
 			   int lastVictoryPoint = 0;
-			   int lastCouncilPrivilege = 0;
+			   int lastCouncilPrivilege = 0;*/
 			   boolean boolCoin = false;
 			   boolean boolStone = false;
 			   boolean boolWood = false; 
@@ -88,7 +89,7 @@ public class ZoneBonusSaxParser {
 			   		}
 
 			   public void characters(char ch[], int start, int length) throws SAXException {
-				   	if (boolCoin) 
+				   	/*if (boolCoin) 
 			   			{lastCoin= Integer.parseInt(new String(ch, start, length));
 			   			toAdd.put("Coin", new Coin(lastCoin));
 			   			boolCoin = false;}
@@ -127,11 +128,51 @@ public class ZoneBonusSaxParser {
 		   				{lastCouncilPrivilege= Integer.parseInt(new String(ch, start, length));
 		   				toAdd.put("CouncilPrivilege", new CouncilPrivilege(lastCouncilPrivilege));
 		   				boolCouncilPrivilege = false;}
+				   */
+				   
+				   if (boolCoin) 
+		   			{lastInt= Integer.parseInt(new String(ch, start, length));
+		   			toAdd.put("Coin", new Coin(lastInt));
+		   			boolCoin = false;}
+			   
+			   	if (boolStone) 
+		   			{lastInt= Integer.parseInt(new String(ch, start, length));
+		   			toAdd.put("Stone", new Stone(lastInt));
+		   			boolStone = false;}
+			   
+			   	if (boolWood) 
+		   			{lastInt= Integer.parseInt(new String(ch, start, length));
+		   			toAdd.put("Wood", new Coin(lastInt));
+		   			boolWood = false;}
+			   
+			   	if (boolServant) 
+		   			{lastInt= Integer.parseInt(new String(ch, start, length));
+		   			toAdd.put("Servant", new Servant(lastInt));
+		   			boolServant = false;}
+			   
+			   	if (boolMilitaryPoint) 
+			   		{lastInt= Integer.parseInt(new String(ch, start, length));
+			   		toAdd.put("MilitaryPoint", new MilitaryPoint(lastInt));
+			   		boolMilitaryPoint = false;}
+			   
+		   		if (boolFaithPoint) 
+		   			{lastInt= Integer.parseInt(new String(ch, start, length));
+		   			toAdd.put("FaithPoint", new FaithPoint(lastInt));
+		   			boolFaithPoint = false;}
+		   		
+		   		if (boolVictoryPoint) 
+	   				{lastInt= Integer.parseInt(new String(ch, start, length));
+	   				toAdd.put("VictoryPoint", new VictoryPoint(lastInt));
+	   				boolVictoryPoint = false;}
+		   		
+		   		if (boolCouncilPrivilege) 
+	   				{lastInt= Integer.parseInt(new String(ch, start, length));
+	   				toAdd.put("CouncilPrivilege", new CouncilPrivilege(lastInt));
+	   				boolCouncilPrivilege = false;}
 				   
 			   		}
 		   		};
 
-		   		
 		   	saxParser.parse(pathname, handler);
 
 	} catch (Exception e) 
