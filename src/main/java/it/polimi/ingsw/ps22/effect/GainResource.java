@@ -28,5 +28,10 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 		}
 		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
 	}
+
+	@Override
+	public boolean canAffordCost(Player player) {
+		return true;
+	}
 	
 }

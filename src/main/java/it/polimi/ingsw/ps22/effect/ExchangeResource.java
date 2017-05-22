@@ -24,7 +24,8 @@ public class ExchangeResource implements ActionEffect{
 	}
 	
 	//Controlla che il giocatore abbia suff risorse per lo scambio
-	private boolean canAffordCost(Player player){
+	@Override
+	public boolean canAffordCost(Player player){
 		for(String type: cost.keySet())
 			if(player.getResources().get(type).getQuantity() < cost.get(type).getQuantity())
 				return false;

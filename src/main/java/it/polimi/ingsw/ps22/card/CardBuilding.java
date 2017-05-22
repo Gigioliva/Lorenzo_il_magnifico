@@ -54,7 +54,7 @@ public class CardBuilding extends DevelopmentCard {
 			this.actionEffects.get(number).performEffect(player, board);
 		}catch (IndexOutOfBoundsException e){
 			return;
-		}
+		}	
 	}
 
 	public int getActionValue() {

@@ -30,4 +30,9 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 		player.applyMalusResource(resources);
 	}
 
+	@Override
+	public boolean canAffordCost(Player player) {
+		return true;
+	}
+
 }
