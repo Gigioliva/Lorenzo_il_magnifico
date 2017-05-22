@@ -26,8 +26,8 @@ public class TowerCharacterZone extends TowerZone {
 				player.getSpecificResource("Coin").subResource(new Coin(3));
 			}
 			towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
-			player.getDevelopmentCard("Character").add(towerSpaces[actionSpace].getCard());
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
+			player.getDevelopmentCard("CardCharacter").add(towerSpaces[actionSpace].getCard());
 			return true;
 		}
 		return false;

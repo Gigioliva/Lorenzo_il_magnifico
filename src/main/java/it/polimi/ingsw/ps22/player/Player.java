@@ -42,10 +42,10 @@ public class Player {
 		points.put("MilitaryPoint", new MilitaryPoint(0));
 		points.put("FaithPoint", new FaithPoint(0));
 		cards = new HashMap<String, ArrayList<DevelopmentCard>>();
-		cards.put("Building", new ArrayList<DevelopmentCard>());
-		cards.put("Character", new ArrayList<DevelopmentCard>());
-		cards.put("Territory", new ArrayList<DevelopmentCard>());
-		cards.put("Venture", new ArrayList<DevelopmentCard>());
+		cards.put("CardBuilding", new ArrayList<DevelopmentCard>());
+		cards.put("CardCharacter", new ArrayList<DevelopmentCard>());
+		cards.put("CardTerritory", new ArrayList<DevelopmentCard>());
+		cards.put("CardVenture", new ArrayList<DevelopmentCard>());
 		bonusAcc = new BonusAcc();
 		specBonus = new SpecBonus();
 		family = new HashMap<Color, Family>();

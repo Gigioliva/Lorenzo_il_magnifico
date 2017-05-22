@@ -26,7 +26,7 @@ public class TowerTerritoryZone extends TowerZone {
 				player.getSpecificResource("Coin").subResource(new Coin(3));
 			}
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
-			player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
+			player.getDevelopmentCard("CardTerritory").add(towerSpaces[actionSpace].getCard());
 			return true;
 		}
 		return false;

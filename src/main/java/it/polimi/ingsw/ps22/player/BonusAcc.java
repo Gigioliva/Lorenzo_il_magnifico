@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.resource.*;
 
 public class BonusAcc {
@@ -30,7 +29,7 @@ public class BonusAcc {
 		accumulator.put("IncrementVenture", new IncrementVenture(0));
 		accumulator.put("IncrementHarvest", new IncrementHarvest(0));
 		accumulator.put("IncrementProduction", new IncrementProduction(0));
-		accumulator.put("IncrementDice", new IncrementDiceBlack(0)); //modificarlo
+		accumulator.put("IncrementDice", new IncrementDice(0));
 		saleBuilding.put("Coin", new Coin(0));
 		saleBuilding.put("Stone", new Stone(0));
 		saleBuilding.put("Wood", new Wood(0));

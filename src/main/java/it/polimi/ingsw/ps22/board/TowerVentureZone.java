@@ -36,7 +36,7 @@ public class TowerVentureZone extends TowerZone {
 			towerSpaces[actionSpace].getCard().applyCostToPlayer(player, possibleCost.get(choice));
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 			towerSpaces[actionSpace].getCard().loadEndEffects(player, board);
-			player.getDevelopmentCard("Venture").add(towerSpaces[actionSpace].getCard());
+			player.getDevelopmentCard("CardVenture").add(towerSpaces[actionSpace].getCard());
 			return true;
 		}
 		return false;
