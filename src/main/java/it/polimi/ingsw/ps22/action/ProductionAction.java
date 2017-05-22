@@ -41,14 +41,15 @@ public class ProductionAction extends Action {
 		//ricordarsi che i gain devono essere fatti per ultimi e che gli scambi possono essere più di uno
 		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects = getPossibleEffects(player);
 		for(DevelopmentCard card: possibleEffects.keySet()){
-			//se la size degli effetti possibili è maggiore di uno, chiedi all'utente quale vuole fare, mi deve ritornare un intero
-			if (possibleEffects.get(card).size() > 1){
-			//chiedi all'utente quale effetto vuol fare, mi ritorna quello che vuole fare
+			if(card.getActionValue() <= super.getActionValue()){
+				//se la size degli effetti possibili è maggiore di uno, chiedi all'utente quale vuole fare, mi deve ritornare un intero
+				if (possibleEffects.get(card).size() > 1){
+				//chiedi all'utente quale effetto vuol fare, mi ritorna quello che vuole fare
+				}
+				else{
+					card.applyActionEffect(player, board, possibleEffects.get(card).get(0));
+				}
 			}
-			else{
-				card.applyActionEffect(player, board, possibleEffects.get(card).get(0));
-			}
-				
 		}
 	}
 

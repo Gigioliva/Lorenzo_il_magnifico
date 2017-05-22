@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.controller.Ask;
+import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
@@ -23,10 +25,20 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 	
 	@Override
 	public void performEffect(Player player, Board board) {
+		int cont = 0;
 		for(String type: gain.keySet()){
-			player.getSpecificResource(type).addResource(gain.get(type));
+			if(type.equals("CouncilPrivilege")){
+				cont = gain.get(type).getQuantity();
+			}
+			else{
+				player.getSpecificResource(type).addResource(gain.get(type));
+			}
 		}
 		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
+		if(cont>0){
+			Ask ask = Model.getAsk();
+			ask.askPrivilegeChange(cont);
+		}
 	}
 
 	@Override

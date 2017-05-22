@@ -26,7 +26,6 @@ public class CardAction extends Action {
 
 	@Override
 	public void applyAction(Player player, Board board) {
-
 	}
 
 }

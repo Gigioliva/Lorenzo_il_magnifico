@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.controller.Ask;
+import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
@@ -23,7 +25,7 @@ public class ExchangeResource implements ActionEffect{
 		gain.put(typeCost, costResource);
 	}
 	
-	//Controlla che il giocatore abbia suff risorse per lo scambio
+	//Controlla che il giocatore abbia suff risorse per lo scambio (suppongo che il costo non sia in privilegi del consiglio)
 	@Override
 	public boolean canAffordCost(Player player){
 		for(String type: cost.keySet())
@@ -39,10 +41,20 @@ public class ExchangeResource implements ActionEffect{
 	}
 	
 	private void addGainToPlayer(Player player){
+		int cont = 0;
 		for(String type: gain.keySet()){
-			player.getSpecificResource(type).addResource(gain.get(type));
+			if(type.equals("CouncilPrivilege")){
+				cont = gain.get(type).getQuantity();
+			}
+			else{
+				player.getSpecificResource(type).addResource(gain.get(type));
+			}
 		}
 		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
+		if(cont > 0){
+			Ask ask = Model.getAsk();
+			ask.askPrivilegeChange(cont);
+		}
 	}
 	
 	@Override

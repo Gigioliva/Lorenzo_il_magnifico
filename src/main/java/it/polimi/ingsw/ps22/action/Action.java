@@ -10,6 +10,10 @@ public abstract class Action {
 		this.actionValue = actionValue;
 	}
 
+	public int getActionValue(){
+		return actionValue;
+	}
+	
 	public void applyAction(Player player, Board board) {
 
 	}
