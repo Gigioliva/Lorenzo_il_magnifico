@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class Model {
@@ -13,8 +14,6 @@ public class Model {
 	private static Ask ask;
 	
 	public Model(){
-		// lettura da file del tracciato punti fede
-		// FaithPointTrack temp = new FaithPointTrack();
 		// this.board = new Board(temp);
 		int turn=1;
 		this.players = new HashMap<>();

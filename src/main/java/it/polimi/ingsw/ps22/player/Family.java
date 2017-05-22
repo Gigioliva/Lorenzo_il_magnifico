@@ -5,7 +5,7 @@ import it.polimi.ingsw.ps22.model.Color;
 public class Family {
 	private Color color;
 	private Player player;
-	private int value;  //trova il modo di settarlo in base a BonusAcc e SpecBonus
+	private int value;
 
 	public Family(Color color, Player player) {
 		this.color = color;
@@ -26,7 +26,13 @@ public class Family {
 	
 	public void setValue(int value){
 		this.value=value;
-		
+		if(player.getSpecBonus().returnBool("AllFamilyCol5") && color!=Color.NEUTRAL)
+			this.value=5;
+		if(player.getSpecBonus().returnBool("Neutral+3") && color==Color.NEUTRAL)
+			this.value=this.value+3;
+		if(player.getSpecBonus().returnBool("FamilyCol+2") && color!=Color.NEUTRAL)
+			this.value=this.value+2;
+		this.value=this.value-player.getBonusAcc().getBonus("IncrementDice").getQuantity();
 	}
 	
 	public void incrementValue(int value){

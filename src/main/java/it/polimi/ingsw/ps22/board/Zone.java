@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps22.board;
 
-import it.polimi.ingsw.ps22.model.Ask;
+import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;

@@ -30,9 +30,7 @@ public class BonusAcc {
 		accumulator.put("IncrementVenture", new IncrementVenture(0));
 		accumulator.put("IncrementHarvest", new IncrementHarvest(0));
 		accumulator.put("IncrementProduction", new IncrementProduction(0));
-		accumulator.put("IncrementDiceBlack", new IncrementDiceBlack(0));
-		accumulator.put("IncrementDiceWhite", new IncrementDiceWhite(0));
-		accumulator.put("IncrementDiceOrange", new IncrementDiceOrange(0));
+		accumulator.put("IncrementDice", new IncrementDiceBlack(0)); //modificarlo
 		saleBuilding.put("Coin", new Coin(0));
 		saleBuilding.put("Stone", new Stone(0));
 		saleBuilding.put("Wood", new Wood(0));

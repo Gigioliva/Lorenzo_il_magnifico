@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.card.CardExcomm;
-import it.polimi.ingsw.ps22.model.Ask;
+import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
 
