@@ -12,7 +12,7 @@ public class Board {
 	private HashMap<Integer,ChurchSpace> church;
 	private Dice dice;
 	
-	public Board(FaithPointTrack faithTrack){
+	public Board(){
 		market=new MarketZone();
 		prodZone=new ProductionZone();
 		harvestZone=new HarvestZone();
@@ -50,5 +50,10 @@ public class Board {
 	
 	public int getDice(Color color){
 		return dice.getDice(color);
+	}
+	public void setZone(int num){
+		market.setZone(num);
+		prodZone.setZone(num);
+		harvestZone.setZone(num);
 	}
 }

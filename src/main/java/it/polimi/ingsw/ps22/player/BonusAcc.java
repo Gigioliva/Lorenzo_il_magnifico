@@ -5,17 +5,16 @@ import java.util.HashMap;
 import it.polimi.ingsw.ps22.resource.*;
 
 public class BonusAcc {
-	private HashMap<String,BonusAbstract> accumulator;
-	private HashMap<String,Resource> saleBuilding;
-	private HashMap<String,Coin> saleCharacter;
-	private HashMap<String,ResourceAbstract> saleVenture;
-	
-	
-	public BonusAcc(){
-		accumulator=new HashMap<String,BonusAbstract>();
-		saleBuilding=new HashMap<String,Resource>();
-		saleCharacter=new HashMap<String,Coin>();
-		saleVenture=new HashMap<String,ResourceAbstract>();
+	private HashMap<String, BonusAbstract> accumulator;
+	private HashMap<String, Resource> saleBuilding;
+	private HashMap<String, Coin> saleCharacter;
+	private HashMap<String, ResourceAbstract> saleVenture;
+
+	public BonusAcc() {
+		accumulator = new HashMap<String, BonusAbstract>();
+		saleBuilding = new HashMap<String, Resource>();
+		saleCharacter = new HashMap<String, Coin>();
+		saleVenture = new HashMap<String, ResourceAbstract>();
 		accumulator.put("Coin", new Coin(0));
 		accumulator.put("Stone", new Stone(0));
 		accumulator.put("Wood", new Wood(0));
@@ -41,49 +40,90 @@ public class BonusAcc {
 		saleVenture.put("MilitaryPoint", new MilitaryPoint(0));
 		saleVenture.put("FaithPoint", new FaithPoint(0));
 	}
-	
-	public BonusAbstract getBonus(String type){
+
+	public BonusAbstract getBonus(String type) {
 		return accumulator.get(type);
 	}
-	
-	public void addBonus(HashMap<String,BonusAbstract> bonus){
-		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
-		for(String el: temp){
-			this.accumulator.get(el).addResource(bonus.get(el));;
+
+	public void addBonus(HashMap<String, BonusAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			this.accumulator.get(el).addResource(bonus.get(el));
+			;
 		}
 	}
-	
-	public void addSales(HashMap<String,ResourceAbstract> bonus, String type){
-		if(type=="Building"){
+
+	public void addSales(HashMap<String, ResourceAbstract> bonus, String type) {
+		if (type == "Building") {
 			addSaleBuilding(bonus);
 		}
-		if(type=="Character"){
+		if (type == "Character") {
 			addSaleCharacter(bonus);
 		}
-		if(type=="Venture"){
+		if (type == "Venture") {
 			addSaleVenture(bonus);
 		}
-		
+
 	}
-	
-	private void addSaleBuilding(HashMap<String,ResourceAbstract> bonus){
-		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
-		for(String el: temp){
-			this.saleBuilding.get(el).addResource(bonus.get(el));;
+
+	private void addSaleBuilding(HashMap<String, ResourceAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			if (saleBuilding.containsKey(el))
+				this.saleBuilding.get(el).addResource(bonus.get(el));
 		}
 	}
-	
-	private void addSaleCharacter(HashMap<String,ResourceAbstract> bonus){
-		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
-		for(String el: temp){
-			this.saleCharacter.get(el).addResource(bonus.get(el));;
+
+	private void addSaleCharacter(HashMap<String, ResourceAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			if (saleCharacter.containsKey(el))
+				this.saleCharacter.get(el).addResource(bonus.get(el));
 		}
 	}
-	
-	private void addSaleVenture(HashMap<String,ResourceAbstract> bonus){
-		ArrayList<String> temp=new ArrayList<String>(bonus.keySet());
-		for(String el: temp){
-			this.saleVenture.get(el).addResource(bonus.get(el));;
+
+	private void addSaleVenture(HashMap<String, ResourceAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			if (saleVenture.containsKey(el))
+				this.saleVenture.get(el).addResource(bonus.get(el));
+		}
+	}
+
+	public void subSales(HashMap<String, ResourceAbstract> bonus, String type) {
+		if (type == "Building") {
+			subSaleBuilding(bonus);
+		}
+		if (type == "Character") {
+			subSaleCharacter(bonus);
+		}
+		if (type == "Venture") {
+			subSaleVenture(bonus);
+		}
+
+	}
+
+	private void subSaleBuilding(HashMap<String, ResourceAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			if (saleBuilding.containsKey(el))
+				this.saleBuilding.get(el).subResource(bonus.get(el));
+		}
+	}
+
+	private void subSaleCharacter(HashMap<String, ResourceAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			if (saleCharacter.containsKey(el))
+				this.saleCharacter.get(el).subResource(bonus.get(el));
+		}
+	}
+
+	private void subSaleVenture(HashMap<String, ResourceAbstract> bonus) {
+		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
+		for (String el : temp) {
+			if (saleVenture.containsKey(el))
+				this.saleVenture.get(el).subResource(bonus.get(el));
 		}
 	}
 

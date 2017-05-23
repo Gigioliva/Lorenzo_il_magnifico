@@ -140,6 +140,10 @@ public class Ask extends Observable {
 		return result;
 	}
 
+	//ricevo HashMap<Tipocarta, array di quelle carte e chiedo quale vuole prendere e ritorna HashMap<tipo,carta>
+	
+	//ricevo HashMap<carta,effetti possibli> e ritorno hashmap<carta,intero scelto>
+
 	private static ArrayList<Integer> parseToArray(String s) {
 		ArrayList<Integer> numbers = new ArrayList<Integer>();
 		Pattern p = Pattern.compile("\\d+");

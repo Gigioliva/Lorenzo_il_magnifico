@@ -63,5 +63,12 @@ public class ProductionZone extends Zone {
 			productionSpace[i].resetFamily();
 		}
 	}
+	
+	@Override
+	public void setZone(int num){
+		if(num<3){
+			productionSpace[1].setNotPlayable();
+		}
+	}
 
 }

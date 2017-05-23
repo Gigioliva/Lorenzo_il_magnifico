@@ -35,5 +35,14 @@ public class MarketZone extends Zone {
 			marketSpace[i].resetFamily();
 		}
 	}
+	
+	@Override
+	public void setZone(int num){
+		if(num<4){
+			marketSpace[2].setNotPlayable();
+			marketSpace[3].setNotPlayable();
+		}
+		
+	}
 
 }

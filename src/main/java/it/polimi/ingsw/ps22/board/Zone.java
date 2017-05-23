@@ -40,4 +40,8 @@ public abstract class Zone {
 		}
 		return false;
 	}
+	
+	public void setZone(int num){
+		
+	}
 }

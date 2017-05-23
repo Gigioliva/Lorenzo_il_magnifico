@@ -54,5 +54,13 @@ public class HarvestZone extends Zone {
 			harvestSpace[i].resetFamily();
 		}
 	}
+	
+	@Override
+	public void setZone(int num){
+		if(num<3){
+			harvestSpace[1].setNotPlayable();
+		}
+		
+	}
 
 }
