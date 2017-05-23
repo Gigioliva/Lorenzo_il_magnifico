@@ -11,11 +11,8 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	private String multiplier;
 	private ResourceAbstract multiplicand;
 	private String multiplicandType;
-	
-	public MultiplyEffect(String multiplier, ResourceAbstract multiplicand, String multiplicandType){
-		this.multiplicand=multiplicand;
-		this.multiplier=multiplier;
-	}
+						//Territory			Coin							//Coin
+	//public MultiplyEffect(String multiplier, ResourceAbstract multiplicand, String multiplicandType){
 
 	@Override
 	public void performEffect(Player player, Board board) {
@@ -33,6 +30,18 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	@Override
 	public boolean canAffordCost(Player player) {
 		return true;
+	}
+
+	public void setMultiplier(String multiplier) {
+		this.multiplier = multiplier;
+	}
+
+	public void setMultiplicand(ResourceAbstract multiplicand) {
+		this.multiplicand = multiplicand;
+	}
+
+	public void setMultiplicandType(String multiplicandType) {
+		this.multiplicandType = multiplicandType;
 	}
 
 }

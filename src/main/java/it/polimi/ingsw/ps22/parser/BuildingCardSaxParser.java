@@ -18,6 +18,7 @@ import it.polimi.ingsw.ps22.effect.EndVictoryEffect;
 import it.polimi.ingsw.ps22.effect.ExchangeResource;
 import it.polimi.ingsw.ps22.effect.ExtraAction;
 import it.polimi.ingsw.ps22.effect.GainResource;
+import it.polimi.ingsw.ps22.effect.MultiplyEffect;
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.resource.FaithPoint;
@@ -98,9 +99,10 @@ public class BuildingCardSaxParser {
 			SAXParser saxParser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler() {
 				CardBuilding card = new CardBuilding();
-				HashMap<String, ResourceAbstract> cost = new HashMap<String, ResourceAbstract>();
-				GainResource gainEffect = new GainResource();
-				ExchangeResource exchange = new ExchangeResource();
+				GainResource gainImmEffect = new GainResource();
+				GainResource gainProdEffect = new GainResource();
+				ExchangeResource exchangeProdEffect = new ExchangeResource();
+				MultiplyEffect multProdEffect;
 				CardAction cardAct;
 				int lastInt = 0;
 				int lastImmActionValue = 0;
@@ -207,6 +209,92 @@ public class BuildingCardSaxParser {
 				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
 
+					// aggiunto nome alla carta
+					if (boolName) {
+						card.setName(new String(ch, start, length));
+						boolName = false;
+					}
+
+					// aggiunta era alla carta
+					if (boolEra) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						card.setEra(lastInt);
+						boolEra = false;
+					}
+					
+					// gestione monete
+					if (boolCoin) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							card.addCost("Coin", new Coin(lastInt));
+						} 
+						if (boolGainImm) {
+							gainImmEffect.addGain("Coin", new Coin(lastInt));
+						}
+						if (boolExchangeProd) {
+							if (lastInt<0) {
+								exchangeProdEffect.addCost("Coin", new Coin(lastInt));
+								}
+							else {
+								exchangeProdEffect.addGain("Coin", new Coin(lastInt));
+								}
+						}
+						if (boolCardMoltProd) {
+							multProdEffect.setMultiplicandType("Coin");
+							multProdEffect.setMultiplicand(new Coin(lastInt));
+						}
+						boolCoin = false;
+					}
+					
+					// gestione pietre
+					if (boolStone) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							card.addCost("Stone", new Stone(lastInt));
+						} 
+						if (boolGainImm) {
+							gainImmEffect.addGain("Stone", new Stone(lastInt));
+						}
+						if (boolExchangeProd) {
+							if (lastInt<0) {
+								exchangeProdEffect.addCost("Stone", new Stone(lastInt));
+								}
+							else {
+								exchangeProdEffect.addGain("Stone", new Stone(lastInt));
+								}
+						}
+						if (boolCardMoltProd) {
+							multProdEffect.setMultiplicandType("Stone");
+							multProdEffect.setMultiplicand(new Stone(lastInt));
+						}
+						boolStone = false;
+					}
+					
+					// gestione legni
+					if (boolWood) {
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						if (boolCost) {
+							card.addCost("Wood", new Wood(lastInt));
+						} 
+						if (boolGainImm) {
+							gainImmEffect.addGain("Wood", new Wood(lastInt));
+						}
+						if (boolExchangeProd) {
+							if (lastInt<0) {
+								exchangeProdEffect.addCost("Wood", new Wood(lastInt));
+								}
+							else {
+								exchangeProdEffect.addGain("Wood", new Wood(lastInt));
+								}
+						}
+						if (boolCardMoltProd) {
+							multProdEffect.setMultiplicandType("Wood");
+							multProdEffect.setMultiplicand(new Wood(lastInt));
+						}
+						boolWood = false;
+					}
+					
+					
 				}
 			};
 

@@ -306,7 +306,7 @@ public class VentureCardSaxParser {
 					// effetto azione immediata
 					if (boolImmActionValue) {
 						lastImmActionValue = Integer.parseInt(new String(ch, start, length));
-						CardAction cardAct = new CardAction(lastImmActionValue);
+						cardAct = new CardAction(lastImmActionValue);
 						boolImmActionValue = false;
 					}
 
