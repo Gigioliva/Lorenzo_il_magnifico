@@ -11,16 +11,20 @@ import it.polimi.ingsw.ps22.resource.Resource;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class CardBuilding extends DevelopmentCard {
-	private final int actionValue;
+	private int actionValue;
 	private HashMap<String, Resource> cost;
 	private ArrayList<ImmediateEffect> immediateEffects;
 	private ArrayList<ActionEffect> actionEffects;
 
-	public CardBuilding(int other) {
+	public CardBuilding() {
 		this.immediateEffects = new ArrayList<ImmediateEffect>();
 		this.actionEffects = new ArrayList<ActionEffect>();
 		this.cost = new HashMap<String, Resource>();
-		this.actionValue = other;
+		this.actionValue = 0;
+	}
+	
+	public void setActionValue(int actionValue){
+		this.actionValue = actionValue;
 	}
 
 	public void addCost(String type, Resource resource) {
