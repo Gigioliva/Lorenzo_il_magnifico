@@ -21,7 +21,7 @@ public class PersonalBoard {
 		return personalBonus;
 	}
 	
-	public HashMap<Integer, VictoryPoint> getbonusCharacter(){
+	public HashMap<Integer, VictoryPoint> getBonusCharacter(){
 		return bonusCharacter;
 	}
 

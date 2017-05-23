@@ -17,14 +17,14 @@ public abstract class Zone {
 	public void reset() {
 
 	}
-	
+
 	public void reset(int turn) {
 
 	}
 
 	protected boolean checkActionValue(ActionSpace actionSpace, Family family, int actionValue) {
-		Ask ask=Model.getAsk();
-		Player player=family.getPlayer();
+		Ask ask = Model.getAsk();
+		Player player = family.getPlayer();
 		int servant = ask.askServant(player);
 		if ((player.getSpecBonus().returnBool("DoubleServant"))
 				&& ((actionValue + servant / 2) > actionSpace.getActionCost())) {
@@ -40,8 +40,8 @@ public abstract class Zone {
 		}
 		return false;
 	}
-	
-	public void setZone(int num){
-		
+
+	public void setZone(int num) {
+
 	}
 }

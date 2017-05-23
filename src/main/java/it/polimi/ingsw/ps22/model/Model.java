@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
+import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.VictoryPoint;
 
 public class Model extends Observable {
 	private Board board;
@@ -49,11 +51,14 @@ public class Model extends Observable {
 		board.setZone(players.size());
 		orderedPlayers = new ArrayList<String>(players.keySet());
 		playerGame = orderedPlayers.get(0);
+		for(int i=0;i<orderedPlayers.size();i++){
+			players.get(orderedPlayers.get(i)).addSpecificResource("Coin", new Coin(5+i));
+		}
 		turn = 1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
-		setChanged();
-		notifyObservers();
+		//setChanged();
+		//notifyObservers();
 	}
 
 	public void nextPlayer() {
@@ -128,13 +133,62 @@ public class Model extends Observable {
 		turn++;
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		if (turn > 6) {
-			// termina partita
-			// per ogni giocatore devo applicare gli endeffect, confertire le
-			// carte in punti, convertire le risorse in punti, controllare chi ha più punti militari
+			EndGame();
 		}
 
 	}
 
+	private void EndGame() {
+		for(String el: players.keySet()){  //occhio a quelli che devono essere eseguiti per primi
+			players.get(el).applyEndEffects(board);
+		}
+		winMilitaryPoint();
+		for(String el: players.keySet()){
+			players.get(el).calcVicPoint();
+		}
+	}
+	
+	private void winMilitaryPoint(){
+		HashMap<Integer, Player> temp = new HashMap<Integer, Player>();
+		temp.put(1, null);
+		temp.put(2, null);
+		temp.put(3, null);
+		int i = 0;
+		for (String el : players.keySet()) {
+			if (players.get(el).getSpecificResource("MilitaryPoint").getQuantity() >= i) {
+				temp.put(3, temp.get(2));
+				temp.put(2, temp.get(1));
+				temp.put(1, players.get(el));
+				i = players.get(el).getSpecificResource("MilitaryPoint").getQuantity();
+			}
+		}
+		if (temp.get(1).getSpecificResource("MilitaryPoint").getQuantity() == temp.get(2)
+				.getSpecificResource("MilitaryPoint").getQuantity()) {
+			temp.get(1).addPoints("VictoryPoint", new VictoryPoint(5));
+			temp.get(2).addPoints("VictoryPoint", new VictoryPoint(5));
+		} else{
+			temp.get(1).addPoints("VictoryPoint", new VictoryPoint(5));
+			if (temp.get(2).getSpecificResource("MilitaryPoint").getQuantity() == temp.get(3)
+					.getSpecificResource("MilitaryPoint").getQuantity()){
+				temp.get(2).addPoints("VictoryPoint", new VictoryPoint(2));
+				temp.get(3).addPoints("VictoryPoint", new VictoryPoint(2));
+			} else{
+				temp.get(2).addPoints("VictoryPoint", new VictoryPoint(2));
+			}
+		}		
+	}
+
+	private Player winGame(){ //scegliere se usarlo nel model per salvarlo o nelle vare view
+		Player player=null;
+		int i = 0;
+		for (String el : orderedPlayers) {
+			if (players.get(el).getSpecificResource("VictoryPoint").getQuantity() > i) {
+				player=players.get(el);
+				i = players.get(el).getSpecificResource("VictoryPoint").getQuantity();
+			}
+		}
+		return player;
+	}
 	public static Ask getAsk() {
 		return ask;
 	}
