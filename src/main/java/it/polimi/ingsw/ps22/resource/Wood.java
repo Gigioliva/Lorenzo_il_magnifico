@@ -5,4 +5,8 @@ public class Wood extends Resource {
 	public Wood(int wood){
 		super(wood);
 	}
+	
+	public String getName() {
+		return "Wood";
+	}
 }

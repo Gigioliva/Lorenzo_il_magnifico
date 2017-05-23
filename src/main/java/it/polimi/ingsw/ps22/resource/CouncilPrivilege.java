@@ -45,4 +45,7 @@ public class CouncilPrivilege extends ResourceAbstract {
 		return resourcesForPlayer;
 	}
 		
+	public String getName() {
+		return "CouncilPrivilege";
+	}
 }

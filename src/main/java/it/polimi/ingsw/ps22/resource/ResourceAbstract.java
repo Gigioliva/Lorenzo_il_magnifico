@@ -6,5 +6,10 @@ public class ResourceAbstract extends BonusAbstract{
 		super(quantity);
 		
 	}
+	
+	public String getName() {
+		return null;
+	}
+	
 
 }

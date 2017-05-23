@@ -4,4 +4,9 @@ public class FaithPoint extends Point {
 	public FaithPoint(int faithpoint) {
 		super(faithpoint);
 	}
+	
+	public String getName() {
+		return "FaithPoint";
+	}
+	
 }

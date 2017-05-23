@@ -3,4 +3,8 @@ public class MilitaryPoint extends Point {
 	public MilitaryPoint(int militarypoint) {
 		super(militarypoint);
 	}
+	
+	public String getName() {
+		return "MilitaryPoint";
+	}
 }

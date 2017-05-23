@@ -6,4 +6,7 @@ public class Stone extends Resource {
 		super(stone);
 	}
 
+	public String getName() {
+		return "Stone";
+	}
 }
