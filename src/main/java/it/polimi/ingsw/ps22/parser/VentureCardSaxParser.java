@@ -47,10 +47,12 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <faithpoint>0</faithpoint>										ok
             <councilpoint>0</councilpoint>									ok
         </gainEffect>														ok
-        <immextraprod>0</immextraprod>
-        <immextraharvest>0</immextraharvest>
-        <immactionvalue>0</immactionvalue>
-        <immactionvaleuassociatedcard>all</immactionvaleuassociatedcard>
+        <immextraprod>0</immextraprod>										ok
+        <immextraharvest>0</immextraharvest>								ok
+        <immactionvalue>0</immactionvalue>									ok
+        <immactionvaleuassociatedcard>										ok
+        	<type></type>													ok
+        </immactionvaleuassociatedcard>										ok
         <victorypoint>0</victorypoint>										ok
     </card>																	ok
 
@@ -67,6 +69,7 @@ public class VentureCardSaxParser {
 				HashMap<String, ResourceAbstract> cost = new HashMap<String, ResourceAbstract>();
 				HashMap<String, ResourceAbstract> requisite = new HashMap<String, ResourceAbstract>();
 				GainResource gainEffect = new GainResource();
+				CardAction cardAct;
 				int lastInt = 0;
 				int lastImmActionValue = 0;
 				boolean boolName = false;
@@ -84,7 +87,7 @@ public class VentureCardSaxParser {
 				boolean boolImmHarvest = false;
 				boolean boolImmProd = false;
 				boolean boolImmActionValue = false;
-				boolean boolAssCard = false;
+				boolean boolType = false;
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
@@ -143,8 +146,8 @@ public class VentureCardSaxParser {
 						boolImmActionValue = true;
 					}
 
-					if (qName.equalsIgnoreCase("immactionvaleuassociatedcard")) {
-						boolAssCard = true;
+					if (qName.equalsIgnoreCase("type")) {
+						boolType = true;
 					}
 
 				}
@@ -168,6 +171,13 @@ public class VentureCardSaxParser {
 					if (qName.equalsIgnoreCase("card")) {
 						parsedData.add(card);
 						card = new CardVenture();
+					}
+
+					// riconoscitore tipo carta associata a azione immediata
+					if (qName.equalsIgnoreCase("immactionvaleuassociatedcard")) {
+						// attenzione a scrivere correttamente i tipi con le
+						// maiuscole
+						card.addImmediateEffect(new ExtraAction(cardAct));
 					}
 				}
 
@@ -289,15 +299,15 @@ public class VentureCardSaxParser {
 					// effetto azione immediata
 					if (boolImmActionValue) {
 						lastImmActionValue = Integer.parseInt(new String(ch, start, length));
+						CardAction cardAct = new CardAction(lastImmActionValue);
 						boolImmActionValue = false;
 					}
 
-					// carta associata a azione immediata
-					if (boolAssCard) {
-						lastInt = Integer.parseInt(new String(ch, start, length));
-						card.addImmediateEffect(new ExtraAction(new CardAction(lastInt)));
-						// manca azione carta!
-						boolAssCard = false;
+					// aggiunge i tipi
+					if (boolType) {
+						String str = new String(ch, start, length);
+						cardAct.addType(str);
+						boolType = false;
 					}
 
 				}
