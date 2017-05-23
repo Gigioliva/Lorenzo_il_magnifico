@@ -17,9 +17,10 @@ public class HarvestAction extends Action {
 	@Override
 	public void applyAction(Player player, Board board) {
 		ArrayList<DevelopmentCard> cards = player.getDevelopmentCard("CardTerritory");
+		int bonus = player.getBonusAcc().getBonus("IncrementHarvest").getQuantity();
 		for(DevelopmentCard card: cards){
 			ArrayList<ActionEffect> effects = card.getActionEffects();
-			if(card.getActionValue() <= super.getActionValue()){
+			if(card.getActionValue() <= super.getActionValue() + bonus){
 				for(ActionEffect effect: effects){
 						effect.performEffect(player, board);
 				}

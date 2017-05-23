@@ -35,6 +35,10 @@ public class TowerZone extends Zone {
 	protected void setOccupied() {
 		this.occupied = true;
 	}
+	
+	public TowerSpace[] getTowerSpaces(){
+		return this.towerSpaces;
+	}
 
 	@Override
 	public boolean Control(Player player, int actionSpace, Family family) {

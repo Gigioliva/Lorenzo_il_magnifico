@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.CardBuilding;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
+import it.polimi.ingsw.ps22.effect.ExchangeResource;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class ProductionAction extends Action {
@@ -15,42 +16,64 @@ public class ProductionAction extends Action {
 		super(actionValue);
 	}
 	
-	private HashMap<DevelopmentCard,ArrayList<Integer>> getPossibleEffects(Player player){
+	private HashMap<DevelopmentCard,ArrayList<Integer>> getPossibleEffects(Player player, int bonus, HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects){
 		
-		ArrayList<DevelopmentCard> buildingCards = player.getDevelopmentCard("CardBuilding");
-		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects = new HashMap<DevelopmentCard, ArrayList<Integer>>();
+		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects = new HashMap<DevelopmentCard,ArrayList<Integer>>();
+		ArrayList<DevelopmentCard> buildingCards = new ArrayList<DevelopmentCard>(allEffects.keySet());
+		
 		for(DevelopmentCard card: buildingCards){
-			ArrayList<ActionEffect> effects = card.getActionEffects();
-			for(int i=0; i<effects.size(); i++){
-				if (effects.get(i).canAffordCost(player)){
+			HashMap<ActionEffect,Integer> mapEffects = allEffects.get(card);
+			for(ActionEffect effect: mapEffects.keySet()){
+				if (effect.canAffordCost(player) && card.getActionValue() <= bonus + super.getActionValue()){
 					if (possibleEffects.containsKey(card)){
-						possibleEffects.get(card).add(i);
+						possibleEffects.get(card).add(mapEffects.get(effect));
 					}
 					else{
 						possibleEffects.put(card, new ArrayList<Integer>());
-						possibleEffects.get(card).add(i);
+						possibleEffects.get(card).add(mapEffects.get(effect));
 					}
 				}
+				else{
+					allEffects.get(card).remove(effect);
+				}
+			}
+			if(allEffects.get(card).size()==0)
+				allEffects.remove(card);
+		}
+		
+		return possibleEffects;
+	}
+	
+	private void applyNoExchangeEffect(Player player, Board board, int bonus ){
+		ArrayList<DevelopmentCard> buildingCards = player.getDevelopmentCard("CardBuilding");
+		for(DevelopmentCard card: buildingCards){
+			ArrayList<ActionEffect> effects = card.getActionEffects();
+			for(int i=0; i<effects.size(); i++){
+				if(!(effects.get(i) instanceof ExchangeResource) && card.getActionValue() <= super.getActionValue() + bonus)
+					effects.get(i).performEffect(player, board);
 			}
 		}
-		return possibleEffects;
 	}
 
 	@Override
 	public void applyAction(Player player, Board board) {
-		//ricordarsi che i gain devono essere fatti per ultimi e che gli scambi possono essere più di uno
-		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects = getPossibleEffects(player);
-		for(DevelopmentCard card: possibleEffects.keySet()){
-			if(card.getActionValue() <= super.getActionValue()){
-				//se la size degli effetti possibili è maggiore di uno, chiedi all'utente quale vuole fare, mi deve ritornare un intero
-				if (possibleEffects.get(card).size() > 1){
-				//chiedi all'utente quale effetto vuol fare, mi ritorna quello che vuole fare
-				}
-				else{
-					card.applyActionEffect(player, board, possibleEffects.get(card).get(0));
-				}
-			}
-		}
+		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects;
+		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects;
+		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
+		allEffects = player.cloneCardswithActionEffect("CardBuilding");
+		do{
+			possibleEffects = getPossibleEffects(player,bonus, allEffects);
+			HashMap<DevelopmentCard,Integer> chosenEffect = new HashMap<DevelopmentCard,Integer>();
+			//passa a utente lista di carte ed effetti possibili ad ogni carta 
+			//chosenEffect = askEffect...
+			DevelopmentCard card = chosenEffect.keySet().iterator().next();
+			card.applyActionEffect(player, board, chosenEffect.get(card));
+			allEffects.remove(card);
+			
+		}while(!possibleEffects.isEmpty());
+		
+		applyNoExchangeEffect(player, board, bonus);
 	}
+	
 
 }

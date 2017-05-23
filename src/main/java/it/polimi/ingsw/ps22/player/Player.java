@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.EndEffect;
 import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.resource.BonusAbstract;
@@ -159,5 +160,18 @@ public class Player {
 	
 	public void addSpecificResource(String type, ResourceAbstract other){
 		this.getSpecificResource(type).addResource(other);
+	}
+	
+	public HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> cloneCardswithActionEffect(String cardType){
+		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> clonedCards = new HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>>();
+		ArrayList<DevelopmentCard> cards = this.getDevelopmentCard(cardType);
+		for(DevelopmentCard card: cards){
+			clonedCards.put(card, new HashMap<ActionEffect,Integer>());
+			ArrayList<ActionEffect> effects = card.getActionEffects(); 
+			for(int i = 0; i< effects.size(); i++){
+				clonedCards.get(card).put(effects.get(i),i);
+			}
+		}
+		return clonedCards;
 	}
 }
