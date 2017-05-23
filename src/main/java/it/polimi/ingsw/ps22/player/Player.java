@@ -32,6 +32,7 @@ public class Player {
 	private String username;
 	
 
+	
 	public Player(String username) {
 		resources = new HashMap<String, Resource>();
 		points = new HashMap<String, Point>();
@@ -58,10 +59,43 @@ public class Player {
 		personalBoard = new PersonalBoard();
 		endEffects = new ArrayList<EndEffect>();
 	}
+	
+	public Player(Player player){
+		this.resources = player.cloneResources();
+		this.points = player.clonePoints();
+	}
+
 
 	public HashMap<String, Resource> getResources() {
 		return this.resources;
 	}
+	
+	private HashMap<String, Resource> cloneResources(){
+		
+		HashMap<String, Resource> res = new HashMap<String, Resource>();
+		
+		for(String string: this.resources.keySet()){
+			String newstring = new String(string);
+			Resource clonedResource = new Resource(this.resources.get(string).getQuantity());
+			res.put(newstring, clonedResource);
+		}
+		
+		return res;
+	}
+	
+	private HashMap<String, Point> clonePoints(){
+		
+		HashMap<String, Point> res = new HashMap<String, Point>();
+		
+		for(String string: this.points.keySet()){
+			String newstring = new String(string);
+			Point clonedResource = new Point(this.points.get(string).getQuantity());
+			res.put(newstring, clonedResource);
+		}
+		
+		return res;
+	}
+
 	
 	public HashMap<String, Point> getPoints(){
 		return this.points;
@@ -139,7 +173,7 @@ public class Player {
 		return endEffects;
 	}
 	
-	private boolean isResource(String type){
+	public boolean isResource(String type){
 		return this.resources.containsKey(type);
 	}
 	
