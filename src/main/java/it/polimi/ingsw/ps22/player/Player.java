@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.board.Dice;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.EndEffect;
@@ -207,5 +208,13 @@ public class Player {
 			}
 		}
 		return clonedCards;
+	}
+	
+	public void setFamily(Dice dice) {
+		for (Color el : family.keySet()) {
+			if (el != Color.NEUTRAL)
+				family.get(el).setValue(dice.getDice(el));
+			else family.get(el).setValue(0);
+		}
 	}
 }
