@@ -85,7 +85,6 @@ public class VentureCardSaxParser {
 				boolean boolImmProd = false;
 				boolean boolImmActionValue = false;
 				boolean boolAssCard = false;
-				
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
@@ -93,7 +92,7 @@ public class VentureCardSaxParser {
 						throws SAXException {
 
 					if (qName.equalsIgnoreCase("cost")) {
-						boolCost= true;
+						boolCost = true;
 					}
 
 					if (qName.equalsIgnoreCase("coin")) {
@@ -119,23 +118,23 @@ public class VentureCardSaxParser {
 					if (qName.equalsIgnoreCase("councilpoint")) {
 						boolCouncilPoint = true;
 					}
-					
+
 					if (qName.equalsIgnoreCase("faithpoint")) {
 						boolFaithPoint = true;
 					}
-					
+
 					if (qName.equalsIgnoreCase("militaryrequirement")) {
 						boolMilitaryPointrequest = true;
 					}
-					
+
 					if (qName.equalsIgnoreCase("victorypoint")) {
 						boolVictoryPoint = true;
 					}
-					
+
 					if (qName.equalsIgnoreCase("immextraprod")) {
 						boolImmProd = true;
 					}
-					
+
 					if (qName.equalsIgnoreCase("immextraharvest")) {
 						boolImmHarvest = true;
 					}
@@ -143,7 +142,7 @@ public class VentureCardSaxParser {
 					if (qName.equalsIgnoreCase("immactionvalue")) {
 						boolImmActionValue = true;
 					}
-					
+
 					if (qName.equalsIgnoreCase("immactionvaleuassociatedcard")) {
 						boolAssCard = true;
 					}
@@ -153,19 +152,19 @@ public class VentureCardSaxParser {
 				// ridefinizione del metodo endElement all'interno del
 				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
-					
+
 					if (qName.equalsIgnoreCase("cost")) {
 						card.addRequisiteCost(cost, requisite);
 						cost = new HashMap<String, ResourceAbstract>();
 						requisite = new HashMap<String, ResourceAbstract>();
 						boolCost = false;
 					}
-					
+
 					if (qName.equalsIgnoreCase("gaineffect")) {
 						card.addImmediateEffect(gainEffect);
 						gainEffect = new GainResource();
 					}
-					
+
 					if (qName.equalsIgnoreCase("card")) {
 						parsedData.add(card);
 						card = new CardVenture();
@@ -175,14 +174,14 @@ public class VentureCardSaxParser {
 				// ridefinizione del metodo characters all'interno del
 				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
-					
-					//aggiunto nome alla carta
+
+					// aggiunto nome alla carta
 					if (boolName) {
 						card.setName(new String(ch, start, length));
 						boolName = false;
 					}
 
-					//aggiunta era alla carta
+					// aggiunta era alla carta
 					if (boolEra) {
 						lastInt = Integer.parseInt(new String(ch, start, length));
 						card.setEra(lastInt);
@@ -272,31 +271,32 @@ public class VentureCardSaxParser {
 						card.addEndEffect(new EndVictoryEffect(lastInt));
 						boolVictoryPoint = false;
 					}
-					
+
 					// effetto nuova azione produzione aggiuntiva
 					if (boolImmProd) {
 						lastInt = Integer.parseInt(new String(ch, start, length));
 						card.addImmediateEffect(new ExtraAction(new ProductionAction(lastInt)));
 						boolImmProd = false;
 					}
-					
+
 					// effetto nuova azione raccolto aggiuntiva
 					if (boolImmHarvest) {
 						lastInt = Integer.parseInt(new String(ch, start, length));
 						card.addImmediateEffect(new ExtraAction(new HarvestAction(lastInt)));
 						boolImmHarvest = false;
 					}
-					
-					// effetto punti vittoria a fine partita
+
+					// effetto azione immediata
 					if (boolImmActionValue) {
 						lastImmActionValue = Integer.parseInt(new String(ch, start, length));
 						boolImmActionValue = false;
 					}
-					
-					// effetto punti vittoria a fine partita
+
+					// carta associata a azione immediata
 					if (boolAssCard) {
 						lastInt = Integer.parseInt(new String(ch, start, length));
 						card.addImmediateEffect(new ExtraAction(new CardAction(lastInt)));
+						// manca azione carta!
 						boolAssCard = false;
 					}
 
@@ -304,7 +304,7 @@ public class VentureCardSaxParser {
 			};
 
 			saxParser.parse(pathname, handler);
- 
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -7,14 +7,14 @@ import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class CardTerritory extends DevelopmentCard {
-	private final int actionValue;
+	private int actionValue;
 	private ArrayList<ImmediateEffect> immediateEffects;
 	private ArrayList<ActionEffect> actionEffects;
 
-	public CardTerritory(int other) {
+	public CardTerritory() {
 		this.immediateEffects = new ArrayList<ImmediateEffect>();
 		this.actionEffects = new ArrayList<ActionEffect>();
-		this.actionValue = other;
+		this.actionValue = 0;
 	}
 
 	public void addImmediateEffect(ImmediateEffect effect) {
@@ -45,6 +45,10 @@ public class CardTerritory extends DevelopmentCard {
 
 	public int getActionValue() {
 		return this.actionValue;
+	}
+	
+	public void setActionValue(int actionVal) {
+		this.actionValue=actionVal;
 	}
 	
 	@Override
