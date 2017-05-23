@@ -24,7 +24,6 @@ import it.polimi.ingsw.ps22.resource.Servant;
 import it.polimi.ingsw.ps22.resource.Stone;
 import it.polimi.ingsw.ps22.resource.Wood;
 
-// Ottimizzazione possibile: una sola variabile per gestire i valori interi
 /*
     <card>
         <name>BASE</name>													ok

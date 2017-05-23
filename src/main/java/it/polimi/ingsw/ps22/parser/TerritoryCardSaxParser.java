@@ -13,6 +13,8 @@ import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.resource.FaithPoint;
 import it.polimi.ingsw.ps22.resource.MilitaryPoint;
+import it.polimi.ingsw.ps22.resource.Point;
+import it.polimi.ingsw.ps22.resource.Resource;
 import it.polimi.ingsw.ps22.resource.Servant;
 import it.polimi.ingsw.ps22.resource.Stone;
 import it.polimi.ingsw.ps22.resource.VictoryPoint;
@@ -27,7 +29,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <wood>0</wood>													
             <stone>0</stone>												
             <servant>0</servant>											
-            <military>0</military>											
+            <militarypoint>0</militarypoint>											
             <faithpoint>0</faithpoint>										
             <councilpoint>0</councilpoint>
             <victorypoint>0</victorypoint>									
@@ -37,7 +39,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <wood>0</wood>													
             <stone>0</stone>												
             <servant>0</servant>											
-            <military>0</military>											
+            <militarypoint>0</militarypoint>											
             <faithpoint>0</faithpoint>										
             <councilpoint>0</councilpoint>
             <victorypoint>0</victorypoint>									
@@ -58,9 +60,10 @@ public class TerritoryCardSaxParser {
 				GainResource gainEffect = new GainResource();
 				GainResource harvestEffect = new GainResource();
 				int lastInt = 0;
-				boolean boolName = false;
-				boolean boolEra = false;
+				String lastQName;
 				boolean boolHarvest = false;
+				/*boolean boolName = false;
+				boolean boolEra = false;
 				boolean boolCoin = false;
 				boolean boolStone = false;
 				boolean boolWood = false;
@@ -69,23 +72,26 @@ public class TerritoryCardSaxParser {
 				boolean boolCouncilPoint = false;
 				boolean boolFaithPoint = false;
 				boolean boolVictoryPoint = false;
-				boolean boolHarvestReq = false;
+				boolean boolHarvestReq = false; */
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
-					
-					if (qName.equalsIgnoreCase("name")) {
-						boolName = true;
-					}
-					
-					if (qName.equalsIgnoreCase("era")) {
-						boolEra = true;
-					}
+	
+					lastQName = qName.toLowerCase();
 					
 					if (qName.equalsIgnoreCase("harvesteffect")) {
 						boolHarvest = true;
+					}
+					
+					/*
+					if (qName.equalsIgnoreCase("name")) {
+						boolName = true;
+					}
+
+					if (qName.equalsIgnoreCase("era")) {
+						boolEra = true;
 					}
 
 					if (qName.equalsIgnoreCase("coin")) {
@@ -123,7 +129,7 @@ public class TerritoryCardSaxParser {
 					if (qName.equalsIgnoreCase("harvestreq")) {
 						boolHarvestReq = true;
 					}
-
+					*/
 				}
 
 				// ridefinizione del metodo endElement all'interno del
@@ -138,6 +144,7 @@ public class TerritoryCardSaxParser {
 					if (qName.equalsIgnoreCase("harvesteffect")) {
 						card.addActionEffect(harvestEffect);
 						harvestEffect = new GainResource();
+						boolHarvest=false;
 					}
 
 					if (qName.equalsIgnoreCase("card")) {
@@ -149,7 +156,50 @@ public class TerritoryCardSaxParser {
 				// ridefinizione del metodo characters all'interno del
 				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
-
+					
+				String str = new String(ch, start, length);
+					if(lastQName.equalsIgnoreCase("name")) {
+					card.setName(str);	
+					}
+					else {
+						
+						lastInt=Integer.parseInt(str);
+						
+						if(lastQName.equalsIgnoreCase("coin")) {
+							ResourceTypeCheck(new Coin(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("stone")) {
+							ResourceTypeCheck(new Stone(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("wood")) {
+							ResourceTypeCheck(new Wood(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("servant")) {
+							ResourceTypeCheck(new Servant(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("militarypoint")) {
+							PointTypeCheck(new MilitaryPoint(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("faithpoint")) {
+							PointTypeCheck(new FaithPoint(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("victorypoint")) {
+							PointTypeCheck(new VictoryPoint(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("militarypoint")) {
+							CouncilPrivilegeTypeCheck(new CouncilPrivilege(lastInt));
+						}
+						
+					}
+					
+					/*
 					// aggiunto nome alla carta
 					if (boolName) {
 						card.setName(new String(ch, start, length));
@@ -257,8 +307,33 @@ public class TerritoryCardSaxParser {
 						card.setActionValue(lastInt);
 						boolHarvestReq = false;
 					}
-
+					*/
 				}
+
+				private void ResourceTypeCheck(Resource res) {
+					if (boolHarvest) {
+						harvestEffect.addGain(res.getName(), res);
+					} else {
+						gainEffect.addGain("Coin", res);
+					}
+				}
+
+				private void PointTypeCheck(Point point) {
+					if (boolHarvest) {
+						harvestEffect.addGain(point.getName(), point);
+					} else {
+						gainEffect.addGain(point.getName(), point);
+					}
+				}
+				
+				private void CouncilPrivilegeTypeCheck(CouncilPrivilege res) {
+					if (boolHarvest) {
+						harvestEffect.addGain(res.getName(), res);
+					} else {
+						gainEffect.addGain("Coin", res);
+					}
+				}
+				
 			};
 
 			saxParser.parse(pathname, handler);
