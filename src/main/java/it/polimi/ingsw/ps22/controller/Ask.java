@@ -146,7 +146,7 @@ public class Ask extends Observable {
 		return null;
 	}
 	
-	public HashMap<String,DevelopmentCard> askCard(){
+	public HashMap<String,DevelopmentCard> askCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard){
 		return null;
 		
 	}

@@ -217,4 +217,16 @@ public class Player {
 			else family.get(el).setValue(0);
 		}
 	}
+	
+	public void calcVicPoint(){
+		VictoryPoint temp=personalBoard.getBonusHarvest().get(cards.get("Harvest").size());
+		points.get("VictoryPoint").addResource(temp);
+		temp=personalBoard.getBonusCharacter().get(cards.get("Character").size());
+		points.get("VictoryPoint").addResource(temp);
+		int res=0;
+		for(String el: resources.keySet()){
+			res=res+resources.get(el).getQuantity();
+		}
+		points.get("VictoryPoint").addResource(new VictoryPoint(res/5));
+	}
 }
