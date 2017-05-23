@@ -11,7 +11,7 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	private String multiplier;
 	private ResourceAbstract multiplicand;
 	private String multiplicandType;
-						//Territory			Coin							//Coin
+						//Territory			Coin							// Coin come 
 	//public MultiplyEffect(String multiplier, ResourceAbstract multiplicand, String multiplicandType){
 
 	@Override
