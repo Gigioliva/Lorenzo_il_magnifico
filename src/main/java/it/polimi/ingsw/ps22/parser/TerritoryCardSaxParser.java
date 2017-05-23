@@ -49,7 +49,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
 
 public class TerritoryCardSaxParser {
 
-	public static void VentureCardParser(String pathname, ArrayList<CardTerritory> parsedData) {
+	public static void TerritoryCardParser(String pathname, ArrayList<CardTerritory> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
@@ -75,7 +75,15 @@ public class TerritoryCardSaxParser {
 				// DefaultHandler
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
-
+					
+					if (qName.equalsIgnoreCase("name")) {
+						boolName = true;
+					}
+					
+					if (qName.equalsIgnoreCase("era")) {
+						boolEra = true;
+					}
+					
 					if (qName.equalsIgnoreCase("harvesteffect")) {
 						boolHarvest = true;
 					}

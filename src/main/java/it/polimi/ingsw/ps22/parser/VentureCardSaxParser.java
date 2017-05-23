@@ -6,7 +6,6 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.action.CardAction;
@@ -35,7 +34,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <wood>0</wood>													ok
             <stone>0</stone>												ok
             <servant>0</servant>											ok
-            <military>0</military>											ok
+            <militarypoint>0</militarypoint>											ok
             <militaryrequirement>0</militaryrequirement>					ok
         </cost>																ok
         <gainEffect>														ok
@@ -43,7 +42,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <wood>0</wood>													ok
             <stone>0</stone>												ok
             <servant>0</servant>											ok
-            <military>0</military>											ok
+            <militarypoint>0</militarypoint>											ok
             <faithpoint>0</faithpoint>										ok
             <councilpoint>0</councilpoint>									ok
         </gainEffect>														ok
@@ -94,6 +93,14 @@ public class VentureCardSaxParser {
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
 
+					if (qName.equalsIgnoreCase("name")) {
+						boolName = true;
+					}
+					
+					if (qName.equalsIgnoreCase("era")) {
+						boolEra = true;
+					}
+					
 					if (qName.equalsIgnoreCase("cost")) {
 						boolCost = true;
 					}
@@ -114,7 +121,7 @@ public class VentureCardSaxParser {
 						boolServant = true;
 					}
 
-					if (qName.equalsIgnoreCase("military")) {
+					if (qName.equalsIgnoreCase("militarypoint")) {
 						boolMilitaryPoint = true;
 					}
 
