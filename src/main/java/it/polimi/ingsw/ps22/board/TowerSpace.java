@@ -16,9 +16,11 @@ public class TowerSpace extends ActionSpace {
 	}
 	
 	public DevelopmentCard getCard(){
-		DevelopmentCard temp=this.card;
-		this.card=null;
-		return temp;
+		return card;
+	}
+	
+	public void removeCard(){
+		card=null;
 	}
 	
 	public int getPlan(){

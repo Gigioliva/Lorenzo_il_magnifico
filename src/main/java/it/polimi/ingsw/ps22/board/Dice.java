@@ -19,7 +19,10 @@ public class Dice {
 	}
 	
 	public int getDice(Color color){
-		return dice.get(color);
+		if(dice.containsKey(color))
+			return dice.get(color);
+		else
+			return 0;
 	}
 	
 	public void setDice(){

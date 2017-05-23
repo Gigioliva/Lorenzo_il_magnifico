@@ -15,6 +15,7 @@ public class TowerVentureZone extends TowerZone {
 
 	public TowerVentureZone(Board board) {
 		super(board);
+		//leggi da file e carica usando addCards le carte nelle torri
 
 	}
 
@@ -43,6 +44,7 @@ public class TowerVentureZone extends TowerZone {
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 			towerSpaces[actionSpace].getCard().loadEndEffects(player, board);
 			player.getDevelopmentCard("CardVenture").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].removeCard();
 			return true;
 		}
 		return false;

@@ -28,6 +28,7 @@ public class TowerCharacterZone extends TowerZone {
 			towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 			player.getDevelopmentCard("CardCharacter").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].removeCard();
 			return true;
 		}
 		return false;

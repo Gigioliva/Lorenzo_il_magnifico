@@ -27,6 +27,7 @@ public class TowerTerritoryZone extends TowerZone {
 			}
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 			player.getDevelopmentCard("CardTerritory").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].removeCard();
 			return true;
 		}
 		return false;

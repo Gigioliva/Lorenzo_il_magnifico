@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
+import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class Model extends Observable {
@@ -49,12 +50,13 @@ public class Model extends Observable {
 		orderedPlayers = new ArrayList<String>(players.keySet());
 		playerGame = orderedPlayers.get(0);
 		turn = 1;
+		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
 		setChanged();
 		notifyObservers();
 	}
 
-	private void nextPlayer() {
+	public void nextPlayer() {
 		int i;
 		if (giro != 5) {
 			for (i = 0; i < orderedPlayers.size(); i++) {
@@ -102,9 +104,35 @@ public class Model extends Observable {
 				}
 			}
 			if (i == orderedPlayers.size()) {
-				// nuovo turno;
+				newTurn();
 			}
 		}
+	}
+
+	private void newTurn() {
+		ArrayList<Family> council = board.getCouncilPalace().getFamilies();
+		ArrayList<String> newOrder = new ArrayList<String>();
+		for (Family el : council) {
+			String player = el.getPlayer().getUsername();
+			if (!newOrder.contains(player)) {
+				newOrder.add(player);
+			}
+		}
+		for (String el : this.orderedPlayers) {
+			if (!newOrder.contains(el)) {
+				newOrder.add(el);
+			}
+		}
+		this.orderedPlayers = newOrder;
+		playerGame = newOrder.get(0);
+		turn++;
+		board.reset(turn, new ArrayList<Player>(players.values()));
+		if (turn > 6) {
+			// termina partita
+			// per ogni giocatore devo applicare gli endeffect, confertire le
+			// carte in punti, convertire le risorse in punti, controllare chi ha più punti militari
+		}
+
 	}
 
 	public static Ask getAsk() {

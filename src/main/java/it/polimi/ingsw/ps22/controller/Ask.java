@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.Observable;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
@@ -140,6 +142,14 @@ public class Ask extends Observable {
 		return result;
 	}
 
+	public HashMap<DevelopmentCard,Integer> askEffect(){
+		return null;
+	}
+	
+	public HashMap<String,DevelopmentCard> askCard(){
+		return null;
+		
+	}
 	//ricevo HashMap<Tipocarta, array di quelle carte e chiedo quale vuole prendere e ritorna HashMap<tipo,carta>
 	
 	//ricevo HashMap<carta,effetti possibli> e ritorno hashmap<carta,intero scelto>
