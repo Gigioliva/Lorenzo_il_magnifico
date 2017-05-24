@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
-import it.polimi.ingsw.ps22.card.CardBuilding;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.ExchangeResource;
 import it.polimi.ingsw.ps22.player.Player;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class ProductionAction extends Action {
 
@@ -24,7 +24,7 @@ public class ProductionAction extends Action {
 		for(DevelopmentCard card: buildingCards){
 			HashMap<ActionEffect,Integer> mapEffects = allEffects.get(card);
 			for(ActionEffect effect: mapEffects.keySet()){
-				if (effect.canAffordCost(player) && card.getActionValue() <= bonus + super.getActionValue()){
+				if ((effect instanceof ExchangeResource) && effect.canAffordCost(player) && card.getActionValue() <= bonus + super.getActionValue()){
 					if (possibleEffects.containsKey(card)){
 						possibleEffects.get(card).add(mapEffects.get(effect));
 					}
@@ -45,7 +45,7 @@ public class ProductionAction extends Action {
 	}
 	
 	private void applyNoExchangeEffect(Player player, Board board, int bonus ){
-		ArrayList<DevelopmentCard> buildingCards = player.getDevelopmentCard("CardBuilding");
+		ArrayList<DevelopmentCard> buildingCards = player.getDevelopmentCard("Building");
 		for(DevelopmentCard card: buildingCards){
 			ArrayList<ActionEffect> effects = card.getActionEffects();
 			for(int i=0; i<effects.size(); i++){
@@ -59,10 +59,11 @@ public class ProductionAction extends Action {
 	public void applyAction(Player player, Board board) {
 		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects;
 		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects;
+		Player clonedPlayer = new Player(player);
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
 		allEffects = player.cloneCardswithActionEffect("CardBuilding");
 		do{
-			possibleEffects = getPossibleEffects(player,bonus, allEffects);
+			possibleEffects = getPossibleEffects(clonedPlayer,bonus, allEffects);
 			HashMap<DevelopmentCard,Integer> chosenEffect = new HashMap<DevelopmentCard,Integer>();
 			//passa a utente lista di carte ed effetti possibili ad ogni carta 
 			//chosenEffect = askEffect...

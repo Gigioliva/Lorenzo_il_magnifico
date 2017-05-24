@@ -16,7 +16,7 @@ public class HarvestAction extends Action {
 	//suppongo che gli effetti delle carte territorio vengano eseguiti tutti, in quanto in genere sono solo di tipo GainResource
 	@Override
 	public void applyAction(Player player, Board board) {
-		ArrayList<DevelopmentCard> cards = player.getDevelopmentCard("CardTerritory");
+		ArrayList<DevelopmentCard> cards = player.getDevelopmentCard("Territory");
 		int bonus = player.getBonusAcc().getBonus("IncrementHarvest").getQuantity();
 		for(DevelopmentCard card: cards){
 			ArrayList<ActionEffect> effects = card.getActionEffects();

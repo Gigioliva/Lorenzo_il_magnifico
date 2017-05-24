@@ -29,8 +29,14 @@ public class ExchangeResource implements ActionEffect{
 	@Override
 	public boolean canAffordCost(Player player){
 		for(String type: cost.keySet())
-			if(player.getResources().get(type).getQuantity() < cost.get(type).getQuantity())
-				return false;
+			if(player.isResource(type)){
+				if(player.getResources().get(type).getQuantity() < cost.get(type).getQuantity())
+					return false;
+			}
+			else{
+				if(player.getPoints().get(type).getQuantity() < cost.get(type).getQuantity())
+					return false;
+			}
 		return true;
 	}
 	

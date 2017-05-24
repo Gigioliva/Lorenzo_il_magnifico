@@ -61,7 +61,9 @@ public class CardAction extends Action {
 			for(int i = 0; i < spaces.length; i++){
 				DevelopmentCard card = spaces[i].getCard();
 					if(isTakeable(type,card,player)){
-						possibleCards.put(type,new ArrayList<DevelopmentCard>());
+						if(!possibleCards.containsKey(type)){
+							possibleCards.put(type,new ArrayList<DevelopmentCard>());
+						}
 						possibleCards.get(type).add(card);
 					}
 				}
@@ -73,12 +75,24 @@ public class CardAction extends Action {
 	@Override
 	public void applyAction(Player player, Board board) {
 		HashMap<String,ArrayList<DevelopmentCard>> possibleCards = getPossibleCards(player, board);
-		String chosenType = "";
-		DevelopmentCard chosenCard = null;
+		//String chosenType = "";
+		//DevelopmentCard chosenCard = null;
+		HashMap<String, HashMap<DevelopmentCard,Integer>> chosen = null;
 		//notifica all'utente quale carta vuol prendere
-		player.getDevelopmentCard(chosenType).add(chosenCard);
+		//player.getDevelopmentCard(chosenType).add(chosenCard);
+		for(String chosenType: chosen.keySet()){
+			for(DevelopmentCard chosenCard: chosen.get(chosenType).keySet()){
+				Integer index = chosen.get(chosenType).get(chosenCard);
+				player.getDevelopmentCard(chosenType).add(chosenCard);
+				TowerSpace space = board.getTower(chosenType).getTowerSpaces()[index];
+				space.removeCard();
+			}
+		}
+		/*
+		board.getTower(chosenType).getTowerSpace()[chosen.]
 		chosenCard.applyImmediateEffects(player, board);
 		chosenCard.applyPermanentEffects(player, board);
+		*/
 		
 	}
 
