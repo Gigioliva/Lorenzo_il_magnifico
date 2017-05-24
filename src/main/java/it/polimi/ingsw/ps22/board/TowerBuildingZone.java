@@ -26,7 +26,7 @@ public class TowerBuildingZone extends TowerZone {
 			}
 			towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
 			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
-			player.getDevelopmentCard("CardBuilding").add(towerSpaces[actionSpace].getCard());
+			player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());
 			towerSpaces[actionSpace].removeCard();
 			return true;
 		}

@@ -61,7 +61,7 @@ public class ProductionAction extends Action {
 		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects;
 		Player clonedPlayer = new Player(player);
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
-		allEffects = player.cloneCardswithActionEffect("CardBuilding");
+		allEffects = player.cloneCardswithActionEffect("Building");
 		do{
 			possibleEffects = getPossibleEffects(clonedPlayer,bonus, allEffects);
 			HashMap<DevelopmentCard,Integer> chosenEffect = new HashMap<DevelopmentCard,Integer>();
