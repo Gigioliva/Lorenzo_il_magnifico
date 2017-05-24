@@ -45,49 +45,34 @@ public class ZoneBonusSaxParser {
 				int lastInt = 0;
 				String lastQName = "";
 				/*
-				boolean boolCoin = false;
-				boolean boolStone = false;
-				boolean boolWood = false;
-				boolean boolServant = false;
-				boolean boolMilitaryPoint = false;
-				boolean boolFaithPoint = false;
-				boolean boolVictoryPoint = false;
-				boolean boolCouncilPrivilege = false;
-				*/
+				 * boolean boolCoin = false; boolean boolStone = false; boolean
+				 * boolWood = false; boolean boolServant = false; boolean
+				 * boolMilitaryPoint = false; boolean boolFaithPoint = false;
+				 * boolean boolVictoryPoint = false; boolean
+				 * boolCouncilPrivilege = false;
+				 */
 
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
 					lastQName = qName.toLowerCase();
-					/*if (qName.equalsIgnoreCase("Coin")) {
-						boolCoin = true;
-					}
-					if (qName.equalsIgnoreCase("Stone")) {
-						boolStone = true;
-					}
-					if (qName.equalsIgnoreCase("Wood")) {
-						boolWood = true;
-					}
-					if (qName.equalsIgnoreCase("Servant")) {
-						boolServant = true;
-					}
-					if (qName.equalsIgnoreCase("MilitaryPoint")) {
-						boolMilitaryPoint = true;
-					}
-					if (qName.equalsIgnoreCase("FaithPoint")) {
-						boolFaithPoint = true;
-					}
-					if (qName.equalsIgnoreCase("VictoryPoint")) {
-						boolVictoryPoint = true;
-					}
-					if (qName.equalsIgnoreCase("CouncilPrivilege")) {
-						boolCouncilPrivilege = true;
-					}
-					*/
+					/*
+					 * if (qName.equalsIgnoreCase("Coin")) { boolCoin = true; }
+					 * if (qName.equalsIgnoreCase("Stone")) { boolStone = true;
+					 * } if (qName.equalsIgnoreCase("Wood")) { boolWood = true;
+					 * } if (qName.equalsIgnoreCase("Servant")) { boolServant =
+					 * true; } if (qName.equalsIgnoreCase("MilitaryPoint")) {
+					 * boolMilitaryPoint = true; } if
+					 * (qName.equalsIgnoreCase("FaithPoint")) { boolFaithPoint =
+					 * true; } if (qName.equalsIgnoreCase("VictoryPoint")) {
+					 * boolVictoryPoint = true; } if
+					 * (qName.equalsIgnoreCase("CouncilPrivilege")) {
+					 * boolCouncilPrivilege = true; }
+					 */
 
 				}
 
 				public void endElement(String uri, String localName, String qName) throws SAXException {
-					
+
 					if (qName.equalsIgnoreCase("space")) {
 						parsedData.add(toAdd);
 						toAdd = new HashMap<String, ResourceAbstract>();
@@ -97,7 +82,7 @@ public class ZoneBonusSaxParser {
 				public void characters(char ch[], int start, int length) throws SAXException {
 
 					lastInt = Integer.parseInt(new String(ch, start, length));
-					
+
 					if (lastQName.equalsIgnoreCase("coin")) {
 						toAdd.put("Coin", new Coin(lastInt));
 					}
@@ -129,49 +114,34 @@ public class ZoneBonusSaxParser {
 					if (lastQName.equalsIgnoreCase("councilprivilege")) {
 						toAdd.put("CouncilPrivilege", new CouncilPrivilege(lastInt));
 					}
-					
+
 					/*
-					if (boolCoin) {
-						toAdd.put("Coin", new Coin(lastInt));
-						boolCoin = false;
-					}
+					 * if (boolCoin) { toAdd.put("Coin", new Coin(lastInt));
+					 * boolCoin = false; }
+					 * 
+					 * if (boolStone) { toAdd.put("Stone", new Stone(lastInt));
+					 * boolStone = false; }
+					 * 
+					 * if (boolWood) { toAdd.put("Wood", new Coin(lastInt));
+					 * boolWood = false; }
+					 * 
+					 * if (boolServant) { toAdd.put("Servant", new
+					 * Servant(lastInt)); boolServant = false; }
+					 * 
+					 * if (boolMilitaryPoint) { toAdd.put("MilitaryPoint", new
+					 * MilitaryPoint(lastInt)); boolMilitaryPoint = false; }
+					 * 
+					 * if (boolFaithPoint) { toAdd.put("FaithPoint", new
+					 * FaithPoint(lastInt)); boolFaithPoint = false; }
+					 * 
+					 * if (boolVictoryPoint) { toAdd.put("VictoryPoint", new
+					 * VictoryPoint(lastInt)); boolVictoryPoint = false; }
+					 * 
+					 * if (boolCouncilPrivilege) { toAdd.put("CouncilPrivilege",
+					 * new CouncilPrivilege(lastInt)); boolCouncilPrivilege =
+					 * false; }
+					 */
 
-					if (boolStone) {
-						toAdd.put("Stone", new Stone(lastInt));
-						boolStone = false;
-					}
-
-					if (boolWood) {
-						toAdd.put("Wood", new Coin(lastInt));
-						boolWood = false;
-					}
-
-					if (boolServant) {
-						toAdd.put("Servant", new Servant(lastInt));
-						boolServant = false;
-					}
-
-					if (boolMilitaryPoint) {
-						toAdd.put("MilitaryPoint", new MilitaryPoint(lastInt));
-						boolMilitaryPoint = false;
-					}
-
-					if (boolFaithPoint) {
-						toAdd.put("FaithPoint", new FaithPoint(lastInt));
-						boolFaithPoint = false;
-					}
-
-					if (boolVictoryPoint) {
-						toAdd.put("VictoryPoint", new VictoryPoint(lastInt));
-						boolVictoryPoint = false;
-					}
-
-					if (boolCouncilPrivilege) {
-						toAdd.put("CouncilPrivilege", new CouncilPrivilege(lastInt));
-						boolCouncilPrivilege = false;
-					}
-					*/
-					
 				}
 			};
 
