@@ -33,7 +33,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <wood>0</wood>													ok
             <stone>0</stone>												ok
             <servant>0</servant>											ok
-            <militarypoint>0</militarypoint>											ok
+            <militarypoint>0</militarypoint>								ok
             <militaryrequirement>0</militaryrequirement>					ok
         </cost>																ok
         <gainEffect>														ok
@@ -41,7 +41,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <wood>0</wood>													ok
             <stone>0</stone>												ok
             <servant>0</servant>											ok
-            <militarypoint>0</militarypoint>											ok
+            <militarypoint>0</militarypoint>								ok
             <faithpoint>0</faithpoint>										ok
             <councilpoint>0</councilpoint>									ok
         </gainEffect>														ok
@@ -68,11 +68,13 @@ public class VentureCardSaxParser {
 				HashMap<String, ResourceAbstract> requisite = new HashMap<String, ResourceAbstract>();
 				GainResource gainEffect = new GainResource();
 				CardAction cardAct;
+				String lastQName = "";
 				int lastInt = 0;
 				int lastImmActionValue = 0;
+				boolean boolCost = false;
+				/*
 				boolean boolName = false;
 				boolean boolEra = false;
-				boolean boolCost = false;
 				boolean boolCoin = false;
 				boolean boolStone = false;
 				boolean boolWood = false;
@@ -82,26 +84,30 @@ public class VentureCardSaxParser {
 				boolean boolCouncilPoint = false;
 				boolean boolFaithPoint = false;
 				boolean boolVictoryPoint = false;
+				boolean boolCost = false;
 				boolean boolImmHarvest = false;
 				boolean boolImmProd = false;
 				boolean boolImmActionValue = false;
-				boolean boolType = false;
+				boolean boolType = false; */
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
 
-					if (qName.equalsIgnoreCase("name")) {
+					lastQName=qName;
+					
+					if (qName.equalsIgnoreCase("cost")) {
+						boolCost = true;
+					}
+					
+					
+					/*if (qName.equalsIgnoreCase("name")) {
 						boolName = true;
 					}
 					
 					if (qName.equalsIgnoreCase("era")) {
 						boolEra = true;
-					}
-					
-					if (qName.equalsIgnoreCase("cost")) {
-						boolCost = true;
 					}
 
 					if (qName.equalsIgnoreCase("coin")) {
@@ -155,6 +161,7 @@ public class VentureCardSaxParser {
 					if (qName.equalsIgnoreCase("type")) {
 						boolType = true;
 					}
+					*/
 
 				}
 
@@ -184,6 +191,7 @@ public class VentureCardSaxParser {
 						// attenzione a scrivere correttamente i tipi con le
 						// maiuscole
 						card.addImmediateEffect(new ExtraAction(cardAct));
+						
 					}
 				}
 
@@ -191,6 +199,115 @@ public class VentureCardSaxParser {
 				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
 
+					String str = new String(ch, start, length);
+				
+					lastInt = Integer.parseInt(str);
+					
+					// aggiunto nome alla carta
+					if (lastQName.equalsIgnoreCase("name")) {
+						card.setName(str);
+					}
+					else
+						{
+						// aggiunge i tipi
+						if (lastQName.equalsIgnoreCase("type")) {
+							cardAct.addType(str);
+						}
+						else
+						{
+							// aggiunta era alla carta
+							if (lastQName.equalsIgnoreCase("era")) {
+								card.setEra(lastInt);
+							}
+
+							// gestione monete
+							if (lastQName.equalsIgnoreCase("coin")) {
+								if (boolCost) {
+									cost.put("Coin", new Coin(lastInt));
+								} else {
+									gainEffect.addGain("Coin", new Coin(lastInt));
+								}
+							}
+
+							// gestione pietre
+							if (lastQName.equalsIgnoreCase("stone")) {
+								if (boolCost) {
+									cost.put("Stone", new Stone(lastInt));
+								} else {
+									gainEffect.addGain("Stone", new Stone(lastInt));
+								}
+							}
+
+							// gestione legni
+							if (lastQName.equalsIgnoreCase("wood")) {
+								if (boolCost) {
+									cost.put("Wood", new Wood(lastInt));
+								} else {
+									gainEffect.addGain("Wood", new Wood(lastInt));
+								}
+							}
+
+							// gestione servitori
+							if (lastQName.equalsIgnoreCase("servant")) {
+								if (boolCost) {
+									cost.put("Servant", new Servant(lastInt));
+								} else {
+									gainEffect.addGain("Servant", new Servant(lastInt));
+								}
+							}
+
+							// gestione punti militari
+							if (lastQName.equalsIgnoreCase("militarypoint")) {
+								if (boolCost) {
+									cost.put("MilitaryPoint", new MilitaryPoint(lastInt));
+								} else {
+									gainEffect.addGain("MilitaryPoint", new MilitaryPoint(lastInt));
+								}
+							}
+
+							// requisito punti militari (non serve il contr che sia un
+							// cost, può essere solo quello)
+							if (lastQName.equalsIgnoreCase("militaryrequirement")) {
+								requisite.put("MilitaryPoint", new MilitaryPoint(lastInt));
+							}
+
+							// effetto immediato privilegio del consiglio
+							if (lastQName.equalsIgnoreCase("councilpoint")) {
+								gainEffect.addGain("CouncilPrivilege", new CouncilPrivilege(lastInt));
+							}
+
+							// effetto immediato punti fede
+							if (lastQName.equalsIgnoreCase("faithpoint")) {
+								gainEffect.addGain("FaithPoint", new FaithPoint(lastInt));
+							}
+
+							// effetto punti vittoria a fine partita
+							if (lastQName.equalsIgnoreCase("victorypoint")) {
+								card.addEndEffect(new EndVictoryEffect(lastInt));
+							}
+
+							// effetto nuova azione produzione aggiuntiva
+							if (lastQName.equalsIgnoreCase("immextraprod")) {
+								card.addImmediateEffect(new ExtraAction(new ProductionAction(lastInt)));
+
+							}
+
+							// effetto nuova azione raccolto aggiuntiva
+							if (lastQName.equalsIgnoreCase("immextraharvest")) {
+								card.addImmediateEffect(new ExtraAction(new HarvestAction(lastInt)));
+							}
+
+							if (lastQName.equalsIgnoreCase("immactionvalue")) {
+								cardAct = new CardAction(lastInt);
+							}
+						}
+						}
+
+					
+
+					
+					
+					/*
 					// aggiunto nome alla carta
 					if (boolName) {
 						card.setName(new String(ch, start, length));
@@ -304,8 +421,8 @@ public class VentureCardSaxParser {
 
 					// effetto azione immediata
 					if (boolImmActionValue) {
-						lastImmActionValue = Integer.parseInt(new String(ch, start, length));
-						cardAct = new CardAction(lastImmActionValue);
+						lastInt = Integer.parseInt(new String(ch, start, length));
+						cardAct = new CardAction(lastInt);
 						boolImmActionValue = false;
 					}
 
@@ -315,7 +432,7 @@ public class VentureCardSaxParser {
 						cardAct.addType(str);
 						boolType = false;
 					}
-
+					*/
 				}
 			};
 
