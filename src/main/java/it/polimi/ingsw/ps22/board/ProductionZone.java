@@ -19,17 +19,14 @@ public class ProductionZone extends Zone {
 	}
 
 	@Override
-	public boolean Control(Player player, int actionSpace, Family family) {
-		int actionValue=family.getValue() + player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
-		if (productionSpace[actionSpace].isPlayable() && (productionSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& checkAllSpace(player) && checkActionValue(productionSpace[actionSpace], family, actionValue)) {
-			productionSpace[actionSpace].addFamily(family);
-			actionValue=family.getValue();
-			if (productionSpace[actionSpace].getMulti()) {
-				actionValue=actionValue-3;
-			}
-			ProductionAction productionAction = new ProductionAction(actionValue);
-			productionAction.applyAction(player);
+	public boolean Control(int numServant, int actionSpace, Family family) {
+		Player player = family.getPlayer();
+		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
+		if (!(family.isPlaced()) && productionSpace[actionSpace].isPlayable()
+				&& (productionSpace[actionSpace].controlPlacement()
+						|| player.getSpecBonus().returnBool("OccupiedSpace"))
+				&& checkAllSpace(player)
+				&& checkActionValue(numServant, productionSpace[actionSpace], family, actionValue)) {
 			return true;
 		}
 		return false;
@@ -44,6 +41,18 @@ public class ProductionZone extends Zone {
 		 */
 	}
 
+	public void applyMove(int numServant, int actionSpace, Family family) {
+		Player player = family.getPlayer();
+		applyServant(family, numServant);
+		productionSpace[actionSpace].addFamily(family);
+		int actionValue = family.getValue();
+		if (productionSpace[actionSpace].getMulti()) {
+			actionValue = actionValue - 3;
+		}
+		ProductionAction productionAction = new ProductionAction(actionValue);
+		productionAction.applyAction(player);
+	}
+
 	private boolean checkAllSpace(Player player) {
 		boolean control = true;
 		ArrayList<Family> allFamily = new ArrayList<Family>();
@@ -56,17 +65,17 @@ public class ProductionZone extends Zone {
 		}
 		return control;
 	}
-	
+
 	@Override
 	public void reset() {
 		for (int i = 0; i < NUM_SPACES; i++) {
 			productionSpace[i].resetFamily();
 		}
 	}
-	
+
 	@Override
-	public void setZone(int num){
-		if(num<3){
+	public void setZone(int num) {
+		if (num < 3) {
 			productionSpace[1].setNotPlayable();
 		}
 	}

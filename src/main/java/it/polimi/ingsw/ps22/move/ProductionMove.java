@@ -4,8 +4,8 @@ import it.polimi.ingsw.ps22.model.Color;
 
 public class ProductionMove extends FamilyMove {
 	
-	public ProductionMove(String username,Color color, int space){
-		super(username, color, space);
+	public ProductionMove(String username,Color color, int space, int numServant){
+		super(username, color, space, numServant);
 	}
 
 }

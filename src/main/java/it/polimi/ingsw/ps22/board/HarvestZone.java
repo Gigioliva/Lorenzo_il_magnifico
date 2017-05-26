@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.board;
 
 import java.util.ArrayList;
-
 import it.polimi.ingsw.ps22.action.HarvestAction;
 import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.player.Family;
@@ -19,20 +18,26 @@ public class HarvestZone extends Zone {
 	}
 
 	@Override
-	public boolean Control(Player player, int actionSpace, Family family) {
+	public boolean Control(int numServant, int actionSpace, Family family) {
+		Player player=family.getPlayer();
 		int actionValue=family.getValue() + player.getBonusAcc().getBonus("IncrementHarvest").getQuantity();
-		if (harvestSpace[actionSpace].isPlayable() && (harvestSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& checkAllSpace(player) && checkActionValue(harvestSpace[actionSpace], family, actionValue)) {
-			harvestSpace[actionSpace].addFamily(family);
-			actionValue=family.getValue();
-			if (harvestSpace[actionSpace].getMulti()) {
-				actionValue=actionValue-3;
-			} 
-			HarvestAction harvestAction = new HarvestAction(actionValue);
-			harvestAction.applyAction(player);
+		if (!(family.isPlaced()) && harvestSpace[actionSpace].isPlayable() && (harvestSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
+				&& checkAllSpace(player) && checkActionValue(numServant, harvestSpace[actionSpace], family, actionValue)) {
 			return true;
 		}
 		return false;
+	}
+	
+	public void applyMove(int numServant, int actionSpace, Family family) {
+		Player player = family.getPlayer();
+		applyServant(family, numServant);
+		harvestSpace[actionSpace].addFamily(family);
+		int actionValue=family.getValue();
+		if (harvestSpace[actionSpace].getMulti()) {
+			actionValue=actionValue-3;
+		} 
+		HarvestAction harvestAction = new HarvestAction(actionValue);
+		harvestAction.applyAction(player);
 	}
 
 	private boolean checkAllSpace(Player player) {

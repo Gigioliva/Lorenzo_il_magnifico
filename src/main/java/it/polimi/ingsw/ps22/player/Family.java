@@ -6,6 +6,7 @@ public class Family {
 	private Color color;
 	private Player player;
 	private int value;
+	private boolean placed=false;
 
 	public Family(Color color, Player player) {
 		this.color = color;
@@ -37,6 +38,13 @@ public class Family {
 	
 	public void incrementValue(int value){
 		this.value=this.value+value;
+	}
+	
+	public void setPlaced(boolean placed){
+		this.placed=placed;
+	}
+	public boolean isPlaced(){
+		return placed;
 	}
 
 }
