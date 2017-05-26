@@ -41,7 +41,7 @@ public class TowerZone extends Zone {
 	}
 
 	@Override
-	public boolean Control(Player player, int actionSpace, Family family) {
+	public boolean Control(int numServant, int actionSpace, Family family) {
 		return false;
 	}
 

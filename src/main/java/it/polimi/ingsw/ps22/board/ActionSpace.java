@@ -25,9 +25,13 @@ public abstract class ActionSpace {
 
 	public void addFamily(Family family) {
 			this.family.add(family);
+			family.setPlaced(true);
 	}
 	
 	public void resetFamily(){
+		for(Family el: family){
+			el.setPlaced(false);
+		}
 		this.family=new ArrayList<Family>();
 	}
 	

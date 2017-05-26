@@ -16,12 +16,13 @@ public class MarketZone extends Zone {
 	}
 
 	@Override
-	public boolean Control(Player player, int actionSpace, Family family) {
+	public boolean Control(int numServant, int actionSpace, Family family) {
+		Player player=family.getPlayer();
 		int actionValue = family.getValue();
-		if (marketSpace[actionSpace].isPlayable()
+		if (!(family.isPlaced()) && marketSpace[actionSpace].isPlayable()
 				&& (marketSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& player.getSpecBonus().returnBool("NotMarket")
-				&& checkActionValue(marketSpace[actionSpace], family, actionValue)) {
+				&& checkActionValue(numServant,marketSpace[actionSpace], family, actionValue)) {
 			marketSpace[actionSpace].addFamily(family);
 			marketSpace[actionSpace].applyBonus(player);
 			return true;

@@ -19,10 +19,11 @@ public class ProductionZone extends Zone {
 	}
 
 	@Override
-	public boolean Control(Player player, int actionSpace, Family family) {
+	public boolean Control(int numServant, int actionSpace, Family family) {
+		Player player=family.getPlayer();
 		int actionValue=family.getValue() + player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
-		if (productionSpace[actionSpace].isPlayable() && (productionSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& checkAllSpace(player) && checkActionValue(productionSpace[actionSpace], family, actionValue)) {
+		if (!(family.isPlaced()) && productionSpace[actionSpace].isPlayable() && (productionSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
+				&& checkAllSpace(player) && checkActionValue(numServant, productionSpace[actionSpace], family, actionValue)) {
 			productionSpace[actionSpace].addFamily(family);
 			actionValue=family.getValue();
 			if (productionSpace[actionSpace].getMulti()) {
