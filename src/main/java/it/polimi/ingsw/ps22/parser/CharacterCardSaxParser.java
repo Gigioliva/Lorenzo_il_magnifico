@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps22.action.HarvestAction;
 import it.polimi.ingsw.ps22.action.ProductionAction;
 import it.polimi.ingsw.ps22.card.CardCharacter;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
+import it.polimi.ingsw.ps22.effect.BonusEffect;
 import it.polimi.ingsw.ps22.effect.EndVictoryEffect;
 import it.polimi.ingsw.ps22.effect.ExtraAction;
 import it.polimi.ingsw.ps22.effect.GainResource;
@@ -21,6 +22,7 @@ import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.resource.FaithPoint;
 import it.polimi.ingsw.ps22.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.resource.*;
 import it.polimi.ingsw.ps22.resource.Servant;
 import it.polimi.ingsw.ps22.resource.Stone;
 import it.polimi.ingsw.ps22.resource.VictoryPoint;
@@ -50,7 +52,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
         <stone>0</stone>					ok
         <servant>0</servant>				ok
     </immextraaction>						ok
-    <moltiplication>						ok
+    <moltiplication>						
         <factor></factor>
         <factor1>
             <coin>0</coin>								
@@ -72,21 +74,19 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <faithpoint>0</faithpoint>			
             <councilpoint>0</councilpoint>
         </factor2>       
-    </moltiplication>						ok
+    </moltiplication>						
     <harvestincrement></harvestincrement>
     <productionincrement></productionincrement>
     <notowerbonus></notowerbonus>   
     <placementincrement>
         <type></type>
-        <discount>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-        </discount>
+        <coin>0</coin>								
+        <wood>0</wood>									
+        <stone>0</stone>								
+        <servant>0</servant>			
+        <militarypoint>0</militarypoint>				
+        <faithpoint>0</faithpoint>			
+        <councilpoint>0</councilpoint>
     </placementincrement>
 </card>											
 
@@ -102,6 +102,7 @@ public class CharacterCardSaxParser {
 				CardCharacter card = new CardCharacter();
 				GainResource gainImm = new GainResource();
 				MultiplyEffect mult = new MultiplyEffect();
+				BonusEffect bonus = new BonusEffect();
 				CardAction cardAct;
 				String lastQName = "";
 				int lastMult = 0;
@@ -110,6 +111,7 @@ public class CharacterCardSaxParser {
 				boolean boolImmExtraAction = false;
 				boolean boolMult = false;
 				boolean boolFactor1 = false;
+				boolean boolPlaceIncr = false;
 				
 				
 				// ridefinizione del metodo startElement all'interno del
@@ -131,6 +133,9 @@ public class CharacterCardSaxParser {
 					if(qName.equals("factor1")) 
 						boolFactor1=true;
 					
+					if(qName.equals("placementincrement")) 
+						boolPlaceIncr=true;
+					
 				}
 
 				
@@ -140,7 +145,9 @@ public class CharacterCardSaxParser {
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
 					if(qName.equals("card")) {
+						card.addPermanentEffect(bonus);
 						parsedData.add(card);
+						bonus = new BonusEffect();
 						card= new CardCharacter();
 					}
 					
@@ -163,6 +170,12 @@ public class CharacterCardSaxParser {
 					
 					if(qName.equals("factor1")) 
 						boolFactor1 = false;
+					
+					if(qName.equals("placementincrement")) 
+						boolPlaceIncr = false;
+					
+					
+					
 					
 				}
 
@@ -315,7 +328,16 @@ public class CharacterCardSaxParser {
 								}
 						}
 						
-							
+						
+						if(lastQName.equalsIgnoreCase("harvestincrement")) {
+							//bonus.addBonus("IncrementHarvest", IncrementHarvest(Integer.parseInt(str)));	
+						}
+						
+						if(lastQName.equalsIgnoreCase("productionincrement")) {
+							//bonus.addBonus("IncrementProduction", IncrementProduction(Integer.parseInt(str)));	
+						}
+						
+						
 							
 							
 					}
