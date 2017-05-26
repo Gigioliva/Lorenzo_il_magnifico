@@ -25,19 +25,24 @@ public abstract class Zone {
 		if (numServant > 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
 			if ((player.getSpecBonus().returnBool("DoubleServant"))
 					&& ((actionValue + numServant / 2) > actionSpace.getActionCost())) {
-				player.getResources().get("Servant").subResource(new Servant((numServant / 2) * 2));
-				family.incrementValue(numServant / 2);
 				return true;
 			}
 			if (!(player.getSpecBonus().returnBool("DoubleServant"))
 					&& ((actionValue + numServant) > actionSpace.getActionCost())) {
-				player.getResources().get("Servant").subResource(new Servant(numServant));
-				family.incrementValue(numServant);
 				return true;
 			}
-			return false;
-		} else{
-			return false;
+		}
+		return false;
+	}
+
+	protected void applyServant(Family family, int numServant) {
+		Player player = family.getPlayer();
+		if (player.getSpecBonus().returnBool("DoubleServant")) {
+			player.getResources().get("Servant").subResource(new Servant((numServant / 2) * 2));
+			family.incrementValue(numServant / 2);
+		} else {
+			player.getResources().get("Servant").subResource(new Servant(numServant));
+			family.incrementValue(numServant);
 		}
 	}
 

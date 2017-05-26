@@ -2,12 +2,10 @@ package it.polimi.ingsw.ps22.move;
 
 import it.polimi.ingsw.ps22.model.Color;
 
-public class TowerMove extends FamilyMove {
-	private String type;
+public abstract class TowerMove extends FamilyMove {
 	
-	public TowerMove(String username,Color color, String type, int floor){
-		super(username, color, floor);
-		this.type=type;
+	public TowerMove(String username,Color color, int floor, int numServant){
+		super(username, color, floor, numServant);
 	}
 
 }

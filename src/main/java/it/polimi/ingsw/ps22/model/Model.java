@@ -6,7 +6,7 @@ import java.util.Observable;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
-import it.polimi.ingsw.ps22.message.messageAsk;
+import it.polimi.ingsw.ps22.message.MessageAsk;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
@@ -19,14 +19,15 @@ public class Model extends Observable {
 	private HashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
-	private boolean waitAnswer=false; //quando arriva la risposta la risetto a false
+	private ArrayList<MessageAsk> waitAnswer; //quando arriva la risposta la risetto a false
 	private static Ask ask;
 
 	public Model() {
 		board = new Board();
 		this.players = new HashMap<String, Player>();
 		ask = new Ask();
-		messageAsk.setModel(this);
+		MessageAsk.setModel(this);
+		this.waitAnswer=new ArrayList<MessageAsk>();
 	}
 
 	public Board getBoard() {
@@ -64,7 +65,7 @@ public class Model extends Observable {
 	}
 	
 	public void notifyModel(){
-		if(!waitAnswer){
+		if(waitAnswer.isEmpty()){
 			setChanged();
 			notifyObservers();
 		}
@@ -209,14 +210,10 @@ public class Model extends Observable {
 		return ask;
 	}
 
-	public void notifyAsk(messageAsk ask) {
-		waitAnswer=true;
+	public void notifyAsk(MessageAsk ask) {
+		waitAnswer.add(ask);
 		setChanged();
 		notifyObservers(ask);
-	}
-	
-	public void recAnswer(){
-		waitAnswer=false;
 	}
 
 }

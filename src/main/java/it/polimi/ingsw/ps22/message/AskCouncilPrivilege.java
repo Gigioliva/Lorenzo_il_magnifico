@@ -1,9 +1,9 @@
 package it.polimi.ingsw.ps22.message;
 
-public class askCouncilPrivilege extends messageAsk {
+public class AskCouncilPrivilege extends MessageAsk {
 	private int numChoice;
 	
-	public askCouncilPrivilege(int numChoice){
+	public AskCouncilPrivilege(int numChoice){
 		this.numChoice=numChoice;
 		StringBuilder str = new StringBuilder();
 		str.append("cosa vuoi in cambio?: " + numChoice + " scelte [separati da spazio]\n");

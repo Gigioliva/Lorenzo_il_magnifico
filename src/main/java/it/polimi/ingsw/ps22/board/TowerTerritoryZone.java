@@ -18,20 +18,25 @@ public class TowerTerritoryZone extends TowerZone {
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& checkAllSpace(player) && checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
-			towerSpaces[actionSpace].addFamily(family);
-			if (!(player.getSpecBonus().returnBool("NoGainTowers")
-					&& (towerSpaces[actionSpace].getPlan() == 3 || towerSpaces[actionSpace].getPlan() == 4))) {
-				towerSpaces[actionSpace].applyBonus(player);
-			}
-			if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
-				player.getSpecificResource("Coin").subResource(new Coin(3));
-			}
-			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
-			player.getDevelopmentCard("CardTerritory").add(towerSpaces[actionSpace].getCard());
-			towerSpaces[actionSpace].removeCard();
 			return true;
 		}
 		return false;
+	}
+
+	public void applyMove(int numServant, int actionSpace, Family family) {
+		Player player = family.getPlayer();
+		applyServant(family, numServant);
+		towerSpaces[actionSpace].addFamily(family);
+		if (!(player.getSpecBonus().returnBool("NoGainTowers")
+				&& (towerSpaces[actionSpace].getPlan() == 3 || towerSpaces[actionSpace].getPlan() == 4))) {
+			towerSpaces[actionSpace].applyBonus(player);
+		}
+		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
+			player.getSpecificResource("Coin").subResource(new Coin(3));
+		}
+		towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
+		player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
+		towerSpaces[actionSpace].removeCard();
 	}
 
 }

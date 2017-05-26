@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps22.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.card.CardExcomm;
-import it.polimi.ingsw.ps22.message.askExcomm;
+import it.polimi.ingsw.ps22.message.AskExcomm;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class ChurchSpace {
@@ -24,7 +24,7 @@ public class ChurchSpace {
 	}
 
 	public void applyExcomm(ArrayList<Player> players) {
-		askExcomm ask = new askExcomm();
+		AskExcomm ask = new AskExcomm();
 		waitPlayer=new ArrayList<Player>();
 		for (Player el : players) {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {
