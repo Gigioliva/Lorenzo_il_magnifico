@@ -6,12 +6,12 @@ import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
-import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.action.CardAction;
 import it.polimi.ingsw.ps22.action.HarvestAction;
 import it.polimi.ingsw.ps22.action.ProductionAction;
 import it.polimi.ingsw.ps22.card.CardCharacter;
+import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.EndVictoryEffect;
 import it.polimi.ingsw.ps22.effect.ExtraAction;
 import it.polimi.ingsw.ps22.effect.GainResource;
@@ -25,34 +25,72 @@ import it.polimi.ingsw.ps22.resource.Stone;
 import it.polimi.ingsw.ps22.resource.Wood;
 
 /*
-    <card>
-        <name>BASE</name>													ok
-        <era>0</era>														ok
-        <cost>																ok
-            <coin>0</coin>													ok
-            <wood>0</wood>													ok
-            <stone>0</stone>												ok
-            <servant>0</servant>											ok
-            <militarypoint>0</militarypoint>								ok
-            <militaryrequirement>0</militaryrequirement>					ok
-        </cost>																ok
-        <gainEffect>														ok
-            <coin>0</coin>													ok
-            <wood>0</wood>													ok
-            <stone>0</stone>												ok
-            <servant>0</servant>											ok
-            <militarypoint>0</militarypoint>								ok
-            <faithpoint>0</faithpoint>										ok
-            <councilpoint>0</councilpoint>									ok
-        </gainEffect>														ok
-        <immextraprod>0</immextraprod>										ok
-        <immextraharvest>0</immextraharvest>								ok
-        <immactionvalue>0</immactionvalue>									ok
-        <immactionvaleuassociatedcard>										ok
-        	<type></type>													ok
-        </immactionvaleuassociatedcard>										ok
-        <victorypoint>0</victorypoint>										ok
-    </card>																	ok
+<card>										ok
+    <name>BASE</name>						ok
+    <era>0</era>							ok				
+    <coincost></coincost>					ok													
+    <istgain>								ok
+        <coin>0</coin>						ok			
+        <wood>0</wood>						ok				
+        <stone>0</stone>					ok				
+        <servant>0</servant>				ok
+        <militarypoint>0</militarypoint>	ok				
+        <faithpoint>0</faithpoint>			ok
+        <councilpoint>0</councilpoint>		ok
+    </istgain>								ok
+    <immextraprod>0</immextraprod>			ok			
+    <immextraharvest>0</immextraharvest>	ok
+    <immextraaction>						ok
+        <value></value>
+        <type></type>
+        <discount>
+            <coin>0</coin>								
+            <wood>0</wood>									
+            <stone>0</stone>								
+            <servant>0</servant>			
+            <militarypoint>0</militarypoint>				
+            <faithpoint>0</faithpoint>			
+            <councilpoint>0</councilpoint>
+        </discount>
+    </immextraaction>				
+    <moltiplication>
+        <factor></factor>
+        <factor1>
+            <coin>0</coin>								
+            <wood>0</wood>									
+            <stone>0</stone>								
+            <servant>0</servant>			
+            <militarypoint>0</militarypoint>				
+            <faithpoint>0</faithpoint>			
+            <councilpoint>0</councilpoint>
+        </factor1>
+        <factor2>
+            <cardtype></cardtype>
+            <coin>0</coin>								
+            <wood>0</wood>									
+            <stone>0</stone>								
+            <servant>0</servant>			
+            <militarypoint>0</militarypoint>				
+            <faithpoint>0</faithpoint>			
+            <councilpoint>0</councilpoint>
+        </factor2>       
+    </moltiplication>	
+    <harvestincrement></harvestincrement>
+    <productionincrement></productionincrement>
+    <notowerbonus></notowerbonus>   
+    <placementincrement>
+        <type></type>
+        <discount>
+            <coin>0</coin>								
+            <wood>0</wood>									
+            <stone>0</stone>								
+            <servant>0</servant>			
+            <militarypoint>0</militarypoint>				
+            <faithpoint>0</faithpoint>			
+            <councilpoint>0</councilpoint>
+        </discount>
+    </placementincrement>
+</card>											
 
 */
 
@@ -64,8 +102,15 @@ public class CharacterCardSaxParser {
 			SAXParser saxParser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler() {
 				CardCharacter card = new CardCharacter();
+				GainResource gainImm = new GainResource();
+				CardAction cardAct;
+
 				String lastQName = "";
 				int lastInt = 0;
+				boolean boolIstEffect = false;
+				boolean boolGainIstEffect = false;
+				boolean boolEffect = false;
+				boolean boolImmExtraAction = false;
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
@@ -73,7 +118,12 @@ public class CharacterCardSaxParser {
 						throws SAXException {
 
 					lastQName = qName;
-
+					
+					if(qName.equals("istgain")) 
+						boolGainIstEffect = true;
+					
+					if(qName.equals("immextraaction")) 
+						boolImmExtraAction = true;
 
 				}
 
@@ -81,7 +131,21 @@ public class CharacterCardSaxParser {
 				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
+					if(qName.equals("card")) {
+						parsedData.add(card);
+						card= new CardCharacter();
+					}
 					
+					if(qName.equals("istgain")) {
+						boolGainIstEffect = false;
+						card.addImmediateEffect(gainImm);
+						gainImm = new GainResource();
+					}
+					
+					if(qName.equals("immextraaction")) {
+						boolImmExtraAction = false;
+						card.addImmediateEffect(new ExtraAction(cardAct));
+					}
 				}
 
 				// ridefinizione del metodo characters all'interno del
@@ -91,15 +155,45 @@ public class CharacterCardSaxParser {
 					String str = new String(ch, start, length);
 
 					// aggiunto nome alla carta
-					if (lastQName.equalsIgnoreCase("name")) {
+					if (lastQName.equalsIgnoreCase("name"))
 						card.setName(str);
-					} else {
-						lastInt = Integer.parseInt(str);
+
+					if (lastQName.equalsIgnoreCase("era"))
+						card.setEra(Integer.parseInt(str));
+					
+					if (lastQName.equalsIgnoreCase("coincost"))
+						card.addCost(new Coin(Integer.parseInt(str)));
+					
+					if(boolGainIstEffect) {
+						if(lastQName.equalsIgnoreCase("coin"))
+							gainImm.addGain("Coin", new Coin(Integer.parseInt(str)));
+						if(lastQName.equalsIgnoreCase("stone"))
+							gainImm.addGain("Stone", new Stone(Integer.parseInt(str)));
+						if(lastQName.equalsIgnoreCase("wood"))
+							gainImm.addGain("Wood", new Wood(Integer.parseInt(str)));
+						if(lastQName.equalsIgnoreCase("servant"))
+							gainImm.addGain("Servant", new Servant(Integer.parseInt(str)));
+						if(lastQName.equalsIgnoreCase("militarypoint"))
+							gainImm.addGain("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
+						if(lastQName.equalsIgnoreCase("faithpoint"))
+							gainImm.addGain("FaithPoint", new FaithPoint(Integer.parseInt(str)));
+						if(lastQName.equalsIgnoreCase("councilpoint"))
+							gainImm.addGain("CouncilPrivilege", new CouncilPrivilege(Integer.parseInt(str)));
+					}
+						
+					if (lastQName.equalsIgnoreCase("immextraprod")) 
+						card.addImmediateEffect(new ExtraAction(new ProductionAction(Integer.parseInt(str))));
+					
+					if (lastQName.equalsIgnoreCase("immextraharvest")) 
+						card.addImmediateEffect(new ExtraAction(new HarvestAction(Integer.parseInt(str))));
+					
+					if (lastQName.equalsIgnoreCase("value")) {
+						cardAct = new CardAction(Integer.parseInt(str));
 
 						
 					}
-
 				}
+
 			};
 
 			saxParser.parse(pathname, handler);
