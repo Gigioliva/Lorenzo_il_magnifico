@@ -71,11 +71,11 @@ public class CardTerritory extends DevelopmentCard {
 		str.append("valore azione = " + actionValue + "\n");
 		str.append("Immediate effects: \n");
 		for(int i = 0; i < immediateEffects.size(); i++){
-			str.append("\t[" + i + "]" + immediateEffects.get(i).toString() + "\n");
+			str.append("\t[" + (i+1) + "]" + immediateEffects.get(i).toString() + "\n");
 		}
 		str.append("Action effects: \n");
 		for(int i = 0; i < actionEffects.size(); i++){
-			str.append("\t[" + i + "]" + actionEffects.get(i).toString() + "\n");
+			str.append("\t[" + (i+1) + "]" + actionEffects.get(i).toString() + "\n");
 		}
 		return str.toString();
 	}
