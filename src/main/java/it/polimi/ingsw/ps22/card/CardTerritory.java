@@ -63,5 +63,21 @@ public class CardTerritory extends DevelopmentCard {
 			return requirementHarvest <= harvestPoint;
 		}
 	}
+	
+	@Override
+	public String toString(){
+		StringBuilder str = new StringBuilder();
+		str.append("nome carta = " + this.getName() + "\n");
+		str.append("valore azione = " + actionValue + "\n");
+		str.append("Immediate effects: \n");
+		for(int i = 0; i < immediateEffects.size(); i++){
+			str.append("\t[" + i + "]" + immediateEffects.get(i).toString() + "\n");
+		}
+		str.append("Action effects: \n");
+		for(int i = 0; i < actionEffects.size(); i++){
+			str.append("\t[" + i + "]" + actionEffects.get(i).toString() + "\n");
+		}
+		return str.toString();
+	}
 
 }

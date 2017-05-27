@@ -4,6 +4,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
+import it.polimi.ingsw.ps22.message.AskCouncilPrivilege;
 import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
@@ -34,11 +35,22 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 				player.getSpecificResource(type).addResource(gain.get(type));
 			}
 		}
-		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
-		if(cont>0){
-			Ask ask = Model.getAsk();
-			ask.askPrivilegeChange(cont);
+		if(cont ==0){
+			player.applyMalusResource(new ArrayList<String>(gain.keySet()));
 		}
+		if(cont>0){
+			AskCouncilPrivilege mex = new AskCouncilPrivilege(cont, player);
+			mex.applyAsk();
+		}
+	}
+	
+	@Override
+	public String toString(){
+		StringBuilder str = new StringBuilder();
+		for(String string: gain.keySet()){
+			str.append(string + " " + gain.get(string).getQuantity() + "\n");
+		}
+		return str.toString();
 	}
 
 	@Override
