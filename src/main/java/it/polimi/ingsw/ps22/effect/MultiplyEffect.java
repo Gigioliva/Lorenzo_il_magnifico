@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
-
+//  factor1								//factor2
 //guadagna multiplicand multiplicandType per ogni multiplierQty di tipo multiplier
 public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	private String multiplier;

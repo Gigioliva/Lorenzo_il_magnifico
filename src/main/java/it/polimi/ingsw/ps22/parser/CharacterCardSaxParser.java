@@ -11,47 +11,53 @@ import it.polimi.ingsw.ps22.action.CardAction;
 import it.polimi.ingsw.ps22.action.HarvestAction;
 import it.polimi.ingsw.ps22.action.ProductionAction;
 import it.polimi.ingsw.ps22.card.CardCharacter;
-import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.BonusEffect;
-import it.polimi.ingsw.ps22.effect.EndVictoryEffect;
+
 import it.polimi.ingsw.ps22.effect.ExtraAction;
 import it.polimi.ingsw.ps22.effect.GainResource;
 import it.polimi.ingsw.ps22.effect.MultiplyEffect;
+import it.polimi.ingsw.ps22.effect.ReduceCostEffect;
+import it.polimi.ingsw.ps22.effect.StrangeEffect;
+
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.resource.FaithPoint;
+import it.polimi.ingsw.ps22.resource.IncrementBuilding;
+import it.polimi.ingsw.ps22.resource.IncrementCharacter;
+import it.polimi.ingsw.ps22.resource.IncrementHarvest;
+import it.polimi.ingsw.ps22.resource.IncrementProduction;
+import it.polimi.ingsw.ps22.resource.IncrementTerritory;
+import it.polimi.ingsw.ps22.resource.IncrementVenture;
 import it.polimi.ingsw.ps22.resource.MilitaryPoint;
-import it.polimi.ingsw.ps22.resource.ResourceAbstract;
-import it.polimi.ingsw.ps22.resource.*;
 import it.polimi.ingsw.ps22.resource.Servant;
 import it.polimi.ingsw.ps22.resource.Stone;
 import it.polimi.ingsw.ps22.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.resource.Wood;
 
 /*
-<card>										ok
-    <name>BASE</name>						ok
-    <era>0</era>							ok				
-    <coincost></coincost>					ok													
-    <istgain>								ok
-        <coin>0</coin>						ok			
-        <wood>0</wood>						ok				
-        <stone>0</stone>					ok				
-        <servant>0</servant>				ok
-        <militarypoint>0</militarypoint>	ok				
-        <faithpoint>0</faithpoint>			ok
-        <councilpoint>0</councilpoint>		ok
-    </istgain>								ok
-    <immextraprod>0</immextraprod>			ok			
-    <immextraharvest>0</immextraharvest>	ok
-    <immextraaction>						ok
-        <value></value>						ok
-        <type></type>						ok
-        <coin>0</coin>						ok
-        <wood>0</wood>						ok
-        <stone>0</stone>					ok
-        <servant>0</servant>				ok
-    </immextraaction>						ok
+<card>											
+    <name>BASE</name>							
+    <era>0</era>									
+    <coincost></coincost>															
+    <istgain>									
+        <coin>0</coin>									
+        <wood>0</wood>						
+        <stone>0</stone>								
+        <servant>0</servant>					
+        <militarypoint>0</militarypoint>
+        <faithpoint>0</faithpoint>				
+        <councilpoint>0</councilpoint>			
+    </istgain>									
+    <immextraprod>0</immextraprod>						
+    <immextraharvest>0</immextraharvest>		
+    <immextraaction>							
+        <value></value>						
+        <type></type>					
+        <coin>0</coin>							
+        <wood>0</wood>					
+        <stone>0</stone>			
+        <servant>0</servant>		
+    </immextraaction>				
     <moltiplication>						
         <factor></factor>
         <factor1>
@@ -65,7 +71,8 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <victorypoint>0</victorypoint>
         </factor1>
         <factor2>
-            <cardtype></cardtype>
+            <cardtype></cardtype>	// dovrà essere scritto come Territory, la maiuscola è importante
+            <factorcard>0</factorcard>
             <coin>0</coin>								
             <wood>0</wood>									
             <stone>0</stone>								
@@ -75,18 +82,17 @@ import it.polimi.ingsw.ps22.resource.Wood;
             <councilpoint>0</councilpoint>
         </factor2>       
     </moltiplication>						
-    <harvestincrement></harvestincrement>
-    <productionincrement></productionincrement>
+    <harvestincrement></harvestincrement>		
+    <productionincrement></productionincrement>	
     <notowerbonus></notowerbonus>   
     <placementincrement>
-        <type></type>
-        <coin>0</coin>								
-        <wood>0</wood>									
-        <stone>0</stone>								
-        <servant>0</servant>			
-        <militarypoint>0</militarypoint>				
-        <faithpoint>0</faithpoint>			
-        <councilpoint>0</councilpoint>
+        <value>0</value>
+        <type></type>				// dovrà essere scritto come Territory, la maiuscola è importante
+        <reduce>
+        	<coin>0</coin>								
+        	<wood>0</wood>									
+        	<stone>0</stone>
+        </reduce>								
     </placementincrement>
 </card>											
 
@@ -103,11 +109,14 @@ public class CharacterCardSaxParser {
 				GainResource gainImm = new GainResource();
 				MultiplyEffect mult = new MultiplyEffect();
 				BonusEffect bonus = new BonusEffect();
+				ReduceCostEffect reduce;
 				CardAction cardAct;
 				String lastQName = "";
-				int lastMult = 0;
+				String stringType = "";
+				//int lastMult = 0;
+				int lastIncrCardValue = 0;
 				boolean boolGainIstEffect = false;
-				boolean boolEffect = false;
+				//boolean boolEffect = false;
 				boolean boolImmExtraAction = false;
 				boolean boolMult = false;
 				boolean boolFactor1 = false;
@@ -171,11 +180,14 @@ public class CharacterCardSaxParser {
 					if(qName.equals("factor1")) 
 						boolFactor1 = false;
 					
-					if(qName.equals("placementincrement")) 
+					if(qName.equals("placementincrement")) {
 						boolPlaceIncr = false;
+					}
 					
-					
-					
+					if(qName.equals("reduce")) {
+						card.addPermanentEffect(reduce);
+					}
+
 					
 				}
 
@@ -249,98 +261,151 @@ public class CharacterCardSaxParser {
 					
 					
 					if(boolMult) {
+						if(lastQName.equalsIgnoreCase("cardtype")) 
+							mult.setMultiplier(str);
 						
-						if(lastQName.equalsIgnoreCase("factor"))
-							lastMult=Integer.parseInt(str);
+						if(lastQName.equalsIgnoreCase("cardtype")) 
+							mult.setMultiplierQty(Integer.parseInt(str));
 						
 						if(lastQName.equalsIgnoreCase("coin")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new Coin(lastMult));
+								mult.setMultiplicand(new Coin(Integer.parseInt(str)));
 								mult.setMultiplicandType("Coin");
 							}
 							else 
-								mult.setMultiplier("Coin");
+								{ mult.setMultiplier("Coin");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
 						}
 						
 						if(lastQName.equalsIgnoreCase("stone")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new Stone(lastMult));
+								mult.setMultiplicand(new Stone(Integer.parseInt(str)));
 								mult.setMultiplicandType("Stone");
 							}
 							else 
-								mult.setMultiplier("Stone");
+								{ mult.setMultiplier("Stone");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
 						}
 						
 						if(lastQName.equalsIgnoreCase("wood")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new Wood(lastMult));
+								mult.setMultiplicand(new Wood(Integer.parseInt(str)));
 								mult.setMultiplicandType("Wood");
 							}
 							else 
-								mult.setMultiplier("Wood");
+								{ mult.setMultiplier("Wood");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
 						}
 						
 						if(lastQName.equalsIgnoreCase("servant")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new Servant(lastMult));
+								mult.setMultiplicand(new Servant(Integer.parseInt(str)));
 								mult.setMultiplicandType("Servant");
 							}
 							else 
-								mult.setMultiplier("Servant");
+								{ mult.setMultiplier("Servant");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
 						}
 						
 						if(lastQName.equalsIgnoreCase("militarypoint")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new MilitaryPoint(lastMult));
+								mult.setMultiplicand(new MilitaryPoint(Integer.parseInt(str)));
 								mult.setMultiplicandType("MilitaryPoint");
 							}
 							else 
-								mult.setMultiplier("MilitaryPoint");
+								{ mult.setMultiplier("MilitaryPoint");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
+								
 						}
 						
 						if(lastQName.equalsIgnoreCase("councilpoint")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new CouncilPrivilege(lastMult));
+								mult.setMultiplicand(new CouncilPrivilege(Integer.parseInt(str)));
 								mult.setMultiplicandType("CouncilPrivilege");
 							}
 							else 
-								mult.setMultiplier("CouncilPrivilege");
+								{ mult.setMultiplier("CouncilPrivilege");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
 						}
 						
 						if(lastQName.equalsIgnoreCase("faithpoint")) {
 							if (boolFactor1) { 
-								mult.setMultiplicand(new FaithPoint(lastMult));
+								mult.setMultiplicand(new FaithPoint(Integer.parseInt(str)));
 								mult.setMultiplicandType("FaithPoint");
 							}
 							else 
-								mult.setMultiplier("FaithPoint");
+								{ mult.setMultiplier("FaithPoint");
+								mult.setMultiplierQty(Integer.parseInt(str));
+								}
 						}
 						
 						if(lastQName.equalsIgnoreCase("victorypoint")) {
-							mult.setMultiplicand(new VictoryPoint(lastMult));
+							mult.setMultiplicand(new VictoryPoint(Integer.parseInt(str)));
 							mult.setMultiplicandType("VictoryPoint");
 						}
 						
-						if(lastQName.equalsIgnoreCase("cardtype")) {
+						/*if(lastQName.equalsIgnoreCase("cardtype")) {
 								if(str.equalsIgnoreCase("cardventure")) {
 									//mult.setMultiplicand();
 									mult.setMultiplicandType("FaithPoint");
 								}
-						}
+						}*/
 						
-						
-						if(lastQName.equalsIgnoreCase("harvestincrement")) {
-							//bonus.addBonus("IncrementHarvest", IncrementHarvest(Integer.parseInt(str)));	
-						}
-						
-						if(lastQName.equalsIgnoreCase("productionincrement")) {
-							//bonus.addBonus("IncrementProduction", IncrementProduction(Integer.parseInt(str)));	
-						}
-						
-						
-							
-							
 					}
+					
+					if(lastQName.equalsIgnoreCase("harvestincrement")) {
+						bonus.addBonus("IncrementHarvest", new IncrementHarvest(Integer.parseInt(str)));	
+					}
+						
+					if(lastQName.equalsIgnoreCase("productionincrement")) {
+						bonus.addBonus("IncrementProduction", new IncrementProduction(Integer.parseInt(str)));	
+					}
+					
+					if(lastQName.equalsIgnoreCase("notowerbonus")) {
+						card.addPermanentEffect(new StrangeEffect("GainTower"));
+					}
+						
+					
+					if(boolPlaceIncr) {
+						
+						if(lastQName.equalsIgnoreCase("value")) 
+							lastIncrCardValue = Integer.parseInt(str);
+						
+						if(lastQName.equalsIgnoreCase("type")) {
+							stringType=str;
+							if(str.equalsIgnoreCase("territory"))
+								bonus.addBonus("IncrementTerritory", new IncrementTerritory(lastIncrCardValue));
+							
+							if(str.equalsIgnoreCase("character"))
+								bonus.addBonus("IncrementCharacter", new IncrementCharacter(lastIncrCardValue));
+							
+							if(str.equalsIgnoreCase("building"))
+								bonus.addBonus("IncrementBuilding", new IncrementBuilding(lastIncrCardValue));
+							
+							if(str.equalsIgnoreCase("venture"))
+								bonus.addBonus("IncrementVenture", new IncrementVenture(lastIncrCardValue));
+						}
+						
+						if(lastQName.equalsIgnoreCase("reduce"))
+							reduce = new ReduceCostEffect(stringType);
+						
+						if(lastQName.equalsIgnoreCase("coin"))
+							reduce.addBonus("Coin", new Coin(Integer.parseInt(str)));
+						
+						if(lastQName.equalsIgnoreCase("stone"))
+							reduce.addBonus("Stone", new Stone(Integer.parseInt(str)));
+						
+						if(lastQName.equalsIgnoreCase("wood"))
+							reduce.addBonus("Wood", new Wood(Integer.parseInt(str)));						
+					}	
+							
+					
 						
 				}
 
