@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.move;
 
+import it.polimi.ingsw.ps22.message.ErrorMove;
 import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Family;
@@ -19,7 +20,8 @@ public class ProductionMove extends FamilyMove {
 			model.getBoard().getProdZone().applyMove(numServant, space, family);
 			model.notifyModel();
 		} else{
-			//genera messaggio di errore e notifica il model per mandarlo
+			ErrorMove error=new ErrorMove();
+			model.notifyError(error);
 		}
 	}
 
