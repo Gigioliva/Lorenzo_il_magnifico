@@ -1,14 +1,9 @@
 package it.polimi.ingsw.ps22.message;
 
-public class ErrorMove {
-	private String ask;
+public class ErrorMove extends GenericMessage {
 
 	public ErrorMove() {
-		ask="Mossa errata. Riprova";
-	}
-
-	public String getString() {
-		return ask;
+		super("Mossa errata. Riprova");
 	}
 
 }

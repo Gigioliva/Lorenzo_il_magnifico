@@ -3,10 +3,9 @@ package it.polimi.ingsw.ps22.model;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
-
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
-import it.polimi.ingsw.ps22.message.ErrorMove;
+import it.polimi.ingsw.ps22.message.GenericMessage;
 import it.polimi.ingsw.ps22.message.MessageAsk;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
@@ -20,6 +19,7 @@ public class Model extends Observable {
 	private HashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
+	private boolean canFamilyMove;
 	private ArrayList<MessageAsk> waitAnswer; //quando arriva la risposta la risetto a false
 	private static Ask ask;
 
@@ -63,6 +63,7 @@ public class Model extends Observable {
 		for (int i = 0; i < orderedPlayers.size(); i++) {
 			players.get(orderedPlayers.get(i)).addSpecificResource("Coin", new Coin(5 + i));
 		}
+		canFamilyMove=true;
 		turn = 1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
@@ -77,6 +78,7 @@ public class Model extends Observable {
 	}
 
 	public void nextPlayer() {
+		canFamilyMove=true;
 		int i;
 		if (giro != 5) {
 			for (i = 0; i < orderedPlayers.size(); i++) {
@@ -221,9 +223,20 @@ public class Model extends Observable {
 		notifyObservers(ask);
 	}
 	
-	public void notifyError(ErrorMove ask) {
+	public void notifyMessage(GenericMessage ask) {
 		setChanged();
 		notifyObservers(ask);
 	}
+	
+	public boolean getCanFamilyMove(){
+		return canFamilyMove;
+	}
 
+	public ArrayList<MessageAsk> getWaitAnswer() {
+		return waitAnswer;
+	}
+
+	public void setCantFamilyMove() {
+		this.canFamilyMove = false;
+	}
 }

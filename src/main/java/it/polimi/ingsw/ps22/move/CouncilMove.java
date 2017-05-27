@@ -14,14 +14,20 @@ public class CouncilMove extends FamilyMove {
 
 	@Override
 	public void applyMove(Model model) {
-		Player player = model.getPlayers().get(username);
-		Family family = player.getFamily(color);
-		if (model.getBoard().getCouncilPalace().Control(numServant, family)) {
-			model.getBoard().getCouncilPalace().applyMove(numServant, family);
-			model.notifyModel();
-		} else {
+		if(canFamilyMove(model)){
+			Player player = model.getPlayers().get(username);
+			Family family = player.getFamily(color);
+			if (model.getBoard().getCouncilPalace().Control(numServant, family)) {
+				model.getBoard().getCouncilPalace().applyMove(numServant, family);
+				model.setCantFamilyMove();
+				model.notifyModel();
+			} else {
+				ErrorMove error = new ErrorMove();
+				model.notifyMessage(error);
+			}
+		} else{
 			ErrorMove error = new ErrorMove();
-			model.notifyError(error);
+			model.notifyMessage(error);
 		}
 	}
 }
