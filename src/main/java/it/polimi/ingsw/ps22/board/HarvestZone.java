@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps22.board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import it.polimi.ingsw.ps22.action.HarvestAction;
 import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.player.Family;
@@ -58,6 +60,20 @@ public class HarvestZone extends Zone {
 		for (int i = 0; i < NUM_SPACES; i++) {
 			harvestSpace[i].resetFamily();
 		}
+	}
+	
+
+	@Override
+	public boolean cantPlaceZone(Player player){
+		 HashMap<Color, Family> family = player.getAllFamily();
+		 for(int i=0; i<NUM_SPACES; i++){
+			 for(Color color: family.keySet()){
+				 if(!family.get(color).isPlaced())
+					 if(cantPlaceSpace(player.getSpecificResource("Servant").getQuantity(), i, family.get(color)))
+						 return false;
+			 }
+		 }
+		 return true;
 	}
 	
 	@Override

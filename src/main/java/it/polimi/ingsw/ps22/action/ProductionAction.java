@@ -74,6 +74,7 @@ public class ProductionAction extends Action {
 		}while(!possibleEffects.isEmpty());
 		
 		applyNoExchangeEffect(player, board, bonus);
+		player.getPersonalBoard().applyPersonalBoardBonus("Production", player, board);
 	}
 	
 

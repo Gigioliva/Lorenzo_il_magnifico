@@ -6,6 +6,7 @@ import java.util.Observable;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
+import it.polimi.ingsw.ps22.message.ErrorMove;
 import it.polimi.ingsw.ps22.message.MessageAsk;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
@@ -49,6 +50,10 @@ public class Model extends Observable {
 
 	public String getPlayerGame() {
 		return playerGame;
+	}
+	
+	public Player getCurrentPlayer(){
+		return players.get(playerGame);
 	}
 
 	public void startGame() {
@@ -212,6 +217,11 @@ public class Model extends Observable {
 
 	public void notifyAsk(MessageAsk ask) {
 		waitAnswer.add(ask);
+		setChanged();
+		notifyObservers(ask);
+	}
+	
+	public void notifyError(ErrorMove ask) {
 		setChanged();
 		notifyObservers(ask);
 	}

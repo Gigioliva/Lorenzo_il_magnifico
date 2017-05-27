@@ -34,7 +34,7 @@ public class Board {
 	public TowerZone getTower(String type) {
 		return towers.get(type);
 	}
-
+	
 	public MarketZone getMarket() {
 		return market;
 	}
@@ -82,5 +82,21 @@ public class Board {
 		if(church.containsKey(turn-1)){
 			church.get(turn-1).applyExcomm(players);
 		}
+	}
+	
+	//per ogni torre, il familiare non può piazzare alcun familiare
+	private boolean cantPlaceTowerZones(Player player){
+		
+		for(String type: towers.keySet()){
+			if(!towers.get(type).cantPlaceZone(player)){
+				return false;
+			}
+		}
+		return true;
+	}
+	
+	public boolean cantPlaceAllZones(Player player){
+		return harvestZone.cantPlaceZone(player) && cantPlaceTowerZones(player) 
+				&& prodZone.cantPlaceZone(player) && market.cantPlaceZone(player) && councilPalace.cantPlaceCouncilPalace(player);
 	}
 }

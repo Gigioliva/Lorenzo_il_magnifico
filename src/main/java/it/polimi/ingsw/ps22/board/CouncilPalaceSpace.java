@@ -2,7 +2,7 @@ package it.polimi.ingsw.ps22.board;
 
 import java.util.HashMap;
 
-import it.polimi.ingsw.ps22.action.ProductionAction;
+import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
@@ -21,7 +21,7 @@ public class CouncilPalaceSpace extends ActionSpace {
 		super.addBonus(bonus);
 	}
 
-	public boolean Control(int numServant, int actionSpace, Family family) {
+	public boolean Control(int numServant, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue();
 		if (!(family.isPlaced()) && this.isPlayable()
@@ -47,7 +47,7 @@ public class CouncilPalaceSpace extends ActionSpace {
 		return false;
 	}
 	
-	public void applyMove(int numServant, int actionSpace, Family family) {
+	public void applyMove(int numServant, Family family) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		this.addFamily(family);
@@ -63,5 +63,17 @@ public class CouncilPalaceSpace extends ActionSpace {
 			player.getResources().get("Servant").subResource(new Servant(numServant));
 			family.incrementValue(numServant);
 		}
+	}
+	
+
+	public boolean cantPlaceCouncilPalace(Player player){
+		 HashMap<Color, Family> family = player.getAllFamily();
+		 if(Control(player.getSpecificResource("Servant").getQuantity(), family.get(Color.NEUTRAL)))
+			 return false;
+		 for(Color color: family.keySet()){
+			 if (!family.get(color).isPlaced() && Color.NEUTRAL != color)
+				 return false;
+		 }
+		 return true;
 	}
 }
