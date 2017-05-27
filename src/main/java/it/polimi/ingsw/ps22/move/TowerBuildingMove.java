@@ -11,17 +11,22 @@ public class TowerBuildingMove extends TowerMove {
 	public TowerBuildingMove(String username, Color color, int floor, int numServant) {
 		super(username, color, floor, numServant);
 	}
-	
+
 	@Override
 	public void applyMove(Model model) {
-		Player player=model.getPlayers().get(username);
-		Family family=player.getFamily(color);
-		if(model.getBoard().getTower("Building").Control(numServant, space, family)){
-			model.getBoard().getTower("Building").applyMove(numServant, space, family);
-			model.notifyModel();
-		}else{
-			ErrorMove error=new ErrorMove();
-			model.notifyError(error);
+		if (canFamilyMove(model)) {
+			Player player = model.getPlayers().get(username);
+			Family family = player.getFamily(color);
+			if (model.getBoard().getTower("Building").Control(numServant, space, family)) {
+				model.getBoard().getTower("Building").applyMove(numServant, space, family);
+				model.notifyModel();
+			} else {
+				ErrorMove error = new ErrorMove();
+				model.notifyMessage(error);
+			}
+		} else {
+			ErrorMove error = new ErrorMove();
+			model.notifyMessage(error);
 		}
 	}
 

@@ -14,6 +14,9 @@ public class View extends Observable implements Observer {
 	public void askMove(){
 		
 	}
+	public String getUsername(){
+		return username;
+	}
 	
 	public void showModel(){
 		
