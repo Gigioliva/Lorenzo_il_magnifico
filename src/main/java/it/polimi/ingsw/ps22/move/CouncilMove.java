@@ -16,7 +16,7 @@ public class CouncilMove extends FamilyMove {
 		Player player=model.getPlayers().get(username);
 		Family family=player.getFamily(color);
 		model.getBoard().getCouncilPalace().Control(numServant, space, family);
-		model.getBoard().getProdZone().applyMove(numServant, space, family);
+		model.getBoard().getCouncilPalace().applyMove(numServant, space, family);
 		model.notifyModel();
 	}
 }

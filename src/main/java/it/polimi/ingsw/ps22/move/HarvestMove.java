@@ -15,9 +15,12 @@ public class HarvestMove extends FamilyMove {
 	public void applyMove(Model model) {
 		Player player=model.getPlayers().get(username);
 		Family family=player.getFamily(color);
-		model.getBoard().getHarvestZone().Control(numServant, space, family);
-		model.getBoard().getHarvestZone().applyMove(numServant, space, family);
-		model.notifyModel();
+		if(model.getBoard().getHarvestZone().Control(numServant, space, family)){
+			model.getBoard().getHarvestZone().applyMove(numServant, space, family);
+			model.notifyModel();
+		} else{
+			//genera messaggio di errore e notifica il model per mandarlo
+		}
 	}
 	
 	
