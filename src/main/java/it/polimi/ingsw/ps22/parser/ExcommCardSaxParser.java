@@ -2,9 +2,26 @@
 XML Structure:
 <cards>   
     <card>
-        <name></name>
         <era></era>
-        
+        <militaryincrement>-1</militaryincrement>
+        <coinincrement>-1</coinincrement>
+        <servantincrement>-1</servantincrement>
+        <woodincrement>-1</woodincrement>
+        <stoneincrement>-1</stoneincrement>
+        <harvestincrement>-3</harvestincrement>
+        <productionincrement>-3<productionincrement>
+        <diceincrement>-1</diceincrement>
+        <territoryactionincrement>-4</territoryactionincrement>
+        <characteractionincrement>-4</characteractionincrement>
+        <buildingactionincrement>-4</buildingactionincrement>
+        <ventureactionincrement>-4</ventureactionincrement>
+        <nomarket>1</nomarket> 								//sta solo a rappresentare il true
+        <servanthalfvalue>1</servanthalfvalue>				//sta solo a rappresentare il true
+        <turnskip>1<turnskip>								//sta solo a rappresentare il true
+        <endinvalidcharacter>1</endinvalidcharacter>		//sta solo a rappresentare il true
+        <endinvalidventure>1</endinvalidventure>			//sta solo a rappresentare il true
+        <endinvalidterritory>1</endinvalidterritory>		//sta solo a rappresentare il true
+        <
     </card>    
 </cards>
  */
