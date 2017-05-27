@@ -6,9 +6,10 @@ import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
-//guadagna multiplicand per ogni multiplier
+//guadagna multiplicand multiplicandType per ogni multiplierQty di tipo multiplier
 public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	private String multiplier;
+	private int multiplierQty = 1;
 	private ResourceAbstract multiplicand;
 	private String multiplicandType;
 						//Territory	(factor2)		Coin	(factor1)				// Coin come 
@@ -20,10 +21,13 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 		resources.add(multiplicandType);
 		if (player.isCard(multiplier)){
 			int numeroCarte = player.getDevelopmentCard(multiplier).size();
-			multiplicand.addResource(new ResourceAbstract(numeroCarte*multiplicand.getQuantity()));
+			ResourceAbstract addingqty = new ResourceAbstract(numeroCarte / multiplierQty * multiplicand.getQuantity());
+			player.getSpecificResource(multiplicandType).addResource(addingqty);
 		}
-		ResourceAbstract playerResource = player.getSpecificResource(multiplier);
-		playerResource.addResource(new ResourceAbstract(playerResource.getQuantity() * multiplicand.getQuantity()));
+		else{
+			ResourceAbstract playerResource = player.getSpecificResource(multiplicandType);
+			playerResource.addResource(new ResourceAbstract(playerResource.getQuantity() * multiplicand.getQuantity() / multiplierQty));
+		}
 		player.applyMalusResource(resources);
 	}
 
@@ -32,6 +36,10 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 		return true;
 	}
 
+	public void setMultiplierQty(int qty){
+		this.multiplierQty = qty;
+	}
+	
 	public void setMultiplier(String multiplier) {
 		this.multiplier = multiplier;
 	}
