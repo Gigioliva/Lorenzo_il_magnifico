@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps22.move;
 
 import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.model.Model;
+import it.polimi.ingsw.ps22.player.Family;
+import it.polimi.ingsw.ps22.player.Player;
 
 public class HarvestMove extends FamilyMove {
 	
@@ -11,7 +13,11 @@ public class HarvestMove extends FamilyMove {
 
 	@Override
 	public void applyMove(Model model) {
-		
+		Player player=model.getPlayers().get(username);
+		Family family=player.getFamily(color);
+		model.getBoard().getHarvestZone().Control(numServant, space, family);
+		model.getBoard().getHarvestZone().applyMove(numServant, space, family);
+		model.notifyModel();
 	}
 	
 	
