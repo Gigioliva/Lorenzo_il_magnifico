@@ -117,65 +117,79 @@ public class TerritoryCardSaxParser {
 				// ridefinizione del metodo endElement all'interno del
 				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
-
 					if (qName.equalsIgnoreCase("gaineffect")) {
 						card.addImmediateEffect(gainEffect);
 						gainEffect = new GainResource();
 					}
 
-					if (qName.equalsIgnoreCase("harvesteffect")) {
+					else if (qName.equalsIgnoreCase("harvesteffect")) {
 						card.addActionEffect(harvestEffect);
 						harvestEffect = new GainResource();
 						boolHarvest = false;
 					}
 
-					if (qName.equalsIgnoreCase("card")) {
+					else if (qName.equalsIgnoreCase("card")) {
 						parsedData.add(card);
 						card = new CardTerritory();
 					}
+					
+					else lastQName = "";
+					
 				}
 
 				// ridefinizione del metodo characters all'interno del
 				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
-
+					
 					String str = new String(ch, start, length);
+					
 					if (lastQName.equalsIgnoreCase("name")) {
 						card.setName(str);
 					} else {
-
-						lastInt = Integer.parseInt(str);
-
+						
 						if (lastQName.equalsIgnoreCase("coin")) {
+							lastInt = Integer.parseInt(str);
 							ResourceTypeCheck(new Coin(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("stone")) {
+							lastInt = Integer.parseInt(str);
 							ResourceTypeCheck(new Stone(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("wood")) {
+							lastInt = Integer.parseInt(str);
 							ResourceTypeCheck(new Wood(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("servant")) {
+							lastInt = Integer.parseInt(str);
 							ResourceTypeCheck(new Servant(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("militarypoint")) {
+							lastInt = Integer.parseInt(str);
 							PointTypeCheck(new MilitaryPoint(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("faithpoint")) {
+							lastInt = Integer.parseInt(str);
 							PointTypeCheck(new FaithPoint(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("victorypoint")) {
+							lastInt = Integer.parseInt(str);
 							PointTypeCheck(new VictoryPoint(lastInt));
 						}
 
 						if (lastQName.equalsIgnoreCase("militarypoint")) {
+							lastInt = Integer.parseInt(str);
 							CouncilPrivilegeTypeCheck(new CouncilPrivilege(lastInt));
+						}
+						
+						if(lastQName.equalsIgnoreCase("harvestreq")){
+							lastInt = Integer.parseInt(str);
+							card.setActionValue(lastInt);
 						}
 
 					}
@@ -253,7 +267,7 @@ public class TerritoryCardSaxParser {
 					if (boolHarvest) {
 						harvestEffect.addGain(res.getName(), res);
 					} else {
-						gainEffect.addGain("Coin", res);
+						gainEffect.addGain(res.getName(), res);
 					}
 				}
 
@@ -269,7 +283,7 @@ public class TerritoryCardSaxParser {
 					if (boolHarvest) {
 						harvestEffect.addGain(res.getName(), res);
 					} else {
-						gainEffect.addGain("Coin", res);
+						gainEffect.addGain(res.getName(), res);
 					}
 				}
 
