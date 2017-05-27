@@ -97,6 +97,6 @@ public class Board {
 	
 	public boolean cantPlaceAllZones(Player player){
 		return harvestZone.cantPlaceZone(player) && cantPlaceTowerZones(player) 
-				&& prodZone.cantPlaceZone(player) && market.cantPlaceZone(player);
+				&& prodZone.cantPlaceZone(player) && market.cantPlaceZone(player) && councilPalace.cantPlaceCouncilPalace(player);
 	}
 }
