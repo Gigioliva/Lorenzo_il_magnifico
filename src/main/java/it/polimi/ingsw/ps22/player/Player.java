@@ -61,6 +61,10 @@ public class Player {
 		endEffects = new ArrayList<EndEffect>();
 	}
 	
+	public  HashMap<Color, Family> getAllFamily(){
+		return family;
+	}
+	
 	public Player(Player player){
 		this.resources = player.cloneResources();
 		this.points = player.clonePoints();

@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.player;
 
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.effect.GainResource;
 import it.polimi.ingsw.ps22.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.resource.VictoryPoint;
@@ -32,4 +33,9 @@ public class PersonalBoard {
 	public HashMap<Integer, VictoryPoint> getBonusHarvest(){
 		return bonusHarvest;
 	}
+	
+	public void applyPersonalBoardBonus(String actionType, Player player,Board board){
+		personalBonus.get(actionType).performEffect(player, board);	
+	}
+	
 }

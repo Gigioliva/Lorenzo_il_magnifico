@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps22.board;
 
+import java.util.HashMap;
+
+import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 
@@ -33,6 +36,20 @@ public class MarketZone extends Zone {
 		applyServant(family, numServant);
 		marketSpace[actionSpace].addFamily(family);
 		marketSpace[actionSpace].applyBonus(player);
+	}
+	
+	
+	@Override
+	public boolean cantPlaceZone(Player player){
+		 HashMap<Color, Family> family = player.getAllFamily();
+		 for(int i=0; i<NUM_SPACES; i++){
+			 for(Color color: family.keySet()){
+				 if(!family.get(color).isPlaced())
+					 if(cantPlaceSpace(player.getSpecificResource("Servant").getQuantity(), i, family.get(color)))
+						 return false;
+			 }
+		 }
+		 return true;
 	}
 
 	@Override

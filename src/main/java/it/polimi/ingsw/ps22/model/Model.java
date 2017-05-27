@@ -50,6 +50,10 @@ public class Model extends Observable {
 	public String getPlayerGame() {
 		return playerGame;
 	}
+	
+	public Player getCurrentPlayer(){
+		return players.get(playerGame);
+	}
 
 	public void startGame() {
 		board.setZone(players.size());

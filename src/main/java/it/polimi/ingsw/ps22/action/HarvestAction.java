@@ -26,7 +26,7 @@ public class HarvestAction extends Action {
 				}
 			}
 		}
-		
+		player.getPersonalBoard().applyPersonalBoardBonus("Harvest", player, board);
 	}
 
 }
