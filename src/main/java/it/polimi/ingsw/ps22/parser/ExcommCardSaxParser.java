@@ -65,7 +65,9 @@ public class ExcommCardSaxParser {
 				
 				
 				public void endElement(String uri, String localName, String qName) throws SAXException {
-
+					
+					lastQName = "";
+					
 					if (qName.equalsIgnoreCase("space")) {
 						
 					}
