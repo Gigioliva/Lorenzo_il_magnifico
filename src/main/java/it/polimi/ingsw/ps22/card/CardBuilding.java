@@ -98,5 +98,35 @@ public class CardBuilding extends DevelopmentCard {
 			 player.getSpecificResource(type).subResource(actualCosts.get(type));
 		 }
 	}
+	
+	
+	@Override
+	public String toString(){
+		StringBuilder str = new StringBuilder();
+		
+		str.append("nome carta = " + this.getName() + "\n");
+		
+		str.append("era: " + super.getEra() + "\n");
+		
+		str.append("valore azione = " + actionValue + "\n");
+		
+		str.append("costo: \n");
+		for(String type: cost.keySet()){
+			str.append("  " + cost.get(type).getQuantity() + " " + type + "\n");
+		}
+		
+		if(immediateEffects.size() > 0){
+			str.append("Immediate effects: \n");
+			for(int i = 0; i < immediateEffects.size(); i++){
+				str.append("  [" + (i+1) + "]" + immediateEffects.get(i).toString() + "\n");
+			}
+		}
+		
+		str.append("Action effects: \n");
+		for(int i = 0; i < actionEffects.size(); i++){
+			str.append("  [" + (i+1) + "]" + actionEffects.get(i).toString() + "\n");
+		}
+		return str.toString();
+	}
 
 }

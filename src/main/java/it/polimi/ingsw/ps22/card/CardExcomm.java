@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.effect.EndEffect;
+import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.player.Player;
 
@@ -42,5 +43,31 @@ public class CardExcomm extends Card {
 		return this.era;
 	}
 
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("era: " + era + "\n");
+		
+		if(permanentEffects.size() > 0){
+			str.append("permanent effects: \n");
+			int i = 1;
+			for(PermanentEffect effect: permanentEffects){
+				str.append("  " + "[" + i +"] " + effect.toString());
+				i++;
+			}
+		}
+		
+		if(endEffects.size() > 0){
+			str.append("end effects: \n");
+			int i = 1;
+			for(EndEffect effect: endEffects){
+				str.append("  " + "[" + i +"] "  + effect.toString());
+			}
+			i++;
+		}
+		
+		return str.toString();
+	}
+	
 
 }

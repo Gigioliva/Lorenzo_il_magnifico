@@ -76,11 +76,11 @@ public class ExchangeResource implements ActionEffect{
 		StringBuilder str = new StringBuilder();
 		str.append("You can exchange: \n");
 		for(String type: cost.keySet()){
-			str.append("\t" + cost.get(type).getQuantity() + type);
+			str.append("  " + cost.get(type).getQuantity() + " " + type + "\n");
 		}
 		str.append("with: \n");
 		for(String type: gain.keySet()){
-			str.append("\t" + gain.get(type).getQuantity() + type);
+			str.append("  " + gain.get(type).getQuantity() + " " + type + "\n");
 		}
 		return str.toString();
 	}

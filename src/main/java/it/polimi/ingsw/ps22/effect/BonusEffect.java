@@ -26,7 +26,7 @@ public class BonusEffect implements PermanentEffect {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		for(String type: bonus.keySet()){
-			str.append(bonus.get(type).getQuantity() + type + "\n");
+			str.append(bonus.get(type).getQuantity() + " " + type + "\n");
 		}
 		
 		return str.toString();

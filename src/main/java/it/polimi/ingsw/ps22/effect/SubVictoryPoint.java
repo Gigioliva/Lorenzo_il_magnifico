@@ -93,16 +93,16 @@ public class SubVictoryPoint implements EndEffect {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("End Effect:\nYou lose 1 victory point for every: \n");
+		str.append("You lose 1 victory point for every: \n");
 		for(String type: weights.keySet()){
-				str.append("\t" + weights.get(type).getQuantity() + " " + type + "\n");
+				str.append("  " + weights.get(type).getQuantity() + " " + type + "\n");
 		}
 		
 		if(!loc.equals("player")){
-			str.append("in the cost of every " + loc + " that you have");
+			str.append("in the cost of every " + loc + " that you have \n");
 		}
 		else{
-			str.append("in your resources");
+			str.append("in your resources \n");
 		}
 		return str.toString();
 	}

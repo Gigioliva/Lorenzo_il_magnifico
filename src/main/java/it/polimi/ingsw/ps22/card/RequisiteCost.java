@@ -38,5 +38,22 @@ public class RequisiteCost{
 		return this.requisite;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		if (requisite.size() > 0){
+			str.append("requisite: \n");
+			for(String type: requisite.keySet()){
+				str.append("  " + requisite.get(type).getQuantity() + " type\n");
+			}
+		}
+		
+		str.append("cost: \n");
+		for(String type: cost.keySet()){
+			str.append("  " + cost.get(type).getQuantity() + " type\n");
+		}
+		return str.toString();
+	}
+	
 	
 }

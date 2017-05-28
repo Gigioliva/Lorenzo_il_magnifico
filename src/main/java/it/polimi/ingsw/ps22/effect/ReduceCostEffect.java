@@ -32,7 +32,7 @@ public class ReduceCostEffect implements PermanentEffect {
 		StringBuilder str = new StringBuilder();
 		str.append("Reduce cost of " + cardType + " by: \n");
 		for(String type: bonus.keySet()){
-			str.append(bonus.get(type).getQuantity() + " " + type + "\n");
+			str.append("  " + bonus.get(type).getQuantity() + " " + type + "\n");
 		}
 		return str.toString();
 	}

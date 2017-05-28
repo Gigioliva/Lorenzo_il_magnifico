@@ -48,7 +48,7 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 	public String toString(){
 		StringBuilder str = new StringBuilder();
 		for(String string: gain.keySet()){
-			str.append(string + " " + gain.get(string).getQuantity() + "\n");
+			str.append(gain.get(string).getQuantity() + " " + string + "\n");
 		}
 		return str.toString();
 	}

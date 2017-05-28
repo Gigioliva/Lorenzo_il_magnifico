@@ -9,7 +9,6 @@ import it.polimi.ingsw.ps22.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
 import it.polimi.ingsw.ps22.resource.Resource;
-import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class CardCharacter extends DevelopmentCard {
 	private Coin cost;										//provare a usare tutto nel costruttore se XML permette
@@ -71,6 +70,38 @@ public class CardCharacter extends DevelopmentCard {
 		int requiredCost = getActualCost(player).getQuantity();
 		int playerCoin = player.getResources().get("Coin").getQuantity();
 		return ( playerCoin >= requiredCost );
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("nome carta: " + super.getName());
+		
+		str.append("era: " + super.getEra() + "\n");
+		
+		str.append("Cost: " + cost.getQuantity() + " Coin");
+		
+		if(immediateEffects.size() > 0){
+			str.append("immediate effects: \n");
+			int i = 1;
+			for(ImmediateEffect effect: immediateEffects){
+				str.append("  " + "[" + i +"] " + effect.toString());
+				i++;
+			}
+		}
+		
+		if(permanentEffects.size() > 0){
+			str.append("permanent effects: \n");
+			int i = 1;
+			for(PermanentEffect effect: permanentEffects){
+				str.append("  " + "[" + i +"] " + effect.toString());
+				i++;
+			}
+		}
+		
+		
+		return str.toString();
 	}
 	
 	/*

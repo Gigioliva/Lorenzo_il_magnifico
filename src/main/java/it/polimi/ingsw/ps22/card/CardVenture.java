@@ -146,6 +146,40 @@ public class CardVenture extends DevelopmentCard {
 		return false;
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("nome carta: " + super.getName());
+		
+		str.append("era: " + super.getEra() + "\n");
+		
+		for(RequisiteCost cost: requisiteCost){
+			str.append(cost.toString());
+			str.append("or\n");
+		}
+		
+		if(immediateEffects.size() > 0){
+			str.append("immediate effects: \n");
+			int i = 1;
+			for(ImmediateEffect effect: immediateEffects){
+				str.append("  " + "[" + i +"] " + effect.toString());
+				i++;
+			}
+		}
+		
+		if(endEffects.size() > 0){
+			str.append("end effects: \n");
+			int i = 1;
+			for(EndEffect effect: endEffects){
+				str.append("  " + "[" + i +"] "  + effect.toString());
+			}
+			i++;
+		}
+		
+		return str.toString();
+	}
+	
 	
 	/*
 	public void applyAllEffects(Player player, Board board){

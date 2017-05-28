@@ -22,7 +22,7 @@ public class NoPointsCard implements EndEffect {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("End Effect: no victory points given by your " + cardType);
+		str.append("No victory points given by your " + cardType + "\n");
 		return str.toString();
 	}
 
