@@ -73,6 +73,8 @@ public class ZoneBonusSaxParser {
 
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
+					lastQName = "";
+					
 					if (qName.equalsIgnoreCase("space")) {
 						parsedData.add(toAdd);
 						toAdd = new HashMap<String, ResourceAbstract>();

@@ -150,6 +150,8 @@ public class CharacterCardSaxParser {
 				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
+					lastQName = "";
+					
 					if (qName.equals("card")) {
 						card.addPermanentEffect(bonus);
 						parsedData.add(card);

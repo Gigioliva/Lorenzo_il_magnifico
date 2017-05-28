@@ -130,7 +130,9 @@ public class BuildingCardSaxParser {
 				}
 
 				public void endElement(String uri, String localName, String qName) throws SAXException {
-
+					
+					lastQName = "";
+					
 					if (qName.equalsIgnoreCase("cost")) {
 						boolCost = false;
 					}

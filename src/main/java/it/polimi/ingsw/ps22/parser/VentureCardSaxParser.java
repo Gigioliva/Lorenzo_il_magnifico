@@ -142,6 +142,8 @@ public class VentureCardSaxParser {
 				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
+					lastQName = "";
+					
 					if (qName.equalsIgnoreCase("cost")) {
 						card.addRequisiteCost(cost, requisite);
 						cost = new HashMap<String, ResourceAbstract>();
