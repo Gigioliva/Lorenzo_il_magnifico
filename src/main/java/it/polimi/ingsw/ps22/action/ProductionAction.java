@@ -78,4 +78,12 @@ public class ProductionAction extends Action {
 	}
 	
 
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Production Action with action value: " + super.getActionValue() + "\n");
+		return str.toString();
+	}
+	
+
 }

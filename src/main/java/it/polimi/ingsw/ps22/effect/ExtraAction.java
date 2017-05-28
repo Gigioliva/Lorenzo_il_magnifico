@@ -15,5 +15,10 @@ public class ExtraAction implements ImmediateEffect {
 	public void performEffect(Player player, Board board) {
 		action.applyAction(player, board);
 	}
+	
+	@Override
+	public String toString() {
+		return action.toString();
+	}
 
 }

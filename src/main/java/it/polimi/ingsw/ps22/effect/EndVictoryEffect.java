@@ -14,4 +14,15 @@ public class EndVictoryEffect implements EndEffect {
 	public void performEffect(Player player, Board board) {
 		player.addPoints("VictoryPoint", points);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("End effect: \n");
+		if(points.getQuantity() > 0)
+			str.append("+" + points.getQuantity() + "victory points");
+		else
+			str.append("-" + points.getQuantity() + "victory points");
+		return str.toString();
+	}
 }

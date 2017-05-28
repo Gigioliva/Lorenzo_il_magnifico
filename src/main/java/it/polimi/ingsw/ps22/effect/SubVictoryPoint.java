@@ -13,7 +13,7 @@ import it.polimi.ingsw.ps22.resource.VictoryPoint;
 
 public class SubVictoryPoint implements EndEffect {
 	private HashMap<String, BonusAbstract> weights;
-	private String loc; // rappresenta se Player o tipo carta
+	private String loc; // rappresenta se Player o tipo carta, è uguale a "player" se si riferisce ad un giocatore
 	
 	
 
@@ -37,8 +37,10 @@ public class SubVictoryPoint implements EndEffect {
 	}
 	
 	private HashMap<String,ResourceAbstract> getVentureCost(Player player){
+		
 		HashMap<String,ResourceAbstract> costMap = new HashMap<String, ResourceAbstract>();
 		ArrayList<DevelopmentCard> playerCards = player.getDevelopmentCard("Venture");
+		
 		for(DevelopmentCard card: playerCards){
 			ArrayList<RequisiteCost> costs = card.getRequisiteCost();
 			for(RequisiteCost cost: costs)
@@ -86,6 +88,23 @@ public class SubVictoryPoint implements EndEffect {
 			VictoryPoint subPoints = new VictoryPoint(-weightedSum(player));
 			player.getSpecificResource("VictoryPoint").addResource(subPoints);
 		}
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("End Effect:\nYou lose 1 victory point for every: \n");
+		for(String type: weights.keySet()){
+				str.append("\t" + weights.get(type).getQuantity() + " " + type + "\n");
+		}
+		
+		if(!loc.equals("player")){
+			str.append("in the cost of every " + loc + " that you have");
+		}
+		else{
+			str.append("in your resources");
+		}
+		return str.toString();
 	}
 
 }

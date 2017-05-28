@@ -95,5 +95,20 @@ public class CardAction extends Action {
 		*/
 		
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("You can take one card between the following types: \n");
+		for(int i = 0; i< types.size(); i++){
+			str.append("\t" + types.get(i) + "\n");
+		}
+		if(discount.size() == 0)
+			str.append("with discount: \n");
+		for(String string: discount.keySet()){
+			str.append(string + " " + discount.get(string).getQuantity());
+		}
+		return str.toString();
+	}
 
 }

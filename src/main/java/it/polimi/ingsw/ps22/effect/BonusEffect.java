@@ -21,6 +21,16 @@ public class BonusEffect implements PermanentEffect {
 	public void performEffect(Player player, Board board) {
 		player.getBonusAcc().addBonus(bonus);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		for(String type: bonus.keySet()){
+			str.append(bonus.get(type).getQuantity() + type + "\n");
+		}
+		
+		return str.toString();
+	}
 
 	
 }

@@ -30,6 +30,14 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 		}
 		player.applyMalusResource(resources);
 	}
+	
+	@Override
+	public String toString(){
+		StringBuilder str = new StringBuilder();
+		str.append(multiplierQty + " " + multiplier + " X " + multiplicand.getQuantity() + multiplicandType);
+		return str.toString();
+		
+	}
 
 	@Override
 	public boolean canAffordCost(Player player) {

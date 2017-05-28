@@ -16,5 +16,10 @@ public class StrangeEffect implements PermanentEffect{
 		player.getSpecBonus().setSpecBonus(type);
 	}
 	
-
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(type);
+		return str.toString();
+	}
 }

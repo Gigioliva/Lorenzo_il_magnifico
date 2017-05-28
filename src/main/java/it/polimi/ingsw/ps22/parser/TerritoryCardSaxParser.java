@@ -133,7 +133,7 @@ public class TerritoryCardSaxParser {
 						card = new CardTerritory();
 					}
 					
-					else lastQName = "";
+					lastQName = "";
 					
 				}
 

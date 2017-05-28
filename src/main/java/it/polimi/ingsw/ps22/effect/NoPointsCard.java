@@ -19,5 +19,11 @@ public class NoPointsCard implements EndEffect {
 			player.getDevelopmentCard(cardType).remove(i);
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("End Effect: no victory points given by your " + cardType);
+		return str.toString();
+	}
 
 }

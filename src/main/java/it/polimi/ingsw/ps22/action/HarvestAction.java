@@ -28,5 +28,13 @@ public class HarvestAction extends Action {
 		}
 		player.getPersonalBoard().applyPersonalBoardBonus("Harvest", player, board);
 	}
+	
 
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Harvest Action with action value: " + super.getActionValue() + "\n");
+		return str.toString();
+	}
+	
 }

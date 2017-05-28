@@ -71,5 +71,19 @@ public class ExchangeResource implements ActionEffect{
 		}
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("You can exchange: \n");
+		for(String type: cost.keySet()){
+			str.append("\t" + cost.get(type).getQuantity() + type);
+		}
+		str.append("with: \n");
+		for(String type: gain.keySet()){
+			str.append("\t" + gain.get(type).getQuantity() + type);
+		}
+		return str.toString();
+	}
+	
 
 }
