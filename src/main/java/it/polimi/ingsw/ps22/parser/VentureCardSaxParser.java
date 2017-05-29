@@ -84,14 +84,13 @@ public class VentureCardSaxParser {
 					}
 
 				}
-				
 
 				// ridefinizione del metodo endElement all'interno del
 				// DefaultHandler
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
 					lastQName = "";
-					
+
 					if (qName.equalsIgnoreCase("cost")) {
 						card.addRequisiteCost(cost, requisite);
 						cost = new HashMap<String, ResourceAbstract>();
@@ -127,187 +126,112 @@ public class VentureCardSaxParser {
 					// aggiunto nome alla carta
 					if (lastQName.equalsIgnoreCase("name")) {
 						card.setName(str);
-					} else {
-						// aggiunge i tipi
-						if (lastQName.equalsIgnoreCase("type")) {
-							cardAct.addType(str);
+					}
+					// aggiunge i tipi
+					if (lastQName.equalsIgnoreCase("type")) {
+						cardAct.addType(str);
+					}
+
+					// aggiunta era alla carta
+					if (lastQName.equalsIgnoreCase("era")) {
+						lastInt = Integer.parseInt(str);
+						card.setEra(lastInt);
+					}
+
+					// gestione monete
+					if (lastQName.equalsIgnoreCase("coin")) {
+						lastInt = Integer.parseInt(str);
+						if (boolCost) {
+							cost.put("Coin", new Coin(lastInt));
 						} else {
-							lastInt = Integer.parseInt(str);
-
-							// aggiunta era alla carta
-							if (lastQName.equalsIgnoreCase("era")) {
-								card.setEra(lastInt);
-							}
-
-							// gestione monete
-							if (lastQName.equalsIgnoreCase("coin")) {
-								if (boolCost) {
-									cost.put("Coin", new Coin(lastInt));
-								} else {
-									gainEffect.addGain("Coin", new Coin(lastInt));
-								}
-							}
-
-							// gestione pietre
-							if (lastQName.equalsIgnoreCase("stone")) {
-								if (boolCost) {
-									cost.put("Stone", new Stone(lastInt));
-								} else {
-									gainEffect.addGain("Stone", new Stone(lastInt));
-								}
-							}
-
-							// gestione legni
-							if (lastQName.equalsIgnoreCase("wood")) {
-								if (boolCost) {
-									cost.put("Wood", new Wood(lastInt));
-								} else {
-									gainEffect.addGain("Wood", new Wood(lastInt));
-								}
-							}
-
-							// gestione servitori
-							if (lastQName.equalsIgnoreCase("servant")) {
-								if (boolCost) {
-									cost.put("Servant", new Servant(lastInt));
-								} else {
-									gainEffect.addGain("Servant", new Servant(lastInt));
-								}
-							}
-
-							// gestione punti militari
-							if (lastQName.equalsIgnoreCase("militarypoint")) {
-								if (boolCost) {
-									cost.put("MilitaryPoint", new MilitaryPoint(lastInt));
-								} else {
-									gainEffect.addGain("MilitaryPoint", new MilitaryPoint(lastInt));
-								}
-							}
-
-							// requisito punti militari (non serve il contr che
-							// sia un
-							// cost, può essere solo quello)
-							if (lastQName.equalsIgnoreCase("militaryrequirement")) {
-								requisite.put("MilitaryPoint", new MilitaryPoint(lastInt));
-							}
-
-							// effetto immediato privilegio del consiglio
-							if (lastQName.equalsIgnoreCase("councilpoint")) {
-								gainEffect.addGain("CouncilPrivilege", new CouncilPrivilege(lastInt));
-							}
-
-							// effetto immediato punti fede
-							if (lastQName.equalsIgnoreCase("faithpoint")) {
-								gainEffect.addGain("FaithPoint", new FaithPoint(lastInt));
-							}
-
-							// effetto punti vittoria a fine partita
-							if (lastQName.equalsIgnoreCase("victorypoint")) {
-								card.addEndEffect(new EndVictoryEffect(lastInt));
-							}
-
-							// effetto nuova azione produzione aggiuntiva
-							if (lastQName.equalsIgnoreCase("immextraprod")) {
-								card.addImmediateEffect(new ExtraAction(new ProductionAction(lastInt)));
-
-							}
-
-							// effetto nuova azione raccolto aggiuntiva
-							if (lastQName.equalsIgnoreCase("immextraharvest")) {
-								card.addImmediateEffect(new ExtraAction(new HarvestAction(lastInt)));
-							}
-
-							if (lastQName.equalsIgnoreCase("immactionvalue")) {
-								cardAct = new CardAction(lastInt);
-							}
+							gainEffect.addGain("Coin", new Coin(lastInt));
 						}
 					}
 
-					/*
-					 * // aggiunto nome alla carta if (boolName) {
-					 * card.setName(new String(ch, start, length)); boolName =
-					 * false; }
-					 * 
-					 * // aggiunta era alla carta if (boolEra) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length));
-					 * card.setEra(lastInt); boolEra = false; }
-					 * 
-					 * // gestione monete if (boolCoin) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolCost) { cost.put("Coin", new Coin(lastInt)); } else
-					 * { gainEffect.addGain("Coin", new Coin(lastInt)); }
-					 * boolCoin = false; }
-					 * 
-					 * // gestione pietre if (boolStone) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolCost) { cost.put("Stone", new Stone(lastInt)); }
-					 * else { gainEffect.addGain("Stone", new Stone(lastInt)); }
-					 * boolStone = false; }
-					 * 
-					 * // gestione legni if (boolWood) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolCost) { cost.put("Wood", new Wood(lastInt)); } else
-					 * { gainEffect.addGain("Wood", new Wood(lastInt)); }
-					 * boolWood = false; }
-					 * 
-					 * // gestione servitori if (boolServant) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolCost) { cost.put("Servant", new Servant(lastInt)); }
-					 * else { gainEffect.addGain("Servant", new
-					 * Servant(lastInt)); } boolServant = false; }
-					 * 
-					 * // gestione punti militari if (boolMilitaryPoint) {
-					 * lastInt = Integer.parseInt(new String(ch, start,
-					 * length)); if (boolCost) { cost.put("MilitaryPoint", new
-					 * MilitaryPoint(lastInt)); } else {
-					 * gainEffect.addGain("MilitaryPoint", new
-					 * MilitaryPoint(lastInt)); } boolMilitaryPoint = false; }
-					 * 
-					 * // requisito punti militari (non serve il contr che sia
-					 * un // cost, può essere solo quello) if
-					 * (boolMilitaryPointrequest) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length));
-					 * requisite.put("MilitaryPoint", new
-					 * MilitaryPoint(lastInt)); boolMilitaryPointrequest =
-					 * false; }
-					 * 
-					 * // effetto immediato privilegio del consiglio if
-					 * (boolCouncilPoint) { lastInt = Integer.parseInt(new
-					 * String(ch, start, length));
-					 * gainEffect.addGain("CouncilPrivilege", new
-					 * CouncilPrivilege(lastInt)); boolCouncilPoint = false; }
-					 * 
-					 * // effetto immediato punti fede if (boolFaithPoint) {
-					 * lastInt = Integer.parseInt(new String(ch, start,
-					 * length)); gainEffect.addGain("FaithPoint", new
-					 * FaithPoint(lastInt)); boolFaithPoint = false; }
-					 * 
-					 * // effetto punti vittoria a fine partita if
-					 * (boolVictoryPoint) { lastInt = Integer.parseInt(new
-					 * String(ch, start, length)); card.addEndEffect(new
-					 * EndVictoryEffect(lastInt)); boolVictoryPoint = false; }
-					 * 
-					 * // effetto nuova azione produzione aggiuntiva if
-					 * (boolImmProd) { lastInt = Integer.parseInt(new String(ch,
-					 * start, length)); card.addImmediateEffect(new
-					 * ExtraAction(new ProductionAction(lastInt))); boolImmProd
-					 * = false; }
-					 * 
-					 * // effetto nuova azione raccolto aggiuntiva if
-					 * (boolImmHarvest) { lastInt = Integer.parseInt(new
-					 * String(ch, start, length)); card.addImmediateEffect(new
-					 * ExtraAction(new HarvestAction(lastInt))); boolImmHarvest
-					 * = false; }
-					 * 
-					 * // effetto azione immediata if (boolImmActionValue) {
-					 * lastInt = Integer.parseInt(new String(ch, start,
-					 * length)); cardAct = new CardAction(lastInt);
-					 * boolImmActionValue = false; }
-					 * 
-					 * // aggiunge i tipi if (boolType) { String str = new
-					 * String(ch, start, length); cardAct.addType(str); boolType
-					 * = false; }
-					 */
+					// gestione pietre
+					if (lastQName.equalsIgnoreCase("stone")) {
+						lastInt = Integer.parseInt(str);
+						if (boolCost) {
+							cost.put("Stone", new Stone(lastInt));
+						} else {
+							gainEffect.addGain("Stone", new Stone(lastInt));
+						}
+					}
+
+					// gestione legni
+					if (lastQName.equalsIgnoreCase("wood")) {
+						lastInt = Integer.parseInt(str);
+						if (boolCost) {
+							cost.put("Wood", new Wood(lastInt));
+						} else {
+							gainEffect.addGain("Wood", new Wood(lastInt));
+						}
+					}
+
+					// gestione servitori
+					if (lastQName.equalsIgnoreCase("servant")) {
+						lastInt = Integer.parseInt(str);
+						if (boolCost) {
+							cost.put("Servant", new Servant(lastInt));
+						} else {
+							gainEffect.addGain("Servant", new Servant(lastInt));
+						}
+					}
+
+					// gestione punti militari
+					if (lastQName.equalsIgnoreCase("militarypoint")) {
+						lastInt = Integer.parseInt(str);
+						if (boolCost) {
+							cost.put("MilitaryPoint", new MilitaryPoint(lastInt));
+						} else {
+							gainEffect.addGain("MilitaryPoint", new MilitaryPoint(lastInt));
+						}
+					}
+
+					// requisito punti militari (non serve il contr che
+					// sia un
+					// cost, può essere solo quello)
+					if (lastQName.equalsIgnoreCase("militaryrequirement")) {
+						lastInt = Integer.parseInt(str);
+						requisite.put("MilitaryPoint", new MilitaryPoint(lastInt));
+					}
+
+					// effetto immediato privilegio del consiglio
+					if (lastQName.equalsIgnoreCase("councilpoint")) {
+						lastInt = Integer.parseInt(str);
+						gainEffect.addGain("CouncilPrivilege", new CouncilPrivilege(lastInt));
+					}
+
+					// effetto immediato punti fede
+					if (lastQName.equalsIgnoreCase("faithpoint")) {
+						lastInt = Integer.parseInt(str);
+						gainEffect.addGain("FaithPoint", new FaithPoint(lastInt));
+					}
+
+					// effetto punti vittoria a fine partita
+					if (lastQName.equalsIgnoreCase("victorypoint")) {
+						lastInt = Integer.parseInt(str);
+						card.addEndEffect(new EndVictoryEffect(lastInt));
+					}
+
+					// effetto nuova azione produzione aggiuntiva
+					if (lastQName.equalsIgnoreCase("immextraprod")) {
+						lastInt = Integer.parseInt(str);
+						card.addImmediateEffect(new ExtraAction(new ProductionAction(lastInt)));
+
+					}
+
+					// effetto nuova azione raccolto aggiuntiva
+					if (lastQName.equalsIgnoreCase("immextraharvest")) {
+						lastInt = Integer.parseInt(str);
+						card.addImmediateEffect(new ExtraAction(new HarvestAction(lastInt)));
+					}
+
+					if (lastQName.equalsIgnoreCase("immactionvalue")) {
+						lastInt = Integer.parseInt(str);
+						cardAct = new CardAction(lastInt);
+					}
+
 				}
 			};
 

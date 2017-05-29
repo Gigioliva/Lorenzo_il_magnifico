@@ -150,7 +150,7 @@ public class CardVenture extends DevelopmentCard {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		
-		str.append("nome carta: " + super.getName());
+		str.append("nome carta: " + super.getName()+"\n");
 		
 		str.append("era: " + super.getEra() + "\n");
 		
