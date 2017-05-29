@@ -63,7 +63,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
     		<servant>0</servant>
     		<military>0</military>
     		<faithpoint>0</faithpoint>	
-    		<councilpoint>0</councilpoint>
+    		<councilpoint>0</councilpoint>					//verificare
     		<victorypoint>0</victorypoint>	
 		</exchangeprodeffect>
 		<cardmoltprodeffect>														
@@ -107,6 +107,7 @@ public class BuildingCardSaxParser {
 
 					// Boolean per capire in quale ambito stiamo parlando della
 					// risorsa
+
 					if (qName.equalsIgnoreCase("cost")) {
 						boolCost = true;
 					}
@@ -130,9 +131,9 @@ public class BuildingCardSaxParser {
 				}
 
 				public void endElement(String uri, String localName, String qName) throws SAXException {
-					
+
 					lastQName = "";
-					
+
 					if (qName.equalsIgnoreCase("cost")) {
 						boolCost = false;
 					}
@@ -170,45 +171,62 @@ public class BuildingCardSaxParser {
 
 				public void characters(char ch[], int start, int length) throws SAXException {
 					String str = new String(ch, start, length);
-					if (lastQName.equalsIgnoreCase("name"))
+					if (lastQName.equalsIgnoreCase("name")) {
 						card.setName(str);
-					else {
-						if (lastQName.equalsIgnoreCase("type"))
-							multProdEffect.setMultiplier(str);
-						else {
-							lastInt = Integer.parseInt(str);
+					}
 
-							if (lastQName.equalsIgnoreCase("era"))
-								card.setEra(lastInt);
+					if (lastQName.equalsIgnoreCase("type")) {
+						multProdEffect.setMultiplier(str);
+					}
 
-							if (lastQName.equalsIgnoreCase("prodreq"))
-								card.setActionValue(lastInt);
+					if (lastQName.equalsIgnoreCase("era")) {
+						lastInt = Integer.parseInt(str);
+						card.setEra(lastInt);
+					}
 
-							if (lastQName.equalsIgnoreCase("coin"))
-								processElementResource(new Coin(lastInt));
+					if (lastQName.equalsIgnoreCase("prodreq")) {
+						lastInt = Integer.parseInt(str);
+						card.setActionValue(lastInt);
+					}
 
-							if (lastQName.equalsIgnoreCase("stone"))
-								processElementResource(new Stone(lastInt));
+					if (lastQName.equalsIgnoreCase("coin")) {
+						lastInt = Integer.parseInt(str);
+						processElementResource(new Coin(lastInt));
+					}
 
-							if (lastQName.equalsIgnoreCase("wood"))
-								processElementResource(new Wood(lastInt));
+					if (lastQName.equalsIgnoreCase("stone")) {
+						lastInt = Integer.parseInt(str);
+						processElementResource(new Stone(lastInt));
+					}
 
-							if (lastQName.equalsIgnoreCase("servant"))
-								processElementResource(new Servant(lastInt));
+					if (lastQName.equalsIgnoreCase("wood")) {
+						lastInt = Integer.parseInt(str);
+						processElementResource(new Wood(lastInt));
+					}
 
-							if (lastQName.equalsIgnoreCase("militarypoint"))
-								processElementPoint(new MilitaryPoint(lastInt));
+					if (lastQName.equalsIgnoreCase("servant")) {
+						lastInt = Integer.parseInt(str);
+						processElementResource(new Servant(lastInt));
+					}
 
-							if (lastQName.equalsIgnoreCase("faithpoint"))
-								processElementPoint(new FaithPoint(lastInt));
+					if (lastQName.equalsIgnoreCase("militarypoint")) {
+						lastInt = Integer.parseInt(str);
+						processElementPoint(new MilitaryPoint(lastInt));
+					}
 
-							if (lastQName.equalsIgnoreCase("victorypoint"))
-								processElementPoint(new VictoryPoint(lastInt));
+					if (lastQName.equalsIgnoreCase("faithpoint")) {
+						lastInt = Integer.parseInt(str);
+						processElementPoint(new FaithPoint(lastInt));
+					}
 
-							if (lastQName.equalsIgnoreCase("coucilpoint"))
-								processElementCouncilPrivilege(lastInt);
+					if (lastQName.equalsIgnoreCase("victorypoint")) {
+						lastInt = Integer.parseInt(str);
+						processElementPoint(new VictoryPoint(lastInt));
+					}
 
-						}
+					if (lastQName.equalsIgnoreCase("councilpoint")) {
+						lastInt = Integer.parseInt(str);
+						processElementCouncilPrivilege(lastInt);
 					}
 
 				}
@@ -267,20 +285,20 @@ public class BuildingCardSaxParser {
 				private void processElementCouncilPrivilege(int value) {
 
 					if (boolGainImm) {
-						gainImmEffect.addGain("CouncilPoint", new CouncilPrivilege(value));
+						gainImmEffect.addGain("CouncilPrivilege", new CouncilPrivilege(value));
 					} else {
 						if (boolGainProd) {
-							gainProdEffect.addGain("CouncilPoint", new CouncilPrivilege(value));
+							gainProdEffect.addGain("CouncilPrivilege", new CouncilPrivilege(value));
 						} else {
 							if (boolExchangeProd) {
 								if (lastInt < 0) {
-									exchangeProdEffect.addCost("CouncilPoint", new CouncilPrivilege(value));
+									exchangeProdEffect.addCost("CouncilPrivilege", new CouncilPrivilege(value));
 								} else {
-									exchangeProdEffect.addGain("CouncilPoint", new CouncilPrivilege(value));
+									exchangeProdEffect.addGain("CouncilPrivilege", new CouncilPrivilege(value));
 								}
 							} else {
 								if (boolCardMoltProd) {
-									multProdEffect.setMultiplicandType("CouncilPoint");
+									multProdEffect.setMultiplicandType("CouncilPrivilege");
 									multProdEffect.setMultiplicand(new CouncilPrivilege(value));
 								}
 							}

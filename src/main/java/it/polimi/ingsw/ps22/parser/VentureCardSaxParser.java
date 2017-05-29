@@ -71,17 +71,6 @@ public class VentureCardSaxParser {
 				String lastQName = "";
 				int lastInt = 0;
 				boolean boolCost = false;
-				/*
-				 * boolean boolName = false; boolean boolEra = false; boolean
-				 * boolCoin = false; boolean boolStone = false; boolean boolWood
-				 * = false; boolean boolServant = false; boolean
-				 * boolMilitaryPoint = false; boolean boolMilitaryPointrequest =
-				 * false; boolean boolCouncilPoint = false; boolean
-				 * boolFaithPoint = false; boolean boolVictoryPoint = false;
-				 * boolean boolCost = false; boolean boolImmHarvest = false;
-				 * boolean boolImmProd = false; boolean boolImmActionValue =
-				 * false; boolean boolType = false;
-				 */
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
@@ -94,49 +83,8 @@ public class VentureCardSaxParser {
 						boolCost = true;
 					}
 
-					/*
-					 * if (qName.equalsIgnoreCase("name")) { boolName = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("era")) { boolEra = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("coin")) { boolCoin = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("stone")) { boolStone = true;
-					 * }
-					 * 
-					 * if (qName.equalsIgnoreCase("wood")) { boolWood = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("servant")) { boolServant =
-					 * true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("militarypoint")) {
-					 * boolMilitaryPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("councilpoint")) {
-					 * boolCouncilPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("faithpoint")) {
-					 * boolFaithPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("militaryrequirement")) {
-					 * boolMilitaryPointrequest = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("victorypoint")) {
-					 * boolVictoryPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("immextraprod")) { boolImmProd
-					 * = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("immextraharvest")) {
-					 * boolImmHarvest = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("immactionvalue")) {
-					 * boolImmActionValue = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("type")) { boolType = true; }
-					 */
-
 				}
+				
 
 				// ridefinizione del metodo endElement all'interno del
 				// DefaultHandler

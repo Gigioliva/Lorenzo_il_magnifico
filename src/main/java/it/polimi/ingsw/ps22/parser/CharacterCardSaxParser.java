@@ -331,14 +331,6 @@ public class CharacterCardSaxParser {
 							mult.setMultiplicand(new VictoryPoint(Integer.parseInt(str)));
 							mult.setMultiplicandType("VictoryPoint");
 						}
-
-						/*
-						 * if(lastQName.equalsIgnoreCase("cardtype")) {
-						 * if(str.equalsIgnoreCase("cardventure")) {
-						 * //mult.setMultiplicand();
-						 * mult.setMultiplicandType("FaithPoint"); } }
-						 */
-
 					}
 
 					if (lastQName.equalsIgnoreCase("harvestincrement")) {
@@ -386,6 +378,8 @@ public class CharacterCardSaxParser {
 							reduce.addBonus("Wood", new Wood(Integer.parseInt(str)));
 					}
 
+					lastQName = "";	
+					
 				}
 
 			};

@@ -62,14 +62,6 @@ public class TerritoryCardSaxParser {
 				int lastInt = 0;
 				String lastQName;
 				boolean boolHarvest = false;
-				/*
-				 * boolean boolName = false; boolean boolEra = false; boolean
-				 * boolCoin = false; boolean boolStone = false; boolean boolWood
-				 * = false; boolean boolServant = false; boolean
-				 * boolMilitaryPoint = false; boolean boolCouncilPoint = false;
-				 * boolean boolFaithPoint = false; boolean boolVictoryPoint =
-				 * false; boolean boolHarvestReq = false;
-				 */
 
 				// ridefinizione del metodo startElement all'interno del
 				// DefaultHandler
@@ -82,36 +74,6 @@ public class TerritoryCardSaxParser {
 						boolHarvest = true;
 					}
 
-					/*
-					 * if (qName.equalsIgnoreCase("name")) { boolName = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("era")) { boolEra = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("coin")) { boolCoin = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("stone")) { boolStone = true;
-					 * }
-					 * 
-					 * if (qName.equalsIgnoreCase("wood")) { boolWood = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("servant")) { boolServant =
-					 * true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("military")) {
-					 * boolMilitaryPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("councilpoint")) {
-					 * boolCouncilPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("faithpoint")) {
-					 * boolFaithPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("victorypoint")) {
-					 * boolVictoryPoint = true; }
-					 * 
-					 * if (qName.equalsIgnoreCase("harvestreq")) {
-					 * boolHarvestReq = true; }
-					 */
 				}
 
 				// ridefinizione del metodo endElement all'interno del
@@ -132,135 +94,71 @@ public class TerritoryCardSaxParser {
 						parsedData.add(card);
 						card = new CardTerritory();
 					}
-					
+
 					lastQName = "";
-					
+
 				}
 
 				// ridefinizione del metodo characters all'interno del
 				// DefaultHandler
 				public void characters(char ch[], int start, int length) throws SAXException {
-					
+
 					String str = new String(ch, start, length);
-					
+
 					if (lastQName.equalsIgnoreCase("name")) {
 						card.setName(str);
-					} else {
-						
-						if (lastQName.equalsIgnoreCase("coin")) {
-							lastInt = Integer.parseInt(str);
-							ResourceTypeCheck(new Coin(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("stone")) {
-							lastInt = Integer.parseInt(str);
-							ResourceTypeCheck(new Stone(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("wood")) {
-							lastInt = Integer.parseInt(str);
-							ResourceTypeCheck(new Wood(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("servant")) {
-							lastInt = Integer.parseInt(str);
-							ResourceTypeCheck(new Servant(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("militarypoint")) {
-							lastInt = Integer.parseInt(str);
-							PointTypeCheck(new MilitaryPoint(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("faithpoint")) {
-							lastInt = Integer.parseInt(str);
-							PointTypeCheck(new FaithPoint(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("victorypoint")) {
-							lastInt = Integer.parseInt(str);
-							PointTypeCheck(new VictoryPoint(lastInt));
-						}
-
-						if (lastQName.equalsIgnoreCase("militarypoint")) {
-							lastInt = Integer.parseInt(str);
-							CouncilPrivilegeTypeCheck(new CouncilPrivilege(lastInt));
-						}
-						
-						if(lastQName.equalsIgnoreCase("harvestreq")){
-							lastInt = Integer.parseInt(str);
-							card.setActionValue(lastInt);
-						}
-
 					}
 
-					/*
-					 * // aggiunto nome alla carta if (boolName) {
-					 * card.setName(new String(ch, start, length)); boolName =
-					 * false; }
-					 * 
-					 * // aggiunta era alla carta if (boolEra) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length));
-					 * card.setEra(lastInt); boolEra = false; }
-					 * 
-					 * // monete if (boolCoin) { lastInt = Integer.parseInt(new
-					 * String(ch, start, length)); if (boolHarvest) {
-					 * harvestEffect.addGain("Coin", new Coin(lastInt)); } else
-					 * { gainEffect.addGain("Coin", new Coin(lastInt)); }
-					 * boolCoin = false; }
-					 * 
-					 * // pietre if (boolStone) { lastInt = Integer.parseInt(new
-					 * String(ch, start, length)); if (boolHarvest) {
-					 * harvestEffect.addGain("Stone", new Stone(lastInt)); }
-					 * else { gainEffect.addGain("Stone", new Stone(lastInt)); }
-					 * boolStone = false; }
-					 * 
-					 * // legni if (boolWood) { lastInt = Integer.parseInt(new
-					 * String(ch, start, length)); if (boolHarvest) {
-					 * harvestEffect.addGain("Wood", new Wood(lastInt)); } else
-					 * { gainEffect.addGain("Wood", new Wood(lastInt)); }
-					 * boolWood = false; }
-					 * 
-					 * // servitori if (boolServant) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolHarvest) { harvestEffect.addGain("Servant", new
-					 * Servant(lastInt)); } else { gainEffect.addGain("Servant",
-					 * new Servant(lastInt)); } boolServant = false; }
-					 * 
-					 * // punti militari if (boolMilitaryPoint) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolHarvest) { harvestEffect.addGain("MilitaryPoint",
-					 * new MilitaryPoint(lastInt)); } else {
-					 * gainEffect.addGain("MilitaryPoint", new
-					 * MilitaryPoint(lastInt)); } boolMilitaryPoint = false; }
-					 * 
-					 * // privilegio del consiglio if (boolCouncilPoint) {
-					 * lastInt = Integer.parseInt(new String(ch, start,
-					 * length)); if (boolHarvest) {
-					 * harvestEffect.addGain("CouncilPrivilege", new
-					 * CouncilPrivilege(lastInt)); } else {
-					 * gainEffect.addGain("CouncilPrivilege", new
-					 * CouncilPrivilege(lastInt)); } boolCouncilPoint = false; }
-					 * 
-					 * // punti fede if (boolFaithPoint) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolHarvest) { harvestEffect.addGain("FaithPoint", new
-					 * FaithPoint(lastInt)); } else {
-					 * gainEffect.addGain("FaithPoint", new
-					 * FaithPoint(lastInt)); } boolFaithPoint = false; }
-					 * 
-					 * // punti vittoria if (boolVictoryPoint) { lastInt =
-					 * Integer.parseInt(new String(ch, start, length)); if
-					 * (boolHarvest) { harvestEffect.addGain("VictoryPoint", new
-					 * VictoryPoint(lastInt)); } else {
-					 * gainEffect.addGain("VictoryPoint", new
-					 * VictoryPoint(lastInt)); } boolVictoryPoint = false; }
-					 * 
-					 * // requisito per azione raccolto if (boolHarvestReq) {
-					 * lastInt = Integer.parseInt(new String(ch, start,
-					 * length)); card.setActionValue(lastInt); boolHarvestReq =
-					 * false; }
-					 */
+					if (lastQName.equalsIgnoreCase("era")) {
+						lastInt = Integer.parseInt(str);
+						card.setEra(lastInt);
+					}
+
+					if (lastQName.equalsIgnoreCase("coin")) {
+						lastInt = Integer.parseInt(str);
+						ResourceTypeCheck(new Coin(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("stone")) {
+						lastInt = Integer.parseInt(str);
+						ResourceTypeCheck(new Stone(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("wood")) {
+						lastInt = Integer.parseInt(str);
+						ResourceTypeCheck(new Wood(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("servant")) {
+						lastInt = Integer.parseInt(str);
+						ResourceTypeCheck(new Servant(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("militarypoint")) {
+						lastInt = Integer.parseInt(str);
+						PointTypeCheck(new MilitaryPoint(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("faithpoint")) {
+						lastInt = Integer.parseInt(str);
+						PointTypeCheck(new FaithPoint(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("victorypoint")) {
+						lastInt = Integer.parseInt(str);
+						PointTypeCheck(new VictoryPoint(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("councilpoint")) {
+						lastInt = Integer.parseInt(str);
+						CouncilPrivilegeTypeCheck(new CouncilPrivilege(lastInt));
+					}
+
+					if (lastQName.equalsIgnoreCase("harvestreq")) {
+						lastInt = Integer.parseInt(str);
+						card.setActionValue(lastInt);
+					}
+
 				}
 
 				private void ResourceTypeCheck(Resource res) {
