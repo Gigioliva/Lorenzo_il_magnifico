@@ -30,5 +30,19 @@ public class SpecBonus {
 	public boolean returnBool(String type){
 		return bonus.get(type);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("You have the following bonus/malus \n");
+		
+		for(String type: bonus.keySet()){
+			if(bonus.get(type))
+				str.append("  " + type + "\n");
+		}
+		
+		return str.toString();
+	}
 
 }

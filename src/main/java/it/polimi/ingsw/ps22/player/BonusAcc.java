@@ -138,5 +138,62 @@ public class BonusAcc {
 	public HashMap<String, ResourceAbstract> getSaleVenture() {
 		return saleVenture;
 	}
+	
+	private String accString(){
+		StringBuilder str = new StringBuilder();
+		if(accumulator.size() > 0){
+			str.append("Accumulator: \n");
+			for(String type: accumulator.keySet()){				
+				str.append("  " + accumulator.get(type).getQuantity() + " " + type + "\n");
+			}
+		}
+			
+		return str.toString();
+	}
+	
+	private String saleBuildingString(){
+		StringBuilder str = new StringBuilder();
+		if(saleBuilding.size() > 0){
+			str.append("SaleBuilding: \n");
+			for(String type: saleBuilding.keySet()){				
+				str.append("  " + saleBuilding.get(type).getQuantity() + " " + type + "\n");
+			}
+		}
+			
+		return str.toString();
+	}
+	
+	private String saleCharacterString(){
+		StringBuilder str = new StringBuilder();
+		if(saleCharacter.size() > 0){
+			str.append("SaleCharacter: \n");
+			for(String type: saleCharacter.keySet()){				
+				str.append("  " + saleCharacter.get(type).getQuantity() + " " + type + "\n");
+			}
+		}
+			
+		return str.toString();
+	}
+	
+	private String saleVentureString(){
+		StringBuilder str = new StringBuilder();
+		if(saleVenture.size() > 0){
+				str.append("Sale Venture: \n");
+				for(String type: saleVenture.keySet()){				
+					str.append("  " + saleVenture.get(type).getQuantity() + " " + type + "\n");
+				}
+		}
+			
+		return str.toString();
+	}
+	
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append(accString() + saleBuildingString() + saleCharacterString() + saleVentureString());
+		return str.toString();
+	}
 
 }

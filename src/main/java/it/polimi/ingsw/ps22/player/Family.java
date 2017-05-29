@@ -46,5 +46,16 @@ public class Family {
 	public boolean isPlaced(){
 		return placed;
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		if(!isPlaced()){
+			str.append(color.toString() + " of value " + value + "\n");
+		}
+		
+		return str.toString();
+	}
 
 }

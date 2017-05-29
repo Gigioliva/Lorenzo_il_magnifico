@@ -233,4 +233,89 @@ public class Player {
 		}
 		points.get("VictoryPoint").addResource(new VictoryPoint(res/5));
 	}
+	
+	private String resourcesString(){
+		
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Resources: \n");
+		
+		for(String type: resources.keySet()){
+			str.append("  " + resources.get(type).getQuantity() + " " + type + "\n");
+		}
+		
+		return str.toString();
+	}
+	
+	private String pointsString(){
+		
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Points: \n");
+		
+		for(String type: points.keySet()){
+			str.append("  " + points.get(type).getQuantity() + " " + type + "\n");
+		}
+		
+		return str.toString();
+	}
+	
+	private String cardsString(){
+		
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Cards: \n");
+		
+		for(String type: cards.keySet()){
+			ArrayList<DevelopmentCard> cardsArray = cards.get(type); 
+			str.append("  " + type + "\n");
+			for(DevelopmentCard card: cardsArray)
+				str.append("    " + card.toString() + "\n");
+		}
+		
+		return str.toString();
+	}
+	
+	private String endEffectsString(){
+		
+		StringBuilder str = new StringBuilder();
+		
+		if (endEffects.size() > 0){
+			str.append("You have the following end effects \n");
+			for(EndEffect effect: endEffects){
+				str.append(effect.toString() + "\n");
+			}
+		}
+		
+		return str.toString();
+	}
+	
+	private String familyString() {
+		
+		StringBuilder str = new StringBuilder();
+		
+		if(family.size() == 0)
+			str.append("no more family members \n");
+		
+		else{
+			str.append("You still have the following family memebers: \n");
+			for(Color col: family.keySet()){
+				str.append("  " + family.get(col).toString() + "\n");
+			}
+				
+		}
+			
+		return str.toString();
+	}
+	
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Player " + username + "\n");
+		str.append(resourcesString() + pointsString() + cardsString() + bonusAcc.toString() + specBonus.toString()
+			+ endEffectsString() + familyString() + personalBoard.toString());
+		
+		return str.toString();
+	}
 }
