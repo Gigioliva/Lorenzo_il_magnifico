@@ -51,7 +51,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
 
 public class TerritoryCardSaxParser {
 
-	public static void TerritoryCardParser(String pathname, ArrayList<CardTerritory> parsedData) {
+	public static void TerritoryRead(String pathname, ArrayList<CardTerritory> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();

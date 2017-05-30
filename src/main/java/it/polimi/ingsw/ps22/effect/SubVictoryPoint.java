@@ -31,7 +31,7 @@ public class SubVictoryPoint implements EndEffect {
 	private int weightedSum(Player player){
 		int sum = 0;
 		for(String type: weights.keySet()){
-			sum = sum + player.getSpecificResource(type).getQuantity() / weights.get(type).getQuantity();
+			sum += player.getSpecificResource(type).getQuantity() / weights.get(type).getQuantity();
 		}
 		return sum;
 	}

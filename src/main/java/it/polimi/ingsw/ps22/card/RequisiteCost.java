@@ -44,7 +44,7 @@ public class RequisiteCost{
 		if (requisite.size() > 0){
 			str.append("requisite: \n");
 			for(String type: requisite.keySet()){
-				str.append("  " + requisite.get(type).getQuantity() + " type\n");
+				str.append("  " + requisite.get(type).getQuantity()+ " "+ type+"\n");
 			}
 		}
 		

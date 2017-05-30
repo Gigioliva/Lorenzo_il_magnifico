@@ -100,7 +100,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
 
 public class CharacterCardSaxParser {
 
-	public static void CharacterCardParser(String pathname, ArrayList<CardCharacter> parsedData) {
+	public static void CharacterRead(String pathname, ArrayList<CardCharacter> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();

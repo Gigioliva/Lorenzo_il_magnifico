@@ -58,7 +58,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
 
 public class VentureCardSaxParser {
 
-	public static void VentureCardParser(String pathname, ArrayList<CardVenture> parsedData) {
+	public static void VentureRead(String pathname, ArrayList<CardVenture> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();

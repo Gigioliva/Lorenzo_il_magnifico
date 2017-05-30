@@ -82,7 +82,7 @@ import it.polimi.ingsw.ps22.resource.Wood;
 
 public class BuildingCardSaxParser {
 
-	public static void BuildingCardParser(String pathname, ArrayList<CardBuilding> parsedData) {
+	public static void BuildingRead(String pathname, ArrayList<CardBuilding> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
