@@ -17,9 +17,9 @@ public class ProductionAction extends Action {
 		super(actionValue);
 	}
 	
-	private HashMap<DevelopmentCard,ArrayList<Integer>> getPossibleEffects(Player player, int bonus, HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects){
+	private HashMap<DevelopmentCard,ArrayList<ActionEffect>> getPossibleEffects(Player player, int bonus, HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects){
 		
-		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects = new HashMap<DevelopmentCard,ArrayList<Integer>>();
+		HashMap<DevelopmentCard,ArrayList<ActionEffect>> possibleEffects = new HashMap<DevelopmentCard,ArrayList<ActionEffect>>();
 		ArrayList<DevelopmentCard> buildingCards = new ArrayList<DevelopmentCard>(allEffects.keySet());
 		
 		for(DevelopmentCard card: buildingCards){
@@ -27,11 +27,11 @@ public class ProductionAction extends Action {
 			for(ActionEffect effect: mapEffects.keySet()){
 				if ((effect instanceof ExchangeResource) && effect.canAffordCost(player) && card.getActionValue() <= bonus + super.getActionValue()){
 					if (possibleEffects.containsKey(card)){
-						possibleEffects.get(card).add(mapEffects.get(effect));
+						possibleEffects.get(card).add(effect);
 					}
 					else{
-						possibleEffects.put(card, new ArrayList<Integer>());
-						possibleEffects.get(card).add(mapEffects.get(effect));
+						possibleEffects.put(card, new ArrayList<ActionEffect>());
+						possibleEffects.get(card).add(effect);
 					}
 				}
 				else{
@@ -59,14 +59,14 @@ public class ProductionAction extends Action {
 	@Override
 	public void applyAction(Player player, Board board, int servants) {
 		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects;
-		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects;
+		HashMap<DevelopmentCard,ArrayList<ActionEffect>> possibleEffects;
 		Player clonedPlayer = new Player(player);
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
 		player.getSpecificResource("Servant").subResource(new Servant(servants));
 		allEffects = player.cloneCardswithActionEffect("Building");
 		//do{
 			possibleEffects = getPossibleEffects(clonedPlayer,bonus, allEffects);
-			HashMap<DevelopmentCard,Integer> chosenEffect = new HashMap<DevelopmentCard,Integer>();
+			//HashMap<DevelopmentCard,Integer> chosenEffect = new HashMap<DevelopmentCard,Integer>();
 			//passa a utente lista di carte ed effetti possibili ad ogni carta 
 			//chosenEffect = askEffect...
 			AskEffect mex = new AskEffect(possibleEffects, this, player);
