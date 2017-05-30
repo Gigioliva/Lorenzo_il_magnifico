@@ -29,5 +29,9 @@ public class MessageAsk {
 	public static void setModel(Model mod) {
 		model = mod;
 	}
+	
+	public void applyAsk(){
+		model.notifyAsk(this);
+	}
 
 }

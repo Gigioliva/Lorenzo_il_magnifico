@@ -23,10 +23,6 @@ public class AskCouncilPrivilege extends MessageAsk {
 		return player;
 	}
 	
-	public void applyAsk(){
-		model.notifyAsk(this);
-	}
-	
 	public int getNumChoice(){
 		return numChoice;
 	}

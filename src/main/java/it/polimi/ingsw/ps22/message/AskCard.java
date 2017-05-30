@@ -4,11 +4,14 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.player.Player;
 
 public class AskCard extends MessageAsk{
 	private HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
+	private Player player;
 	
-	public AskCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard){
+	public AskCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard, Player player){
+		this.player=player;
 		this.possibleCard=possibleCard;
 		StringBuilder str=new StringBuilder();
 		for(String el: possibleCard.keySet()){
@@ -23,6 +26,10 @@ public class AskCard extends MessageAsk{
 	
 	public HashMap<String,ArrayList<DevelopmentCard>> getPossibleCard(){
 		return possibleCard;
+	}
+	
+	public Player getPlayer(){
+		return player;
 	}
 
 }

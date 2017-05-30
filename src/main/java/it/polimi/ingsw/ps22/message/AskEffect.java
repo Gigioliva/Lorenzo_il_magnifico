@@ -2,14 +2,21 @@ package it.polimi.ingsw.ps22.message;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import it.polimi.ingsw.ps22.action.ProductionAction;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
+import it.polimi.ingsw.ps22.player.Player;
 
 public class AskEffect extends MessageAsk {
 	private HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
+	private ProductionAction prodAction;
+	private Player player;
 	
-	public AskEffect(HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect){
+	public AskEffect(HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect, ProductionAction prodAction, Player player){
 		this.listEffect=listEffect;
+		this.prodAction=prodAction;
+		this.player=player;
 		StringBuilder str=new StringBuilder();
 		for(DevelopmentCard el: listEffect.keySet()){
 			str.append("Gli effetti della carta " + el.getName() + " sono:\n");
@@ -25,5 +32,14 @@ public class AskEffect extends MessageAsk {
 	public HashMap<DevelopmentCard,ArrayList<ActionEffect>> getListEffect(){
 		return listEffect;
 	}
+
+	public ProductionAction getProdAction() {
+		return prodAction;
+	}
+
+	public Player getPlayer() {
+		return player;
+	}
+	
 
 }

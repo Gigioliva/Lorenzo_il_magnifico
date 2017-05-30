@@ -53,10 +53,6 @@ public class AskCosts extends MessageAsk {
 		return towerSpace;
 	}
 	
-	public void applyAsk(){
-		model.notifyAsk(this);
-	}
-	
 	public int getNumChoice(){
 		return numChoice;
 	}
