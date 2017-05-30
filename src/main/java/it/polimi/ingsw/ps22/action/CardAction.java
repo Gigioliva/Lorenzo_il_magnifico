@@ -115,6 +115,7 @@ public class CardAction extends Action {
 		String chosenType = chosenCard.keySet().iterator().next();
 		player.getDevelopmentCard(chosenType).add(chosenCard.get(chosenType));
 		
+		//applico costo a giocatore
 		applyDiscount(player, chosenType);
 		chosenCard.get(chosenType).applyCostToPlayer(player);
 		deApplyDiscount(player, chosenType);
