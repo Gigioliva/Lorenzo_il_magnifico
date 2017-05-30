@@ -109,5 +109,19 @@ public class TowerZone extends Zone {
 			// aggiungo le carte nei vari piani
 		}
 	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder str = new StringBuilder();
+		
+		for(TowerSpace tower: towerSpaces){
+			tower.toString();
+			str.append("\n\n");
+		}
+		
+		return str.toString();
+		
+	}
 
 }

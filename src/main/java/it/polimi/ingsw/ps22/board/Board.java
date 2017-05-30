@@ -99,4 +99,53 @@ public class Board {
 		return harvestZone.cantPlaceZone(player) && cantPlaceTowerZones(player) 
 				&& prodZone.cantPlaceZone(player) && market.cantPlaceZone(player) && councilPalace.cantPlaceCouncilPalace(player);
 	}
+	
+	private String towersString(){
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Towers: \n");
+		
+		for(String type: towers.keySet()){
+			str.append(towers.get(type).toString() + "\n");
+		}
+		
+		return str.toString();
+	}
+	
+	private String churchString(){
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Church: \n");
+		
+		for(Integer turn: church.keySet()){
+			str.append(church.get(turn).toString() + "\n");
+		}
+		
+		return str.toString();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("BOARD: \n");
+		
+		str.append(towersString());
+		
+		str.append(churchString());
+		
+		str.append(church.get(2).getFaithTrack().toString());
+		
+		str.append(councilPalace.toString());
+		
+		str.append(harvestZone.toString());
+		 
+		str.append(prodZone.toString());
+		
+		str.append(dice.toString());
+		
+		return str.toString();
+		
+		
+	}
 }

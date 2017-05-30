@@ -35,5 +35,16 @@ public class Dice {
 			}
 		}
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Dice: \n");
+		for(Color col: dice.keySet()){
+			str.append("  " + col.toString() + " value: " + dice.get(col) + "\n");
+		}
+		return str.toString();
+		
+	}
 
 }

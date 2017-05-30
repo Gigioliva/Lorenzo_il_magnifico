@@ -67,5 +67,16 @@ public class MarketZone extends Zone {
 		}
 
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Market Zone \n");
+		for(MarketSpace mark: marketSpace){
+			str.append(mark.toString());
+		}
+		
+		return str.toString();
+	}
 
 }

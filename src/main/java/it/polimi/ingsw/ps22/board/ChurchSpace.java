@@ -36,6 +36,11 @@ public class ChurchSpace {
 		}
 		ask.applyAsk();
 	}
+	
+	public FaithPointTrack getFaithTrack(){
+		return faithPointTrack;
+	}
+
 
 	public void excommunication(Player player) {
 		cardExcomm.applyPermanentEffects(player, null);
@@ -49,6 +54,33 @@ public class ChurchSpace {
 	
 	public ArrayList<Player> getWaitPlayer(){ //usato nel messaggio di risposta di askExcomm
 		return waitPlayer;
+	}
+	
+	private String requisiteString(){
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Excommunication requisite: ");
+		
+		str.append(requisite.get(era) + " faith points\n");
+		
+		return str.toString();
+	}
+	
+	@Override
+	public String toString() {
+		
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Era: " + era + "\n");
+		
+		str.append("Card: \n" + "  " + cardExcomm.toString() + "\n");
+		
+		
+		str.append(requisiteString());
+		
+		
+		return str.toString();
+		
 	}
 
 }

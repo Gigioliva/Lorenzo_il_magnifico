@@ -55,5 +55,10 @@ public class TowerVentureZone extends TowerZone {
 		player.getDevelopmentCard("Venture").add(towerSpace.getCard());
 		towerSpace.removeCard();
 	}
-
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder("Venture Tower \n" +  super.toString());
+		return str.toString();
+	}
 }

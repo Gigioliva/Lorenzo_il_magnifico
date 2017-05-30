@@ -14,5 +14,18 @@ public class FaithPointTrack {
 		return track.get(faithPoint);
 	}
 	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Faith Point track: \n");
+		
+		for(Integer pos: track.keySet()){
+			str.append("  Position: " + pos + " ");
+			str.append("Victory Points " + track.get(pos) + "\n");
+		}
+		
+		return str.toString();
+	}
 
 }

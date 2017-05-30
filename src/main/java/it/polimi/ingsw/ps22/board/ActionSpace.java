@@ -78,5 +78,37 @@ public abstract class ActionSpace {
 	public boolean isPlayable(){
 		return playable;
 	}
+	
+	private String familyString() {
+		
+		StringBuilder str = new StringBuilder();
+		
+		if(family.size() == 0)
+			str.append("no family members \n");
+		
+		else{
+			str.append("Family memebers here: \n");
+			for(Family fam: family){
+				str.append("  Player: " + fam.getPlayer().getUsername());
+				str.append("  " + fam.toString() + "\n");
+			}
+				
+		}
+			
+		return str.toString();
+	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		
+		str.append("Action cost: " + actionCost);
+		
+		str.append(familyString() + "\n");
+		
+		str.append(bonus.toString() + "\n");
+		
+		return str.toString();
+	}
 
 }

@@ -39,5 +39,11 @@ public class TowerBuildingZone extends TowerZone {
 		player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());
 		towerSpaces[actionSpace].removeCard();
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder("Building Tower \n" +  super.toString());
+		return str.toString();
+	}
 
 }

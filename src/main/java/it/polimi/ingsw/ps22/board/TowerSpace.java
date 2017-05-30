@@ -26,5 +26,16 @@ public class TowerSpace extends ActionSpace {
 	public int getPlan(){
 		return plan;
 	}
+	
+	@Override
+	public String toString() {
+	
+		StringBuilder str = new StringBuilder(super.toString());
+		
+		str.append("flat: " + plan + "\n");
+		str.append(card.toString() + "\n");
+		
+		return str.toString();
+	}
 
 }

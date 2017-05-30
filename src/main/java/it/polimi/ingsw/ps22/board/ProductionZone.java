@@ -95,5 +95,16 @@ public class ProductionZone extends Zone {
 			productionSpace[1].setNotPlayable();
 		}
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Production Zone \n");
+		for(ProductionSpace prod: productionSpace){
+			str.append(prod.toString());
+		}
+		
+		return str.toString();
+	}
 
 }

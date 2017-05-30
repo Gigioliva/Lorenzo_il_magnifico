@@ -76,4 +76,10 @@ public class CouncilPalaceSpace extends ActionSpace {
 		 }
 		 return true;
 	}
+	
+	@Override
+	public String toString() {
+		
+		return super.toString();
+	}
 }

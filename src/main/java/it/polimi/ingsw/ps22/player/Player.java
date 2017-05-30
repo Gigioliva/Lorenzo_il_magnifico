@@ -300,7 +300,8 @@ public class Player {
 		else{
 			str.append("You still have the following family memebers: \n");
 			for(Color col: family.keySet()){
-				str.append("  " + family.get(col).toString() + "\n");
+				if (!family.get(col).isPlaced())
+					str.append("  " + family.get(col).toString() + "\n");
 			}
 				
 		}

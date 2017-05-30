@@ -39,5 +39,11 @@ public class TowerCharacterZone extends TowerZone {
 		player.getDevelopmentCard("Character").add(towerSpaces[actionSpace].getCard());
 		towerSpaces[actionSpace].removeCard();
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder("Character Tower \n" +  super.toString());
+		return str.toString();
+	}
 
 }

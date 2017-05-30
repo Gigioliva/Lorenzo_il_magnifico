@@ -83,5 +83,16 @@ public class HarvestZone extends Zone {
 		}
 		
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder str = new StringBuilder();
+		str.append("Harvest Zone \n");
+		for(HarvestSpace harv: harvestSpace){
+			str.append(harv.toString());
+		}
+		
+		return str.toString();
+	}
 
 }
