@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.ExchangeResource;
+import it.polimi.ingsw.ps22.message.AskEffect;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Servant;
 
@@ -85,6 +86,7 @@ public class ProductionAction extends Action {
 			Integer chosenEffect = chosenEffects.get(card);
 			card.applyActionEffect(player, board, chosenEffect);
 		}
+		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
 		applyNoExchangeEffect(player, board, bonus);
 		player.getPersonalBoard().applyPersonalBoardBonus("Production", player, board);
 	}
