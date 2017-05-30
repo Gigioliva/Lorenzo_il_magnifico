@@ -8,7 +8,7 @@ import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.ExchangeResource;
 import it.polimi.ingsw.ps22.player.Player;
-import it.polimi.ingsw.ps22.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.resource.Servant;
 
 public class ProductionAction extends Action {
 
@@ -56,23 +56,35 @@ public class ProductionAction extends Action {
 	}
 
 	@Override
-	public void applyAction(Player player, Board board) {
+	public void applyAction(Player player, Board board, int servants) {
 		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects;
 		HashMap<DevelopmentCard,ArrayList<Integer>> possibleEffects;
 		Player clonedPlayer = new Player(player);
-		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
+		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
+		player.getSpecificResource("Servant").subResource(new Servant(servants));
 		allEffects = player.cloneCardswithActionEffect("Building");
-		do{
+		//do{
 			possibleEffects = getPossibleEffects(clonedPlayer,bonus, allEffects);
 			HashMap<DevelopmentCard,Integer> chosenEffect = new HashMap<DevelopmentCard,Integer>();
 			//passa a utente lista di carte ed effetti possibili ad ogni carta 
 			//chosenEffect = askEffect...
-			DevelopmentCard card = chosenEffect.keySet().iterator().next();
-			card.applyActionEffect(player, board, chosenEffect.get(card));
-			allEffects.remove(card);
+			AskEffect mex = new AskEffect(possibleEffects, this, player);
+			mex.applyAsk();
+			//DevelopmentCard card = chosenEffect.keySet().iterator().next();
+			//card.applyActionEffect(player, board, chosenEffect.get(card));
+			//allEffects.remove(card);
 			
-		}while(!possibleEffects.isEmpty());
+		//}while(!possibleEffects.isEmpty());
 		
+			//applyNoExchangeEffect(player, board, bonus);
+			//player.getPersonalBoard().applyPersonalBoardBonus("Production", player, board);
+	}
+	
+	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects, Board board, Player player){
+		for(DevelopmentCard card: chosenEffects.keySet()){
+			Integer chosenEffect = chosenEffects.get(card);
+			card.applyActionEffect(player, board, chosenEffect);
+		}
 		applyNoExchangeEffect(player, board, bonus);
 		player.getPersonalBoard().applyPersonalBoardBonus("Production", player, board);
 	}

@@ -5,6 +5,7 @@ import it.polimi.ingsw.ps22.player.Player;
 
 public abstract class Action {
 	private int actionValue;
+	protected int servants;
 
 	public Action(int actionValue) {
 		this.actionValue = actionValue;
@@ -16,6 +17,10 @@ public abstract class Action {
 	
 	public void applyAction(Player player, Board board) {
 
+	}
+	
+	public void applyAction(Player player, Board board, int servants){
+		
 	}
 
 	public void applyAction(Player player) {
