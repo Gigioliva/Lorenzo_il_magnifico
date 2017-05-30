@@ -1,8 +1,11 @@
 package it.polimi.ingsw.ps22.board;
 
+import java.util.HashMap;
+
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class TowerBuildingZone extends TowerZone {
 
@@ -36,12 +39,17 @@ public class TowerBuildingZone extends TowerZone {
 		}
 	}
 	
-	public void takeCard(int actionSpace, Family family){
-		Player player = family.getPlayer();
+	public void takeCard(int actionSpace, Player player){
 		towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
 		towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 		player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());
 		towerSpaces[actionSpace].removeCard();
+	}
+	
+	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount){
+		applyDiscount(player, "Building", discount);
+		takeCard(actionSpace, player);
+		deApplyDiscount(player, "Building", discount);
 	}
 	
 	@Override

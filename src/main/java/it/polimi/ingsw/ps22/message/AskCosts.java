@@ -10,22 +10,23 @@ import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class AskCosts extends MessageAsk {
 	private int numChoice;
-	//salvo i valori per sospendere il model finchè il giocatore non risponde
+	// salvo i valori per sospendere il model finchè il giocatore non risponde
 	private ArrayList<RequisiteCost> possibleCost;
+	private HashMap<String, ResourceAbstract> discount;
 	private Player player;
 	private TowerSpace towerSpace;
-	
-	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace){
+
+	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		super();
-		this.possibleCost=possibleCost;
-		this.player=player;
-		this.towerSpace=towerSpace;
+		this.possibleCost = possibleCost;
+		this.player = player;
+		this.towerSpace = towerSpace;
 		ArrayList<HashMap<String, ResourceAbstract>> cost = new ArrayList<HashMap<String, ResourceAbstract>>();
 		for (RequisiteCost el : possibleCost) {
 			cost.add(el.getCost());
 		}
-		numChoice=cost.size();
-		StringBuilder str=new StringBuilder();
+		numChoice = cost.size();
+		StringBuilder str = new StringBuilder();
 		str.append("Quale costo scegli? \n");
 		for (HashMap<String, ResourceAbstract> x : cost) {
 			for (String el : x.keySet()) {
@@ -35,6 +36,12 @@ public class AskCosts extends MessageAsk {
 			str.append("\n");
 		}
 		setString(str.toString());
+	}
+
+	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace,
+			HashMap<String, ResourceAbstract> discount) {
+		this(possibleCost, player, towerSpace);
+		this.discount = discount;
 	}
 
 	public int getIdAsk() {
@@ -52,9 +59,16 @@ public class AskCosts extends MessageAsk {
 	public TowerSpace getTowerSpace() {
 		return towerSpace;
 	}
-	
-	public int getNumChoice(){
+
+	public int getNumChoice() {
 		return numChoice;
+	}
+
+	public HashMap<String, ResourceAbstract> getDiscount() {
+		if (discount != null)
+			return discount;
+		else
+			return new HashMap<String, ResourceAbstract>();
 	}
 
 }

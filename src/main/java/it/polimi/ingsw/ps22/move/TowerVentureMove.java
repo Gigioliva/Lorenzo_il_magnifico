@@ -19,7 +19,7 @@ public class TowerVentureMove extends TowerMove {
 			Family family = player.getFamily(color);
 			if (model.getBoard().getTower("Venture").Control(numServant, space, family)) {
 				model.getBoard().getTower("Venture").placeFamily(numServant, space, family);
-				model.getBoard().getTower("Venture").takeCard(space, family);
+				model.getBoard().getTower("Venture").takeCard(space, player);
 				model.notifyModel();
 			} else {
 				ErrorMove error = new ErrorMove();

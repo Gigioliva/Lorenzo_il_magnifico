@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps22.board;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import it.polimi.ingsw.ps22.card.RequisiteCost;
 import it.polimi.ingsw.ps22.message.AskCosts;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class TowerVentureZone extends TowerZone {
 
@@ -40,14 +43,24 @@ public class TowerVentureZone extends TowerZone {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 		}
 	}
-	
-	public void takeCard(int actionSpace, Family family){
-		Player player = family.getPlayer();
+
+	public void takeCard(int actionSpace, Player player) {
 		ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
 		if (possibleCost.size() == 1) {
 			payCard(0, possibleCost, player, towerSpaces[actionSpace]);
 		} else {
 			AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace]);
+			ask.applyAsk();
+		}
+	}
+
+	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount) {
+		applyDiscount(player, "Venture", discount);
+		ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
+		if (possibleCost.size() == 1) {
+			payCard(0, possibleCost, player, towerSpaces[actionSpace], discount);
+		} else {
+			AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace], discount);
 			ask.applyAsk();
 		}
 	}
@@ -59,10 +72,16 @@ public class TowerVentureZone extends TowerZone {
 		player.getDevelopmentCard("Venture").add(towerSpace.getCard());
 		towerSpace.removeCard();
 	}
-	
+
+	public void payCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace,
+			HashMap<String, ResourceAbstract> discount) {
+		payCard(choice, possibleCost, player, towerSpace);
+		deApplyDiscount(player, "Venture", discount);
+	}
+
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("Venture Tower \n" +  super.toString());
+		StringBuilder str = new StringBuilder("Venture Tower \n" + super.toString());
 		return str.toString();
 	}
 }

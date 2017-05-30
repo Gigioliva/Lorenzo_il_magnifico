@@ -19,13 +19,11 @@ public class CardAction extends Action {
 														// riaggiungerlo dopo
 														// averla presa o se non
 														// può prenderla
-	private int flat;
 
 	public CardAction(int actionValue) {
 		super(actionValue);
 		types = new ArrayList<String>();
 		discount = new HashMap<String, ResourceAbstract>();
-		flat = 0;
 	}
 
 	public void addType(String type) {
@@ -78,27 +76,8 @@ public class CardAction extends Action {
 	@Override
 	public void applyAction(Player player, Board board, int servants) {
 		HashMap<String,ArrayList<DevelopmentCard>> possibleCards = getPossibleCards(player, board, servants);
-		//String chosenType = "";
-		//DevelopmentCard chosenCard = null;
 		AskCard mex = new AskCard(possibleCards, player);
 		mex.applyAsk();
-		HashMap<String, HashMap<DevelopmentCard,Integer>> chosen = null;
-		//notifica all'utente quale carta vuol prendere
-		//player.getDevelopmentCard(chosenType).add(chosenCard);
-		for(String chosenType: chosen.keySet()){
-			for(DevelopmentCard chosenCard: chosen.get(chosenType).keySet()){
-				Integer index = chosen.get(chosenType).get(chosenCard);
-				player.getDevelopmentCard(chosenType).add(chosenCard);
-				TowerSpace space = board.getTower(chosenType).getTowerSpaces()[index];
-				space.removeCard();
-			}
-		}
-		/*
-		board.getTower(chosenType).getTowerSpace()[chosen.]
-		chosenCard.applyImmediateEffects(player, board);
-		chosenCard.applyPermanentEffects(player, board);
-		*/
-		
 	}
 	
 	private int getRightFlat(DevelopmentCard chosenCard,String chosenType, Board board){
@@ -112,19 +91,12 @@ public class CardAction extends Action {
 	}
 	
 	public void applyAnswer(HashMap<String, DevelopmentCard> chosenCard, Player player, Board board){
+		/*
+		 * quando risponde trovo il piano relativo alla carta e applica il prendi carta della torre
+		 */
 		String chosenType = chosenCard.keySet().iterator().next();
-		player.getDevelopmentCard(chosenType).add(chosenCard.get(chosenType));
-		
-		//applico costo a giocatore
-		applyDiscount(player, chosenType);
-		chosenCard.get(chosenType).applyCostToPlayer(player);
-		deApplyDiscount(player, chosenType);
-		
-		//rimuovo carta da board
 		int flat = getRightFlat(chosenCard.get(chosenType), chosenType, board);
-		board.getTower(chosenType).getTowerSpaces()[flat].removeCard();
-		
-		
+		board.getTower(chosenType).takeCard(flat, player, discount);
 	}
 	
 	@Override

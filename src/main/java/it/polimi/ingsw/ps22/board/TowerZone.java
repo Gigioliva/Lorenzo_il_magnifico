@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.player.Family;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Coin;
+import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class TowerZone extends Zone {
 
@@ -100,7 +101,14 @@ public class TowerZone extends Zone {
 	public void placeFamily(int numServant, int actionSpace, Family family) {
 	}
 	
-	public void takeCard(int actionSpace, Family family){
+	public void takeCard(int actionSpace, Player player){
+		
+	}
+	
+	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount){
+		if(discount==null || discount.isEmpty()){
+			takeCard(actionSpace,player);
+		}
 	}
 
 	@Override
@@ -125,6 +133,15 @@ public class TowerZone extends Zone {
 		
 		return str.toString();
 		
+	}
+	
+	protected void deApplyDiscount(Player player, String cardType, HashMap<String, ResourceAbstract> discount){
+		player.getBonusAcc().subSales(discount, cardType);
+	}
+	
+	
+	protected void applyDiscount(Player player, String cardType, HashMap<String, ResourceAbstract> discount){
+		player.getBonusAcc().addSales(discount, cardType);
 	}
 
 }
