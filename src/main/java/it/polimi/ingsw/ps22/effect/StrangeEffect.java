@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps22.effect;
 
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class StrangeEffect implements PermanentEffect{
@@ -12,7 +11,7 @@ public class StrangeEffect implements PermanentEffect{
 	}
 
 	@Override
-	public void performEffect(Player player, Board board) {
+	public void performEffect(Player player) {
 		player.getSpecBonus().setSpecBonus(type);
 	}
 	

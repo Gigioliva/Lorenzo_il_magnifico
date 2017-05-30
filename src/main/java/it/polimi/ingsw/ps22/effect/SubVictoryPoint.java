@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps22.effect;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.card.RequisiteCost;
 import it.polimi.ingsw.ps22.player.Player;
@@ -79,7 +77,7 @@ public class SubVictoryPoint implements EndEffect {
 	}
 	
 	@Override
-	public void performEffect(Player player, Board board) {
+	public void performEffect(Player player) {
 		if (player.isCard(loc)){
 			VictoryPoint subPoints = new VictoryPoint(-weightedSum(player,loc));
 			player.getSpecificResource("VictoryPoint").addResource(subPoints);

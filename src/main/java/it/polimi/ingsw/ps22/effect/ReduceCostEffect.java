@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps22.effect;
 
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.Resource;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
@@ -23,7 +21,7 @@ public class ReduceCostEffect implements PermanentEffect {
 	 }
 	 
 	@Override
-	public void performEffect(Player player, Board board) {
+	public void performEffect(Player player) {
 		player.getBonusAcc().addSales(bonus,cardType);
 	}
 	

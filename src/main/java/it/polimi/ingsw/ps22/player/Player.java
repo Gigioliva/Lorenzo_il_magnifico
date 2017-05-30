@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps22.player;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.board.Dice;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
@@ -168,9 +166,9 @@ public class Player {
 		this.specBonus.setSpecBonus(type);
 	}
 	
-	public void applyEndEffects(Board board){
+	public void applyEndEffects(){
 		for(EndEffect effect: endEffects){
-			effect.performEffect(this, board);
+			effect.performEffect(this);
 		}
 	}
 	

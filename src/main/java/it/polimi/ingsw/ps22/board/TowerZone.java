@@ -96,8 +96,11 @@ public class TowerZone extends Zone {
 		 return true;
 	}
 	
-	public void applyMove(int numServants, int actionSpace, Family family){
-		
+	
+	public void placeFamily(int numServant, int actionSpace, Family family) {
+	}
+	
+	public void takeCard(int actionSpace, Family family){
 	}
 
 	@Override

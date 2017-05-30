@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps22.card;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.effect.GainResource;
 import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.player.Player;
@@ -38,15 +38,18 @@ public class CardCharacter extends DevelopmentCard {
 		this.permanentEffects.add(effect);
 	}
 
-	public void applyImmediateEffects(Player player, Board board) {
+	public void applyImmediateEffects(Player player) {
 		for (ImmediateEffect el : immediateEffects) {
-			el.performEffect(player, board);
+			el.performEffect(player);
+			if (player.getSpecBonus().returnBool("DoubleGain") && el instanceof GainResource) {
+				el.performEffect(player);
+			}
 		}
 	}
 
-	public void applyPermanentEffects(Player player, Board board) {
+	public void applyPermanentEffects(Player player) {
 		for (PermanentEffect el : permanentEffects) {
-			el.performEffect(player, board);
+			el.performEffect(player);
 		}
 	}
 

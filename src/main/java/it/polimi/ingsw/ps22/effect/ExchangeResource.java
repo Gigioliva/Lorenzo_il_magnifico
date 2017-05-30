@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps22.effect;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
@@ -64,7 +62,7 @@ public class ExchangeResource implements ActionEffect{
 	}
 	
 	@Override
-	public void performEffect(Player player, Board board) {
+	public void performEffect(Player player) {
 		if(canAffordCost(player)){
 			subCostFromPlayer(player);
 			addGainToPlayer(player);

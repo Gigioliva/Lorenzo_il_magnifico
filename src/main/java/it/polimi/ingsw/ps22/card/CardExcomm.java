@@ -26,9 +26,9 @@ public class CardExcomm extends Card {
 		this.endEffects.add(effect);
 	}
 
-	public void applyPermanentEffects(Player player, Board board) {
+	public void applyPermanentEffects(Player player) {
 		for (PermanentEffect el : permanentEffects) {
-			el.performEffect(player, board);
+			el.performEffect(player);
 		}
 	}
 

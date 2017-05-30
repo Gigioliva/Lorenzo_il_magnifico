@@ -28,7 +28,7 @@ public class TowerVentureZone extends TowerZone {
 		return false;
 	}
 
-	public void applyMove(int numServant, int actionSpace, Family family) {
+	public void placeFamily(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		towerSpaces[actionSpace].addFamily(family);
@@ -39,16 +39,20 @@ public class TowerVentureZone extends TowerZone {
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 		}
+	}
+	
+	public void takeCard(int actionSpace, Family family){
+		Player player = family.getPlayer();
 		ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
 		if (possibleCost.size() == 1) {
-			takeCard(0, possibleCost, player, towerSpaces[actionSpace]);
+			payCard(0, possibleCost, player, towerSpaces[actionSpace]);
 		} else {
 			AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace]);
 			ask.applyAsk();
 		}
 	}
 
-	public void takeCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
+	public void payCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		towerSpace.getCard().applyCostToPlayer(player, possibleCost.get(choice));
 		towerSpace.getCard().applyImmediateEffects(player, board);
 		towerSpace.getCard().loadEndEffects(player, board);

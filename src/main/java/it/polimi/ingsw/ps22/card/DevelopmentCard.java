@@ -74,7 +74,7 @@ public abstract class DevelopmentCard extends Card {
 		// Accedi a player e caricali nel EndEffect Arraylist
 	}
 
-	public void applyActionEffect(Player player, Board board, int number) {
+	public void applyActionEffect(Player player, int number) {
 
 	}
 	

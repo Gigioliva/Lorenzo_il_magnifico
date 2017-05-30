@@ -53,7 +53,7 @@ public abstract class ActionSpace {
 	}
 
 	public void applyBonus(Player player) {
-		bonus.performEffect(player, null);
+		bonus.performEffect(player);
 	}
 	
 	public void deapplyBonus(Player player) {

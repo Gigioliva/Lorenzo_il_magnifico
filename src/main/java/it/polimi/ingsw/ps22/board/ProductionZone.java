@@ -52,7 +52,7 @@ public class ProductionZone extends Zone {
 			actionValue = actionValue - 3;
 		}
 		ProductionAction productionAction = new ProductionAction(actionValue);
-		productionAction.applyAction(player);
+		productionAction.applyAction(player, 0);
 	}
 
 	private boolean checkAllSpace(Player player) {

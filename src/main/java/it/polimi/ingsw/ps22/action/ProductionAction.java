@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps22.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.ExchangeResource;
@@ -45,19 +43,19 @@ public class ProductionAction extends Action {
 		return possibleEffects;
 	}
 	
-	private void applyNoExchangeEffect(Player player, Board board, int bonus ){
+	private void applyNoExchangeEffect(Player player, int bonus ){
 		ArrayList<DevelopmentCard> buildingCards = player.getDevelopmentCard("Building");
 		for(DevelopmentCard card: buildingCards){
 			ArrayList<ActionEffect> effects = card.getActionEffects();
 			for(int i=0; i<effects.size(); i++){
 				if(!(effects.get(i) instanceof ExchangeResource) && card.getActionValue() <= super.getActionValue() + bonus)
-					effects.get(i).performEffect(player, board);
+					effects.get(i).performEffect(player);
 			}
 		}
 	}
 
 	@Override
-	public void applyAction(Player player, Board board, int servants) {
+	public void applyAction(Player player, int servants) {
 		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> allEffects;
 		HashMap<DevelopmentCard,ArrayList<ActionEffect>> possibleEffects;
 		Player clonedPlayer = new Player(player);
@@ -81,14 +79,14 @@ public class ProductionAction extends Action {
 			//player.getPersonalBoard().applyPersonalBoardBonus("Production", player, board);
 	}
 	
-	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects, Board board, Player player){
+	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects,Player player){
 		for(DevelopmentCard card: chosenEffects.keySet()){
 			Integer chosenEffect = chosenEffects.get(card);
-			card.applyActionEffect(player, board, chosenEffect);
+			card.applyActionEffect(player, chosenEffect);
 		}
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
-		applyNoExchangeEffect(player, board, bonus);
-		player.getPersonalBoard().applyPersonalBoardBonus("Production", player, board);
+		applyNoExchangeEffect(player, bonus);
+		player.getPersonalBoard().applyPersonalBoardBonus("Production", player);
 	}
 	
 

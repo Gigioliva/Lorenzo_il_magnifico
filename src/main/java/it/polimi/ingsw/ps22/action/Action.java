@@ -11,20 +11,16 @@ public abstract class Action {
 		this.actionValue = actionValue;
 	}
 
-	public int getActionValue(){
+	public int getActionValue() {
 		return actionValue;
 	}
-	
-	public void applyAction(Player player, Board board) {
 
-	}
-	
-	public void applyAction(Player player, Board board, int servants){
+	public void applyAction(Player player, int servants){
 		
 	}
 
-	public void applyAction(Player player) {
-
+	public void applyAction(Player player, Board board, int servants){
+		
 	}
 
 }

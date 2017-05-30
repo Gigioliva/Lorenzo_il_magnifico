@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps22.action;
 
 import java.util.ArrayList;
-
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.player.Player;
@@ -16,7 +14,7 @@ public class HarvestAction extends Action {
 
 	//suppongo che gli effetti delle carte territorio vengano eseguiti tutti, in quanto in genere sono solo di tipo GainResource
 	@Override
-	public void applyAction(Player player, Board board, int servants) {
+	public void applyAction(Player player, int servants) {
 		ArrayList<DevelopmentCard> cards = player.getDevelopmentCard("Territory");
 		int bonus = player.getBonusAcc().getBonus("IncrementHarvest").getQuantity() + servants;
 		player.getSpecificResource("Servants").subResource(new Servant(servants));
@@ -24,11 +22,11 @@ public class HarvestAction extends Action {
 			ArrayList<ActionEffect> effects = card.getActionEffects();
 			if(card.getActionValue() <= super.getActionValue() + bonus){
 				for(ActionEffect effect: effects){
-						effect.performEffect(player, board);
+						effect.performEffect(player);
 				}
 			}
 		}
-		player.getPersonalBoard().applyPersonalBoardBonus("Harvest", player, board);
+		player.getPersonalBoard().applyPersonalBoardBonus("Harvest", player);
 	}
 	
 

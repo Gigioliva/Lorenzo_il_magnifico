@@ -40,7 +40,7 @@ public class ChurchSpace {
 
 
 	public void excommunication(Player player) {
-		cardExcomm.applyPermanentEffects(player, null);
+		cardExcomm.applyPermanentEffects(player);
 	}
 
 	public void notExcommunication(Player player) {

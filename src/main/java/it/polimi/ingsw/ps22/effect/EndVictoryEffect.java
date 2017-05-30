@@ -1,5 +1,5 @@
 package it.polimi.ingsw.ps22.effect;
-import it.polimi.ingsw.ps22.board.Board;
+
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.VictoryPoint;
 
@@ -11,7 +11,7 @@ public class EndVictoryEffect implements EndEffect {
 	}
 
 	@Override
-	public void performEffect(Player player, Board board) {
+	public void performEffect(Player player) {
 		player.addPoints("VictoryPoint", points);
 	}
 	

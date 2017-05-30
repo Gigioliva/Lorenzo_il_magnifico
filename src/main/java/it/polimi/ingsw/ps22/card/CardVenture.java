@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.effect.EndEffect;
+import it.polimi.ingsw.ps22.effect.GainResource;
 import it.polimi.ingsw.ps22.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
@@ -40,9 +41,12 @@ public class CardVenture extends DevelopmentCard {
 		this.endEffects.add(effect);
 	}
 	
-	public void applyImmediateEffects(Player player, Board board) {
+	public void applyImmediateEffects(Player player) {
 		for (ImmediateEffect el : immediateEffects) {
-			el.performEffect(player, board);
+			el.performEffect(player);
+			if (player.getSpecBonus().returnBool("DoubleGain") && el instanceof GainResource) {
+				el.performEffect(player);
+			}
 		}
 	}
 	

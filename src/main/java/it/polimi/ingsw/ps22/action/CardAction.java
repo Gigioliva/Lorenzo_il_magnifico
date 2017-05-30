@@ -80,7 +80,7 @@ public class CardAction extends Action {
 		HashMap<String,ArrayList<DevelopmentCard>> possibleCards = getPossibleCards(player, board, servants);
 		//String chosenType = "";
 		//DevelopmentCard chosenCard = null;
-		AskCard mex = new AskCard(possibleCards);
+		AskCard mex = new AskCard(possibleCards, player);
 		mex.applyAsk();
 		HashMap<String, HashMap<DevelopmentCard,Integer>> chosen = null;
 		//notifica all'utente quale carta vuol prendere

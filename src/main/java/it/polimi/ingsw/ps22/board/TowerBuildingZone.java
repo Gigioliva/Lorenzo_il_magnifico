@@ -23,7 +23,7 @@ public class TowerBuildingZone extends TowerZone {
 		return false;
 	}
 	
-	public void applyMove(int numServant, int actionSpace, Family family) {
+	public void placeFamily(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		towerSpaces[actionSpace].addFamily(family);
@@ -34,6 +34,10 @@ public class TowerBuildingZone extends TowerZone {
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 		}
+	}
+	
+	public void takeCard(int actionSpace, Family family){
+		Player player = family.getPlayer();
 		towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
 		towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
 		player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());

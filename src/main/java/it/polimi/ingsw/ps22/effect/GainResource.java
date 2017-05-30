@@ -1,11 +1,7 @@
 package it.polimi.ingsw.ps22.effect;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.board.Board;
-import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.message.AskCouncilPrivilege;
-import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
@@ -25,7 +21,7 @@ public class GainResource implements ActionEffect,ImmediateEffect {
 	}
 	
 	@Override
-	public void performEffect(Player player, Board board) {
+	public void performEffect(Player player) {
 		int cont = 0;
 		for(String type: gain.keySet()){
 			if(type.equals("CouncilPrivilege")){

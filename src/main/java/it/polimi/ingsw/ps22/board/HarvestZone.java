@@ -39,7 +39,7 @@ public class HarvestZone extends Zone {
 			actionValue=actionValue-3;
 		} 
 		HarvestAction harvestAction = new HarvestAction(actionValue);
-		harvestAction.applyAction(player);
+		harvestAction.applyAction(player, 0);
 	}
 
 	private boolean checkAllSpace(Player player) {

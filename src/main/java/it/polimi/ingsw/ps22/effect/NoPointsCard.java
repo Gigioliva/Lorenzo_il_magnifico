@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps22.effect;
 
-import it.polimi.ingsw.ps22.board.Board;
 import it.polimi.ingsw.ps22.player.Player;
 
 public class NoPointsCard implements EndEffect {
@@ -14,7 +13,7 @@ public class NoPointsCard implements EndEffect {
 
 	//forse rimuovere non è la cosa migliore da fare
 	@Override
-	public void performEffect(Player player, Board board) { //cancella le carte cardType
+	public void performEffect(Player player) { //cancella le carte cardType
 		for(int i=0; i<player.getDevelopmentCard(cardType).size(); i++)
 			player.getDevelopmentCard(cardType).remove(i);
 	}

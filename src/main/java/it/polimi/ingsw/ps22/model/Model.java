@@ -161,7 +161,7 @@ public class Model extends Observable {
 	private void EndGame() {
 		for (String el : players.keySet()) { // occhio a quelli che devono
 												// essere eseguiti per primi
-			players.get(el).applyEndEffects(board);
+			players.get(el).applyEndEffects();
 		}
 		winMilitaryPoint();
 		for (String el : players.keySet()) {

@@ -18,7 +18,8 @@ public class TowerTerritoryMove extends TowerMove {
 			Player player = model.getPlayers().get(username);
 			Family family = player.getFamily(color);
 			if (model.getBoard().getTower("Territory").Control(numServant, space, family)) {
-				model.getBoard().getTower("Territory").applyMove(numServant, space, family);
+				model.getBoard().getTower("Territory").placeFamily(numServant, space, family);
+				model.getBoard().getTower("Territory").takeCard(space, family);
 				model.notifyModel();
 			} else {
 				ErrorMove error = new ErrorMove();
