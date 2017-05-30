@@ -39,7 +39,7 @@ public class View extends Observable implements Observer {
 			}
 		}
 		if(o instanceof Model && arg instanceof AskExcomm){
-			if(((AskExcomm)arg).getPlayers().contains(username)){
+			if(((AskExcomm)arg).getPlayer().getUsername().equals(username)){
 				//mando al client / forse salvo in memoria il messaggio mandato
 			}
 		}

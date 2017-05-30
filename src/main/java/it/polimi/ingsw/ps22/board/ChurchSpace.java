@@ -11,7 +11,6 @@ public class ChurchSpace {
 	private CardExcomm cardExcomm;
 	private static FaithPointTrack faithPointTrack;
 	private HashMap<Integer, Integer> requisite;
-	private ArrayList<Player> waitPlayer; //se è vuoto chiamo la notifyModel
 
 	public ChurchSpace(int era) {
 		this.era = era;
@@ -24,17 +23,15 @@ public class ChurchSpace {
 	}
 
 	public void applyExcomm(ArrayList<Player> players) {
-		AskExcomm ask = new AskExcomm();
-		waitPlayer=new ArrayList<Player>();
 		for (Player el : players) {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {
 				excommunication(el);
 			} else {
-				waitPlayer.add(el);
+				AskExcomm ask = new AskExcomm();
 				ask.addPlayer(el);
+				ask.applyAsk();
 			}
 		}
-		ask.applyAsk();
 	}
 	
 	public FaithPointTrack getFaithTrack(){
@@ -50,10 +47,6 @@ public class ChurchSpace {
 		player.getSpecificResource("VictoryPoint")
 				.addResource(faithPointTrack.getVictoryBonus(player.getSpecificResource("FaithPoint").getQuantity()));
 		player.getSpecificResource("FaithPoint").subResource(player.getSpecificResource("FaithPoint"));
-	}
-	
-	public ArrayList<Player> getWaitPlayer(){ //usato nel messaggio di risposta di askExcomm
-		return waitPlayer;
 	}
 	
 	private String requisiteString(){
