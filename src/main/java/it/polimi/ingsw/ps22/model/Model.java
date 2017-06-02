@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import it.polimi.ingsw.ps22.board.Board;
-import it.polimi.ingsw.ps22.controller.Ask;
 import it.polimi.ingsw.ps22.message.GenericMessage;
 import it.polimi.ingsw.ps22.message.MessageAsk;
 import it.polimi.ingsw.ps22.player.Family;
@@ -21,12 +20,10 @@ public class Model extends Observable {
 	private String playerGame;
 	private boolean canFamilyMove;
 	private ArrayList<MessageAsk> waitAnswer; //quando arriva la risposta la risetto a false
-	private static Ask ask;
 
 	public Model() {
 		board = new Board();
 		this.players = new HashMap<String, Player>();
-		ask = new Ask();
 		MessageAsk.setModel(this);
 		this.waitAnswer=new ArrayList<MessageAsk>();
 	}
@@ -211,10 +208,6 @@ public class Model extends Observable {
 			}
 		}
 		return player;
-	}
-
-	public static Ask getAsk() {
-		return ask;
 	}
 
 	public void notifyAsk(MessageAsk ask) {

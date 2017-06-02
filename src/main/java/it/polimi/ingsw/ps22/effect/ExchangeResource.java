@@ -1,8 +1,8 @@
 package it.polimi.ingsw.ps22.effect;
+
 import java.util.ArrayList;
 import java.util.HashMap;
-import it.polimi.ingsw.ps22.controller.Ask;
-import it.polimi.ingsw.ps22.model.Model;
+import it.polimi.ingsw.ps22.message.AskCouncilPrivilege;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
@@ -54,10 +54,12 @@ public class ExchangeResource implements ActionEffect{
 				player.getSpecificResource(type).addResource(gain.get(type));
 			}
 		}
-		player.applyMalusResource(new ArrayList<String>(gain.keySet()));
-		if(cont > 0){
-			Ask ask = Model.getAsk();
-			ask.askPrivilegeChange(cont);
+		if(cont == 0){
+			player.applyMalusResource(new ArrayList<String>(gain.keySet()));
+		}
+		if(cont>0){
+			AskCouncilPrivilege mex = new AskCouncilPrivilege(cont, player);
+			mex.applyAsk();
 		}
 	}
 	

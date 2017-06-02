@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.player.Player;
+import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskCard extends MessageAsk{
 	private HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
@@ -30,6 +31,10 @@ public class AskCard extends MessageAsk{
 	
 	public Player getPlayer(){
 		return player;
+	}
+	
+	public GenericMessage accept(Visitor visitor){
+		return visitor.visit(this);
 	}
 
 }

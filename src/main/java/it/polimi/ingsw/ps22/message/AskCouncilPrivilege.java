@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.message;
 
 import it.polimi.ingsw.ps22.player.Player;
+import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskCouncilPrivilege extends MessageAsk {
 	private int numChoice;
@@ -25,6 +26,10 @@ public class AskCouncilPrivilege extends MessageAsk {
 	
 	public int getNumChoice(){
 		return numChoice;
+	}
+	
+	public GenericMessage accept(Visitor visitor){
+		return visitor.visit(this);
 	}
 	
 }

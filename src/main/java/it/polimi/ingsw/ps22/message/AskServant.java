@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.message;
 
 import it.polimi.ingsw.ps22.action.Action;
+import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskServant extends MessageAsk {
 	private Action Action;
@@ -16,6 +17,10 @@ public class AskServant extends MessageAsk {
 	
 	public void applyAsk(){
 		model.notifyAsk(this);
+	}
+	
+	public GenericMessage accept(Visitor visitor){
+		return visitor.visit(this);
 	}
 
 }

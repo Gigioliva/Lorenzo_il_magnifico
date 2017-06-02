@@ -2,10 +2,9 @@ package it.polimi.ingsw.ps22.message;
 
 import it.polimi.ingsw.ps22.model.Model;
 
-public class MessageAsk {
+public class MessageAsk extends GenericMessage {
 	private static int id;
 	protected int id_ask;
-	private String ask;
 
 	protected static Model model;
 
@@ -17,13 +16,10 @@ public class MessageAsk {
 		}
 		id = id_ask;
 	}
-
-	public String getString() {
-		return ask;
-	}
-
-	public void setString(String str) {
-		this.ask = str;
+	
+	public MessageAsk(String ask, int id){
+		setString(ask);
+		id_ask=id;
 	}
 
 	public static void setModel(Model mod) {
@@ -32,6 +28,10 @@ public class MessageAsk {
 	
 	public void applyAsk(){
 		model.notifyAsk(this);
+	}
+	
+	public int getId(){
+		return id_ask;
 	}
 
 }

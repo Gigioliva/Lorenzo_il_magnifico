@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.action.ProductionAction;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.player.Player;
+import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskEffect extends MessageAsk {
 	private HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
@@ -39,6 +40,10 @@ public class AskEffect extends MessageAsk {
 
 	public Player getPlayer() {
 		return player;
+	}
+	
+	public GenericMessage accept(Visitor visitor){
+		return visitor.visit(this);
 	}
 	
 

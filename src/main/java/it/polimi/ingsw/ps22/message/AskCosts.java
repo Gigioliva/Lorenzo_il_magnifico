@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.board.TowerSpace;
 import it.polimi.ingsw.ps22.card.RequisiteCost;
 import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskCosts extends MessageAsk {
 	private int numChoice;
@@ -69,6 +70,10 @@ public class AskCosts extends MessageAsk {
 			return discount;
 		else
 			return new HashMap<String, ResourceAbstract>();
+	}
+	
+	public GenericMessage accept(Visitor visitor){
+		return visitor.visit(this);
 	}
 
 }
