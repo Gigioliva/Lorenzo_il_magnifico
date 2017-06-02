@@ -5,7 +5,7 @@ import java.util.HashMap;
 
 public class CouncilPrivilege extends ResourceAbstract {
 	
-	private HashMap<Integer, HashMap<String,ResourceAbstract>> possibleExchanges;
+	private static HashMap<Integer, HashMap<String,ResourceAbstract>> possibleExchanges;
 	
 	public CouncilPrivilege(int councilprivilege){
 		super(councilprivilege);
@@ -36,7 +36,7 @@ public class CouncilPrivilege extends ResourceAbstract {
 		
 	}
 	
-	public HashMap<String, ResourceAbstract> exchangeWithResources(ArrayList<Integer> chosenPossibilities){
+	public static HashMap<String, ResourceAbstract> exchangeWithResources(ArrayList<Integer> chosenPossibilities){
 		HashMap<String, ResourceAbstract> resourcesForPlayer = new HashMap<String, ResourceAbstract>();
 		for(Integer index: chosenPossibilities){
 			for(String resource: possibleExchanges.get(index).keySet())

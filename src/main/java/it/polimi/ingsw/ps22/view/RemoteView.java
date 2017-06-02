@@ -12,6 +12,7 @@ public class RemoteView extends View implements Observer{
 	public RemoteView(String username, Connection connection){
 		super(username);
 		this.connection=connection;
+		connection.addObserver(this);
 	}
 	
 	@Override

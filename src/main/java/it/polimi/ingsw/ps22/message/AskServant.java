@@ -11,7 +11,7 @@ public class AskServant extends MessageAsk {
 		setString("Quanti servitori vuoi spendere? ");
 	}
 	
-	public Action getExtraAction(){
+	public Action getAction(){
 		return Action;
 	}
 	

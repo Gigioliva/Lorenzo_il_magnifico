@@ -76,7 +76,7 @@ public class CardAction extends Action {
 	@Override
 	public void applyAction(Player player, Board board, int servants) {
 		HashMap<String,ArrayList<DevelopmentCard>> possibleCards = getPossibleCards(player, board, servants);
-		AskCard mex = new AskCard(possibleCards, player);
+		AskCard mex = new AskCard(possibleCards, player, this);
 		mex.applyAsk();
 	}
 	

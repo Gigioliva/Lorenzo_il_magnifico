@@ -5,11 +5,10 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
-import java.util.Observable;
 import it.polimi.ingsw.ps22.message.GenericMessage;
 import it.polimi.ingsw.ps22.model.Model;
 
-public class ConnectionSocket extends Observable implements Connection {
+public class ConnectionSocket extends Connection {
 	
 	private Socket socket;
 

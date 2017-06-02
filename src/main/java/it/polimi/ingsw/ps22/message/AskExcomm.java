@@ -7,7 +7,7 @@ public class AskExcomm extends MessageAsk {
 	private Player player;
 
 	public AskExcomm() {
-		setString("Vuoi essere scomunicato?");
+		setString("Appoggi la chiesa?");
 	}
 
 	public void addPlayer(Player player) {

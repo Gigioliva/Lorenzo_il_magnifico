@@ -51,10 +51,6 @@ public class Board {
 		return councilPalace;
 	}
 
-	public ChurchSpace getChurchSpace(int era) {
-		return church.get(era);
-	}
-
 	public int getDice(Color color) {
 		return dice.getDice(color);
 	}
@@ -145,7 +141,12 @@ public class Board {
 		str.append(dice.toString());
 		
 		return str.toString();
-		
-		
+	}
+
+	public ChurchSpace getChurch(int id) {
+		if(church.containsKey(id)){
+			return church.get(id);
+		}
+		return null;
 	}
 }

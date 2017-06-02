@@ -76,5 +76,13 @@ public class Visitor {
 			return null;
 		}
 	}
+	
+	public GenericMessage visit(GenericMessage mex) {
+		if (user.equals(user_mex)) {
+			return mex;
+		} else{
+			return null;
+		}
+	}
 
 }

@@ -20,7 +20,7 @@ public abstract class Action {
 	}
 
 	public void applyAction(Player player, Board board, int servants){
-		
+		applyAction(player,servants);
 	}
 
 }

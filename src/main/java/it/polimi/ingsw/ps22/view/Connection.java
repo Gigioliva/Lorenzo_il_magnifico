@@ -1,12 +1,14 @@
 package it.polimi.ingsw.ps22.view;
 
+import java.util.Observable;
+
 import it.polimi.ingsw.ps22.message.GenericMessage;
 import it.polimi.ingsw.ps22.model.Model;
 
-public interface Connection extends Runnable {
+public abstract class Connection extends Observable implements Runnable {
 	
-	public void send(GenericMessage message);
+	public abstract void send(GenericMessage message);
 	
-	public void send(Model model);
+	public abstract void send(Model model);
 
 }

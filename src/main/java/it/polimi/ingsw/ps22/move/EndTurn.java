@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.move;
 
+import it.polimi.ingsw.ps22.message.ErrorMove;
 import it.polimi.ingsw.ps22.model.Model;
 
 public class EndTurn extends Move {
@@ -10,8 +11,13 @@ public class EndTurn extends Move {
 
 	@Override
 	public void applyMove(Model model) {
-		model.nextPlayer();
-		model.notifyModel();
+		if(model.getWaitAnswer().size()!=0){
+			model.nextPlayer();
+			model.notifyModel();
+		}else{
+			ErrorMove error = new ErrorMove();
+			model.notifyMessage(error);
+		}
 	}
 	
 	

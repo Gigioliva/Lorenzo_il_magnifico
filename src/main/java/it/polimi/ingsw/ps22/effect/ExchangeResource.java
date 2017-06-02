@@ -84,6 +84,9 @@ public class ExchangeResource implements ActionEffect{
 		}
 		return str.toString();
 	}
-	
+
+	public HashMap<String, ResourceAbstract> getCost() {
+		return cost;
+	}
 
 }
