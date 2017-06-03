@@ -2,11 +2,12 @@ package it.polimi.ingsw.ps22.message;
 
 import it.polimi.ingsw.ps22.model.Model;
 
-public class MessageAsk extends GenericMessage {
-	private static int id;
+public class MessageAsk extends GenericMessage{
+	
+	private static final long serialVersionUID = 1L;
+	private transient static int id;
 	protected int id_ask;
-
-	protected static Model model;
+	protected transient static Model model;
 
 	public MessageAsk() {
 		if (id == 0) {

@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps22.model.Model;
 
 public class EndTurn extends Move {
 
+	private static final long serialVersionUID = 1L;
+
 	public EndTurn(String username) {
 		super(username);
 	}

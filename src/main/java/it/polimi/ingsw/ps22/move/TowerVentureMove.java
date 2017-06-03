@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.player.Player;
 
 public class TowerVentureMove extends TowerMove {
 
+	private static final long serialVersionUID = 1L;
+
 	public TowerVentureMove(String username, Color color, int floor, int numServant) {
 		super(username, color, floor, numServant);
 	}

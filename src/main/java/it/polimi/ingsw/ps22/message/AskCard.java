@@ -9,9 +9,11 @@ import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskCard extends MessageAsk{
-	private HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
-	private Player player;
-	private CardAction cardAction;
+	
+	private static final long serialVersionUID = 1L;
+	private transient HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
+	private transient Player player;
+	private transient CardAction cardAction;
 	
 	public AskCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard, Player player, CardAction cardAction){
 		this.player=player;
@@ -28,6 +30,10 @@ public class AskCard extends MessageAsk{
 		setString(str.toString());
 	}
 	
+	public AskCard(String str, int id){
+		super(str,id);
+	}
+	
 	public HashMap<String,ArrayList<DevelopmentCard>> getPossibleCard(){
 		return possibleCard;
 	}
@@ -40,7 +46,7 @@ public class AskCard extends MessageAsk{
 		return cardAction;
 	}
 	
-	public GenericMessage accept(Visitor visitor){
+	public AskCard accept(Visitor visitor){
 		return visitor.visit(this);
 	}
 

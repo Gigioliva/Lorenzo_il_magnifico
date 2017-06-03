@@ -4,6 +4,8 @@ import it.polimi.ingsw.ps22.model.Color;
 import it.polimi.ingsw.ps22.model.Model;
 
 public abstract class FamilyMove extends Move{
+	
+	private static final long serialVersionUID = 1L;
 	protected Color color;
 	protected int space;
 	protected int numServant;

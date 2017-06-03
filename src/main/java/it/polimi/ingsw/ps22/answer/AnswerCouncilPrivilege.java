@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 
 public class AnswerCouncilPrivilege extends GenericAnswer {
 	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<Integer> answer;
 	
 	public AnswerCouncilPrivilege(int id, ArrayList<Integer> answer){

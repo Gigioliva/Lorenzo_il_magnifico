@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps22.message.MessageAsk;
 import it.polimi.ingsw.ps22.model.Model;
 
 public class AnswerCosts extends GenericAnswer {
+	
+	private static final long serialVersionUID = 1L;
 	private int answer;
 	
 	public AnswerCosts(int id, int answer){

@@ -10,12 +10,12 @@ import it.polimi.ingsw.ps22.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskCosts extends MessageAsk {
-	private int numChoice;
-	// salvo i valori per sospendere il model finchè il giocatore non risponde
-	private ArrayList<RequisiteCost> possibleCost;
-	private HashMap<String, ResourceAbstract> discount;
-	private Player player;
-	private TowerSpace towerSpace;
+	private static final long serialVersionUID = 1L;
+	private transient int numChoice;
+	private transient ArrayList<RequisiteCost> possibleCost;
+	private transient HashMap<String, ResourceAbstract> discount;
+	private transient Player player;
+	private transient TowerSpace towerSpace;
 
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		super();
@@ -37,6 +37,10 @@ public class AskCosts extends MessageAsk {
 			str.append("\n");
 		}
 		setString(str.toString());
+	}
+	
+	public AskCosts(String str, int id){
+		super(str,id);
 	}
 
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace,
@@ -72,7 +76,7 @@ public class AskCosts extends MessageAsk {
 			return new HashMap<String, ResourceAbstract>();
 	}
 	
-	public GenericMessage accept(Visitor visitor){
+	public AskCosts accept(Visitor visitor){
 		return visitor.visit(this);
 	}
 

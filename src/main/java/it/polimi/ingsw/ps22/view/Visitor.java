@@ -16,49 +16,49 @@ public class Visitor {
 		this.user_mex = user_mex;
 	}
 
-	public GenericMessage visit(AskServant mex) {
+	public AskServant visit(AskServant mex) {
 		if (user.equals(user_mex)) {
-			return new MessageAsk(mex.getString(),mex.getId());
+			return new AskServant(mex.getString(),mex.getId());
 		} else{
 			return null;
 		}
 	}
 
-	public GenericMessage visit(AskCard mex) {
+	public AskCard visit(AskCard mex) {
 		if (user.equals(user_mex)) {
-			return new MessageAsk(mex.getString(),mex.getId());
+			return new AskCard(mex.getString(),mex.getId());
 		} else{
 			return null;
 		}
 	}
 
-	public GenericMessage visit(AskCosts mex) {
+	public AskCosts visit(AskCosts mex) {
 		if (user.equals(user_mex)) {
-			return new MessageAsk(mex.getString(),mex.getId());
+			return new AskCosts(mex.getString(),mex.getId());
 		} else{
 			return null;
 		}
 	}
 
-	public GenericMessage visit(AskCouncilPrivilege mex) {
+	public AskCouncilPrivilege visit(AskCouncilPrivilege mex) {
 		if (user.equals(user_mex)) {
-			return new MessageAsk(mex.getString(),mex.getId());
+			return new AskCouncilPrivilege(mex.getString(),mex.getId());
 		} else{
 			return null;
 		}
 	}
 
-	public GenericMessage visit(AskEffect mex) {
+	public AskEffect visit(AskEffect mex) {
 		if (user.equals(user_mex)) {
-			return new MessageAsk(mex.getString(),mex.getId());
+			return new AskEffect(mex.getString(),mex.getId());
 		} else{
 			return null;
 		}
 	}
 
-	public GenericMessage visit(AskExcomm mex) {
+	public AskExcomm visit(AskExcomm mex) {
 		if (user.equals(mex.getPlayer().getUsername())) {
-			return new MessageAsk(mex.getString(),mex.getId());
+			return new AskExcomm(mex.getString(),mex.getId());
 		} else{
 			return null;
 		}

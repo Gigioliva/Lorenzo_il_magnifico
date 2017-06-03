@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps22.player.Player;
 
 public class AnswerServant extends GenericAnswer {
 	
+	private static final long serialVersionUID = 1L;
 	private int answer;
 	
 	public AnswerServant(int id, int answer){

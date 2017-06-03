@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.player.Player;
 
 public class CouncilMove extends FamilyMove {
 
+	private static final long serialVersionUID = 1L;
+
 	public CouncilMove(String username, Color color, int numServant) {
 		super(username, color, 1, numServant);
 	}

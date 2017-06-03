@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.controller;
 import java.util.Observable;
 import java.util.Observer;
 
+import it.polimi.ingsw.ps22.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.message.ChatMessage;
 import it.polimi.ingsw.ps22.model.Model;
 import it.polimi.ingsw.ps22.move.Move;
@@ -26,7 +27,9 @@ public class Controller implements Observer {
 		if(o instanceof View && arg instanceof ChatMessage){
 			model.notifyMessage((ChatMessage)arg);
 		}
-		
+		if(o instanceof View && arg instanceof GenericAnswer){
+			((GenericAnswer)arg).applyAnswer(model);
+		}
 	}
 	 
 

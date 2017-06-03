@@ -1,7 +1,8 @@
 package it.polimi.ingsw.ps22.model;
 
+import java.io.Serializable;
 
-public enum Color {
+public enum Color implements Serializable{
 	BLACK, WHITE, ORANGE, NEUTRAL;
 	
 	public static Color Conversion(String input){ 

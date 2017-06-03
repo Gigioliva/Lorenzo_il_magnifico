@@ -12,6 +12,7 @@ import it.polimi.ingsw.ps22.model.Model;
 
 public class AnswerCard extends GenericAnswer {
 	
+	private static final long serialVersionUID = 1L;
 	private String type;
 	private String name;
 	

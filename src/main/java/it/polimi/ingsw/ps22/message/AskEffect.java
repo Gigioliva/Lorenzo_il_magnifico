@@ -10,9 +10,11 @@ import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskEffect extends MessageAsk {
-	private HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
-	private ProductionAction prodAction;
-	private Player player;
+	
+	private static final long serialVersionUID = 1L;
+	private transient HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
+	private transient ProductionAction prodAction;
+	private transient Player player;
 	
 	public AskEffect(HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect, ProductionAction prodAction, Player player){
 		this.listEffect=listEffect;
@@ -30,6 +32,10 @@ public class AskEffect extends MessageAsk {
 		setString(str.toString());
 	}
 	
+	public AskEffect(String str, int id){
+		super(str,id);
+	}
+	
 	public HashMap<DevelopmentCard,ArrayList<ActionEffect>> getListEffect(){
 		return listEffect;
 	}
@@ -42,7 +48,7 @@ public class AskEffect extends MessageAsk {
 		return player;
 	}
 	
-	public GenericMessage accept(Visitor visitor){
+	public AskEffect accept(Visitor visitor){
 		return visitor.visit(this);
 	}
 	

@@ -4,8 +4,10 @@ import it.polimi.ingsw.ps22.player.Player;
 import it.polimi.ingsw.ps22.view.Visitor;
 
 public class AskCouncilPrivilege extends MessageAsk {
-	private int numChoice;
-	private Player player;
+	
+	private static final long serialVersionUID = 1L;
+	private transient int numChoice;
+	private transient Player player;
 	
 	public AskCouncilPrivilege(int numChoice, Player player){
 		this.numChoice=numChoice;
@@ -20,6 +22,10 @@ public class AskCouncilPrivilege extends MessageAsk {
 		setString(str.toString());
 	}
 	
+	public AskCouncilPrivilege(String str, int id){
+		super(str,id);
+	}
+	
 	public Player getPlayer(){
 		return player;
 	}
@@ -28,7 +34,7 @@ public class AskCouncilPrivilege extends MessageAsk {
 		return numChoice;
 	}
 	
-	public GenericMessage accept(Visitor visitor){
+	public AskCouncilPrivilege accept(Visitor visitor){
 		return visitor.visit(this);
 	}
 	

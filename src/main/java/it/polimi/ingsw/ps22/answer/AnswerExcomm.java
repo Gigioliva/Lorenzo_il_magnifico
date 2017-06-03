@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps22.model.Model;
 
 public class AnswerExcomm extends GenericAnswer {
 	
+	private static final long serialVersionUID = 1L;
 	private String answer;
 	
 	public AnswerExcomm(int id, String answer){

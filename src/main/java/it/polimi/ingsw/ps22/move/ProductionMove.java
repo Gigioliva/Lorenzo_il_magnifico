@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.player.Player;
 
 public class ProductionMove extends FamilyMove {
 
+	private static final long serialVersionUID = 1L;
+
 	public ProductionMove(String username, Color color, int space, int numServant) {
 		super(username, color, space, numServant);
 	}
