@@ -67,7 +67,6 @@ public class Model extends Observable implements Serializable {
 	public void startGame() {
 		board.setZone(players.size());
 		orderedPlayers = new ArrayList<String>(players.keySet());
-		// playerGame = orderedPlayers.get(0); fallo dopo draft
 		for (int i = 0; i < orderedPlayers.size(); i++) {
 			players.get(orderedPlayers.get(i)).addSpecificResource("Coin", new Coin(5 + i));
 		}
@@ -78,7 +77,7 @@ public class Model extends Observable implements Serializable {
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
 		notifyModel();
-		draftStart();
+		//draftStart();
 	}
 
 	public void notifyModel() {

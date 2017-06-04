@@ -39,10 +39,9 @@ public class ConnectionSocket extends Connection {
 			send(mex);
 			name = ((GenericMessage)in.readObject()).getString();
 			server.rednezvous(this, name);
-			while(active){
-				GenericMessage answer = (GenericMessage)in.readObject();				
+			while(active){				
 				setChanged();
-				notifyObservers(answer);
+				notifyObservers(in.readObject());
 			}			
 		} catch (IOException | NoSuchElementException | ClassNotFoundException e) {
 			System.err.println("Errore!");

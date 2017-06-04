@@ -12,6 +12,7 @@ public class Dice implements Serializable {
 	private HashMap<Color, Integer> dice; 
 	
 	public Dice(){
+		this.dice=new HashMap<Color, Integer>();
 		Color[] colors=Color.values();
 		for(Color el: colors){
 			if(el!=Color.NEUTRAL){
@@ -33,7 +34,7 @@ public class Dice implements Serializable {
 		for(Color el: colors){
 			if(el!=Color.NEUTRAL){
 				Random random=new Random();
-				int value=random.nextInt(7);
+				int value=random.nextInt(6)+1;
 				dice.put(el, value);
 			}
 		}
