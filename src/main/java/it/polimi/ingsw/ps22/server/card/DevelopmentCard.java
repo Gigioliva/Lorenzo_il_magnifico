@@ -14,6 +14,8 @@ import it.polimi.ingsw.ps22.server.resource.Resource;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public abstract class DevelopmentCard extends Card {
+	
+	private static final long serialVersionUID = 1L;
 	private int era;
 	private String name;
 

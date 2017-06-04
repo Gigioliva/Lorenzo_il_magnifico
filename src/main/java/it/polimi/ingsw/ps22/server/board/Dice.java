@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Random;
 
 import it.polimi.ingsw.ps22.server.model.Color;
 
-public class Dice {
+public class Dice implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<Color, Integer> dice; 
 	
 	public Dice(){

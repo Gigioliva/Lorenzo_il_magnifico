@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class TowerCharacterZone extends TowerZone {
+	
+	private static final long serialVersionUID = 1L;
 
 	public TowerCharacterZone(Board board) {
 		super(board);

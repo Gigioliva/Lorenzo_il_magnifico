@@ -7,6 +7,8 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 //  factor1								//factor2
 //guadagna multiplicand multiplicandType per ogni multiplierQty di tipo multiplier
 public class MultiplyEffect implements ActionEffect, ImmediateEffect {
+	
+	private static final long serialVersionUID = 1L;
 	private String multiplier;
 	private int multiplierQty = 1;
 	private ResourceAbstract multiplicand;

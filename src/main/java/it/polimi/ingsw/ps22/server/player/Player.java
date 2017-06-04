@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -21,7 +22,9 @@ import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Wood;
 
-public class Player {
+public class Player implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, Resource> resources; 
 	private HashMap<String, Point> points;
 	private HashMap<String, ArrayList<DevelopmentCard>> cards;

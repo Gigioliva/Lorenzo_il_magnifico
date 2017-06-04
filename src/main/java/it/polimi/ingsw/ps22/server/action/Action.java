@@ -1,9 +1,13 @@
 package it.polimi.ingsw.ps22.server.action;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.player.Player;
 
-public abstract class Action {
+public abstract class Action implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private int actionValue;
 	protected int servants;
 

@@ -1,10 +1,13 @@
 package it.polimi.ingsw.ps22.server.card;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
-public class RequisiteCost{
+public class RequisiteCost implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, ResourceAbstract> cost;
 	private HashMap<String, ResourceAbstract> requisite;
 	

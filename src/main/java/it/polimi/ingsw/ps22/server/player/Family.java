@@ -1,12 +1,16 @@
 package it.polimi.ingsw.ps22.server.player;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps22.server.model.Color;
 
-public class Family {
+public class Family implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private Color color;
 	private Player player;
 	private int value;
-	private boolean placed=false;
+	private transient boolean placed=false;
 
 	public Family(Color color, Player player) {
 		this.color = color;

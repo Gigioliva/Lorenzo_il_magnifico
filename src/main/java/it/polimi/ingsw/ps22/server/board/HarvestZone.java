@@ -10,7 +10,8 @@ import it.polimi.ingsw.ps22.server.player.Player;
 
 public class HarvestZone extends Zone {
 
-	private static final int NUM_SPACES = 2;
+	private static final long serialVersionUID = 1L;
+	private transient static final int NUM_SPACES = 2;
 	private HarvestSpace[] harvestSpace;
 
 	public HarvestZone() {

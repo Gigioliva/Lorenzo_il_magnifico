@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class TowerBuildingZone extends TowerZone {
 
+	private static final long serialVersionUID = 1L;
+	
 	public TowerBuildingZone(Board board) {
 		super(board);
 	}

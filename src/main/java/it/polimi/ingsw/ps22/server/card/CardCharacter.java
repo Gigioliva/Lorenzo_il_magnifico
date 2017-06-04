@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.Resource;
 
 public class CardCharacter extends DevelopmentCard {
+	
+	private static final long serialVersionUID = 1L;
 	private Coin cost; // provare a usare tutto nel costruttore se XML permette
 	private ArrayList<ImmediateEffect> immediateEffects;
 	private ArrayList<PermanentEffect> permanentEffects;

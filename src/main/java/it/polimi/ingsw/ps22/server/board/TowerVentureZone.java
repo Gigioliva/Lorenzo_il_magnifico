@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class TowerVentureZone extends TowerZone {
+	
+	private static final long serialVersionUID = 1L;
 
 	public TowerVentureZone(Board board) {
 		super(board);

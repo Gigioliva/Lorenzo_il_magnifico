@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 
 public class TowerTerritoryZone extends TowerZone {
+	
+	private static final long serialVersionUID = 1L;
 
 	public TowerTerritoryZone(Board board) {
 		super(board);

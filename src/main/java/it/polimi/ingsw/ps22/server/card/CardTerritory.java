@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class CardTerritory extends DevelopmentCard {
+	
+	private static final long serialVersionUID = 1L;
 	private int actionValue;
 	private ArrayList<ImmediateEffect> immediateEffects;
 	private ArrayList<ActionEffect> actionEffects;

@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps22.server.resource;
 
 public class Coin extends Resource {
 	
+	private static final long serialVersionUID = 1L;
+	
 	public Coin(int coin){
 		super(coin);
 	}

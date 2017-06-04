@@ -12,11 +12,12 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class TowerZone extends Zone {
 
-	private static final int NUM_SPACES = 4;
+	private static final long serialVersionUID = 1L;
+	private transient static final int NUM_SPACES = 4;
 	protected TowerSpace[] towerSpaces;
-	protected boolean occupied;
+	protected transient boolean occupied;
 	private HashMap<Integer, ArrayList<DevelopmentCard>> cards;
-	protected Board board;
+	protected transient Board board;
 
 	public TowerZone(Board board) {
 		towerSpaces = new TowerSpace[NUM_SPACES];

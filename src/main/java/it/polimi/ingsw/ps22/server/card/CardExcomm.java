@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class CardExcomm extends Card {
+	
+	private static final long serialVersionUID = 1L;
 	private int era;
 	private ArrayList<PermanentEffect> permanentEffects;
 	private ArrayList<EndEffect> endEffects;

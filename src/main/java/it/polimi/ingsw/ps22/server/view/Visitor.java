@@ -92,5 +92,13 @@ public class Visitor {
 			return null;
 		}
 	}
+	
+	public AskCopyLeader visit(AskCopyLeader mex) {
+		if (user.equals(user_mex)) {
+			return new AskCopyLeader(mex.getString(),mex.getId());
+		} else{
+			return null;
+		}
+	}
 
 }

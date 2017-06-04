@@ -39,6 +39,7 @@ public class AnswerCard extends GenericAnswer {
 						HashMap<String, DevelopmentCard> risp=new HashMap<String,DevelopmentCard>();
 						risp.put(type, el);
 						cardAction.applyAnswer(risp, ask.getPlayer(), model.getBoard());
+						model.getWaitAnswer().remove(ask);
 						return;
 					}
 				}

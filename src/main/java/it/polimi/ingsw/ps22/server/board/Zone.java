@@ -1,10 +1,14 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.io.Serializable;
+
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 
-public abstract class Zone {
+public abstract class Zone implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		return false;

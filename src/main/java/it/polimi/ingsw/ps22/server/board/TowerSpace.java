@@ -3,6 +3,8 @@ import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 
 public class TowerSpace extends ActionSpace {
 	
+	private static final long serialVersionUID = 1L;
+	
 	private DevelopmentCard card;
 	private int plan;
 	

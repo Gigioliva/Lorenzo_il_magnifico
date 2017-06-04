@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -8,10 +9,12 @@ import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
-public abstract class ActionSpace {
+public abstract class ActionSpace implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private final int actionCost;
-	private boolean multi;
-	private boolean playable;
+	private transient boolean multi;
+	private transient boolean playable;
 	private ArrayList<Family> family;
 	private GainResource bonus;
 

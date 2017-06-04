@@ -1,8 +1,11 @@
 package it.polimi.ingsw.ps22.server.player;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
-public class SpecBonus {
+public class SpecBonus implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String,Boolean> bonus;
 	
 	public SpecBonus(){

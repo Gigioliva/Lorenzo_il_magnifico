@@ -1,53 +1,52 @@
 package it.polimi.ingsw.ps22.server.answer;
 
-import java.util.ArrayList;
-
 import it.polimi.ingsw.ps22.server.card.CardLeader;
-import it.polimi.ingsw.ps22.server.message.AskLeader;
+import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
-public class AnswerLeader extends GenericAnswer {
-	
-	private String answer;
-	private static final long serialVersionUID = 1L;
+public class AnswerCopyLeader extends GenericAnswer {
 
-	public AnswerLeader(int id, String name) {
+	private static final long serialVersionUID = 1L;
+	private String answer;
+
+	public AnswerCopyLeader(int id, String answer) {
 		super(id);
-		this.answer=name;
+		this.answer = answer;
 	}
 
 	@Override
 	public void applyAnswer(Model model) {
-		AskLeader ask=null;
+		AskCopyLeader ask=null;
 		for(MessageAsk el: model.getWaitAnswer()){
 			if(el.getId()==id){
-				ask=(AskLeader)el;
+				ask=(AskCopyLeader)el;
 			}
 		}
 		if(ask!=null){
 			Player player=ask.getPlayer();
-			ArrayList<CardLeader> temp=model.getCardLeaderStart(player);
-			CardLeader leader=null;
-			for(CardLeader el: temp){
+			CardLeader lead=ask.getLeader();
+			CardLeader leadChoice=null;
+			for(CardLeader el: ask.getLeaders()){
 				if(el.getName().equalsIgnoreCase(answer)){
-					leader=el;
+					leadChoice=el;
+					break;
 				}
 			}
-			if(leader!=null){
-				player.addLeader(leader);
-				temp.remove(leader);
-				model.draftStart();
+			if(leadChoice!=null){
+				lead.setActionEffect(leadChoice.getActionEffect());
+				lead.setPermanentEffect(leadChoice.getPermanentEffect());
+				lead.playLeader(player);
 				model.getWaitAnswer().remove(ask);
 				return;
 			}
 		}
+		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();
 		mex.setString("risposta errata");
 		model.notifyMessage(mex);
-		
 	}
 
 }

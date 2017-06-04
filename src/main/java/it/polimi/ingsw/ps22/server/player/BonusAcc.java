@@ -1,11 +1,14 @@
 package it.polimi.ingsw.ps22.server.player;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.resource.*;
 
-public class BonusAcc {
+public class BonusAcc implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, BonusAbstract> accumulator;
 	private HashMap<String, Resource> saleBuilding;
 	private HashMap<String, Coin> saleCharacter;

@@ -9,6 +9,8 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 //riduce costo di acquisto di una carta
 public class ReduceCostEffect implements PermanentEffect {
+	
+	private static final long serialVersionUID = 1L;
 	 private HashMap<String,ResourceAbstract> bonus;  //accedere alla classe bonus di player e aggiungere
 	 private String cardType;
 	 

@@ -8,6 +8,8 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class ExchangeResource implements ActionEffect{
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String,ResourceAbstract> cost;
 	private HashMap<String,ResourceAbstract> gain;
 	

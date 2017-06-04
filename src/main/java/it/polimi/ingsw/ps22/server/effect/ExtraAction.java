@@ -5,6 +5,8 @@ import it.polimi.ingsw.ps22.server.message.AskServant;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class ExtraAction implements ImmediateEffect {
+	
+	private static final long serialVersionUID = 1L;
 	private Action action;
 
 	public ExtraAction(Action action) {

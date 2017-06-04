@@ -12,6 +12,8 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 
 public class ProductionAction extends Action {
 
+	private static final long serialVersionUID = 1L;
+	
 	public ProductionAction(int actionValue) {
 		super(actionValue);
 	}

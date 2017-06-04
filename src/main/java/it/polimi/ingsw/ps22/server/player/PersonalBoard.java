@@ -1,12 +1,15 @@
 package it.polimi.ingsw.ps22.server.player;
 
+import java.io.Serializable;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
-public class PersonalBoard {
+public class PersonalBoard implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, GainResource> personalBonus;
 	private HashMap<Integer, VictoryPoint> bonusCharacter;
 	private HashMap<Integer, MilitaryPoint> requirementHarvest;

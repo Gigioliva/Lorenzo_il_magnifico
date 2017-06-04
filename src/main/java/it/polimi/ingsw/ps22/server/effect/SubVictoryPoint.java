@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
 public class SubVictoryPoint implements EndEffect {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, BonusAbstract> weights;
 	private String loc; // rappresenta se Player o tipo carta, è uguale a "player" se si riferisce ad un giocatore
 	

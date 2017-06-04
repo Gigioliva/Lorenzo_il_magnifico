@@ -5,7 +5,9 @@ import java.util.HashMap;
 
 public class CouncilPrivilege extends ResourceAbstract {
 	
-	private static HashMap<Integer, HashMap<String,ResourceAbstract>> possibleExchanges;
+	private static final long serialVersionUID = 1L;
+	
+	private transient static HashMap<Integer, HashMap<String,ResourceAbstract>> possibleExchanges;
 	
 	public CouncilPrivilege(int councilprivilege){
 		super(councilprivilege);

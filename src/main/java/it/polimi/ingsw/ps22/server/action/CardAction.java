@@ -12,13 +12,10 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class CardAction extends Action {
-	private ArrayList<String> types; // inventato da noi per possibilità di
-										// prendere più tipi di carte
-	private HashMap<String, ResourceAbstract> discount; // da sottrarre al costo
-														// della carta e
-														// riaggiungerlo dopo
-														// averla presa o se non
-														// può prenderla
+	
+	private static final long serialVersionUID = 1L;
+	private ArrayList<String> types;
+	private HashMap<String, ResourceAbstract> discount; 
 
 	public CardAction(int actionValue) {
 		super(actionValue);

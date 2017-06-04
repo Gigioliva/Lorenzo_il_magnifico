@@ -11,7 +11,8 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class CardVenture extends DevelopmentCard {
-
+	
+	private static final long serialVersionUID = 1L;
 	private ArrayList<RequisiteCost> requisiteCost;
 	private ArrayList<EndEffect> endEffects;
 	private ArrayList<ImmediateEffect> immediateEffects;

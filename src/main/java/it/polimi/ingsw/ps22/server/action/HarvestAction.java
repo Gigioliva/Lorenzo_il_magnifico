@@ -9,6 +9,9 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 
 public class HarvestAction extends Action {
 
+	private static final long serialVersionUID = 1L;
+
+
 	public HarvestAction(int actionValue) {
 		super(actionValue);
 	}

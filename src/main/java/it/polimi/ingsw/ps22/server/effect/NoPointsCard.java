@@ -3,8 +3,9 @@ package it.polimi.ingsw.ps22.server.effect;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class NoPointsCard implements EndEffect {
-	private String cardType;
 	
+	private static final long serialVersionUID = 1L;
+	private String cardType;
 
 	public NoPointsCard(String cardType) {
 		this.cardType = cardType;

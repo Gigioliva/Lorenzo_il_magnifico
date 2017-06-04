@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -7,10 +8,12 @@ import it.polimi.ingsw.ps22.server.card.CardExcomm;
 import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.player.Player;
 
-public class ChurchSpace {
+public class ChurchSpace implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private int era;
 	private CardExcomm cardExcomm;
-	private static FaithPointTrack faithPointTrack;
+	private transient static FaithPointTrack faithPointTrack;
 	private HashMap<Integer, Integer> requisite;
 
 	public ChurchSpace(int era) {

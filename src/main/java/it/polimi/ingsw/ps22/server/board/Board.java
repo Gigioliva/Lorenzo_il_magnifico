@@ -1,12 +1,15 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.player.Player;
 
-public class Board {
+public class Board implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<String, TowerZone> towers;
 	private MarketZone market;
 	private ProductionZone prodZone;

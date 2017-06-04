@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
@@ -14,17 +15,20 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
-public class Model extends Observable {
+//per ora è serializable poi quando si fa il ModelView no
+
+public class Model extends Observable implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private Board board;
 	private int turn;
 	private int giro;
 	private HashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
-	private boolean canFamilyMove;
-	private ArrayList<MessageAsk> waitAnswer; // quando arriva la risposta la
-												// risetto a false
-	private HashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
+	private transient boolean canFamilyMove;
+	private transient ArrayList<MessageAsk> waitAnswer;
+	private transient HashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
 
 	public Model() {
 		board = new Board();

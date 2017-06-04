@@ -47,6 +47,7 @@ public class AnswerCouncilPrivilege extends GenericAnswer {
 					player.getSpecificResource(type).addResource(temp.get(type));
 				}
 				player.applyMalusResource(new ArrayList<String>(temp.keySet()));
+				model.getWaitAnswer().remove(ask);
 				return;
 			}
 		}

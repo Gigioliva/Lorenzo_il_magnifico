@@ -28,6 +28,8 @@ public class AnswerServant extends GenericAnswer {
 			Player player=model.getCurrentPlayer();
 			if(answer>0 && answer<=player.getSpecificResource("Servant").getQuantity()){
 				ask.getAction().applyAction(player, model.getBoard(), answer);
+				model.getWaitAnswer().remove(ask);
+				return;
 			}
 		}
 		//applicato solo se tutto non va bene

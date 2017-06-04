@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.CardLeader;
+import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.ErrorMove;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -41,13 +42,37 @@ public class LeaderPlaying extends LeaderMove {
 				}
 			}
 			if (playable == true) {
-				leader.playLeader(player);
-				return;
+				if (leader.getCopy() == false) {
+					leader.playLeader(player);
+					return;
+				} else {
+					ArrayList<CardLeader> leaderPlay=getLeaderPlay(model);
+					if(!leaderPlay.isEmpty()){
+						AskCopyLeader mex=new AskCopyLeader(leaderPlay, leader, player);
+						mex.applyAsk();
+						leader.setCopy(false);
+						return;
+					}
+				}
 			}
 		} else {
 			ErrorMove error = new ErrorMove();
 			model.notifyMessage(error);
 		}
+	}
+
+	private ArrayList<CardLeader> getLeaderPlay(Model model) {
+		ArrayList<CardLeader> temp = new ArrayList<CardLeader>();
+		ArrayList<Player> players = new ArrayList<Player>(model.getPlayers().values());
+		for (Player el : players) {
+			ArrayList<CardLeader> cards = el.getLeaders();
+			for (CardLeader card : cards) {
+				if (card.isPlay()) {
+					temp.add(card);
+				}
+			}
+		}
+		return temp;
 	}
 
 }

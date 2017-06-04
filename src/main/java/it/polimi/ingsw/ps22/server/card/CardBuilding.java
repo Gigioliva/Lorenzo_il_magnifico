@@ -11,6 +11,8 @@ import it.polimi.ingsw.ps22.server.resource.Resource;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class CardBuilding extends DevelopmentCard {
+	
+	private static final long serialVersionUID = 1L;
 	private int actionValue;
 	private HashMap<String, Resource> cost;
 	private ArrayList<ImmediateEffect> immediateEffects;
