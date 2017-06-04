@@ -1,7 +1,9 @@
 package it.polimi.ingsw.ps22.move;
 
 public class LeaderMove extends Move {
-	private String nameCard;
+	
+	private static final long serialVersionUID = 1L;
+	protected String nameCard;
 	
 	public LeaderMove(String username,String nameCard){
 		super(username);

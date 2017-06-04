@@ -66,6 +66,7 @@ public class Board {
 			dice.setDice();
 			for (Player el : players) {
 				el.setFamily(dice);
+				el.resetLeader();
 			}
 			market.reset();
 			prodZone.reset();

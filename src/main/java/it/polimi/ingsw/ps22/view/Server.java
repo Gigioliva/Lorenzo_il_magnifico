@@ -52,6 +52,7 @@ public class Server {
 			for(String el: waitingConnection.keySet()){
 				Connection con =waitingConnection.get(el);
 				RemoteView player=new RemoteView(el, con);
+				model.addPlayers(name);
 				model.addObserver(player);
 				player.addObserver(controller);
 				temp.add(con);	

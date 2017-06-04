@@ -19,7 +19,7 @@ public class Controller implements Observer {
 	@Override
 	public void update(Observable o, Object arg) {
 		if(o instanceof View && arg instanceof Move){
-			if(model.getPlayerGame()==((View)o).getUsername()){
+			if(((View)o).getUsername().equals(model.getPlayerGame())){
 				((Move)arg).applyMove(model);
 			}
 			//si potrebbe aggiungere una notifica al giocatore che il turno non è il suo

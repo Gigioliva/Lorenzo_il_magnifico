@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Observable;
 import it.polimi.ingsw.ps22.board.Board;
+import it.polimi.ingsw.ps22.card.CardLeader;
+import it.polimi.ingsw.ps22.message.AskLeader;
 import it.polimi.ingsw.ps22.message.GenericMessage;
 import it.polimi.ingsw.ps22.message.MessageAsk;
 import it.polimi.ingsw.ps22.player.Family;
@@ -19,13 +21,17 @@ public class Model extends Observable {
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
 	private boolean canFamilyMove;
-	private ArrayList<MessageAsk> waitAnswer; //quando arriva la risposta la risetto a false
+	private ArrayList<MessageAsk> waitAnswer; // quando arriva la risposta la
+												// risetto a false
+	private HashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
 
 	public Model() {
 		board = new Board();
 		this.players = new HashMap<String, Player>();
 		MessageAsk.setModel(this);
-		this.waitAnswer=new ArrayList<MessageAsk>();
+		this.waitAnswer = new ArrayList<MessageAsk>();
+		cardLeaderStart = new HashMap<Player, ArrayList<CardLeader>>();
+		playerGame = null;
 	}
 
 	public Board getBoard() {
@@ -48,34 +54,37 @@ public class Model extends Observable {
 	public String getPlayerGame() {
 		return playerGame;
 	}
-	
-	public Player getCurrentPlayer(){
+
+	public Player getCurrentPlayer() {
 		return players.get(playerGame);
 	}
 
 	public void startGame() {
 		board.setZone(players.size());
 		orderedPlayers = new ArrayList<String>(players.keySet());
-		playerGame = orderedPlayers.get(0);
+		// playerGame = orderedPlayers.get(0); fallo dopo draft
 		for (int i = 0; i < orderedPlayers.size(); i++) {
 			players.get(orderedPlayers.get(i)).addSpecificResource("Coin", new Coin(5 + i));
 		}
-		canFamilyMove=true;
+		// leggere da file le carte leader e ne carica 4 casualmente in
+		// cardLeaderStart
+		canFamilyMove = true;
 		turn = 1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
 		notifyModel();
+		draftStart();
 	}
-	
-	public void notifyModel(){
-		if(waitAnswer.isEmpty()){
+
+	public void notifyModel() {
+		if (waitAnswer.isEmpty()) {
 			setChanged();
 			notifyObservers();
 		}
 	}
 
 	public void nextPlayer() {
-		canFamilyMove=true;
+		canFamilyMove = true;
 		int i;
 		if (giro != 5) {
 			for (i = 0; i < orderedPlayers.size(); i++) {
@@ -215,13 +224,13 @@ public class Model extends Observable {
 		setChanged();
 		notifyObservers(ask);
 	}
-	
+
 	public void notifyMessage(GenericMessage ask) {
 		setChanged();
 		notifyObservers(ask);
 	}
-	
-	public boolean getCanFamilyMove(){
+
+	public boolean getCanFamilyMove() {
 		return canFamilyMove;
 	}
 
@@ -231,5 +240,60 @@ public class Model extends Observable {
 
 	public void setCantFamilyMove() {
 		this.canFamilyMove = false;
+	}
+
+	public void draftStart() {
+		boolean end = true;
+		for (Player el : cardLeaderStart.keySet()) {
+			if (cardLeaderStart.get(el).size() != 0) {
+				end = false;
+			}
+		}
+		if (end == true) {
+			cardLeaderStart = null;
+			playerGame = orderedPlayers.get(0);
+			notifyModel();
+		} else {
+			if(nextDraft()){
+				draftLeader();
+				for (Player el : cardLeaderStart.keySet()) {
+					AskLeader mex = new AskLeader(cardLeaderStart.get(el), el);
+					mex.applyAsk();
+				}
+			}
+		}
+	}
+	
+	private void draftLeader(){
+		ArrayList<Player> players=new ArrayList<Player>(cardLeaderStart.keySet());
+		ArrayList<ArrayList<CardLeader>> cards=new ArrayList<ArrayList<CardLeader>>(cardLeaderStart.values());
+		HashMap<Player, ArrayList<CardLeader>> temp=new HashMap<Player, ArrayList<CardLeader>>();
+		for(int i=0;i<players.size();i++){
+			temp.put(players.get(i), cards.get((i+1) % cards.size()));
+		}
+		cardLeaderStart=temp;
+	}
+	
+	private boolean nextDraft(){
+		boolean next=true;
+		int x=0;
+		for(ArrayList<CardLeader> el: cardLeaderStart.values()){
+			if(x==0){
+				x=el.size();
+			}else{
+				if(x!=el.size()){
+					next=false;
+				}
+			}
+		}
+		return next;
+	}
+	
+	public ArrayList<CardLeader> getCardLeaderStart(Player player){
+		if(cardLeaderStart.containsKey(player)){
+			return cardLeaderStart.get(player);
+		}else{
+			return null;
+		}
 	}
 }

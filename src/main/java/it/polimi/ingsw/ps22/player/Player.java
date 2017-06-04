@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.player;
 import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.board.Dice;
+import it.polimi.ingsw.ps22.card.CardLeader;
 import it.polimi.ingsw.ps22.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.effect.ActionEffect;
 import it.polimi.ingsw.ps22.effect.EndEffect;
@@ -22,15 +23,14 @@ import it.polimi.ingsw.ps22.resource.Wood;
 public class Player {
 	private HashMap<String, Resource> resources; 
 	private HashMap<String, Point> points;
-	private HashMap<String, ArrayList<DevelopmentCard>> cards; 
+	private HashMap<String, ArrayList<DevelopmentCard>> cards;
+	private ArrayList<CardLeader> leaders;
 	private BonusAcc bonusAcc;
 	private SpecBonus specBonus;
 	private ArrayList<EndEffect> endEffects;
 	private HashMap<Color, Family> family;
 	private PersonalBoard personalBoard;
 	private String username;
-	
-
 	
 	public Player(String username) {
 		resources = new HashMap<String, Resource>();
@@ -47,6 +47,7 @@ public class Player {
 		cards.put("Character", new ArrayList<DevelopmentCard>());
 		cards.put("Territory", new ArrayList<DevelopmentCard>());
 		cards.put("Venture", new ArrayList<DevelopmentCard>());
+		leaders=new ArrayList<CardLeader>();
 		bonusAcc = new BonusAcc();
 		specBonus = new SpecBonus();
 		family = new HashMap<Color, Family>();
@@ -68,9 +69,16 @@ public class Player {
 		this.points = player.clonePoints();
 	}
 
-
 	public HashMap<String, Resource> getResources() {
 		return this.resources;
+	}
+	
+	public void addLeader(CardLeader leader){
+		leaders.add(leader);
+	}
+	
+	public ArrayList<CardLeader> getLeaders(){
+		return leaders;
 	}
 	
 	private HashMap<String, Resource> cloneResources(){
@@ -317,4 +325,24 @@ public class Player {
 		
 		return str.toString();
 	}
+	
+	public int getGenericValue(String type){
+		if(isResource(type)){
+			return resources.get(type).getQuantity();
+		}
+		if(isPoint(type)){
+			return points.get(type).getQuantity();
+		}
+		if(isCard(type)){
+			return getSizeCard(type);
+		}
+		return 0;
+	}
+	
+	public void resetLeader(){
+		for(CardLeader el: leaders){
+			el.resetLeader();
+		}
+	}
+	
 }

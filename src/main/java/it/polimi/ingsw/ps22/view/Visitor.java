@@ -84,5 +84,13 @@ public class Visitor {
 			return null;
 		}
 	}
+	
+	public AskLeader visit(AskLeader mex) {
+		if (user.equals(mex.getPlayer().getUsername())) {
+			return new AskLeader(mex.getString(),mex.getId());
+		} else{
+			return null;
+		}
+	}
 
 }
