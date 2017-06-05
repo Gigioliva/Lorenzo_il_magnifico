@@ -1,25 +1,27 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 public class Rectangle {
-	
+
 	private int initx;
 	private int finalx;
 	private int inity;
 	private int finaly;
-	
-	public Rectangle(int ix, int fx, int iy, int fy){
+
+	public Rectangle(int ix, int fx, int iy, int fy) {
 		initx = ix;
 		finalx = fx;
 		inity = iy;
 		finaly = fy;
 	}
-	public int getOffsetX(){
+
+	public int getOffsetX() {
 		return finalx - initx;
 	}
-	
-	public int getOffsetY(){
-		return finaly-inity;
+
+	public int getOffsetY() {
+		return finaly - inity;
 	}
+
 	public int getInitx() {
 		return initx;
 	}
@@ -50,6 +52,12 @@ public class Rectangle {
 
 	public void setFinaly(int finaly) {
 		this.finaly = finaly;
+	}
+
+	public Rectangle resize(float factor) {
+		Rectangle temp = new Rectangle((int) ((float) this.initx / factor), (int) ((float) this.finalx / factor),
+				(int) ((float) this.inity / factor), (int) ((float) this.finaly / factor));
+		return temp;
 	}
 
 }
