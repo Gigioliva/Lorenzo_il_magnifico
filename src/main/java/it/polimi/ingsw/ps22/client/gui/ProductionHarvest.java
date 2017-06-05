@@ -17,10 +17,10 @@ public class ProductionHarvest extends JPanel {
 	
 	public ProductionHarvest(){
 		this.setLayout(new GridLayout(2,2));
-		p1 = new ActionButton("p1");
+		/*p1 = new ActionButton("p1");
 		p2 = new ActionButton("p2");
 		h1 = new ActionButton("h1");
-		h2 = new ActionButton("h2");
+		h2 = new ActionButton("h2");*/
 		
 		this.add(p1);
 		this.add(p2);

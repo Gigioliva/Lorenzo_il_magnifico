@@ -16,7 +16,7 @@ public class TakeFamiliarListener implements ActionListener {
 			FamiliarButton b = (FamiliarButton)e.getSource();
 			System.out.println("preso familiare");
 			b.setEnabled(false);
-			towers.enableTowers();
+			towers.enableTowers(b.getColor());
 		
 	}
 
