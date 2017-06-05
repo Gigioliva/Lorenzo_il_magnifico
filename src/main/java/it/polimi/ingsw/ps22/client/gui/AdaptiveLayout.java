@@ -13,23 +13,23 @@ public class AdaptiveLayout {
 	private static final int cardDevelopmentOffsetY = 24;
 	
 	
-	public static Rectangle getOrangeDiceSpace(float resizeFactor) {
+	public static Rectangle getOrangeDiceSpace(double resizeFactor) {
 		return orangeDice.resize(resizeFactor);
 	}
 	
-	public static Rectangle getBlackDiceSpace(float resizeFactor) {
+	public static Rectangle getBlackDiceSpace(double resizeFactor) {
 		return blackDice.resize(resizeFactor);
 	}
 
-	public static Rectangle getWhiteDiceSpace(float resizeFactor) {
+	public static Rectangle getWhiteDiceSpace(double resizeFactor) {
 		return whiteDice.resize(resizeFactor);
 	}
 	
-	public static Rectangle getCouncilPalaceSpace(float resizeFactor) {
+	public static Rectangle getCouncilPalaceSpace(double resizeFactor) {
 		return councilPalace.resize(resizeFactor);
 	}
 	
-	public static Rectangle getCardTerritorySpace(float resizeFactor, int towerSlot) {
+	public static Rectangle getCardTerritorySpace(double resizeFactor, int towerSlot) {
 		towerSlot=3-towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
@@ -41,7 +41,7 @@ public class AdaptiveLayout {
 		return temp.resize(resizeFactor);
 	}
 	
-	public static Rectangle getCardDevelopmentSpace(float resizeFactor, int towerNumber, int towerSlot) {
+	public static Rectangle getCardDevelopmentSpace(double resizeFactor, int towerNumber, int towerSlot) {
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		//towerNumber--;

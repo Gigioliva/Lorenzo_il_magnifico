@@ -54,9 +54,9 @@ public class Rectangle {
 		this.finaly = finaly;
 	}
 
-	public Rectangle resize(float factor) {
-		Rectangle temp = new Rectangle((int) ((float) this.initx / factor), (int) ((float) this.finalx / factor),
-				(int) ((float) this.inity / factor), (int) ((float) this.finaly / factor));
+	public Rectangle resize(double factor) {
+		Rectangle temp = new Rectangle((int) ((double) this.initx / factor), (int) ((double) this.finalx / factor),
+				(int) ((double) this.inity / factor), (int) ((double) this.finaly / factor));
 		return temp;
 	}
 
