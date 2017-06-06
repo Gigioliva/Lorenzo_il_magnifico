@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -15,10 +18,10 @@ public class FamiliarButton extends JButton {
 	public FamiliarButton(Color color){
 		super();
 		this.setEnabled(true);
-		this.setOpaque(false);
-		this.setContentAreaFilled(false);
-		this.setBorderPainted(false);
-		loadImage();
+		this.setOpaque(true);
+		this.setContentAreaFilled(true);
+		this.setBorderPainted(true);
+		//loadImage();
 		
 		this.color = color;
 		
@@ -33,4 +36,6 @@ public class FamiliarButton extends JButton {
 	public Color getColor(){
 		return this.color;
 	}
+	
+	
 }

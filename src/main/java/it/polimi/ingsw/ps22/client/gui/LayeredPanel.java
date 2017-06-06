@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import java.awt.Color;
+import java.awt.Container;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -24,10 +26,18 @@ public class LayeredPanel extends JPanel{
 	 */
 
 	private static final long serialVersionUID = -5630682030714330058L;
+	
+	private static final int NUM_TOWERS = 4;
 
 	private JPanel spinPan = new JPanel();
 	
-	private AllTowersPanel p;
+	private TowerPanel terrTower;
+	
+	private TowerPanel charTower;
+	
+	private TowerPanel buildingTower;
+	
+	private TowerPanel ventureTower;
 	
 	private ProductionHarvest hp;
 	
@@ -73,20 +83,31 @@ public class LayeredPanel extends JPanel{
         layeredPane.add(mapIcon, new Integer(20), 0);
         //layeredPane.add(cardIcon, new Integer(25), 0);
 		
-        
-		p = new AllTowersPanel();
-		//hp = new ProductionHarvest();
-		
-		layeredPane.add(p, new Integer(200), 0);
-		p.setBounds(150, 50, board.getIconWidth() - 200, board.getIconHeight()/2);
+		terrTower = new TowerPanel("Territory", factorScaleBoard, new TerritoryListener());
+		addScaledTower(terrTower, 0, factorScaleBoard);
 		 
+		charTower = new TowerPanel("Character", factorScaleBoard, new CharacterListener());
+		addScaledTower(charTower, 1, factorScaleBoard);
+		
+		buildingTower = new TowerPanel("Building", factorScaleBoard, new BuildingListener());
+		addScaledTower(buildingTower, 2, factorScaleBoard);
+		
+		ventureTower = new TowerPanel("Venture", factorScaleBoard, new VentureListener());
+		addScaledTower(ventureTower, 3, factorScaleBoard);
+		
+		//hp = new ProductionHarvest();
 		/*layeredPane.add(hp, new Integer(100),0);
 		hp.setBounds(150,200 + board.getIconHeight()/2, board.getIconWidth()/2 -100, board.getIconHeight()-100);
 		*/
 	
 		fam = new FamiliarButton(it.polimi.ingsw.ps22.server.model.Color.BLACK);
 		fam.setBounds((int)widthScreen - 500, (int)heightScreen - 800, board.getIconWidth()- 400, board.getIconHeight() - 600);
-		fam.addActionListener(new TakeFamiliarListener(p));
+		ArrayList<TowerPanel> arr = new ArrayList<TowerPanel>();
+		arr.add(terrTower);
+		arr.add(charTower);
+		arr.add(buildingTower);
+		arr.add(ventureTower);
+		fam.addActionListener(new TakeFamiliarListener(arr));
 			
 		layeredPane.add(fam, new Integer(50), 0);
 		
@@ -132,11 +153,19 @@ public class LayeredPanel extends JPanel{
 			@Override
 			public void stateChanged(ChangeEvent e) {
 				int value = (int) spinner.getValue();
-				p.setNumServants(value);
+				terrTower.setNumServants(value);
 				
 			}
 		});
 		layeredPane.add(spinPan, new Integer(2000),0);
+	}
+	
+	private void addScaledTower(Container c, int tower, double factorScale){
+		layeredPane.add(c, new Integer(200), 0);
+		Rectangle m1 = AdaptiveLayout.getCardDevelopmentSpace(factorScale, tower, 0);
+		Rectangle m2 = AdaptiveLayout.getCardDevelopmentSpace(factorScale, tower, 3);
+		c.setBounds(m2.getInitx(), m2.getInity(), m1.getFinalx() - m1.getInitx(), m1.getFinaly() - m2.getInity());
+		c.setVisible(true);
 	}
 
 	private Image getScaledImage(Image srcImg, Rectangle dim){

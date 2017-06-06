@@ -42,6 +42,7 @@ public class AdaptiveLayout {
 	}
 	
 	public static Rectangle getCardDevelopmentSpace(double resizeFactor, int towerNumber, int towerSlot) {
+		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		//towerNumber--;

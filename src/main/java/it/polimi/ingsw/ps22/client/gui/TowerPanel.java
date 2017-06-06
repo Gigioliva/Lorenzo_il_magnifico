@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.border.TitledBorder;
 
 import it.polimi.ingsw.ps22.server.model.Color;
 
@@ -20,34 +22,85 @@ public class TowerPanel extends JPanel {
 	ActionButton b3;
 	ActionButton b4;
 	
-	private void setTitle(String name){
-		TitledBorder border = new TitledBorder(name);
-	    border.setTitleJustification(TitledBorder.CENTER);
-	    border.setTitlePosition(TitledBorder.TOP);
-		this.setBorder(border);
-		this.name = name;
-	}
 	
-	public TowerPanel(String name){
-		this.setLayout(new GridLayout(4,1));
-		setTitle(name);
+	public TowerPanel(String name, double resizeFactor, ActionListener actionListener){
+		this.setLayout(new GridBagLayout());
 		
 		this.name = name;
 		
 		this.setOpaque(false);
 		
-		b1 = new ActionButton(name,1);
-		b2 = new ActionButton(name,2);
-		b3 = new ActionButton(name,3);
-		b4 = new ActionButton(name,4);
 		
-		this.add(b4);
-		this.add(b3);
-		this.add(b2);
-		this.add(b1);
+		b1 = new ActionButton(0);
+		b1.addActionListener(actionListener);
+		b2 = new ActionButton(1);
+		b2.addActionListener(actionListener);
+		b3 = new ActionButton(2);
+		b3.addActionListener(actionListener);
+		b4 = new ActionButton(3);
+		b4.addActionListener(actionListener);
+		
+		setMeasures(resizeFactor);
 		
 		this.setBorder(BorderFactory.createEmptyBorder());
 		
+	}
+	
+	private void setMeasures(double resizeFactor){
+		GridBagConstraints c = new GridBagConstraints();
+		c.fill = GridBagConstraints.VERTICAL;
+		
+		Rectangle measures1 = AdaptiveLayout.getCardDevelopmentSpace(resizeFactor, 1, 0);
+		Rectangle measures2 = AdaptiveLayout.getCardDevelopmentSpace(resizeFactor, 1, 1);
+		
+		c.weighty=1;
+		c.ipady = measures1.getOffsetY();
+		c.ipadx = measures2.getOffsetX();
+		c.gridx=0;
+		
+		c.gridy=0;
+		this.add(b4,c);
+		
+		JButton p1 =new JButton();
+		p1.setEnabled(false);
+		p1.setOpaque(true);
+		p1.setBorderPainted(false);
+		p1.setContentAreaFilled(false);
+		c.ipady =measures1.getInity() - measures2.getFinaly();
+		c.gridy = 1;
+		this.add(p1,c);
+		
+	
+		c.ipady = measures1.getOffsetY();
+		c.gridy=2;
+		this.add(b3,c);
+		
+		JButton p2 =new JButton();
+		p2.setEnabled(false);
+		p2.setOpaque(true);
+		p2.setBorderPainted(false);
+		p2.setContentAreaFilled(false);
+		c.ipady =measures1.getInity() - measures2.getFinaly();
+		c.gridy = 3;
+		this.add(p2,c);
+		
+		
+		c.ipady = measures1.getOffsetY();
+		c.gridy=4;
+		this.add(b2,c);
+		
+		JButton p3 =new JButton();
+		p3.setEnabled(false);
+		p3.setOpaque(true);
+		p3.setBorderPainted(false);
+		p3.setContentAreaFilled(false);
+		c.ipady =measures1.getInity() - measures2.getFinaly();
+		c.gridy = 5;
+		this.add(p3,c);
+		
+		c.ipady = measures1.getOffsetY();
+		c.gridy=6;
+		this.add(b1,c);
 	}
 	
 	protected void enableTower(Color color){
@@ -83,5 +136,5 @@ public class TowerPanel extends JPanel {
 		b4.setNumServants(value);
 	}
 
-	
+		
 }
