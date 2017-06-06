@@ -17,21 +17,21 @@ public class ActionButton extends JButton  {
 		/**
 	 * 
 	 */
-	int floor;
+	int space;
 	Color color;
 	int numServants;
 	String username;
 	
 	private static final long serialVersionUID = 7616297999407953048L;
 
-		public ActionButton(int floor){
+		public ActionButton(int space){
 			super();
 			this.setEnabled(false);
 			this.setOpaque(true);
 			this.setBorderPainted(false);
 			this.setContentAreaFilled(false);
 			
-			this.floor = floor;
+			this.space = space;
 			
 			final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
 			final Insets insets = raisedBevelBorder.getBorderInsets(this);
@@ -61,7 +61,7 @@ public class ActionButton extends JButton  {
 	
 		
 		public int getFloor() {
-			return floor;
+			return space;
 		}
 
 

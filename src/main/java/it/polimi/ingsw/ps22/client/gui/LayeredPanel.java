@@ -26,8 +26,6 @@ public class LayeredPanel extends JPanel{
 	 */
 
 	private static final long serialVersionUID = -5630682030714330058L;
-	
-	private static final int NUM_TOWERS = 4;
 
 	private JPanel spinPan = new JPanel();
 	
@@ -43,15 +41,16 @@ public class LayeredPanel extends JPanel{
 	
 	private FamiliarButton fam;
 	
-	final ImageIcon board = createImageIcon("./image/gameboard.jpg");
+	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
+	
+	private final ImageIcon orangeDice = MyImage.createImageIcon("./image/dice/orangeDice.jpg");
 	
 	//final ImageIcon card = createImageIcon("rsz_devcards_f_en_c_3.png");
 	
+	
 	private JLayeredPane layeredPane;
+
 	
-	
-	private JLabel mapIcon;
-	private JLabel cardIcon;
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
 		double factorScaleX = (double)c.getIconHeight() / (heightScreen);
@@ -68,19 +67,60 @@ public class LayeredPanel extends JPanel{
 		
 		Image img = board.getImage();
 		Rectangle dimBoard = new Rectangle(0,(int)(board.getIconWidth()/factorScaleBoard),0, (int)(board.getIconHeight()/factorScaleBoard));
-		Image image = getScaledImage(img, dimBoard);
+		Image image = MyImage.getScaledImage(img, dimBoard);
 		ImageIcon board = new ImageIcon(image);
 	
-        mapIcon = new JLabel(board);
-        mapIcon.setBounds(0, 0, board.getIconWidth(), board.getIconHeight());
-       
+        JLabel mapLabel = new JLabel(board);
+        mapLabel.setBounds(0, 0, board.getIconWidth(), board.getIconHeight());
+        System.out.println(mapLabel.getIcon());
+        layeredPane.add(mapLabel, new Integer(20), 0);
+        
+		/*Image img1 = orangeDice.getImage();
+		Rectangle dimDice = AdaptiveLayout.getOrangeDiceSpace(factorScaleBoard);
+		//Rectangle r = new Rectangle(dimDice.getInitx(), dimDice.getFinalx(), dimDice.getInity(), dimDice.getFinaly());
+		Image imag1 = MyImage.getScaledImage(img1, dimDice);
+		ImageIcon b = new ImageIcon(imag1);
+		System.out.println("image dim " + b.getIconWidth() + " " + b.getIconHeight() );*/
+		
+		/*JLabel p = new JLabel();
+		p.setIcon(orangeDice);
+		p.setBounds(200, 200, orangeDice.getIconWidth(), orangeDice.getIconHeight());*/
+		Rectangle dimDice1 = AdaptiveLayout.getOrangeDiceSpace(factorScaleBoard);
+		JLabel la = MyImage.getScaledImageinLabel("./image/dice/orange.jpg", dimDice1);
+		layeredPane.add(la, new Integer(2000));
+	
+		
+	
+       /* JLabel diceLabel = new JLabel(b);
+        diceLabel.setBounds(dimDice.getInitx(), dimDice.getInity(), dimDice.getOffsetX(), dimDice.getOffsetY());
+        System.out.println("label bounds "  + dimDice.getInitx() + " " + dimDice.getInity() + " " + diceLabel.getWidth() + " " + diceLabel.getHeight());
+        System.out.println(diceLabel.getIcon());
+        //diceLabel.setOpaque(true);
+        layeredPane.add(diceLabel, new Integer(2000),0);*/
+        
+        
+        /*
+        Rectangle dimDice = AdaptiveLayout.getOrangeDiceSpace(factorScaleBoard);
+        JLabel la = MyImage.getScaledImageinLabel("./image/dice/orange.jpg", dimDice);
+        la.setOpaque(true);
+        
+        ImageIcon orangeDice = MyImage.createImageIcon("./image/dice/orangeDice.jpg");
+        Image imageDice = MyImage.getScaledImage(orangeDice.getImage(), dimDice);
+        ImageIcon orangeDic = new ImageIcon(imageDice);
+        
+        JLabel diceLabel = new JLabel(orangeDic);
+        //diceLabel.setIcon(orangeDice);
+        diceLabel.setBounds(dimDice.getInitx(), dimDice.getInity(), orangeDice.getIconWidth(), orangeDice.getIconHeight());
+        //diceLabel.setVisible(true);
+        //diceLabel.setOpaque(true);
+        System.out.println("dice dim " + dimDice.getInitx() + " " + dimDice.getInity() + " "  + orangeDice.getIconWidth() + " " + orangeDice.getIconHeight());
+        layeredPane.add(diceLabel, new Integer(100),0);
+        System.out.println(diceLabel.getIcon());*/
         
         //cardIcon = new JLabel(card);
   
         //cardIcon.setBounds(200, 100, card.getIconWidth(), card.getIconHeight());
        
-        
-        layeredPane.add(mapIcon, new Integer(20), 0);
         //layeredPane.add(cardIcon, new Integer(25), 0);
 		
 		terrTower = new TowerPanel("Territory", factorScaleBoard, new TerritoryListener());
@@ -123,23 +163,7 @@ public class LayeredPanel extends JPanel{
         
 	}
 	
-	public static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = LayeredPanel.class.getResource(path);
-        if (imgURL != null) {
-            return new ImageIcon(imgURL);
-        } else {
-            System.err.println("Couldn't find file: " + path);
-            return null;
-        }
-    }
-	
-	/*private ImageIcon createScaledImageIcon(String path, double factorScale){
-		ImageIcon icon = createImageIcon(path);
-		Image image = icon.getImage();
-		Rectangle dim = new Rectangle(0,0,(int)(icon.getIconWidth()/factorScale), (int)(icon.getIconHeight()/factorScale));
-		Image img = getScaledImage(image, dim);
-		return new ImageIcon(img);
-	}*/
+
 	
 	private void spinFamiliar(){
 		JLabel spinLab = new JLabel("familiar");
@@ -166,16 +190,6 @@ public class LayeredPanel extends JPanel{
 		Rectangle m2 = AdaptiveLayout.getCardDevelopmentSpace(factorScale, tower, 3);
 		c.setBounds(m2.getInitx(), m2.getInity(), m1.getFinalx() - m1.getInitx(), m1.getFinaly() - m2.getInity());
 		c.setVisible(true);
-	}
-
-	private Image getScaledImage(Image srcImg, Rectangle dim){
-	    BufferedImage resizedImg = new BufferedImage(dim.getOffsetX(), dim.getOffsetY(), BufferedImage.TYPE_INT_ARGB);
-	    Graphics2D g2 = resizedImg.createGraphics();
-	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    g2.drawImage(srcImg, dim.getInitx(), dim.getInity(), dim.getFinalx(), dim.getFinaly(), null);
-	    g2.dispose();
-
-	    return resizedImg;
 	}
 
 	
