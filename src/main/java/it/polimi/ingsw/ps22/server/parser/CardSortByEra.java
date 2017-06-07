@@ -4,6 +4,7 @@ import it.polimi.ingsw.ps22.server.card.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class CardSortByEra {
 
@@ -19,6 +20,14 @@ public class CardSortByEra {
 				temp.add(el);
 				card.put(el.getEra(), temp);
 			}
+		}
+		for (Integer el : card.keySet()) {
+			ArrayList<CardCharacter> temp = new ArrayList<CardCharacter>();
+			Random random = new Random();
+			while (!card.get(el).isEmpty()) {
+				temp.add(card.get(el).remove(random.nextInt(card.get(el).size())));
+			}
+			card.put(el, temp);
 		}
 		return card;
 	}
@@ -36,6 +45,14 @@ public class CardSortByEra {
 				card.put(el.getEra(), temp);
 			}
 		}
+		for (Integer el : card.keySet()) {
+			ArrayList<CardVenture> temp = new ArrayList<CardVenture>();
+			Random random = new Random();
+			while (!card.get(el).isEmpty()) {
+				temp.add(card.get(el).remove(random.nextInt(card.get(el).size())));
+			}
+			card.put(el, temp);
+		}
 		return card;
 	}
 
@@ -52,6 +69,14 @@ public class CardSortByEra {
 				card.put(el.getEra(), temp);
 			}
 		}
+		for (Integer el : card.keySet()) {
+			ArrayList<CardBuilding> temp = new ArrayList<CardBuilding>();
+			Random random = new Random();
+			while (!card.get(el).isEmpty()) {
+				temp.add(card.get(el).remove(random.nextInt(card.get(el).size())));
+			}
+			card.put(el, temp);
+		}
 		return card;
 	}
 
@@ -67,6 +92,14 @@ public class CardSortByEra {
 				temp.add(el);
 				card.put(el.getEra(), temp);
 			}
+		}
+		for (Integer el : card.keySet()) {
+			ArrayList<CardTerritory> temp = new ArrayList<CardTerritory>();
+			Random random = new Random();
+			while (!card.get(el).isEmpty()) {
+				temp.add(card.get(el).remove(random.nextInt(card.get(el).size())));
+			}
+			card.put(el, temp);
 		}
 		return card;
 	}
