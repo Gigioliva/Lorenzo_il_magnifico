@@ -21,7 +21,7 @@ public class ConnectionSocket extends Connection {
 
 	private String name;
 
-	private boolean active = true;
+	private boolean active = false;
 
 	public ConnectionSocket(Socket socket, Server server) {
 		this.socket=socket;
@@ -34,11 +34,15 @@ public class ConnectionSocket extends Connection {
 		try{
 			in = new ObjectInputStream(socket.getInputStream());  //ricordarsi di aprire prima l'output nel client
 			out = new ObjectOutputStream(socket.getOutputStream());
-			GenericMessage mex=new GenericMessage();
-			mex.setString("Who are you?");
-			send(mex);
-			name = ((GenericMessage)in.readObject()).getString();
-			server.rednezvous(this, name);
+			do{
+				GenericMessage mex=new GenericMessage();
+				mex.setString("Who are you?");
+				send(mex);
+				name = ((GenericMessage)in.readObject()).getString();
+				server.rednezvous(this, name);
+			}while(!active);
+			out.writeObject(name);
+			out.flush();
 			while(active){				
 				setChanged();
 				notifyObservers(in.readObject());
@@ -55,6 +59,7 @@ public class ConnectionSocket extends Connection {
 	public void send(GenericMessage message) {
 		try {
 			out.writeObject(message);
+			out.flush();
 		} catch (IOException e) {
 			System.out.println("Errore nell'invio messaggio");
 		}
@@ -65,6 +70,7 @@ public class ConnectionSocket extends Connection {
 	public void send(Model model) {
 		try {
 			out.writeObject(model);
+			out.flush();
 		} catch (IOException e) {
 			System.out.println("Errore nell'invio messaggio");
 		}
@@ -85,6 +91,10 @@ public class ConnectionSocket extends Connection {
 		closeConnection();		
 		System.out.println("Deregistro il client!");
 		server.deregisterConnection(this);
+	}
+	
+	public void setActive(){
+		active=true;
 	}
 
 }

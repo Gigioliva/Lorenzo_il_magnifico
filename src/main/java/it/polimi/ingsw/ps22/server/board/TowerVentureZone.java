@@ -11,11 +11,11 @@ import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class TowerVentureZone extends TowerZone {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	public TowerVentureZone(Board board) {
-		super(board);
+	public TowerVentureZone() {
+		super();
 		// leggi da file e carica usando addCards le carte nelle torri
 
 	}
@@ -24,7 +24,7 @@ public class TowerVentureZone extends TowerZone {
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementVenture").getQuantity();
-		if (!(family.isPlaced())
+		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& checkAllSpace(player) && checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
@@ -44,6 +44,7 @@ public class TowerVentureZone extends TowerZone {
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 		}
+		setOccupied();
 	}
 
 	public void takeCard(int actionSpace, Player player) {
@@ -69,8 +70,8 @@ public class TowerVentureZone extends TowerZone {
 
 	public void payCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		towerSpace.getCard().applyCostToPlayer(player, possibleCost.get(choice));
-		towerSpace.getCard().applyImmediateEffects(player, board);
-		towerSpace.getCard().loadEndEffects(player, board);
+		towerSpace.getCard().applyImmediateEffects(player);
+		towerSpace.getCard().loadEndEffects(player);
 		player.getDevelopmentCard("Venture").add(towerSpace.getCard());
 		towerSpace.removeCard();
 	}

@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.model.Model;
 
@@ -45,22 +44,25 @@ public class Server {
 	 * Mi metto in attesa di altri giocatori
 	 */
 	public synchronized void rednezvous(Connection c, String name){
-		waitingConnection.put(name, c);
-		if(waitingConnection.size() == 4){								//impostare un timer se non si arriva a 4
-			ArrayList<Connection> temp=new ArrayList<Connection>();
-			Model model = new Model();
-			Controller controller = new Controller(model);
-			for(String el: waitingConnection.keySet()){
-				Connection con =waitingConnection.get(el);
-				RemoteView player=new RemoteView(el, con);
-				model.addPlayers(el);
-				model.addObserver(player);
-				player.addObserver(controller);
-				temp.add(con);	
-			}
-			playingConnection.put(playingConnection.size(), temp);
-			waitingConnection.clear();
-			model.startGame();
+		if(!waitingConnection.containsKey(name)){
+			c.setActive();
+			waitingConnection.put(name, c);
+			if(waitingConnection.size() == 4){								//impostare un timer se non si arriva a 4
+				ArrayList<Connection> temp=new ArrayList<Connection>();
+				Model model = new Model();
+				Controller controller = new Controller(model);
+				for(String el: waitingConnection.keySet()){
+					Connection con =waitingConnection.get(el);
+					RemoteView player=new RemoteView(el, con);
+					model.addPlayers(el);
+					model.addObserver(player);
+					player.addObserver(controller);
+					temp.add(con);	
+				}
+				playingConnection.put(playingConnection.size(), temp);
+				waitingConnection.clear();
+				model.startGame();
+			}	
 		}
 	}
 	
@@ -88,7 +90,7 @@ public class Server {
 			server.run();
 		} catch (IOException e) {
 			System.err.println("Impossibile inizializzare il server: " + e.getMessage() + "!");
-		}		
+		}
 	}
 
 }

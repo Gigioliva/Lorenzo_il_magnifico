@@ -24,7 +24,7 @@ public class HarvestZone extends Zone {
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player=family.getPlayer();
 		int actionValue=family.getValue() + player.getBonusAcc().getBonus("IncrementHarvest").getQuantity();
-		if (!(family.isPlaced()) && harvestSpace[actionSpace].isPlayable() && (harvestSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
+		if (0<=actionSpace && actionSpace<=NUM_SPACES && !(family.isPlaced()) && harvestSpace[actionSpace].isPlayable() && (harvestSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& checkAllSpace(player) && checkActionValue(numServant, harvestSpace[actionSpace], family, actionValue)) {
 			return true;
 		}

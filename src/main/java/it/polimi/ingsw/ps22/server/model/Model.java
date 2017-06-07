@@ -8,6 +8,7 @@ import java.util.Observable;
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
+import it.polimi.ingsw.ps22.server.message.ChoiceMove;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.player.Family;
@@ -118,6 +119,7 @@ public class Model extends Observable implements Serializable {
 				return;
 			}
 		}
+		notifyMessage(new ChoiceMove());
 	}
 
 	private void newGiro() {
@@ -224,7 +226,9 @@ public class Model extends Observable implements Serializable {
 	}
 
 	public void notifyAsk(MessageAsk ask) {
-		waitAnswer.add(ask);
+		if(!waitAnswer.contains(ask)){
+			waitAnswer.add(ask);
+		}
 		setChanged();
 		notifyObservers(ask);
 	}
@@ -257,6 +261,7 @@ public class Model extends Observable implements Serializable {
 			cardLeaderStart = null;
 			playerGame = orderedPlayers.get(0);
 			notifyModel();
+			notifyMessage(new ChoiceMove());
 		} else {
 			if(nextDraft()){
 				draftLeader();

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.server.message;
-
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class ErrorMove extends GenericMessage {
 
@@ -10,7 +11,11 @@ public class ErrorMove extends GenericMessage {
 		setString("Mossa errata. Riprova");
 	}
 	
-	public GenericMessage accept(Visitor visitor){
+	public GenericMessage accept(VisitorA visitor){
+		return visitor.visit(this);
+	}
+	
+	public GenericAnswer accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
 

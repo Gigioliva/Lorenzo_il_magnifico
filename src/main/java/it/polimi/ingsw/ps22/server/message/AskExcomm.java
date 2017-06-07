@@ -1,7 +1,9 @@
 package it.polimi.ingsw.ps22.server.message;
 
+import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.AnswerExcomm;
 import it.polimi.ingsw.ps22.server.player.Player;
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class AskExcomm extends MessageAsk{
 
@@ -24,7 +26,11 @@ public class AskExcomm extends MessageAsk{
 		return player;
 	}
 	
-	public AskExcomm accept(Visitor visitor){
+	public AskExcomm accept(VisitorA visitor){
+		return visitor.visit(this);
+	}
+	
+	public AnswerExcomm accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
 

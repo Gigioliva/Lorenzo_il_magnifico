@@ -13,13 +13,12 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 public class TowerZone extends Zone {
 
 	private static final long serialVersionUID = 1L;
-	private transient static final int NUM_SPACES = 4;
+	protected transient static final int NUM_SPACES = 4;
 	protected TowerSpace[] towerSpaces;
 	protected transient boolean occupied;
 	private HashMap<Integer, ArrayList<DevelopmentCard>> cards;
-	protected transient Board board;
 
-	public TowerZone(Board board) {
+	public TowerZone() {
 		towerSpaces = new TowerSpace[NUM_SPACES];
 		towerSpaces[0] = new TowerSpace(1, false, 1);
 		towerSpaces[1] = new TowerSpace(3, false, 2);
@@ -27,12 +26,7 @@ public class TowerZone extends Zone {
 		towerSpaces[3] = new TowerSpace(7, false, 4);
 		this.occupied = false;
 		cards = new HashMap<Integer, ArrayList<DevelopmentCard>>();
-		this.board = board;
 		// leggere da file le carte e bonus azione
-	}
-
-	protected void addCards(int turn, ArrayList<DevelopmentCard> cards) {
-		this.cards.put(turn, cards);
 	}
 
 	protected void setOccupied() {
@@ -115,11 +109,11 @@ public class TowerZone extends Zone {
 
 	@Override
 	public void reset(int turn) {
+		this.occupied=false;
 		ArrayList<DevelopmentCard> temp = cards.get(turn);
 		for (int i = 0; i < NUM_SPACES; i++) {
 			towerSpaces[i].resetFamily();
 			towerSpaces[i].addCard(temp.get(i));
-			// aggiungo le carte nei vari piani
 		}
 	}
 	

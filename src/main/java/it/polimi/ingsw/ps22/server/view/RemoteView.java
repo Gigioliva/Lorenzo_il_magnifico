@@ -27,7 +27,7 @@ public class RemoteView extends View implements Observer{
 			showModel((Model)o);
 		}
 		if(o instanceof Model && arg instanceof GenericMessage){
-			GenericMessage mex=((GenericMessage)arg).accept(new Visitor(username, ((Model)o).getPlayerGame()));
+			GenericMessage mex=((GenericMessage)arg).accept(new VisitorA(username, ((Model)o).getPlayerGame()));
 			if(mex!=null){
 				connection.send(mex);
 			}

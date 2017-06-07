@@ -2,7 +2,9 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.io.Serializable;
 
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class GenericMessage implements Serializable {
 	
@@ -17,8 +19,12 @@ public class GenericMessage implements Serializable {
 		this.ask = str;
 	}
 	
-	public GenericMessage accept(Visitor visitor){
+	public GenericMessage accept(VisitorA visitor){
 		return null;
+	}
+	
+	public GenericAnswer accept(VisitorB visitor){
+		return visitor.visit(this);
 	}
 
 }

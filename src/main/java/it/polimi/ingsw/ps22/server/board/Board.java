@@ -29,10 +29,10 @@ public class Board implements Serializable {
 		church.put(6, new ChurchSpace(3));
 		dice = new Dice();
 		towers = new HashMap<String, TowerZone>();
-		towers.put("Building", new TowerBuildingZone(this));
-		towers.put("Character", new TowerCharacterZone(this));
-		towers.put("Territory", new TowerTerritoryZone(this));
-		towers.put("Venture", new TowerVentureZone(this));
+		towers.put("Building", new TowerBuildingZone());
+		towers.put("Character", new TowerCharacterZone());
+		towers.put("Territory", new TowerTerritoryZone());
+		towers.put("Venture", new TowerVentureZone());
 	}
 
 	public TowerZone getTower(String type) {

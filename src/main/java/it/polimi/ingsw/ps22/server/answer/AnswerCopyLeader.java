@@ -42,6 +42,7 @@ public class AnswerCopyLeader extends GenericAnswer {
 				model.getWaitAnswer().remove(ask);
 				return;
 			}
+			model.notifyAsk(ask);
 		}
 		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();

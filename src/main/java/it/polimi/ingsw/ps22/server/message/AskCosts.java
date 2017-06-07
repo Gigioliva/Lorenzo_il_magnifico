@@ -3,11 +3,13 @@ package it.polimi.ingsw.ps22.server.message;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.AnswerCosts;
 import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class AskCosts extends MessageAsk {
 	private static final long serialVersionUID = 1L;
@@ -76,7 +78,11 @@ public class AskCosts extends MessageAsk {
 			return new HashMap<String, ResourceAbstract>();
 	}
 	
-	public AskCosts accept(Visitor visitor){
+	public AskCosts accept(VisitorA visitor){
+		return visitor.visit(this);
+	}
+	
+	public AnswerCosts accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
 

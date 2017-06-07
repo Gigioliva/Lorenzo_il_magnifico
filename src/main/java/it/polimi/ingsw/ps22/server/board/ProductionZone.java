@@ -24,7 +24,7 @@ public class ProductionZone extends Zone {
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementProduction").getQuantity();
-		if (!(family.isPlaced()) && productionSpace[actionSpace].isPlayable()
+		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced()) && productionSpace[actionSpace].isPlayable()
 				&& (productionSpace[actionSpace].controlPlacement()
 						|| player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& checkAllSpace(player)

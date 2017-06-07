@@ -3,11 +3,13 @@ package it.polimi.ingsw.ps22.server.message;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
+import it.polimi.ingsw.ps22.server.answer.AnswerEffect;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.player.Player;
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class AskEffect extends MessageAsk {
 	
@@ -48,7 +50,11 @@ public class AskEffect extends MessageAsk {
 		return player;
 	}
 	
-	public AskEffect accept(Visitor visitor){
+	public AskEffect accept(VisitorA visitor){
+		return visitor.visit(this);
+	}
+	
+	public AnswerEffect accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
 	

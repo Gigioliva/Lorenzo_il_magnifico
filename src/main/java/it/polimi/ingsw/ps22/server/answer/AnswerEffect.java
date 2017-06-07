@@ -47,6 +47,7 @@ public class AnswerEffect extends GenericAnswer {
 						GenericMessage mex = new GenericMessage();
 						mex.setString("risposta errata");
 						model.notifyMessage(mex);
+						model.notifyAsk(ask);
 						return;
 					}
 					i++;
@@ -61,6 +62,7 @@ public class AnswerEffect extends GenericAnswer {
 						GenericMessage mex = new GenericMessage();
 						mex.setString("risposta errata");
 						model.notifyMessage(mex);
+						model.notifyAsk(ask);
 						return;
 					}
 				}
@@ -68,6 +70,7 @@ public class AnswerEffect extends GenericAnswer {
 				model.getWaitAnswer().remove(ask);
 				return;
 			}
+			model.notifyAsk(ask);
 		}
 		// applicato solo se tutto non va bene
 		GenericMessage mex = new GenericMessage();

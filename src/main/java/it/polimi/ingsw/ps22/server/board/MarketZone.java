@@ -24,7 +24,7 @@ public class MarketZone extends Zone {
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue();
-		if (!(family.isPlaced()) && marketSpace[actionSpace].isPlayable()
+		if (0<=actionSpace && actionSpace<=NUM_SPACES && !(family.isPlaced()) && marketSpace[actionSpace].isPlayable()
 				&& (marketSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& player.getSpecBonus().returnBool("NotMarket")
 				&& checkActionValue(numServant, marketSpace[actionSpace], family, actionValue)) {

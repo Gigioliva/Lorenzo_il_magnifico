@@ -13,7 +13,7 @@ public abstract class FamilyMove extends Move{
 	public FamilyMove(String username, Color color, int space, int numServant){
 		super(username);
 		this.color=color;
-		this.space=space;
+		this.space=space-1;
 		this.numServant=numServant;
 	}
 	

@@ -8,15 +8,15 @@ public class TowerTerritoryZone extends TowerZone {
 	
 	private static final long serialVersionUID = 1L;
 
-	public TowerTerritoryZone(Board board) {
-		super(board);
+	public TowerTerritoryZone() {
+		super();
 	}
 
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementTerritory").getQuantity();
-		if (!(family.isPlaced())
+		if (0<=actionSpace && actionSpace<=NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& checkAllSpace(player) && checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
@@ -36,13 +36,11 @@ public class TowerTerritoryZone extends TowerZone {
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 		}
-		towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
-		player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
-		towerSpaces[actionSpace].removeCard();
+		setOccupied();
 	}
 	
 	public void takeCard(int actionSpace, Player player){
-		towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
+		towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
 		player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
 		towerSpaces[actionSpace].removeCard();
 	}

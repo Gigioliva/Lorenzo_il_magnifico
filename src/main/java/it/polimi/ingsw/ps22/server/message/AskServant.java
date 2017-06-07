@@ -1,7 +1,8 @@
 package it.polimi.ingsw.ps22.server.message;
-
+import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.Action;
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.server.answer.AnswerServant;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class AskServant extends MessageAsk {
 	
@@ -25,7 +26,11 @@ public class AskServant extends MessageAsk {
 		model.notifyAsk(this);
 	}
 	
-	public AskServant accept(Visitor visitor){
+	public AskServant accept(VisitorA visitor){
+		return visitor.visit(this);
+	}
+	
+	public AnswerServant accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
 

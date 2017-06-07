@@ -2,9 +2,11 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.AnswerCopyLeader;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.player.Player;
-import it.polimi.ingsw.ps22.server.view.Visitor;
+import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class AskCopyLeader extends MessageAsk {
 
@@ -42,7 +44,11 @@ public class AskCopyLeader extends MessageAsk {
 		return leaders;
 	}
 
-	public AskCopyLeader accept(Visitor visitor){
+	public AskCopyLeader accept(VisitorA visitor){
+		return visitor.visit(this);
+	}
+	
+	public AnswerCopyLeader accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
 }

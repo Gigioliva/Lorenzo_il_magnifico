@@ -29,17 +29,18 @@ public class AnswerCouncilPrivilege extends GenericAnswer {
 				ask=(AskCouncilPrivilege)el;
 			}
 		}
-		for(int i=0; i<answer.size();i++){
-			for(int j=i+1; j<answer.size();j++){
-				if(answer.get(i)==answer.get(j)){
-					GenericMessage mex=new GenericMessage();
-					mex.setString("risposta errata");
-					model.notifyMessage(mex);
-					return;
+		if(ask!=null){
+			for(int i=0; i<answer.size();i++){
+				for(int j=i+1; j<answer.size();j++){
+					if(answer.get(i)==answer.get(j) || (answer.get(i)<=0 && answer.get(i)>5)){
+						GenericMessage mex=new GenericMessage();
+						mex.setString("risposta errata");
+						model.notifyMessage(mex);
+						model.notifyAsk(ask);
+						return;
+					}
 				}
 			}
-		}
-		if(ask!=null){
 			if(answer.size()==ask.getNumChoice()){
 				Player player=ask.getPlayer();
 				HashMap<String, ResourceAbstract> temp=CouncilPrivilege.exchangeWithResources(answer);
@@ -50,6 +51,7 @@ public class AnswerCouncilPrivilege extends GenericAnswer {
 				model.getWaitAnswer().remove(ask);
 				return;
 			}
+			model.notifyAsk(ask);
 		}
 		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();

@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
@@ -51,7 +49,7 @@ public class CardVenture extends DevelopmentCard {
 		}
 	}
 	
-	public void loadEndEffects(Player player, Board board) {
+	public void loadEndEffects(Player player) {
 		//Accedi a player e caricali nel EndEffect Arraylist
 		try{
 			player.getEndEffects().addAll(endEffects);

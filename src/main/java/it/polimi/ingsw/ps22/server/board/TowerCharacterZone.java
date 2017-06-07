@@ -11,15 +11,15 @@ public class TowerCharacterZone extends TowerZone {
 	
 	private static final long serialVersionUID = 1L;
 
-	public TowerCharacterZone(Board board) {
-		super(board);
+	public TowerCharacterZone() {
+		super();
 	}
 
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementCharacter").getQuantity();
-		if (!(family.isPlaced())
+		if (0<=actionSpace && actionSpace<=NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& checkAllSpace(player) && checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
@@ -39,11 +39,12 @@ public class TowerCharacterZone extends TowerZone {
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 		}
+		setOccupied();
 	}
 	
 	public void takeCard(int actionSpace, Player player){
 		towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
-		towerSpaces[actionSpace].getCard().applyImmediateEffects(player, board);
+		towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
 		player.getDevelopmentCard("Character").add(towerSpaces[actionSpace].getCard());
 		towerSpaces[actionSpace].removeCard();
 	}

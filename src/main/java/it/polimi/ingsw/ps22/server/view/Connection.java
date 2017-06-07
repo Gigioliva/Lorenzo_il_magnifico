@@ -10,5 +10,7 @@ public abstract class Connection extends Observable implements Runnable {
 	public abstract void send(GenericMessage message);
 	
 	public abstract void send(Model model);
+	
+	public abstract void setActive();
 
 }
