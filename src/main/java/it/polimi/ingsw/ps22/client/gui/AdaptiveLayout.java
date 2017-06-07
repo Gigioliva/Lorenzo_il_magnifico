@@ -29,6 +29,7 @@ public class AdaptiveLayout {
 	private static final Rectangle victorySlotFrom51To69 = new Rectangle(2370,2450,3660,3740);
 	private static final Rectangle victorySlot70 = new Rectangle(50,130,3630,3710);
 	private static final Rectangle victorySlotFrom71To99 = new Rectangle(5,85,3490,3570);
+	private static final Rectangle familiar = new Rectangle(512,612,360,460);
 	private static final int cardDevelopmentStartOffsetX = 183;
 	private static final int cardDevelopmentStartOffsetY = 193;
 	private static final int cardDevelopmentHeight = 446;
@@ -39,6 +40,21 @@ public class AdaptiveLayout {
 	private static final int inChurchOffsetX = 486;
 	private static final int outChurchOffsetX = 114;
 	private static final int victoryPointOffsetXY = 120;
+	private static final int familiarOffsetX = 508;
+	private static final int familiarOffsetY = 473;
+	
+
+	public static Rectangle getFamiliarSpace(double resizeFactor, int towerNumber, int towerSlot) {
+		//deve essere da 0 a tre per entrambi
+		towerSlot = 3 - towerSlot;
+		Rectangle temp = new Rectangle(
+				(familiar.getInitx()+(towerNumber*familiarOffsetX)),
+				(familiar.getFinalx()+(towerNumber*familiarOffsetX)),
+				(familiar.getInity()+(towerSlot*familiarOffsetY)),
+				(familiar.getFinaly()+(towerSlot*familiarOffsetY))
+				);
+		return temp.resize(resizeFactor);
+	}
 	
 	public static Rectangle getVictorySlotSpace(double resizeFactor, int slot) { 
 		Rectangle temp;
@@ -111,10 +127,6 @@ public class AdaptiveLayout {
 		}
 		return null;
 	}
-	
-	
-	
-	
 	
 	public static Rectangle getChurchSpace(double resizeFactor, int era) { 
 		//era deve essere 1, 2 o 3
@@ -227,12 +239,10 @@ public class AdaptiveLayout {
 		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
-		// towerNumber--;
-		// towerSlot--;
 		initx += ((cardDevelopmentOffsetX + cardDevelopmentWidth) * towerNumber);
 		inity += ((cardDevelopmentOffsetY + cardDevelopmentHeight) * towerSlot);
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
 		return temp.resize(resizeFactor);
 	}
-
+	
 }

@@ -66,13 +66,10 @@ public class Rectangle {
 		ArrayList<Rectangle> toReturn = new ArrayList<Rectangle>();
 		toReturn.add(new Rectangle(toDivide.getInitx(),(toDivide.getInitx()+toDivide.getOffsetX()/2),
 									toDivide.getInity(),(toDivide.getInity()+toDivide.getOffsetY()/2)));
-		
 		toReturn.add(new Rectangle((toDivide.getInitx()+toDivide.getOffsetX()/2),toDivide.getFinalx(),
 									toDivide.getInity(),(toDivide.getInity()+toDivide.getOffsetY()/2)));
-		
 		toReturn.add(new Rectangle(toDivide.getInitx(),(toDivide.getInitx()+toDivide.getOffsetX()/2),
 									(toDivide.getInity()+toDivide.getOffsetY()/2),toDivide.getFinaly()));
-		
 		toReturn.add(new Rectangle((toDivide.getInitx()+toDivide.getOffsetX()/2),toDivide.getFinalx(),
 									(toDivide.getInity()+toDivide.getOffsetY()/2),toDivide.getFinaly()));
 		return toReturn;
