@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 public class AdaptiveLayout {
-	
+
 	private static final Rectangle orangeDice = new Rectangle(1876, 2005, 3414, 3540);
 	private static final Rectangle whiteDice = new Rectangle(1634, 1762, 3414, 3540);
 	private static final Rectangle blackDice = new Rectangle(1390, 1520, 3414, 3540);
@@ -15,21 +15,23 @@ public class AdaptiveLayout {
 	private static final Rectangle market3 = new Rectangle(1860, 2064, 3038, 3262);
 	private static final Rectangle market4 = new Rectangle(2032, 2240, 3210, 3432);
 	private static final Rectangle playerGrid = new Rectangle(2042, 2148, 2000, 2106);
-	private static final Rectangle church1 = new Rectangle(508,685,2263,2623);
-	private static final Rectangle church2 = new Rectangle(704,883,2307,2654);
-	private static final Rectangle church3 = new Rectangle(901,1078,2263,2623);
-	private static final Rectangle faithSlotFrom1To3 = new Rectangle(169,274,2738,2845);
-	private static final Rectangle faithSlotFrom3To5 = new Rectangle(518,693,2738,2845);
-	private static final Rectangle faithSlotFrom6To15 = new Rectangle(1077,1182,2738,2845);
-	private static final Rectangle victorySlot0 = new Rectangle(50,130,35,115);
-	private static final Rectangle victorySlotFrom1To19 = new Rectangle(195,275,5,85);
-	private static final Rectangle victorySlot20 = new Rectangle(2520,2600,35,115);
-	private static final Rectangle victorySlotFrom21To49 = new Rectangle(2565,2645,170,250);
-	private static final Rectangle victorySlot50 = new Rectangle(2520,2600,3630,3710);
-	private static final Rectangle victorySlotFrom51To69 = new Rectangle(2370,2450,3660,3740);
-	private static final Rectangle victorySlot70 = new Rectangle(50,130,3630,3710);
-	private static final Rectangle victorySlotFrom71To99 = new Rectangle(5,85,3490,3570);
-	private static final Rectangle familiar = new Rectangle(512,612,360,460);
+	private static final Rectangle church1 = new Rectangle(508, 685, 2263, 2623);
+	private static final Rectangle church2 = new Rectangle(704, 883, 2307, 2654);
+	private static final Rectangle church3 = new Rectangle(901, 1078, 2263, 2623);
+	private static final Rectangle faithSlotFrom1To3 = new Rectangle(169, 274, 2738, 2845);
+	private static final Rectangle faithSlotFrom3To5 = new Rectangle(518, 693, 2738, 2845);
+	private static final Rectangle faithSlotFrom6To15 = new Rectangle(1077, 1182, 2738, 2845);
+	private static final Rectangle victorySlot0 = new Rectangle(50, 130, 35, 115);
+	private static final Rectangle victorySlotFrom1To19 = new Rectangle(195, 275, 5, 85);
+	private static final Rectangle victorySlot20 = new Rectangle(2520, 2600, 35, 115);
+	private static final Rectangle victorySlotFrom21To49 = new Rectangle(2565, 2645, 170, 250);
+	private static final Rectangle victorySlot50 = new Rectangle(2520, 2600, 3630, 3710);
+	private static final Rectangle victorySlotFrom51To69 = new Rectangle(2370, 2450, 3660, 3740);
+	private static final Rectangle victorySlot70 = new Rectangle(50, 130, 3630, 3710);
+	private static final Rectangle victorySlotFrom71To99 = new Rectangle(5, 85, 3490, 3570);
+	private static final Rectangle familiar = new Rectangle(512, 612, 360, 460);
+	private static final Rectangle militarySlotFrom1 = new Rectangle(2300, 2380, 3240, 3320);
+	private static final Rectangle militarySlot0 = new Rectangle(2300, 2380, 3400, 3480);
 	private static final int cardDevelopmentStartOffsetX = 183;
 	private static final int cardDevelopmentStartOffsetY = 193;
 	private static final int cardDevelopmentHeight = 446;
@@ -42,106 +44,125 @@ public class AdaptiveLayout {
 	private static final int victoryPointOffsetXY = 120;
 	private static final int familiarOffsetX = 508;
 	private static final int familiarOffsetY = 473;
-	
+	private static final int militaryOffsetY = 127;
+	private static final int addingMilitaryOffsetY = 15;
+
+	public static Rectangle getMilitarySlotSpace(double resizeFactor, int slot) {
+		slot = slot % 26;
+		if (slot > 0) {
+			Rectangle temp = new Rectangle(militarySlotFrom1.getInitx(), militarySlotFrom1.getFinalx(),
+					(militarySlotFrom1.getInity() - ((slot - 1) * militaryOffsetY)),
+					(militarySlotFrom1.getFinaly() - ((slot - 1) * militaryOffsetY)));
+			if (slot > 2) {
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+			}
+			if (slot > 6) {
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+			}
+			if (slot > 11) {
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+			}
+			if (slot > 17) {
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+			}
+			return temp.resize(resizeFactor);
+		} else
+			return militarySlot0.resize(resizeFactor);
+	}
 
 	public static Rectangle getFamiliarSpace(double resizeFactor, int towerNumber, int towerSlot) {
-		//deve essere da 0 a tre per entrambi
+		// deve essere da 0 a tre per entrambi
 		towerSlot = 3 - towerSlot;
-		Rectangle temp = new Rectangle(
-				(familiar.getInitx()+(towerNumber*familiarOffsetX)),
-				(familiar.getFinalx()+(towerNumber*familiarOffsetX)),
-				(familiar.getInity()+(towerSlot*familiarOffsetY)),
-				(familiar.getFinaly()+(towerSlot*familiarOffsetY))
-				);
+		Rectangle temp = new Rectangle((familiar.getInitx() + (towerNumber * familiarOffsetX)),
+				(familiar.getFinalx() + (towerNumber * familiarOffsetX)),
+				(familiar.getInity() + (towerSlot * familiarOffsetY)),
+				(familiar.getFinaly() + (towerSlot * familiarOffsetY)));
 		return temp.resize(resizeFactor);
 	}
-	
-	public static Rectangle getVictorySlotSpace(double resizeFactor, int slot) { 
+
+	public static Rectangle getVictorySlotSpace(double resizeFactor, int slot) {
 		Rectangle temp;
-		slot=slot%100;
-		if(slot==0) {
+		slot = slot % 100;
+		if (slot == 0) {
 			return victorySlot0.resize(resizeFactor);
 		}
-		if(slot==20) {
+		if (slot == 20) {
 			return victorySlot20.resize(resizeFactor);
 		}
-		if(slot==50) {
+		if (slot == 50) {
 			return victorySlot50.resize(resizeFactor);
 		}
-		if(slot==70) {
+		if (slot == 70) {
 			return victorySlot70.resize(resizeFactor);
 		}
-		if (slot>0 && slot<20) {
-			temp = new Rectangle(
-				(victorySlotFrom1To19.getInitx()+((slot-1)*victoryPointOffsetXY)),
-				(victorySlotFrom1To19.getFinalx()+((slot-1)*victoryPointOffsetXY)),
-				victorySlotFrom1To19.getInity(),victorySlotFrom1To19.getFinaly());
+		if (slot > 0 && slot < 20) {
+			temp = new Rectangle((victorySlotFrom1To19.getInitx() + ((slot - 1) * victoryPointOffsetXY)),
+					(victorySlotFrom1To19.getFinalx() + ((slot - 1) * victoryPointOffsetXY)),
+					victorySlotFrom1To19.getInity(), victorySlotFrom1To19.getFinaly());
 			return temp.resize(resizeFactor);
 		}
-		if (slot>20 && slot<50) {
-			temp = new Rectangle(
-					victorySlotFrom21To49.getInitx(),victorySlotFrom21To49.getFinalx(),
-					(victorySlotFrom21To49.getInity()+((slot-21)*victoryPointOffsetXY)),
-					(victorySlotFrom21To49.getFinaly()+((slot-21)*victoryPointOffsetXY)));
+		if (slot > 20 && slot < 50) {
+			temp = new Rectangle(victorySlotFrom21To49.getInitx(), victorySlotFrom21To49.getFinalx(),
+					(victorySlotFrom21To49.getInity() + ((slot - 21) * victoryPointOffsetXY)),
+					(victorySlotFrom21To49.getFinaly() + ((slot - 21) * victoryPointOffsetXY)));
 			return temp.resize(resizeFactor);
 		}
-		if (slot>50 && slot<70) {
-			temp = new Rectangle(
-					(victorySlotFrom51To69.getInitx()-((slot-51)*victoryPointOffsetXY)),
-					(victorySlotFrom51To69.getFinalx()-((slot-51)*victoryPointOffsetXY)),
-					victorySlotFrom51To69.getInity(),victorySlotFrom51To69.getFinaly());
+		if (slot > 50 && slot < 70) {
+			temp = new Rectangle((victorySlotFrom51To69.getInitx() - ((slot - 51) * victoryPointOffsetXY)),
+					(victorySlotFrom51To69.getFinalx() - ((slot - 51) * victoryPointOffsetXY)),
+					victorySlotFrom51To69.getInity(), victorySlotFrom51To69.getFinaly());
 			return temp.resize(resizeFactor);
 		}
-		if (slot>70 && slot<100) {
-			temp = new Rectangle(
-					victorySlotFrom71To99.getInitx(),victorySlotFrom71To99.getFinalx(),
-					(victorySlotFrom71To99.getInity()-((slot-71)*victoryPointOffsetXY)),
-					(victorySlotFrom71To99.getFinaly()-((slot-71)*victoryPointOffsetXY)));
+		if (slot > 70 && slot < 100) {
+			temp = new Rectangle(victorySlotFrom71To99.getInitx(), victorySlotFrom71To99.getFinalx(),
+					(victorySlotFrom71To99.getInity() - ((slot - 71) * victoryPointOffsetXY)),
+					(victorySlotFrom71To99.getFinaly() - ((slot - 71) * victoryPointOffsetXY)));
 			return temp.resize(resizeFactor);
 		}
 		return null;
 	}
-	
-	public static Rectangle getFaithSlotSpace(double resizeFactor, int slot) { 
+
+	public static Rectangle getFaithSlotSpace(double resizeFactor, int slot) {
 		Rectangle temp;
-		if (slot>=0 && slot<=2) {
-			temp = new Rectangle(
-				(faithSlotFrom1To3.getInitx()+(slot*outChurchOffsetX)),
-				(faithSlotFrom1To3.getFinalx()+(slot*outChurchOffsetX)),
-				faithSlotFrom1To3.getInity(),faithSlotFrom1To3.getFinaly());
+		if (slot >= 0 && slot <= 2) {
+			temp = new Rectangle((faithSlotFrom1To3.getInitx() + (slot * outChurchOffsetX)),
+					(faithSlotFrom1To3.getFinalx() + (slot * outChurchOffsetX)), faithSlotFrom1To3.getInity(),
+					faithSlotFrom1To3.getFinaly());
 			return temp.resize(resizeFactor);
 		}
-		if (slot>=3 && slot<=5) {
-			temp = new Rectangle(
-					(faithSlotFrom3To5.getInitx()+((slot-3)*inChurchOffsetX)),
-					(faithSlotFrom3To5.getFinalx()+((slot-3)*inChurchOffsetX)),
-					faithSlotFrom3To5.getInity(),faithSlotFrom3To5.getFinaly());
+		if (slot >= 3 && slot <= 5) {
+			temp = new Rectangle((faithSlotFrom3To5.getInitx() + ((slot - 3) * inChurchOffsetX)),
+					(faithSlotFrom3To5.getFinalx() + ((slot - 3) * inChurchOffsetX)), faithSlotFrom3To5.getInity(),
+					faithSlotFrom3To5.getFinaly());
 			return temp.resize(resizeFactor);
 		}
-		if (slot>=6 && slot<=15) {
-			temp = new Rectangle(
-					(faithSlotFrom6To15.getInitx()+((slot-6)*outChurchOffsetX)),
-					(faithSlotFrom6To15.getFinalx()+((slot-6)*outChurchOffsetX)),
-					faithSlotFrom3To5.getInity(),faithSlotFrom3To5.getFinaly());
+		if (slot >= 6 && slot <= 15) {
+			temp = new Rectangle((faithSlotFrom6To15.getInitx() + ((slot - 6) * outChurchOffsetX)),
+					(faithSlotFrom6To15.getFinalx() + ((slot - 6) * outChurchOffsetX)), faithSlotFrom3To5.getInity(),
+					faithSlotFrom3To5.getFinaly());
 			return temp.resize(resizeFactor);
 		}
 		return null;
 	}
-	
-	public static Rectangle getChurchSpace(double resizeFactor, int era) { 
-		//era deve essere 1, 2 o 3
-		if (era==1)
+
+	public static Rectangle getChurchSpace(double resizeFactor, int era) {
+		// era deve essere 1, 2 o 3
+		if (era == 1)
 			return church1.resize(resizeFactor);
-		if (era==2)
+		if (era == 2)
 			return church2.resize(resizeFactor);
-		if (era==3)
+		if (era == 3)
 			return church3.resize(resizeFactor);
 		return null;
 	}
-	
+
 	public static Rectangle getPlayerGridSpace(double resizeFactor, int position) {
 		// da 0 a 3 la position
-		//position--;
+		// position--;
 		Rectangle temp = new Rectangle(playerGrid.getInitx(), playerGrid.getFinalx(),
 				(playerGrid.getInity() + (position * playerGridOffsetY)),
 				(playerGrid.getFinaly() + (position * playerGridOffsetY)));
@@ -244,5 +265,5 @@ public class AdaptiveLayout {
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
 		return temp.resize(resizeFactor);
 	}
-	
+
 }
