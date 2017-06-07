@@ -16,7 +16,7 @@ public class TowerZone extends Zone {
 	protected transient static final int NUM_SPACES = 4;
 	protected TowerSpace[] towerSpaces;
 	protected transient boolean occupied;
-	private HashMap<Integer, ArrayList<DevelopmentCard>> cards;
+	protected HashMap<Integer, ArrayList<DevelopmentCard>> cards;
 
 	public TowerZone() {
 		towerSpaces = new TowerSpace[NUM_SPACES];

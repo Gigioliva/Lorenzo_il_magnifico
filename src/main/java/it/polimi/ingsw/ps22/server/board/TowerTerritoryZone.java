@@ -1,8 +1,15 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import it.polimi.ingsw.ps22.server.card.CardTerritory;
+import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.parser.CardSortByEra;
+import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
+import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class TowerTerritoryZone extends TowerZone {
 	
@@ -10,6 +17,19 @@ public class TowerTerritoryZone extends TowerZone {
 
 	public TowerTerritoryZone() {
 		super();
+		HashMap<Integer, ArrayList<CardTerritory>> temp=CardSortByEra.territorySortByEra();
+		for(int i=0; i<6;i++){
+			ArrayList<DevelopmentCard> card=new ArrayList<DevelopmentCard>();
+			for(int j=0;j<4;j++){
+				card.add(temp.get((i/2)+1).remove(0));
+			}
+			cards.put(i+1,card);
+		}
+		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
+		ZoneBonusSaxParser.BonusRead("",bonus);
+		for (int i = 0; i < NUM_SPACES; i++) {
+			towerSpaces[i].addBonus(bonus.get(i));
+		}
 	}
 
 	@Override

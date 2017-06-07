@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
 import it.polimi.ingsw.ps22.server.message.AskExcomm;
+import it.polimi.ingsw.ps22.server.parser.CardSortByEra;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class ChurchSpace implements Serializable {
@@ -23,7 +24,7 @@ public class ChurchSpace implements Serializable {
 		requisite.put(2, 4);
 		requisite.put(3, 5);
 		// faithPointTrack letto da file
-		// cardExcomm letto da file
+		cardExcomm=CardSortByEra.excommSortByEra().get(era).get(0);
 	}
 
 	public void applyExcomm(ArrayList<Player> players) {

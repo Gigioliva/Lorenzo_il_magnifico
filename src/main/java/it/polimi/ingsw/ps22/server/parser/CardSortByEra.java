@@ -103,5 +103,29 @@ public class CardSortByEra {
 		}
 		return card;
 	}
+	
+	public static HashMap<Integer, ArrayList<CardExcomm>> excommSortByEra() {
+		HashMap<Integer, ArrayList<CardExcomm>> card = new HashMap<Integer, ArrayList<CardExcomm>>();
+		ArrayList<CardExcomm> allCard = new ArrayList<CardExcomm>();
+		ExcommCardSaxParser.ExcommRead("territory.xml", allCard);
+		for (CardExcomm el : allCard) {
+			if (card.containsKey(el.getEra())) {
+				card.get(el.getEra()).add(el);
+			} else {
+				ArrayList<CardExcomm> temp = new ArrayList<CardExcomm>();
+				temp.add(el);
+				card.put(el.getEra(), temp);
+			}
+		}
+		for (Integer el : card.keySet()) {
+			ArrayList<CardExcomm> temp = new ArrayList<CardExcomm>();
+			Random random = new Random();
+			while (!card.get(el).isEmpty()) {
+				temp.add(card.get(el).remove(random.nextInt(card.get(el).size())));
+			}
+			card.put(el, temp);
+		}
+		return card;
+	}
 
 }

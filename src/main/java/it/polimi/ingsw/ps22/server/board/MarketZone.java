@@ -1,10 +1,12 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
+import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class MarketZone extends Zone {
 	
@@ -14,10 +16,12 @@ public class MarketZone extends Zone {
 
 	public MarketZone() {
 		marketSpace = new MarketSpace[NUM_SPACES];
+		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
+		ZoneBonusSaxParser.BonusRead("",bonus);
 		for (int i = 0; i < NUM_SPACES; i++) {
 			marketSpace[i] = new MarketSpace(1, false);
+			marketSpace[i].addBonus(bonus.get(i));
 		}
-		// leggere da file i bonus degli spazi azione
 	}
 
 	@Override
