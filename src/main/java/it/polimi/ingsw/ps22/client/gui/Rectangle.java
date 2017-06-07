@@ -17,11 +17,11 @@ public class Rectangle {
 	}
 
 	public int getOffsetX() {
-		return finalx - initx;
+		return Math.abs(finalx - initx);
 	}
 
 	public int getOffsetY() {
-		return finaly - inity;
+		return Math.abs(finaly - inity);
 	}
 
 	public int getInitx() {

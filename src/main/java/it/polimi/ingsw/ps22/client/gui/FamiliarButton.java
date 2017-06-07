@@ -28,7 +28,7 @@ public class FamiliarButton extends JButton {
 	}
 	
 	private void loadImage(){
-		ImageIcon img = LayeredPanel.createImageIcon("./image/fam.jpg");
+		ImageIcon img = MyImage.createImageIcon("./image/fam.jpg");
 		this.setIcon(img);
 		this.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());
 	}

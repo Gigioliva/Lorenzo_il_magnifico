@@ -54,16 +54,16 @@ public class TowerPanel extends JPanel {
 		Rectangle measures2 = AdaptiveLayout.getCardDevelopmentSpace(resizeFactor, 1, 1);
 		
 		c.weighty=1;
-		c.ipady = measures1.getOffsetY();
 		c.ipadx = measures2.getOffsetX();
 		c.gridx=0;
 		
+		c.ipady = measures1.getOffsetY();
 		c.gridy=0;
 		this.add(b4,c);
 		
 		JButton p1 =new JButton();
 		p1.setEnabled(false);
-		p1.setOpaque(true);
+		p1.setOpaque(false);
 		p1.setBorderPainted(false);
 		p1.setContentAreaFilled(false);
 		c.ipady =measures1.getInity() - measures2.getFinaly();
