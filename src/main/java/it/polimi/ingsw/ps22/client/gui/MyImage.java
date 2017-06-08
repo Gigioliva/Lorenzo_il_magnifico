@@ -15,7 +15,6 @@ public class MyImage {
 		ImageIcon img = createScaledImageIcon(path, dim);
 		JLabel icon = new JLabel(img);
 	    icon.setBounds(dim.getInitx(), dim.getInity(), dim.getOffsetX(), dim.getOffsetY());
-	    System.out.println("dice bounds" + dim.getInitx() + " " + dim.getInity());
 	    return icon;
 	}
 	
@@ -46,5 +45,6 @@ public class MyImage {
             return null;
         }
     }
+
 
 }

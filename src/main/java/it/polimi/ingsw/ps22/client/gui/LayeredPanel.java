@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.Color;
+
 import java.awt.Image;
 import java.util.ArrayList;
 
@@ -15,6 +15,8 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import it.polimi.ingsw.ps22.server.model.Color;
+
 public class LayeredPanel extends JPanel{
 	
 	/**
@@ -25,8 +27,6 @@ public class LayeredPanel extends JPanel{
 
 	private JPanel spinPan = new JPanel();
 	
-	
-	private FamiliarButton fam;
 	
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
 	
@@ -102,8 +102,16 @@ public class LayeredPanel extends JPanel{
 		hp.setBounds(150,200 + board.getIconHeight()/2, board.getIconWidth()/2 -100, board.getIconHeight()-100);
 		*/
 	
-		fam = new FamiliarButton(it.polimi.ingsw.ps22.server.model.Color.BLACK);
-		fam.setBounds((int)widthScreen - 500, (int)heightScreen - 800, board.getIconWidth()- 400, board.getIconHeight() - 600);
+		FamiliarButton fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces));
+		fam1.setBounds((int)widthScreen - 600, 0, 100, 100);
+		FamiliarButton fam2 = new FamiliarButton(Color.ORANGE, java.awt.Color.ORANGE,new TakeFamiliarListener(actionSpaces));
+		fam2.setBounds((int)widthScreen - 600 + 100, 0, 100, 100);
+		FamiliarButton fam3 = new FamiliarButton(Color.WHITE, java.awt.Color.WHITE, new TakeFamiliarListener(actionSpaces));
+		fam3.setBounds((int)widthScreen - 600 + 200, 0, 100, 100);
+		layeredPane.add(fam1, new Integer(50), 0);
+		layeredPane.add(fam2, new Integer(50), 0);
+		layeredPane.add(fam3, new Integer(50), 0);
+		
 
 		actionSpaces.add(harvest1);
 		actionSpaces.add(harvest2);
@@ -129,16 +137,14 @@ public class LayeredPanel extends JPanel{
 			layeredPane.add(tower4, new Integer(30));
 			actionSpaces.add(tower4);
 		}
-			
-		fam.addActionListener(new TakeFamiliarListener(actionSpaces));
-		layeredPane.add(fam, new Integer(50), 0);
+		
 		
 		
 		
 		spinPan.setBounds((int)widthScreen - 500, (int)heightScreen - 500, board.getIconWidth()- 400, board.getIconHeight() - 700);
 		spinFamiliar();
 		
-		this.setBackground(new Color(34,45,32));
+		this.setBackground(new java.awt.Color(55, 55, 55));
 		
 		this.add(layeredPane);
         

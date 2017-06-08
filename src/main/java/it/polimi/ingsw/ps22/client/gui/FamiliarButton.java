@@ -12,14 +12,17 @@ public class FamiliarButton extends JButton {
 	private Color color;
 	private static final long serialVersionUID = 8698619865338767712L;
 
-	public FamiliarButton(Color color){
+	public FamiliarButton(Color color, java.awt.Color c, TakeFamiliarListener listener){
 		super();
 		this.setEnabled(true);
 		this.setOpaque(true);
 		this.setContentAreaFilled(true);
 		this.setBorderPainted(true);
 		//loadImage();
+		this.setBackground(c);
 		
+		this.addActionListener(listener);
+	
 		this.color = color;
 		
 	}
