@@ -7,19 +7,20 @@ import java.util.ArrayList;
 
 public class TakeFamiliarListener implements ActionListener {
 
-	ArrayList<TowerPanel> towers;
+	ArrayList<ActionPanel> zones;
 	
-	public TakeFamiliarListener(ArrayList<TowerPanel> towers) {
-		this.towers = towers;
+	public TakeFamiliarListener(ArrayList<ActionPanel> zones) {
+		this.zones = zones;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			FamiliarButton b = (FamiliarButton)e.getSource();
 			b.setEnabled(false);
-			for(TowerPanel tower: towers){
-				tower.enableTower(b.getColor());
+			for(ActionPanel zone: zones){
+				zone.enableZone(b.getColor());
 			}
+		
 		
 	}
 

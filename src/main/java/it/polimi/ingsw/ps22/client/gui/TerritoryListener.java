@@ -9,9 +9,9 @@ public class TerritoryListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ActionButton pressedButton = (ActionButton)e.getSource();
-		TowerTerritoryMove move = new TowerTerritoryMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getFloor(), 
+		TowerTerritoryMove move = new TowerTerritoryMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace(), 
 				pressedButton.getNumServants());
-		System.out.println("creo territory Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getFloor() + 
+		System.out.println("creo territory Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getSpace() + 
 				" servitori aggiunti " + pressedButton.getNumServants());
 	}
 }

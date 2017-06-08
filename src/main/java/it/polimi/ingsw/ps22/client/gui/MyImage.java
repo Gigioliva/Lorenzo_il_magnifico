@@ -30,7 +30,7 @@ public class MyImage {
 	    BufferedImage resizedImg = new BufferedImage(dim.getOffsetX(), dim.getOffsetY(), BufferedImage.TYPE_INT_ARGB);
 	    Graphics2D g2 = resizedImg.createGraphics();
 	    g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-	    g2.drawImage(srcImg, dim.getInitx(), dim.getInity(), dim.getOffsetX(), dim.getOffsetY(), null);
+	    g2.drawImage(srcImg, 0, 0, dim.getOffsetX(), dim.getOffsetY(), null);
 	    System.out.println("draw Image " + dim.getInitx() + " " + dim.getInity() + " " + dim.getOffsetX() + " " + dim.getOffsetY());
 	    g2.dispose();
 

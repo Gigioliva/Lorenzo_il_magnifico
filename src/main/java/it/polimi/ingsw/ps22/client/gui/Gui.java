@@ -12,7 +12,7 @@ public class Gui extends JFrame  {
 	
 
 	
-	public void initGui(){
+	public void initGui(String username){
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
@@ -22,7 +22,7 @@ public class Gui extends JFrame  {
 		this.setVisible(true);
 		
 	
-		board = new LayeredPanel(this.getWidth(), this.getHeight()); 
+		board = new LayeredPanel(this.getWidth(), this.getHeight(), username); 
 		
 		this.add(board);
 		

@@ -1,8 +1,5 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
