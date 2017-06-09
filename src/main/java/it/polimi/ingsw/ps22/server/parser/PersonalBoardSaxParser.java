@@ -48,12 +48,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import it.polimi.ingsw.ps22.server.action.CardAction;
-import it.polimi.ingsw.ps22.server.action.HarvestAction;
-import it.polimi.ingsw.ps22.server.action.ProductionAction;
-import it.polimi.ingsw.ps22.server.card.CardVenture;
-import it.polimi.ingsw.ps22.server.effect.EndVictoryEffect;
-import it.polimi.ingsw.ps22.server.effect.ExtraAction;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.player.PersonalBoard;
 import it.polimi.ingsw.ps22.server.resource.Coin;
@@ -159,7 +153,6 @@ public class PersonalBoardSaxParser {
 				public void characters(char ch[], int start, int length) throws SAXException {
 
 					String str = new String(ch, start, length);
-					String type;
 					if (boolHarvestBonus) {
 						if (lastQName.equalsIgnoreCase("coin")) {
 							lastInt = Integer.parseInt(str);

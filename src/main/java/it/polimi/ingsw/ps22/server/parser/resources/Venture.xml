@@ -1,0 +1,102 @@
+<cards>
+    <card>
+        <name>Ingaggiare Reclute</name>
+        <era>1</era>
+        <cost>
+            <coin>4</coin>
+        </cost>
+        <gainEffect>
+            <militarypoint>5</militarypoint>
+        </gainEffect>
+        <victorypoint>4</victorypoint>
+    </card>
+    <card>
+        <name>Riparare la Chiesa</name>
+        <era>1</era>
+        <cost>
+            <coin>1</coin>
+            <wood>1</wood>
+            <stone>1</stone>
+        </cost>
+        <gainEffect>
+            <faithpoint>1</faithpoint>
+        </gainEffect>
+        <victorypoint>5</victorypoint>
+    </card>
+    <card>
+        <name>Costruire le Mura</name>
+        <era>1</era>
+        <cost>
+            <stone>3</stone>
+        </cost>
+        <gainEffect>
+            <militarypoint>2</militarypoint>
+            <councilpoint>1</councilpoint>
+        </gainEffect>
+        <victorypoint>3</victorypoint>
+    </card>
+    <card>
+        <name>Innalzare una Statua</name>
+        <era>1</era>
+        <cost>
+            <wood>2</wood>
+            <stone>2</stone>
+        </cost>
+        <gainEffect>
+            <councilpoint>2</councilpoint>
+        </gainEffect>
+        <victorypoint>4</victorypoint>
+    </card>
+    <card>
+        <name>Campagna Militare</name>
+        <era>1</era>
+        <cost>
+            <militarypoint>2</militarypoint>
+            <militaryrequirement>3</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <coin>3</coin>
+        </gainEffect>
+        <victorypoint>5</victorypoint>
+    </card>
+    <card>
+        <name>Ospitare i Mendicanti</name>
+        <era>1</era>
+        <cost>
+            <wood>3</wood>
+        </cost>
+        <gainEffect>
+            <servant>4</servant>
+        </gainEffect>
+        <victorypoint>4</victorypoint>
+    </card>
+    <card>
+        <name>Combattere le Eresie</name>
+        <era>1</era>
+        <cost>
+            <militarypoint>3</militarypoint>
+            <militaryrequirement>5</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <faithpoint>2</faithpoint>
+        </gainEffect>
+        <victorypoint>5</victorypoint>
+    </card>
+    <card>
+        <name>Sostegno al Vescovo</name>
+        <era>1</era>
+        <cost>
+            <coin>2</coin>
+            <wood>1</wood>
+            <stone>1</stone>
+        </cost>
+        <cost>
+            <militarypoint>2</militarypoint>
+            <militaryrequirement>4</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <faithpoint>3</faithpoint>
+        </gainEffect>
+        <victorypoint>1</victorypoint>
+    </card>
+</cards>

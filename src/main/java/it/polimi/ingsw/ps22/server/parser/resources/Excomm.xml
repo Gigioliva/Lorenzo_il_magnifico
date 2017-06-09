@@ -1,0 +1,27 @@
+<cards>
+    <card>
+        <era>1</era>
+        <militaryincrement>-1</militaryincrement>
+        <coinincrement>-1</coinincrement>
+        <servantincrement>-1</servantincrement>
+        <woodincrement>-1</woodincrement>
+        <stoneincrement>-1</stoneincrement>
+        <harvestincrement>-3</harvestincrement>
+        <productionincrement>-3</productionincrement>
+        <diceincrement>-1</diceincrement>
+        <territoryactionincrement>-4</territoryactionincrement>
+        <characteractionincrement>-4</characteractionincrement>
+        <buildingactionincrement>-4</buildingactionincrement>
+        <ventureactionincrement>-4</ventureactionincrement>
+        <nomarket>1</nomarket>
+        <servanthalfvalue>1</servanthalfvalue>
+        <turnskip>1</turnskip>
+        <endinvalidcharacter>1</endinvalidcharacter>
+        <endinvalidventure>1</endinvalidventure>
+        <endinvalidterritory>1</endinvalidterritory>
+        <endvictorylose-1>5</endvictorylose-1>
+        <militarydecrementvictory>1</militarydecrementvictory>
+        <endlosevictorybuildingstonewood>1</endlosevictorybuildingstonewood>
+        <endlosevictoryforallresource>1</endlosevictoryforallresource>
+    </card>
+</cards>

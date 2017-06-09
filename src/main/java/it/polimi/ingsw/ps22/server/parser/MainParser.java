@@ -15,42 +15,42 @@ public class MainParser {
 	public static void mainParser(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<CardBuilding> building = new ArrayList<CardBuilding>();
-		String pathnameBuilding = "/Users/marco/Desktop/TestXML/Building.xml";
+		String pathnameBuilding = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Building.xml";
 		BuildingCardSaxParser.BuildingRead(pathnameBuilding, building);
 		System.out.println("CARD BUILDING");
 		for (CardBuilding card : building)
 			System.out.println("\n" + card.toString());
 
 		ArrayList<CardTerritory> territory = new ArrayList<CardTerritory>();
-		String pathnameTerritory = "/Users/marco/Desktop/TestXML/Territory.xml";
+		String pathnameTerritory = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Territory.xml";
 		TerritoryCardSaxParser.TerritoryRead(pathnameTerritory, territory);
 		System.out.println("\n\n\nCARD TERRITORY");
 		for (CardTerritory card : territory)
 			System.out.println("\n" + card.toString());
 
 		ArrayList<CardVenture> venture = new ArrayList<CardVenture>();
-		String pathnameVenture = "/Users/marco/Desktop/TestXML/Venture.xml";
+		String pathnameVenture = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Venture.xml";
 		VentureCardSaxParser.VentureRead(pathnameVenture, venture);
 		System.out.println("\n\n\nCARD VENTURE");
 		for (CardVenture card : venture)
 			System.out.println("\n" + card.toString());
 
 		ArrayList<CardCharacter> character = new ArrayList<CardCharacter>();
-		String pathnameCharacter = "/Users/marco/Desktop/TestXML/Character.xml";
+		String pathnameCharacter = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Character.xml";
 		CharacterCardSaxParser.CharacterRead(pathnameCharacter, character);
 		System.out.println("\n\n\nCARD CHARACTER");
 		for (CardCharacter card : character)
 			System.out.println("\n" + card.toString());
 
 		ArrayList<CardExcomm> excomm = new ArrayList<CardExcomm>();
-		String pathnameExcomm = "/Users/marco/Desktop/TestXML/Excomm.xml";
+		String pathnameExcomm = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Excomm.xml";
 		ExcommCardSaxParser.ExcommRead(pathnameExcomm, excomm);
 		System.out.println("\n\n\nCARD EXCOMM");
 		for (CardExcomm card : excomm)
 			System.out.println("\n" + card.toString());
 
 		ArrayList<HashMap<String, ResourceAbstract>> spaces = new ArrayList<HashMap<String, ResourceAbstract>>();
-		String pathnameSpace = "/Users/marco/Desktop/TestXML/MarketSpace.xml";
+		String pathnameSpace = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/MarketSpace.xml";
 		ZoneBonusSaxParser.BonusRead(pathnameSpace, spaces);
 		System.out.println("\n\n\nSPACE BONUS");
 		StringBuilder temp = new StringBuilder();

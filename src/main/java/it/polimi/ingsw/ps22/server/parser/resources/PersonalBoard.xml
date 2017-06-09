@@ -1,0 +1,35 @@
+<all>
+    <personalboard>
+        <personalbonus>
+            <harvestpersonalbonus>
+                <coin>0</coin>
+                <wood>0</wood>
+                <stone>0</stone>
+                <servant>0</servant>
+                <militarypoint>0</militarypoint>
+                <faithpoint>0</faithpoint>
+                <councilpoint>0</councilpoint>
+                <victorypoint>0</victorypoint>
+            </harvestpersonalbonus>
+            <prodpersonalbonus>
+                <coin>0</coin>
+                <wood>0</wood>
+                <stone>0</stone>
+                <servant>0</servant>
+                <militarypoint>0</militarypoint>
+                <faithpoint>0</faithpoint>
+                <councilpoint>0</councilpoint>
+                <victorypoint>0</victorypoint>
+            </prodpersonalbonus>
+        </personalbonus>
+        <territorybonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+            <require>0</require>
+        </territorybonus>
+        <characterbonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+        </characterbonus>
+    </personalboard>
+</all>

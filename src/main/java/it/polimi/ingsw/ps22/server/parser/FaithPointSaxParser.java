@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps22.server.parser;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.xml.parsers.SAXParser;
@@ -10,7 +9,6 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import it.polimi.ingsw.ps22.server.board.FaithPointTrack;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
 /*
