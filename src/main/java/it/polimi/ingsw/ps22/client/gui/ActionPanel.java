@@ -13,6 +13,7 @@ public class ActionPanel extends JPanel  {
 	 */
 	private static final long serialVersionUID = 2811878893905465346L;
 	ActionButton b;
+	Rectangle dim;
 	
 	public ActionPanel(String name,Rectangle dim, ActionListener actionListener, int space){
 		
@@ -23,6 +24,8 @@ public class ActionPanel extends JPanel  {
 		this.setLayout(new GridLayout(1, 1));
 		this.add(b);
 		this.setOpaque(false);
+		
+		this.dim = dim;
 		
 		setMeasures(dim);
 		
@@ -46,7 +49,7 @@ public class ActionPanel extends JPanel  {
 		
 	}
 	
-	public void setMeasures(Rectangle dim){
+	private void setMeasures(Rectangle dim){
 		this.setBounds(dim.getInitx(), dim.getInity(), dim.getOffsetX(), dim.getOffsetY());
 	}
 

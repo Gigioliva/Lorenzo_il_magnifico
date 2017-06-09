@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.client.gui;
 
 import java.awt.Image;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -31,6 +32,8 @@ public class LayeredPanel extends JPanel{
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
 	
 	ArrayList<ActionPanel> actionSpaces = new ArrayList<ActionPanel>();
+	
+	HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<Integer,ArrayList<TowerPanel>>();
 	
 	
 	
@@ -123,17 +126,26 @@ public class LayeredPanel extends JPanel{
 		actionSpaces.add(mark4);
 		actionSpaces.add(council);
 		
+		towers.put(0, new ArrayList<TowerPanel>());
+		towers.put(1, new ArrayList<TowerPanel>());
+		towers.put(2, new ArrayList<TowerPanel>());
+		towers.put(3, new ArrayList<TowerPanel>());
+		
 		for(int i = 0; i < 4; i++){
-			ActionPanel tower1 = new ActionPanel(username, AdaptiveLayout.getCardTerritorySpace(factorScaleBoard, i), new TerritoryListener(), i);
+			TowerPanel tower1 = new TowerPanel(username, AdaptiveLayout.getCardTerritorySpace(factorScaleBoard, i), new TerritoryListener(), i);
+			towers.get(0).add(tower1);
 			layeredPane.add(tower1, new Integer(30));
 			actionSpaces.add(tower1);
-			ActionPanel tower2 = new ActionPanel(username, AdaptiveLayout.getCharacterSpace(factorScaleBoard, i), new CharacterListener(), i);
+			TowerPanel tower2 = new TowerPanel(username, AdaptiveLayout.getCharacterSpace(factorScaleBoard, i), new CharacterListener(), i);
+			towers.get(1).add(tower2);
 			layeredPane.add(tower2, new Integer(30));
 			actionSpaces.add(tower2);
-			ActionPanel tower3 = new ActionPanel(username, AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, i), new BuildingListener(), i);
+			TowerPanel tower3 = new TowerPanel(username, AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, i), new BuildingListener(), i);
+			towers.get(2).add(tower3);
 			layeredPane.add(tower3, new Integer(30));
 			actionSpaces.add(tower3);
-			ActionPanel tower4 = new ActionPanel(username, AdaptiveLayout.getCardVentureSpace(factorScaleBoard, i), new VentureListener(), i);
+			TowerPanel tower4 = new TowerPanel(username, AdaptiveLayout.getCardVentureSpace(factorScaleBoard, i), new VentureListener(), i);
+			towers.get(3).add(tower4);
 			layeredPane.add(tower4, new Integer(30));
 			actionSpaces.add(tower4);
 		}
@@ -143,6 +155,34 @@ public class LayeredPanel extends JPanel{
 		
 		spinPan.setBounds((int)widthScreen - 500, (int)heightScreen - 500, board.getIconWidth()- 400, board.getIconHeight() - 700);
 		spinFamiliar();
+		
+		HashMap<Integer,ArrayList<String>> map = new HashMap<Integer,ArrayList<String>>();
+		map.put(0,new ArrayList<String>());
+		map.put(1,new ArrayList<String>());
+		map.put(2,new ArrayList<String>());
+		map.put(3,new ArrayList<String>());
+		
+
+		map.get(0).add("./image/devcards_f_en_c_1.png");
+		map.get(0).add("./image/devcards_f_en_c_2.png");
+		map.get(0).add("./image/devcards_f_en_c_5.png");
+		map.get(0).add("./image/devcards_f_en_c_4.png");
+		
+		map.get(1).add("./image/devcards_f_en_c_49.png");
+		map.get(1).add("./image/devcards_f_en_c_50.png");
+		map.get(1).add("./image/devcards_f_en_c_51.png");
+		map.get(1).add("./image/devcards_f_en_c_52.png");
+		
+		map.get(2).add("./image/devcards_f_en_c_25.png");
+		map.get(2).add("./image/devcards_f_en_c_26.png");
+		map.get(2).add("./image/devcards_f_en_c_27.png");
+		map.get(2).add("./image/devcards_f_en_c_28.png");
+		
+		map.get(3).add("./image/devcards_f_en_c_73.png");
+		map.get(3).add("./image/devcards_f_en_c_74.png");
+		map.get(3).add("./image/devcards_f_en_c_75.png");
+		map.get(3).add("./image/devcards_f_en_c_76.png");
+		this.setCards(map);
 		
 		this.setBackground(new java.awt.Color(55, 55, 55));
 		
@@ -171,6 +211,16 @@ public class LayeredPanel extends JPanel{
 			}
 		});
 		layeredPane.add(spinPan, new Integer(2000),0);
+	}
+	
+	public void setCards(HashMap<Integer, ArrayList<String>> cardsPaths){
+		for(Integer tower: cardsPaths.keySet()){
+			ArrayList<String> paths = cardsPaths.get(tower);
+			ArrayList<TowerPanel> panels = towers.get(tower);
+			for(int i=0; i < panels.size(); i++){
+				panels.get(i).setCard(paths.get(i));
+			}
+		}
 	}
 	
 }
