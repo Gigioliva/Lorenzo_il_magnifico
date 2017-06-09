@@ -1,5 +1,9 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.util.ArrayList;
+
+import it.polimi.ingsw.ps22.server.player.PersonalBoard;
+
 //	TUTTE LE POSIZIONI RITORNATE DA QUESTA CLASSE SONO DA RIFERIRSI AL FATTORE DI RISCALATURA
 //	DELLA PERSONAL BOARD E SONO IN POSIZIONE RELATIVA DALL'INIZIO DELLA STESSA
 
@@ -35,7 +39,6 @@ public class PersonalBoardAdaptive {
 				);
 		return temp.resize(resizeFactor);
 	}
-	
 	
 	
 	

@@ -3,12 +3,15 @@ package it.polimi.ingsw.ps22.server.parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps22.server.board.FaithPointTrack;
 import it.polimi.ingsw.ps22.server.card.CardBuilding;
 import it.polimi.ingsw.ps22.server.card.CardCharacter;
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
 import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.CardVenture;
+import it.polimi.ingsw.ps22.server.player.PersonalBoard;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
 public class MainParser {
 
@@ -58,14 +61,25 @@ public class MainParser {
 		for (HashMap<String, ResourceAbstract> x : spaces) {
 			temp.append("\nSPACE "+i+"\n");
 			i++;
-			for (String el : x.keySet()) {
-				
-				temp.append(el + " " + x.get(el).getQuantity() + "\n");
-			}
-			temp.append("\n");
-		}
+			for (String el : x.keySet()) {	
+				temp.append(el + " " + x.get(el).getQuantity() + "\n"); }
+			temp.append("\n"); }
 		System.out.println(temp);
 
+		ArrayList<PersonalBoard> persBoard = new ArrayList<PersonalBoard>();
+		String pathnamePersonalBoard = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/PersonalBoard.xml";
+		PersonalBoardSaxParser.PersonalBoardRead(pathnamePersonalBoard, persBoard);
+		System.out.println("\n\n\nPERSONAL BOARD");
+		for (PersonalBoard pers : persBoard)
+			System.out.println("\n" + pers.toString());
+
+		HashMap<Integer,VictoryPoint> faithPoint = new HashMap<Integer,VictoryPoint>();
+		String pathnameFaithPoint = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/FaithPointTrack.xml";
+		FaithPointSaxParser.FaithRead(pathnameFaithPoint, faithPoint);
+		FaithPointTrack faithPointTrack = new FaithPointTrack(faithPoint);
+		System.out.println("\n\n\n FAITH POINT TRACK");
+		System.out.println(faithPointTrack.toString());
+		
 	}
 
 }
