@@ -19,6 +19,22 @@ public class PersonalBoard implements Serializable {
 		//setta i vari campi a 0
 	}
 	
+	public void setPersonalBonus(HashMap<String, GainResource> persBonus){
+		personalBonus = persBonus;
+	}
+	
+	public void setBonusCharacter(HashMap<Integer, VictoryPoint> bonusChar){
+		bonusCharacter = bonusChar;
+	}
+
+	public void setRequirementHarvest(HashMap<Integer, MilitaryPoint> requHarvest){
+		requirementHarvest = requHarvest;
+	}
+	
+	public void setBonusHarvest(HashMap<Integer, VictoryPoint> bonusHarv){
+		bonusHarvest = bonusHarv;
+	}
+	
 	public HashMap<String, GainResource> getPersonalBonus(){
 		return personalBonus;
 	}
