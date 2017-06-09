@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps22.client.main;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.util.Observable;
 import java.util.Observer;
 import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
@@ -13,8 +11,11 @@ import it.polimi.ingsw.ps22.server.move.Move;
 public class ViewClient extends Observable implements Observer, Runnable {
 	
 	private static String username;
-	private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
-	private VisitorB visitor;
+	private Graphic graphic;
+	
+	public ViewClient(){
+		graphic=new GraphicCLI();
+	}
 
 	@Override
 	public void update(Observable o, Object arg) {
@@ -23,24 +24,22 @@ public class ViewClient extends Observable implements Observer, Runnable {
 			System.out.println("Your username is: " + username);
 		}
 		if(o instanceof Receive && arg instanceof GenericMessage){
-			GenericAnswer mex=((GenericMessage)arg).accept(visitor);
+			GenericAnswer mex=graphic.getAnswer((GenericMessage)arg);
 			if(mex!=null){
 				setChanged();
 				notifyObservers(mex);
 			}
 		}
 		if(o instanceof Receive && arg instanceof ChoiceMove){
-			Move temp=RequestMove.chiediMossa(stdin);
+			Move temp=graphic.getMove();
 			if(temp!=null){
 				setChanged();
 				notifyObservers(temp);
 			}
-			
 		}
 		if(o instanceof Receive && arg instanceof Model){
-			
+			graphic.printModel((Model)arg);
 		}
-		
 	}
 
 	@Override

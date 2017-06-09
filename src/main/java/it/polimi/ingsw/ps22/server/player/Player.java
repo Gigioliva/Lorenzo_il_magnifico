@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.server.player;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 import it.polimi.ingsw.ps22.server.board.Dice;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
@@ -10,6 +11,7 @@ import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.parser.PersonalBoardSaxParser;
 import it.polimi.ingsw.ps22.server.resource.BonusAbstract;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.FaithPoint;
@@ -62,6 +64,10 @@ public class Player implements Serializable {
 		this.username = username;
 		personalBoard = new PersonalBoard();
 		endEffects = new ArrayList<EndEffect>();
+		ArrayList<PersonalBoard> temp = new ArrayList<PersonalBoard>();
+		PersonalBoardSaxParser.PersonalBoardRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/PersonalBoard.xml", temp);
+		Random random=new Random();
+		personalBoard=temp.get(random.nextInt(temp.size()));
 	}
 	
 	public  HashMap<Color, Family> getAllFamily(){

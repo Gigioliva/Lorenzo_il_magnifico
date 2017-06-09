@@ -46,6 +46,7 @@ public class Client implements Observer {
 		ViewClient view=new ViewClient();
 		view.addObserver(cl);
 		cl.receive(view);
+		(new Thread(view)).start();
 	}
 
 }

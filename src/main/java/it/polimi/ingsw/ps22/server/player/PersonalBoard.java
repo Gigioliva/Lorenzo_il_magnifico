@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22.server.player;
 
 import java.io.Serializable;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
@@ -16,7 +15,6 @@ public class PersonalBoard implements Serializable {
 	private HashMap<Integer, VictoryPoint> bonusHarvest;
 	
 	public PersonalBoard(){
-		//setta i vari campi a 0
 	}
 	
 	public void setPersonalBonus(HashMap<String, GainResource> persBonus){
@@ -99,7 +97,7 @@ public class PersonalBoard implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("Personal Board: \n");
+		str.append("Personal Board: \n" + bonusHarvestString() + reqHarvestString() + bonusCharString() + personalBonusString());
 		return str.toString();
 	}
 	
