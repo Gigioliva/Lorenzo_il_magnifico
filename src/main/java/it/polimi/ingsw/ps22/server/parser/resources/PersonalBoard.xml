@@ -2,88 +2,6 @@
     <personalboard>
         <personalbonus>
             <harvestpersonalbonus>
-                <coin>0</coin>
-                <wood>0</wood>
-                <stone>0</stone>
-                <servant>0</servant>
-                <militarypoint>0</militarypoint>
-                <faithpoint>0</faithpoint>
-                <councilpoint>0</councilpoint>
-                <victorypoint>0</victorypoint>
-            </harvestpersonalbonus>
-            <prodpersonalbonus>
-                <coin>0</coin>
-                <wood>0</wood>
-                <stone>0</stone>
-                <servant>0</servant>
-                <militarypoint>0</militarypoint>
-                <faithpoint>0</faithpoint>
-                <councilpoint>0</councilpoint>
-                <victorypoint>0</victorypoint>
-            </prodpersonalbonus>
-        </personalbonus>
-        <territorybonus>
-            <value>1</value>
-            <victorypoint>0</victorypoint>
-            <require>0</require>
-        </territorybonus>
-        <territorybonus>
-            <value>2</value>
-            <victorypoint>0</victorypoint>
-            <require>0</require>
-        </territorybonus>
-        <territorybonus>
-            <value>3</value>
-            <victorypoint>1</victorypoint>
-            <require>3</require>
-        </territorybonus>
-        <territorybonus>
-            <value>4</value>
-            <victorypoint>4</victorypoint>
-            <require>7</require>
-        </territorybonus>
-        <territorybonus>
-            <value>5</value>
-            <victorypoint>10</victorypoint>
-            <require>12</require>
-        </territorybonus>
-        <territorybonus>
-            <value>6</value>
-            <victorypoint>20</victorypoint>
-            <require>18</require>
-        </territorybonus>
-        <characterbonus>
-            <value>0</value>
-            <victorypoint>0</victorypoint>
-        </characterbonus>
-        <characterbonus>
-            <value>1</value>
-            <victorypoint>1</victorypoint>
-        </characterbonus>
-        <characterbonus>
-            <value>2</value>
-            <victorypoint>3</victorypoint>
-        </characterbonus>
-        <characterbonus>
-            <value>3</value>
-            <victorypoint>6</victorypoint>
-        </characterbonus>
-        <characterbonus>
-            <value>4</value>
-            <victorypoint>10</victorypoint>
-        </characterbonus>
-        <characterbonus>
-            <value>5</value>
-            <victorypoint>15</victorypoint>
-        </characterbonus>
-        <characterbonus>
-            <value>6</value>
-            <victorypoint>21</victorypoint>
-        </characterbonus>
-    </personalboard>
-    <personalboard>
-        <personalbonus>
-            <harvestpersonalbonus>
                 <wood>1</wood>
                 <stone>1</stone>
                 <servant>1</servant>
@@ -97,28 +15,18 @@
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>2</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>3</value>
             <victorypoint>1</victorypoint>
             <require>3</require>
-        </territorybonus>
-        <territorybonus>
             <value>4</value>
             <victorypoint>4</victorypoint>
             <require>7</require>
-        </territorybonus>
-        <territorybonus>
             <value>5</value>
             <victorypoint>10</victorypoint>
             <require>12</require>
-        </territorybonus>
-        <territorybonus>
             <value>6</value>
             <victorypoint>20</victorypoint>
             <require>18</require>
@@ -126,28 +34,16 @@
         <characterbonus>
             <value>0</value>
             <victorypoint>0</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>1</value>
             <victorypoint>1</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>2</value>
             <victorypoint>3</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>3</value>
             <victorypoint>6</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>4</value>
             <victorypoint>10</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>5</value>
             <victorypoint>15</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>6</value>
             <victorypoint>21</victorypoint>
         </characterbonus>
@@ -168,28 +64,18 @@
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>2</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>3</value>
             <victorypoint>1</victorypoint>
             <require>3</require>
-        </territorybonus>
-        <territorybonus>
             <value>4</value>
             <victorypoint>4</victorypoint>
             <require>7</require>
-        </territorybonus>
-        <territorybonus>
             <value>5</value>
             <victorypoint>10</victorypoint>
             <require>12</require>
-        </territorybonus>
-        <territorybonus>
             <value>6</value>
             <victorypoint>20</victorypoint>
             <require>18</require>
@@ -197,28 +83,16 @@
         <characterbonus>
             <value>0</value>
             <victorypoint>0</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>1</value>
             <victorypoint>1</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>2</value>
             <victorypoint>3</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>3</value>
             <victorypoint>6</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>4</value>
             <victorypoint>10</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>5</value>
             <victorypoint>15</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>6</value>
             <victorypoint>21</victorypoint>
         </characterbonus>
@@ -239,28 +113,18 @@
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>2</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>3</value>
             <victorypoint>1</victorypoint>
             <require>3</require>
-        </territorybonus>
-        <territorybonus>
             <value>4</value>
             <victorypoint>4</victorypoint>
             <require>7</require>
-        </territorybonus>
-        <territorybonus>
             <value>5</value>
             <victorypoint>10</victorypoint>
             <require>12</require>
-        </territorybonus>
-        <territorybonus>
             <value>6</value>
             <victorypoint>20</victorypoint>
             <require>18</require>
@@ -268,28 +132,16 @@
         <characterbonus>
             <value>0</value>
             <victorypoint>0</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>1</value>
             <victorypoint>1</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>2</value>
             <victorypoint>3</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>3</value>
             <victorypoint>6</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>4</value>
             <victorypoint>10</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>5</value>
             <victorypoint>15</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>6</value>
             <victorypoint>21</victorypoint>
         </characterbonus>
@@ -310,28 +162,18 @@
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>2</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>3</value>
             <victorypoint>1</victorypoint>
             <require>3</require>
-        </territorybonus>
-        <territorybonus>
             <value>4</value>
             <victorypoint>4</victorypoint>
             <require>7</require>
-        </territorybonus>
-        <territorybonus>
             <value>5</value>
             <victorypoint>10</victorypoint>
             <require>12</require>
-        </territorybonus>
-        <territorybonus>
             <value>6</value>
             <victorypoint>20</victorypoint>
             <require>18</require>
@@ -339,28 +181,16 @@
         <characterbonus>
             <value>0</value>
             <victorypoint>0</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>1</value>
             <victorypoint>1</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>2</value>
             <victorypoint>3</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>3</value>
             <victorypoint>6</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>4</value>
             <victorypoint>10</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>5</value>
             <victorypoint>15</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>6</value>
             <victorypoint>21</victorypoint>
         </characterbonus>
@@ -381,28 +211,18 @@
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>2</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
-        </territorybonus>
-        <territorybonus>
             <value>3</value>
             <victorypoint>1</victorypoint>
             <require>3</require>
-        </territorybonus>
-        <territorybonus>
             <value>4</value>
             <victorypoint>4</victorypoint>
             <require>7</require>
-        </territorybonus>
-        <territorybonus>
             <value>5</value>
             <victorypoint>10</victorypoint>
             <require>12</require>
-        </territorybonus>
-        <territorybonus>
             <value>6</value>
             <victorypoint>20</victorypoint>
             <require>18</require>
@@ -410,28 +230,16 @@
         <characterbonus>
             <value>0</value>
             <victorypoint>0</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>1</value>
             <victorypoint>1</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>2</value>
             <victorypoint>3</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>3</value>
             <victorypoint>6</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>4</value>
             <victorypoint>10</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>5</value>
             <victorypoint>15</victorypoint>
-        </characterbonus>
-        <characterbonus>
             <value>6</value>
             <victorypoint>21</victorypoint>
         </characterbonus>

@@ -35,7 +35,6 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
 
  */
 
-
 public class LeaderCardSaxParser {
 
 
