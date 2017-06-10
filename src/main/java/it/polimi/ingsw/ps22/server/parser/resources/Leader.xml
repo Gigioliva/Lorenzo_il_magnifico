@@ -1,0 +1,39 @@
+<leadercard>
+    <card>
+        <name>BaseCard</name>
+        <requisite>
+            <samedevelopmentcard>0</samedevelopmentcard>
+            <cardterritory>0</cardterritory>
+            <cardventure>0</cardventure>
+            <cardbuilding>0</cardbuilding>
+            <cardcharacter>0</cardcharacter>
+            <coin>0</coin>
+            <stone>0</stone>
+            <wood>0</wood>
+            <servant>0</servant>
+            <militarypoint>0</militarypoint>
+            <faithpoint>0</faithpoint>
+            <victorypoint>0</victorypoint>
+        </requisite>
+        <eachturnharvestaction>0</eachturnharvestaction> <!-- sta a indicare il valore della azione -->
+        <eachturnprodaction>0</eachturnprodaction> <!-- sta a indicare il valore della azione -->
+        <eachturngaincoin>0</eachturngaincoin> <!-- sta a indicare il valore del gain -->
+        <eachturngainstone>0</eachturngainstone> <!-- sta a indicare il valore del gain -->
+        <eachturngainwood>0</eachturngainwood> <!-- sta a indicare il valore del gain -->
+        <eachturngainservant>0</eachturngainservant> <!-- sta a indicare il valore del gain -->
+        <eachturngainmilitarypoint>0</eachturngainmilitarypoint> <!-- sta a indicare il valore del gain-->
+        <eachturngainfaithpoint>0</eachturngainfaithpoint> <!-- sta a indicare il valore del gain -->
+        <eachturngainvictorypoint>0</eachturngainvictorypoint> <!-- sta a indicare il valore del gain -->
+        <eachturngaincouncilpoint>0</eachturngaincouncilpoint> <!-- sta a indicare il valore del gain -->
+        <eachturnonefamdefvalue>6</eachturnonefamdefvalue> <!-- sta a indicare il valore del azione fam -->
+        <canplaceinocupatedspace>0</canplaceinocupatedspace> <!-- sta a indicare il true -->
+        <nothreeadditivecoin>1</nothreeadditivecoin> <!-- sta a indicare il true -->
+        <neutralmaggioration>1</neutralmaggioration> <!-- sta a indicare il valore dell'incremento -->
+        <familiardefinitevalue>0</familiardefinitevalue> <!-- sta a indicare il valore dei fam colorati -->
+        <familiarbonus>0</familiarbonus> <!-- sta a indicare il valore dell'inc dei fam colorati -->
+        <leadercopy>1</leadercopy> <!-- sta a indicare il true -->
+        <vaticansubstainvictorypointgain>1</vaticansubstainvictorypointgain> <!-- indica il gain -->
+        <resourcebonusdouble>1</resourcebonusdouble> <!-- sta a indicare il true -->
+        <developmentcardcoindiscount>0</developmentcardcoindiscount> <!-- indica il val del discount -->
+    </card>
+</leadercard>
