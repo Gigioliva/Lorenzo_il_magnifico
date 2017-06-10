@@ -36,7 +36,7 @@ public class MyImage {
 	}
 	
 	public static ImageIcon createImageIcon(String path) {
-        java.net.URL imgURL = LayeredPanel.class.getResource(path);
+        java.net.URL imgURL = BoardPanel.class.getResource(path);
         if (imgURL != null) {
             return new ImageIcon(imgURL);
         } else {
@@ -44,5 +44,7 @@ public class MyImage {
             return null;
         }
     }
+	
+
 
 }

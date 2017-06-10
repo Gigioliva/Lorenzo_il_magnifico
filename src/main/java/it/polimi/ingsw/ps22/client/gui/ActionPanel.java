@@ -15,7 +15,7 @@ public class ActionPanel extends JPanel  {
 	ActionButton b;
 	Rectangle dim;
 	
-	public ActionPanel(String name,Rectangle dim, ActionListener actionListener, int space){
+	public ActionPanel(String name, Rectangle dim, ActionListener actionListener, int space){
 		
 		ActionButton b = new ActionButton(space,name);
 		this.b = b;
