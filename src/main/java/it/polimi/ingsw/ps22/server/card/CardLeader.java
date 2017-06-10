@@ -2,8 +2,7 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.server.effect.ActionEffect;
+import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.player.Player;
 
@@ -13,7 +12,7 @@ public class CardLeader extends Card {
 	private String name;
 	private ArrayList<HashMap<String, Integer>> requisite;
 	private PermanentEffect permanentEffect;
-	private ActionEffect actionEffect;
+	private ImmediateEffect immediateEffect;
 	private boolean play;
 	private boolean copy=false;
 
@@ -35,12 +34,12 @@ public class CardLeader extends Card {
 		this.permanentEffect = permanentEffect;
 	}
 
-	public ActionEffect getActionEffect() {
-		return actionEffect;
+	public ImmediateEffect getActionEffect() {
+		return immediateEffect;
 	}
 
-	public void setActionEffect(ActionEffect actionEffect) {
-		this.actionEffect = actionEffect;
+	public void setActionEffect(ImmediateEffect immediateEffect) {
+		this.immediateEffect = immediateEffect;
 	}
 
 	public String getName() {
@@ -54,8 +53,8 @@ public class CardLeader extends Card {
 	}
 
 	private void applyActionEffect(Player player) {
-		if (actionEffect != null) {
-			actionEffect.performEffect(player);
+		if (immediateEffect != null) {
+			immediateEffect.performEffect(player);
 		}
 	}
 

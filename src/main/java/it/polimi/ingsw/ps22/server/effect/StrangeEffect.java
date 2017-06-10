@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps22.server.effect;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
 import it.polimi.ingsw.ps22.server.player.Player;
 
-public class StrangeEffect implements PermanentEffect{
+public class StrangeEffect implements PermanentEffect, ImmediateEffect{
 	
 	private static final long serialVersionUID = 1L;
 	private String type;
