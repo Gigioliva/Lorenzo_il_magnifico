@@ -44,7 +44,7 @@ public class CardVenture extends DevelopmentCard {
 		for (ImmediateEffect el : immediateEffects) {
 			el.performEffect(player);
 			if (player.getSpecBonus().returnBool("DoubleGain") && el instanceof GainResource) {
-				el.performEffect(player);
+				((GainResource)el).doubleGain(player);
 			}
 		}
 	}
