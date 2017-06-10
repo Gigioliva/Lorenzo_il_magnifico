@@ -57,6 +57,4 @@ public class AskEffect extends MessageAsk {
 	public AnswerEffect accept(VisitorB visitor){
 		return visitor.visit(this);
 	}
-	
-
 }

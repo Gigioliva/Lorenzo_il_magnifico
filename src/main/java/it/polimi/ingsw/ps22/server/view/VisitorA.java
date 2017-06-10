@@ -104,5 +104,13 @@ public class VisitorA {
 			return null;
 		}
 	}
+	
+	public AskFamily visit(AskFamily mex) {
+		if (user.equals(user_mex)) {
+			return mex;
+		} else {
+			return null;
+		}
+	}
 
 }

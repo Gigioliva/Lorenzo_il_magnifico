@@ -14,7 +14,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.model.Model;

@@ -3,8 +3,6 @@ package it.polimi.ingsw.ps22.server.board;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class Board implements Serializable {
@@ -55,8 +53,8 @@ public class Board implements Serializable {
 		return councilPalace;
 	}
 
-	public int getDice(Color color) {
-		return dice.getDice(color);
+	public Dice getDice() {
+		return dice;
 	}
 
 	public void setZone(int num) {

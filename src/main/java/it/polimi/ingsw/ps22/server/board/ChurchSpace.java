@@ -56,6 +56,9 @@ public class ChurchSpace implements Serializable {
 		player.getSpecificResource("VictoryPoint")
 				.addResource(faithPointTrack.getVictoryBonus(player.getSpecificResource("FaithPoint").getQuantity()));
 		player.getSpecificResource("FaithPoint").subResource(player.getSpecificResource("FaithPoint"));
+		if(player.getSpecBonus().returnBool("PointVicChurch+5")){
+			player.getSpecificResource("VictoryPoint").addResource(new VictoryPoint(5));
+		}
 	}
 	
 	private String requisiteString(){

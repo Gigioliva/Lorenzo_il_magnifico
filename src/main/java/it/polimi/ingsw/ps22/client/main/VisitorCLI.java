@@ -8,6 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import it.polimi.ingsw.ps22.server.answer.*;
 import it.polimi.ingsw.ps22.server.message.*;
+import it.polimi.ingsw.ps22.server.model.Color;
 
 public class VisitorCLI extends VisitorB {
 
@@ -187,6 +188,22 @@ public class VisitorCLI extends VisitorB {
 			}
 		} while (!correct);
 		return new AnswerUsername(name);
+	}
+	
+	public AnswerFamily visit(AskFamily mex){
+		System.out.println(mex.getString());
+		boolean correct = false;
+		Color color = null;
+		do {
+			try {
+				color = Color.Conversion(stdin.readLine());
+				correct = true;
+			} catch (IOException | IllegalArgumentException e) {
+				System.out.println("Errato.");
+			}
+		} while (!correct);
+		return new AnswerFamily(mex.getId(), color);
+		
 	}
 
 	private static ArrayList<Integer> extractingNumbers(String s) {

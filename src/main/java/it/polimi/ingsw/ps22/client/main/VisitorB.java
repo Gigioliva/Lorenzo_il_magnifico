@@ -30,5 +30,7 @@ public abstract class VisitorB {
 	public abstract GenericAnswer visit(ChoiceMove mex);
 	
 	public abstract AnswerUsername visit(AskUsername mex);
+	
+	public abstract AnswerFamily visit(AskFamily mex);
 
 }
