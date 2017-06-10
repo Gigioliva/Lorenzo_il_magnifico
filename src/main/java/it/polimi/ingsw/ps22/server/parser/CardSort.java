@@ -130,8 +130,8 @@ public class CardSort {
 	
 	public static ArrayList<CardLeader> leaderSort() {
 		ArrayList<CardLeader> temp=new ArrayList<CardLeader>();
-		//LeaderCardSaxParser.LeaderRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Leader.xml", allCard);
 		ArrayList<CardLeader> allCard=new ArrayList<CardLeader>();
+		LeaderCardSaxParser.LeaderRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Leader.xml", temp);
 		Random random = new Random();
 		while(!temp.isEmpty()){
 			allCard.add(temp.remove(random.nextInt(temp.size())));

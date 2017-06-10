@@ -10,6 +10,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
+import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.effect.BonusEffect;
 import it.polimi.ingsw.ps22.server.effect.NoPointsCard;
 import it.polimi.ingsw.ps22.server.effect.StrangeEffect;
@@ -29,157 +30,91 @@ import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Wood;
 
 /*
+XML Structure
 <leadercard>
-
-
-
+    <card>
+        <name>BaseCard</name>
+        <requisite>
+            <samedevelopmentcard>0</samedevelopmentcard>
+            <cardterritory>0</cardterritory>
+            <cardventure>0</cardventure>
+            <cardbuilding>0</cardbuilding>
+            <cardcharacter>0</cardcharacter>
+            <coin>0</coin>
+            <stone>0</stone>
+            <wood>0</wood>
+            <servant>0</servant>
+            <militarypoint>0</militarypoint>
+            <faithpoint>0</faithpoint>
+            <victorypoint>0</victorypoint>
+        </requisite>
+        <eachturnharvestaction>0</eachturnharvestaction> <!-- sta a indicare il valore della azione -->
+        <eachturnprodaction>0</eachturnprodaction> <!-- sta a indicare il valore della azione -->
+        <eachturngaincoin>0</eachturngaincoin> <!-- sta a indicare il valore del gain -->
+        <eachturngainstone>0</eachturngainstone> <!-- sta a indicare il valore del gain -->
+        <eachturngainwood>0</eachturngainwood> <!-- sta a indicare il valore del gain -->
+        <eachturngainservant>0</eachturngainservant> <!-- sta a indicare il valore del gain -->
+        <eachturngainmilitarypoint>0</eachturngainmilitarypoint> <!-- sta a indicare il valore del gain-->
+        <eachturngainfaithpoint>0</eachturngainfaithpoint> <!-- sta a indicare il valore del gain -->
+        <eachturngainvictorypoint>0</eachturngainvictorypoint> <!-- sta a indicare il valore del gain -->
+        <eachturngaincouncilpoint>0</eachturngaincouncilpoint> <!-- sta a indicare il valore del gain -->
+        <eachturnonefamdefvalue>6</eachturnonefamdefvalue> <!-- sta a indicare il valore del azione fam -->
+        <canplaceinocupatedspace>0</canplaceinocupatedspace> <!-- sta a indicare il true -->
+        <nothreeadditivecoin>1</nothreeadditivecoin> <!-- sta a indicare il true -->
+        <neutralmaggioration>1</neutralmaggioration> <!-- sta a indicare il valore dell'incremento -->
+        <familiardefinitevalue>0</familiardefinitevalue> <!-- sta a indicare il valore dei fam colorati -->
+        <familiarbonus>0</familiarbonus> <!-- sta a indicare il valore dell'inc dei fam colorati -->
+        <leadercopy>1</leadercopy> <!-- sta a indicare il true -->
+        <vaticansubstainvictorypointgain>1</vaticansubstainvictorypointgain> <!-- indica il gain -->
+        <resourcebonusdouble>1</resourcebonusdouble> <!-- sta a indicare il true -->
+        <developmentcardcoindiscount>0</developmentcardcoindiscount> <!-- indica il val del discount -->
+    </card>
+</leadercard>
  */
 
 public class LeaderCardSaxParser {
 
-
-	public static void LeaderRead(String pathname, ArrayList<CardExcomm> parsedData) {
+	public static void LeaderRead(String pathname, ArrayList<CardLeader> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler() {
-				CardExcomm card = new CardExcomm();
-				BonusEffect permResEff =new BonusEffect();
-				SubVictoryPoint subEff;
+				
+				CardLeader card = new CardLeader("",true);
 				String lastQName = "";
 
+				
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
 					lastQName = qName.toLowerCase();
 				}
 
+				
+				
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 					lastQName = "";
 					if (qName.equalsIgnoreCase("card")) {
-						card.addPermanentEffect(permResEff);
+						//azioni aggiuntive
 						parsedData.add(card);
-						card = new CardExcomm();
+						card = new CardLeader("",true);
 					}
 				}
 
+				
+				
 				public void characters(char ch[], int start, int length) throws SAXException {
-
 					String str = new String(ch, start, length);
-
-					if (lastQName.equalsIgnoreCase("era")) {
-						card.setEra(Integer.parseInt(str));
-					}
-
-					if (lastQName.equalsIgnoreCase("militaryincrement")) {
-						permResEff.addBonus("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("coinincrement")) {
-						permResEff.addBonus("Coin", new Coin(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("servantincrement")) {
-						permResEff.addBonus("Servant", new Servant(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("woodincrement")) {
-						permResEff.addBonus("Wood", new Wood(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("stoneincrement")) {
-						permResEff.addBonus("Stone", new Stone(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("harvestincrement")) {
-						permResEff.addBonus("IncrementHarvest", new IncrementHarvest(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("productionincrement")) {
-						permResEff.addBonus("IncrementProduction", new IncrementProduction(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("diceincrement")) {
-						permResEff.addBonus("IncrementDice", new IncrementDice(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("territoryactionincrement")) {
-						permResEff.addBonus("IncrementTerritory", new IncrementTerritory(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("characteractionincrement")) {
-						permResEff.addBonus("IncrementCharacter", new IncrementCharacter(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("buildingactionincrement")) {
-						permResEff.addBonus("IncrementBuilding", new IncrementBuilding(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("ventureactionincrement")) {
-						permResEff.addBonus("IncrementVenture", new IncrementVenture(Integer.parseInt(str)));
-					}
-
-					if (lastQName.equalsIgnoreCase("nomarket")) {
-						card.addPermanentEffect(new StrangeEffect("NoMarket"));
-					}
-
-					if (lastQName.equalsIgnoreCase("servanthalfvalue")) {
-						card.addPermanentEffect(new StrangeEffect("DoubleServant"));
-					}
-
-					if (lastQName.equalsIgnoreCase("turnskip")) {
-						card.addPermanentEffect(new StrangeEffect("SkipFirstMove"));
-					}
-
-					if (lastQName.equalsIgnoreCase("endinvalidcharacter")) {
-						card.addEndEffect(new NoPointsCard("Character"));
-					}
-
-					if (lastQName.equalsIgnoreCase("endinvalidventure")) {
-						card.addEndEffect(new NoPointsCard("Venture"));
-					}
-
-					if (lastQName.equalsIgnoreCase("endinvalidterritory")) {
-						card.addEndEffect(new NoPointsCard("Territory"));
-					}
-
-					if (lastQName.equalsIgnoreCase("endvictorylose")) {
-						subEff= new SubVictoryPoint("player");
-						subEff.addBonus("VictoryPoint", new VictoryPoint(5));
-						card.addEndEffect(subEff);
-					}
-
-					if (lastQName.equalsIgnoreCase("militarydecrementvictory")) {
-						subEff= new SubVictoryPoint("player");
-						subEff.addBonus("MilitaryPoint", new MilitaryPoint(1));
-						card.addEndEffect(subEff);
-					}
-
-					if (lastQName.equalsIgnoreCase("endlosevictorybuildingstonewood")) {
-						subEff= new SubVictoryPoint("Building");
-						subEff.addBonus("Wood", new Wood(1));
-						subEff.addBonus("Stone", new Stone(1));
-						card.addEndEffect(subEff);
-					}
-
-					if (lastQName.equalsIgnoreCase("endlosevictoryforallresource")) {
-						subEff= new SubVictoryPoint("player");
-						subEff.addBonus("Coin", new Coin(1));
-						subEff.addBonus("Stone", new Stone(1));
-						subEff.addBonus("Wood", new Wood(1));
-						subEff.addBonus("Servant", new Servant(1));
-						card.addEndEffect(subEff);
-					}
-
+					
 				}
+				
+				
+					
+				
 			};
 
 			saxParser.parse(pathname, handler);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 	}
-
-
 }
