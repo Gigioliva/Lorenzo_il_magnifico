@@ -1,14 +1,6 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.Insets;
-
-import javax.swing.BorderFactory;
-import javax.swing.ButtonModel;
 import javax.swing.JButton;
-import javax.swing.border.Border;
-import javax.swing.border.EmptyBorder;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
 
 import it.polimi.ingsw.ps22.server.model.Color;
 
@@ -34,22 +26,8 @@ public class ActionButton extends JButton  {
 			this.space = space;
 			this.username = username;
 			
-			
-			final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
-			final Insets insets = raisedBevelBorder.getBorderInsets(this);
-		    final EmptyBorder emptyBorder = new EmptyBorder(insets);
 		    
-			this.getModel().addChangeListener(new ChangeListener() {
-			        @Override
-			        public void stateChanged(ChangeEvent e) {
-			            ButtonModel model = (ButtonModel) e.getSource();
-			            if (model.isRollover()) {
-			                ActionButton.this.setBorder(raisedBevelBorder);
-			            } else {
-			                ActionButton.this.setBorder(emptyBorder);
-			            }
-			        }
-			    });
+			this.getModel().addChangeListener(new BorderEffect(this));
 		}
 
 		

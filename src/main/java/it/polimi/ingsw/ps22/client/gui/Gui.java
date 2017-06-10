@@ -1,21 +1,17 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.JFrame;
 
 import it.polimi.ingsw.ps22.server.model.Model;
 
-public class Gui extends JFrame implements Observer {
+public class Gui extends JFrame{
 	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	LayeredPanel board;
+	BoardPanel board;
+	//PersonalBoardPanel personalBoard;
 	
 
 	
@@ -29,9 +25,12 @@ public class Gui extends JFrame implements Observer {
 		this.setVisible(true);
 		
 	
-		board = new LayeredPanel(this.getWidth(), this.getHeight(), username); 
+		board = new BoardPanel(this.getWidth(), this.getHeight(), username); 
+		
+		//personalBoard = new PersonalBoardPanel(this.getWidth(), this.getHeight(), username);
 		
 		this.add(board);
+		//this.add(personalBoard);
 		
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -43,14 +42,5 @@ public class Gui extends JFrame implements Observer {
 		//board.update(model.getBoard());
 	}
 
-
-
-	@Override
-	public void update(Observable arg0, Object arg1) {
-		if (!(arg1 instanceof HashMap<?,?>))
-			throw new IllegalArgumentException();
-		board.setCards((HashMap<Integer,ArrayList<String>>) arg1);
-		
-	}
 
 }
