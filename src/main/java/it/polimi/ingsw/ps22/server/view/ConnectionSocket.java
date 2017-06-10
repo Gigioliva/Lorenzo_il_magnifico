@@ -5,22 +5,17 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
-
+import it.polimi.ingsw.ps22.server.message.AskUsername;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
-import it.polimi.ingsw.ps22.server.model.Model;
+import it.polimi.ingsw.ps22.server.answer.AnswerUsername;;
 
 public class ConnectionSocket extends Connection {
 	
 	private Socket socket;
-
 	private ObjectInputStream in;
-
 	private ObjectOutputStream out;
-
 	private Server server;
-
 	private String name;
-
 	private boolean active = false;
 
 	public ConnectionSocket(Socket socket, Server server) {
@@ -35,10 +30,10 @@ public class ConnectionSocket extends Connection {
 			in = new ObjectInputStream(socket.getInputStream());  //ricordarsi di aprire prima l'output nel client
 			out = new ObjectOutputStream(socket.getOutputStream());
 			do{
-				GenericMessage mex=new GenericMessage();
-				mex.setString("Who are you?");
+				AskUsername mex=new AskUsername();
 				send(mex);
-				name = ((GenericMessage)in.readObject()).getString();
+				name = ((AnswerUsername)in.readObject()).getAnswer();
+				System.out.println(name);
 				server.rednezvous(this, name);
 			}while(!active);
 			out.writeObject(name);
@@ -56,24 +51,14 @@ public class ConnectionSocket extends Connection {
 	}
 
 	@Override
-	public void send(GenericMessage message) {
+	public void send(Object obj) {
 		try {
-			out.writeObject(message);
+			out.writeObject(obj);
 			out.flush();
 		} catch (IOException e) {
 			System.out.println("Errore nell'invio messaggio");
 		}
 
-	}
-
-	@Override
-	public void send(Model model) {
-		try {
-			out.writeObject(model);
-			out.flush();
-		} catch (IOException e) {
-			System.out.println("Errore nell'invio messaggio");
-		}
 	}
 	
 	public synchronized void closeConnection() {	

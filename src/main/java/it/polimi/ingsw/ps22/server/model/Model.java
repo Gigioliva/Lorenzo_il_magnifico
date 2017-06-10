@@ -11,6 +11,7 @@ import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
+import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
@@ -71,14 +72,18 @@ public class Model extends Observable implements Serializable {
 		for (int i = 0; i < orderedPlayers.size(); i++) {
 			players.get(orderedPlayers.get(i)).addSpecificResource("Coin", new Coin(5 + i));
 		}
-		// leggere da file le carte leader e ne carica 4 casualmente in
-		// cardLeaderStart
+		ArrayList<CardLeader> temp=CardSort.leaderSort();
+		for(Player el: cardLeaderStart.keySet()){
+			for(int i=0; i<4;i++){
+				cardLeaderStart.get(el).add(temp.remove(0));
+			}
+		}
 		canFamilyMove = true;
 		turn = 1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
 		notifyModel();
-		//draftStart();
+		draftStart();
 	}
 
 	public void notifyModel() {
@@ -171,8 +176,7 @@ public class Model extends Observable implements Serializable {
 	}
 
 	private void EndGame() {
-		for (String el : players.keySet()) { // occhio a quelli che devono
-												// essere eseguiti per primi
+		for (String el : players.keySet()) { 
 			players.get(el).applyEndEffects();
 		}
 		winMilitaryPoint();

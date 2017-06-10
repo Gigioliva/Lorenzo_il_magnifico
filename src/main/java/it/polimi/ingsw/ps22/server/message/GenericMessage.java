@@ -20,7 +20,7 @@ public class GenericMessage implements Serializable {
 	}
 	
 	public GenericMessage accept(VisitorA visitor){
-		return null;
+		return visitor.visit(this);
 	}
 	
 	public GenericAnswer accept(VisitorB visitor){

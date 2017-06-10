@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.card.CardCharacter;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
-import it.polimi.ingsw.ps22.server.parser.CardSortByEra;
+import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -17,7 +17,7 @@ public class TowerCharacterZone extends TowerZone {
 
 	public TowerCharacterZone() {
 		super();
-		HashMap<Integer, ArrayList<CardCharacter>> temp=CardSortByEra.characterSortByEra();
+		HashMap<Integer, ArrayList<CardCharacter>> temp=CardSort.characterSortByEra();
 		for(int i=0; i<6;i++){
 			ArrayList<DevelopmentCard> card=new ArrayList<DevelopmentCard>();
 			for(int j=0;j<4;j++){

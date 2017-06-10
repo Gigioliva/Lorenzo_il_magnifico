@@ -87,7 +87,7 @@ public class PersonalBoard implements Serializable {
 		StringBuilder str = new StringBuilder();
 		str.append("Personal bonus: \n");
 		for(String type: personalBonus.keySet()){
-			str.append("  " + type + " " + personalBonus.get(type).toString() + "\n");
+			str.append(type + "\n" + personalBonus.get(type).toString() + "\n");
 		}
 		
 		return str.toString();

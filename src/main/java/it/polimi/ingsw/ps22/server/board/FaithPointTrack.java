@@ -22,7 +22,7 @@ public class FaithPointTrack {
 		
 		for(Integer pos: track.keySet()){
 			str.append("  Position: " + pos + " ");
-			str.append("Victory Points " + track.get(pos) + "\n");
+			str.append("Victory Points " + track.get(pos).getQuantity() + "\n");
 		}
 		
 		return str.toString();

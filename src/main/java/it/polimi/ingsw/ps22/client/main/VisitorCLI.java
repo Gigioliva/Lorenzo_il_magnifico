@@ -172,6 +172,22 @@ public class VisitorCLI extends VisitorB {
 		System.out.println(mex.getString());
 		return null;
 	}
+	
+	@Override
+	public AnswerUsername visit(AskUsername mex){
+		System.out.println(mex.getString());
+		boolean correct = false;
+		String name = null;
+		do {
+			try {
+				name = stdin.readLine();
+				correct = true;
+			} catch (IOException e) {
+				System.out.println("Errato.");
+			}
+		} while (!correct);
+		return new AnswerUsername(name);
+	}
 
 	private static ArrayList<Integer> extractingNumbers(String s) {
 		ArrayList<Integer> numbers = new ArrayList<Integer>();
@@ -185,5 +201,4 @@ public class VisitorCLI extends VisitorB {
 		}
 		return numbers;
 	}
-
 }

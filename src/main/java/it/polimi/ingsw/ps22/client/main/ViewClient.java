@@ -19,7 +19,7 @@ public class ViewClient extends Observable implements Observer, Runnable {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if(o instanceof Receive && arg instanceof String){
+		/*if(o instanceof Receive && arg instanceof String){
 			username=(String)arg;
 			System.out.println("Your username is: " + username);
 		}
@@ -38,6 +38,27 @@ public class ViewClient extends Observable implements Observer, Runnable {
 			}
 		}
 		if(o instanceof Receive && arg instanceof Model){
+			graphic.printModel((Model)arg);
+		}*/
+		if(arg instanceof String){
+			username=(String)arg;
+			System.out.println("Your username is: " + username);
+		}
+		if(arg instanceof GenericMessage){
+			GenericAnswer mex=graphic.getAnswer((GenericMessage)arg);
+			if(mex!=null){
+				setChanged();
+				notifyObservers(mex);
+			}
+		}
+		if(arg instanceof ChoiceMove){
+			Move temp=graphic.getMove();
+			if(temp!=null){
+				setChanged();
+				notifyObservers(temp);
+			}
+		}
+		if(arg instanceof Model){
 			graphic.printModel((Model)arg);
 		}
 	}

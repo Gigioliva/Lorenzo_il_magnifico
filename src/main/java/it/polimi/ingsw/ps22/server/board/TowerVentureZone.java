@@ -6,7 +6,7 @@ import it.polimi.ingsw.ps22.server.card.CardVenture;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
-import it.polimi.ingsw.ps22.server.parser.CardSortByEra;
+import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -19,7 +19,7 @@ public class TowerVentureZone extends TowerZone {
 
 	public TowerVentureZone() {
 		super();
-		HashMap<Integer, ArrayList<CardVenture>> temp=CardSortByEra.ventureSortByEra();
+		HashMap<Integer, ArrayList<CardVenture>> temp=CardSort.ventureSortByEra();
 		for(int i=0; i<6;i++){
 			ArrayList<DevelopmentCard> card=new ArrayList<DevelopmentCard>();
 			for(int j=0;j<4;j++){

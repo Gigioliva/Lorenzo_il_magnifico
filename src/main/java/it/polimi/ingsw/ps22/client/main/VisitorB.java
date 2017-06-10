@@ -28,5 +28,7 @@ public abstract class VisitorB {
 	public abstract AnswerCopyLeader visit(AskCopyLeader mex);
 
 	public abstract GenericAnswer visit(ChoiceMove mex);
+	
+	public abstract AnswerUsername visit(AskUsername mex);
 
 }
