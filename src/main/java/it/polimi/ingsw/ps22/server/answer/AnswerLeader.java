@@ -43,6 +43,8 @@ public class AnswerLeader extends GenericAnswer {
 				model.getWaitAnswer().remove(ask);
 				return;
 			}
+			model.notifyAsk(ask);
+			return;
 		}
 		GenericMessage mex=new GenericMessage();
 		mex.setString("risposta errata");

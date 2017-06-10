@@ -28,9 +28,11 @@ public class TowerVentureZone extends TowerZone {
 			cards.put(i+1,card);
 		}
 		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
-		ZoneBonusSaxParser.BonusRead("",bonus);
+		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/TowerVenture.xml",bonus);
 		for (int i = 0; i < NUM_SPACES; i++) {
-			towerSpaces[i].addBonus(bonus.get(i));
+			if(bonus.get(i)!=null){
+				towerSpaces[i].addBonus(bonus.get(i));
+			}
 		}
 
 	}

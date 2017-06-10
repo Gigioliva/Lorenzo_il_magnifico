@@ -26,7 +26,7 @@ public class ChurchSpace implements Serializable {
 		requisite.put(2, 4);
 		requisite.put(3, 5);
 		HashMap<Integer,VictoryPoint> track=new HashMap<Integer,VictoryPoint>();
-		FaithPointSaxParser.FaithRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/FaithPointSaxParser.xml", track);
+		FaithPointSaxParser.FaithRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/FaithPointTrack.xml", track);
 		faithPointTrack=new FaithPointTrack(track);
 		cardExcomm=CardSort.excommSortByEra().get(era).get(0);
 	}

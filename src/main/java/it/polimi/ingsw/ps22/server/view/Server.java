@@ -15,6 +15,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
+import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.model.Model;
 
@@ -111,13 +112,15 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	}
 	
 	public static void main(String[] args) {
-		Server server;
+		/*Server server;
 		try {
 			server = new Server();
 			server.run();
 		} catch (IOException e) {
 			System.err.println("Impossibile inizializzare il server: " + e.getMessage() + "!");
-		}
+		}*/
+		Board temp=new Board();
+		System.out.println(temp.toString());
 	}
 
 }

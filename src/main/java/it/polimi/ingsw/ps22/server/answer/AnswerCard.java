@@ -45,6 +45,7 @@ public class AnswerCard extends GenericAnswer {
 				}
 			}
 			model.notifyAsk(ask);
+			return;
 		}
 		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();

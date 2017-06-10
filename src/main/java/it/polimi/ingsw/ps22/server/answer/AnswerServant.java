@@ -31,6 +31,8 @@ public class AnswerServant extends GenericAnswer {
 				model.getWaitAnswer().remove(ask);
 				return;
 			}
+			model.notifyAsk(ask);
+			return;
 		}
 		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();

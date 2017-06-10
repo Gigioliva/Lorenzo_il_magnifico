@@ -1,47 +1,15 @@
 <spaces>
-    
     <space>
-        <Coin>11</Coin>
-        <Stone>12</Stone>
-        <Wood>13</Wood>
-        <Servant>14</Servant>
-        <MilitaryPoint>15</MilitaryPoint>
-        <FaithPoint>16</FaithPoint>
-        <VictoryPoint>17</VictoryPoint>
-        <CouncilPrivilege>18</CouncilPrivilege>
+        <Coin>5</Coin>
     </space>
-    
     <space>
-        <Coin>21</Coin>
-        <Stone>22</Stone>
-        <Wood>23</Wood>
-        <Servant>24</Servant>
-        <MilitaryPoint>25</MilitaryPoint>
-        <FaithPoint>26</FaithPoint>
-        <VictoryPoint>27</VictoryPoint>
-        <CouncilPrivilege>28</CouncilPrivilege>
+        <Servant>5</Servant>
     </space>
-    
     <space>
-        <Coin>31</Coin>
-        <Stone>32</Stone>
-        <Wood>33</Wood>
-        <Servant>34</Servant>
-        <MilitaryPoint>35</MilitaryPoint>
-        <FaithPoint>36</FaithPoint>
-        <VictoryPoint>37</VictoryPoint>
-        <CouncilPrivilege>38</CouncilPrivilege>
+        <Coin>2</Coin>
+        <MilitaryPoint>3</MilitaryPoint>
     </space>
-    
     <space>
-        <Coin>41</Coin>
-        <Stone>42</Stone>
-        <Wood>43</Wood>
-        <Servant>44</Servant>
-        <MilitaryPoint>45</MilitaryPoint>
-        <FaithPoint>46</FaithPoint>
-        <VictoryPoint>47</VictoryPoint>
-        <CouncilPrivilege>48</CouncilPrivilege>
+        <CouncilPrivilege>2</CouncilPrivilege>
     </space>
-    
 </spaces>

@@ -43,6 +43,7 @@ public class AnswerCopyLeader extends GenericAnswer {
 				return;
 			}
 			model.notifyAsk(ask);
+			return;
 		}
 		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();
