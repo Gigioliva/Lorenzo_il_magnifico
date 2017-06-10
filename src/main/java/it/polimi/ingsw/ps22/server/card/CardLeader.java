@@ -15,13 +15,16 @@ public class CardLeader extends Card {
 	private PermanentEffect permanentEffect;
 	private ActionEffect actionEffect;
 	private boolean play;
-	private boolean copy;
+	private boolean copy=false;
 
-	public CardLeader(String name, boolean copy) {
+	public CardLeader(String name) {
 		this.name = name;
 		requisite = new ArrayList<HashMap<String, Integer>>();
 		this.play = false;
-		this.copy = copy;
+	}
+	
+	public void setCopy(){
+		copy=true;
 	}
 
 	public PermanentEffect getPermanentEffect() {
