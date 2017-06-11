@@ -21,7 +21,8 @@ public class TowerPanel extends JPanel{
 		JButton b = new JButton();
 		
 		b.setEnabled(true);
-		b.setBorderPainted(true);
+		b.setBorderPainted(false);
+		b.setContentAreaFilled(false);
 	
 		this.b = b;
 		
@@ -38,6 +39,9 @@ public class TowerPanel extends JPanel{
 	
 	}
 
+	public void takeCard(){
+		b.setBorderPainted(false);
+	}
 	
 	public void setCard(String path){
 		this.path = path;

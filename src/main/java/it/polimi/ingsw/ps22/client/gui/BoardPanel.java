@@ -92,9 +92,14 @@ public class BoardPanel extends JPanel{
 		FamiliarButton fam3 = new FamiliarButton(Color.WHITE, java.awt.Color.WHITE, new TakeFamiliarListener(actionSpaces));
 		fam3.setBounds((int)(heightScreen*0.75) + 200, (int)heightScreen - 100, 100, 100);
 		fam3.setText("white");
+		FamiliarButton fam4 = new FamiliarButton(Color.NEUTRAL, java.awt.Color.lightGray, new TakeFamiliarListener(actionSpaces));
+		fam4.setBounds((int)(heightScreen*0.75) + 300, (int)heightScreen - 100, 100, 100);
+		fam4.setText("neutral");
+		
 		layeredPane.add(fam1, new Integer(50), 0);
 		layeredPane.add(fam2, new Integer(50), 0);
 		layeredPane.add(fam3, new Integer(50), 0);
+		layeredPane.add(fam4, new Integer(50), 0);
 		
 		towers.put(0, new ArrayList<TowerPanel>());
 		towers.put(1, new ArrayList<TowerPanel>());
@@ -136,9 +141,6 @@ public class BoardPanel extends JPanel{
 		
 		
 		
-		spinPan.setBounds((int)widthScreen - 500, (int)heightScreen - 500, board.getIconWidth()- 400, board.getIconHeight() - 700);
-		spinFamiliar();
-		
 		HashMap<Integer,ArrayList<String>> map = new HashMap<Integer,ArrayList<String>>();
 		map.put(0,new ArrayList<String>());
 		map.put(1,new ArrayList<String>());
@@ -173,6 +175,11 @@ public class BoardPanel extends JPanel{
 	
 		layeredPane.add(personalBoard, new Integer(400),0);
 		
+		spinPan.setBounds((int)(heightScreen*0.75) + personalBoard.getWidth(), (int)(heightScreen/2.5), 
+				(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth())),  
+					(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth()))/3);
+		spinFamiliar();
+		
 		for(int i = 0 ; i < NUM_PLAYERS - 1; i++){
 			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, "Gianni " + i,i);
 			layeredPane.add(b1, new Integer(40));
@@ -202,6 +209,7 @@ public class BoardPanel extends JPanel{
 				
 			}
 		});
+		spinPan.setBackground(java.awt.Color.GRAY);
 		layeredPane.add(spinPan, new Integer(2000),0);
 	}
 	

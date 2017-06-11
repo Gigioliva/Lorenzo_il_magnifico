@@ -21,6 +21,7 @@ public class BorderEffect implements ChangeListener {
 	}
 	@Override
 	public void stateChanged(ChangeEvent e) {
+		b.setBorderPainted(true);
 		final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
 		final Insets insets = raisedBevelBorder.getBorderInsets(b);
 	    final EmptyBorder emptyBorder = new EmptyBorder(insets);

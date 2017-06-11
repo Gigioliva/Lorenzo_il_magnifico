@@ -17,7 +17,7 @@ public class PlayersButton extends JButton {
 	public PlayersButton(double widthScreen, double heightScreen, String username, int pos){
 		this.setText(username);
 		
-		this.setBounds((int)widthScreen/2 + 200 + 100*pos, (int)heightScreen - 100, 100, 50); 
+		this.setBounds((int)widthScreen/2 + 300 + 100*pos, (int)heightScreen - 100, 100, 50); 
 		
 		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username);
 		
