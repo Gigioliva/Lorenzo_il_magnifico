@@ -1,19 +1,37 @@
 <leadercard>
     <card>
-        <name>BaseCard</name>
+        <name>Francesco Sforza</name>
         <requisite>
-            <samedevelopmentcard>0</samedevelopmentcard>
-            <cardterritory>0</cardterritory>
-            <cardventure>0</cardventure>
-            <cardbuilding>0</cardbuilding>
-            <cardcharacter>0</cardcharacter>
-            <coin>0</coin>
-            <stone>0</stone>
-            <wood>0</wood>
-            <servant>0</servant>
-            <militarypoint>0</militarypoint>
-            <faithpoint>0</faithpoint>
-            <victorypoint>0</victorypoint>
+            <Venture>5</Venture>
+        </requisite>
+         <eachturnharvestaction>1</eachturnharvestaction>
+    </card>
+    <card>
+        <name>Ludovico Ariosto</name>
+        <requisite>
+            <Character>5</Character>
+        </requisite>
+        <canplaceinocupatedspace>1</canplaceinocupatedspace>
+    </card>
+    <card>
+        <name>Filippo Brunelleschi</name>
+        <requisite>
+            <Building>5</Building>
+        </requisite>
+        <nothreeadditivecoin>1</nothreeadditivecoin>
+    </card>
+    <card>
+        <name>Sigismondo Malatesta</name>
+        <requisite>
+            <MilitaryPoint>7</MilitaryPoint>
+            <FaithPoint>3</FaithPoint>
+        </requisite>
+        <neutralmaggioration3>1</neutralmaggioration3>
+    </card>
+    <card>
+        <name>Girolamo Savonarola</name>
+        <requisite>
+            <Coin>18</Coin>
         </requisite>
         
         <eachturnharvestaction>0</eachturnharvestaction>
@@ -21,42 +39,149 @@
         <eachturnprodaction>0</eachturnprodaction>
         <!-- sta a indicare il valore della azione -->
         <gainresource>
-            <eachturngaincoin>0</eachturngaincoin>
-            <!-- sta a indicare il valore del gain -->
-            <eachturngainstone>0</eachturngainstone>
-            <!-- sta a indicare il valore del gain -->
-            <eachturngainwood>0</eachturngainwood>
-            <!-- sta a indicare il valore del gain -->
-            <eachturngainservant>0</eachturngainservant>
-            <!-- sta a indicare il valore del gain -->
-            <eachturngainmilitarypoint>0</eachturngainmilitarypoint>
-            <!-- sta a indicare il valore del gain-->
-            <eachturngainfaithpoint>0</eachturngainfaithpoint>
-            <!-- sta a indicare il valore del gain -->
-            <eachturngainvictorypoint>0</eachturngainvictorypoint>
-            <!-- sta a indicare il valore del gain -->
-            <eachturngaincouncilpoint>0</eachturngaincouncilpoint>
-            <!-- sta a indicare il valore del gain -->
+            <FaithPoint>1</FaithPoint>
         </gainresource>
-        <eachturnonefamdefvalue>6</eachturnonefamdefvalue>
-        <!-- sta a indicare il valore del azione fam -->
-        <canplaceinocupatedspace>0</canplaceinocupatedspace>
-        <!-- sta a indicare il true -->
-        <nothreeadditivecoin>1</nothreeadditivecoin>
-        <!-- sta a indicare il true -->
-        <neutralmaggioration3>1</neutralmaggioration3>
-        <!-- sta a indicare il true -->
-        <familiardefinitevalue>1</familiardefinitevalue>
-        <!-- sta a indicare il true -->
-        <familiarbonus+2>1</familiarbonus+2>
-        <!-- sta a indicare il true -->
+    </card>
+        <card>
+        <name>Michelangelo Buonarroti</name>
+        <requisite>
+            <Stone>10</Stone>
+        </requisite>
+        <gainresource>
+            <Coin>3</Coin>
+        </gainresource>
+    </card>
+        <card>
+        <name>Giovanni dalle Bande Nere</name>
+        <requisite>
+            <MilitaryPoint>12</MilitaryPoint>
+        </requisite>
+        <gainresource>
+            <Coin>1</Coin>
+            <Stone>1</Stone>
+            <Wood>1</Wood>
+        </gainresource>
+    </card>
+        <card>
+        <name>Leonardo da Vinci</name>
+        <requisite>
+            <Territory>2</Territory>
+            <Character>4</Character>
+        </requisite>
+        <eachturnprodaction>0</eachturnprodaction>
+    </card>
+        <card>
+        <name>Sandro Botticelli</name>
+        <requisite>
+            <Wood>10</Wood>
+        </requisite>
+        <gainresource>
+            <MilitaryPoint>2</MilitaryPoint>
+            <VictoryPoint>1</VictoryPoint>
+        </gainresource>
+    </card>
+        <card>
+        <name>Ludovico il Moro</name>
+        <requisite>
+            <Territory>2</Territory>
+            <Venture>2</Venture>
+            <Building>2</Building>
+            <Character>2</Character>
+        </requisite>
+        <familiardefinitevalue5>1</familiardefinitevalue5>
+    </card>
+        <card>
+        <name>Lucrezia Borgia</name>
+        <requisite>
+            <Territory>6</Territory>
+        </requisite>
+        <requisite>
+            <Venture>6</Venture>
+        </requisite>
+        <requisite>
+            <Building>6</Building>
+        </requisite>
+        <requisite>
+            <Character>6</Character>
+        </requisite>
+        <familiarbonus2>1</familiarbonus2>
+    </card>
+    <card>
+        <name>Federico da Montefeltro</name>
+        <requisite>
+            <Territory>5</Territory>
+        </requisite>
+        <eachturnonefamdefvalue6>1</eachturnonefamdefvalue6>
+    </card>
+    <card>
+        <name>Lorenzo de Medici</name>
+        <requisite>
+            <VictoryPoint>35</VictoryPoint>
+        </requisite>
         <leadercopy>1</leadercopy>
-        <!-- sta a indicare il true -->
+    </card>
+    <card>
+        <name>Sisto IV</name>
+        <requisite>
+            <Coin>6</Coin>
+            <Stone>6</Stone>
+            <Wood>6</Wood>
+            <Servant>6</Servant>
+        </requisite>
         <vaticansubstainvictorypointgain5>1</vaticansubstainvictorypointgain5>
-        <!-- sta a indicare il true -->
+    </card>
+    <card>
+        <name>Cesare Borgia</name>
+        <requisite>
+            <Building>3</Building>
+            <Coin>12</Coin>
+            <FaithPoint>2</FaithPoint>
+        </requisite>
+        <nomilitarypointrequisiteterritory>1</nomilitarypointrequisiteterritory>
+    </card>
+    <card>
+        <name>Santa Rita</name>
+        <requisite>
+            <FaithPoint>8</FaithPoint>
+        </requisite>
         <resourcebonusdouble>1</resourcebonusdouble>
-        <!-- sta a indicare il true -->
-        <developmentcardcoindiscount>0</developmentcardcoindiscount>
-        <!-- indica il val del discount -->
+    </card>
+    <card>
+        <name>Cosimo de Medici</name>
+        <requisite>
+            <Building>4</Building>
+            <Character>2</Character>
+        </requisite>
+        <gainresource>
+            <Servant>3</Servant>
+            <VictoryPoint>1</VictoryPoint>
+        </gainresource>
+    </card>
+    <card>
+        <name>Bartolomeo Colleoni</name>
+        <requisite>
+            <Territory>4</Territory>
+            <Venture>2</Venture>
+        </requisite>
+        <gainresource>
+            <VictoryPoint>4</VictoryPoint>
+        </gainresource>
+    </card>
+    <card>
+        <name>Ludovico III Gonzaga</name>
+        <requisite>
+            <Servant>15</Servant>
+        </requisite>
+        <gainresource>
+            <CouncilPrivilege>1</CouncilPrivilege>
+        </gainresource>
+    </card>
+    <card>
+        <name>Pico della Mirandola</name>
+        <requisite>
+            <Venture>4</Venture>
+            <Building>2</Building>
+        </requisite>
+        <developmentcardcoindiscount3>1</developmentcardcoindiscount3>
     </card>
 </leadercard>

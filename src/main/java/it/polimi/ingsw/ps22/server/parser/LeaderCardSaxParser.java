@@ -10,20 +10,16 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import it.polimi.ingsw.ps22.server.action.HarvestAction;
+import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.effect.BonusEffect;
-import it.polimi.ingsw.ps22.server.effect.NoPointsCard;
+import it.polimi.ingsw.ps22.server.effect.ExtraAction;
+import it.polimi.ingsw.ps22.server.effect.ReduceCostEffect;
 import it.polimi.ingsw.ps22.server.effect.StrangeEffect;
-import it.polimi.ingsw.ps22.server.effect.SubVictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Coin;
+import it.polimi.ingsw.ps22.server.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.server.resource.FaithPoint;
-import it.polimi.ingsw.ps22.server.resource.IncrementBuilding;
-import it.polimi.ingsw.ps22.server.resource.IncrementCharacter;
-import it.polimi.ingsw.ps22.server.resource.IncrementDice;
-import it.polimi.ingsw.ps22.server.resource.IncrementHarvest;
-import it.polimi.ingsw.ps22.server.resource.IncrementProduction;
-import it.polimi.ingsw.ps22.server.resource.IncrementTerritory;
-import it.polimi.ingsw.ps22.server.resource.IncrementVenture;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 import it.polimi.ingsw.ps22.server.resource.Stone;
@@ -36,53 +32,51 @@ XML Structure
     <card>
         <name>BaseCard</name>
         <requisite>
-            <samedevelopmentcard>0</samedevelopmentcard>
-            <cardterritory>0</cardterritory>
-            <cardventure>0</cardventure>
-            <cardbuilding>0</cardbuilding>
-            <cardcharacter>0</cardcharacter>
-            <coin>0</coin>
-            <stone>0</stone>
-            <wood>0</wood>
-            <servant>0</servant>
-            <militarypoint>0</militarypoint>
-            <faithpoint>0</faithpoint>
-            <victorypoint>0</victorypoint>
+            <Territory>0</Territory>
+            <Venture>0</Venture>
+            <Building>0</Building>
+            <Character>0</Character>
+            <Coin>0</Coin>
+            <Stone>0</Stone>
+            <Wood>0</Wood>
+            <Servant>0</Servant>
+            <MilitaryPoint>0</MilitaryPoint>
+            <FaithPoint>0</FaithPoint>
+            <VictoryPoint>0</VictoryPoint>
         </requisite>
-        
         <eachturnharvestaction>0</eachturnharvestaction>
         <!-- sta a indicare il valore della azione -->
         <eachturnprodaction>0</eachturnprodaction>
         <!-- sta a indicare il valore della azione -->
         <gainresource>
-            <eachturngaincoin>0</eachturngaincoin>
+            <Coin>0</Coin>
             <!-- sta a indicare il valore del gain -->
-            <eachturngainstone>0</eachturngainstone>
+            <Stone>0</Stone>
             <!-- sta a indicare il valore del gain -->
-            <eachturngainwood>0</eachturngainwood>
+            <Wood>0</Wood>
             <!-- sta a indicare il valore del gain -->
-            <eachturngainservant>0</eachturngainservant>
+            <Servant>0</Servant>
             <!-- sta a indicare il valore del gain -->
-            <eachturngainmilitarypoint>0</eachturngainmilitarypoint>
+            <MilitaryPoint>0</MilitaryPoint>
             <!-- sta a indicare il valore del gain-->
-            <eachturngainfaithpoint>0</eachturngainfaithpoint>
+            <FaithPoint>0</FaithPoint>
             <!-- sta a indicare il valore del gain -->
-            <eachturngainvictorypoint>0</eachturngainvictorypoint>
+            <VictoryPoint>0</VictoryPoint>
             <!-- sta a indicare il valore del gain -->
-            <eachturngaincouncilpoint>0</eachturngaincouncilpoint>
+            <CouncilPrivilege>0</CouncilPrivilege>
             <!-- sta a indicare il valore del gain -->
         </gainresource>
-        <eachturnonefamdefvalue>6</eachturnonefamdefvalue>
-        <!-- sta a indicare il valore del azione fam -->
-        <canplaceinocupatedspace>0</canplaceinocupatedspace>
+        <eachturnonefamdefvalue6>1</eachturnonefamdefvalue6>
+        <!-- sta a indicare il true -->
+        <canplaceinocupatedspace>1</canplaceinocupatedspace>
         <!-- sta a indicare il true -->
         <nothreeadditivecoin>1</nothreeadditivecoin>
         <!-- sta a indicare il true -->
         <neutralmaggioration3>1</neutralmaggioration3>
         <!-- sta a indicare il true -->
-        <familiardefinitevalue>1</familiardefinitevalue>
+        <familiardefinitevalue5>1</familiardefinitevalue5>
         <!-- sta a indicare il true -->
-        <familiarbonus+2>1</familiarbonus+2>
+        <familiarbonus2>1</familiarbonus2>
         <!-- sta a indicare il true -->
         <leadercopy>1</leadercopy>
         <!-- sta a indicare il true -->
@@ -90,8 +84,10 @@ XML Structure
         <!-- sta a indicare il true -->
         <resourcebonusdouble>1</resourcebonusdouble>
         <!-- sta a indicare il true -->
-        <developmentcardcoindiscount>0</developmentcardcoindiscount>
-        <!-- indica il val del discount -->
+        <developmentcardcoindiscount3>1</developmentcardcoindiscount3>
+        <!-- sta a indicare il true -->
+        <nomilitarypointrequisiteterritory>1</nomilitarypointrequisiteterritory>
+        <!-- sta a indicare il true -->
     </card>
 </leadercard>
  */
@@ -105,15 +101,20 @@ public class LeaderCardSaxParser {
 			DefaultHandler handler = new DefaultHandler() {
 				CardLeader card;
 				HashMap<String, Integer> req = new HashMap<String, Integer>();
+				BonusEffect gainTurnEffect = new BonusEffect();
 				String lastQName = "";
 				private boolean boolRequisite = false;
+				private boolean boolGainResource = false;
 
 				public void startElement(String uri, String localName, String qName, Attributes attributes)
 						throws SAXException {
-					lastQName = qName.toLowerCase();
+					lastQName = new String(qName);
 					if (qName.equalsIgnoreCase("requisite")) {
 						boolRequisite = true;
+					}
 
+					if (qName.equalsIgnoreCase("gainresource")) {
+						boolGainResource = true;
 					}
 
 				}
@@ -128,6 +129,13 @@ public class LeaderCardSaxParser {
 					if (qName.equalsIgnoreCase("requisite")) {
 						card.addRequisite(req);
 						req = new HashMap<String, Integer>();
+						boolRequisite = false;
+					}
+
+					if (qName.equalsIgnoreCase("gainresource")) {
+						card.addPermanentEffect(gainTurnEffect);
+						gainTurnEffect = new BonusEffect();
+						boolGainResource = false;
 					}
 
 				}
@@ -135,40 +143,116 @@ public class LeaderCardSaxParser {
 				public void characters(char ch[], int start, int length) throws SAXException {
 					String str = new String(ch, start, length);
 
+					if (lastQName.equalsIgnoreCase("name")) {
+						card = new CardLeader(str);
+					}
+
 					if (boolRequisite) {
-						if (lastQName.equalsIgnoreCase("coin")) {
-							//req.put("Coin",new Coin(Integer.parseInt(str)));
-						}
-
-						if (lastQName.equalsIgnoreCase("stone")) {
-							
-						}
-
-						if (lastQName.equalsIgnoreCase("wood")) {
-							
-						}
-
-						if (lastQName.equalsIgnoreCase("servant")) {
-							
-						}
-
-						if (lastQName.equalsIgnoreCase("militarypoint")) {
-							
-						}
-
-						if (lastQName.equalsIgnoreCase("faithpoint")) {
-							
-						}
-
-						if (lastQName.equalsIgnoreCase("victorypoint")) {
-							
-						}
-
-						if (lastQName.equalsIgnoreCase("councilpoint")) {
-							
+						if (lastQName.equalsIgnoreCase("territory") 
+								|| lastQName.equalsIgnoreCase("venture")
+								|| lastQName.equalsIgnoreCase("building") 
+								|| lastQName.equalsIgnoreCase("character")
+								|| lastQName.equalsIgnoreCase("coin") 
+								|| lastQName.equalsIgnoreCase("stone")
+								|| lastQName.equalsIgnoreCase("wood") 
+								|| lastQName.equalsIgnoreCase("servant")
+								|| lastQName.equalsIgnoreCase("coin") 
+								|| lastQName.equalsIgnoreCase("militarypoint")
+								|| lastQName.equalsIgnoreCase("faithpoint")
+								|| lastQName.equalsIgnoreCase("councilprivilege")
+								|| lastQName.equalsIgnoreCase("victorypoint")) {
+							req.put(lastQName, Integer.parseInt(str));
 						}
 					}
 
+					if (boolGainResource) {
+						if (lastQName.equalsIgnoreCase("coin")) {
+							gainTurnEffect.addBonus("Coin", new Coin(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("stone")) {
+							gainTurnEffect.addBonus("Stone", new Stone(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("wood")) {
+							gainTurnEffect.addBonus("Wood", new Wood(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("servant")) {
+							gainTurnEffect.addBonus("Servant", new Servant(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("militarypoint")) {
+							gainTurnEffect.addBonus("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("faithpoint")) {
+							gainTurnEffect.addBonus("FaithPoint", new FaithPoint(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("victorypoint")) {
+							gainTurnEffect.addBonus("VictoryPoint", new VictoryPoint(Integer.parseInt(str)));
+						}
+						if (lastQName.equalsIgnoreCase("councilprivilege")) {
+							gainTurnEffect.addBonus("CouncilPrivilege", new CouncilPrivilege(Integer.parseInt(str)));
+						}
+					}
+
+					if (lastQName.equalsIgnoreCase("leadercopy")) {
+						card.setCopy();
+					}
+
+					if (lastQName.equalsIgnoreCase("eachturnonefamdefvalue6")) {
+						card.addPermanentEffect(new StrangeEffect("OneFamilyCol6"));
+					}
+
+					if (lastQName.equalsIgnoreCase("canplaceinocupatedspace")) {
+						card.addPermanentEffect(new StrangeEffect("OccupiedSpace"));
+					}
+
+					if (lastQName.equalsIgnoreCase("nothreeadditivecoin")) {
+						card.addPermanentEffect(new StrangeEffect("NoCostTower"));
+					}
+
+					if (lastQName.equalsIgnoreCase("neutralmaggioration3")) {
+						card.addPermanentEffect(new StrangeEffect("Neutral+3"));
+					}
+
+					if (lastQName.equalsIgnoreCase("familiardefinitevalue5")) {
+						card.addPermanentEffect(new StrangeEffect("AllFamilyCol5"));
+					}
+
+					if (lastQName.equalsIgnoreCase("familiarbonus2")) {
+						card.addPermanentEffect(new StrangeEffect("FamilyCol+2"));
+					}
+
+					if (lastQName.equalsIgnoreCase("vaticansubstainvictorypointgain5")) {
+						card.addPermanentEffect(new StrangeEffect("PointVicChurch+5"));
+					}
+
+					if (lastQName.equalsIgnoreCase("resourcebonusdouble")) {
+						card.addPermanentEffect(new StrangeEffect("DoubleGain"));
+					}
+
+					if (lastQName.equalsIgnoreCase("nomilitarypointrequisiteterritory")) {
+						card.addPermanentEffect(new StrangeEffect("NoTerritoryReq"));
+					}
+
+					if (lastQName.equalsIgnoreCase("developmentcardcoindiscount3")) {
+						final int coinDiscount = 3;
+						ReduceCostEffect reduce;
+						reduce = new ReduceCostEffect("Venture");
+						reduce.addBonus("Coin", new Coin(coinDiscount));
+						card.addPermanentEffect(reduce);
+						reduce = new ReduceCostEffect("Character");
+						reduce.addBonus("Coin", new Coin(coinDiscount));
+						card.addPermanentEffect(reduce);
+						reduce = new ReduceCostEffect("Building");
+						reduce.addBonus("Coin", new Coin(coinDiscount));
+						card.addPermanentEffect(reduce);
+					}
+
+					if (lastQName.equalsIgnoreCase("eachturnharvestaction")) {
+						card.addImmediateEffect(new ExtraAction(new HarvestAction(Integer.parseInt(str))));
+					}
+
+					if (lastQName.equalsIgnoreCase("eachturnprodaction")) {
+						card.addImmediateEffect(new ExtraAction(new ProductionAction(Integer.parseInt(str))));
+					}
 				}
 
 			};

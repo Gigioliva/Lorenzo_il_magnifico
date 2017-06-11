@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.server.board.FaithPointTrack;
 import it.polimi.ingsw.ps22.server.card.CardBuilding;
 import it.polimi.ingsw.ps22.server.card.CardCharacter;
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
+import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.CardVenture;
 import it.polimi.ingsw.ps22.server.player.PersonalBoard;
@@ -15,7 +16,7 @@ import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
 public class MainParser {
 
-	public static void mainParser(String[] args) {
+	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		ArrayList<CardBuilding> building = new ArrayList<CardBuilding>();
 		String pathnameBuilding = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Building.xml";
@@ -50,6 +51,13 @@ public class MainParser {
 		ExcommCardSaxParser.ExcommRead(pathnameExcomm, excomm);
 		System.out.println("\n\n\nCARD EXCOMM");
 		for (CardExcomm card : excomm)
+			System.out.println("\n" + card.toString());
+		
+		ArrayList<CardLeader> leader = new ArrayList<CardLeader>();
+		String pathnameLeader = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Leader.xml";
+		LeaderCardSaxParser.LeaderRead(pathnameLeader, leader);
+		System.out.println("\n\n\nCARD LEADER");
+		for (CardLeader card : leader)
 			System.out.println("\n" + card.toString());
 
 		ArrayList<HashMap<String, ResourceAbstract>> spaces = new ArrayList<HashMap<String, ResourceAbstract>>();
