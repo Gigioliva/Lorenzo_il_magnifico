@@ -35,7 +35,7 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	@Override
 	public String toString(){
 		StringBuilder str = new StringBuilder();
-		str.append(multiplierQty + " " + multiplier + " X " + multiplicand.getQuantity() + multiplicandType + "\n");
+		str.append(multiplicand.getQuantity() + " " +  multiplicandType + " X " + multiplierQty + " "+ multiplier  + "\n");
 		return str.toString();
 		
 	}

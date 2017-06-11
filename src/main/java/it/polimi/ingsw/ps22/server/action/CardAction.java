@@ -105,7 +105,9 @@ public class CardAction extends Action {
 			str.append("  " + types.get(i) + "\n");
 		}
 		
-		if(discount.size() == 0){
+		str.append("with action value: " + super.getActionValue() + "\n");
+		
+		if(discount.size() != 0){
 			str.append("with discount: \n");
 			for(String string: discount.keySet()){
 			str.append(discount.get(string).getQuantity() + " " + string + "\n");

@@ -53,7 +53,7 @@ public class RequisiteCost implements Serializable{
 		
 		str.append("cost: \n");
 		for(String type: cost.keySet()){
-			str.append("  " + cost.get(type).getQuantity() + " type\n");
+			str.append("  " + cost.get(type).getQuantity() + " " + type + "\n");
 		}
 		return str.toString();
 	}

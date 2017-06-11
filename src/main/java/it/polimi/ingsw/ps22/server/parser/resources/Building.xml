@@ -1,6 +1,6 @@
 <cards>
 <card>
-    <name>Zecca</name>
+    <name>Mint</name>
     <era>1</era>
     <prodreq>5</prodreq>
     <cost>
@@ -12,11 +12,11 @@
     </gainEffect>
     <cardmoltprodeffect>
         <coin>1</coin>
-        <type>CardBuilding</type>
+        <type>Building</type>
     </cardmoltprodeffect>
 </card>
 <card>
-    <name>Esattoria</name>
+    <name>Tax Office</name>
     <era>1</era>
     <prodreq>5</prodreq>
     <cost>
@@ -28,11 +28,11 @@
     </gainEffect>
     <cardmoltprodeffect>
         <coin>1</coin>
-        <type>CardTerritory</type>
+        <type>Territory</type>
     </cardmoltprodeffect>
 </card>
 <card>
-    <name>Arco di Trionfo</name>
+    <name>Triumphal Arch</name>
     <era>1</era>
     <prodreq>6</prodreq>
     <cost>
@@ -44,11 +44,11 @@
     </gainEffect>
     <cardmoltprodeffect>
         <victorypoint>1</victorypoint>
-        <type>CardVenture</type>
+        <type>Venture</type>
     </cardmoltprodeffect>
 </card>
 <card>
-    <name>Teatro</name>
+    <name>Theater</name>
     <era>1</era>
     <prodreq>6</prodreq>
     <cost>
@@ -60,11 +60,11 @@
     </gainEffect>
     <cardmoltprodeffect>
         <victorypoint>1</victorypoint>
-        <type>CardCharacter</type>
+        <type>Character</type>
     </cardmoltprodeffect>
 </card>
 <card>
-    <name>Falegnameria</name>
+    <name>Carpenter's Shop</name>
     <era>1</era>
     <prodreq>4</prodreq>
     <cost>
@@ -84,7 +84,7 @@
     </exchangeprodeffect>
 </card>
 <card>
-    <name>Tagliapietre</name>
+    <name>Stonemason's Shop</name>
     <era>1</era>
     <prodreq>3</prodreq>
     <cost>
@@ -104,7 +104,7 @@
     </exchangeprodeffect>
 </card>
 <card>
-    <name>Cappella</name>
+    <name>Chapel</name>
     <era>1</era>
     <prodreq>2</prodreq>
     <cost>
@@ -119,7 +119,7 @@
     </exchangeprodeffect>
 </card>
 <card>
-    <name>Residenza</name>
+    <name>Residence</name>
     <era>1</era>
     <prodreq>1</prodreq>
     <cost>
@@ -132,5 +132,286 @@
         <coin>-1</coin>
         <councilpoint>1</councilpoint>
     </exchangeprodeffect>
+</card>
+<card>
+	<name>Marketplace</name>
+    <era>2</era>
+    <prodreq>3</prodreq>
+    <cost>
+        <wood>2</wood>		
+        <stone>1</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>3</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <coin>-3</coin>
+        <wood>2</wood>
+        <stone>2</stone>
+    </exchangeprodeffect>
+ </card>	
+<card>
+	<name>Treasury</name>
+    <era>2</era>
+    <prodreq>3</prodreq>
+    <cost>
+        <wood>3</wood>		
+    </cost>
+    <gainEffect>
+        <victorypoint>4</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <coin>-1</coin>
+        <victorypoint>3</victorypoint>	
+    </exchangeprodeffect>
+    <exchangeprodeffect>
+        <coin>-2</coin>
+        <victorypoint>5</victorypoint>	
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Painters' Guild</name>
+    <era>2</era>
+    <prodreq>4</prodreq>
+    <cost>
+        <wood>4</wood>		
+    </cost>
+    <gainEffect>
+        <victorypoint>5</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <wood>-1</wood>
+        <victorypoint>3</victorypoint>	
+    </exchangeprodeffect>
+    <exchangeprodeffect>
+        <wood>-3</wood>
+        <victorypoint>7</victorypoint>	
+    </exchangeprodeffect>
+    </card>	
+<card>
+	<name>Sculptors' Guild</name>
+    <era>2</era>
+    <prodreq>5</prodreq>
+    <cost>
+        <stone>4</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>6</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <stone>-1</stone>
+        <victorypoint>3</victorypoint>	
+    </exchangeprodeffect>
+     <exchangeprodeffect>
+        <stone>-3</stone>
+        <victorypoint>7</victorypoint>	
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Stonemasons' Guild</name>
+    <era>2</era>
+    <prodreq>4</prodreq>
+    <cost>
+        <wood>1</wood>		
+        <stone>2</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>4</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <wood>-1</wood>
+        <stone>-1</stone>
+        <servant>-1</servant>
+    	<victorypoint>6</victorypoint>	
+    </exchangeprodeffect>
+ </card>	
+<card>
+	<name>Baptistery</name>
+    <era>2</era>
+    <prodreq>2</prodreq>
+    <cost>
+        <stone>3</stone>
+    </cost>
+    <gainEffect>
+        <faithpoint>1</faithpoint>
+        <victorypoint>2</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <coin>2</coin>
+        <faithpoint>-1</faithpoint>
+        <victorypoint>2</victorypoint>	
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Barracks</name>
+    <era>2</era>
+    <prodreq>1</prodreq>
+    <cost>
+        <wood>1</wood>		
+        <stone>1</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>3</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <servant>-1</servant>
+        <militarypoint>3</militarypoint>
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Stronghold</name>
+    <era>2</era>
+    <prodreq>6</prodreq>
+    <cost>
+        <coin>2</coin>	
+        <wood>2</wood>		
+        <stone>2</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>8</victorypoint>			
+    </gainEffect>
+    <gainprodeffect>
+    	<militarypoint>2</militarypoint>
+        <victorypoint>2</victorypoint>	
+    </gainprodeffect>
+</card>	
+<card>
+	<name>Bank</name>
+    <era>3</era>
+    <prodreq>2</prodreq>
+    <cost>
+        <coin>3</coin>	
+        <wood>1</wood>		
+        <stone>2</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>7</victorypoint>			
+    </gainEffect>
+    <gainprodeffect>
+        <coin>5</coin>
+    </gainprodeffect>
+</card>	
+<card>
+	<name>Fair</name>
+    <era>3</era>
+    <prodreq>4</prodreq>
+    <cost>
+        <coin>4</coin>	
+        <wood>3</wood>		
+    </cost>
+    <gainEffect>
+        <victorypoint>8</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <coin>-4</coin>
+        <wood>3</wood>
+        <stone>3</stone>
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Garden</name>
+    <era>3</era>
+    <prodreq>1</prodreq>
+    <cost>
+        <wood>4</wood>		
+        <stone>2</stone>
+        <servant>2</servant>
+    </cost>
+    <gainEffect>
+        <victorypoint>10</victorypoint>			
+    </gainEffect>
+    <gainprodeffect>
+        <victorypoint>3</victorypoint>	
+    </gainprodeffect>
+    </card>	
+<card>
+	<name>Fortress</name>
+    <era>3</era>
+    <prodreq>5</prodreq>
+    <cost>
+        <coin>2</coin>	
+        <wood>2</wood>		
+        <stone>4</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>9</victorypoint>			
+    </gainEffect>
+    <gainprodeffect>
+        <councilpoint>1</councilpoint>
+        <victorypoint>2</victorypoint>	
+    </gainprodeffect>
+</card>	
+<card>
+	<name>Palace</name>
+    <era>3</era>
+    <prodreq>6</prodreq>
+    <cost>
+        <coin>3</coin>	
+        <wood>3</wood>		
+        <stone>1</stone>
+    </cost>
+    <gainEffect>
+        <victorypoint>9</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <coin>-1</coin>
+        <servant>2</servant>
+    	<victorypoint>4</victorypoint>	
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Church</name>
+    <era>3</era>
+    <prodreq>1</prodreq>
+    <cost>
+        <wood>1</wood>		
+        <stone>4</stone>
+    </cost>
+    <gainEffect>
+        <faithpoint>1</faithpoint>
+        <victorypoint>5</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <wood>-1</wood>
+        <faithpoint>2</faithpoint>
+    </exchangeprodeffect>
+    <exchangeprodeffect>
+        <stone>-1</stone>
+        <faithpoint>2</faithpoint>
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Military Academy</name>
+    <era>3</era>
+    <prodreq>3</prodreq>
+    <cost>
+        <wood>2</wood>		
+        <stone>2</stone>
+        <servant>1</servant>
+    </cost>
+    <gainEffect>
+        <victorypoint>7</victorypoint>			
+    </gainEffect>
+    <exchangeprodeffect>
+        <servant>-1</servant>
+    	<militarypoint>3</militarypoint>
+        <victorypoint>1</victorypoint>	
+    </exchangeprodeffect>
+</card>	
+<card>
+	<name>Cathedral</name>
+    <era>3</era>
+    <prodreq>2</prodreq>
+    <cost>
+        <wood>4</wood>		
+        <stone>4</stone>
+    </cost>
+    <gainEffect>
+        <faithpoint>3</faithpoint>
+        <victorypoint>7</victorypoint>			
+    </gainEffect>
+    <gainprodeffect>
+        <victorypoint>1</victorypoint>	
+    </gainprodeffect>
 </card>
 </cards>

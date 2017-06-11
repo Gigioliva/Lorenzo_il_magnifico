@@ -38,13 +38,14 @@ public class MainParser {
 		System.out.println("\n\n\nCARD VENTURE");
 		for (CardVenture card : venture)
 			System.out.println("\n" + card.toString());
-
+		
 		ArrayList<CardCharacter> character = new ArrayList<CardCharacter>();
 		String pathnameCharacter = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Character.xml";
 		CharacterCardSaxParser.CharacterRead(pathnameCharacter, character);
 		System.out.println("\n\n\nCARD CHARACTER");
 		for (CardCharacter card : character)
 			System.out.println("\n" + card.toString());
+		
 
 		ArrayList<CardExcomm> excomm = new ArrayList<CardExcomm>();
 		String pathnameExcomm = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Excomm.xml";

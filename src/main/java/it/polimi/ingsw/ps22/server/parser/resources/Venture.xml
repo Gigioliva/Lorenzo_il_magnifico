@@ -1,6 +1,6 @@
 <cards>
     <card>
-        <name>Ingaggiare Reclute</name>
+        <name>Hiring Recruits</name>
         <era>1</era>
         <cost>
             <coin>4</coin>
@@ -11,7 +11,7 @@
         <victorypoint>4</victorypoint>
     </card>
     <card>
-        <name>Riparare la Chiesa</name>
+        <name>Repairing the Church</name>
         <era>1</era>
         <cost>
             <coin>1</coin>
@@ -24,7 +24,7 @@
         <victorypoint>5</victorypoint>
     </card>
     <card>
-        <name>Costruire le Mura</name>
+        <name>Building the Walls</name>
         <era>1</era>
         <cost>
             <stone>3</stone>
@@ -36,7 +36,7 @@
         <victorypoint>3</victorypoint>
     </card>
     <card>
-        <name>Innalzare una Statua</name>
+        <name>Raising a Statue</name>
         <era>1</era>
         <cost>
             <wood>2</wood>
@@ -48,7 +48,7 @@
         <victorypoint>4</victorypoint>
     </card>
     <card>
-        <name>Campagna Militare</name>
+        <name>Military Campaign</name>
         <era>1</era>
         <cost>
             <militarypoint>2</militarypoint>
@@ -60,7 +60,7 @@
         <victorypoint>5</victorypoint>
     </card>
     <card>
-        <name>Ospitare i Mendicanti</name>
+        <name>Hosting Panhandlers</name>
         <era>1</era>
         <cost>
             <wood>3</wood>
@@ -71,7 +71,7 @@
         <victorypoint>4</victorypoint>
     </card>
     <card>
-        <name>Combattere le Eresie</name>
+        <name>Fighting Heresies</name>
         <era>1</era>
         <cost>
             <militarypoint>3</militarypoint>
@@ -83,7 +83,7 @@
         <victorypoint>5</victorypoint>
     </card>
     <card>
-        <name>Sostegno al Vescovo</name>
+        <name>Support to the Bishop</name>
         <era>1</era>
         <cost>
             <coin>2</coin>
@@ -98,5 +98,212 @@
             <faithpoint>3</faithpoint>
         </gainEffect>
         <victorypoint>1</victorypoint>
+    </card>
+     <card>
+        <name>Hiring Soldiers</name>
+        <era>2</era>
+        <cost>
+            <coin>6</coin>
+        </cost>
+        <gainEffect>
+            <militarypoint>6</militarypoint>
+        </gainEffect>
+        <victorypoint>5</victorypoint>
+    </card>
+     <card>
+        <name>Repairing the Abbey</name>
+        <era>2</era>
+        <cost>
+            <coin>2</coin>
+            <wood>2</wood>
+            <stone>2</stone>
+        </cost>
+        <gainEffect>
+            <faithpoint>2</faithpoint>
+        </gainEffect>
+        <victorypoint>6</victorypoint>
+    </card>
+     <card>
+        <name>Building the Bastions</name>
+        <era>2</era>
+        <cost>
+            <stone>4</stone>
+        </cost>
+        <gainEffect>
+            <militarypoint>3</militarypoint>
+            <councilpoint>1</councilpoint>
+        </gainEffect>
+        <victorypoint>2</victorypoint>
+    </card>
+     <card>
+        <name>Support to the King</name>
+        <era>2</era>
+        <cost>
+            <militarypoint>3</militarypoint>
+            <militaryrequirement>6</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <coin>5</coin>
+            <councilpoint>1</councilpoint>
+        </gainEffect>
+        <victorypoint>3</victorypoint>
+    </card>
+     <card>
+        <name>Improving to the canals</name>
+        <era>2</era>
+        <cost>
+            <coin>3</coin>
+            <servant>2</servant>
+        </cost>
+        <immextraharvest>4</immextraharvest>
+        <victorypoint>5</victorypoint>
+    </card>
+     <card>
+        <name>Hosting Foreigners</name>
+        <era>2</era>
+        <cost>
+            <wood>4</wood>
+        </cost>
+        <gainEffect>
+            <servant>5</servant>
+        </gainEffect>
+        <victorypoint>4</victorypoint>
+    </card>
+     <card>
+        <name>Crusade</name>
+        <era>2</era>
+        <cost>
+            <militarypoint>4</militarypoint>
+            <militaryrequirement>8</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <coin>5</coin>
+            <faithpoint>1</faithpoint>
+        </gainEffect>
+         <victorypoint>5</victorypoint>
+    </card>
+     <card>
+        <name>Support to the Cardinal</name>
+        <era>2</era>
+        <cost>
+            <militarypoint>4</militarypoint>
+            <militaryrequirement>7</militaryrequirement>
+        </cost>
+        <cost>
+            <coin>3</coin>
+            <wood>2</wood>
+            <stone>2</stone>
+        </cost>
+        <gainEffect>
+            <faithpoint>3</faithpoint>
+        </gainEffect>
+        <victorypoint>4</victorypoint>
+    </card>
+     <card>
+        <name>Hiring Mercenaries</name>
+        <era>3</era>
+        <cost>
+            <coin>8</coin>
+        </cost>
+        <gainEffect>
+            <militarypoint>7</militarypoint>
+        </gainEffect>
+        <victorypoint>6</victorypoint>
+    </card>
+     <card>
+        <name>Repairing the Cathedral</name>
+        <era>3</era>
+        <cost>
+            <coin>3</coin>
+            <wood>3</wood>
+            <stone>3</stone>
+        </cost>
+        <gainEffect>
+            <faithpoint>1</faithpoint>
+        </gainEffect>
+        <immactionvalue>7</immactionvalue>
+        <immactionvaleuassociatedcard>
+        	<type>Territory</type>
+            <type>Building</type>
+            <type>Venture</type>
+            <type>Character</type>
+        </immactionvaleuassociatedcard>
+        <victorypoint>5</victorypoint>
+    </card>
+     <card>
+        <name>Building the Towers</name>
+        <era>3</era>
+        <cost>
+            <stone>6</stone>
+        </cost>
+        <gainEffect>
+            <militarypoint>4</militarypoint>
+            <councilpoint>1</councilpoint>
+        </gainEffect>
+        <victorypoint>4</victorypoint>
+    </card>
+     <card>
+        <name>Promoting Sacred Art</name>
+        <era>3</era>
+        <cost>
+            <wood>6</wood>
+        </cost>
+        <gainEffect>
+            <faithpoint>3</faithpoint>
+        </gainEffect>
+        <victorypoint>3</victorypoint>
+    </card>
+     <card>
+        <name>Military Conquest</name>
+        <era>3</era>
+        <cost>
+            <militarypoint>6</militarypoint>
+            <militaryrequirement>12</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <coin>3</coin>
+            <wood>3</wood>
+            <stone>3</stone>
+        </gainEffect>
+        <victorypoint>7</victorypoint>
+    </card>
+     <card>
+        <name>Improving the Roads</name>
+        <era>3</era>
+        <cost>
+            <coin>4</coin>
+            <servant>3</servant>
+        </cost>
+        <immextraprod>3</immextraprod>
+        <victorypoint>5</victorypoint>
+    </card>
+     <card>
+        <name>Sacred War</name>
+        <era>3</era>
+        <cost>
+            <militarypoint>8</militarypoint>
+            <militaryrequirement>15</militaryrequirement>
+        </cost>
+        <gainEffect>
+            <faithpoint>4</faithpoint>
+        </gainEffect>
+        <victorypoint>8</victorypoint>
+    </card>
+    <card>
+        <name>Support to the Pope</name>
+        <era>3</era>
+        <cost>
+            <militarypoint>5</militarypoint>
+            <militaryrequirement>10</militaryrequirement>
+        </cost>
+        <cost>
+            <coin>4</coin>
+            <wood>3</wood>
+            <stone>3</stone>
+        </cost>
+        <gainEffect>
+            <faithpoint>2</faithpoint>
+        </gainEffect>
+        <victorypoint>10</victorypoint>
     </card>
 </cards>
