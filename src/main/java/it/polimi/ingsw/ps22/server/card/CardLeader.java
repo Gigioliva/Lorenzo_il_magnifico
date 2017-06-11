@@ -11,14 +11,16 @@ public class CardLeader extends Card {
 	private static final long serialVersionUID = 1L;
 	private String name;
 	private ArrayList<HashMap<String, Integer>> requisite;
-	private PermanentEffect permanentEffect;
-	private ImmediateEffect immediateEffect;
+	private ArrayList<PermanentEffect> permanentEffect;
+	private ArrayList<ImmediateEffect> immediateEffect;
 	private boolean play;
 	private boolean copy=false;
 
 	public CardLeader(String name) {
 		this.name = name;
 		requisite = new ArrayList<HashMap<String, Integer>>();
+		permanentEffect=new ArrayList<PermanentEffect>();
+		immediateEffect=new ArrayList<ImmediateEffect>();
 		this.play = false;
 	}
 	
@@ -26,20 +28,20 @@ public class CardLeader extends Card {
 		copy=true;
 	}
 
-	public PermanentEffect getPermanentEffect() {
+	public ArrayList<PermanentEffect> getPermanentEffect() {
 		return permanentEffect;
 	}
 
-	public void setPermanentEffect(PermanentEffect permanentEffect) {
-		this.permanentEffect = permanentEffect;
+	public void addPermanentEffect(PermanentEffect permanentEffect) {
+		this.permanentEffect.add(permanentEffect);
 	}
 
-	public ImmediateEffect getActionEffect() {
+	public ArrayList<ImmediateEffect> getImmediateEffect() {
 		return immediateEffect;
 	}
 
-	public void setActionEffect(ImmediateEffect immediateEffect) {
-		this.immediateEffect = immediateEffect;
+	public void addImmediateEffect(ImmediateEffect immediateEffect) {
+		this.immediateEffect.add(immediateEffect);
 	}
 
 	public String getName() {
@@ -47,14 +49,14 @@ public class CardLeader extends Card {
 	}
 
 	private void applyPermanentEffect(Player player) {
-		if (permanentEffect != null) {
-			permanentEffect.performEffect(player);
+		for(PermanentEffect el: permanentEffect){
+			el.performEffect(player);
 		}
 	}
 
 	private void applyActionEffect(Player player) {
-		if (immediateEffect != null) {
-			immediateEffect.performEffect(player);
+		for(ImmediateEffect el: immediateEffect){
+			el.performEffect(player);
 		}
 	}
 
@@ -79,7 +81,7 @@ public class CardLeader extends Card {
 	}
 
 	public void resetLeader() {
-		if (permanentEffect != null) {
+		if (permanentEffect.size() != 0) {
 			play = false;
 		}
 	}

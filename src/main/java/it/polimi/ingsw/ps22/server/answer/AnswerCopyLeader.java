@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps22.server.answer;
 
 import it.polimi.ingsw.ps22.server.card.CardLeader;
+import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
+import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
@@ -36,8 +38,12 @@ public class AnswerCopyLeader extends GenericAnswer {
 				}
 			}
 			if(leadChoice!=null){
-				lead.setActionEffect(leadChoice.getActionEffect());
-				lead.setPermanentEffect(leadChoice.getPermanentEffect());
+				for(ImmediateEffect el: leadChoice.getImmediateEffect()){
+					lead.addImmediateEffect(el);
+				}
+				for(PermanentEffect el: leadChoice.getPermanentEffect()){
+					lead.addPermanentEffect(el);
+				}
 				lead.playLeader(player);
 				model.getWaitAnswer().remove(ask);
 				return;
