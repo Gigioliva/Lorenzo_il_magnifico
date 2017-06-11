@@ -1,6 +1,6 @@
 <cards>
     <card>
-        <name>Avamposto Commerciale</name>
+        <name>Commercial Hub</name>
         <era>1</era>
         <harvestEffect>
             <coin>1</coin>
@@ -8,7 +8,7 @@
         <harvestreq>1</harvestreq>
     </card>
     <card>
-        <name>Bosco</name>
+        <name>Wood</name>
         <era>1</era>
         <gainEffect>
             <wood>1</wood>
@@ -19,7 +19,7 @@
         <harvestreq>2</harvestreq>
     </card>
     <card>
-        <name>Borgo</name>
+        <name>Village</name>
         <era>1</era>
         <harvestEffect>
             <coin>1</coin>
@@ -28,7 +28,7 @@
         <harvestreq>3</harvestreq>
     </card>
     <card>
-        <name>Cava di Ghiaia</name>
+        <name>Gravel Pit</name>
         <era>1</era>
         <gainEffect>
             <stone>2</stone>
@@ -39,7 +39,7 @@
         <harvestreq>4</harvestreq>
     </card>
     <card>
-        <name>Foresta</name>
+        <name>Forest</name>
         <era>1</era>
         <gainEffect>
             <wood>1</wood>
@@ -50,7 +50,7 @@
         <harvestreq>5</harvestreq>
     </card>
     <card>
-        <name>Monastero</name>
+        <name>Monastery</name>
         <era>1</era>
         <gainEffect>
             <servant>1</servant>
@@ -63,7 +63,7 @@
         <harvestreq>6</harvestreq>
     </card>
     <card>
-        <name>Rocca</name>
+        <name>Citadel</name>
         <era>1</era>
         <harvestEffect>
             <stone>1</stone>
@@ -72,7 +72,7 @@
         <harvestreq>5</harvestreq>
     </card>
     <card>
-        <name>Città</name>
+        <name>City</name>
         <era>1</era>
         <gainEffect>
             <coin>3</coin>
@@ -82,4 +82,203 @@
         </harvestEffect>
         <harvestreq>6</harvestreq>
     </card>
+    <card>
+        <name>Gold Mine</name>
+        <era>2</era>
+        <gainEffect>
+            <coin>1</coin>
+        </gainEffect>
+        <harvestEffect>
+            <coin>2</coin>
+        </harvestEffect>
+        <harvestreq>1</harvestreq>
+    </card>  
+    <card>
+        <name>Mountain Town</name>
+        <era>2</era>
+        <gainEffect>
+            <servant>1</servant>
+        </gainEffect>
+        <harvestEffect>
+            <wood>2</wood>
+            <militarypoint>1</militarypoint>
+        </harvestEffect>
+        <harvestreq>3</harvestreq>
+    </card>
+    <card>
+        <name>Mining Town</name>
+        <era>2</era>
+        <gainEffect>
+            <stone>1</stone>
+            <servant>2</servant>
+        </gainEffect>
+        <harvestEffect>
+            <stone>2</stone>
+            <servant>1</servant>
+        </harvestEffect>
+        <harvestreq>4</harvestreq>
+    </card>
+    <card>
+        <name>Rock Pit</name>
+        <era>2</era>
+        <gainEffect>
+            <wood>1</wood>
+        </gainEffect>
+        <harvestEffect>
+            <stone>3</stone>
+        </harvestEffect>
+        <harvestreq>3</harvestreq>
+    </card>
+    <card>
+        <name>Estate</name>
+        <era>2</era>
+        <gainEffect>
+            <stone>1</stone>
+            <servant>2</servant>
+        </gainEffect>
+        <harvestEffect>
+            <coin>1</coin>
+            <wood>2</wood>
+        </harvestEffect>
+        <harvestreq>4</harvestreq>
+    </card>
+    <card>
+        <name>Hermitage</name>
+        <era>2</era>
+        <gainEffect>
+            <faithpoint>1</faithpoint>
+        </gainEffect>
+        <harvestEffect>
+            <faithpoint>1</faithpoint>
+        </harvestEffect>
+        <harvestreq>2</harvestreq>
+    </card>
+    <card>
+        <name>Manor House</name>
+        <era>2</era>
+        <harvestEffect>
+            <servant>2</servant>
+            <militarypoint>2</militarypoint>
+        </harvestEffect>
+        <harvestreq>5</harvestreq>
+    </card>
+    <card>
+        <name>Dukedom</name>
+        <era>2</era>
+        <gainEffect>
+            <coin>4</coin>
+        </gainEffect>
+        <harvestEffect>
+            <coin>1</coin>
+            <wood>2</wood>
+            <stone>1</stone>
+        </harvestEffect>
+        <harvestreq>6</harvestreq>
+    </card>
+    <card>
+        <name>Trading Town</name>
+        <era>3</era>
+        <gainEffect>
+            <servant>1</servant>
+            <coin>1</coin>
+        </gainEffect>
+        <harvestEffect>
+            <coin>3</coin>
+        </harvestEffect>
+        <harvestreq>1</harvestreq>
+    </card>
+    <card>
+        <name>Farm</name>
+        <era>3</era>
+        <gainEffect>
+            <victorypoint>1</victorypoint>
+            <wood>1</wood>
+        </gainEffect>
+        <harvestEffect>
+            <victorypoint>2</victorypoint>
+            <wood>2</wood>
+        </harvestEffect>
+        <harvestreq>3</harvestreq>
+    </card>
+    <card>
+        <name>Colony</name>
+        <era>3</era>
+        <gainEffect>
+            <militarypoint>2</militarypoint>
+        </gainEffect>
+        <harvestEffect>
+            <wood>1</wood>
+            <victorypoint>4</victorypoint>
+        </harvestEffect>
+        <harvestreq>5</harvestreq>
+    </card>
+    <card>
+        <name>Marble Pit</name>
+        <era>3</era>
+        <gainEffect>
+            <victorypoint>3</victorypoint>
+        </gainEffect>
+        <harvestEffect>
+            <stone>2</stone>
+            <victorypoint>1</victorypoint>
+        </harvestEffect>
+        <harvestreq>2</harvestreq>
+    </card>
+    <card>
+        <name>Province</name>
+        <era>3</era>
+        <gainEffect>
+            <coin></coin>
+            <wood></wood>
+            <stone>1</stone>
+            <servant></servant>
+            <militarypoint></militarypoint>
+            <faithpoint></faithpoint>
+            <councilpoint>1</councilpoint>
+            <victorypoint></victorypoint>
+        </gainEffect>
+        <harvestEffect>
+            <stone>1</stone>
+            <victorypoint>4</victorypoint>
+        </harvestEffect>
+        <harvestreq>6</harvestreq>
+    </card>
+    <card>
+        <name>Sanctuary</name>
+        <era>3</era>
+        <gainEffect>
+            <faithpoint>1</faithpoint>
+        </gainEffect>
+        <harvestEffect>
+            <coin>1</coin>
+            <faithpoint>1</faithpoint>
+        </harvestEffect>
+        <harvestreq>1</harvestreq>
+    </card>
+    <card>
+        <name>Castle</name>
+        <era>3</era>
+        <gainEffect>
+            <coin>2</coin>
+            <victorypoint>2</victorypoint>
+        </gainEffect>
+        <harvestEffect>
+            <servant>1</servant>
+            <militarypoint>3</militarypoint>
+        </harvestEffect>
+        <harvestreq>4</harvestreq>
+    </card>
+    <card>
+        <name>Fortified Town</name>
+        <era>3</era>
+        <gainEffect>
+            <servant>1</servant>
+            <militarypoint>2</militarypoint>
+        </gainEffect>
+        <harvestEffect>
+            <servant>2</servant>
+            <militarypoint>1</militarypoint>
+        </harvestEffect>
+        <harvestreq>2</harvestreq>
+    </card>    
 </cards>

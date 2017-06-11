@@ -22,7 +22,7 @@ public class PersonalBoardPanel extends JPanel {
 	JLayeredPane personalBoard = new JLayeredPane();
 	HashMap<Integer, ArrayList<TowerPanel>> cards = new HashMap<Integer, ArrayList<TowerPanel>>();
 	double resizeFactor;
-	private final ImageIcon personal = MyImage.createImageIcon("./image/punchboard_f_c_05.jpg");
+	private final ImageIcon personal = MyImage.createImageIcon("./image/PersonalBoard.png");
 	
 	
 	public PersonalBoardPanel(double widthScreen, double heightScreen, String username){
