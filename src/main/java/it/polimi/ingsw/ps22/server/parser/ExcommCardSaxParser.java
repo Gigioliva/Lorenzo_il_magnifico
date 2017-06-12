@@ -86,6 +86,7 @@ public class ExcommCardSaxParser {
 					if (qName.equalsIgnoreCase("card")) {
 						card.addPermanentEffect(permResEff);
 						parsedData.add(card);
+						permResEff = new BonusEffect();
 						card = new CardExcomm();
 					}
 				}
