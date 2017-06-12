@@ -84,232 +84,179 @@
             <type>Building</type>
         </immextraaction>
     </card>
-    <card>											
-    <name>Captain</name>							
-    <era>2</era>									
-    <coincost>4</coincost>									<istgain>									
-        <militarypoint>2</militarypoint>
-    </istgain>									
-    <immextraaction>							
-        <value>6</value>						
-        <type>Territory</type>					
-    </immextraaction>				
-   </card>
-    <card>											
-    <name>Architect</name>							
-    <era>2</era>									
-    <coincost>4</coincost>									<immextraaction>							
-        <value>6</value>						
-        <type>Building</type>					
-        <wood>1</wood>					
-        <stone>1</stone>			
-    </immextraaction>				
-</card>
-    <card>											
-    <name>Patron</name>							
-    <era>2</era>									
-    <coincost>3</coincost>									<immextraaction>							
-        <value>6</value>						
-        <type>Character</type>					
-        <coin>2</coin>							
-    </immextraaction>				
-</card>
-    <card>											
-    <name>Hero</name>							
-    <era>2</era>									
-    <coincost>4</coincost>									<istgain>									
-        <councilpoint>1</councilpoint>			
-    </istgain>									
-    <immextraaction>							
-        <value>6</value>						
-        <type>Venture</type>					
-    </immextraaction>				
-</card>
-    <card>											
-    <name>Peasant</name>							
-    <era>2</era>									
-    <coincost>4</coincost>									<immextraharvest>3</immextraharvest>		
-</card>
-    <card>											
-    <name>Scholar</name>							
-    <era>2</era>									
-    <coincost>4</coincost>									<immextraprod>3</immextraprod>						
-</card>
-    <card>											
-    <name>Papal Messenger</name>							
-    <era>2</era>									
-    <coincost>5</coincost>									<istgain>									
-        <faithpoint>3</faithpoint>							
-    </istgain>									
+    <card>
+        <name>Captain</name>
+        <era>2</era>
+        <coincost>4</coincost>
+        <istgain>
+            <militarypoint>2</militarypoint>
+        </istgain>
+        <immextraaction>
+            <value>6</value>
+            <type>Territory</type>
+        </immextraaction>
     </card>
-    <card>											
-    <name>Royal Messenger</name>							
-    <era>2</era>									
-    <coincost>5</coincost>									<istgain>									
-        <councilpoint>3</councilpoint>			
-    </istgain>									
+    <card>
+        <name>Architect</name>
+        <era>2</era>
+        <coincost>4</coincost>
+        <immextraaction>
+            <value>6</value>
+            <type>Building</type>
+            <wood>1</wood>
+            <stone>1</stone>
+        </immextraaction>
     </card>
-    <card>											
-    <name>Noble</name>							
-    <era>3</era>									
-    <coincost>6</coincost>									<moltiplication>						
-        <factor>2</factor>
-        <factor1>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-            <victorypoint>1</victorypoint>
-        </factor1>
-        <factor2>
-            <cardtype>Territory</cardtype>
-            <factorcard>1</factorcard>
-        </factor2>       
-    </moltiplication>						
-</card>
-    <card>											
-    <name>Governor</name>							
-    <era>3</era>									
-    <coincost>6</coincost>									<moltiplication>						
-        <factor></factor>
-        <factor1>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-            <victorypoint>0</victorypoint>
-        </factor1>
-        <factor2>
-            <cardtype></cardtype>	// dovrà essere scritto come Territory, la maiuscola è importante
-            <factorcard>0</factorcard>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-        </factor2>       
-    </moltiplication>						
-</card>
-<card>											
-    <name>Paramour</name>							
-    <era>3</era>									
-    <coincost>7</coincost>									<moltiplication>						
-        <factor></factor>
-        <factor1>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-            <victorypoint>0</victorypoint>
-        </factor1>
-        <factor2>
-            <cardtype></cardtype>	// dovrà essere scritto come Territory, la maiuscola è importante
-            <factorcard>0</factorcard>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-        </factor2>       
-    </moltiplication>						
+    <card>
+        <name>Patron</name>
+        <era>2</era>
+        <coincost>3</coincost>
+        <immextraaction>
+            <value>6</value>
+            <type>Character</type>
+            <coin>2</coin>
+        </immextraaction>
     </card>
-    <card>											
-    <name>Herald</name>							
-    <era>3</era>									
-    <coincost>6</coincost>									<moltiplication>						
-        <factor></factor>
-        <factor1>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-            <victorypoint>0</victorypoint>
-        </factor1>
-        <factor2>
-            <cardtype></cardtype>	// dovrà essere scritto come Territory, la maiuscola è importante
-            <factorcard>0</factorcard>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-        </factor2>       
-    </moltiplication>						
+    <card>
+        <name>Hero</name>
+        <era>2</era>
+        <coincost>4</coincost>
+        <istgain>
+            <councilpoint>1</councilpoint>
+        </istgain>
+        <immextraaction>
+            <value>6</value>
+            <type>Venture</type>
+        </immextraaction>
     </card>
-    <card>											
-    <name>Cardinal</name>							
-    <era>3</era>									
-    <coincost>4</coincost>									<istgain>									
-        <faithpoint>2</faithpoint>				
-    </istgain>												
-    <immextraharvest>4</immextraharvest>		
+    <card>
+        <name>Peasant</name>
+        <era>2</era>
+        <coincost>4</coincost>
+        <immextraharvest>3</immextraharvest>
     </card>
-    <card>											
-    <name>Bishop</name>							
-    <era>3</era>									
-    <coincost>5</coincost>									<istgain>									
-        <faithpoint>1</faithpoint>							
-    </istgain>									
-    <immextraprod>4</immextraprod>						
-</card>
-    <card>											
-    <name>General</name>							
-    <era>3</era>									
-    <coincost>5</coincost>									<moltiplication>						
-        <factor></factor>
-        <factor1>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-            <victorypoint>0</victorypoint>
-        </factor1>
-        <factor2>
-            <cardtype></cardtype>	// dovrà essere scritto come Territory, la maiuscola è importante
-            <factorcard>0</factorcard>
-            <coin>0</coin>								
-            <wood>0</wood>									
-            <stone>0</stone>								
-            <servant>0</servant>			
-            <militarypoint>0</militarypoint>				
-            <faithpoint>0</faithpoint>			
-            <councilpoint>0</councilpoint>
-        </factor2>       
-    </moltiplication>						
+    <card>
+        <name>Scholar</name>
+        <era>2</era>
+        <coincost>4</coincost>
+        <immextraprod>3</immextraprod>
     </card>
-    <card>											
-    <name>Ambassador</name>							
-    <era>3</era>									
-    <coincost>6</coincost>									<istgain>									
-        <councilpoint>1</councilpoint>			
-    </istgain>									
-    <immextraaction>							
-        <value>7</value>						
-        <type>Territory</type>
-        <type>Venture</type>
-        <type>Character</type>
-        <type>Building</type>		
-    </immextraaction>				
- </card>
+    <card>
+        <name>Papal Messenger</name>
+        <era>2</era>
+        <coincost>5</coincost>
+        <istgain>
+            <faithpoint>3</faithpoint>
+        </istgain>
+    </card>
+    <card>
+        <name>Royal Messenger</name>
+        <era>2</era>
+        <coincost>5</coincost>
+        <istgain>
+            <councilpoint>3</councilpoint>
+        </istgain>
+    </card>
+    <card>
+        <name>Noble</name>
+        <era>3</era>
+        <coincost>6</coincost>
+        <moltiplication>
+            <factor1>
+                <victorypoint>2</victorypoint>
+            </factor1>
+            <factor2>
+                <cardtype>Territory</cardtype>
+                <factorcard>1</factorcard>
+            </factor2>
+        </moltiplication>
+    </card>
+    <card>
+        <name>Governor</name>
+        <era>3</era>
+        <coincost>6</coincost>
+        <moltiplication>
+            <factor1>
+                <victorypoint>2</victorypoint>
+            </factor1>
+            <factor2>
+                <cardtype>Building</cardtype>
+                <factorcard>1</factorcard>
+            </factor2>
+        </moltiplication>
+    </card>
+    <card>
+        <name>Paramour</name>
+        <era>3</era>
+        <coincost>7</coincost>
+        <moltiplication>
+            <factor1>
+                <victorypoint>2</victorypoint>
+            </factor1>
+            <factor2>
+                <cardtype>Character</cardtype>
+                <factorcard>1</factorcard>
+            </factor2>
+        </moltiplication>
+    </card>
+    <card>
+        <name>Herald</name>
+        <era>3</era>
+        <coincost>6</coincost>
+        <moltiplication>
+            <factor1>
+                <victorypoint>2</victorypoint>
+            </factor1>
+            <factor2>
+                <cardtype>Venture</cardtype>
+                <factorcard>1</factorcard>
+            </factor2>
+        </moltiplication>
+    </card>
+    <card>
+        <name>Cardinal</name>
+        <era>3</era>
+        <coincost>4</coincost>
+        <istgain>
+            <faithpoint>2</faithpoint>
+        </istgain>
+        <immextraharvest>4</immextraharvest>
+    </card>
+    <card>
+        <name>Bishop</name>
+        <era>3</era>
+        <coincost>5</coincost>
+        <istgain>
+            <faithpoint>1</faithpoint>
+        </istgain>
+        <immextraprod>4</immextraprod>
+    </card>
+    <card>
+        <name>General</name>
+        <era>3</era>
+        <coincost>5</coincost>
+        <moltiplication>
+            <factor1>
+                <victorypoint>1</victorypoint>
+            </factor1>
+            <factor2>
+                <militarypoint>2</militarypoint>
+            </factor2>
+        </moltiplication>
+    </card>
+    <card>
+        <name>Ambassador</name>
+        <era>3</era>
+        <coincost>6</coincost>
+        <istgain>
+            <councilpoint>1</councilpoint>
+        </istgain>
+        <immextraaction>
+            <value>7</value>
+            <type>Territory</type>
+            <type>Venture</type>
+            <type>Character</type>
+            <type>Building</type>
+        </immextraaction>
+    </card>
 </cards>

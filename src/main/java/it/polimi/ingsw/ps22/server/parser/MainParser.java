@@ -17,7 +17,7 @@ import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 public class MainParser {
 
 	public static void mainParser(String[] args) {
-		// TODO Auto-generated method stub
+		
 		ArrayList<CardBuilding> building = new ArrayList<CardBuilding>();
 		String pathnameBuilding = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Building.xml";
 		BuildingCardSaxParser.BuildingRead(pathnameBuilding, building);

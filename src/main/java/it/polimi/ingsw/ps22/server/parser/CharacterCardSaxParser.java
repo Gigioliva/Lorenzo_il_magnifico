@@ -57,7 +57,6 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
         <servant>0</servant>		
     </immextraaction>				
     <moltiplication>						
-        <factor></factor>
         <factor1>
             <coin>0</coin>								
             <wood>0</wood>									
@@ -251,7 +250,7 @@ public class CharacterCardSaxParser {
 						if (lastQName.equalsIgnoreCase("cardtype"))
 							mult.setMultiplier(str);
 
-						if (lastQName.equalsIgnoreCase("cardtype"))
+						if (lastQName.equalsIgnoreCase("factorcard"))
 							mult.setMultiplierQty(Integer.parseInt(str));
 
 						if (lastQName.equalsIgnoreCase("coin")) {
