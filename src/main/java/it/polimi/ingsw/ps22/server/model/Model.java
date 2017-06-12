@@ -54,7 +54,7 @@ public class Model extends Observable implements Serializable {
 	}
 
 	public void addPlayers(String username) {
-		Player player = new Player(username);
+		Player player = new Player(username, ColorPlayer.getColor(players.size()+1));
 		this.players.put(username, player);
 	}
 
