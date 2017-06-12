@@ -2,26 +2,86 @@
     <card>
         <era>1</era>
         <militaryincrement>-1</militaryincrement>
+    </card>
+    <card>
+        <era>1</era>
         <coinincrement>-1</coinincrement>
+    </card>
+    <card>
+        <era>1</era>
         <servantincrement>-1</servantincrement>
+    </card>
+    <card>
+        <era>1</era>
         <woodincrement>-1</woodincrement>
         <stoneincrement>-1</stoneincrement>
+    </card>
+    <card>
+        <era>1</era>
         <harvestincrement>-3</harvestincrement>
+    </card>
+    <card>
+        <era>1</era>
         <productionincrement>-3</productionincrement>
+    </card>
+    <card>
+        <era>1</era>
         <diceincrement>-1</diceincrement>
+    </card>
+    <card>
+        <era>2</era>
         <territoryactionincrement>-4</territoryactionincrement>
-        <characteractionincrement>-4</characteractionincrement>
+    </card>
+    <card>
+        <era>2</era>
         <buildingactionincrement>-4</buildingactionincrement>
+    </card>
+    <card>
+        <era>2</era>
+        <characteractionincrement>-4</characteractionincrement>
+    </card>
+    <card>
+        <era>2</era>
         <ventureactionincrement>-4</ventureactionincrement>
+    </card>
+    <card>
+        <era>2</era>
         <nomarket>1</nomarket>
+    </card>
+    <card>
+        <era>2</era>
         <servanthalfvalue>1</servanthalfvalue>
+    </card>
+    <card>
+        <era>2</era>
         <turnskip>1</turnskip>
+    </card>
+    <card>
+        <era>3</era>
         <endinvalidcharacter>1</endinvalidcharacter>
+    </card>
+    <card>
+        <era>3</era>
         <endinvalidventure>1</endinvalidventure>
+    </card>
+    <card>
+        <era>3</era>
         <endinvalidterritory>1</endinvalidterritory>
+    </card>
+    <card>
+        <era>3</era>
         <endvictorylose-1>5</endvictorylose-1>
+    </card>
+    <card>
+        <era>3</era>
         <militarydecrementvictory>1</militarydecrementvictory>
+    </card>
+    <card>
+        <era>3</era>
         <endlosevictorybuildingstonewood>1</endlosevictorybuildingstonewood>
+    </card>
+    <card>
+        <era>3</era>
         <endlosevictoryforallresource>1</endlosevictoryforallresource>
     </card>
 </cards>

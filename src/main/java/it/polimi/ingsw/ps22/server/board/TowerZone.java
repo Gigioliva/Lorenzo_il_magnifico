@@ -123,7 +123,7 @@ public class TowerZone extends Zone {
 		StringBuilder str = new StringBuilder();
 		
 		for(TowerSpace tower: towerSpaces){
-			tower.toString();
+			str.append(tower.toString());
 			str.append("\n\n");
 		}
 		

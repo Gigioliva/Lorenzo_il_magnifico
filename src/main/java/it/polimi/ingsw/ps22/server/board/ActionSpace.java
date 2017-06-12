@@ -107,7 +107,7 @@ public abstract class ActionSpace implements Serializable {
 		
 		str.append("Action cost: " + actionCost);
 		
-		str.append(familyString() + "\n");
+		str.append("\n"+ familyString() + "\n");
 		
 		str.append(bonus.toString() + "\n");
 		
