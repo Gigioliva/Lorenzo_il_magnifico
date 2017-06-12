@@ -36,8 +36,6 @@ public class ConnectionSocket extends Connection {
 				System.out.println(name);
 				server.rednezvous(this, name);
 			}while(!active);
-			out.writeObject(name);
-			out.flush();
 			while(active){				
 				setChanged();
 				notifyObservers(in.readObject());

@@ -27,8 +27,8 @@ public abstract class ActionSpace implements Serializable {
 	}
 
 	public void addFamily(Family family) {
-			this.family.add(family);
-			family.setPlaced(true);
+		this.family.add(family);
+		family.setPlaced(true);
 	}
 	
 	public void resetFamily(){
@@ -43,9 +43,9 @@ public abstract class ActionSpace implements Serializable {
 	}
 
 	public boolean controlPlacement() {
-		if ((!multi && this.family.size() == 0) || multi)
+		if ((!multi && this.family.size() == 0) || multi){
 			return true;
-		else
+		}else
 			return false;
 	}
 

@@ -32,7 +32,7 @@ public class RemoteView extends View implements Observer{
 				connection.send(mex);
 			}
 		}
-		if(o instanceof ConnectionSocket && arg!=null){
+		if(o instanceof Connection && arg!=null){
 			setChanged();
 			notifyObservers(arg);
 		}

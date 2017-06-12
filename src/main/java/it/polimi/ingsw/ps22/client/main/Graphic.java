@@ -19,8 +19,8 @@ public abstract class Graphic {
 		return arg.accept(visitor);
 	}
 	
-	public Move getMove(){
-		return requestMove.requestMove();
+	public Move getMove(String username){
+		return requestMove.requestMove(username);
 	}
 	
 	public abstract void printModel(Model model);

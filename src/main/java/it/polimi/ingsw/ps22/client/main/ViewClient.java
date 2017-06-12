@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps22.server.move.Move;
 
 public class ViewClient extends Observable implements Observer, Runnable {
 	
-	private static String username;
+	private String username;
 	private Graphic graphic;
 	
 	public ViewClient(){
@@ -19,30 +19,9 @@ public class ViewClient extends Observable implements Observer, Runnable {
 
 	@Override
 	public void update(Observable o, Object arg) {
-		/*if(o instanceof Receive && arg instanceof String){
-			username=(String)arg;
-			System.out.println("Your username is: " + username);
-		}
-		if(o instanceof Receive && arg instanceof GenericMessage){
-			GenericAnswer mex=graphic.getAnswer((GenericMessage)arg);
-			if(mex!=null){
-				setChanged();
-				notifyObservers(mex);
-			}
-		}
-		if(o instanceof Receive && arg instanceof ChoiceMove){
-			Move temp=graphic.getMove();
-			if(temp!=null){
-				setChanged();
-				notifyObservers(temp);
-			}
-		}
-		if(o instanceof Receive && arg instanceof Model){
-			graphic.printModel((Model)arg);
-		}*/
 		if(arg instanceof String){
 			username=(String)arg;
-			System.out.println("Your username is: " + username);
+			System.out.println((String)arg);
 		}
 		if(arg instanceof GenericMessage){
 			GenericAnswer mex=graphic.getAnswer((GenericMessage)arg);
@@ -52,8 +31,9 @@ public class ViewClient extends Observable implements Observer, Runnable {
 			}
 		}
 		if(arg instanceof ChoiceMove){
-			Move temp=graphic.getMove();
+			Move temp=graphic.getMove(username);
 			if(temp!=null){
+				System.out.println(temp.getName());
 				setChanged();
 				notifyObservers(temp);
 			}
@@ -68,7 +48,7 @@ public class ViewClient extends Observable implements Observer, Runnable {
 		
 	}
 	
-	public static String getUsername(){
+	public String getUsername(){
 		return username;
 	}
 

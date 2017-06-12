@@ -1,9 +1,12 @@
 package it.polimi.ingsw.ps22.server.board;
+import java.io.Serializable;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
-public class FaithPointTrack {
+public class FaithPointTrack implements Serializable {
+	
+	private static final long serialVersionUID = 1L;
 	private HashMap<Integer,VictoryPoint> track;
 	
 	public FaithPointTrack(HashMap<Integer,VictoryPoint> track){

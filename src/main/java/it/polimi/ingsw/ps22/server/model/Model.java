@@ -72,6 +72,9 @@ public class Model extends Observable implements Serializable {
 		for (int i = 0; i < orderedPlayers.size(); i++) {
 			players.get(orderedPlayers.get(i)).addSpecificResource("Coin", new Coin(5 + i));
 		}
+		for(String el: players.keySet()){
+			cardLeaderStart.put(players.get(el), new ArrayList<CardLeader>());
+		}
 		ArrayList<CardLeader> temp=CardSort.leaderSort();
 		for(Player el: cardLeaderStart.keySet()){
 			for(int i=0; i<4;i++){
@@ -80,10 +83,14 @@ public class Model extends Observable implements Serializable {
 		}
 		canFamilyMove = true;
 		turn = 1;
-		board.reset(turn, new ArrayList<Player>(players.values()));
 		giro = 1;
+		board.reset(turn, new ArrayList<Player>(players.values()));
 		notifyModel();
-		draftStart();
+		//ddd
+		playerGame = orderedPlayers.get(0);
+		notifyModel();
+		notifyMessage(new ChoiceMove());
+		//draftStart();
 	}
 
 	public void notifyModel() {

@@ -35,13 +35,14 @@ public abstract class Zone implements Serializable {
 
 	protected boolean checkActionValue(int numServant, ActionSpace actionSpace, Family family, int actionValue) {
 		Player player = family.getPlayer();
-		if (numServant > 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
+		if (numServant >= 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
 			if ((player.getSpecBonus().returnBool("DoubleServant"))
-					&& ((actionValue + numServant / 2) > actionSpace.getActionCost())) {
+					&& ((actionValue + numServant / 2) >= actionSpace.getActionCost())) {
+				System.out.println("prova2 zone");
 				return true;
 			}
 			if (!(player.getSpecBonus().returnBool("DoubleServant"))
-					&& ((actionValue + numServant) > actionSpace.getActionCost())) {
+					&& ((actionValue + numServant) >= actionSpace.getActionCost())) {
 				return true;
 			}
 		}

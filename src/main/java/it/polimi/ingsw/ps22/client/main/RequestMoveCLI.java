@@ -10,8 +10,11 @@ import it.polimi.ingsw.ps22.server.move.*;
 public class RequestMoveCLI implements RequestMove {
 	
 	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	
+	private String username;
 
-	public Move requestMove() {
+	public Move requestMove(String username) {
+		this.username=username;
 		boolean corretto=false;
 		do {
 			try {
@@ -28,7 +31,7 @@ public class RequestMoveCLI implements RequestMove {
 		return null;
 	}
 
-	private static Move chiediMossa() {
+	private Move chiediMossa() {
 		System.out.println("che mossa vuoi fare? [familiare, leader]");
 		String str;
 		try {
@@ -46,7 +49,7 @@ public class RequestMoveCLI implements RequestMove {
 		}
 	}
 
-	private static Move chiedifamiliare() {
+	private Move chiedifamiliare() {
 		try {
 			System.out.println("Che familiare vuoi piazzare? [white,black,orange,neutral]");
 			String str = in.readLine();
@@ -75,7 +78,7 @@ public class RequestMoveCLI implements RequestMove {
 		}
 	}
 
-	private static Move chiediLeader() {
+	private Move chiediLeader() {
 		try {
 			System.out.println("Vuoi Giocare un Leader o Scartarlo? [gioca,scarta]");
 			String str = in.readLine();
@@ -92,79 +95,79 @@ public class RequestMoveCLI implements RequestMove {
 		}
 	}
 
-	private static Move giocaLeader() {
+	private Move giocaLeader() {
 		try {
 			System.out.println("Nome del Leader");
 			String nome = in.readLine();
-			return new LeaderPlaying(ViewClient.getUsername(), nome);
+			return new LeaderPlaying(username, nome);
 		} catch (IOException e) {
 			System.out.println("Error.");
 			return null;
 		}
 	}
 
-	private static Move scartaLeader() {
+	private Move scartaLeader() {
 		try {
 			System.out.println("Nome del Leader");
 			String nome = in.readLine();
-			return new LeaderDiscarding(ViewClient.getUsername(), nome);
+			return new LeaderDiscarding(username, nome);
 		} catch (IOException e) {
 			System.out.println("Error.");
 			return null;
 		}
 	}
 
-	private static Move chiediMercato(Color color) {
+	private Move chiediMercato(Color color) {
 		try {
 			System.out.println("in quale spazio? [1,2,3,4]");
 			int space = Integer.parseInt(in.readLine());
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new MarketMove(ViewClient.getUsername(), color, space, servant);
+			return new MarketMove(username, color, space, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
 		}
 	}
 
-	private static Move chiediRaccolto(Color color) {
+	private Move chiediRaccolto(Color color) {
 		try {
 			System.out.println("in quale spazio? [1,2]");
 			int space = Integer.parseInt(in.readLine());
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new HarvestMove(ViewClient.getUsername(), color, space, servant);
+			return new HarvestMove(username, color, space, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
 		}
 	}
 
-	private static Move chiediProduzione(Color color) {
+	private Move chiediProduzione(Color color) {
 		try {
 			System.out.println("in quale spazio? [1,2]");
 			int space = Integer.parseInt(in.readLine());
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new ProductionMove(ViewClient.getUsername(), color, space, servant);
+			return new ProductionMove(username, color, space, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
 		}
 	}
 
-	private static Move chiediConcilio(Color color) {
+	private Move chiediConcilio(Color color) {
 		try {
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new CouncilMove(ViewClient.getUsername(), color, servant);
+			return new CouncilMove(username, color, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
 		}
 	}
 	
-	private static Move chiediTorre(Color color) {
+	private Move chiediTorre(Color color) {
 		try {
 			System.out.println("in quale piano? [1,2,3,4]");
 			int space = Integer.parseInt(in.readLine());
@@ -173,16 +176,16 @@ public class RequestMoveCLI implements RequestMove {
 			System.out.println("In quale torre vuoi posizionare? [building,character,territory,venture]");
 			String str = in.readLine();
 			if (str.equalsIgnoreCase("building")) {
-				return new TowerBuildingMove(ViewClient.getUsername(), color, space, servant);
+				return new TowerBuildingMove(username, color, space, servant);
 			}
 			if (str.equalsIgnoreCase("character")) {
-				return new TowerCharacterMove(ViewClient.getUsername(), color, space, servant);
+				return new TowerCharacterMove(username, color, space, servant);
 			}
 			if (str.equalsIgnoreCase("territory")) {
-				return new TowerTerritoryMove(ViewClient.getUsername(), color, space, servant);
+				return new TowerTerritoryMove(username, color, space, servant);
 			}
 			if (str.equalsIgnoreCase("venture")) {
-				return new TowerVentureMove(ViewClient.getUsername(), color, space, servant);
+				return new TowerVentureMove(username, color, space, servant);
 			}
 			return null;
 		} catch (IOException | NumberFormatException e) {

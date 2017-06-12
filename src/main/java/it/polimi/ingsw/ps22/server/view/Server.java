@@ -50,7 +50,8 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		if(!waitingConnection.containsKey(name)){
 			c.setActive();
 			waitingConnection.put(name, c);
-			if(waitingConnection.size() == 2){								//impostare un timer se non si arriva a 4
+			c.send(name);
+			if(waitingConnection.size() == 1){								//impostare un timer se non si arriva a 4
 				ArrayList<Connection> temp=new ArrayList<Connection>();
 				Model model = new Model();
 				Controller controller = new Controller(model);
@@ -119,5 +120,5 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			System.err.println("Impossibile inizializzare il server: " + e.getMessage() + "!");
 		}
 	}
-
+	
 }

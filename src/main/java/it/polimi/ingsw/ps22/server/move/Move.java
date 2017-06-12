@@ -16,5 +16,5 @@ public abstract class Move implements Serializable {
 	public void applyMove(Model model){
 		
 	}
-
+	
 }

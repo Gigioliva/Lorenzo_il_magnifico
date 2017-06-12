@@ -16,7 +16,7 @@ public class ChurchSpace implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private int era;
 	private CardExcomm cardExcomm;
-	private transient static FaithPointTrack faithPointTrack;
+	private FaithPointTrack faithPointTrack;
 	private HashMap<Integer, Integer> requisite;
 
 	public ChurchSpace(int era) {

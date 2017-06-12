@@ -4,6 +4,6 @@ import it.polimi.ingsw.ps22.server.move.Move;
 
 public interface RequestMove {
 	
-	public Move requestMove();
+	public Move requestMove(String username);
 
 }

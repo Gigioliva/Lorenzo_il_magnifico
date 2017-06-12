@@ -30,7 +30,7 @@ public class MarketZone extends Zone {
 		int actionValue = family.getValue();
 		if (0<=actionSpace && actionSpace<=NUM_SPACES && !(family.isPlaced()) && marketSpace[actionSpace].isPlayable()
 				&& (marketSpace[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& player.getSpecBonus().returnBool("NotMarket")
+				&& !player.getSpecBonus().returnBool("NoMarket")
 				&& checkActionValue(numServant, marketSpace[actionSpace], family, actionValue)) {
 			return true;
 		}
