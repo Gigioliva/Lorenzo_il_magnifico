@@ -33,7 +33,6 @@ public class ViewClient extends Observable implements Observer, Runnable {
 		if(arg instanceof ChoiceMove){
 			Move temp=graphic.getMove(username);
 			if(temp!=null){
-				System.out.println(temp.getName());
 				setChanged();
 				notifyObservers(temp);
 			}
