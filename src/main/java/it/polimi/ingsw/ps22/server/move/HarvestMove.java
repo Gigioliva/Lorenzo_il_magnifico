@@ -22,14 +22,12 @@ public class HarvestMove extends FamilyMove {
 			if (model.getBoard().getHarvestZone().Control(numServant, space, family)) {
 				model.getBoard().getHarvestZone().applyMove(numServant, space, family);
 				model.notifyModel();
-			} else {
-				ErrorMove error = new ErrorMove();
-				model.notifyMessage(error);
+				return;
 			}
-		} else {
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 
 }

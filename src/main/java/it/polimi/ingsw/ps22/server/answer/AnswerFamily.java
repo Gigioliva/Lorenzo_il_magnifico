@@ -33,6 +33,7 @@ public class AnswerFamily extends GenericAnswer {
 			Player player=model.getCurrentPlayer();
 			player.getAllFamily().get(color).setValue(0);
 			model.getWaitAnswer().remove(ask);
+			model.notifyModel();
 			return;
 		}
 		//applicato solo se tutto non va bene

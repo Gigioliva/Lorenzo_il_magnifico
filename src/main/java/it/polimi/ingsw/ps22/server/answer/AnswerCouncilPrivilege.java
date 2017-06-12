@@ -49,6 +49,7 @@ public class AnswerCouncilPrivilege extends GenericAnswer {
 				}
 				player.applyMalusResource(new ArrayList<String>(temp.keySet()));
 				model.getWaitAnswer().remove(ask);
+				model.notifyModel();
 				return;
 			}
 			model.notifyAsk(ask);

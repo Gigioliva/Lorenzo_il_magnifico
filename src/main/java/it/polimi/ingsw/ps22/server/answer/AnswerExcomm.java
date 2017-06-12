@@ -31,11 +31,13 @@ public class AnswerExcomm extends GenericAnswer {
 				if(answer.equalsIgnoreCase("SI")){
 					temp.notExcommunication(ask.getPlayer());
 					model.getWaitAnswer().remove(ask);
+					model.notifyModel();
 					return;
 				}
 				if(answer.equalsIgnoreCase("SI")){
 					temp.excommunication(ask.getPlayer());
 					model.getWaitAnswer().remove(ask);
+					model.notifyModel();
 					return;
 				}
 			}

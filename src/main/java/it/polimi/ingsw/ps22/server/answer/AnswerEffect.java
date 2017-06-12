@@ -68,6 +68,7 @@ public class AnswerEffect extends GenericAnswer {
 				}
 				ask.getProdAction().applyAnswer(temp, player);
 				model.getWaitAnswer().remove(ask);
+				model.notifyModel();
 				return;
 			}
 			model.notifyAsk(ask);

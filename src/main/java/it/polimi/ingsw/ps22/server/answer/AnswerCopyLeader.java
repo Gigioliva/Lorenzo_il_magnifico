@@ -46,6 +46,7 @@ public class AnswerCopyLeader extends GenericAnswer {
 				}
 				lead.playLeader(player);
 				model.getWaitAnswer().remove(ask);
+				model.notifyModel();
 				return;
 			}
 			model.notifyAsk(ask);

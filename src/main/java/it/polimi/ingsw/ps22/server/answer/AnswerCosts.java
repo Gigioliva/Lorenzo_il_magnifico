@@ -34,6 +34,7 @@ public class AnswerCosts extends GenericAnswer {
 				TowerVentureZone temp=(TowerVentureZone)model.getBoard().getTower("Venture");
 				temp.payCard(answer, possibleCost, ask.getPlayer(), ask.getTowerSpace(), ask.getDiscount());
 				model.getWaitAnswer().remove(ask);
+				model.notifyModel();
 				return;
 			}
 			model.notifyAsk(ask);

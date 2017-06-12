@@ -22,14 +22,12 @@ public class MarketMove extends FamilyMove {
 			if (model.getBoard().getMarket().Control(numServant, space, family)) {
 				model.getBoard().getMarket().applyMove(numServant, space, family);
 				model.notifyModel();
-			} else {
-				ErrorMove error = new ErrorMove();
-				model.notifyMessage(error);
+				return;
 			}
-		} else {
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 
 }

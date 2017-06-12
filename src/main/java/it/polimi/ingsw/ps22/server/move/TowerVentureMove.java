@@ -23,14 +23,12 @@ public class TowerVentureMove extends TowerMove {
 				model.getBoard().getTower("Venture").placeFamily(numServant, space, family);
 				model.getBoard().getTower("Venture").takeCard(space, player);
 				model.notifyModel();
-			} else {
-				ErrorMove error = new ErrorMove();
-				model.notifyMessage(error);
+				return;
 			}
-		} else{
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 
 }

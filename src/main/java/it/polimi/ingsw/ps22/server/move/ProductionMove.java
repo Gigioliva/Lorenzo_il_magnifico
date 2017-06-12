@@ -22,14 +22,12 @@ public class ProductionMove extends FamilyMove {
 			if (model.getBoard().getProdZone().Control(numServant, space, family)) {
 				model.getBoard().getProdZone().applyMove(numServant, space, family);
 				model.notifyModel();
-			} else {
-				ErrorMove error = new ErrorMove();
-				model.notifyMessage(error);
+				return;
 			}
-		} else {
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 
 }

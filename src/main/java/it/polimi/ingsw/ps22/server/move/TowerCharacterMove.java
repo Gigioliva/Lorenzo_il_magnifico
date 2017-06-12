@@ -23,13 +23,11 @@ public class TowerCharacterMove extends TowerMove {
 				model.getBoard().getTower("Character").placeFamily(numServant, space, family);
 				model.getBoard().getTower("Character").takeCard(space, player);
 				model.notifyModel();
-			} else {
-				ErrorMove error = new ErrorMove();
-				model.notifyMessage(error);
+				return;
 			}
-		} else {
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 }

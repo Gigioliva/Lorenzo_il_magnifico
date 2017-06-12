@@ -23,13 +23,11 @@ public class CouncilMove extends FamilyMove {
 				model.getBoard().getCouncilPalace().applyMove(numServant, family);
 				model.setCantFamilyMove();
 				model.notifyModel();
-			} else {
-				ErrorMove error = new ErrorMove();
-				model.notifyMessage(error);
+				return;
 			}
-		} else{
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 }

@@ -33,10 +33,10 @@ public class LeaderDiscarding extends LeaderMove {
 			gain.addGain("CouncilPrivilege", new CouncilPrivilege(1));
 			gain.performEffect(player);
 			return;
-		} else {
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 
 }

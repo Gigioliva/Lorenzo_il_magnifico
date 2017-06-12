@@ -20,7 +20,7 @@ public class GraphicCLI extends Graphic {
 		System.out.println(temp.toString());*/
 		System.out.println(model.getBoard().getMarket().toString());
 		for(String el: model.getPlayers().keySet()){
-			System.out.println(model.getPlayers().get(el).toString());
+			System.out.println(model.getPlayers().get(el).resourcesString());
 		}
 	}
 

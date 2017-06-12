@@ -40,6 +40,7 @@ public class AnswerCard extends GenericAnswer {
 						risp.put(type, el);
 						cardAction.applyAnswer(risp, ask.getPlayer(), model.getBoard());
 						model.getWaitAnswer().remove(ask);
+						model.notifyModel();
 						return;
 					}
 				}
