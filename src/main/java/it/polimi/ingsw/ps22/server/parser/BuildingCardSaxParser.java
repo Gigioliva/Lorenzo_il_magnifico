@@ -191,42 +191,42 @@ public class BuildingCardSaxParser {
 
 					if (lastQName.equalsIgnoreCase("coin")) {
 						lastInt = Integer.parseInt(str);
-						processElementResource(new Coin(lastInt));
+						processElementResource(new Coin(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("stone")) {
 						lastInt = Integer.parseInt(str);
-						processElementResource(new Stone(lastInt));
+						processElementResource(new Stone(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("wood")) {
 						lastInt = Integer.parseInt(str);
-						processElementResource(new Wood(lastInt));
+						processElementResource(new Wood(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("servant")) {
 						lastInt = Integer.parseInt(str);
-						processElementResource(new Servant(lastInt));
+						processElementResource(new Servant(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("militarypoint")) {
 						lastInt = Integer.parseInt(str);
-						processElementPoint(new MilitaryPoint(lastInt));
+						processElementPoint(new MilitaryPoint(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("faithpoint")) {
 						lastInt = Integer.parseInt(str);
-						processElementPoint(new FaithPoint(lastInt));
+						processElementPoint(new FaithPoint(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("victorypoint")) {
 						lastInt = Integer.parseInt(str);
-						processElementPoint(new VictoryPoint(lastInt));
+						processElementPoint(new VictoryPoint(Math.abs(lastInt)));
 					}
 
 					if (lastQName.equalsIgnoreCase("councilpoint")) {
 						lastInt = Integer.parseInt(str);
-						processElementCouncilPrivilege(lastInt);
+						processElementCouncilPrivilege(Math.abs(lastInt));
 					}
 
 				}
