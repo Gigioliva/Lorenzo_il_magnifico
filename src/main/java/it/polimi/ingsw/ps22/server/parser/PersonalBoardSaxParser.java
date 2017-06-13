@@ -153,6 +153,11 @@ public class PersonalBoardSaxParser {
 				public void characters(char ch[], int start, int length) throws SAXException {
 
 					String str = new String(ch, start, length);
+					
+					if (lastQName.equalsIgnoreCase("pathname")) {
+						toAdd.setPathname(str);
+					}
+					
 					if (boolHarvestBonus) {
 						if (lastQName.equalsIgnoreCase("coin")) {
 							lastInt = Integer.parseInt(str);
