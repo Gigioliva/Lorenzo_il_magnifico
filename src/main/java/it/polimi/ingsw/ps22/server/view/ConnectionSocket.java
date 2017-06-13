@@ -51,6 +51,7 @@ public class ConnectionSocket extends Connection {
 	@Override
 	public void send(Object obj) {
 		try {
+			out.reset();
 			out.writeObject(obj);
 			out.flush();
 		} catch (IOException e) {
