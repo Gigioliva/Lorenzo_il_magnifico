@@ -14,6 +14,7 @@ public class Gui extends JFrame{
 	 */
 	private static final long serialVersionUID = 1L;
 	BoardPanel board;
+	ViewClient view;
 	//PersonalBoardPanel personalBoard;
 	
 
@@ -34,6 +35,7 @@ public class Gui extends JFrame{
 		
 		this.add(board);
 		//this.add(personalBoard);
+		this.view = view;
 		
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -45,7 +47,11 @@ public class Gui extends JFrame{
 		board.updateBoard(model);
 	}
 	
-	
+	/*public AnswerCost getPrivilege(int idMex){
+		PrivilegeDialog p = new PrivilegeDialog(view);
+		
+	}
+	*/
 
 
 }

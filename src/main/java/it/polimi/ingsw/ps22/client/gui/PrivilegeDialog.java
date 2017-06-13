@@ -1,11 +1,12 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.Choice;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Enumeration;
 
+import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
@@ -22,11 +23,12 @@ public class PrivilegeDialog extends MessageDialog {
 	public PrivilegeDialog(ViewClient view){
 		super(view);
 		
-		JRadioButton b1 = new JRadioButton(new ExchangeElem(1, "1 legno e 1 pietra").toString());
-		JRadioButton b2 = new JRadioButton(new ExchangeElem(2, "2 servitori").toString());
-		JRadioButton b3 = new JRadioButton(new ExchangeElem(3, "2 monete").toString());
-		JRadioButton b4 = new JRadioButton(new ExchangeElem(4, "2 punti militari").toString());
-		JRadioButton b5 = new JRadioButton(new ExchangeElem(5, "1 punto fede").toString());
+		
+		Button b1 = new Button(new ExchangeElem(1, "1 legno e 1 pietra"));
+		Button b2 = new Button(new ExchangeElem(2, "2 servitori"));
+		Button b3 = new Button(new ExchangeElem(3, "2 monete"));
+		Button b4 = new Button(new ExchangeElem(4, "2 punti militari"));
+		Button b5 = new Button(new ExchangeElem(5, "1 punto fede"));
 	
 	    group.add(b1);
 	    group.add(b2);
@@ -43,16 +45,37 @@ public class PrivilegeDialog extends MessageDialog {
 		
 	    mainPanel.add(confirmButton);
 	    
+	    confirmButton.addActionListener(new ConfirmListener());
+	    
 	    this.setMinimumSize(new Dimension(150,200));;
+	}
+	
+	private class Button extends JRadioButton{
+		private ExchangeElem el;
+		
+		public Button(ExchangeElem el){
+			super(el.toString());
+			this.el = el;
+			
+		}
+		
+		public ExchangeElem getEl(){
+			return this.el;
+		}
 	}
 	
 	private class ConfirmListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			ExchangeElem el = (ExchangeElem)group.getSelection();
-			view.send(el.getId());
+			Enumeration<AbstractButton> b = group.getElements();
+			while(b.hasMoreElements()){
+				Button b1 =(Button) b.nextElement();
+				if(b1.isSelected())
+					view.send(b1.getEl().getId());
+			}
 			//nelle classi innestate per poter usare this devo mettere nome della classe che lo contiene.this altrimenti this sarebbe ConfirmListener
 			PrivilegeDialog.this.dispose();
+			
 		}		
 }
 	
