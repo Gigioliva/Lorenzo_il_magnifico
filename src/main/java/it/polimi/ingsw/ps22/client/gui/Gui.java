@@ -1,7 +1,10 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.util.ArrayList;
+
 import javax.swing.JFrame;
 
+import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.model.Model;
 
 public class Gui extends JFrame{
@@ -15,7 +18,7 @@ public class Gui extends JFrame{
 	
 
 	
-	public void initGui(String username){
+	public void initGui(String username, String persBonusPath, ArrayList<String> avver, ArrayList<String> personBonusPaths, ViewClient view){
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
@@ -25,7 +28,7 @@ public class Gui extends JFrame{
 		this.setVisible(true);
 		
 	
-		board = new BoardPanel(this.getWidth(), this.getHeight(), username); 
+		board = new BoardPanel(this.getWidth(), this.getHeight(), username, persBonusPath, avver, personBonusPaths, view); 
 		
 		//personalBoard = new PersonalBoardPanel(this.getWidth(), this.getHeight(), username);
 		
@@ -39,7 +42,7 @@ public class Gui extends JFrame{
 	}
 	
 	public void updateGui(Model model){
-		//board.update(model.getBoard());
+		board.updateBoard(model);
 	}
 
 

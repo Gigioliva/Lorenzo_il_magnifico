@@ -1,15 +1,20 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-public class MyImage {
+import it.polimi.ingsw.ps22.server.player.Family;
+import it.polimi.ingsw.ps22.server.player.Player;
 
+public class MyImage {
+	
 	
 	public static JLabel getScaledImageinLabel(String path, Rectangle dim){
 		ImageIcon img = createScaledImageIcon(path, dim);
@@ -44,6 +49,32 @@ public class MyImage {
             return null;
         }
     }
+	
+	public static void updatePlayersSpaces(ArrayList<Family> familiars, ActionButton b, Graphics g){
+		
+		ArrayList<Rectangle> recs = Rectangle.divideRectangle(new Rectangle(0,b.getWidth(),0,b.getHeight()));
+		
+		for(int i = 0 ; i < familiars.size(); i++){
+			g.setColor(familiars.get(i).getPlayer().getColor().getColor());
+			Rectangle rec = recs.get(i);
+			g.fillRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			g.setColor(familiars.get(i).getColor().getColor());
+			g.drawRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+		}
+	}
+	
+	public static void updatePlayersSpaces(ArrayList<Player> players, JLabel b, Graphics g){
+		
+		ArrayList<Rectangle> recs = Rectangle.divideRectangle(new Rectangle(0,b.getWidth(),0,b.getHeight()));
+		
+		for(int i = 0 ; i < players.size(); i++){
+			g.setColor(players.get(i).getColor().getColor());
+			Rectangle rec = recs.get(i);
+			g.fillRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			g.setColor(players.get(i).getColor().getColor());
+			g.drawRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+		}
+	}
 	
 
 

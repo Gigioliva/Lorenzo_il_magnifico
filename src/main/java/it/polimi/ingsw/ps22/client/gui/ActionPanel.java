@@ -1,11 +1,13 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 
 public class ActionPanel extends JPanel  {
 	/**
@@ -15,9 +17,9 @@ public class ActionPanel extends JPanel  {
 	ActionButton b;
 	Rectangle dim;
 	
-	public ActionPanel(String name, Rectangle dim, ActionListener actionListener, int space){
+	public ActionPanel(String name, Rectangle dim, ActionListener actionListener, int space, String tower){
 		
-		ActionButton b = new ActionButton(space,name);
+		//ActionButton b = new ActionButton(space,name,tower);
 		this.b = b;
 		b.addActionListener(actionListener);
 		
@@ -51,6 +53,12 @@ public class ActionPanel extends JPanel  {
 	
 	private void setMeasures(Rectangle dim){
 		this.setBounds(dim.getInitx(), dim.getInity(), dim.getOffsetX(), dim.getOffsetY());
+	}
+	
+	
+	
+	public void update(Model model){
+		b.updateButton(model);
 	}
 
 

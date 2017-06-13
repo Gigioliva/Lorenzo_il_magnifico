@@ -85,6 +85,10 @@ public class HarvestZone extends Zone {
 		
 	}
 	
+	public HarvestSpace[] getHarvestSpaces(){
+		return this.harvestSpace;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

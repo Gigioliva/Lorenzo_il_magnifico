@@ -16,7 +16,10 @@ import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
+import it.polimi.ingsw.ps22.server.player.Player;
 
 public class BoardPanel extends JPanel{
 	
@@ -29,11 +32,14 @@ public class BoardPanel extends JPanel{
 	private final static int NUM_PLAYERS = 4;
 	private JPanel spinPan = new JPanel();
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
-	private ArrayList<ActionPanel> actionSpaces = new ArrayList<ActionPanel>();
+	private ArrayList<ActionButton> actionSpaces = new ArrayList<ActionButton>();
 	private HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<Integer,ArrayList<TowerPanel>>();
-	private JLabel zoomedCard;
+	protected static JLabel zoomedCard;
 	private PersonalBoardPanel personalBoard;
 	private JLayeredPane layeredPane;
+	private String username;
+	private ArrayList<PlayersButton> players = new ArrayList<PlayersButton>();
+	private double resizeFactor; 
 
 	
 	
@@ -42,11 +48,14 @@ public class BoardPanel extends JPanel{
 		return factorScaleX;
 	}
 	
-	public BoardPanel(double widthScreen, double heightScreen, String username) {
+	public BoardPanel(double widthScreen, double heightScreen, String username, String persBonusPath, ArrayList<String> avver, ArrayList<String> personBonusPaths, ViewClient view) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 	
 		
 		double factorScaleBoard = resizeFactor(board, heightScreen);
+		this.resizeFactor = factorScaleBoard;
+		
+		this.username = username;
 		
 		layeredPane = new JLayeredPane();
 		
@@ -60,27 +69,27 @@ public class BoardPanel extends JPanel{
         System.out.println(mapLabel.getIcon());
         layeredPane.add(mapLabel, new Integer(20), 0);
 	
-		ActionPanel harvest1 = new ActionPanel(username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard), new HarvestListener(), 1);
+		HarvestButton harvest1 = new HarvestButton(1, username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard), new HarvestListener(view));
 		addActionPanelToLayeredPane(harvest1);
 		
-		ActionPanel harvest2 = new ActionPanel(username, AdaptiveLayout.getHarvestLeftSpace(factorScaleBoard), new HarvestListener(), 0);
+		HarvestButton harvest2 = new HarvestButton(0, username, AdaptiveLayout.getHarvestLeftSpace(factorScaleBoard), new HarvestListener(view));
 		addActionPanelToLayeredPane(harvest2);
 		
-		ActionPanel prod1 = new ActionPanel(username, AdaptiveLayout.getProdRightSpace(factorScaleBoard), new ProductionListener(), 1);
-		ActionPanel prod2 = new ActionPanel(username, AdaptiveLayout.getProdLeftSpace(factorScaleBoard), new ProductionListener(), 0);
+		ProductionButton prod1 = new ProductionButton(1,username, AdaptiveLayout.getProdRightSpace(factorScaleBoard), new ProductionListener(view));
+		ProductionButton prod2 = new ProductionButton(0, username, AdaptiveLayout.getProdLeftSpace(factorScaleBoard), new ProductionListener(view));
 		addActionPanelToLayeredPane(prod1);
 		addActionPanelToLayeredPane(prod2);
 		
-		ActionPanel mark1 = new ActionPanel(username, AdaptiveLayout.getMarket1Space(factorScaleBoard), new MarketListener(), 1);
-		ActionPanel mark2 = new ActionPanel(username, AdaptiveLayout.getMarket2Space(factorScaleBoard), new MarketListener(), 2);
-		ActionPanel mark3 = new ActionPanel(username, AdaptiveLayout.getMarket3Space(factorScaleBoard), new MarketListener(), 3);
-		ActionPanel mark4 = new ActionPanel(username, AdaptiveLayout.getMarket4Space(factorScaleBoard), new MarketListener(), 4);
+		MarketButton mark1 = new MarketButton(0, username, AdaptiveLayout.getMarket1Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark2 = new MarketButton(1, username, AdaptiveLayout.getMarket2Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark3 = new MarketButton(2, username, AdaptiveLayout.getMarket3Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark4 = new MarketButton(3, username, AdaptiveLayout.getMarket4Space(factorScaleBoard), new MarketListener(view));
 		addActionPanelToLayeredPane(mark1);		
 		addActionPanelToLayeredPane(mark2);
 		addActionPanelToLayeredPane(mark3);
 		addActionPanelToLayeredPane(mark4);
 		
-		ActionPanel council = new ActionPanel(username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), new MarketListener(), 0);
+		CouncilButton council = new CouncilButton(0, username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), new MarketListener(view));
 		addActionPanelToLayeredPane(council);
 	
 		FamiliarButton fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces));
@@ -113,26 +122,26 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(zoomedCard, new Integer(2000));
 		
 		for(int i = 0; i < 4; i++){
-			TowerPanel tower1 = new TowerPanel(AdaptiveLayout.getCardTerritorySpace(factorScaleBoard, i));
-			ActionPanel space1 = new ActionPanel(username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 0, i), new TerritoryListener(), i);
+			TowerPanel tower1 = new TowerPanel(AdaptiveLayout.getCardTerritorySpace(factorScaleBoard, i),"Territory",i );
+			TowerButton space1 = new TowerButton(i, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 0, i), new TerritoryListener(view),"Territory");
 			addActionPanelToLayeredPane(space1);
 			towers.get(0).add(tower1);
 			layeredPane.add(tower1, new Integer(30));
 			
-			TowerPanel tower2 = new TowerPanel(AdaptiveLayout.getCharacterSpace(factorScaleBoard, i));
-			ActionPanel space2 = new ActionPanel(username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 1, i), new CharacterListener(), i);
+			TowerPanel tower2 = new TowerPanel(AdaptiveLayout.getCharacterSpace(factorScaleBoard, i), "Character", i);
+			TowerButton space2 = new TowerButton(i,username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 1, i), new CharacterListener(view), "Character");
 			addActionPanelToLayeredPane(space2);
 			towers.get(1).add(tower2);
 			layeredPane.add(tower2, new Integer(30));
 
-			TowerPanel tower3 = new TowerPanel(AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, i));
-			ActionPanel space3 = new ActionPanel(username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 2, i), new BuildingListener(), i);
+			TowerPanel tower3 = new TowerPanel(AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, i), "Building", i);
+			TowerButton space3 = new TowerButton(i, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 2, i), new BuildingListener(view), "Building");
 			addActionPanelToLayeredPane(space3);
 			towers.get(2).add(tower3);
 			layeredPane.add(tower3, new Integer(30));
 			
-			TowerPanel tower4 = new TowerPanel(AdaptiveLayout.getCardVentureSpace(factorScaleBoard, i));
-			ActionPanel space4 = new ActionPanel(username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 3, i), new VentureListener(), i);
+			TowerPanel tower4 = new TowerPanel(AdaptiveLayout.getCardVentureSpace(factorScaleBoard, i), "Venture", i);
+			TowerButton space4 = new TowerButton(i, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 3, i), new VentureListener(view), "Venture");
 			addActionPanelToLayeredPane(space4);
 			towers.get(3).add(tower4);
 			layeredPane.add(tower4, new Integer(30));
@@ -140,7 +149,7 @@ public class BoardPanel extends JPanel{
 		
 		
 		
-		
+		/*
 		HashMap<Integer,ArrayList<String>> map = new HashMap<Integer,ArrayList<String>>();
 		map.put(0,new ArrayList<String>());
 		map.put(1,new ArrayList<String>());
@@ -168,10 +177,10 @@ public class BoardPanel extends JPanel{
 		map.get(3).add("./image/devcards_f_en_c_75.png");
 		map.get(3).add("./image/devcards_f_en_c_76.png");
 		this.setCards(map);
-		
+		*/
 		this.setBackground(new java.awt.Color(55, 55, 55));
 		
-		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username);
+		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username, persBonusPath);
 	
 		layeredPane.add(personalBoard, new Integer(400),0);
 		
@@ -181,7 +190,8 @@ public class BoardPanel extends JPanel{
 		spinFamiliar();
 		
 		for(int i = 0 ; i < NUM_PLAYERS - 1; i++){
-			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, "Gianni " + i,i);
+			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, avver.get(i) ,i, personBonusPaths.get(i));
+			players.add(b1);
 			layeredPane.add(b1, new Integer(40));
 		}
 		
@@ -213,10 +223,11 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(spinPan, new Integer(2000),0);
 	}
 	
-	private void addActionPanelToLayeredPane(ActionPanel c){
+	private void addActionPanelToLayeredPane(ActionButton c){
 		actionSpaces.add(c);
 		layeredPane.add(c, new Integer(30));
 	}
+
 	
 	//setta le carte nei rispettivi bottoni ed aggiunge i mouse listener per lo zoom
 	private void setCards(HashMap<Integer, ArrayList<String>> cardsPaths){
@@ -227,6 +238,54 @@ public class BoardPanel extends JPanel{
 				panels.get(i).setCard(paths.get(i));
 				panels.get(i).b.addMouseListener(new MyMouse(zoomedCard, paths.get(i)));
 			}
+		}
+	}
+	
+	public void updateBoard(Model model){
+		updateActionSpaces(model);
+		updateTowers(model);
+		updatePersonalBoard(model);
+		updatePlayers(model);
+	}
+	
+	private void updateActionSpaces(Model model){
+		for(ActionButton button: actionSpaces){
+			button.updateButton(model);
+		}
+	}
+	
+	private void updateTowers(Model model){
+		for(Integer tower: towers.keySet()){
+			for(TowerPanel pan: towers.get(tower)){
+				pan.update(model);
+			}
+		}
+	}
+	
+	private void updatePersonalBoard(Model model){
+		personalBoard.update(model);
+	}
+	
+	private void updatePlayers(Model model){
+		for(PlayersButton button: players){
+			button.update(model);
+		}
+	}
+	
+	private void updateFaithTrack(Model model){
+		HashMap<Integer, ArrayList<Player>> tempPlay = new HashMap<Integer, ArrayList<Player>>();
+		
+		for(String user: model.getPlayers().keySet()){
+			int qty = model.getPlayers().get(user).getSpecificResource("FaithPoint").getQuantity();
+			if(!tempPlay.containsKey(qty))
+				tempPlay.put(qty, new ArrayList<Player>());
+			tempPlay.get(qty).add(model.getPlayers().get(user));
+		}
+		
+		for(Integer qty: tempPlay.keySet()){
+			FaithTrackLabel lab = new FaithTrackLabel(resizeFactor, qty, tempPlay.get(qty));
+			lab.update(model);
+			layeredPane.add(lab, new Integer(100));
 		}
 	}
 	
