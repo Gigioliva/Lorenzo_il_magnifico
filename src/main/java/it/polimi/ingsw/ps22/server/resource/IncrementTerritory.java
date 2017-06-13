@@ -7,5 +7,10 @@ public class IncrementTerritory extends BonusAbstract {
 	public IncrementTerritory(int quantity) {
 		super(quantity);
 	}
+	
+	@Override
+	public IncrementTerritory clone() {
+		return new IncrementTerritory(this.getQuantity());
+	}
 
 }

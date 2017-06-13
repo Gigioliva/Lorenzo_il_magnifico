@@ -34,8 +34,8 @@ public class ClientRMI extends Observable implements ClientInterface, Observer {
 	}
 	
 	public static void mainRMI() {
-		ClientRMI cl = new ClientRMI();
 		ViewClient view=new ViewClient();
+		ClientRMI cl = new ClientRMI();
 		view.addObserver(cl);
 		cl.addObserver(view);
 		(new Thread(view)).start();

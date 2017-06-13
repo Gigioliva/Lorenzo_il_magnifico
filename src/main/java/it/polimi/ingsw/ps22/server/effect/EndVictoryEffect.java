@@ -11,6 +11,12 @@ public class EndVictoryEffect implements EndEffect {
 	public EndVictoryEffect(int value){
 		points=new VictoryPoint(value);
 	}
+	
+	@Override
+	public EndVictoryEffect clone(){
+		EndVictoryEffect temp=new EndVictoryEffect(this.points.getQuantity());
+		return temp;
+	}
 
 	@Override
 	public void performEffect(Player player) {

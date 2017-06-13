@@ -42,8 +42,8 @@ public class ClientSocket implements Observer {
 	}
 	
 	public static void mainSocket() {
-		ClientSocket cl = new ClientSocket();
 		ViewClient view=new ViewClient();
+		ClientSocket cl = new ClientSocket();
 		view.addObserver(cl);
 		cl.receive(view);
 		(new Thread(view)).start();

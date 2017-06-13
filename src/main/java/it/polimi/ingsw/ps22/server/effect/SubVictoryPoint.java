@@ -26,6 +26,15 @@ public class SubVictoryPoint implements EndEffect {
 	public void addBonus(String type,BonusAbstract value){
 		 weights.put(type, value);
 	 }
+	
+	@Override
+	public SubVictoryPoint clone(){
+		SubVictoryPoint temp=new SubVictoryPoint(this.loc);
+		for(String el: weights.keySet()){
+			temp.weights.put(el, weights.get(el).clone());
+		}
+		return temp;
+	}
 
 
 	//ritorna il numero totale di punti vittoria da sottrarre (caso giocatore)

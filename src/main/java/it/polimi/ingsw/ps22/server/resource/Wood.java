@@ -11,4 +11,9 @@ public class Wood extends Resource {
 	public String getName() {
 		return "Wood";
 	}
+	
+	@Override
+	public Wood clone() {
+		return new Wood(this.getQuantity());
+	}
 }

@@ -50,4 +50,9 @@ public class CouncilPrivilege extends ResourceAbstract {
 	public String getName() {
 		return "CouncilPrivilege";
 	}
+	
+	@Override
+	public CouncilPrivilege clone() {
+		return new CouncilPrivilege(this.getQuantity());
+	}
 }

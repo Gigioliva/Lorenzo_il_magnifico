@@ -15,7 +15,16 @@ public class GainResource implements ActionEffect, ImmediateEffect {
 	public GainResource() {
 		gain = new HashMap<String, ResourceAbstract>();
 	}
-
+	
+	@Override
+	public GainResource clone(){
+		GainResource temp=new GainResource();
+		for(String el: gain.keySet()){
+			temp.gain.put(el, gain.get(el).clone());
+		}
+		return temp;
+	}
+	
 	public void addGain(String type, ResourceAbstract resource) {
 		gain.put(type, resource);
 	}

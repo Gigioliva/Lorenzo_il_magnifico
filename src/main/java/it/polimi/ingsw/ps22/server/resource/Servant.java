@@ -12,4 +12,9 @@ public class Servant extends Resource {
 		return "Servant";
 	}
 	
+	@Override
+	public Servant clone() {
+		return new Servant(this.getQuantity());
+	}
+	
 }

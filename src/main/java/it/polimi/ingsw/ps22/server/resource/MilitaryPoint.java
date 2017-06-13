@@ -11,4 +11,9 @@ public class MilitaryPoint extends Point {
 	public String getName() {
 		return "MilitaryPoint";
 	}
+	
+	@Override
+	public MilitaryPoint clone() {
+		return new MilitaryPoint(this.getQuantity());
+	}
 }

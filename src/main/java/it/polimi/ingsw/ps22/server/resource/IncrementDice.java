@@ -7,5 +7,10 @@ public class IncrementDice extends BonusAbstract {
 	public IncrementDice(int quantity) {
 		super(quantity);
 	}
+	
+	@Override
+	public IncrementDice clone() {
+		return new IncrementDice(this.getQuantity());
+	}
 
 }

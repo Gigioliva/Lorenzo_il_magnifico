@@ -8,4 +8,9 @@ public class Resource extends ResourceAbstract {
 		super(resources);
 	}
 	
+	@Override
+	public Resource clone() {
+		return new Resource(this.getQuantity());
+	}
+	
 }

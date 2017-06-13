@@ -12,4 +12,9 @@ public class FaithPoint extends Point {
 		return "FaithPoint";
 	}
 	
+	@Override
+	public FaithPoint clone() {
+		return new FaithPoint(this.getQuantity());
+	}
+	
 }

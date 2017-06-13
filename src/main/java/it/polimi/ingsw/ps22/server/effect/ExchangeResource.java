@@ -18,6 +18,18 @@ public class ExchangeResource implements ActionEffect{
 		gain=new HashMap<String, ResourceAbstract>();
 	}
 	
+	@Override
+	public ExchangeResource clone(){
+		ExchangeResource temp=new ExchangeResource();
+		for(String el: cost.keySet()){
+			temp.cost.put(el, cost.get(el).clone());
+		}
+		for(String el: gain.keySet()){
+			temp.gain.put(el, gain.get(el).clone());
+		}
+		return temp;
+	}
+	
 	public void addCost(String typeCost, ResourceAbstract costResource){
 		cost.put(typeCost, costResource);
 	}

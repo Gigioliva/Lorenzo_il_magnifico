@@ -15,6 +15,13 @@ public class HarvestAction extends Action {
 	public HarvestAction(int actionValue) {
 		super(actionValue);
 	}
+	
+	@Override
+	public HarvestAction clone() {
+		HarvestAction temp=new HarvestAction(this.getActionValue());
+		temp.servants=this.servants;
+		return temp;
+	}
 
 	//suppongo che gli effetti delle carte territorio vengano eseguiti tutti, in quanto in genere sono solo di tipo GainResource
 	@Override

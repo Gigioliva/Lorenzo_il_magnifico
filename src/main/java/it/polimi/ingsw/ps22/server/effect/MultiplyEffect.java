@@ -33,6 +33,16 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	}
 	
 	@Override
+	public MultiplyEffect clone(){
+		MultiplyEffect temp=new MultiplyEffect();
+		temp.multiplier=this.multiplier;
+		temp.multiplierQty=this.multiplierQty;
+		temp.multiplicand=this.multiplicand.clone();
+		temp.multiplicandType=this.multiplicandType;
+		return temp;
+	}
+	
+	@Override
 	public String toString(){
 		StringBuilder str = new StringBuilder();
 		str.append(multiplicand.getQuantity() + " " +  multiplicandType + " X " + multiplierQty + " "+ multiplier  + "\n");

@@ -7,5 +7,10 @@ public class IncrementVenture extends BonusAbstract {
 	public IncrementVenture(int quantity) {
 		super(quantity);
 	}
+	
+	@Override
+	public IncrementVenture clone() {
+		return new IncrementVenture(this.getQuantity());
+	}
 
 }

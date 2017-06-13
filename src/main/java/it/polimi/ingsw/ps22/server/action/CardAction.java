@@ -23,6 +23,19 @@ public class CardAction extends Action {
 		discount = new HashMap<String, ResourceAbstract>();
 	}
 
+	@Override
+	public CardAction clone() {
+		CardAction temp=new CardAction(this.getActionValue());
+		temp.servants=this.servants;
+		for(String el: types){
+			temp.types.add(el);
+		}
+		for(String el: discount.keySet()){
+			temp.discount.put(el, discount.get(el).clone());
+		}
+		return temp;
+	}
+
 	public void addType(String type) {
 		types.add(type);
 	}

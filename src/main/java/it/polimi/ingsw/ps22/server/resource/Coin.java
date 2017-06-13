@@ -12,4 +12,9 @@ public class Coin extends Resource {
 		return "Coin";
 	}
 	
+	@Override
+	public Coin clone() {
+		return new Coin(this.getQuantity());
+	}
+	
 }

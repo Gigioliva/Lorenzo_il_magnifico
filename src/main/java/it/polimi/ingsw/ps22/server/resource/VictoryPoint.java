@@ -11,4 +11,9 @@ public class VictoryPoint extends Point {
 	public String getName() {
 		return "VictoryPoint";
 	}
+	
+	@Override
+	public VictoryPoint clone() {
+		return new VictoryPoint(this.getQuantity());
+	}
 }

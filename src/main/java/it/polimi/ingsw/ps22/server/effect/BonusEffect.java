@@ -18,6 +18,15 @@ public class BonusEffect implements PermanentEffect {
 	public void addBonus(String type, BonusAbstract value) {
 		bonus.put(type, value);
 	}
+	
+	@Override
+	public BonusEffect clone(){
+		BonusEffect temp=new BonusEffect();
+		for(String el: bonus.keySet()){
+			temp.bonus.put(el, bonus.get(el).clone());
+		}
+		return temp;
+	}
 
 	@Override
 	public void performEffect(Player player) {

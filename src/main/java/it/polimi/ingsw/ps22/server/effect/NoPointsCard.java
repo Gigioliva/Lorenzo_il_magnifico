@@ -10,6 +10,12 @@ public class NoPointsCard implements EndEffect {
 	public NoPointsCard(String cardType) {
 		this.cardType = cardType;
 	}
+	
+	@Override
+	public NoPointsCard clone(){
+		NoPointsCard temp=new NoPointsCard(this.cardType);
+		return temp;
+	}
 
 
 	//forse rimuovere non è la cosa migliore da fare

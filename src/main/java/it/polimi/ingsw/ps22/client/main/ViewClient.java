@@ -1,5 +1,8 @@
 package it.polimi.ingsw.ps22.client.main;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Observable;
 import java.util.Observer;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
@@ -10,9 +13,26 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	
 	private String username;
 	private Graphic graphic;
+	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 	
 	public ViewClient(){
-		graphic=new GraphicCLI(this);
+		boolean flag=false;
+		do{
+			try{
+				System.out.println("GUI o CLI [1,2]");
+				int x=Integer.parseInt(stdin.readLine());
+				if(x==1){
+					graphic=new GraphicGUI();
+					flag=true;
+				}
+				if(x==2){
+					graphic=new GraphicCLI(this);
+					flag=true;
+				}
+			}catch(NumberFormatException | IOException e){
+				System.out.println("Scelta errata.");
+			}
+		}while(!flag);
 	}
 
 	@Override

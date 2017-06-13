@@ -22,4 +22,6 @@ public abstract class BonusAbstract implements Serializable {
 	public void subResource(BonusAbstract other) {
 		this.quantity = this.quantity - other.getQuantity();
 	}
+	
+	public abstract BonusAbstract clone();
 }

@@ -23,6 +23,12 @@ public class StrangeEffect implements PermanentEffect, ImmediateEffect{
 	}
 	
 	@Override
+	public StrangeEffect clone(){
+		StrangeEffect temp=new StrangeEffect(this.type);
+		return temp;
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		str.append(type);

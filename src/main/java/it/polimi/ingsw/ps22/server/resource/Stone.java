@@ -11,4 +11,9 @@ public class Stone extends Resource {
 	public String getName() {
 		return "Stone";
 	}
+	
+	@Override
+	public Stone clone() {
+		return new Stone(this.getQuantity());
+	}
 }

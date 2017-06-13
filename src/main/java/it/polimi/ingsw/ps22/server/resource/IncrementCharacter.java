@@ -7,5 +7,10 @@ public class IncrementCharacter extends BonusAbstract {
 	public IncrementCharacter(int quantity) {
 		super(quantity);
 	}
+	
+	@Override
+	public IncrementCharacter clone() {
+		return new IncrementCharacter(this.getQuantity());
+	}
 
 }

@@ -13,6 +13,12 @@ public class ExtraAction implements ImmediateEffect {
 		this.action = action;
 	}
 	
+	@Override
+	public ExtraAction clone(){
+		ExtraAction temp=new ExtraAction(this.action.clone());
+		return temp;
+	}
+	
 	private void askForServant(){
 		AskServant mex = new AskServant(this.action);
 		mex.applyAsk();

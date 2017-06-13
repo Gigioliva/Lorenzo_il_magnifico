@@ -7,5 +7,10 @@ public class Point extends ResourceAbstract {
 	public Point(int points){
 		super(points);
 	}
+	
+	@Override
+	public Point clone() {
+		return new Point(this.getQuantity());
+	}
 
 }

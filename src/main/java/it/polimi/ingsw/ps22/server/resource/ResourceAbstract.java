@@ -13,5 +13,10 @@ public class ResourceAbstract extends BonusAbstract{
 		return null;
 	}
 	
+	@Override
+	public ResourceAbstract clone() {
+		return new ResourceAbstract(this.getQuantity());
+	}
+	
 
 }

@@ -8,4 +8,9 @@ public class IncrementBuilding extends BonusAbstract {
 		super(quantity);
 	}
 
+	@Override
+	public IncrementBuilding clone() {
+		return new IncrementBuilding(this.getQuantity());
+	}
+
 }

@@ -7,5 +7,10 @@ public class IncrementHarvest extends BonusAbstract {
 	public IncrementHarvest(int quantity) {
 		super(quantity);
 	}
+	
+	@Override
+	public IncrementHarvest clone() {
+		return new IncrementHarvest(this.getQuantity());
+	}
 
 }

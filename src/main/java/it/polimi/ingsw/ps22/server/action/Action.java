@@ -26,5 +26,7 @@ public abstract class Action implements Serializable {
 	public void applyAction(Player player, Board board, int servants){
 		applyAction(player,servants);
 	}
+	
+	public abstract Action clone();
 
 }

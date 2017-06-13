@@ -7,5 +7,10 @@ public class IncrementProduction extends BonusAbstract {
 	public IncrementProduction(int quantity) {
 		super(quantity);
 	}
+	
+	@Override
+	public IncrementProduction clone() {
+		return new IncrementProduction(this.getQuantity());
+	}
 
 }

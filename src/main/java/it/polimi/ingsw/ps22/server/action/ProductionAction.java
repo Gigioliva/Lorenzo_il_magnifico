@@ -17,6 +17,13 @@ public class ProductionAction extends Action {
 	public ProductionAction(int actionValue) {
 		super(actionValue);
 	}
+	
+	@Override
+	public ProductionAction clone() {
+		ProductionAction temp=new ProductionAction(this.getActionValue());
+		temp.servants=this.servants;
+		return temp;
+	}
 
 	private HashMap<DevelopmentCard, ArrayList<ActionEffect>> getPossibleEffects(Player player, int bonus,
 			HashMap<DevelopmentCard, HashMap<ActionEffect, Integer>> allEffects) {
