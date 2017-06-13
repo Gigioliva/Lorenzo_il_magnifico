@@ -24,6 +24,27 @@ public class CardLeader extends Card {
 		this.play = false;
 	}
 	
+	@Override
+	public CardLeader clone() {
+		CardLeader temp=new CardLeader(this.name);
+		temp.play=this.play;
+		temp.copy=this.copy;
+		for(HashMap<String, Integer> el: requisite){
+			HashMap<String, Integer> x=new HashMap<String, Integer>();
+			for(String el2: el.keySet()){
+				x.put(el2, el.get(el2));
+			}
+			temp.addRequisite(x);
+		}
+		for(PermanentEffect el: permanentEffect){
+			temp.addPermanentEffect(el.clone());
+		}
+		for(ImmediateEffect el: immediateEffect){
+			temp.addImmediateEffect(el.clone());
+		}
+		return temp;
+	}
+	
 	public void setCopy(){
 		copy=true;
 	}
@@ -62,10 +83,6 @@ public class CardLeader extends Card {
 
 	public void addRequisite(HashMap<String, Integer> req) {
 		this.requisite.add(req);
-	}
-
-	public ArrayList<HashMap<String, Integer>> addRequisite() {
-		return requisite;
 	}
 
 	public ArrayList<HashMap<String, Integer>> getRequisite() {

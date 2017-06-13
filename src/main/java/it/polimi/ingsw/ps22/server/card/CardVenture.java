@@ -21,6 +21,21 @@ public class CardVenture extends DevelopmentCard {
 		this.immediateEffects=new ArrayList<ImmediateEffect>();
 	}
 	
+	@Override
+	public CardVenture clone() {
+		CardVenture temp=new CardVenture();
+		for(RequisiteCost el: requisiteCost){
+			temp.requisiteCost.add(el.clone());
+		}
+		for(ImmediateEffect el: immediateEffects){
+			temp.addImmediateEffect(el.clone());
+		}
+		for(EndEffect el: endEffects){
+			temp.addEndEffect(el.clone());
+		}
+		return temp;
+	}
+	
 	public ArrayList<RequisiteCost> getRequisiteCost(){
 		return this.requisiteCost;
 	}

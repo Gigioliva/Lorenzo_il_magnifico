@@ -19,6 +19,21 @@ public class CardTerritory extends DevelopmentCard {
 		this.actionEffects = new ArrayList<ActionEffect>();
 		this.actionValue = 0;
 	}
+	
+	@Override
+	public CardTerritory clone() {
+		CardTerritory temp=new CardTerritory();
+		temp.setEra(this.getEra());
+		temp.setName(this.getName());
+		temp.actionValue=this.actionValue;
+		for(ImmediateEffect el: immediateEffects){
+			temp.addImmediateEffect(el.clone());
+		}
+		for(ActionEffect el: actionEffects){
+			temp.addActionEffect(el.clone());
+		}
+		return temp;
+	}
 
 	public void addImmediateEffect(ImmediateEffect effect) {
 		this.immediateEffects.add(effect);

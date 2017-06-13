@@ -32,6 +32,8 @@ public abstract class DevelopmentCard extends Card {
 	public String getName() {
 		return this.name;
 	}
+	
+	public abstract DevelopmentCard clone();
 
 	public boolean takeCardControl(Player player) {
 		return false;

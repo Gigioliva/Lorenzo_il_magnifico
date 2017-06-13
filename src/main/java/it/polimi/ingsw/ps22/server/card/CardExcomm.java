@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
-
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
@@ -20,6 +19,20 @@ public class CardExcomm extends Card {
 		pathname = null;
 		endEffects = new ArrayList<EndEffect>();
 		permanentEffects = new ArrayList<PermanentEffect>();
+	}
+	
+	@Override
+	public CardExcomm clone() {
+		CardExcomm temp=new CardExcomm();
+		temp.era=this.era;
+		temp.pathname=this.pathname;
+		for(PermanentEffect el: permanentEffects){
+			temp.addPermanentEffect(el.clone());
+		}
+		for(EndEffect el: endEffects){
+			temp.addEndEffect(el.clone());
+		}
+		return temp;
 	}
 
 	public void addPermanentEffect(PermanentEffect effect) {

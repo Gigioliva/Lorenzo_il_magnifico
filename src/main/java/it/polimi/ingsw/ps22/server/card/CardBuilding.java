@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
@@ -23,6 +22,24 @@ public class CardBuilding extends DevelopmentCard {
 		this.actionEffects = new ArrayList<ActionEffect>();
 		this.cost = new HashMap<String, Resource>();
 		this.actionValue = 0;
+	}
+	
+	@Override
+	public CardBuilding clone() {
+		CardBuilding temp=new CardBuilding();
+		temp.setEra(this.getEra());
+		temp.setName(this.getName());
+		temp.actionValue=this.actionValue;
+		for(String el: cost.keySet()){
+			temp.cost.put(el, cost.get(el).clone());
+		}
+		for(ImmediateEffect el: immediateEffects){
+			temp.addImmediateEffect(el.clone());
+		}
+		for(ActionEffect el: actionEffects){
+			temp.addActionEffect(el.clone());
+		}
+		return temp;
 	}
 
 	public void setActionValue(int actionValue) {

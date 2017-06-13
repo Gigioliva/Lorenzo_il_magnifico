@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
@@ -13,13 +12,28 @@ import it.polimi.ingsw.ps22.server.resource.Resource;
 public class CardCharacter extends DevelopmentCard {
 	
 	private static final long serialVersionUID = 1L;
-	private Coin cost; // provare a usare tutto nel costruttore se XML permette
+	private Coin cost;
 	private ArrayList<ImmediateEffect> immediateEffects;
 	private ArrayList<PermanentEffect> permanentEffects;
 
 	public CardCharacter() {
 		this.immediateEffects = new ArrayList<ImmediateEffect>();
 		this.permanentEffects = new ArrayList<PermanentEffect>();
+	}
+	
+	@Override
+	public CardCharacter clone() {
+		CardCharacter temp=new CardCharacter();
+		temp.setEra(this.getEra());
+		temp.setName(this.getName());
+		temp.cost=this.cost.clone();
+		for(ImmediateEffect el: immediateEffects){
+			temp.addImmediateEffect(el.clone());
+		}
+		for(PermanentEffect el: permanentEffects){
+			temp.addPermanentEffect(el.clone());
+		}
+		return temp;
 	}
 
 	public void addCost(Coin coin) {
