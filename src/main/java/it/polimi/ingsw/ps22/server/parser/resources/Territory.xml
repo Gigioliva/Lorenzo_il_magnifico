@@ -8,7 +8,7 @@
         <harvestreq>1</harvestreq>
     </card>
     <card>
-        <name>Wood</name>
+        <name>Woods</name>
         <era>1</era>
         <gainEffect>
             <wood>1</wood>
