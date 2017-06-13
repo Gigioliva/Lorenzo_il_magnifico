@@ -18,6 +18,7 @@ public class CardPath {
 		return name.toString().toLowerCase();
 	}
 	
+	
 	public static String getExcommCardPathname(CardExcomm card) {
 		StringBuilder name = new StringBuilder("./image/excommCard/"+deleteSpaces(card.getPathname()));
 		return name.toString();
