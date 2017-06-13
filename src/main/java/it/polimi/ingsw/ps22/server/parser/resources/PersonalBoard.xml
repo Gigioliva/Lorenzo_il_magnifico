@@ -1,5 +1,6 @@
 <all>
     <personalboard>
+        <pathname>personalbonus1.png</pathname>
         <personalbonus>
             <harvestpersonalbonus>
                 <wood>1</wood>
@@ -49,6 +50,7 @@
         </characterbonus>
     </personalboard>
     <personalboard>
+        <pathname>personalbonus2.png</pathname>
         <personalbonus>
             <harvestpersonalbonus>
                 <wood>1</wood>
@@ -98,6 +100,7 @@
         </characterbonus>
     </personalboard>
     <personalboard>
+        <pathname>personalbonus3.png</pathname>
         <personalbonus>
             <harvestpersonalbonus>
                 <wood>1</wood>
@@ -147,6 +150,7 @@
         </characterbonus>
     </personalboard>
     <personalboard>
+        <pathname>personalbonus4.png</pathname>
         <personalbonus>
             <harvestpersonalbonus>
                 <wood>1</wood>
@@ -196,6 +200,7 @@
         </characterbonus>
     </personalboard>
     <personalboard>
+        <pathname>personalbonus5.png</pathname>
         <personalbonus>
             <harvestpersonalbonus>
                 <coin>1</coin>

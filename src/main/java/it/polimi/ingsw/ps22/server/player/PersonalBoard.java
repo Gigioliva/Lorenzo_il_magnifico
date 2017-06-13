@@ -9,12 +9,21 @@ import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 public class PersonalBoard implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
+	public String pathname;
 	private HashMap<String, GainResource> personalBonus;
 	private HashMap<Integer, VictoryPoint> bonusCharacter;
 	private HashMap<Integer, MilitaryPoint> requirementHarvest;
 	private HashMap<Integer, VictoryPoint> bonusHarvest;
 	
 	public PersonalBoard(){
+	}
+	
+	public String getPathname() {
+		return this.pathname;
+	}
+	
+	public void setPathname(String path) {
+		this.pathname=path;
 	}
 	
 	public void setPersonalBonus(HashMap<String, GainResource> persBonus){
