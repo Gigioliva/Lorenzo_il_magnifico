@@ -44,6 +44,8 @@ public class Gui extends JFrame{
 	public void updateGui(Model model){
 		board.updateBoard(model);
 	}
+	
+	
 
 
 }

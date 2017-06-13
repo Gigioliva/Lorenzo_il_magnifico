@@ -195,6 +195,8 @@ public class BoardPanel extends JPanel{
 			layeredPane.add(b1, new Integer(40));
 		}
 		
+		PrivilegeDialog d = new PrivilegeDialog(view);
+		
 		this.add(layeredPane);
         
         
