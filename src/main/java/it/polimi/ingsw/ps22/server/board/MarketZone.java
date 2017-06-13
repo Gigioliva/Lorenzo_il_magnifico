@@ -74,6 +74,10 @@ public class MarketZone extends Zone {
 
 	}
 	
+	public MarketSpace[] getMarketSpaces(){
+		return this.marketSpace;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

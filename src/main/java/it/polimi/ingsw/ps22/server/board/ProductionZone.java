@@ -96,6 +96,10 @@ public class ProductionZone extends Zone {
 		}
 	}
 	
+	public  ProductionSpace[] getProdSpaces(){
+		return this.productionSpace;
+	}
+	
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

@@ -3,9 +3,17 @@ package it.polimi.ingsw.ps22.client.gui;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import it.polimi.ingsw.ps22.client.main.ViewClient;
+import it.polimi.ingsw.ps22.server.move.Move;
 import it.polimi.ingsw.ps22.server.move.ProductionMove;
 
 public class ProductionListener implements ActionListener {
+	
+	ViewClient view;
+	
+	public  ProductionListener(ViewClient view) {
+		this.view = view;
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
@@ -16,5 +24,5 @@ public class ProductionListener implements ActionListener {
 				" servitori aggiunti " + pressedButton.getNumServants());
 		
 	}
-
+	
 }

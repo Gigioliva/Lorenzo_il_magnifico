@@ -14,7 +14,7 @@ public class PersonalBoardAdaptive {
 	private static final Rectangle stoneSlot = new Rectangle(1500,1620,2070,2190);;
 	private static final Rectangle servantSlot = new Rectangle(2020,2140,2070,2190);
 	private static final int cardOffsetX = 548;
-	private static final int cardTerritoryOffsetY = 800;
+	private static final int cardTerritoryOffsetY = 1000;
 	private static final int cardVentureOffsetY = 2400;
 	private static final int cardCharacterOffsetY = 3200;
 	
