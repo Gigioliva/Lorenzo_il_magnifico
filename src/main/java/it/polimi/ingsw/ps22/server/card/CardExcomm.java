@@ -11,11 +11,13 @@ public class CardExcomm extends Card {
 	
 	private static final long serialVersionUID = 1L;
 	private int era;
+	private String pathname;
 	private ArrayList<PermanentEffect> permanentEffects;
 	private ArrayList<EndEffect> endEffects;
 
 	public CardExcomm() {
 		era = 0;
+		pathname = null;
 		endEffects = new ArrayList<EndEffect>();
 		permanentEffects = new ArrayList<PermanentEffect>();
 	}
@@ -42,6 +44,14 @@ public class CardExcomm extends Card {
 
 	public void setEra(int era) {
 		this.era = era;
+	}
+
+	public String getPathname() {
+		return this.pathname;
+	}
+	
+	public void setPathname(String path) {
+		this.pathname = path;
 	}
 
 	public int getEra() {

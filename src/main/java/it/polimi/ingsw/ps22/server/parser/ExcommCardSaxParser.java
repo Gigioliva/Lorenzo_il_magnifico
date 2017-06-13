@@ -99,6 +99,10 @@ public class ExcommCardSaxParser {
 						card.setEra(Integer.parseInt(str));
 					}
 
+					if (lastQName.equalsIgnoreCase("pathname")) {
+						card.setPathname(str);
+					}
+					
 					if (lastQName.equalsIgnoreCase("militaryincrement")) {
 						permResEff.addBonus("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
 					}

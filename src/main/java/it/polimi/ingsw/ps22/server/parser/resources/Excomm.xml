@@ -1,87 +1,106 @@
 <cards>
     <card>
         <era>1</era>
+        <pathname>excomm_1_1.png</pathname>
         <militaryincrement>-1</militaryincrement>
     </card>
     <card>
         <era>1</era>
+        <pathname>excomm_1_2.png</pathname>
         <coinincrement>-1</coinincrement>
     </card>
     <card>
         <era>1</era>
+        <pathname>excomm_1_3.png</pathname>
         <servantincrement>-1</servantincrement>
     </card>
     <card>
         <era>1</era>
+        <pathname>excomm_1_4.png</pathname>
         <woodincrement>-1</woodincrement>
         <stoneincrement>-1</stoneincrement>
     </card>
     <card>
         <era>1</era>
+        <pathname>excomm_1_5.png</pathname>
         <harvestincrement>-3</harvestincrement>
     </card>
     <card>
         <era>1</era>
+        <pathname>excomm_1_6.png</pathname>
         <productionincrement>-3</productionincrement>
     </card>
     <card>
         <era>1</era>
+        <pathname>excomm_1_7.png</pathname>
         <diceincrement>-1</diceincrement>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_1.png</pathname>
         <territoryactionincrement>-4</territoryactionincrement>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_2.png</pathname>
         <buildingactionincrement>-4</buildingactionincrement>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_3.png</pathname>
         <characteractionincrement>-4</characteractionincrement>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_4.png</pathname>
         <ventureactionincrement>-4</ventureactionincrement>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_5.png</pathname>
         <nomarket>1</nomarket>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_6.png</pathname>
         <servanthalfvalue>1</servanthalfvalue>
     </card>
     <card>
         <era>2</era>
+        <pathname>excomm_2_7.png</pathname>
         <turnskip>1</turnskip>
     </card>
     <card>
         <era>3</era>
+        <pathname>excomm_3_1.png</pathname>
         <endinvalidcharacter>1</endinvalidcharacter>
     </card>
     <card>
         <era>3</era>
+        <pathname>excomm_3_2.png</pathname>
         <endinvalidventure>1</endinvalidventure>
     </card>
     <card>
         <era>3</era>
+        <pathname>excomm_3_3.png</pathname>
         <endinvalidterritory>1</endinvalidterritory>
     </card>
     <card>
         <era>3</era>
+        <pathname>excomm_3_4.png</pathname>
         <endvictorylose-1>5</endvictorylose-1>
     </card>
     <card>
         <era>3</era>
+        <pathname>excomm_3_5.png</pathname>
         <militarydecrementvictory>1</militarydecrementvictory>
     </card>
     <card>
         <era>3</era>
-        <endlosevictorybuildingstonewood>1</endlosevictorybuildingstonewood>
+       <pathname>excomm_3_6.png</pathname> <endlosevictorybuildingstonewood>1</endlosevictorybuildingstonewood>
     </card>
     <card>
         <era>3</era>
-        <endlosevictoryforallresource>1</endlosevictoryforallresource>
+       <pathname>excomm_3_7.png</pathname> <endlosevictoryforallresource>1</endlosevictoryforallresource>
     </card>
 </cards>
