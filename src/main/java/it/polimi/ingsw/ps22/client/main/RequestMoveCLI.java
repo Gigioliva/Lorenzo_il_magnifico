@@ -32,7 +32,7 @@ public class RequestMoveCLI implements RequestMove {
 	}
 
 	private Move chiediMossa() {
-		System.out.println("che mossa vuoi fare? [familiare, leader]");
+		System.out.println("che mossa vuoi fare? [familiare, leader, end]");
 		String str;
 		try {
 			str = in.readLine();
@@ -41,6 +41,9 @@ public class RequestMoveCLI implements RequestMove {
 			}
 			if (str.equalsIgnoreCase("leader")) {
 				return chiediLeader();
+			}
+			if (str.equalsIgnoreCase("end")) {
+				return new EndTurn(username);
 			}
 			return null;
 		} catch (IOException e) {

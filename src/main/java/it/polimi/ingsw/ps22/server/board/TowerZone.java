@@ -50,7 +50,7 @@ public class TowerZone extends Zone {
 		}
 		for (Color el : Color.values()) {
 			if (el != Color.NEUTRAL)
-				control = control && allFamily.contains(player.getFamily(el));
+				control = control && !allFamily.contains(player.getFamily(el));
 		}
 		return control;
 	}
@@ -65,7 +65,7 @@ public class TowerZone extends Zone {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
 			payCoin = true;
 		}
-		if (!(player.getSpecBonus().returnBool("NoGainTowers")
+		if (!(player.getSpecBonus().returnBool("GainTowers")
 				&& (towerSpace.getPlan() == 3 || towerSpace.getPlan() == 4))) {
 			towerSpace.applyBonus(player);
 			applyBonus = true;
