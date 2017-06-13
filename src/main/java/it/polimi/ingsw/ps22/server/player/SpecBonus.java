@@ -19,10 +19,18 @@ public class SpecBonus implements Serializable {
 		bonus.put("Neutral+3",false);
 		bonus.put("AllFamilyCol5",false);
 		bonus.put("FamilyCol+2",false);
-		//bonus.put("OneFamilyCol6",false); da creare un effetto carta leader
 		bonus.put("PointVicChurch+5",false);
 		bonus.put("NoTerritoryReq",false);
 		bonus.put("DoubleGain",false);
+	}
+	
+	@Override
+	public SpecBonus clone(){
+		SpecBonus temp=new SpecBonus();
+		for(String el: bonus.keySet()){
+			temp.bonus.put(el, this.bonus.get(el));
+		}
+		return temp;
 	}
 	
 	public void setSpecBonus(String type){

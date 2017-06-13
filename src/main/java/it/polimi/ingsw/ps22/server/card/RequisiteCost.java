@@ -2,9 +2,6 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.io.Serializable;
 import java.util.HashMap;
-
-import it.polimi.ingsw.ps22.server.effect.EndEffect;
-import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class RequisiteCost implements Serializable{

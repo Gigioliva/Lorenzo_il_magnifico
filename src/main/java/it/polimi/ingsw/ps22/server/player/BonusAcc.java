@@ -3,11 +3,10 @@ package it.polimi.ingsw.ps22.server.player;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.resource.*;
 
 public class BonusAcc implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private HashMap<String, BonusAbstract> accumulator;
 	private HashMap<String, Resource> saleBuilding;
@@ -43,6 +42,24 @@ public class BonusAcc implements Serializable {
 		saleVenture.put("VictoryPoint", new VictoryPoint(0));
 		saleVenture.put("MilitaryPoint", new MilitaryPoint(0));
 		saleVenture.put("FaithPoint", new FaithPoint(0));
+	}
+
+	@Override
+	public BonusAcc clone() {
+		BonusAcc temp = new BonusAcc();
+		for (String el : accumulator.keySet()) {
+			temp.accumulator.put(el, this.accumulator.get(el).clone());
+		}
+		for (String el : saleBuilding.keySet()) {
+			temp.saleBuilding.put(el, this.saleBuilding.get(el).clone());
+		}
+		for (String el : saleCharacter.keySet()) {
+			temp.saleCharacter.put(el, this.saleCharacter.get(el).clone());
+		}
+		for (String el : saleVenture.keySet()) {
+			temp.saleVenture.put(el, this.saleVenture.get(el).clone());
+		}
+		return temp;
 	}
 
 	public BonusAbstract getBonus(String type) {
@@ -142,57 +159,55 @@ public class BonusAcc implements Serializable {
 	public HashMap<String, ResourceAbstract> getSaleVenture() {
 		return saleVenture;
 	}
-	
-	private String accString(){
+
+	private String accString() {
 		StringBuilder str = new StringBuilder();
-		if(accumulator.size() > 0){
+		if (accumulator.size() > 0) {
 			str.append("Accumulator: \n");
-			for(String type: accumulator.keySet()){				
+			for (String type : accumulator.keySet()) {
 				str.append("  " + accumulator.get(type).getQuantity() + " " + type + "\n");
 			}
 		}
-			
+
 		return str.toString();
 	}
-	
-	private String saleBuildingString(){
+
+	private String saleBuildingString() {
 		StringBuilder str = new StringBuilder();
-		if(saleBuilding.size() > 0){
+		if (saleBuilding.size() > 0) {
 			str.append("SaleBuilding: \n");
-			for(String type: saleBuilding.keySet()){				
+			for (String type : saleBuilding.keySet()) {
 				str.append("  " + saleBuilding.get(type).getQuantity() + " " + type + "\n");
 			}
 		}
-			
+
 		return str.toString();
 	}
-	
-	private String saleCharacterString(){
+
+	private String saleCharacterString() {
 		StringBuilder str = new StringBuilder();
-		if(saleCharacter.size() > 0){
+		if (saleCharacter.size() > 0) {
 			str.append("SaleCharacter: \n");
-			for(String type: saleCharacter.keySet()){				
+			for (String type : saleCharacter.keySet()) {
 				str.append("  " + saleCharacter.get(type).getQuantity() + " " + type + "\n");
 			}
 		}
-			
+
 		return str.toString();
 	}
-	
-	private String saleVentureString(){
+
+	private String saleVentureString() {
 		StringBuilder str = new StringBuilder();
-		if(saleVenture.size() > 0){
-				str.append("Sale Venture: \n");
-				for(String type: saleVenture.keySet()){				
-					str.append("  " + saleVenture.get(type).getQuantity() + " " + type + "\n");
-				}
+		if (saleVenture.size() > 0) {
+			str.append("Sale Venture: \n");
+			for (String type : saleVenture.keySet()) {
+				str.append("  " + saleVenture.get(type).getQuantity() + " " + type + "\n");
+			}
 		}
-			
+
 		return str.toString();
 	}
-	
-	
-	
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

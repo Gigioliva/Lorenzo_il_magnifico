@@ -16,6 +16,13 @@ public class Family implements Serializable {
 		this.color = color;
 		this.player = player;
 	}
+	
+	public Family clone(Player player) {
+		Family temp = new Family(this.color, player);
+		temp.value=this.value;
+		temp.placed=this.placed;
+		return temp;
+	}
 
 	public Color getColor() {
 		return color;

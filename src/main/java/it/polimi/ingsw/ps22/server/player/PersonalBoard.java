@@ -15,7 +15,23 @@ public class PersonalBoard implements Serializable {
 	private HashMap<Integer, MilitaryPoint> requirementHarvest;
 	private HashMap<Integer, VictoryPoint> bonusHarvest;
 	
-	public PersonalBoard(){
+	@Override
+	public PersonalBoard clone() {
+		PersonalBoard temp = new PersonalBoard();
+		temp.pathname=this.pathname;
+		for (String el : personalBonus.keySet()) {
+			temp.personalBonus.put(el, this.personalBonus.get(el).clone());
+		}
+		for (Integer el : bonusCharacter.keySet()) {
+			temp.bonusCharacter.put(el, this.bonusCharacter.get(el).clone());
+		}
+		for (Integer el : requirementHarvest.keySet()) {
+			temp.requirementHarvest.put(el, this.requirementHarvest.get(el).clone());
+		}
+		for (Integer el : bonusHarvest.keySet()) {
+			temp.bonusHarvest.put(el, this.bonusHarvest.get(el).clone());
+		}
+		return temp;
 	}
 	
 	public String getPathname() {

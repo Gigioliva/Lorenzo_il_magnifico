@@ -73,6 +73,36 @@ public class Player implements Serializable {
 		this.color=color;
 	}
 	
+	@Override
+	public Player clone() {
+		Player temp = new Player(this.username, this.color);
+		temp.bonusAcc=this.bonusAcc.clone();
+		temp.specBonus=this.specBonus.clone();
+		for(EndEffect el: endEffects){
+			temp.endEffects.add(el.clone());
+		}
+		for(CardLeader el: leaders){
+			temp.leaders.add(el.clone());
+		}
+		for (String el : resources.keySet()) {
+			temp.resources.put(el, this.resources.get(el).clone());
+		}
+		for (String el : points.keySet()) {
+			temp.points.put(el, this.points.get(el).clone());
+		}
+		for (Color el : family.keySet()) {
+			temp.family.put(el, this.family.get(el).clone(temp));
+		}
+		for (String el : cards.keySet()) {
+			ArrayList<DevelopmentCard> x=new ArrayList<DevelopmentCard>();
+			for(DevelopmentCard el2: this.cards.get(el)){
+				x.add(el2.clone());
+			}
+			temp.cards.put(el, x);
+		}
+		return temp;
+	}
+	
 	public  HashMap<Color, Family> getAllFamily(){
 		return family;
 	}
