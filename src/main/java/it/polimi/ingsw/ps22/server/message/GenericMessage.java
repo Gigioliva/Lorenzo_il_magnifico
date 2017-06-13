@@ -1,9 +1,7 @@
 package it.polimi.ingsw.ps22.server.message;
 
 import java.io.Serializable;
-
 import it.polimi.ingsw.ps22.client.main.VisitorB;
-import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class GenericMessage implements Serializable {
@@ -23,8 +21,8 @@ public class GenericMessage implements Serializable {
 		return visitor.visit(this);
 	}
 	
-	public GenericAnswer accept(VisitorB visitor){
-		return visitor.visit(this);
+	public void accept(VisitorB visitor){
+		visitor.visit(this);
 	}
 
 }

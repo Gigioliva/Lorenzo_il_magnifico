@@ -10,25 +10,26 @@ import it.polimi.ingsw.ps22.server.move.*;
 public class RequestMoveCLI implements RequestMove {
 	
 	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+	private ViewClient view;
 	
-	private String username;
+	public RequestMoveCLI(ViewClient view){
+		this.view=view;
+	}
 
-	public Move requestMove(String username) {
-		this.username=username;
+	public void requestMove() {
 		boolean corretto=false;
 		do {
 			try {
 				Move mossa = chiediMossa();
 				if(mossa!=null){
 					corretto = true;
-					return mossa;
+					view.send(mossa);
 				}
 			} catch (Exception e) {
 				System.out.println("Non corretto, riprova.");
 				corretto = false;
 			}
 		} while (!corretto);
-		return null;
 	}
 
 	private Move chiediMossa() {
@@ -43,7 +44,7 @@ public class RequestMoveCLI implements RequestMove {
 				return chiediLeader();
 			}
 			if (str.equalsIgnoreCase("end")) {
-				return new EndTurn(username);
+				return new EndTurn(view.getUsername());
 			}
 			return null;
 		} catch (IOException e) {
@@ -102,7 +103,7 @@ public class RequestMoveCLI implements RequestMove {
 		try {
 			System.out.println("Nome del Leader");
 			String nome = in.readLine();
-			return new LeaderPlaying(username, nome);
+			return new LeaderPlaying(view.getUsername(), nome);
 		} catch (IOException e) {
 			System.out.println("Error.");
 			return null;
@@ -113,7 +114,7 @@ public class RequestMoveCLI implements RequestMove {
 		try {
 			System.out.println("Nome del Leader");
 			String nome = in.readLine();
-			return new LeaderDiscarding(username, nome);
+			return new LeaderDiscarding(view.getUsername(), nome);
 		} catch (IOException e) {
 			System.out.println("Error.");
 			return null;
@@ -126,7 +127,7 @@ public class RequestMoveCLI implements RequestMove {
 			int space = Integer.parseInt(in.readLine());
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new MarketMove(username, color, space, servant);
+			return new MarketMove(view.getUsername(), color, space, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
@@ -139,7 +140,7 @@ public class RequestMoveCLI implements RequestMove {
 			int space = Integer.parseInt(in.readLine());
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new HarvestMove(username, color, space, servant);
+			return new HarvestMove(view.getUsername(), color, space, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
@@ -152,7 +153,7 @@ public class RequestMoveCLI implements RequestMove {
 			int space = Integer.parseInt(in.readLine());
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new ProductionMove(username, color, space, servant);
+			return new ProductionMove(view.getUsername(), color, space, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
@@ -163,7 +164,7 @@ public class RequestMoveCLI implements RequestMove {
 		try {
 			System.out.println("Quanti servitori vuoi spendere?");
 			int servant = Integer.parseInt(in.readLine());
-			return new CouncilMove(username, color, servant);
+			return new CouncilMove(view.getUsername(), color, servant);
 		} catch (IOException | NumberFormatException e) {
 			System.out.println("Error.");
 			return null;
@@ -179,16 +180,16 @@ public class RequestMoveCLI implements RequestMove {
 			System.out.println("In quale torre vuoi posizionare? [building,character,territory,venture]");
 			String str = in.readLine();
 			if (str.equalsIgnoreCase("building")) {
-				return new TowerBuildingMove(username, color, space, servant);
+				return new TowerBuildingMove(view.getUsername(), color, space, servant);
 			}
 			if (str.equalsIgnoreCase("character")) {
-				return new TowerCharacterMove(username, color, space, servant);
+				return new TowerCharacterMove(view.getUsername(), color, space, servant);
 			}
 			if (str.equalsIgnoreCase("territory")) {
-				return new TowerTerritoryMove(username, color, space, servant);
+				return new TowerTerritoryMove(view.getUsername(), color, space, servant);
 			}
 			if (str.equalsIgnoreCase("venture")) {
-				return new TowerVentureMove(username, color, space, servant);
+				return new TowerVentureMove(view.getUsername(), color, space, servant);
 			}
 			return null;
 		} catch (IOException | NumberFormatException e) {

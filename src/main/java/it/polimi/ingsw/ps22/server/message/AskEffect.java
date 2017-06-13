@@ -2,10 +2,8 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
-import it.polimi.ingsw.ps22.server.answer.AnswerEffect;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -54,7 +52,7 @@ public class AskEffect extends MessageAsk {
 		return visitor.visit(this);
 	}
 	
-	public AnswerEffect accept(VisitorB visitor){
-		return visitor.visit(this);
+	public void accept(VisitorB visitor){
+		visitor.visit(this);
 	}
 }

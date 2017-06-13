@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.server.message;
 
 import it.polimi.ingsw.ps22.client.main.VisitorB;
-import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 
 public class AskUsername extends GenericMessage {
 	
@@ -11,8 +10,8 @@ public class AskUsername extends GenericMessage {
 		super.setString("Who are you?");
 	}
 	
-	public GenericAnswer accept(VisitorB visitor){
-		return visitor.visit(this);
+	public void accept(VisitorB visitor){
+		visitor.visit(this);
 	}
 
 }

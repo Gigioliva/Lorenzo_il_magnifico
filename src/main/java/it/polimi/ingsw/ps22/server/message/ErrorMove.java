@@ -1,6 +1,6 @@
 package it.polimi.ingsw.ps22.server.message;
+
 import it.polimi.ingsw.ps22.client.main.VisitorB;
-import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class ErrorMove extends GenericMessage {
@@ -15,8 +15,8 @@ public class ErrorMove extends GenericMessage {
 		return visitor.visit(this);
 	}
 	
-	public GenericAnswer accept(VisitorB visitor){
-		return visitor.visit(this);
+	public void accept(VisitorB visitor){
+		visitor.visit(this);
 	}
 
 }

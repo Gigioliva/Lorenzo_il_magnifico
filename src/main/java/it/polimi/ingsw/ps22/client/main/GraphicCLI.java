@@ -4,8 +4,8 @@ import it.polimi.ingsw.ps22.server.model.Model;
 
 public class GraphicCLI extends Graphic {
 	
-	public GraphicCLI(){
-		super(new VisitorCLI(),new RequestMoveCLI());
+	public GraphicCLI(ViewClient view){
+		super(new VisitorCLI(view),new RequestMoveCLI(view));
 	}
 
 	@Override

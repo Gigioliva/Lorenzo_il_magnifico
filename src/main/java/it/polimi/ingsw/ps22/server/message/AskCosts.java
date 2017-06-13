@@ -2,9 +2,7 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.client.main.VisitorB;
-import it.polimi.ingsw.ps22.server.answer.AnswerCosts;
 import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -82,8 +80,8 @@ public class AskCosts extends MessageAsk {
 		return visitor.visit(this);
 	}
 	
-	public AnswerCosts accept(VisitorB visitor){
-		return visitor.visit(this);
+	public void accept(VisitorB visitor){
+		visitor.visit(this);
 	}
 
 }

@@ -1,9 +1,7 @@
 package it.polimi.ingsw.ps22.client.main;
 
-import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
-import it.polimi.ingsw.ps22.server.move.Move;
 
 public abstract class Graphic {
 	
@@ -15,12 +13,12 @@ public abstract class Graphic {
 		this.requestMove=requestMove;
 	}
 	
-	public GenericAnswer getAnswer(GenericMessage arg){
-		return arg.accept(visitor);
+	public void getAnswer(GenericMessage arg){
+		arg.accept(visitor);
 	}
 	
-	public Move getMove(String username){
-		return requestMove.requestMove(username);
+	public void getMove(){
+		requestMove.requestMove();
 	}
 	
 	public abstract void printModel(Model model);

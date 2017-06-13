@@ -2,10 +2,8 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.CardAction;
-import it.polimi.ingsw.ps22.server.answer.AnswerCard;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
@@ -52,8 +50,8 @@ public class AskCard extends MessageAsk{
 		return visitor.visit(this);
 	}
 	
-	public AnswerCard accept(VisitorB visitor){
-		return visitor.visit(this);
+	public void accept(VisitorB visitor){
+		visitor.visit(this);
 	}
 
 }

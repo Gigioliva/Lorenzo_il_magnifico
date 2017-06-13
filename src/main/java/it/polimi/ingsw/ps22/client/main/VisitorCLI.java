@@ -13,9 +13,14 @@ import it.polimi.ingsw.ps22.server.model.Color;
 public class VisitorCLI extends VisitorB {
 
 	private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+	private ViewClient client;
+	
+	public VisitorCLI(ViewClient client){
+		this.client=client;
+	}
 
 	@Override
-	public AnswerServant visit(AskServant mex) {
+	public void visit(AskServant mex) {
 		System.out.println(mex.getString() + "prova");
 		boolean correct = false;
 		int x = 0;
@@ -27,11 +32,11 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato. Scrivi un numero");
 			}
 		} while (!correct);
-		return new AnswerServant(mex.getId(), x);
+		client.send(new AnswerServant(mex.getId(), x));
 	}
 
 	@Override
-	public AnswerCard visit(AskCard mex) {
+	public void visit(AskCard mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String type = null;
@@ -47,11 +52,11 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		return new AnswerCard(mex.getId(), type, name);
+		client.send(new AnswerCard(mex.getId(), type, name));
 	}
 
 	@Override
-	public AnswerCosts visit(AskCosts mex) {
+	public void visit(AskCosts mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		int x = 0;
@@ -63,11 +68,11 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato. Scrivi un numero");
 			}
 		} while (!correct);
-		return new AnswerCosts(mex.getId(), x);
+		client.send(new AnswerCosts(mex.getId(), x));
 	}
 
 	@Override
-	public AnswerCouncilPrivilege visit(AskCouncilPrivilege mex) {
+	public void visit(AskCouncilPrivilege mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		ArrayList<Integer> x = new ArrayList<Integer>();
@@ -81,11 +86,11 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato. Scrivi un numero");
 			}
 		} while (!correct);
-		return new AnswerCouncilPrivilege(mex.getId(), x);
+		client.send(new AnswerCouncilPrivilege(mex.getId(), x));
 	}
 
 	@Override
-	public AnswerEffect visit(AskEffect mex) {
+	public void visit(AskEffect mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		ArrayList<Integer> x = new ArrayList<Integer>();
@@ -99,11 +104,11 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato. Scrivi un numero");
 			}
 		} while (!correct);
-		return new AnswerEffect(mex.getId(), x);
+		client.send(new AnswerEffect(mex.getId(), x));
 	}
 
 	@Override
-	public AnswerExcomm visit(AskExcomm mex) {
+	public void visit(AskExcomm mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String answer = null;
@@ -115,29 +120,26 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		return new AnswerExcomm(mex.getId(), answer);
+		client.send(new AnswerExcomm(mex.getId(), answer));
 	}
 
 	@Override
-	public GenericAnswer visit(ChatMessage mex) {
+	public void visit(ChatMessage mex) {
 		System.out.println(mex.getString());
-		return null;
 	}
 
 	@Override
-	public GenericAnswer visit(ErrorMove mex) {
+	public void visit(ErrorMove mex) {
 		System.out.println(mex.getString());
-		return null;
 	}
 
 	@Override
-	public GenericAnswer visit(GenericMessage mex) {
+	public void visit(GenericMessage mex) {
 		System.out.println(mex.getString());
-		return null;
 	}
 
 	@Override
-	public AnswerLeader visit(AskLeader mex) {
+	public void visit(AskLeader mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String name = null;
@@ -149,11 +151,11 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		return new AnswerLeader(mex.getId(), name);
+		client.send(new AnswerLeader(mex.getId(), name));
 	}
 
 	@Override
-	public AnswerCopyLeader visit(AskCopyLeader mex) {
+	public void visit(AskCopyLeader mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String name = null;
@@ -165,17 +167,16 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		return new AnswerCopyLeader(mex.getId(), name);
+		client.send(new AnswerCopyLeader(mex.getId(), name));
 	}
 
 	@Override
-	public GenericAnswer visit(ChoiceMove mex) {
+	public void visit(ChoiceMove mex) {
 		System.out.println(mex.getString());
-		return null;
 	}
 	
 	@Override
-	public AnswerUsername visit(AskUsername mex){
+	public void visit(AskUsername mex){
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String name = null;
@@ -187,10 +188,10 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		return new AnswerUsername(name);
+		client.send(new AnswerUsername(name));
 	}
 	
-	public AnswerFamily visit(AskFamily mex){
+	public void visit(AskFamily mex){
 		System.out.println(mex.getString());
 		boolean correct = false;
 		Color color = null;
@@ -202,7 +203,7 @@ public class VisitorCLI extends VisitorB {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		return new AnswerFamily(mex.getId(), color);
+		client.send(new AnswerFamily(mex.getId(), color));
 		
 	}
 

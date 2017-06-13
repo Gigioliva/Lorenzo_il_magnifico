@@ -2,11 +2,9 @@ package it.polimi.ingsw.ps22.client.main;
 
 import java.util.Observable;
 import java.util.Observer;
-import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
-import it.polimi.ingsw.ps22.server.move.Move;
 
 public class ViewClient extends Observable implements Observer, Runnable {
 	
@@ -14,7 +12,7 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	private Graphic graphic;
 	
 	public ViewClient(){
-		graphic=new GraphicCLI();
+		graphic=new GraphicCLI(this);
 	}
 
 	@Override
@@ -24,18 +22,10 @@ public class ViewClient extends Observable implements Observer, Runnable {
 			System.out.println((String)arg);
 		}
 		if(arg instanceof GenericMessage){
-			GenericAnswer mex=graphic.getAnswer((GenericMessage)arg);
-			if(mex!=null){
-				setChanged();
-				notifyObservers(mex);
-			}
+			graphic.getAnswer((GenericMessage)arg);
 		}
 		if(arg instanceof ChoiceMove){
-			Move temp=graphic.getMove(username);
-			if(temp!=null){
-				setChanged();
-				notifyObservers(temp);
-			}
+			graphic.getMove();
 		}
 		if(arg instanceof Model){
 			graphic.printModel((Model)arg);
@@ -49,6 +39,13 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	
 	public String getUsername(){
 		return username;
+	}
+	
+	public void send(Object obj){
+		if(obj!=null){
+			setChanged();
+			notifyObservers(obj);
+		}
 	}
 
 }
