@@ -27,7 +27,7 @@ public class CardPath {
 	public static String deleteSpaces(String toModify) {
 		StringBuilder temp = new StringBuilder(toModify);
 		for (int i = 0; i < temp.length(); i++) {
-			if (temp.charAt(i)==' ') {
+			if (temp.charAt(i)==' '|| temp.charAt(i)=='\'') {
 				temp.deleteCharAt(i);
 				i--;
 			}
@@ -40,6 +40,5 @@ public class CardPath {
 		temp.append(".png");
 		return temp;
 	}
-	
 	
 }
