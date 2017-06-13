@@ -89,7 +89,7 @@ public class BoardPanel extends JPanel{
 		addActionPanelToLayeredPane(mark3);
 		addActionPanelToLayeredPane(mark4);
 		
-		CouncilButton council = new CouncilButton(0, username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), new MarketListener(view));
+		CouncilButton council = new CouncilButton(0, username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), new CouncilListener(view));
 		addActionPanelToLayeredPane(council);
 	
 		FamiliarButton fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces));
@@ -246,6 +246,9 @@ public class BoardPanel extends JPanel{
 		updateTowers(model);
 		updatePersonalBoard(model);
 		updatePlayers(model);
+		updateFaithTrack(model);
+		updateMilitaryTrack(model);
+		updateVictoryTrack(model);
 	}
 	
 	private void updateActionSpaces(Model model){
@@ -273,20 +276,47 @@ public class BoardPanel extends JPanel{
 	}
 	
 	private void updateFaithTrack(Model model){
-		HashMap<Integer, ArrayList<Player>> tempPlay = new HashMap<Integer, ArrayList<Player>>();
 		
-		for(String user: model.getPlayers().keySet()){
-			int qty = model.getPlayers().get(user).getSpecificResource("FaithPoint").getQuantity();
-			if(!tempPlay.containsKey(qty))
-				tempPlay.put(qty, new ArrayList<Player>());
-			tempPlay.get(qty).add(model.getPlayers().get(user));
-		}
+		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "FaithPoint");
 		
 		for(Integer qty: tempPlay.keySet()){
 			FaithTrackLabel lab = new FaithTrackLabel(resizeFactor, qty, tempPlay.get(qty));
 			lab.update(model);
 			layeredPane.add(lab, new Integer(100));
 		}
+	}
+	
+	private void updateMilitaryTrack(Model model){
+		
+		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "MilitaryPoint");
+		
+		for(Integer qty: tempPlay.keySet()){
+			MilitaryPointLabel lab = new MilitaryPointLabel(resizeFactor, qty, tempPlay.get(qty));
+			lab.update(model);
+			layeredPane.add(lab, new Integer(100));
+		}
+	}
+	
+	private void updateVictoryTrack(Model model){
+		
+		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "VictoryPoint");
+		
+		for(Integer qty: tempPlay.keySet()){
+			VictoryPointLabel lab = new VictoryPointLabel(resizeFactor, qty, tempPlay.get(qty));
+			lab.update(model);
+			layeredPane.add(lab, new Integer(100));
+		}
+	}
+	
+	private HashMap<Integer, ArrayList<Player>> updatePointTrack(Model model, String type){
+		HashMap<Integer, ArrayList<Player>> tempPlay = new HashMap<Integer, ArrayList<Player>>();
+		for(String user: model.getPlayers().keySet()){
+			int qty = model.getPlayers().get(user).getSpecificResource(type).getQuantity();
+			if(!tempPlay.containsKey(qty))
+				tempPlay.put(qty, new ArrayList<Player>());
+			tempPlay.get(qty).add(model.getPlayers().get(user));
+		}
+		return tempPlay;
 	}
 	
 	
