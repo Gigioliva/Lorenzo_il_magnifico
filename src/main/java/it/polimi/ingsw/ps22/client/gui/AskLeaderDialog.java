@@ -32,7 +32,7 @@ public class AskLeaderDialog extends MessageDialog {
 		this.setTitle("Which leader card you wanna copy?");
 		
 		for(int i = 0; i < mex.getLeaders().size(); i++){
-			JRadioButton b1 = new JRadioButton(mex.getLeaders().get(i).getName());
+			JRadioButton b1 = new JRadioButton(mex.getLeaders().get(i));
 			group.add(b1);
 			buttons.add(b1);
 		    mainPanel.add(b1);
