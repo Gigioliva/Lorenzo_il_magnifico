@@ -22,7 +22,6 @@ public class Controller implements Observer {
 			if(((View)o).getUsername().equals(model.getPlayerGame())){
 				((Move)arg).applyMove(model);
 			}
-			//si potrebbe aggiungere una notifica al giocatore che il turno non è il suo
 		}
 		if(o instanceof View && arg instanceof ChatMessage){
 			model.notifyMessage((ChatMessage)arg);

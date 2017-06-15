@@ -13,12 +13,13 @@ public class EndTurn extends Move {
 
 	@Override
 	public void applyMove(Model model) {
-		if(model.getWaitAnswer().size()!=0){
+		if(model.getWaitAnswer().size()==0){
 			model.nextPlayer();
 			model.notifyModel();
 		}else{
 			ErrorMove error = new ErrorMove();
 			model.notifyMessage(error);
+			model.notifyModel();
 		}
 	}
 	
