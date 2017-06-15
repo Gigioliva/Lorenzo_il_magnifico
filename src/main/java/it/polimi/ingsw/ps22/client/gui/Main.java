@@ -1,10 +1,19 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
+import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
+import it.polimi.ingsw.ps22.server.action.ProductionAction;
+import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.effect.ActionEffect;
+import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
+import it.polimi.ingsw.ps22.server.message.AskEffect;
+import it.polimi.ingsw.ps22.server.message.AskFamily;
+import it.polimi.ingsw.ps22.server.message.AskServant;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
@@ -35,6 +44,18 @@ public class Main {
 				}
 				model.getBoard().reset(1, players);
 				b.updateGui(model);
+				
+				b.askPrivilege(new AskCouncilPrivilege(2, model.getPlayers().get("Tizio")) );
+				
+				HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect = new HashMap<DevelopmentCard,ArrayList<ActionEffect>>();
+				listEffect.put(model.getBoard().getTower("Building").getTowerSpaces()[0].getCard(),
+						model.getBoard().getTower("Building").getTowerSpaces()[0].getCard().getActionEffects() );
+				listEffect.put(model.getBoard().getTower("Building").getTowerSpaces()[1].getCard(),
+						model.getBoard().getTower("Building").getTowerSpaces()[1].getCard().getActionEffects() );
+				AskEffect mex = new AskEffect(listEffect , new ProductionAction(3), model.getPlayers().get("Tizio"));
+				b.askEffect(mex);
+				b.askFamily(new AskFamily(model.getPlayers().get("Tizio")));
+				b.askServants(new AskServant(new ProductionAction(4)));
 			}
 		});
 	}

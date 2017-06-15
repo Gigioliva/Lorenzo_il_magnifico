@@ -30,10 +30,10 @@ public class BoardPanel extends JPanel{
 	private static final long serialVersionUID = -5630682030714330058L;
 
 	private final static int NUM_PLAYERS = 4;
-	private JPanel spinPan = new JPanel();
+	private ServantSpinner spinner = new ServantSpinner();
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
 	private ArrayList<ActionButton> actionSpaces = new ArrayList<ActionButton>();
-	private HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<Integer,ArrayList<TowerPanel>>();
+	 HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<Integer,ArrayList<TowerPanel>>();
 	protected static JLabel zoomedCard;
 	private PersonalBoardPanel personalBoard;
 	private JLayeredPane layeredPane;
@@ -184,10 +184,10 @@ public class BoardPanel extends JPanel{
 	
 		layeredPane.add(personalBoard, new Integer(400),0);
 		
-		spinPan.setBounds((int)(heightScreen*0.75) + personalBoard.getWidth(), (int)(heightScreen/2.5), 
+		spinner.setBounds((int)(heightScreen*0.75) + personalBoard.getWidth(), (int)(heightScreen/2.5), 
 				(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth())),  
 					(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth()))/3);
-		spinFamiliar();
+		spinServant();
 		
 		for(int i = 0 ; i < NUM_PLAYERS - 1; i++){
 			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, avver.get(i) ,i, personBonusPaths.get(i));
@@ -195,7 +195,7 @@ public class BoardPanel extends JPanel{
 			layeredPane.add(b1, new Integer(40));
 		}
 		
-		PrivilegeDialog d = new PrivilegeDialog(view);
+		// PrivilegeDialog d = new PrivilegeDialog(view);
 		
 		this.add(layeredPane);
         
@@ -204,43 +204,24 @@ public class BoardPanel extends JPanel{
 	
 
 	
-	private void spinFamiliar(){
-		JLabel spinLab = new JLabel("familiar");
-		spinPan.add(spinLab);
-		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1);  
-		JSpinner spinner = new JSpinner(model);
-		spinLab.setLabelFor(spinner);
-		spinPan.add(spinner);
-		spinner.addChangeListener(new ChangeListener() {
+	private void spinServant(){
+		
+		spinner.getSpin().addChangeListener(new ChangeListener() {
 			
 			@Override
 			public void stateChanged(ChangeEvent e) {
-				int value = (int) spinner.getValue();
+				int value = (int) spinner.getSpin().getValue();
 				for(int i= 0; i < actionSpaces.size(); i++)
 					actionSpaces.get(i).setNumServants(value);
 				
 			}
 		});
-		spinPan.setBackground(java.awt.Color.GRAY);
-		layeredPane.add(spinPan, new Integer(2000),0);
+		layeredPane.add(spinner, new Integer(2000),0);
 	}
 	
 	private void addActionPanelToLayeredPane(ActionButton c){
 		actionSpaces.add(c);
 		layeredPane.add(c, new Integer(30));
-	}
-
-	
-	//setta le carte nei rispettivi bottoni ed aggiunge i mouse listener per lo zoom
-	private void setCards(HashMap<Integer, ArrayList<String>> cardsPaths){
-		for(Integer tower: cardsPaths.keySet()){
-			ArrayList<String> paths = cardsPaths.get(tower);
-			ArrayList<TowerPanel> panels = towers.get(tower);
-			for(int i=0; i < panels.size(); i++){
-				panels.get(i).setCard(paths.get(i));
-				panels.get(i).b.addMouseListener(new MyMouse(zoomedCard, paths.get(i)));
-			}
-		}
 	}
 	
 	public void updateBoard(Model model){

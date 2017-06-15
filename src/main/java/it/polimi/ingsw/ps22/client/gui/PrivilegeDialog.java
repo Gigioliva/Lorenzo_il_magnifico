@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Enumeration;
 
 import javax.swing.AbstractButton;
@@ -11,6 +12,8 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
+import it.polimi.ingsw.ps22.server.answer.AnswerCouncilPrivilege;
+import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
 
 public class PrivilegeDialog extends MessageDialog {
 	
@@ -19,22 +22,25 @@ public class PrivilegeDialog extends MessageDialog {
 	 */
 	private static final long serialVersionUID = -5295328520342279302L;
 	ButtonGroup group = new ButtonGroup();
+	AskCouncilPrivilege mex;
+	ArrayList<Button> buttons = new ArrayList<Button>();
 	
-	public PrivilegeDialog(ViewClient view){
+	public PrivilegeDialog(ViewClient view, AskCouncilPrivilege mex){
 		super(view);
 		
+		this.mex = mex;
 		
 		Button b1 = new Button(new ExchangeElem(1, "1 legno e 1 pietra"));
 		Button b2 = new Button(new ExchangeElem(2, "2 servitori"));
 		Button b3 = new Button(new ExchangeElem(3, "2 monete"));
 		Button b4 = new Button(new ExchangeElem(4, "2 punti militari"));
 		Button b5 = new Button(new ExchangeElem(5, "1 punto fede"));
-	
-	    group.add(b1);
-	    group.add(b2);
-	    group.add(b3);
-	    group.add(b4);
-	    group.add(b5);
+		
+		buttons.add(b1);
+		buttons.add(b2);
+		buttons.add(b3);
+		buttons.add(b4);
+		buttons.add(b5);
 	    
 	    mainPanel.setLayout(new GridLayout(0, 1));
 	    mainPanel.add(b1);
@@ -47,10 +53,14 @@ public class PrivilegeDialog extends MessageDialog {
 	    
 	    confirmButton.addActionListener(new ConfirmListener());
 	    
-	    this.setMinimumSize(new Dimension(150,200));;
+	    this.setMinimumSize(new Dimension(150,200));
 	}
 	
 	private class Button extends JRadioButton{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 4680334484801282487L;
 		private ExchangeElem el;
 		
 		public Button(ExchangeElem el){
@@ -64,20 +74,33 @@ public class PrivilegeDialog extends MessageDialog {
 		}
 	}
 	
+	private int numSelected(){
+		int cont = 0;
+		for(Button b: buttons){
+			if(b.isSelected())
+				cont++;
+		}
+		
+		return cont;
+	}
+
 	private class ConfirmListener implements ActionListener {
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			Enumeration<AbstractButton> b = group.getElements();
-			while(b.hasMoreElements()){
-				Button b1 =(Button) b.nextElement();
-				if(b1.isSelected())
-					view.send(b1.getEl().getId());
+			ArrayList<Integer> choices = new ArrayList<Integer>();
+			if(numSelected() == mex.getNumChoice()){
+				for(Button b: buttons){
+					if (b.isSelected()){
+						choices.add(b.getEl().getId());
+					}
+				}
+
+				view.send(new AnswerCouncilPrivilege(mex.getId(), choices));
+				PrivilegeDialog.this.dispose();
 			}
-			//nelle classi innestate per poter usare this devo mettere nome della classe che lo contiene.this altrimenti this sarebbe ConfirmListener
-			PrivilegeDialog.this.dispose();
 			
 		}		
-}
+	}
 	
 	
 	private class ExchangeElem{
