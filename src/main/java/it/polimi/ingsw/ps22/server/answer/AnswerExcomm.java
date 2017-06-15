@@ -34,7 +34,7 @@ public class AnswerExcomm extends GenericAnswer {
 					model.notifyModel();
 					return;
 				}
-				if(answer.equalsIgnoreCase("SI")){
+				if(answer.equalsIgnoreCase("NO")){
 					temp.excommunication(ask.getPlayer());
 					model.getWaitAnswer().remove(ask);
 					model.notifyModel();
