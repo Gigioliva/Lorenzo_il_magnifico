@@ -12,10 +12,12 @@ import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.answer.AnswerCard;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.message.AskCard;
+import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
 import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
+import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.AskServant;
 import it.polimi.ingsw.ps22.server.model.Model;
 
@@ -121,6 +123,14 @@ public class Gui extends JFrame{
 	
 	public void askServants(AskServant mex){
 		new AskServantDialog(view, mex);
+	}
+	
+	public void askCopyLeader(AskCopyLeader mex){
+		new AskCopyLeaderDialog(view, mex);
+	}
+	
+	public void askLeader(AskLeader mex){
+		new AskLeaderDialog(view, mex);
 	}
 
 

@@ -22,7 +22,6 @@ public class AskCostDialog extends MessageDialog {
 	AskCosts mex;
 	ButtonGroup group = new ButtonGroup();
 	ArrayList<Button> buttons = new ArrayList<Button>();
-	//ArrayList<Button> buttons = new ArrayList<Button>();
 	
 	public AskCostDialog(ViewClient view, AskCosts mex ){
 		super(view);

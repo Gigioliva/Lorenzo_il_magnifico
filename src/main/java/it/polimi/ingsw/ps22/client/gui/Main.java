@@ -3,13 +3,14 @@ package it.polimi.ingsw.ps22.client.gui;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JRadioButton;
 import javax.swing.SwingUtilities;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
+import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
+import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
@@ -56,6 +57,10 @@ public class Main {
 				b.askEffect(mex);
 				b.askFamily(new AskFamily(model.getPlayers().get("Tizio")));
 				b.askServants(new AskServant(new ProductionAction(4)));
+				ArrayList<CardLeader> arr = new ArrayList<CardLeader>();
+				arr.add(new CardLeader("Botticelli"));
+				arr.add(new CardLeader("Borgia"));
+				b.askCopyLeader(new AskCopyLeader(arr,new CardLeader("ciao"),model.getPlayers().get("Tizio")));
 			}
 		});
 	}

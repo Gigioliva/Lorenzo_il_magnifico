@@ -10,9 +10,11 @@ public class AskLeader extends MessageAsk {
 
 	private static final long serialVersionUID = 1L;
 	private transient Player player;
+	private transient ArrayList<CardLeader> leaders;
 	
 	public AskLeader(ArrayList<CardLeader> leaders, Player player){
 		this.player=player;
+		this.leaders = leaders;
 		StringBuilder temp=new StringBuilder();
 		temp.append("Choice one card: \n");
 		for(CardLeader el: leaders){
@@ -23,6 +25,14 @@ public class AskLeader extends MessageAsk {
 	
 	public Player getPlayer(){
 		return player;
+	}
+	
+	public ArrayList<String> getLeaders(){
+		ArrayList<String> lead = new ArrayList<String>();
+		for(CardLeader c: leaders){
+			lead.add(c.getName());
+		}
+		return lead;
 	}
 	
 	public AskLeader(String str, int id){
