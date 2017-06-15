@@ -10,7 +10,7 @@ public class AskLeader extends MessageAsk {
 
 	private static final long serialVersionUID = 1L;
 	private transient Player player;
-	private transient ArrayList<CardLeader> leaders;
+	private  ArrayList<CardLeader> leaders;
 	
 	public AskLeader(ArrayList<CardLeader> leaders, Player player){
 		this.player=player;
