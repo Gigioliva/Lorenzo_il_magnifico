@@ -19,7 +19,14 @@ public class HarvestZone extends Zone {
 		harvestSpace[0] = new HarvestSpace(1, false);
 		harvestSpace[1] = new HarvestSpace(1, true);
 	}
-
+	
+	public HarvestZone clone() {
+		HarvestZone temp = new HarvestZone();
+		temp.harvestSpace[0] = this.harvestSpace[0].clone();
+		temp.harvestSpace[1] = this.harvestSpace[1].clone();
+		return temp;
+	}
+	
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player=family.getPlayer();

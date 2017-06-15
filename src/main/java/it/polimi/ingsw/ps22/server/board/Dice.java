@@ -21,6 +21,15 @@ public class Dice implements Serializable {
 		}
 		this.setDice();
 	}
+
+	@Override
+	public Dice clone() {
+		Dice temp=new Dice();
+		for (Color c: dice.keySet()) {
+		temp.dice.put(c, dice.get(c));
+		}
+		return temp;
+	}
 	
 	public int getDice(Color color){
 		if(dice.containsKey(color))

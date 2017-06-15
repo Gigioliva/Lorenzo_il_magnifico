@@ -24,6 +24,18 @@ public class MarketZone extends Zone {
 		}
 	}
 
+	public MarketZone(MarketSpace[] marketSp) {
+		marketSpace = new MarketSpace[NUM_SPACES];
+		for (int i=0;i<NUM_SPACES;i++) {
+			this.marketSpace[i] = marketSp[i].clone();
+		}
+	}
+	
+	@Override
+	public MarketZone clone() {
+		return new MarketZone(this.marketSpace);
+	}
+	
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();

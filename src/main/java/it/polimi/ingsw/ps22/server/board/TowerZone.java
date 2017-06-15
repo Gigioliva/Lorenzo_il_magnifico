@@ -29,6 +29,24 @@ public class TowerZone extends Zone {
 		// leggere da file le carte e bonus azione
 	}
 
+	@Override
+	public TowerZone clone() {
+		TowerZone temp = new TowerZone();
+		ArrayList<DevelopmentCard> arr;
+		for (int i=0;i<NUM_SPACES;i++) {
+			temp.towerSpaces[i] = this.towerSpaces[i].clone();
+		}
+		temp.occupied = this.occupied;
+		for (Integer key: cards.keySet()) {
+			arr = new ArrayList<DevelopmentCard>();
+			for (DevelopmentCard devCard: cards.get(key)) {
+				arr.add(devCard.clone());
+			}
+			temp.cards.put(key,arr);
+		}
+		return temp;
+	}
+	
 	protected void setOccupied() {
 		this.occupied = true;
 	}

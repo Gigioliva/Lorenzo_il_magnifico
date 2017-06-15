@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.model.Color;
@@ -23,6 +24,19 @@ public class CouncilPalaceSpace extends ActionSpace {
 		super.addBonus(bonus);
 	}
 
+	@Override
+	public CouncilPalaceSpace clone() {
+		CouncilPalaceSpace temp = new CouncilPalaceSpace();
+		if (!this.isPlayable())
+			temp.setNotPlayable();
+		ArrayList<Family> fam = this.getFamilies();
+		for (Family el: fam) {
+			temp.addFamily(el.clone(el.getPlayer()));
+		}
+		temp.setBonus(this.getBonus().clone());
+		return temp;
+	}
+	
 	public boolean Control(int numServant, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue();

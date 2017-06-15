@@ -20,6 +20,13 @@ public class ProductionZone extends Zone {
 		productionSpace[1] = new ProductionSpace(1, true);
 	}
 
+	public ProductionZone clone() {
+		ProductionZone temp = new ProductionZone();
+		temp.productionSpace[0] = this.productionSpace[0].clone();
+		temp.productionSpace[1] = this.productionSpace[1].clone();
+		return temp;
+	}
+	
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();

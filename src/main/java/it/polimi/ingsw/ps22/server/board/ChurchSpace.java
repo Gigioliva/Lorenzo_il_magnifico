@@ -27,10 +27,25 @@ public class ChurchSpace implements Serializable {
 		requisite.put(3, 5);
 		HashMap<Integer,VictoryPoint> track=new HashMap<Integer,VictoryPoint>();
 		FaithPointSaxParser.FaithRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/FaithPointTrack.xml", track);
-		faithPointTrack=new FaithPointTrack(track);
-		cardExcomm=CardSort.excommSortByEra().get(era).get(0);
+		this.faithPointTrack=new FaithPointTrack(track);
+		this.cardExcomm=CardSort.excommSortByEra().get(era).get(0);
 	}
-
+	
+	public ChurchSpace(int era, FaithPointTrack track, CardExcomm card) {
+		this.era = era;
+		requisite = new HashMap<Integer, Integer>();
+		requisite.put(1, 3);
+		requisite.put(2, 4);
+		requisite.put(3, 5);
+		this.faithPointTrack = track; // passo gli oggetti già clpnati
+		this.cardExcomm = card;  // passo gli oggetti già clpnati
+	}
+	
+	@Override
+	public ChurchSpace clone() {
+		return new ChurchSpace(this.era,this.faithPointTrack.clone(),this.cardExcomm.clone());
+	}
+	
 	public void applyExcomm(ArrayList<Player> players) {
 		for (Player el : players) {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {

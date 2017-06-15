@@ -18,6 +18,16 @@ public class FaithPointTrack implements Serializable {
 	}
 	
 	@Override
+	public FaithPointTrack clone() {
+		HashMap<Integer,VictoryPoint> temp = new HashMap<Integer,VictoryPoint>();
+		for(Integer i: track.keySet()) {
+			temp.put(i, track.get(i).clone());
+		}
+		FaithPointTrack x = new FaithPointTrack(temp);
+		return x;
+	}
+	
+	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		

@@ -21,7 +21,7 @@ public abstract class ActionSpace implements Serializable {
 	public ActionSpace(int actionCost, boolean multi) {
 		this.actionCost = actionCost;
 		this.multi = multi;
-		playable=true;
+		playable = true;
 		family = new ArrayList<Family>();
 		bonus = new GainResource();
 	}
@@ -41,6 +41,10 @@ public abstract class ActionSpace implements Serializable {
 	public ArrayList<Family> getFamilies(){
 		return family;
 	}
+	
+	public GainResource getBonus(){
+		return bonus;
+	}
 
 	public boolean controlPlacement() {
 		if ((!multi && this.family.size() == 0) || multi){
@@ -55,6 +59,10 @@ public abstract class ActionSpace implements Serializable {
 		}
 	}
 
+	public void setBonus(GainResource bonus) {
+		this.bonus=bonus;
+	}
+	
 	public void applyBonus(Player player) {
 		bonus.performEffect(player);
 	}
@@ -78,6 +86,7 @@ public abstract class ActionSpace implements Serializable {
 	public void setNotPlayable(){
 		this.playable=false;
 	}
+	
 	public boolean isPlayable(){
 		return playable;
 	}
@@ -114,4 +123,7 @@ public abstract class ActionSpace implements Serializable {
 		return str.toString();
 	}
 
+	@Override
+	public abstract ActionSpace clone();
+	
 }

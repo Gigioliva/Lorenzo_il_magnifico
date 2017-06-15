@@ -6,7 +6,7 @@ import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class Board implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private HashMap<String, TowerZone> towers;
 	private MarketZone market;
@@ -33,10 +33,25 @@ public class Board implements Serializable {
 		towers.put("Venture", new TowerVentureZone());
 	}
 
+	public Board clone() {
+		Board temp = new Board();
+		temp.market = this.market.clone();
+		temp.prodZone = this.prodZone.clone();
+		temp.harvestZone = this.harvestZone.clone();
+		temp.councilPalace = this.councilPalace.clone();
+		for (Integer i : church.keySet()) {
+			temp.church.put(i, this.church.get(i).clone());
+		}
+		for (String el : this.towers.keySet()) {
+			temp.towers.put(el, this.towers.get(el).clone());
+		}
+		return temp;
+	}
+
 	public TowerZone getTower(String type) {
 		return towers.get(type);
 	}
-	
+
 	public MarketZone getMarket() {
 		return market;
 	}
@@ -78,78 +93,79 @@ public class Board implements Serializable {
 				towers.get(el).reset(turn);
 			}
 		}
-		if(church.containsKey(turn-1)){
-			church.get(turn-1).applyExcomm(players);
+		if (church.containsKey(turn - 1)) {
+			church.get(turn - 1).applyExcomm(players);
 		}
 	}
-	
-	//per ogni torre, il familiare non può piazzare alcun familiare
-	private boolean cantPlaceTowerZones(Player player){
-		
-		for(String type: towers.keySet()){
-			if(!towers.get(type).cantPlaceZone(player)){
+
+	// per ogni torre, il familiare non può piazzare alcun familiare
+	private boolean cantPlaceTowerZones(Player player) {
+
+		for (String type : towers.keySet()) {
+			if (!towers.get(type).cantPlaceZone(player)) {
 				return false;
 			}
 		}
 		return true;
 	}
-	
-	public boolean cantPlaceAllZones(Player player){
-		return harvestZone.cantPlaceZone(player) && cantPlaceTowerZones(player) 
-				&& prodZone.cantPlaceZone(player) && market.cantPlaceZone(player) && councilPalace.cantPlaceCouncilPalace(player);
+
+	public boolean cantPlaceAllZones(Player player) {
+		return harvestZone.cantPlaceZone(player) && cantPlaceTowerZones(player) && prodZone.cantPlaceZone(player)
+				&& market.cantPlaceZone(player) && councilPalace.cantPlaceCouncilPalace(player);
 	}
-	
-	private String towersString(){
+
+	private String towersString() {
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Towers: \n");
-		
-		for(String type: towers.keySet()){
+
+		for (String type : towers.keySet()) {
 			str.append(towers.get(type).toString() + "\n");
 		}
-		
+
 		return str.toString();
 	}
-	
-	private String churchString(){
+
+	private String churchString() {
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Church: \n");
-		
-		for(Integer turn: church.keySet()){
+
+		for (Integer turn : church.keySet()) {
 			str.append(church.get(turn).toString() + "\n");
 		}
-		
+
 		return str.toString();
 	}
-	
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("BOARD: \n");
-		
+
 		str.append(towersString());
-		
+
 		str.append(churchString());
-		
+
 		str.append(church.get(2).getFaithTrack().toString());
-		
+
 		str.append(councilPalace.toString());
-		
+
 		str.append(harvestZone.toString());
-		 
+
 		str.append(prodZone.toString());
-		
+
 		str.append(dice.toString());
-		
+
 		return str.toString();
 	}
 
 	public ChurchSpace getChurch(int id) {
-		if(church.containsKey(id)){
+		if (church.containsKey(id)) {
 			return church.get(id);
 		}
 		return null;
 	}
+
 }

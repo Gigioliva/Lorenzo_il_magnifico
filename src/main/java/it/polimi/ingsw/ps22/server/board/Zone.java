@@ -63,4 +63,7 @@ public abstract class Zone implements Serializable {
 	public void setZone(int num) {
 
 	}
+	
+	@Override 
+	public abstract Zone clone();
 }
