@@ -39,15 +39,6 @@ public class ProductionZone extends Zone {
 			return true;
 		}
 		return false;
-		/*
-		 * Verificare che in questa zona non ci siano famigliari colorati dello
-		 * stesso giocatore e che ci sia posto nella zona indicata. Chiedere
-		 * all'utente se vuole spendere dei servitori, a quel punto confrontare
-		 * se il valore del dado del famigliare + incremento dei servitori è
-		 * maggiore del valore dell'azione richiesto, se sufficiente scalare i
-		 * servitori. quindi aggiungere il famigliare nella zona (bonus e presa
-		 * carte verrà fatto dallo spazio azione)
-		 */
 	}
 
 	public void applyMove(int numServant, int actionSpace, Family family) {
@@ -103,7 +94,7 @@ public class ProductionZone extends Zone {
 		}
 	}
 	
-	public  ProductionSpace[] getProdSpaces(){
+	public ProductionSpace[] getProdSpaces(){
 		return this.productionSpace;
 	}
 	
