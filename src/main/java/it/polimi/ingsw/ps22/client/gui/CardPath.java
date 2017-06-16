@@ -27,7 +27,7 @@ public class CardPath {
 	
 	
 	public static String getPersonalBoardPathname(PersonalBoard pers) {
-		StringBuilder name = new StringBuilder("./image/personalboard/"+deleteSpaces(pers.getPathname()));
+		StringBuilder name = new StringBuilder("./image/personalbonus/"+deleteSpaces(pers.getPathname()));
 		return name.toString();
 	}
 	
