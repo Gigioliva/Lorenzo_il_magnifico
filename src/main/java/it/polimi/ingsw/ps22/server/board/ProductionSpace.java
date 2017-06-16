@@ -26,7 +26,7 @@ public class ProductionSpace extends ActionSpace{
 		ArrayList<Family> fam = this.getFamilies();
 		for(Family el: fam)
 			temp.addFamily(el.clone(el.getPlayer()));
-			GainResource bonus = this.getBonus().clone();
+			GainResource bonus = this.bonus.clone();
 			temp.setBonus(bonus);
 		return temp;
 	}

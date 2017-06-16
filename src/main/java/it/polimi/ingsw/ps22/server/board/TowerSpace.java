@@ -26,7 +26,7 @@ public class TowerSpace extends ActionSpace {
 		for (Family el: fam) {
 			temp.addFamily(el.clone(el.getPlayer()));
 		}
-		temp.setBonus(this.getBonus().clone());
+		temp.setBonus(this.bonus.clone());
 		temp.plan = this.plan;
 		return temp;
 	}

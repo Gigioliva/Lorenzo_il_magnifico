@@ -16,7 +16,7 @@ public abstract class ActionSpace implements Serializable {
 	private transient boolean multi;
 	private boolean playable;
 	private ArrayList<Family> family;
-	private GainResource bonus;
+	protected GainResource bonus;
 
 	public ActionSpace(int actionCost, boolean multi) {
 		this.actionCost = actionCost;
@@ -40,10 +40,6 @@ public abstract class ActionSpace implements Serializable {
 	
 	public ArrayList<Family> getFamilies(){
 		return family;
-	}
-	
-	public GainResource getBonus(){
-		return bonus;
 	}
 
 	public boolean controlPlacement() {
