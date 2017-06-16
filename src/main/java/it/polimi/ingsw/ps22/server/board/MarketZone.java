@@ -24,16 +24,16 @@ public class MarketZone extends Zone {
 		}
 	}
 
-	public MarketZone(MarketSpace[] marketSp) {
+	public MarketZone(MarketSpace[] marketSp, ArrayList<Player> player) {
 		marketSpace = new MarketSpace[NUM_SPACES];
 		for (int i=0;i<NUM_SPACES;i++) {
-			this.marketSpace[i] = marketSp[i].clone(null);
+			this.marketSpace[i] = marketSp[i].clone(player);
 		}
 	}
 	
 	@Override
-	public MarketZone clone() {
-		return new MarketZone(this.marketSpace);
+	public MarketZone clone(ArrayList<Player> player) {
+		return new MarketZone(this.marketSpace, player);
 	}
 	
 	@Override

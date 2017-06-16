@@ -33,17 +33,17 @@ public class Board implements Serializable {
 		towers.put("Venture", new TowerVentureZone());
 	}
 
-	public Board clone() {
+	public Board clone(ArrayList<Player> player) {
 		Board temp = new Board();
-		temp.market = this.market.clone();
-		temp.prodZone = this.prodZone.clone();
-		temp.harvestZone = this.harvestZone.clone();
-		temp.councilPalace = this.councilPalace.clone(null);
+		temp.market = this.market.clone(player);
+		temp.prodZone = this.prodZone.clone(player);
+		temp.harvestZone = this.harvestZone.clone(player);
+		temp.councilPalace = this.councilPalace.clone(player);
 		for (Integer i : church.keySet()) {
 			temp.church.put(i, this.church.get(i).clone());
 		}
 		for (String el : this.towers.keySet()) {
-			temp.towers.put(el, this.towers.get(el).clone());
+			temp.towers.put(el, this.towers.get(el).clone(player));
 		}
 		return temp;
 	}

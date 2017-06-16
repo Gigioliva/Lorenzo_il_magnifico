@@ -20,10 +20,10 @@ public class ProductionZone extends Zone {
 		productionSpace[1] = new ProductionSpace(1, true);
 	}
 
-	public ProductionZone clone() {
+	public ProductionZone clone(ArrayList<Player> player) {
 		ProductionZone temp = new ProductionZone();
-		temp.productionSpace[0] = this.productionSpace[0].clone(null);
-		temp.productionSpace[1] = this.productionSpace[1].clone(null);
+		temp.productionSpace[0] = this.productionSpace[0].clone(player);
+		temp.productionSpace[1] = this.productionSpace[1].clone(player);
 		return temp;
 	}
 	

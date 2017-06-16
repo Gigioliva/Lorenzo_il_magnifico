@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.server.board;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -64,6 +65,5 @@ public abstract class Zone implements Serializable {
 
 	}
 	
-	@Override 
-	public abstract Zone clone();
+	public abstract Zone clone(ArrayList<Player> player);
 }
