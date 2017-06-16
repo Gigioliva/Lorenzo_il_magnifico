@@ -32,11 +32,11 @@ public class AskExcommDialog extends MessageDialog {
 		
 		
 		this.setTitle("Vuoi appoggiare la chiesa?");
-		JRadioButton b1 = new JRadioButton("Si");
+		b1 = new JRadioButton("Si");
 		group.add(b1);
 	    mainPanel.add(b1);
 	    
-	    JRadioButton b2 = new JRadioButton("No");
+	    b2 = new JRadioButton("No");
 	    group.add(b2);
 	    mainPanel.add(b2);
 

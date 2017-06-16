@@ -18,6 +18,7 @@ public class AnswerExcomm extends GenericAnswer {
 
 	@Override
 	public void applyAnswer(Model model) {
+		System.out.println(answer);
 		AskExcomm ask=null;
 		for(MessageAsk el: model.getWaitAnswer()){
 			if(el.getId()==id){

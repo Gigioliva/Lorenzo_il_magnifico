@@ -21,6 +21,7 @@ public class HarvestMove extends FamilyMove {
 			Family family = player.getFamily(color);
 			if (model.getBoard().getHarvestZone().Control(numServant, space, family)) {
 				model.getBoard().getHarvestZone().applyMove(numServant, space, family);
+				model.setCantFamilyMove();
 				model.notifyModel();
 				return;
 			}

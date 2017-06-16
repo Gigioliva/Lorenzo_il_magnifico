@@ -24,7 +24,7 @@ public class Model extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Board board;
 	private int turn;
-	public int giro;
+	private int giro;
 	private HashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;

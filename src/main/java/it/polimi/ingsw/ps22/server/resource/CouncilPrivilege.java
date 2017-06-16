@@ -32,7 +32,7 @@ public class CouncilPrivilege extends ResourceAbstract {
 		possibleExchanges.put(new Integer(4), scelta4);
 		
 		HashMap<String, ResourceAbstract> scelta5 = new HashMap<String, ResourceAbstract>();
-		scelta5.put("FatihPoint", new FaithPoint(1));
+		scelta5.put("FaithPoint", new FaithPoint(1));
 		possibleExchanges.put(new Integer(5), scelta5);
 		
 		

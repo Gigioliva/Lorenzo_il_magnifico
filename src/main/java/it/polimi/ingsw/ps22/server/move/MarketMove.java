@@ -21,6 +21,7 @@ public class MarketMove extends FamilyMove {
 			Family family = player.getFamily(color);
 			if (model.getBoard().getMarket().Control(numServant, space, family)) {
 				model.getBoard().getMarket().applyMove(numServant, space, family);
+				model.setCantFamilyMove();
 				model.notifyModel();
 				return;
 			}

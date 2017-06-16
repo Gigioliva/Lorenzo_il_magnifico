@@ -19,7 +19,6 @@ public class GraphicGUI extends Graphic {
 
 	@Override
 	public void printModel(Model model) {
-		System.out.println(model.giro);
 		if (flag) {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override

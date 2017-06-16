@@ -21,6 +21,7 @@ public class ProductionMove extends FamilyMove {
 			Family family = player.getFamily(color);
 			if (model.getBoard().getProdZone().Control(numServant, space, family)) {
 				model.getBoard().getProdZone().applyMove(numServant, space, family);
+				model.setCantFamilyMove();
 				model.notifyModel();
 				return;
 			}

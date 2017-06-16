@@ -28,7 +28,7 @@ public class HarvestAction extends Action {
 	public void applyAction(Player player, int servants) {
 		ArrayList<DevelopmentCard> cards = player.getDevelopmentCard("Territory");
 		int bonus = player.getBonusAcc().getBonus("IncrementHarvest").getQuantity() + servants;
-		player.getSpecificResource("Servants").subResource(new Servant(servants));
+		player.getSpecificResource("Servant").subResource(new Servant(servants));
 		for(DevelopmentCard card: cards){
 			ArrayList<ActionEffect> effects = card.getActionEffects();
 			if(card.getActionValue() <= super.getActionValue() + bonus){
