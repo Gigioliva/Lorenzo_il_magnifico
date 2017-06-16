@@ -47,6 +47,10 @@ public class BoardPanel extends JPanel{
 	private JLabel dice1;
 	private JLabel dice2;
 	private JLabel dice3;
+	private FamiliarButton fam1;
+	private FamiliarButton fam2;
+	private FamiliarButton fam3;
+	private FamiliarButton fam4;
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
 
 	
@@ -109,22 +113,22 @@ public class BoardPanel extends JPanel{
 		CouncilButton council = new CouncilButton(0, username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), new CouncilListener(view));
 		addActionPanelToLayeredPane(council);
 	
-		FamiliarButton fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces));
+		fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces),username);
 		Rectangle dimFam1 = PersonalBoardAdaptive.getBlackButtonSLot(personalBoard.resizeFactor);
 		fam1.setBounds(personalBoard.getBounds().width, dimFam1.getInity(), dimFam1.getOffsetX(), dimFam1.getOffsetY());
 		fam1.setText("black");
 		
-		FamiliarButton fam2 = new FamiliarButton(Color.ORANGE, java.awt.Color.ORANGE,new TakeFamiliarListener(actionSpaces));
+		fam2 = new FamiliarButton(Color.ORANGE, java.awt.Color.ORANGE,new TakeFamiliarListener(actionSpaces), username);
 		Rectangle dimFam2 = PersonalBoardAdaptive.getOrangeButtonSLot(personalBoard.resizeFactor);
 		fam2.setBounds(personalBoard.getBounds().width + dimFam2.getInitx(), dimFam2.getInity(), dimFam2.getOffsetX(), dimFam2.getOffsetY());
 		fam2.setText("orange");
 		
-		FamiliarButton fam3 = new FamiliarButton(Color.WHITE, java.awt.Color.WHITE, new TakeFamiliarListener(actionSpaces));
+		fam3 = new FamiliarButton(Color.WHITE, java.awt.Color.WHITE, new TakeFamiliarListener(actionSpaces), username);
 		Rectangle dimFam3 = PersonalBoardAdaptive.getWhiteButtonSLot(personalBoard.resizeFactor);
 		fam3.setBounds(personalBoard.getBounds().width + dimFam3.getInitx(), dimFam3.getInity(), dimFam3.getOffsetX(), dimFam3.getOffsetY());
 		fam3.setText("white");
 		
-		FamiliarButton fam4 = new FamiliarButton(Color.NEUTRAL, java.awt.Color.lightGray, new TakeFamiliarListener(actionSpaces));
+		fam4 = new FamiliarButton(Color.NEUTRAL, java.awt.Color.lightGray, new TakeFamiliarListener(actionSpaces), username);
 		Rectangle dimFam4 = PersonalBoardAdaptive.getNeutralButtonSLot(personalBoard.resizeFactor);
 		fam4.setBounds(personalBoard.getBounds().width + dimFam4.getInitx(), dimFam4.getInity(), dimFam4.getOffsetX(), dimFam4.getOffsetY());
 		fam4.setText("neutral");
@@ -262,6 +266,7 @@ public class BoardPanel extends JPanel{
 		updateDices(model);
 		updateOrderPlayers(model);
 		updateCardExcomm(model);
+		updateFamiliars(model);
 		repaint();
 	}
 	
@@ -370,6 +375,13 @@ public class BoardPanel extends JPanel{
 			layeredPane.add(exCardLabel, new Integer(200));
 		}
 	
+	}
+	
+	private void updateFamiliars(Model model){
+		fam1.updateFamiliar(model);
+		fam2.updateFamiliar(model);
+		fam3.updateFamiliar(model);
+		fam4.updateFamiliar(model);
 	}
 	
 	

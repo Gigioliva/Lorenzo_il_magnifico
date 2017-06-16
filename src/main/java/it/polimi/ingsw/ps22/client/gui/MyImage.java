@@ -55,11 +55,16 @@ public class MyImage {
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(new Rectangle(0,b.getWidth(),0,b.getHeight()));
 		
 		for(int i = 0 ; i < familiars.size(); i++){
-			g.setColor(familiars.get(i).getPlayer().getColor().getColor());
+			
+			//g.setColor(familiars.get(i).getPlayer().getColor().getColor());
 			Rectangle rec = recs.get(i);
-			g.fillOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
-			g.setColor(familiars.get(i).getColor().getColor());
-			g.drawOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			ImageIcon img =MyImage.createScaledImageIcon(FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(),
+					familiars.get(i).getColor()), recs.get(i));
+
+			//g.fillOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			g.drawImage(img.getImage(), rec.getInitx(), rec.getInity(), null);
+			//g.setColor(familiars.get(i).getColor().getColor());
+			//g.drawOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 		}
 	}
 	

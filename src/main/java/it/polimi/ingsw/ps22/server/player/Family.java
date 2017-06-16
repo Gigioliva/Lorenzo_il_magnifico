@@ -10,7 +10,7 @@ public class Family implements Serializable {
 	private Color color;
 	private Player player;
 	private int value;
-	private transient boolean placed=false;
+	private boolean placed=false;
 
 	public Family(Color color, Player player) {
 		this.color = color;

@@ -6,6 +6,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 
 public class FamiliarButton extends JButton {
 	/**
@@ -13,9 +14,10 @@ public class FamiliarButton extends JButton {
 	 */
 	private Color color;
 	private java.awt.Color c;
+	private String username;
 	private static final long serialVersionUID = 8698619865338767712L;
 
-	public FamiliarButton(Color color, java.awt.Color c, TakeFamiliarListener listener){
+	public FamiliarButton(Color color, java.awt.Color c, TakeFamiliarListener listener, String username){
 		super();
 		this.setEnabled(true);
 		this.setOpaque(false);
@@ -27,25 +29,36 @@ public class FamiliarButton extends JButton {
 		this.addActionListener(listener);
 	
 		this.color = color;
+		this.username = username;
 		
-	}
-	
-	private void loadImage(){
-		ImageIcon img = MyImage.createImageIcon("./image/fam.jpg");
-		this.setIcon(img);
-		this.setBounds(0, 0, img.getIconWidth(), img.getIconHeight());
 	}
 	
 	public Color getColor(){
 		return this.color;
 	}
 	
+	public void updateFamiliar(Model model){
+		System.out.println("eccomi in update");
+		if(model.getPlayers().get(username).getFamily(color).isPlaced()){
+			System.out.println("prova enabled");
+			this.setEnabled(false);
+			this.setVisible(false);
+		}
+		else{
+			this.setEnabled(true);
+			this.setVisible(true);;
+		}
+		repaint();
+	}
+	
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		g.setColor(c);
-		g.drawOval(0, 0, this.getWidth(), this.getHeight());
-		g.fillOval(0, 0, this.getWidth(), this.getHeight());
+		if(this.isEnabled() == true){
+			g.setColor(c);
+			g.drawOval(0, 0, this.getWidth(), this.getHeight());
+			g.fillOval(0, 0, this.getWidth(), this.getHeight());
+		}
 
 	}
 	
