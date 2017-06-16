@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
@@ -16,9 +17,12 @@ import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
 import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
+import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.AskServant;
+import it.polimi.ingsw.ps22.server.message.ChoiceMove;
+import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 
 public class Gui extends JFrame{
@@ -29,11 +33,10 @@ public class Gui extends JFrame{
 	private static final long serialVersionUID = 1L;
 	BoardPanel board;
 	ViewClient view;
-	//PersonalBoardPanel personalBoard;
 	
 
 	
-	public void initGui(String username, String persBonusPath, ArrayList<String> avver, ArrayList<String> personBonusPaths, ViewClient view){
+	public void initGui( Model model, ViewClient view){
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
@@ -43,7 +46,7 @@ public class Gui extends JFrame{
 		this.setVisible(true);
 		
 	
-		board = new BoardPanel(this.getWidth(), this.getHeight(), username, persBonusPath, avver, personBonusPaths, view); 
+		board = new BoardPanel(this.getWidth(), this.getHeight(), view.getUsername(), view, model); 
 		
 		//personalBoard = new PersonalBoardPanel(this.getWidth(), this.getHeight(), username);
 		
@@ -132,6 +135,22 @@ public class Gui extends JFrame{
 	public void askLeader(AskLeader mex){
 		new AskLeaderDialog(view, mex);
 	}
+	
+	public void errorMove(){
+		JOptionPane.showMessageDialog(this, "You can't do this move");
+	}
 
+	
+	public void askExcomm(AskExcomm mex){
+		new AskExcommDialog(view, mex);
+	}
+	
+	public void yourTurn(ChoiceMove mex){
+		JOptionPane.showMessageDialog(this, mex.getString());
+	}
+	
+	public void genericMessage(GenericMessage mex){
+		JOptionPane.showMessageDialog(this, mex.getString());
+	}
 
 }

@@ -20,6 +20,7 @@ public class TerritoryListener implements ActionListener {
 		ActionButton pressedButton = (ActionButton)e.getSource();
 		TowerTerritoryMove move = new TowerTerritoryMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace(), 
 				pressedButton.getNumServants());
+		view.send(move);
 		System.out.println("creo territory Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getSpace() + 
 				" servitori aggiunti " + pressedButton.getNumServants());
 	}

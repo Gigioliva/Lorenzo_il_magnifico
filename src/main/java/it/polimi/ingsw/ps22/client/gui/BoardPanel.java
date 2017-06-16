@@ -10,9 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-import javax.swing.JSpinner;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -40,6 +37,9 @@ public class BoardPanel extends JPanel{
 	private String username;
 	private ArrayList<PlayersButton> players = new ArrayList<PlayersButton>();
 	private double resizeFactor; 
+	private ArrayList<VictoryPointLabel> victory = new ArrayList<VictoryPointLabel>();
+	private ArrayList<MilitaryPointLabel> military = new ArrayList<MilitaryPointLabel>();
+	private ArrayList<FaithTrackLabel> faith = new ArrayList<FaithTrackLabel>();
 
 	
 	
@@ -48,15 +48,23 @@ public class BoardPanel extends JPanel{
 		return factorScaleX;
 	}
 	
-	public BoardPanel(double widthScreen, double heightScreen, String username, String persBonusPath, ArrayList<String> avver, ArrayList<String> personBonusPaths, ViewClient view) {
+	public BoardPanel(double widthScreen, double heightScreen, String username, ViewClient view, Model model) {
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-	
+		
+		ArrayList<String> avver = new ArrayList<String>(model.getPlayers().keySet());
+		avver.remove(username);
+		
+		ArrayList<String> personBonusPaths = new ArrayList<String>();
+		for(String user: avver){
+			personBonusPaths.add(model.getPlayers().get(user).getPersonalBoard().getPathname());
+		}
 		
 		double factorScaleBoard = resizeFactor(board, heightScreen);
 		this.resizeFactor = factorScaleBoard;
 		
 		this.username = username;
 		
+		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username, model.getPlayers().get(username).getPersonalBoard().getPathname() );
 		layeredPane = new JLayeredPane();
 		
 		Image img = board.getImage();
@@ -93,16 +101,23 @@ public class BoardPanel extends JPanel{
 		addActionPanelToLayeredPane(council);
 	
 		FamiliarButton fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces));
-		fam1.setBounds((int)(heightScreen*0.75), (int)heightScreen - 100, 100, 100);
+		Rectangle dimFam1 = PersonalBoardAdaptive.getBlackButtonSLot(personalBoard.resizeFactor);
+		fam1.setBounds(personalBoard.getBounds().width, dimFam1.getInity(), dimFam1.getOffsetX(), dimFam1.getOffsetY());
 		fam1.setText("black");
+		
 		FamiliarButton fam2 = new FamiliarButton(Color.ORANGE, java.awt.Color.ORANGE,new TakeFamiliarListener(actionSpaces));
-		fam2.setBounds((int)(heightScreen*0.75) + 100, (int)heightScreen - 100, 100, 100);
+		Rectangle dimFam2 = PersonalBoardAdaptive.getOrangeButtonSLot(personalBoard.resizeFactor);
+		fam2.setBounds(personalBoard.getBounds().width + dimFam2.getInitx(), dimFam2.getInity(), dimFam2.getOffsetX(), dimFam2.getOffsetY());
 		fam2.setText("orange");
+		
 		FamiliarButton fam3 = new FamiliarButton(Color.WHITE, java.awt.Color.WHITE, new TakeFamiliarListener(actionSpaces));
-		fam3.setBounds((int)(heightScreen*0.75) + 200, (int)heightScreen - 100, 100, 100);
+		Rectangle dimFam3 = PersonalBoardAdaptive.getWhiteButtonSLot(personalBoard.resizeFactor);
+		fam3.setBounds(personalBoard.getBounds().width + dimFam3.getInitx(), dimFam3.getInity(), dimFam3.getOffsetX(), dimFam3.getOffsetY());
 		fam3.setText("white");
+		
 		FamiliarButton fam4 = new FamiliarButton(Color.NEUTRAL, java.awt.Color.lightGray, new TakeFamiliarListener(actionSpaces));
-		fam4.setBounds((int)(heightScreen*0.75) + 300, (int)heightScreen - 100, 100, 100);
+		Rectangle dimFam4 = PersonalBoardAdaptive.getNeutralButtonSLot(personalBoard.resizeFactor);
+		fam4.setBounds(personalBoard.getBounds().width + dimFam4.getInitx(), dimFam4.getInity(), dimFam4.getOffsetX(), dimFam4.getOffsetY());
 		fam4.setText("neutral");
 		
 		layeredPane.add(fam1, new Integer(50), 0);
@@ -148,39 +163,8 @@ public class BoardPanel extends JPanel{
 		}
 		
 		
-		
-		/*
-		HashMap<Integer,ArrayList<String>> map = new HashMap<Integer,ArrayList<String>>();
-		map.put(0,new ArrayList<String>());
-		map.put(1,new ArrayList<String>());
-		map.put(2,new ArrayList<String>());
-		map.put(3,new ArrayList<String>());
-		
-
-		map.get(0).add("./image/devcards_f_en_c_1.png");
-		map.get(0).add("./image/devcards_f_en_c_2.png");
-		map.get(0).add("./image/devcards_f_en_c_5.png");
-		map.get(0).add("./image/devcards_f_en_c_4.png");
-		
-		map.get(1).add("./image/devcards_f_en_c_49.png");
-		map.get(1).add("./image/devcards_f_en_c_50.png");
-		map.get(1).add("./image/devcards_f_en_c_51.png");
-		map.get(1).add("./image/devcards_f_en_c_52.png");
-		
-		map.get(2).add("./image/devcards_f_en_c_25.png");
-		map.get(2).add("./image/devcards_f_en_c_26.png");
-		map.get(2).add("./image/devcards_f_en_c_27.png");
-		map.get(2).add("./image/devcards_f_en_c_28.png");
-		
-		map.get(3).add("./image/devcards_f_en_c_73.png");
-		map.get(3).add("./image/devcards_f_en_c_74.png");
-		map.get(3).add("./image/devcards_f_en_c_75.png");
-		map.get(3).add("./image/devcards_f_en_c_76.png");
-		this.setCards(map);
-		*/
 		this.setBackground(new java.awt.Color(55, 55, 55));
 		
-		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username, persBonusPath);
 	
 		layeredPane.add(personalBoard, new Integer(400),0);
 		
@@ -194,8 +178,6 @@ public class BoardPanel extends JPanel{
 			players.add(b1);
 			layeredPane.add(b1, new Integer(40));
 		}
-		
-		// PrivilegeDialog d = new PrivilegeDialog(view);
 		
 		this.add(layeredPane);
         
@@ -232,6 +214,7 @@ public class BoardPanel extends JPanel{
 		updateFaithTrack(model);
 		updateMilitaryTrack(model);
 		updateVictoryTrack(model);
+		repaint();
 	}
 	
 	private void updateActionSpaces(Model model){
@@ -262,9 +245,15 @@ public class BoardPanel extends JPanel{
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "FaithPoint");
 		
+		for(FaithTrackLabel lab: faith){
+			layeredPane.remove(lab);
+		}
+		faith.clear();
+		
 		for(Integer qty: tempPlay.keySet()){
 			FaithTrackLabel lab = new FaithTrackLabel(resizeFactor, qty, tempPlay.get(qty));
 			lab.update(model);
+			faith.add(lab);
 			layeredPane.add(lab, new Integer(100));
 		}
 	}
@@ -272,10 +261,15 @@ public class BoardPanel extends JPanel{
 	private void updateMilitaryTrack(Model model){
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "MilitaryPoint");
+		for(MilitaryPointLabel lab: military){
+			layeredPane.remove(lab);
+		}
+		military.clear();
 		
 		for(Integer qty: tempPlay.keySet()){
 			MilitaryPointLabel lab = new MilitaryPointLabel(resizeFactor, qty, tempPlay.get(qty));
 			lab.update(model);
+			military.add(lab);
 			layeredPane.add(lab, new Integer(100));
 		}
 	}
@@ -283,9 +277,13 @@ public class BoardPanel extends JPanel{
 	private void updateVictoryTrack(Model model){
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "VictoryPoint");
-		
+		for(VictoryPointLabel lab: victory){
+			layeredPane.remove(lab);
+		}
+		victory.clear();
 		for(Integer qty: tempPlay.keySet()){
 			VictoryPointLabel lab = new VictoryPointLabel(resizeFactor, qty, tempPlay.get(qty));
+			victory.add(lab);
 			lab.update(model);
 			layeredPane.add(lab, new Integer(100));
 		}
@@ -293,6 +291,7 @@ public class BoardPanel extends JPanel{
 	
 	private HashMap<Integer, ArrayList<Player>> updatePointTrack(Model model, String type){
 		HashMap<Integer, ArrayList<Player>> tempPlay = new HashMap<Integer, ArrayList<Player>>();
+		
 		for(String user: model.getPlayers().keySet()){
 			int qty = model.getPlayers().get(user).getSpecificResource(type).getQuantity();
 			if(!tempPlay.containsKey(qty))

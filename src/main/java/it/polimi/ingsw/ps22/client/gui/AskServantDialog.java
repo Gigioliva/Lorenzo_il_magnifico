@@ -5,19 +5,16 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ButtonGroup;
-import javax.swing.JRadioButton;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-
 import it.polimi.ingsw.ps22.client.main.ViewClient;
-import it.polimi.ingsw.ps22.server.answer.AnswerExcomm;
 import it.polimi.ingsw.ps22.server.answer.AnswerServant;
-import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.message.AskServant;
 
 public class AskServantDialog extends MessageDialog{
 		
+		/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6944956486643841684L;
 		AskServant mex;
 		ServantSpinner spin;
 		

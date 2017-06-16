@@ -4,18 +4,20 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
-import it.polimi.ingsw.ps22.server.answer.AnswerCosts;
 import it.polimi.ingsw.ps22.server.answer.AnswerExcomm;
 import it.polimi.ingsw.ps22.server.message.AskExcomm;
 
 public class AskExcommDialog extends MessageDialog {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -7438327380031572667L;
 	AskExcomm mex;
 	ButtonGroup group = new ButtonGroup();
 	JRadioButton b1;
