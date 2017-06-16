@@ -365,8 +365,8 @@ public class BoardPanel extends JPanel{
 	private void updateCardExcomm(Model model){
 		
 		for(int i = 0; i < NUM_CARDEXCOMM; i++){
-			String path = CardPath.getExcommCardPathname(model.getBoard().getChurch(i).getCardExcomm());
-			JLabel exCardLabel = MyImage.getScaledImageinLabel(path, AdaptiveLayout.getChurchSpace(resizeFactor, i));
+			String path = CardPath.getExcommCardPathname(model.getBoard().getChurch((i+1)*2).getCardExcomm());
+			JLabel exCardLabel = MyImage.getScaledImageinLabel(path, AdaptiveLayout.getChurchSpace(resizeFactor, i + 1));
 			layeredPane.add(exCardLabel, new Integer(200));
 		}
 	
