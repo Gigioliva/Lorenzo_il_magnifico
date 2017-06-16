@@ -25,7 +25,7 @@ public class CouncilPalaceSpace extends ActionSpace {
 	}
 
 	@Override
-	public CouncilPalaceSpace clone() {
+	public CouncilPalaceSpace clone(ArrayList<Player> player) {
 		CouncilPalaceSpace temp = new CouncilPalaceSpace();
 		if (!this.isPlayable())
 			temp.setNotPlayable();

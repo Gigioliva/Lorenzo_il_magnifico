@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.player.Family;
+import it.polimi.ingsw.ps22.server.player.Player;
 
 public class HarvestSpace extends ActionSpace{
 	
@@ -20,7 +21,7 @@ public class HarvestSpace extends ActionSpace{
 	}
 
 	@Override
-	public HarvestSpace clone() {
+	public HarvestSpace clone(ArrayList<Player> player) {
 		HarvestSpace temp = new HarvestSpace(this.getActionCost(),this.getMulti()); 
 		if (!this.isPlayable())
 			temp.setNotPlayable();

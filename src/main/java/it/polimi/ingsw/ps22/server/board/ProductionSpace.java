@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.player.Family;
+import it.polimi.ingsw.ps22.server.player.Player;
 
 public class ProductionSpace extends ActionSpace{
 	
@@ -19,7 +20,7 @@ public class ProductionSpace extends ActionSpace{
 	}
 	
 	@Override
-	public ProductionSpace clone() {
+	public ProductionSpace clone(ArrayList<Player> player) {
 		ProductionSpace temp = new ProductionSpace(this.getActionCost(),this.getMulti()); 
 		if (!this.isPlayable())
 			temp.setNotPlayable();

@@ -3,6 +3,7 @@ import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.player.Family;
+import it.polimi.ingsw.ps22.server.player.Player;
 
 public class TowerSpace extends ActionSpace {
 	
@@ -16,8 +17,8 @@ public class TowerSpace extends ActionSpace {
 		this.plan=plan;
 	}
 	
-	@Override
-	public TowerSpace clone() {
+
+	public TowerSpace clone(ArrayList<Player> player) {
 		TowerSpace temp = new TowerSpace(this.getActionCost(),this.getMulti(),this.plan);
 		temp.addCard(this.card.clone());
 		if(!this.isPlayable())
