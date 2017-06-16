@@ -2,11 +2,14 @@ package it.polimi.ingsw.ps22.client.gui;
 
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
@@ -16,6 +19,7 @@ import javax.swing.event.ChangeListener;
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
+import it.polimi.ingsw.ps22.server.move.EndTurn;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class BoardPanel extends JPanel{
@@ -34,7 +38,6 @@ public class BoardPanel extends JPanel{
 	protected static JLabel zoomedCard;
 	private PersonalBoardPanel personalBoard;
 	private JLayeredPane layeredPane;
-	private String username;
 	private ArrayList<PlayersButton> players = new ArrayList<PlayersButton>();
 	private double resizeFactor; 
 	private ArrayList<VictoryPointLabel> victory = new ArrayList<VictoryPointLabel>();
@@ -64,7 +67,6 @@ public class BoardPanel extends JPanel{
 		double factorScaleBoard = resizeFactor(board, heightScreen);
 		this.resizeFactor = factorScaleBoard;
 		
-		this.username = username;
 		
 		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username,CardPath.getPersonalBoardPathname(model.getPlayers().get(username).getPersonalBoard()));
 		layeredPane = new JLayeredPane();
@@ -79,21 +81,21 @@ public class BoardPanel extends JPanel{
         System.out.println(mapLabel.getIcon());
         layeredPane.add(mapLabel, new Integer(20), 0);
 	
-		HarvestButton harvest1 = new HarvestButton(1, username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard), new HarvestListener(view));
+		HarvestButton harvest1 = new HarvestButton(2, username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard), new HarvestListener(view));
 		addActionPanelToLayeredPane(harvest1);
 		
-		HarvestButton harvest2 = new HarvestButton(0, username, AdaptiveLayout.getHarvestLeftSpace(factorScaleBoard), new HarvestListener(view));
+		HarvestButton harvest2 = new HarvestButton(1, username, AdaptiveLayout.getHarvestLeftSpace(factorScaleBoard), new HarvestListener(view));
 		addActionPanelToLayeredPane(harvest2);
 		
-		ProductionButton prod1 = new ProductionButton(1,username, AdaptiveLayout.getProdRightSpace(factorScaleBoard), new ProductionListener(view));
-		ProductionButton prod2 = new ProductionButton(0, username, AdaptiveLayout.getProdLeftSpace(factorScaleBoard), new ProductionListener(view));
+		ProductionButton prod1 = new ProductionButton(2,username, AdaptiveLayout.getProdRightSpace(factorScaleBoard), new ProductionListener(view));
+		ProductionButton prod2 = new ProductionButton(1, username, AdaptiveLayout.getProdLeftSpace(factorScaleBoard), new ProductionListener(view));
 		addActionPanelToLayeredPane(prod1);
 		addActionPanelToLayeredPane(prod2);
 		
-		MarketButton mark1 = new MarketButton(0, username, AdaptiveLayout.getMarket1Space(factorScaleBoard), new MarketListener(view));
-		MarketButton mark2 = new MarketButton(1, username, AdaptiveLayout.getMarket2Space(factorScaleBoard), new MarketListener(view));
-		MarketButton mark3 = new MarketButton(2, username, AdaptiveLayout.getMarket3Space(factorScaleBoard), new MarketListener(view));
-		MarketButton mark4 = new MarketButton(3, username, AdaptiveLayout.getMarket4Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark1 = new MarketButton(1, username, AdaptiveLayout.getMarket1Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark2 = new MarketButton(2, username, AdaptiveLayout.getMarket2Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark3 = new MarketButton(3, username, AdaptiveLayout.getMarket3Space(factorScaleBoard), new MarketListener(view));
+		MarketButton mark4 = new MarketButton(4, username, AdaptiveLayout.getMarket4Space(factorScaleBoard), new MarketListener(view));
 		addActionPanelToLayeredPane(mark1);		
 		addActionPanelToLayeredPane(mark2);
 		addActionPanelToLayeredPane(mark3);
@@ -139,26 +141,26 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(zoomedCard, new Integer(2000));
 		
 		for(int i = 0; i < 4; i++){
-			TowerPanel tower1 = new TowerPanel(AdaptiveLayout.getCardTerritorySpace(factorScaleBoard, i),"Territory",i );
-			TowerButton space1 = new TowerButton(i, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 0, i), new TerritoryListener(view),"Territory");
+			TowerPanel tower1 = new TowerPanel(AdaptiveLayout.getCardTerritorySpace(factorScaleBoard, i),"Territory",i + 1 );
+			TowerButton space1 = new TowerButton(i + 1, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 0, i), new TerritoryListener(view),"Territory");
 			addActionPanelToLayeredPane(space1);
 			towers.get(0).add(tower1);
 			layeredPane.add(tower1, new Integer(30));
 			
-			TowerPanel tower2 = new TowerPanel(AdaptiveLayout.getCharacterSpace(factorScaleBoard, i), "Character", i);
-			TowerButton space2 = new TowerButton(i,username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 1, i), new CharacterListener(view), "Character");
+			TowerPanel tower2 = new TowerPanel(AdaptiveLayout.getCharacterSpace(factorScaleBoard, i), "Character", i + 1);
+			TowerButton space2 = new TowerButton(i + 1,username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 1, i), new CharacterListener(view), "Character");
 			addActionPanelToLayeredPane(space2);
 			towers.get(1).add(tower2);
 			layeredPane.add(tower2, new Integer(30));
 
-			TowerPanel tower3 = new TowerPanel(AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, i), "Building", i);
-			TowerButton space3 = new TowerButton(i, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 2, i), new BuildingListener(view), "Building");
+			TowerPanel tower3 = new TowerPanel(AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, i), "Building", i +1);
+			TowerButton space3 = new TowerButton(i + 1, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 2, i), new BuildingListener(view), "Building");
 			addActionPanelToLayeredPane(space3);
 			towers.get(2).add(tower3);
 			layeredPane.add(tower3, new Integer(30));
 			
-			TowerPanel tower4 = new TowerPanel(AdaptiveLayout.getCardVentureSpace(factorScaleBoard, i), "Venture", i);
-			TowerButton space4 = new TowerButton(i, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 3, i), new VentureListener(view), "Venture");
+			TowerPanel tower4 = new TowerPanel(AdaptiveLayout.getCardVentureSpace(factorScaleBoard, i), "Venture", i + 1);
+			TowerButton space4 = new TowerButton(i + 1, username, AdaptiveLayout.getFamiliarSpace(factorScaleBoard, 3, i), new VentureListener(view), "Venture");
 			addActionPanelToLayeredPane(space4);
 			towers.get(3).add(tower4);
 			layeredPane.add(tower4, new Integer(30));
@@ -180,6 +182,20 @@ public class BoardPanel extends JPanel{
 			players.add(b1);
 			layeredPane.add(b1, new Integer(40));
 		}
+		
+		JButton quitTurn = new JButton("End turn");
+		this.setBounds((int)widthScreen - 100,(int) heightScreen - 100,
+				100, 100);
+		quitTurn.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				EndTurn end = new EndTurn(username);
+				view.send(end);
+				
+			}
+		});
+		layeredPane.add(quitTurn, new Integer(2000));
 		
 		this.add(layeredPane);
         
