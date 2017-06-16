@@ -56,14 +56,14 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			if (waitingConnection.size() == 2) {
 				timer.schedule(new Task(), TIMER);
 			}
-			if (waitingConnection.size() == 1) {
+			if (waitingConnection.size() == 4) {
 				startGame();
 			}
 		}
 	}
 
 	public void startGame() {
-		if(waitingConnection.size()>0){
+		if(waitingConnection.size()>1){
 			timer.cancel();
 			timer=new Timer();
 			ArrayList<Connection> temp = new ArrayList<Connection>();

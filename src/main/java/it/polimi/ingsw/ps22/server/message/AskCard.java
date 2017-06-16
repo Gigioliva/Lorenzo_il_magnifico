@@ -11,7 +11,7 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskCard extends MessageAsk{
 	
 	private static final long serialVersionUID = 1L;
-	private transient HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
+	private HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
 	private transient Player player;
 	private transient CardAction cardAction;
 	
@@ -30,8 +30,9 @@ public class AskCard extends MessageAsk{
 		setString(str.toString());
 	}
 	
-	public AskCard(String str, int id){
+	public AskCard(String str, int id,HashMap<String,ArrayList<DevelopmentCard>> possibleCard){
 		super(str,id);
+		this.possibleCard=possibleCard;
 	}
 	
 	public HashMap<String,ArrayList<DevelopmentCard>> getPossibleCard(){

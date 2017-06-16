@@ -22,7 +22,7 @@ public class VisitorA {
 
 	public AskCard visit(AskCard mex) {
 		if (user.equals(user_mex)) {
-			return new AskCard(mex.getString(), mex.getId());
+			return new AskCard(mex.getString(), mex.getId(), mex.getPossibleCard());
 		} else {
 			return null;
 		}
