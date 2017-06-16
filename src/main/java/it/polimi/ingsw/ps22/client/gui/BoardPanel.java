@@ -26,7 +26,7 @@ public class BoardPanel extends JPanel{
 
 	private static final long serialVersionUID = -5630682030714330058L;
 
-	private final static int NUM_PLAYERS = 4;
+	private int NUM_PLAYERS;
 	private ServantSpinner spinner = new ServantSpinner();
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
 	private ArrayList<ActionButton> actionSpaces = new ArrayList<ActionButton>();
@@ -58,6 +58,8 @@ public class BoardPanel extends JPanel{
 		for(String user: avver){
 			personBonusPaths.add(CardPath.getPersonalBoardPathname(model.getPlayers().get(user).getPersonalBoard()));
 		}
+		
+		this.NUM_PLAYERS = model.getPlayers().size();
 		
 		double factorScaleBoard = resizeFactor(board, heightScreen);
 		this.resizeFactor = factorScaleBoard;
