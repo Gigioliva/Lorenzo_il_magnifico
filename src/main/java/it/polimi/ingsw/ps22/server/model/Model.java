@@ -24,7 +24,7 @@ public class Model extends Observable implements Serializable {
 	private static final long serialVersionUID = 1L;
 	private Board board;
 	private int turn;
-	private int giro;
+	public int giro;
 	private HashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
@@ -129,19 +129,18 @@ public class Model extends Observable implements Serializable {
 				return;
 			}
 		}
-		notifyMessage(new ChoiceMove());
 	}
 
 	private void newGiro() {
 		if (giro < 4) {
 			giro++;
 			playerGame = orderedPlayers.get(0);
+			return;
 		}
 		if (giro == 4) {
 			giro++;
 			int i;
-			boolean find = false;
-			for (i = 0; i < orderedPlayers.size() && !find; i++) {
+			for (i = 0; i < orderedPlayers.size(); i++) {
 				if (players.get(orderedPlayers.get(i)).getSpecBonus().returnBool("SkipFirstMove")) {
 					playerGame = orderedPlayers.get(i);
 					return;
@@ -149,10 +148,12 @@ public class Model extends Observable implements Serializable {
 			}
 			if (i == orderedPlayers.size()) {
 				newTurn();
+				return;
 			}
 		}
 		if (giro == 5) {
 			newTurn();
+			return;
 		}
 	}
 
@@ -173,11 +174,11 @@ public class Model extends Observable implements Serializable {
 		this.orderedPlayers = newOrder;
 		playerGame = newOrder.get(0);
 		turn++;
+		giro=1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
 		if (turn > 6) {
 			EndGame();
 		}
-
 	}
 
 	private void EndGame() {

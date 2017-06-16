@@ -17,17 +17,9 @@ public class GraphicGUI extends Graphic {
 		visitor = new VisitorGUI(gui, view);
 	}
 
-	/*public void initGui() {
-		SwingUtilities.invokeLater(new Runnable() {
-			@Override
-			public void run() {
-				gui = new Gui();
-			}
-		});
-	}*/
-
 	@Override
 	public void printModel(Model model) {
+		System.out.println(model.giro);
 		if (flag) {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
