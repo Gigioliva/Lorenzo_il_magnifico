@@ -109,15 +109,14 @@ public class MainParser {
 		System.out.println("Now already written file is ready to be read");
 		HashMap<String, UserData> playerDataReaded = new HashMap<String, UserData>();
 		InputPlayerDataSaxParser.PlayerRead(playerPathname, playerDataReaded);
+		playerDataReaded.get("Gigi").setNumVictory(playerDataReaded.get("Gigi").getNumVictory()+1);
 		for(String el: playerDataReaded.keySet()) {
 			System.out.println("\nUsername: " + el);
 			System.out.println(playerDataReaded.get(el).toString());
 		}
-		
-		System.out.println("\n\nTERMINATO CORRETTAMENTE");
-		
-		
-		
+		System.out.println("\nWrite new players' data on file");
+		OutputPlayerDataDomParser.PlayerDataWrite(playerPathname, playerDataReaded);
+		System.out.println("\n\nEXECUTION TERMINATED CORRECTLY");	
 		
 	}
 
