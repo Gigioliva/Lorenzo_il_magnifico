@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.client.gui;
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.player.PersonalBoard;
 
 public class CardPath {
 
@@ -18,9 +19,15 @@ public class CardPath {
 		return name.toString().toLowerCase();
 	}
 	
-	
+
 	public static String getExcommCardPathname(CardExcomm card) {
 		StringBuilder name = new StringBuilder("./image/excommCard/"+deleteSpaces(card.getPathname()));
+		return name.toString();
+	}
+	
+	
+	public static String getPersonalBoardPathname(PersonalBoard pers) {
+		StringBuilder name = new StringBuilder("./image/personalboard/"+deleteSpaces(pers.getPathname()));
 		return name.toString();
 	}
 	
