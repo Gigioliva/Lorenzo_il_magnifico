@@ -17,6 +17,7 @@ import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
 import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
+import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.AskServant;
@@ -137,5 +138,9 @@ public class Gui extends JFrame{
 		JOptionPane.showMessageDialog(this, "You can't do this move");
 	}
 
+	
+	public void askExcomm(AskExcomm mex){
+		new AskExcommDialog(view, mex);
+	}
 
 }

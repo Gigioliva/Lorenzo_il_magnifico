@@ -179,8 +179,6 @@ public class BoardPanel extends JPanel{
 			layeredPane.add(b1, new Integer(40));
 		}
 		
-		// PrivilegeDialog d = new PrivilegeDialog(view);
-		
 		this.add(layeredPane);
         
         
@@ -216,6 +214,7 @@ public class BoardPanel extends JPanel{
 		updateFaithTrack(model);
 		updateMilitaryTrack(model);
 		updateVictoryTrack(model);
+		repaint();
 	}
 	
 	private void updateActionSpaces(Model model){
@@ -246,9 +245,15 @@ public class BoardPanel extends JPanel{
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "FaithPoint");
 		
+		for(FaithTrackLabel lab: faith){
+			layeredPane.remove(lab);
+		}
+		faith.clear();
+		
 		for(Integer qty: tempPlay.keySet()){
 			FaithTrackLabel lab = new FaithTrackLabel(resizeFactor, qty, tempPlay.get(qty));
 			lab.update(model);
+			faith.add(lab);
 			layeredPane.add(lab, new Integer(100));
 		}
 	}
@@ -256,10 +261,15 @@ public class BoardPanel extends JPanel{
 	private void updateMilitaryTrack(Model model){
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "MilitaryPoint");
+		for(MilitaryPointLabel lab: military){
+			layeredPane.remove(lab);
+		}
+		military.clear();
 		
 		for(Integer qty: tempPlay.keySet()){
 			MilitaryPointLabel lab = new MilitaryPointLabel(resizeFactor, qty, tempPlay.get(qty));
 			lab.update(model);
+			military.add(lab);
 			layeredPane.add(lab, new Integer(100));
 		}
 	}
@@ -267,6 +277,9 @@ public class BoardPanel extends JPanel{
 	private void updateVictoryTrack(Model model){
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "VictoryPoint");
+		for(VictoryPointLabel lab: victory){
+			layeredPane.remove(lab);
+		}
 		victory.clear();
 		for(Integer qty: tempPlay.keySet()){
 			VictoryPointLabel lab = new VictoryPointLabel(resizeFactor, qty, tempPlay.get(qty));
