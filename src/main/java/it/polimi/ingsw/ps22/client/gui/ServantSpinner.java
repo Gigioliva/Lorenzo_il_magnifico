@@ -8,6 +8,10 @@ import javax.swing.SpinnerNumberModel;
 
 public class ServantSpinner extends JPanel {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 4913189729334223962L;
 	JSpinner spin;
 	
 	public ServantSpinner() {

@@ -51,7 +51,7 @@ public class PersonalBoardPanel extends JPanel {
 		ImageIcon personalB = new ImageIcon(imageBonus);		
 	    JLabel bonusLabel = new JLabel(personalB);
 	    bonusLabel.setBounds(0, 0, personalB.getIconWidth(), personalB.getIconHeight());
- 	    personalBoard.add(bonusLabel, new Integer(30), 0);	    		
+ 	    personalBoard.add(bonusLabel, new Integer(30), 0);	
 	    
 		Image img = personal.getImage();
 		Rectangle dimBoard = new Rectangle((int)(heightScreen*0.75) + personalBonus.getIconWidth() ,(int)(personal.getIconWidth()/factorScalePersonalBoard + heightScreen*0.75 + personalBonus.getIconWidth()),0, (int)(personal.getIconHeight()/factorScalePersonalBoard));
@@ -162,5 +162,9 @@ public class PersonalBoardPanel extends JPanel {
 		updateCharacter(chara);
 		updateTerritory(terr);
 		updateVenture(venture);
+	}
+	
+	public JLayeredPane getLayeredPane(){
+		return this.personalBoard;
 	}
 }

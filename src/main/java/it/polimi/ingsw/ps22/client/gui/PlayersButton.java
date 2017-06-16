@@ -19,9 +19,10 @@ public class PlayersButton extends JButton {
 	public PlayersButton(double widthScreen, double heightScreen, String username, int pos, String pathPersonalBonus){
 		this.setText(username);
 		
-		this.setBounds((int)widthScreen/2 + 300 + 100*pos, (int)heightScreen - 100, 100, 50); 
-		
 		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username, pathPersonalBonus);
+		
+		Rectangle dim = PersonalBoardAdaptive.getPlayerButtonSLot(personalBoard.resizeFactor, pos);
+		this.setBounds(dim.getInitx() + personalBoard.getBounds().width, dim.getInity(), dim.getOffsetX(), dim.getOffsetY()); 
 		
 		this.addActionListener(new ShowPersonalBoard(username));
 		
