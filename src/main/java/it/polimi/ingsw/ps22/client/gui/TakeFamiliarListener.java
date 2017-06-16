@@ -16,7 +16,7 @@ public class TakeFamiliarListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 			FamiliarButton b = (FamiliarButton)e.getSource();
-			b.setEnabled(false);
+			//b.setEnabled(false);
 			for(ActionButton zone: zones){
 				zone.enableZone(b.getColor());
 			}

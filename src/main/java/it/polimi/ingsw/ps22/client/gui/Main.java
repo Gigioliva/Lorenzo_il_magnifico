@@ -19,7 +19,7 @@ import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class Main {
-	public static void main(String[] args) {
+	public static void mainGui(String[] args) {
 	
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){

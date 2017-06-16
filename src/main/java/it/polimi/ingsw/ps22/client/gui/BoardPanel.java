@@ -56,7 +56,7 @@ public class BoardPanel extends JPanel{
 		
 		ArrayList<String> personBonusPaths = new ArrayList<String>();
 		for(String user: avver){
-			personBonusPaths.add(model.getPlayers().get(user).getPersonalBoard().getPathname());
+			personBonusPaths.add(CardPath.getPersonalBoardPathname(model.getPlayers().get(user).getPersonalBoard()));
 		}
 		
 		double factorScaleBoard = resizeFactor(board, heightScreen);
@@ -64,7 +64,7 @@ public class BoardPanel extends JPanel{
 		
 		this.username = username;
 		
-		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username, model.getPlayers().get(username).getPersonalBoard().getPathname() );
+		personalBoard = new PersonalBoardPanel(widthScreen, heightScreen, username,CardPath.getPersonalBoardPathname(model.getPlayers().get(username).getPersonalBoard()));
 		layeredPane = new JLayeredPane();
 		
 		Image img = board.getImage();
