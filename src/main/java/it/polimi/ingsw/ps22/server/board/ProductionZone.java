@@ -61,7 +61,7 @@ public class ProductionZone extends Zone {
 		}
 		for (Color el : Color.values()) {
 			if (el != Color.NEUTRAL)
-				control = control && allFamily.contains(player.getFamily(el));
+				control = control && !allFamily.contains(player.getFamily(el));
 		}
 		return control;
 	}
