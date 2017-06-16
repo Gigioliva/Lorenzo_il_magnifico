@@ -21,7 +21,7 @@ public class GraphicCLI extends Graphic {
 		/*for(String el: model.getPlayers().keySet()){
 			System.out.println(model.getPlayers().get(el).resourcesString());
 		}*/
-		//System.out.println(model.getBoard().towersString());
+		System.out.println(model.getBoard().getChurch(2).toString());
 	}
 
 	/*@Override
