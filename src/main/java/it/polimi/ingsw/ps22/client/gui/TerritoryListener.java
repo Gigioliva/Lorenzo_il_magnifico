@@ -18,7 +18,7 @@ public class TerritoryListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ActionButton pressedButton = (ActionButton)e.getSource();
-		TowerTerritoryMove move = new TowerTerritoryMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace(), 
+		TowerTerritoryMove move = new TowerTerritoryMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace() + 1, 
 				pressedButton.getNumServants());
 		view.send(move);
 		System.out.println("creo territory Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getSpace() + 

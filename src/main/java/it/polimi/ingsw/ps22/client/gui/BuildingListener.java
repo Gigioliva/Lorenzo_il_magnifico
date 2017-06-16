@@ -17,7 +17,7 @@ public class BuildingListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ActionButton pressedButton = (ActionButton)e.getSource();
-		TowerBuildingMove move = new TowerBuildingMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace(), 
+		TowerBuildingMove move = new TowerBuildingMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace() +1, 
 				pressedButton.getNumServants());
 		view.send(move);
 		System.out.println("creo building Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getSpace() + 

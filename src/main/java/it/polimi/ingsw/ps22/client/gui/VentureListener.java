@@ -17,7 +17,7 @@ public class VentureListener implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		ActionButton pressedButton = (ActionButton)e.getSource();
-		TowerVentureMove move = new TowerVentureMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace(), 
+		TowerVentureMove move = new TowerVentureMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace() + 1, 
 				pressedButton.getNumServants());
 		view.send(move);
 		System.out.println("creo venture Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getSpace() + 
