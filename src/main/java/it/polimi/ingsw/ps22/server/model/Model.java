@@ -315,4 +315,8 @@ public class Model extends Observable implements Serializable {
 			return null;
 		}
 	}
+	
+	public String getOrderedPlayers(int pos){
+		return orderedPlayers.get(pos);
+	}
 }

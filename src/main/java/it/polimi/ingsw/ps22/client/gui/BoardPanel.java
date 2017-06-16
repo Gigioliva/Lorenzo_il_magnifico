@@ -31,6 +31,7 @@ public class BoardPanel extends JPanel{
 	private static final long serialVersionUID = -5630682030714330058L;
 
 	private int NUM_PLAYERS;
+	private static final int NUM_CARDEXCOMM = 3;
 	private ServantSpinner spinner = new ServantSpinner();
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
 	private ArrayList<ActionButton> actionSpaces = new ArrayList<ActionButton>();
@@ -46,6 +47,7 @@ public class BoardPanel extends JPanel{
 	private JLabel dice1;
 	private JLabel dice2;
 	private JLabel dice3;
+	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
 
 	
 	
@@ -215,6 +217,12 @@ public class BoardPanel extends JPanel{
 		dice3.setBounds(rec3.getInitx(), rec3.getInity(), rec3.getOffsetX(), rec3.getOffsetY());
 		layeredPane.add(dice3, new Integer(400));
 		
+		for(int i = 0; i<NUM_PLAYERS; i++){
+			OrderPlayerLabel lab = new OrderPlayerLabel(i, resizeFactor);
+			lab.setVisible(false);
+			orederPlayers.add(lab);
+			layeredPane.add(lab, new Integer(200));
+		}
 		
 		this.add(layeredPane);
         
@@ -252,6 +260,8 @@ public class BoardPanel extends JPanel{
 		updateMilitaryTrack(model);
 		updateVictoryTrack(model);
 		updateDices(model);
+		updateOrderPlayers(model);
+		updateCardExcomm(model);
 		repaint();
 	}
 	
@@ -343,6 +353,23 @@ public class BoardPanel extends JPanel{
 		dice1.setText(String.valueOf(model.getBoard().getDice().getDice(Color.ORANGE)));
 		dice2.setText(String.valueOf(model.getBoard().getDice().getDice(Color.BLACK)));
 		dice3.setText(String.valueOf(model.getBoard().getDice().getDice(Color.WHITE)));
+	}
+	
+	private void updateOrderPlayers(Model model){
+		for(int i=0; i< NUM_PLAYERS; i++){
+			OrderPlayerLabel lab = orederPlayers.get(i);
+			lab.updateOrderLabel(model);
+		}
+	}
+	
+	private void updateCardExcomm(Model model){
+		
+		for(int i = 0; i < NUM_CARDEXCOMM; i++){
+			String path = CardPath.getExcommCardPathname(model.getBoard().getChurch(i).getCardExcomm());
+			JLabel exCardLabel = MyImage.getScaledImageinLabel(path, AdaptiveLayout.getChurchSpace(resizeFactor, i));
+			layeredPane.add(exCardLabel, new Integer(200));
+		}
+	
 	}
 	
 	

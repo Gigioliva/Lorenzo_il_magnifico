@@ -86,6 +86,11 @@ public class ChurchSpace implements Serializable {
 		return str.toString();
 	}
 	
+	public CardExcomm getCardExcomm() {
+		System.out.println("prova");
+		return cardExcomm;
+	}
+	
 	@Override
 	public String toString() {
 		
