@@ -34,7 +34,7 @@ public class TowerZone extends Zone {
 		TowerZone temp = new TowerZone();
 		ArrayList<DevelopmentCard> arr;
 		for (int i=0;i<NUM_SPACES;i++) {
-			temp.towerSpaces[i] = this.towerSpaces[i].clone();
+			temp.towerSpaces[i] = this.towerSpaces[i].clone(null);
 		}
 		temp.occupied = this.occupied;
 		for (Integer key: cards.keySet()) {

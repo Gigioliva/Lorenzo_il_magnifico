@@ -27,7 +27,7 @@ public class MarketZone extends Zone {
 	public MarketZone(MarketSpace[] marketSp) {
 		marketSpace = new MarketSpace[NUM_SPACES];
 		for (int i=0;i<NUM_SPACES;i++) {
-			this.marketSpace[i] = marketSp[i].clone();
+			this.marketSpace[i] = marketSp[i].clone(null);
 		}
 	}
 	

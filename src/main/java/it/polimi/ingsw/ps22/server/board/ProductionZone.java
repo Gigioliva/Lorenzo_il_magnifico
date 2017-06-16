@@ -22,8 +22,8 @@ public class ProductionZone extends Zone {
 
 	public ProductionZone clone() {
 		ProductionZone temp = new ProductionZone();
-		temp.productionSpace[0] = this.productionSpace[0].clone();
-		temp.productionSpace[1] = this.productionSpace[1].clone();
+		temp.productionSpace[0] = this.productionSpace[0].clone(null);
+		temp.productionSpace[1] = this.productionSpace[1].clone(null);
 		return temp;
 	}
 	

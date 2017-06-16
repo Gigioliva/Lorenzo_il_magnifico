@@ -22,8 +22,8 @@ public class HarvestZone extends Zone {
 	
 	public HarvestZone clone() {
 		HarvestZone temp = new HarvestZone();
-		temp.harvestSpace[0] = this.harvestSpace[0].clone();
-		temp.harvestSpace[1] = this.harvestSpace[1].clone();
+		temp.harvestSpace[0] = this.harvestSpace[0].clone(null);
+		temp.harvestSpace[1] = this.harvestSpace[1].clone(null);
 		return temp;
 	}
 	

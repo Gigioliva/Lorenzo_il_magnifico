@@ -30,8 +30,11 @@ public class CouncilPalaceSpace extends ActionSpace {
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
-		for (Family el: fam) {
-			temp.addFamily(el.clone(el.getPlayer()));
+		for (Player pl : player) {
+			for (Family el : fam) {
+				if(pl.getUsername().equals(el.getPlayer().getUsername()))
+				temp.addFamily(el.clone(pl));
+			}
 		}
 		temp.setBonus(this.bonus.clone());
 		return temp;

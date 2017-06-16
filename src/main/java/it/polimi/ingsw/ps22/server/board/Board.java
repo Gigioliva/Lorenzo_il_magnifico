@@ -38,7 +38,7 @@ public class Board implements Serializable {
 		temp.market = this.market.clone();
 		temp.prodZone = this.prodZone.clone();
 		temp.harvestZone = this.harvestZone.clone();
-		temp.councilPalace = this.councilPalace.clone();
+		temp.councilPalace = this.councilPalace.clone(null);
 		for (Integer i : church.keySet()) {
 			temp.church.put(i, this.church.get(i).clone());
 		}
