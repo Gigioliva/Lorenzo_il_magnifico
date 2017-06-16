@@ -68,6 +68,7 @@ public class Gui extends JFrame{
 		new PrivilegeDialog(view, mex);
 		return;
 	}
+	/*
 
 	public void getCard(AskCard mex){
 		
@@ -110,6 +111,10 @@ public class Gui extends JFrame{
 			throw new IllegalArgumentException();
 		}
 		
+	}
+	*/
+	public void getCard(AskCard mex){
+		new AskCardDialog(view, mex);
 	}
 	
 	public void askCosts(AskCosts mex){
