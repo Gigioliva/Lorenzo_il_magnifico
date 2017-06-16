@@ -80,7 +80,6 @@ public class PrivilegeDialog extends MessageDialog {
 			if(b.isSelected())
 				cont++;
 		}
-		System.out.println(cont);
 		return cont;
 	}
 
