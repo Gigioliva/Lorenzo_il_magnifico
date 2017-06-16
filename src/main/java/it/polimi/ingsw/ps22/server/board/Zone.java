@@ -39,7 +39,6 @@ public abstract class Zone implements Serializable {
 		if (numServant >= 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
 			if ((player.getSpecBonus().returnBool("DoubleServant"))
 					&& ((actionValue + numServant / 2) >= actionSpace.getActionCost())) {
-				System.out.println("prova2 zone");
 				return true;
 			}
 			if (!(player.getSpecBonus().returnBool("DoubleServant"))

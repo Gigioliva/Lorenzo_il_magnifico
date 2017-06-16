@@ -17,20 +17,18 @@ public class ProductionAction extends Action {
 	public ProductionAction(int actionValue) {
 		super(actionValue);
 	}
-	
+
 	@Override
 	public ProductionAction clone() {
-		ProductionAction temp=new ProductionAction(this.getActionValue());
-		temp.servants=this.servants;
+		ProductionAction temp = new ProductionAction(this.getActionValue());
+		temp.servants = this.servants;
 		return temp;
 	}
 
 	private HashMap<DevelopmentCard, ArrayList<ActionEffect>> getPossibleEffects(Player player, int bonus,
 			HashMap<DevelopmentCard, HashMap<ActionEffect, Integer>> allEffects) {
-
 		HashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects = new HashMap<DevelopmentCard, ArrayList<ActionEffect>>();
 		ArrayList<DevelopmentCard> buildingCards = new ArrayList<DevelopmentCard>(allEffects.keySet());
-
 		for (DevelopmentCard card : buildingCards) {
 			HashMap<ActionEffect, Integer> mapEffects = allEffects.get(card);
 			for (ActionEffect effect : mapEffects.keySet()) {
@@ -79,8 +77,10 @@ public class ProductionAction extends Action {
 		// HashMap<DevelopmentCard,Integer>();
 		// passa a utente lista di carte ed effetti possibili ad ogni carta
 		// chosenEffect = askEffect...
-		AskEffect mex = new AskEffect(possibleEffects, this, player);
-		mex.applyAsk();
+		if(!possibleEffects.isEmpty()){
+			AskEffect mex = new AskEffect(possibleEffects, this, player);
+			mex.applyAsk();
+		}
 		// DevelopmentCard card = chosenEffect.keySet().iterator().next();
 		// card.applyActionEffect(player, board, chosenEffect.get(card));
 		// allEffects.remove(card);
