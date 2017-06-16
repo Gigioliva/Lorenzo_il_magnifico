@@ -43,6 +43,9 @@ public class BoardPanel extends JPanel{
 	private ArrayList<VictoryPointLabel> victory = new ArrayList<VictoryPointLabel>();
 	private ArrayList<MilitaryPointLabel> military = new ArrayList<MilitaryPointLabel>();
 	private ArrayList<FaithTrackLabel> faith = new ArrayList<FaithTrackLabel>();
+	private JLabel dice1;
+	private JLabel dice2;
+	private JLabel dice3;
 
 	
 	
@@ -78,7 +81,7 @@ public class BoardPanel extends JPanel{
 	
         JLabel mapLabel = new JLabel(board);
         mapLabel.setBounds(0, 0, board.getIconWidth(), board.getIconHeight());
-        System.out.println(mapLabel.getIcon());
+        
         layeredPane.add(mapLabel, new Integer(20), 0);
 	
 		HarvestButton harvest1 = new HarvestButton(1, username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard), new HarvestListener(view));
@@ -184,7 +187,7 @@ public class BoardPanel extends JPanel{
 		}
 		
 		JButton quitTurn = new JButton("End turn");
-		this.setBounds((int)widthScreen - 100,(int) heightScreen - 100,
+		quitTurn.setBounds((int)widthScreen - 100,(int) heightScreen - 100,
 				100, 100);
 		quitTurn.addActionListener(new ActionListener() {
 			
@@ -196,6 +199,22 @@ public class BoardPanel extends JPanel{
 			}
 		});
 		layeredPane.add(quitTurn, new Integer(2000));
+		
+		dice1 = new JLabel();
+		Rectangle rec = AdaptiveLayout.getOrangeDiceSpace(factorScaleBoard);
+		dice1.setBounds(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+		layeredPane.add(dice1, new Integer(400));
+		
+		dice2 = new JLabel();
+		Rectangle rec2 = AdaptiveLayout.getBlackDiceSpace(factorScaleBoard);
+		dice2.setBounds(rec2.getInitx(), rec2.getInity(), rec2.getOffsetX(), rec2.getOffsetY());
+		layeredPane.add(dice2, new Integer(400));
+		
+		dice3 = new JLabel();
+		Rectangle rec3 = AdaptiveLayout.getWhiteDiceSpace(factorScaleBoard);
+		dice3.setBounds(rec3.getInitx(), rec3.getInity(), rec3.getOffsetX(), rec3.getOffsetY());
+		layeredPane.add(dice3, new Integer(400));
+		
 		
 		this.add(layeredPane);
         
@@ -232,6 +251,7 @@ public class BoardPanel extends JPanel{
 		updateFaithTrack(model);
 		updateMilitaryTrack(model);
 		updateVictoryTrack(model);
+		updateDices(model);
 		repaint();
 	}
 	
@@ -317,6 +337,12 @@ public class BoardPanel extends JPanel{
 			tempPlay.get(qty).add(model.getPlayers().get(user));
 		}
 		return tempPlay;
+	}
+	
+	private void updateDices(Model model){
+		dice1.setText(String.valueOf(model.getBoard().getDice().getDice(Color.ORANGE)));
+		dice2.setText(String.valueOf(model.getBoard().getDice().getDice(Color.BLACK)));
+		dice3.setText(String.valueOf(model.getBoard().getDice().getDice(Color.WHITE)));
 	}
 	
 	

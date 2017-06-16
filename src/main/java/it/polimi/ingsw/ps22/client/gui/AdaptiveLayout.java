@@ -10,10 +10,10 @@ public class AdaptiveLayout {
 	private static final Rectangle harvestRight = new Rectangle(445, 975, 3340, 3568);
 	private static final Rectangle productionLeft = new Rectangle(162, 368, 3034, 3256);
 	private static final Rectangle productionRight = new Rectangle(445, 975, 3034, 3256);
-	private static final Rectangle market1 = new Rectangle(1403, 1609, 2973, 3200);
-	private static final Rectangle market2 = new Rectangle(1638, 1845, 2973, 3200);
-	private static final Rectangle market3 = new Rectangle(1860, 2064, 3038, 3262);
-	private static final Rectangle market4 = new Rectangle(2032, 2240, 3210, 3432);
+	private static final Rectangle market1 = new Rectangle(1456, 1556, 3020, 3120);
+	private static final Rectangle market2 = new Rectangle(1690, 1790, 3020, 3120);
+	private static final Rectangle market3 = new Rectangle(1914, 2014, 3090, 3190);
+	private static final Rectangle market4 = new Rectangle(2090, 2190, 3260, 3360);
 	private static final Rectangle playerGrid = new Rectangle(2042, 2148, 2000, 2106);
 	private static final Rectangle church1 = new Rectangle(508, 685, 2263, 2623);
 	private static final Rectangle church2 = new Rectangle(704, 883, 2307, 2654);
