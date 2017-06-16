@@ -21,6 +21,8 @@ import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.AskServant;
+import it.polimi.ingsw.ps22.server.message.ChoiceMove;
+import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 
 public class Gui extends JFrame{
@@ -141,6 +143,14 @@ public class Gui extends JFrame{
 	
 	public void askExcomm(AskExcomm mex){
 		new AskExcommDialog(view, mex);
+	}
+	
+	public void yourTurn(ChoiceMove mex){
+		JOptionPane.showMessageDialog(this, mex.getString());
+	}
+	
+	public void genericMessage(GenericMessage mex){
+		JOptionPane.showMessageDialog(this, mex.getString());
 	}
 
 }

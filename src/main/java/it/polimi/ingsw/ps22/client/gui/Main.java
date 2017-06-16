@@ -19,12 +19,12 @@ import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class Main {
-	public static void mainGui(String[] args) {
+	public static void main(String[] args) {
 	
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
 				
-				/*
+				
 				ArrayList<String> avver = new ArrayList<String>();
 				avver.add("Lore");
 				avver.add("Gigi");
@@ -37,8 +37,8 @@ public class Main {
 				ViewClient view = new ViewClient();
 				new LoginFrame(view);
 				Gui b = new Gui();
-				b.initGui("Tizio", "./image/personalBonus/personalbonus4.png", avver, paths, view);
 				Model model = new Model();
+				b.initGui(model, view);
 				model.addPlayers("Lore");
 				model.addPlayers("Gigi");
 				model.addPlayers("Marco");
@@ -66,7 +66,7 @@ public class Main {
 				arr.add(new CardLeader("Borgia"));
 				b.askCopyLeader(new AskCopyLeader(arr,new CardLeader("ciao"),model.getPlayers().get("Tizio")));
 				b.errorMove();
-				*/
+				
 			}
 		});
 	}

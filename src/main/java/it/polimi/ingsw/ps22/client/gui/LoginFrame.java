@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,6 +15,10 @@ import it.polimi.ingsw.ps22.server.answer.AnswerUsername;
 
 public class LoginFrame extends JFrame {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -1941598498652425988L;
 	JPanel mainPanel = new JPanel();
 	
 	public LoginFrame(ViewClient view){
