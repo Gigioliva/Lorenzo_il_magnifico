@@ -33,7 +33,7 @@ public class CouncilPalaceSpace extends ActionSpace {
 		for (Family el: fam) {
 			temp.addFamily(el.clone(el.getPlayer()));
 		}
-		temp.setBonus(this.getBonus().clone());
+		temp.setBonus(this.bonus.clone());
 		return temp;
 	}
 	
