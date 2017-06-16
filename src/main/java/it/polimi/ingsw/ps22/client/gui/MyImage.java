@@ -57,9 +57,9 @@ public class MyImage {
 		for(int i = 0 ; i < familiars.size(); i++){
 			g.setColor(familiars.get(i).getPlayer().getColor().getColor());
 			Rectangle rec = recs.get(i);
-			g.fillRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			g.fillOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 			g.setColor(familiars.get(i).getColor().getColor());
-			g.drawRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			g.drawOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 		}
 	}
 	
