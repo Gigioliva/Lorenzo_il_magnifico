@@ -283,7 +283,7 @@ public class Player implements Serializable {
 		points.get("VictoryPoint").addResource(new VictoryPoint(res/5));
 	}
 	
-	public String resourcesString(){
+	private String resourcesString(){
 		
 		StringBuilder str = new StringBuilder();
 		

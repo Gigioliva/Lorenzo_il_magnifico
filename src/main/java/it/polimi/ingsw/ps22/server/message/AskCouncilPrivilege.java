@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskCouncilPrivilege extends MessageAsk {
 	
 	private static final long serialVersionUID = 1L;
-	private transient int numChoice;
+	private int numChoice;
 	private transient Player player;
 	
 	public AskCouncilPrivilege(int numChoice, Player player){
@@ -23,8 +23,9 @@ public class AskCouncilPrivilege extends MessageAsk {
 		setString(str.toString());
 	}
 	
-	public AskCouncilPrivilege(String str, int id){
+	public AskCouncilPrivilege(String str, int id, int num){
 		super(str,id);
+		this.numChoice=num;
 	}
 	
 	public Player getPlayer(){

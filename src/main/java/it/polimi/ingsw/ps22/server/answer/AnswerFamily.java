@@ -30,13 +30,14 @@ public class AnswerFamily extends GenericAnswer {
 			}
 		}
 		if(ask!=null){
-			Player player=model.getCurrentPlayer();
-			player.getAllFamily().get(color).setValue(0);
-			model.getWaitAnswer().remove(ask);
-			model.notifyModel();
-			return;
+			if(color!=Color.NEUTRAL){
+				Player player=model.getCurrentPlayer();
+				player.getAllFamily().get(color).setValue(0);
+				model.getWaitAnswer().remove(ask);
+				model.notifyModel();
+				return;
+			}
 		}
-		//applicato solo se tutto non va bene
 		GenericMessage mex=new GenericMessage();
 		mex.setString("risposta errata");
 		model.notifyMessage(mex);

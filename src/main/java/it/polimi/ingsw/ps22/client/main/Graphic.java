@@ -5,12 +5,16 @@ import it.polimi.ingsw.ps22.server.model.Model;
 
 public abstract class Graphic {
 	
-	private VisitorB visitor;
-	private RequestMove requestMove;
+	protected VisitorB visitor;
+	protected RequestMove requestMove;
 	
 	public Graphic(VisitorB visitor, RequestMove requestMove){
 		this.visitor=visitor;
 		this.requestMove=requestMove;
+	}
+	
+	public Graphic(){
+		
 	}
 	
 	public void getAnswer(GenericMessage arg){

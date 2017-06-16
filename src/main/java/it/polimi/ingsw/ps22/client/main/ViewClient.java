@@ -22,7 +22,7 @@ public class ViewClient extends Observable implements Observer, Runnable {
 				System.out.println("GUI o CLI [1,2]");
 				int x=Integer.parseInt(stdin.readLine());
 				if(x==1){
-					graphic=new GraphicGUI();
+					graphic=new GraphicGUI(this);
 					flag=true;
 				}
 				if(x==2){

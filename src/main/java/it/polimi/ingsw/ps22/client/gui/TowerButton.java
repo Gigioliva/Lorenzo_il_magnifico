@@ -22,7 +22,6 @@ public class TowerButton extends ActionButton{
 	@Override
 	public void updateButton(Model model){
 		if(tower!=null){
-			System.out.println(tower);
 			ArrayList<Family> familiars = model.getBoard().getTower(tower).getTowerSpaces()[space].getFamilies();
 			this.familiars = familiars;
 			repaint();

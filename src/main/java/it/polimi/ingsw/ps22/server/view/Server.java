@@ -24,7 +24,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	private static final long serialVersionUID = 1L;
 	private static final int PORT = 12345;
-	private static final int TIMER=10000;
+	private static final int TIMER=5000;
 	private ServerSocket serverSocket;
 	private ExecutorService executor = Executors.newFixedThreadPool(128);
 	private List<Connection> connections = new ArrayList<Connection>();
@@ -63,7 +63,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	}
 
 	public void startGame() {
-		if(waitingConnection.size()>1){ //Dopo mettilo maggiore di 1
+		if(waitingConnection.size()>1){
 			timer.cancel();
 			timer=new Timer();
 			ArrayList<Connection> temp = new ArrayList<Connection>();

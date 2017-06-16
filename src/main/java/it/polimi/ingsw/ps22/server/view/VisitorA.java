@@ -38,7 +38,7 @@ public class VisitorA {
 
 	public AskCouncilPrivilege visit(AskCouncilPrivilege mex) {
 		if (user.equals(user_mex)) {
-			return new AskCouncilPrivilege(mex.getString(), mex.getId());
+			return new AskCouncilPrivilege(mex.getString(), mex.getId(),mex.getNumChoice());
 		} else {
 			return null;
 		}

@@ -50,13 +50,13 @@ public class CouncilPalaceSpace extends ActionSpace {
 	
 	private boolean checkActionValue(int numServant, Family family,int  actionValue){
 		Player player = family.getPlayer();
-		if (numServant > 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
+		if (numServant >= 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
 			if ((player.getSpecBonus().returnBool("DoubleServant"))
-					&& ((actionValue + numServant / 2) > ACTIONCOST)) {
+					&& ((actionValue + numServant / 2) >= ACTIONCOST)) {
 				return true;
 			}
 			if (!(player.getSpecBonus().returnBool("DoubleServant"))
-					&& ((actionValue + numServant) > ACTIONCOST)) {
+					&& ((actionValue + numServant) >= ACTIONCOST)) {
 				return true;
 			}
 		}

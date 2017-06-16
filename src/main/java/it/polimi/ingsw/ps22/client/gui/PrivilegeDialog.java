@@ -80,7 +80,7 @@ public class PrivilegeDialog extends MessageDialog {
 			if(b.isSelected())
 				cont++;
 		}
-		
+		System.out.println(cont);
 		return cont;
 	}
 
@@ -88,6 +88,7 @@ public class PrivilegeDialog extends MessageDialog {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			ArrayList<Integer> choices = new ArrayList<Integer>();
+			System.out.println(mex.getNumChoice());
 			if(numSelected() == mex.getNumChoice()){
 				for(Button b: buttons){
 					if (b.isSelected()){

@@ -54,7 +54,7 @@ public class TowerVentureZone extends TowerZone {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		towerSpaces[actionSpace].addFamily(family);
-		if (!(player.getSpecBonus().returnBool("NoGainTowers")
+		if (!(player.getSpecBonus().returnBool("GainTowers")
 				&& (towerSpaces[actionSpace].getPlan() == 3 || towerSpaces[actionSpace].getPlan() == 4))) {
 			towerSpaces[actionSpace].applyBonus(player);
 		}
