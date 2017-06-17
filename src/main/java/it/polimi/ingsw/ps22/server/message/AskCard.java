@@ -32,7 +32,14 @@ public class AskCard extends MessageAsk{
 	
 	public AskCard(String str, int id,HashMap<String,ArrayList<DevelopmentCard>> possibleCard){
 		super(str,id);
-		this.possibleCard=possibleCard;
+		HashMap<String,ArrayList<DevelopmentCard>> temp=new HashMap<String,ArrayList<DevelopmentCard>>();
+		for(String el: possibleCard.keySet()){
+			temp.put(el, new ArrayList<DevelopmentCard>());
+			for(DevelopmentCard card: possibleCard.get(el)){
+				temp.get(el).add(card.clone());
+			}
+		}
+		this.possibleCard=temp;
 	}
 	
 	public HashMap<String,ArrayList<DevelopmentCard>> getPossibleCard(){

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
@@ -12,11 +12,11 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskEffect extends MessageAsk {
 	
 	private static final long serialVersionUID = 1L;
-	private transient HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
+	private LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
 	private transient ProductionAction prodAction;
 	private transient Player player;
 	
-	public AskEffect(HashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect, ProductionAction prodAction, Player player){
+	public AskEffect(LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect, ProductionAction prodAction, Player player){
 		this.listEffect=listEffect;
 		this.prodAction=prodAction;
 		this.player=player;
@@ -32,11 +32,19 @@ public class AskEffect extends MessageAsk {
 		setString(str.toString());
 	}
 	
-	public AskEffect(String str, int id){
+	public AskEffect(String str, int id, LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect){
 		super(str,id);
+		LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> temp=new LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>>();
+		for(DevelopmentCard el: listEffect.keySet()){
+			temp.put(el, new ArrayList<ActionEffect>());
+			for(ActionEffect el2: listEffect.get(el)){
+				temp.get(el).add(el2.clone());
+			}
+		}
+		this.listEffect=temp;
 	}
 	
-	public HashMap<DevelopmentCard,ArrayList<ActionEffect>> getListEffect(){
+	public LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> getListEffect(){
 		return listEffect;
 	}
 

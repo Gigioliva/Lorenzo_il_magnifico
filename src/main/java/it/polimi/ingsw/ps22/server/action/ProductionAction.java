@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
@@ -25,29 +26,23 @@ public class ProductionAction extends Action {
 		return temp;
 	}
 
-	private HashMap<DevelopmentCard, ArrayList<ActionEffect>> getPossibleEffects(Player player, int bonus,
-			HashMap<DevelopmentCard, HashMap<ActionEffect, Integer>> allEffects) {
-		HashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects = new HashMap<DevelopmentCard, ArrayList<ActionEffect>>();
+	private LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> getPossibleEffects(Player player, int bonus,
+			LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> allEffects) {
+		LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects = new LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>>();
 		ArrayList<DevelopmentCard> buildingCards = new ArrayList<DevelopmentCard>(allEffects.keySet());
 		for (DevelopmentCard card : buildingCards) {
-			HashMap<ActionEffect, Integer> mapEffects = allEffects.get(card);
+			LinkedHashMap<ActionEffect, Integer> mapEffects = allEffects.get(card);
 			for (ActionEffect effect : mapEffects.keySet()) {
-				if ((effect instanceof ExchangeResource) && effect.canAffordCost(player)
-						&& card.getActionValue() <= bonus + super.getActionValue()) {
+				if ((effect instanceof ExchangeResource)  && effect.canAffordCost(player) && card.getActionValue() <= bonus + super.getActionValue()) {
 					if (possibleEffects.containsKey(card)) {
 						possibleEffects.get(card).add(effect);
 					} else {
 						possibleEffects.put(card, new ArrayList<ActionEffect>());
 						possibleEffects.get(card).add(effect);
 					}
-				} else {
-					allEffects.get(card).remove(effect);
 				}
 			}
-			if (allEffects.get(card).size() == 0)
-				allEffects.remove(card);
 		}
-
 		return possibleEffects;
 	}
 
@@ -65,9 +60,10 @@ public class ProductionAction extends Action {
 
 	@Override
 	public void applyAction(Player player, int servants) {
-		HashMap<DevelopmentCard, HashMap<ActionEffect, Integer>> allEffects;
-		HashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects;
-		Player clonedPlayer = new Player(player);
+		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> allEffects;
+		LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects;
+		Player clonedPlayer = player.clone();
+		this.servants = servants;
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
 		player.getSpecificResource("Servant").subResource(new Servant(servants));
 		allEffects = player.cloneCardswithActionEffect("Building");
@@ -77,7 +73,7 @@ public class ProductionAction extends Action {
 		// HashMap<DevelopmentCard,Integer>();
 		// passa a utente lista di carte ed effetti possibili ad ogni carta
 		// chosenEffect = askEffect...
-		if(!possibleEffects.isEmpty()){
+		if (!possibleEffects.isEmpty()) {
 			AskEffect mex = new AskEffect(possibleEffects, this, player);
 			mex.applyAsk();
 		}

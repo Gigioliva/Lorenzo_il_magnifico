@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.answer;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
@@ -32,10 +33,10 @@ public class AnswerEffect extends GenericAnswer {
 			}
 		}
 		if (ask != null) {
-			HashMap<DevelopmentCard, ArrayList<ActionEffect>> listEffect = ask.getListEffect();
-			HashMap<DevelopmentCard, Integer> temp = new HashMap<DevelopmentCard, Integer>();
+			LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> listEffect = ask.getListEffect();
+			LinkedHashMap<DevelopmentCard, Integer> temp = new LinkedHashMap<DevelopmentCard, Integer>();
 			HashMap<String, ResourceAbstract> cost = null;
-			Player player=ask.getPlayer();
+			Player player = ask.getPlayer();
 			if (answer.size() == listEffect.size()) {
 				int i = 0;
 				for (DevelopmentCard el : listEffect.keySet()) {
@@ -55,10 +56,10 @@ public class AnswerEffect extends GenericAnswer {
 				for (DevelopmentCard el : temp.keySet()) {
 					HashMap<String, ResourceAbstract> cost_temp = ((ExchangeResource) listEffect.get(el)
 							.get(temp.get(el))).getCost();
-					cost=sumCost(cost,cost_temp);
+					cost = sumCost(cost, cost_temp);
 				}
-				for(String el: cost.keySet()){
-					if(cost.get(el).getQuantity()>player.getSpecificResource(el).getQuantity()){
+				for (String el : cost.keySet()) {
+					if (cost.get(el).getQuantity() > player.getSpecificResource(el).getQuantity()) {
 						GenericMessage mex = new GenericMessage();
 						mex.setString("risposta errata");
 						model.notifyMessage(mex);
@@ -82,13 +83,13 @@ public class AnswerEffect extends GenericAnswer {
 
 	private HashMap<String, ResourceAbstract> sumCost(HashMap<String, ResourceAbstract> cost1,
 			HashMap<String, ResourceAbstract> cost2) {
-		if(cost1==null && cost2==null){
+		if (cost1 == null && cost2 == null) {
 			return null;
 		}
 		if (cost1 == null) {
 			return cost2;
 		}
-		if(cost2==null){
+		if (cost2 == null) {
 			return cost1;
 		}
 		for (String el : cost2.keySet()) {
