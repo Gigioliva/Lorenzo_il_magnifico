@@ -63,6 +63,7 @@ public class TowerCharacterZone extends TowerZone {
 	public void takeCard(int actionSpace, Player player){
 		towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
 		towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
+		towerSpaces[actionSpace].getCard().applyPermanentEffects(player);
 		player.getDevelopmentCard("Character").add(towerSpaces[actionSpace].getCard());
 		towerSpaces[actionSpace].removeCard();
 	}

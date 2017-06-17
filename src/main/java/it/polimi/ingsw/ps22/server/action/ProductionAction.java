@@ -76,6 +76,11 @@ public class ProductionAction extends Action {
 		if (!possibleEffects.isEmpty()) {
 			AskEffect mex = new AskEffect(possibleEffects, this, player);
 			mex.applyAsk();
+		} else{
+			applyNoExchangeEffect(player, bonus);
+			if (1 <= super.getActionValue() + bonus) {
+				player.getPersonalBoard().applyPersonalBoardBonus("Production", player);
+			}
 		}
 		// DevelopmentCard card = chosenEffect.keySet().iterator().next();
 		// card.applyActionEffect(player, board, chosenEffect.get(card));
