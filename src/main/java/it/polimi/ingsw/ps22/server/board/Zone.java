@@ -64,5 +64,5 @@ public abstract class Zone implements Serializable {
 
 	}
 	
-	public abstract Zone clone(ArrayList<Player> player);
+	public abstract Zone clone(ArrayList<Family> family);
 }
