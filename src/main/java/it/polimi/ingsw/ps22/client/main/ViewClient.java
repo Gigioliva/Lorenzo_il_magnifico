@@ -14,6 +14,7 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	private String username;
 	private Graphic graphic;
 	private BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
+	private boolean myTurn=true;
 	
 	public ViewClient(){
 		boolean flag=false;
@@ -66,6 +67,14 @@ public class ViewClient extends Observable implements Observer, Runnable {
 			setChanged();
 			notifyObservers(obj);
 		}
+	}
+	
+	public boolean isMyTurn(){
+		return myTurn;
+	}
+	
+	public void setFlag(boolean flag){
+		this.myTurn=flag;
 	}
 
 }
