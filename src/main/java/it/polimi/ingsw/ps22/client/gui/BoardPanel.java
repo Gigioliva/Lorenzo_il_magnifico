@@ -1,9 +1,14 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 
+import java.awt.Font;
+import java.awt.FontFormatException;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -13,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
@@ -176,7 +182,7 @@ public class BoardPanel extends JPanel{
 		}
 		
 		
-		this.setBackground(new java.awt.Color(55, 55, 55));
+		this.setBackground(new java.awt.Color(154, 92, 43));
 		
 	
 		layeredPane.add(personalBoard, new Integer(400),0);
@@ -193,6 +199,8 @@ public class BoardPanel extends JPanel{
 		}
 		
 		JButton quitTurn = new JButton("End turn");
+		quitTurn.setBackground(java.awt.Color.BLACK);
+		quitTurn.setForeground(java.awt.Color.WHITE);
 		quitTurn.setBounds((int)widthScreen - 100,(int) heightScreen - 100,
 				100, 100);
 		quitTurn.addActionListener(new ActionListener() {
@@ -207,20 +215,33 @@ public class BoardPanel extends JPanel{
 		});
 		layeredPane.add(quitTurn, new Integer(2000));
 		
+		
 		dice1 = new JLabel();
+		
 		Rectangle rec = AdaptiveLayout.getOrangeDiceSpace(factorScaleBoard);
 		dice1.setBounds(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 		layeredPane.add(dice1, new Integer(400));
+		
+		Font font = new Font("Papyrus", Font.ITALIC + Font.BOLD , dice1.getHeight());
+		dice1.setFont(font);
+		dice1.setForeground(java.awt.Color.BLACK);
+		dice1.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		dice2 = new JLabel();
 		Rectangle rec2 = AdaptiveLayout.getBlackDiceSpace(factorScaleBoard);
 		dice2.setBounds(rec2.getInitx(), rec2.getInity(), rec2.getOffsetX(), rec2.getOffsetY());
 		layeredPane.add(dice2, new Integer(400));
+		dice2.setFont(font);
+		dice2.setForeground(java.awt.Color.WHITE);
+		dice2.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		dice3 = new JLabel();
 		Rectangle rec3 = AdaptiveLayout.getWhiteDiceSpace(factorScaleBoard);
 		dice3.setBounds(rec3.getInitx(), rec3.getInity(), rec3.getOffsetX(), rec3.getOffsetY());
 		layeredPane.add(dice3, new Integer(400));
+		dice3.setFont(font);
+		dice3.setForeground(java.awt.Color.BLACK);
+		dice3.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		for(int i = 0; i<NUM_PLAYERS; i++){
 			OrderPlayerLabel lab = new OrderPlayerLabel(i, resizeFactor);
@@ -228,6 +249,11 @@ public class BoardPanel extends JPanel{
 			orederPlayers.add(lab);
 			layeredPane.add(lab, new Integer(200));
 		}
+		
+		JLabel sfondo = MyImage.getScaledImageinLabel("./image/sfondo.png", new Rectangle(0,  (int)widthScreen + 300, 0,(int) heightScreen + 300));
+		sfondo.setBounds(0,0,(int) widthScreen,(int) heightScreen);
+		//sfondo.setText("Ciao");
+		layeredPane.add(sfondo, new Integer(0));
 		
 		this.add(layeredPane);
         

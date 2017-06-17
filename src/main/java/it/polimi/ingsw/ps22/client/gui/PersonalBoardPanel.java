@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -81,35 +82,45 @@ public class PersonalBoardPanel extends JPanel {
 	    	cards.get(2).add(p3);
 	    }
 	    
+
 	    coinLabel = new JLabel("0",JLabel.CENTER);
 	    Rectangle dimCoin = PersonalBoardAdaptive.getCoinSlot(resizeFactor);
-	    coinLabel.setOpaque(true);
+	    coinLabel.setForeground(java.awt.Color.WHITE);
+	    coinLabel.setOpaque(false);
 	    coinLabel.setBounds(dimCoin.getInitx(), dimCoin.getInity(), dimCoin.getOffsetX(), dimCoin.getOffsetY());
+	    Font font = new Font("Papyrus", Font.ITALIC + Font.BOLD , coinLabel.getHeight());
+	    coinLabel.setFont(font);
 	    personalBoard.add(coinLabel, new Integer(40));
 	    
 	    woodLabel = new JLabel("0", JLabel.CENTER);
 	    Rectangle dimWood = PersonalBoardAdaptive.getWoodSlot(resizeFactor);
-	    woodLabel.setOpaque(true);
+	    woodLabel.setOpaque(false);
 	    woodLabel.setBounds(dimWood.getInitx(), dimWood.getInity(), dimWood.getOffsetX(), dimWood.getOffsetY());
+	    woodLabel.setFont(font);
+	    woodLabel.setForeground(java.awt.Color.BLACK);
 	    personalBoard.add(woodLabel, new Integer(40));
 	    
 	    servantLabel = new JLabel("0", JLabel.CENTER);
+	    servantLabel.setFont(font);
 	    Rectangle dimServant = PersonalBoardAdaptive.getServantSlot(resizeFactor);
-	    servantLabel.setOpaque(true);
+	    servantLabel.setOpaque(false);
 	    servantLabel.setBounds(dimServant.getInitx(), dimServant.getInity(), dimServant.getOffsetX(), dimServant.getOffsetY());
+	    servantLabel.setForeground(java.awt.Color.BLACK);
 	    personalBoard.add(servantLabel, new Integer(40));
 	    
 	    stoneLabel = new JLabel("0", JLabel.CENTER);
+	    stoneLabel.setFont(font);
 	    Rectangle dimStone = PersonalBoardAdaptive.getStoneSlot(resizeFactor);
-	    stoneLabel.setOpaque(true);
+	    stoneLabel.setOpaque(false);
 	    stoneLabel.setBounds(dimStone.getInitx(), dimStone.getInity(), dimStone.getOffsetX(), dimStone.getOffsetY());
+	    stoneLabel.setForeground(java.awt.Color.BLACK);
 	    personalBoard.add(stoneLabel, new Integer(40));
 	    
 	  
 	    this.setBounds((int)(heightScreen*0.75), 0,(int)(personal.getIconWidth()/factorScalePersonalBoard) + bonusLabel.getWidth(),
 	    		+ PersonalBoardAdaptive.getCharacterCardSlot(resizeFactor, 1).getFinaly());
 	    
-	    this.setBackground(new Color(60, 60, 60));
+	    this.setOpaque(false);;
 	    this.add(personalBoard);		
 	    
 		
