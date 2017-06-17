@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.server.model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Observable;
 
 import it.polimi.ingsw.ps22.server.board.Board;
@@ -25,19 +26,19 @@ public class Model extends Observable implements Serializable {
 	private Board board;
 	private int turn;
 	private int giro;
-	private HashMap<String, Player> players;
+	private LinkedHashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
 	private transient boolean canFamilyMove;
 	private transient ArrayList<MessageAsk> waitAnswer;
-	private transient HashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
+	private transient LinkedHashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
 
 	public Model() {
 		board = new Board();
-		this.players = new HashMap<String, Player>();
+		this.players = new LinkedHashMap<String, Player>();
 		MessageAsk.setModel(this);
 		this.waitAnswer = new ArrayList<MessageAsk>();
-		cardLeaderStart = new HashMap<Player, ArrayList<CardLeader>>();
+		cardLeaderStart = new LinkedHashMap<Player, ArrayList<CardLeader>>();
 		playerGame = null;
 	}
 
@@ -189,7 +190,12 @@ public class Model extends Observable implements Serializable {
 		for (String el : players.keySet()) {
 			players.get(el).calcVicPoint();
 		}
-		winGame();
+		String winner=winGame().getUsername();
+		GenericMessage mex=new GenericMessage();
+		mex.setString("THE WINNER IS: " + winner);
+		setChanged();
+		notifyObservers();
+		notifyMessage(mex);
 	}
 
 	private void winMilitaryPoint() {
@@ -222,8 +228,7 @@ public class Model extends Observable implements Serializable {
 		}
 	}
 
-	private Player winGame() { // scegliere se usarlo nel model per salvarlo o
-								// nelle vare view
+	private Player winGame() {
 		Player player = null;
 		int i = 0;
 		for (String el : orderedPlayers) {
@@ -271,7 +276,6 @@ public class Model extends Observable implements Serializable {
 			cardLeaderStart = null;
 			playerGame = orderedPlayers.get(0);
 			notifyModel();
-			notifyMessage(new ChoiceMove());
 		} else {
 			if(nextDraft()){
 				draftLeader();
@@ -286,7 +290,7 @@ public class Model extends Observable implements Serializable {
 	private void draftLeader(){
 		ArrayList<Player> players=new ArrayList<Player>(cardLeaderStart.keySet());
 		ArrayList<ArrayList<CardLeader>> cards=new ArrayList<ArrayList<CardLeader>>(cardLeaderStart.values());
-		HashMap<Player, ArrayList<CardLeader>> temp=new HashMap<Player, ArrayList<CardLeader>>();
+		LinkedHashMap<Player, ArrayList<CardLeader>> temp=new LinkedHashMap<Player, ArrayList<CardLeader>>();
 		for(int i=0;i<players.size();i++){
 			temp.put(players.get(i), cards.get((i+1) % cards.size()));
 		}
