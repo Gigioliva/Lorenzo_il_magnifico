@@ -24,6 +24,8 @@ public class CardVenture extends DevelopmentCard {
 	@Override
 	public CardVenture clone() {
 		CardVenture temp=new CardVenture();
+		temp.setName(this.getName());
+		temp.setEra(this.getEra());
 		for(RequisiteCost el: requisiteCost){
 			temp.requisiteCost.add(el.clone());
 		}

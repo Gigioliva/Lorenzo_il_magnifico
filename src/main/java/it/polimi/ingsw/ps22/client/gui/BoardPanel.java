@@ -207,6 +207,7 @@ public class BoardPanel extends JPanel{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				view.setFlag(true);
 				EndTurn end = new EndTurn(username);
 				view.send(end);
 				

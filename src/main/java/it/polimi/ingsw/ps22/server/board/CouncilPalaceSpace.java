@@ -25,15 +25,16 @@ public class CouncilPalaceSpace extends ActionSpace {
 	}
 
 	@Override
-	public CouncilPalaceSpace clone(ArrayList<Player> player) {
+	public CouncilPalaceSpace clone(ArrayList<Family> family) {
 		CouncilPalaceSpace temp = new CouncilPalaceSpace();
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
-		for (Player pl : player) {
-			for (Family el : fam) {
-				if(pl.getUsername().equals(el.getPlayer().getUsername()))
-				temp.addFamily(el.clone(pl));
+		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal model
+		for (Family palFam : fam) {
+			for (Family gameFam : family) {
+				if(palFam.equals(gameFam))
+				temp.addFamily(gameFam.clone(gameFam.getPlayer()));
 			}
 		}
 		temp.setBonus(this.bonus.clone());

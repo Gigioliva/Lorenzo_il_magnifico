@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps22.server.board;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.server.player.Family;
-import it.polimi.ingsw.ps22.server.player.Player;
 
 public class ProductionSpace extends ActionSpace{
 	
@@ -19,15 +18,16 @@ public class ProductionSpace extends ActionSpace{
 	}
 	
 	@Override
-	public ProductionSpace clone(ArrayList<Player> player) {
+	public ProductionSpace clone(ArrayList<Family> family) {
 		ProductionSpace temp = new ProductionSpace(this.getActionCost(),this.getMulti()); 
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
-		for (Player pl : player) {
-			for (Family el : fam) {
-				if(pl.getUsername().equals(el.getPlayer().getUsername()))
-				temp.addFamily(el.clone(pl));
+		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal model
+		for (Family palFam : fam) {
+			for (Family gameFam : family) {
+				if(palFam.equals(gameFam))
+				temp.addFamily(gameFam.clone(gameFam.getPlayer()));
 			}
 		}
 		temp.setBonus(this.bonus.clone());

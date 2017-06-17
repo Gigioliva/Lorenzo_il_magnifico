@@ -70,7 +70,10 @@ public class VisitorGUI extends VisitorB {
 
 	@Override
 	public void visit(ChoiceMove mex) {
-		gui.yourTurn(mex);
+		if(view.isMyTurn()){
+			view.setFlag(false);
+			gui.yourTurn(mex);
+		}
 	}
 
 	@Override

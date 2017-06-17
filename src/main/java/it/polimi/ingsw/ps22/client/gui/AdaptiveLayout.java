@@ -39,7 +39,7 @@ public class AdaptiveLayout {
 	private static final int cardDevelopmentOffsetX = 231;
 	private static final int cardDevelopmentOffsetY = 24;
 	private static final int playerGridOffsetY = 136;
-	private static final int inChurchOffsetX = 486;
+	private static final int inChurchOffsetX = 186;
 	private static final int outChurchOffsetX = 114;
 	private static final int victoryPointOffsetXY = 120;
 	private static final int familiarOffsetX = 508;

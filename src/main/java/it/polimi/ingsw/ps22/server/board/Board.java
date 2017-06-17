@@ -3,6 +3,8 @@ package it.polimi.ingsw.ps22.server.board;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class Board implements Serializable {
@@ -32,7 +34,8 @@ public class Board implements Serializable {
 		towers.put("Territory", new TowerTerritoryZone());
 		towers.put("Venture", new TowerVentureZone());
 	}
-
+	
+/*
 	public Board clone(ArrayList<Player> player) {
 		Board temp = new Board();
 		temp.market = this.market.clone(player);
@@ -44,6 +47,22 @@ public class Board implements Serializable {
 		}
 		for (String el : this.towers.keySet()) {
 			temp.towers.put(el, this.towers.get(el).clone(player));
+		}
+		return temp;
+	}
+*/
+	
+	public Board clone(ArrayList<Family> family) {
+		Board temp = new Board();
+		temp.market = this.market.clone(family);
+		temp.prodZone = this.prodZone.clone(family);
+		temp.harvestZone = this.harvestZone.clone(family);
+		temp.councilPalace = this.councilPalace.clone(family);
+		for (Integer i : church.keySet()) {
+			temp.church.put(i, this.church.get(i).clone());
+		}
+		for (String el : this.towers.keySet()) {
+			temp.towers.put(el, this.towers.get(el).clone(family));
 		}
 		return temp;
 	}

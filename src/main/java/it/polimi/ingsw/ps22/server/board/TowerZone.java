@@ -30,11 +30,11 @@ public class TowerZone extends Zone {
 	}
 
 	@Override
-	public TowerZone clone(ArrayList<Player> player) {
+	public TowerZone clone(ArrayList<Family> family) {
 		TowerZone temp = new TowerZone();
 		ArrayList<DevelopmentCard> arr;
 		for (int i=0;i<NUM_SPACES;i++) {
-			temp.towerSpaces[i] = this.towerSpaces[i].clone(player);
+			temp.towerSpaces[i] = this.towerSpaces[i].clone(family);
 		}
 		temp.occupied = this.occupied;
 		for (Integer key: cards.keySet()) {

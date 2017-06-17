@@ -20,10 +20,10 @@ public class HarvestZone extends Zone {
 		harvestSpace[1] = new HarvestSpace(1, true);
 	}
 	
-	public HarvestZone clone(ArrayList<Player> player) {
+	public HarvestZone clone(ArrayList<Family> family) {
 		HarvestZone temp = new HarvestZone();
-		temp.harvestSpace[0] = this.harvestSpace[0].clone(player);
-		temp.harvestSpace[1] = this.harvestSpace[1].clone(player);
+		temp.harvestSpace[0] = this.harvestSpace[0].clone(family);
+		temp.harvestSpace[1] = this.harvestSpace[1].clone(family);
 		return temp;
 	}
 	

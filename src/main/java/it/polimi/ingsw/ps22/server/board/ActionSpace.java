@@ -119,6 +119,6 @@ public abstract class ActionSpace implements Serializable {
 		return str.toString();
 	}
 	
-	public abstract ActionSpace clone(ArrayList<Player> player);
+	public abstract ActionSpace clone(ArrayList<Family> family);
 
 }
