@@ -28,5 +28,10 @@ public class ServantSpinner extends JPanel {
 	public JSpinner getSpin(){
 		return this.spin;
 	}
+	
+	public void updateSpin(){
+		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1); 
+		spin.setModel(model);
+	}
 
 }

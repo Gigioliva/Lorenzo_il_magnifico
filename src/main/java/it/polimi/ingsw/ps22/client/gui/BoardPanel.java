@@ -294,6 +294,7 @@ public class BoardPanel extends JPanel{
 		updateOrderPlayers(model);
 		updateCardExcomm(model);
 		updateFamiliars(model);
+		updateFamSpinner();
 		repaint();
 	}
 	
@@ -409,6 +410,10 @@ public class BoardPanel extends JPanel{
 		fam2.updateFamiliar(model);
 		fam3.updateFamiliar(model);
 		fam4.updateFamiliar(model);
+	}
+	
+	private void updateFamSpinner(){
+		spinner.updateSpin();
 	}
 	
 	
