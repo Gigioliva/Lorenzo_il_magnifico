@@ -75,13 +75,13 @@ public class BonusAcc implements Serializable {
 	}
 
 	public void addSales(HashMap<String, ResourceAbstract> bonus, String type) {
-		if (type == "Building") {
+		if (type.equalsIgnoreCase("Building")) {
 			addSaleBuilding(bonus);
 		}
-		if (type == "Character") {
+		if (type.equalsIgnoreCase("Character")) {
 			addSaleCharacter(bonus);
 		}
-		if (type == "Venture") {
+		if (type.equalsIgnoreCase("Venture")) {
 			addSaleVenture(bonus);
 		}
 

@@ -99,7 +99,7 @@ public class CardCharacter extends DevelopmentCard {
 
 		str.append("era: " + super.getEra() + "\n");
 
-		str.append("Cost: " + cost.getQuantity() + " Coin");
+		str.append("Cost: " + cost.getQuantity() + " Coin ");
 
 		if (immediateEffects.size() > 0) {
 			str.append("\nimmediate effects: \n");
