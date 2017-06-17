@@ -34,7 +34,7 @@ public class ProductionZone extends Zone {
 		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced()) && productionSpace[actionSpace].isPlayable()
 				&& (productionSpace[actionSpace].controlPlacement()
 						|| player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& checkAllSpace(player)
+				&& (family.getColor()==Color.NEUTRAL || checkAllSpace(player))
 				&& checkActionValue(numServant, productionSpace[actionSpace], family, actionValue)) {
 			return true;
 		}
