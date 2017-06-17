@@ -3,6 +3,9 @@ package it.polimi.ingsw.ps22.server.parser;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import javax.swing.ImageIcon;
+
+import it.polimi.ingsw.ps22.client.gui.CardPath;
 import it.polimi.ingsw.ps22.server.board.FaithPointTrack;
 import it.polimi.ingsw.ps22.server.card.CardBuilding;
 import it.polimi.ingsw.ps22.server.card.CardCharacter;
@@ -114,10 +117,37 @@ public class MainParser {
 			System.out.println("\nUsername: " + el);
 			System.out.println(playerDataReaded.get(el).toString());
 		}
+		
 		System.out.println("\nWrite new players' data on file");
 		OutputPlayerDataDomParser.PlayerDataWrite(playerPathname, playerDataReaded);
-		System.out.println("\n\nEXECUTION TERMINATED CORRECTLY");	
 		
+		System.out.println("\n\nPARSER EXECUTION TERMINATED CORRECTLY");
+		
+		System.out.println("\n\nDevelopment card pathname check\n");
+		ImageIcon card;
+		int count = 0;
+		for (CardTerritory t: territory) {
+			card = new ImageIcon(new String("src/main/java/it/polimi/ingsw/ps22/client/gui/"+CardPath.getDevCardPathname(t)));
+			count++;
+			System.out.println("Card number: " + count + "\tVerifica l'altezza di 436: " + card.getIconHeight());
+		}
+		for (CardBuilding b: building) {
+			card = new ImageIcon(new String("src/main/java/it/polimi/ingsw/ps22/client/gui/"+CardPath.getDevCardPathname(b)));
+			count++;
+			System.out.println("Card number: " + count + "\tVerifica l'altezza di 436: " + card.getIconHeight());
+		}
+		for (CardCharacter c: character) {
+			card = new ImageIcon(new String("src/main/java/it/polimi/ingsw/ps22/client/gui/"+CardPath.getDevCardPathname(c)));
+			count++;
+			System.out.println("Card number: " + count + "\tVerifica l'altezza di 436: " + card.getIconHeight());
+		}
+		for (CardVenture v: venture) {
+			card = new ImageIcon(new String("src/main/java/it/polimi/ingsw/ps22/client/gui/"+CardPath.getDevCardPathname(v)));
+			count++;
+			System.out.println("Card number: " + count + "\tVerifica l'altezza di 436: " + card.getIconHeight());
+		}
+		
+		System.out.println("\nDevelopment card pathname check finished");
 	}
 
 }
