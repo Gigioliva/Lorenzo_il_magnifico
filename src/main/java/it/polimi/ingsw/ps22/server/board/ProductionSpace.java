@@ -26,7 +26,7 @@ public class ProductionSpace extends ActionSpace{
 		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal model
 		for (Family palFam : fam) {
 			for (Family gameFam : family) {
-				if(palFam.equals(gameFam))
+				if(palFam.getPlayer().getUsername().equals(gameFam.getPlayer().getUsername()))
 				temp.addFamily(gameFam.clone(gameFam.getPlayer()));
 			}
 		}
