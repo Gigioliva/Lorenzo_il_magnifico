@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 
 public class CouncilPalaceSpace extends ActionSpace {
-	
+
 	private static final long serialVersionUID = 1L;
 	private transient final static int ACTIONCOST = 1;
 
@@ -30,17 +30,18 @@ public class CouncilPalaceSpace extends ActionSpace {
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
-		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal model
+		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal
+		// model
 		for (Family palFam : fam) {
 			for (Family gameFam : family) {
-				if(palFam.equals(gameFam))
-				temp.addFamily(gameFam.clone(gameFam.getPlayer()));
+				if (palFam.getPlayer().getUsername().equals(gameFam.getPlayer().getUsername()))
+					temp.addFamily(gameFam.clone(gameFam.getPlayer()));
 			}
 		}
 		temp.setBonus(this.bonus.clone());
 		return temp;
 	}
-	
+
 	public boolean Control(int numServant, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue();
@@ -51,29 +52,27 @@ public class CouncilPalaceSpace extends ActionSpace {
 		}
 		return false;
 	}
-	
-	private boolean checkActionValue(int numServant, Family family,int  actionValue){
+
+	private boolean checkActionValue(int numServant, Family family, int actionValue) {
 		Player player = family.getPlayer();
 		if (numServant >= 0 && numServant <= player.getSpecificResource("Servant").getQuantity()) {
-			if ((player.getSpecBonus().returnBool("DoubleServant"))
-					&& ((actionValue + numServant / 2) >= ACTIONCOST)) {
+			if ((player.getSpecBonus().returnBool("DoubleServant")) && ((actionValue + numServant / 2) >= ACTIONCOST)) {
 				return true;
 			}
-			if (!(player.getSpecBonus().returnBool("DoubleServant"))
-					&& ((actionValue + numServant) >= ACTIONCOST)) {
+			if (!(player.getSpecBonus().returnBool("DoubleServant")) && ((actionValue + numServant) >= ACTIONCOST)) {
 				return true;
 			}
 		}
 		return false;
 	}
-	
+
 	public void applyMove(int numServant, Family family) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		this.addFamily(family);
 		this.applyBonus(player);
 	}
-	
+
 	private void applyServant(Family family, int numServant) {
 		Player player = family.getPlayer();
 		if (player.getSpecBonus().returnBool("DoubleServant")) {
@@ -84,22 +83,21 @@ public class CouncilPalaceSpace extends ActionSpace {
 			family.incrementValue(numServant);
 		}
 	}
-	
 
-	public boolean cantPlaceCouncilPalace(Player player){
-		 HashMap<Color, Family> family = player.getAllFamily();
-		 if(Control(player.getSpecificResource("Servant").getQuantity(), family.get(Color.NEUTRAL)))
-			 return false;
-		 for(Color color: family.keySet()){
-			 if (!family.get(color).isPlaced() && Color.NEUTRAL != color)
-				 return false;
-		 }
-		 return true;
+	public boolean cantPlaceCouncilPalace(Player player) {
+		HashMap<Color, Family> family = player.getAllFamily();
+		if (Control(player.getSpecificResource("Servant").getQuantity(), family.get(Color.NEUTRAL)))
+			return false;
+		for (Color color : family.keySet()) {
+			if (!family.get(color).isPlaced() && Color.NEUTRAL != color)
+				return false;
+		}
+		return true;
 	}
-	
+
 	@Override
 	public String toString() {
-		
+
 		return super.toString();
 	}
 }
