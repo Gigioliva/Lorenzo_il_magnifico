@@ -127,6 +127,8 @@ public class PersonalBoardSaxParser {
 						personalBonus.put("Production", gain);
 						toAdd.setPersonalBonus(personalBonus);
 						personalBonus = new HashMap<String, GainResource>();
+						harvestGain = new HashMap<String, ResourceAbstract>();
+						prodGain = new HashMap<String, ResourceAbstract>();
 					}
 
 					if (qName.equalsIgnoreCase("territorybonus")) {
@@ -146,6 +148,7 @@ public class PersonalBoardSaxParser {
 					if (qName.equalsIgnoreCase("personalboard")) {
 						parsedData.add(toAdd);
 						toAdd = new PersonalBoard();
+						personalBonus = new HashMap<String, GainResource>();
 					}
 
 				}
