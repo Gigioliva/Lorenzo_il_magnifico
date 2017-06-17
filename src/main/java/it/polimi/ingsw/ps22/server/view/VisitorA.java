@@ -46,7 +46,7 @@ public class VisitorA {
 
 	public AskEffect visit(AskEffect mex) {
 		if (user.equals(user_mex)) {
-			return new AskEffect(mex.getString(), mex.getId());
+			return new AskEffect(mex.getString(), mex.getId(), mex.getListEffect());
 		} else {
 			return null;
 		}

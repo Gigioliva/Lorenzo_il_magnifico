@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.server.player;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Random;
 
 import it.polimi.ingsw.ps22.server.board.Dice;
@@ -250,11 +251,11 @@ public class Player implements Serializable {
 		this.getSpecificResource(type).addResource(other);
 	}
 	
-	public HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> cloneCardswithActionEffect(String cardType){
-		HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>> clonedCards = new HashMap<DevelopmentCard, HashMap<ActionEffect,Integer>>();
+	public LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect,Integer>> cloneCardswithActionEffect(String cardType){
+		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect,Integer>> clonedCards = new LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect,Integer>>();
 		ArrayList<DevelopmentCard> cards = this.getDevelopmentCard(cardType);
 		for(DevelopmentCard card: cards){
-			clonedCards.put(card, new HashMap<ActionEffect,Integer>());
+			clonedCards.put(card, new LinkedHashMap<ActionEffect,Integer>());
 			ArrayList<ActionEffect> effects = card.getActionEffects(); 
 			for(int i = 0; i< effects.size(); i++){
 				clonedCards.get(card).put(effects.get(i),i);

@@ -38,9 +38,7 @@ public class FamiliarButton extends JButton {
 	}
 	
 	public void updateFamiliar(Model model){
-		System.out.println("eccomi in update");
 		if(model.getPlayers().get(username).getFamily(color).isPlaced()){
-			System.out.println("prova enabled");
 			this.setEnabled(false);
 			this.setVisible(false);
 		}

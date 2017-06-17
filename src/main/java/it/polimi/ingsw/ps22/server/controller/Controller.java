@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps22.server.move.Move;
 import it.polimi.ingsw.ps22.server.view.View;
 
 public class Controller implements Observer {
-	private static final int TIMER=120000;
+	private static final int TIMER=1200000;
 	private Model model;
 	private Timer timer;
 	

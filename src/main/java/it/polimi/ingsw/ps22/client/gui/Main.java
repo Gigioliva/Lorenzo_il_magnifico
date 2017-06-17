@@ -23,8 +23,6 @@ public class Main {
 	
 		SwingUtilities.invokeLater(new Runnable(){
 			public void run(){
-				
-				
 				ArrayList<String> avver = new ArrayList<String>();
 				avver.add("Lore");
 				avver.add("Gigi");
@@ -57,8 +55,8 @@ public class Main {
 						model.getBoard().getTower("Building").getTowerSpaces()[0].getCard().getActionEffects() );
 				listEffect.put(model.getBoard().getTower("Building").getTowerSpaces()[1].getCard(),
 						model.getBoard().getTower("Building").getTowerSpaces()[1].getCard().getActionEffects() );
-				AskEffect mex = new AskEffect(listEffect , new ProductionAction(3), model.getPlayers().get("Tizio"));
-				b.askEffect(mex);
+				//AskEffect mex = new AskEffect(listEffect , new ProductionAction(3), model.getPlayers().get("Tizio"));
+				//b.askEffect(mex);
 				b.askFamily(new AskFamily(model.getPlayers().get("Tizio")));
 				b.askServants(new AskServant(new ProductionAction(4)));
 				ArrayList<CardLeader> arr = new ArrayList<CardLeader>();
