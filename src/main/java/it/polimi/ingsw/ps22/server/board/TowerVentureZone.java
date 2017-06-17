@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps22.server.card.CardVenture;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
+import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
@@ -43,7 +44,7 @@ public class TowerVentureZone extends TowerZone {
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementVenture").getQuantity();
 		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& checkAllSpace(player) && checkResources(player, towerSpaces[actionSpace])
+				&& (family.getColor()==Color.NEUTRAL || checkAllSpace(player)) && checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
 			return true;
 		}
