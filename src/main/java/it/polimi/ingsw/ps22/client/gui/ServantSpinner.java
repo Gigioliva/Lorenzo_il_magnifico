@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.util.ArrayList;
+
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -13,10 +15,23 @@ public class ServantSpinner extends JPanel {
 	 */
 	private static final long serialVersionUID = 4913189729334223962L;
 	JSpinner spin;
+	 ArrayList<ActionButton> actionSpaces;
 	
 	public ServantSpinner() {
 		JLabel spinLab = new JLabel("servant");
 		this.add(spinLab);
+		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1);  
+		spin = new JSpinner(model);
+		spinLab.setLabelFor(spin);
+		this.add(spin);
+		
+		this.setBackground(java.awt.Color.GRAY);
+	}
+	
+	public ServantSpinner( ArrayList<ActionButton> actionSpaces) {
+		JLabel spinLab = new JLabel("servant");
+		this.add(spinLab);
+		this.actionSpaces = actionSpaces;
 		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1);  
 		spin = new JSpinner(model);
 		spinLab.setLabelFor(spin);
@@ -32,6 +47,9 @@ public class ServantSpinner extends JPanel {
 	public void updateSpin(){
 		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1); 
 		spin.setModel(model);
+		for(int i = 0; i<actionSpaces.size(); i++){
+			actionSpaces.get(i).numServants = 0;
+		}
 	}
 
 }

@@ -38,7 +38,7 @@ public class BoardPanel extends JPanel{
 
 	private int NUM_PLAYERS;
 	private static final int NUM_CARDEXCOMM = 3;
-	private ServantSpinner spinner = new ServantSpinner();
+	private ServantSpinner spinner;
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
 	private ArrayList<ActionButton> actionSpaces = new ArrayList<ActionButton>();
 	 HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<Integer,ArrayList<TowerPanel>>();
@@ -186,6 +186,8 @@ public class BoardPanel extends JPanel{
 		
 	
 		layeredPane.add(personalBoard, new Integer(400),0);
+		
+		spinner = new ServantSpinner(actionSpaces);
 		
 		spinner.setBounds((int)(heightScreen*0.75) + personalBoard.getWidth(), (int)(heightScreen/2.5), 
 				(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth())),  
