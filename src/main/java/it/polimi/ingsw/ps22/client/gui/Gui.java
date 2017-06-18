@@ -1,17 +1,9 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
-import it.polimi.ingsw.ps22.server.answer.AnswerCard;
-import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.message.AskCard;
 import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
@@ -54,6 +46,7 @@ public class Gui extends JFrame{
 		//this.add(personalBoard);
 		this.view = view;
 		
+		Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/Age_Of_Empires.mp3");
 		
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
