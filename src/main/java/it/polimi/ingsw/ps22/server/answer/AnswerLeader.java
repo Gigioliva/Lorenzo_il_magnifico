@@ -39,8 +39,8 @@ public class AnswerLeader extends GenericAnswer {
 			if(leader!=null){
 				player.addLeader(leader);
 				temp.remove(leader);
-				model.draftStart();
 				model.getWaitAnswer().remove(ask);
+				model.draftStart();
 				return;
 			}
 			model.notifyAsk(ask);

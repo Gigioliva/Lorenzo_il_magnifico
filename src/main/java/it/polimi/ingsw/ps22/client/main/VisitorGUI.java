@@ -57,6 +57,11 @@ public class VisitorGUI extends VisitorB {
 	public void visit(GenericMessage mex) {
 		gui.genericMessage(mex);
 	}
+	
+	@Override
+	public void visit(EndDraft mex) {
+		//gui.setLeaders();
+	}
 
 	@Override
 	public void visit(AskLeader mex) {

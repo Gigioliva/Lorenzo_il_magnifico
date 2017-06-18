@@ -13,5 +13,4 @@ public class AskUsername extends GenericMessage {
 	public void accept(VisitorB visitor){
 		visitor.visit(this);
 	}
-
 }
