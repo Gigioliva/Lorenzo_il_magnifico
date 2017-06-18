@@ -133,13 +133,13 @@
         <name>Peasant</name>
         <era>2</era>
         <coincost>4</coincost>
-        <immextraharvest>3</immextraharvest>
+        <harvestincrement>3</harvestincrement>
     </card>
     <card>
         <name>Scholar</name>
         <era>2</era>
         <coincost>4</coincost>
-        <immextraprod>3</immextraprod>
+        <productionincrement>3</productionincrement>
     </card>
     <card>
         <name>Papal Messenger</name>
