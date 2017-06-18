@@ -57,6 +57,7 @@ public class BoardPanel extends JPanel{
 	private FamiliarButton fam4;
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
 	private String username;
+	private ViewClient view;
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -71,6 +72,7 @@ public class BoardPanel extends JPanel{
 		avver.remove(username);
 		
 		this.username = username;
+		this.view = view;
 		
 		ArrayList<String> personBonusPaths = new ArrayList<String>();
 		for(String user: avver){
@@ -433,6 +435,7 @@ public class BoardPanel extends JPanel{
 		for(int i = 0; i< NUMLEADERS; i++){
 			CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
 			LeaderButton b1 = new LeaderButton(i, personalBoard, card, username);
+			b1.addActionListener(new LeaderPlayingListener(view, username, card.getName()));
 			layeredPane.add(b1, new Integer(2500));
 		}
 	}
