@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
+import it.polimi.ingsw.ps22.server.message.EndDraft;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.parser.CardSort;
@@ -86,8 +87,8 @@ public class Model extends Observable implements Serializable {
 		turn = 1;
 		giro = 1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
-		//playerGame = orderedPlayers.get(0); //eliminalo dopo
-		notifyModel();
+		setChanged();
+		notifyObservers();
 		draftStart();
 	}
 
@@ -187,7 +188,6 @@ public class Model extends Observable implements Serializable {
 			players.get(el).applyEndEffects();
 		}
 		winMilitaryPoint();
-		System.out.println("Prova1 endGame");
 		for (String el : players.keySet()) {
 			players.get(el).calcVicPoint();
 		}
@@ -282,6 +282,7 @@ public class Model extends Observable implements Serializable {
 			cardLeaderStart = null;
 			playerGame = orderedPlayers.get(0);
 			notifyModel();
+			notifyMessage(new EndDraft());
 		} else {
 			if(nextDraft()){
 				draftLeader();
@@ -305,9 +306,9 @@ public class Model extends Observable implements Serializable {
 	
 	private boolean nextDraft(){
 		boolean next=true;
-		int x=0;
+		int x=-1;
 		for(ArrayList<CardLeader> el: cardLeaderStart.values()){
-			if(x==0){
+			if(x==-1){
 				x=el.size();
 			}else{
 				if(x!=el.size()){

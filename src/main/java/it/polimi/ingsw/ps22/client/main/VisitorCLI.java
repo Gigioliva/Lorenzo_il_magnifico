@@ -137,6 +137,11 @@ public class VisitorCLI extends VisitorB {
 	public void visit(GenericMessage mex) {
 		System.out.println(mex.getString());
 	}
+	
+	@Override
+	public void visit(EndDraft mex) {
+		System.out.println(mex.getString());
+	}
 
 	@Override
 	public void visit(AskLeader mex) {

@@ -31,5 +31,7 @@ public abstract class VisitorB {
 	public abstract void visit(AskUsername mex);
 	
 	public abstract void visit(AskFamily mex);
+	
+	public abstract void visit(EndDraft mex);
 
 }

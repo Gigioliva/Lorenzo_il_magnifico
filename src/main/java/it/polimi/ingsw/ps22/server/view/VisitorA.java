@@ -64,6 +64,10 @@ public class VisitorA {
 	public GenericMessage visit(ChatMessage mex) {
 		return mex;
 	}
+	
+	public EndDraft visit(EndDraft mex) {
+		return mex;
+	}
 
 	public GenericMessage visit(ErrorMove mex) {
 		if (user.equals(user_mex)) {
