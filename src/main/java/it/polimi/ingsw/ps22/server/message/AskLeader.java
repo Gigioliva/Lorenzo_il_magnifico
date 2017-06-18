@@ -10,7 +10,7 @@ public class AskLeader extends MessageAsk {
 
 	private static final long serialVersionUID = 1L;
 	private transient Player player;
-	private  ArrayList<CardLeader> leaders;
+	private ArrayList<CardLeader> leaders;
 	
 	public AskLeader(ArrayList<CardLeader> leaders, Player player){
 		this.player=player;
@@ -35,8 +35,16 @@ public class AskLeader extends MessageAsk {
 		return lead;
 	}
 	
-	public AskLeader(String str, int id){
+	public ArrayList<CardLeader> getLead(){
+		return leaders;
+	}
+	
+	public AskLeader(String str, int id, ArrayList<CardLeader> leaders){
 		super(str,id);
+		this.leaders=new ArrayList<CardLeader>();
+		for(CardLeader el: leaders){
+			this.leaders.add(el.clone());
+		}
 	}
 	
 	public AskLeader accept(VisitorA visitor){

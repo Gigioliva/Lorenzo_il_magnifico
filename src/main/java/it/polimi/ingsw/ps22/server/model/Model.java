@@ -86,9 +86,9 @@ public class Model extends Observable implements Serializable {
 		turn = 1;
 		giro = 1;
 		board.reset(turn, new ArrayList<Player>(players.values()));
-		playerGame = orderedPlayers.get(0); //eliminalo dopo
+		//playerGame = orderedPlayers.get(0); //eliminalo dopo
 		notifyModel();
-		//draftStart();
+		draftStart();
 	}
 
 	public void notifyModel() {

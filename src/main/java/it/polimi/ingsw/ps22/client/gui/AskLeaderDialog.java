@@ -10,7 +10,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JRadioButton;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
-import it.polimi.ingsw.ps22.server.answer.AnswerCopyLeader;
+import it.polimi.ingsw.ps22.server.answer.AnswerLeader;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 
 public class AskLeaderDialog extends MessageDialog {
@@ -51,7 +51,7 @@ public class AskLeaderDialog extends MessageDialog {
 		public void actionPerformed(ActionEvent e) {
 			for(JRadioButton b: buttons){
 				if (b.isSelected()){
-					view.send(new AnswerCopyLeader(mex.getId(), b.getText()));
+					view.send(new AnswerLeader(mex.getId(), b.getText()));
 					AskLeaderDialog.this.dispose();
 				}
 			}

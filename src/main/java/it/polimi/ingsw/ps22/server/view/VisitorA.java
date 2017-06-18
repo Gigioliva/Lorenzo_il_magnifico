@@ -83,7 +83,7 @@ public class VisitorA {
 
 	public AskLeader visit(AskLeader mex) {
 		if (user.equals(mex.getPlayer().getUsername())) {
-			return new AskLeader(mex.getString(), mex.getId());
+			return new AskLeader(mex.getString(), mex.getId(), mex.getLead());
 		} else {
 			return null;
 		}
