@@ -281,8 +281,8 @@ public class Model extends Observable implements Serializable {
 		if (end == true) {
 			cardLeaderStart = null;
 			playerGame = orderedPlayers.get(0);
-			notifyModel();
 			notifyMessage(new EndDraft());
+			notifyModel();
 		} else {
 			if(nextDraft()){
 				draftLeader();

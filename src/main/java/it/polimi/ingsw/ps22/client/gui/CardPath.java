@@ -15,7 +15,7 @@ public class CardPath {
 	
 	public static String getLeaderCardPathname(CardLeader card) {
 		StringBuilder name = new StringBuilder("./image/leaderCard/"+deleteSpaces(card.getName()));
-		name = new StringBuilder(addPNG(name.toString()));
+		name = new StringBuilder(addJPG(name.toString()));
 		return name.toString().toLowerCase();
 	}
 	
@@ -45,6 +45,12 @@ public class CardPath {
 	public static StringBuilder addPNG(String x) {
 		StringBuilder temp = new StringBuilder(x);
 		temp.append(".png");
+		return temp;
+	}
+	
+	public static StringBuilder addJPG(String x) {
+		StringBuilder temp = new StringBuilder(x);
+		temp.append(".jpg");
 		return temp;
 	}
 	

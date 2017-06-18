@@ -60,7 +60,7 @@ public class VisitorGUI extends VisitorB {
 	
 	@Override
 	public void visit(EndDraft mex) {
-		//gui.setLeaders();
+		gui.setLeaders();
 	}
 
 	@Override
