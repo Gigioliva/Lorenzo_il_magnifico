@@ -2,10 +2,10 @@ package it.polimi.ingsw.ps22.server.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Observable;
-
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
@@ -187,6 +187,7 @@ public class Model extends Observable implements Serializable {
 			players.get(el).applyEndEffects();
 		}
 		winMilitaryPoint();
+		System.out.println("Prova1 endGame");
 		for (String el : players.keySet()) {
 			players.get(el).calcVicPoint();
 		}
@@ -199,33 +200,38 @@ public class Model extends Observable implements Serializable {
 	}
 
 	private void winMilitaryPoint() {
-		HashMap<Integer, Player> temp = new HashMap<Integer, Player>();
-		temp.put(1, null);
-		temp.put(2, null);
-		temp.put(3, null);
-		int i = 0;
-		for (String el : players.keySet()) {
-			if (players.get(el).getSpecificResource("MilitaryPoint").getQuantity() >= i) {
-				temp.put(3, temp.get(2));
-				temp.put(2, temp.get(1));
-				temp.put(1, players.get(el));
-				i = players.get(el).getSpecificResource("MilitaryPoint").getQuantity();
+		HashMap<Player, Integer> temp = new HashMap<Player, Integer>();
+		for(String el: players.keySet()){
+			temp.put(players.get(el),players.get(el).getSpecificResource("MilitaryPoint").getQuantity());
+		}
+		ArrayList<Integer> point=new ArrayList<Integer>(temp.values());
+		Collections.sort(point);
+		int i=point.get(0);
+		Player player=searchPlayMil(temp,i);
+		player.addPoints("VictoryPoint", new VictoryPoint(5));
+		if(i==point.get(1)){
+			player=searchPlayMil(temp,i);
+			player.addPoints("VictoryPoint", new VictoryPoint(5));
+		}else{
+			i=point.get(1);
+			player=searchPlayMil(temp,i);
+			player.addPoints("VictoryPoint", new VictoryPoint(2));
+			if(point.size()>2 && point.get(1)==point.get(2)){
+				player=searchPlayMil(temp,i);
+				player.addPoints("VictoryPoint", new VictoryPoint(2));
 			}
 		}
-		if (temp.get(1).getSpecificResource("MilitaryPoint").getQuantity() == temp.get(2)
-				.getSpecificResource("MilitaryPoint").getQuantity()) {
-			temp.get(1).addPoints("VictoryPoint", new VictoryPoint(5));
-			temp.get(2).addPoints("VictoryPoint", new VictoryPoint(5));
-		} else {
-			temp.get(1).addPoints("VictoryPoint", new VictoryPoint(5));
-			if (temp.get(2).getSpecificResource("MilitaryPoint").getQuantity() == temp.get(3)
-					.getSpecificResource("MilitaryPoint").getQuantity()) {
-				temp.get(2).addPoints("VictoryPoint", new VictoryPoint(2));
-				temp.get(3).addPoints("VictoryPoint", new VictoryPoint(2));
-			} else {
-				temp.get(2).addPoints("VictoryPoint", new VictoryPoint(2));
+	}
+	
+	private Player searchPlayMil(HashMap<Player, Integer> temp, int i){
+		for(Player el: temp.keySet()){
+			if(temp.get(el)==i){
+				el.addPoints("VictoryPoint", new VictoryPoint(5));
+				 temp.remove(el);
+				 return el;
 			}
 		}
+		return null;
 	}
 
 	private Player winGame() {
