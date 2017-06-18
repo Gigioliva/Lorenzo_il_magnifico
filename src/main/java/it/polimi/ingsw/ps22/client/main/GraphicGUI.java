@@ -8,11 +8,9 @@ public class GraphicGUI extends Graphic {
 
 	private Gui gui;
 	public boolean flag = true;
-	private ViewClient view;
 
 	public GraphicGUI(ViewClient view) {
-		this.gui=new Gui();
-		this.view = view;
+		this.gui=new Gui(view);
 		requestMove = new RequestMoveGUI();
 		visitor = new VisitorGUI(gui, view);
 	}
@@ -23,7 +21,7 @@ public class GraphicGUI extends Graphic {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					gui.initGui(model, view);
+					gui.initGui(model);
 					gui.updateGui(model);
 					flag = false;
 				}

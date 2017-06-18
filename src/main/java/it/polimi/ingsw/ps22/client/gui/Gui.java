@@ -26,9 +26,12 @@ public class Gui extends JFrame{
 	BoardPanel board;
 	ViewClient view;
 	
+	public Gui(ViewClient view){
+		this.view=view;
+	}
 
 	
-	public void initGui( Model model, ViewClient view){
+	public void initGui(Model model){
 		
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
 		this.setUndecorated(true);
@@ -44,7 +47,6 @@ public class Gui extends JFrame{
 		
 		this.add(board);
 		//this.add(personalBoard);
-		this.view = view;
 		
 		if(System.getProperty("os.name").contains("Windows")){
 			Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/Age_Of_Empires.mp3");

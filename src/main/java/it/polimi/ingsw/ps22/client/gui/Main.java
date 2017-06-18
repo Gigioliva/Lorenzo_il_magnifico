@@ -34,9 +34,9 @@ public class Main {
 				
 				ViewClient view = new ViewClient();
 				new LoginFrame(view);
-				Gui b = new Gui();
+				Gui b = new Gui(null);
 				Model model = new Model();
-				b.initGui(model, view);
+				b.initGui(model);
 				model.addPlayers("Lore");
 				model.addPlayers("Gigi");
 				model.addPlayers("Marco");
