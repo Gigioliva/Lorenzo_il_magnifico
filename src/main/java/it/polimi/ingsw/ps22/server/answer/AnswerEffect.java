@@ -58,14 +58,17 @@ public class AnswerEffect extends GenericAnswer {
 							.get(temp.get(el))).getCost();
 					cost = sumCost(cost, cost_temp);
 				}
-				for (String el : cost.keySet()) {
-					if (cost.get(el).getQuantity() > player.getSpecificResource(el).getQuantity()) {
-						GenericMessage mex = new GenericMessage();
-						mex.setString("risposta errata");
-						model.notifyMessage(mex);
-						model.notifyAsk(ask);
-						return;
+				if(cost!=null){
+					for (String el : cost.keySet()) {
+						if (cost.get(el).getQuantity() > player.getSpecificResource(el).getQuantity()) {
+							GenericMessage mex = new GenericMessage();
+							mex.setString("risposta errata");
+							model.notifyMessage(mex);
+							model.notifyAsk(ask);
+							return;
+						}
 					}
+					
 				}
 				ask.getProdAction().applyAnswer(temp, player);
 				model.getWaitAnswer().remove(ask);
