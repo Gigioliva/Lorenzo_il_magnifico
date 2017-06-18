@@ -112,13 +112,13 @@ public class BonusAcc implements Serializable {
 	}
 
 	public void subSales(HashMap<String, ResourceAbstract> bonus, String type) {
-		if (type == "Building") {
+		if (type.equalsIgnoreCase("Building")) {
 			subSaleBuilding(bonus);
 		}
-		if (type == "Character") {
+		if (type.equalsIgnoreCase("Character")) {
 			subSaleCharacter(bonus);
 		}
-		if (type == "Venture") {
+		if (type.equalsIgnoreCase("Venture")) {
 			subSaleVenture(bonus);
 		}
 
