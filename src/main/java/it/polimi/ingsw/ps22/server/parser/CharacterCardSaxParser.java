@@ -339,7 +339,7 @@ public class CharacterCardSaxParser {
 					}
 
 					if (lastQName.equalsIgnoreCase("notowerbonus")) {
-						card.addPermanentEffect(new StrangeEffect("GainTower"));
+						card.addPermanentEffect(new StrangeEffect("GainTowers"));
 					}
 
 					if (boolPlaceIncr) {
