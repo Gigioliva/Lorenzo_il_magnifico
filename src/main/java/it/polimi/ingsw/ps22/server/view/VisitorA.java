@@ -30,7 +30,7 @@ public class VisitorA {
 
 	public AskCosts visit(AskCosts mex) {
 		if (user.equals(user_mex)) {
-			return new AskCosts(mex.getString(), mex.getId());
+			return new AskCosts(mex.getString(), mex.getId(), mex.getPossibleCost());
 		} else {
 			return null;
 		}

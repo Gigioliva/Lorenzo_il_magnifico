@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskCosts extends MessageAsk {
 	private static final long serialVersionUID = 1L;
 	private transient int numChoice;
-	private transient ArrayList<RequisiteCost> possibleCost;
+	private ArrayList<RequisiteCost> possibleCost;
 	private transient HashMap<String, ResourceAbstract> discount;
 	private transient Player player;
 	private transient TowerSpace towerSpace;
@@ -39,8 +39,12 @@ public class AskCosts extends MessageAsk {
 		setString(str.toString());
 	}
 	
-	public AskCosts(String str, int id){
+	public AskCosts(String str, int id, ArrayList<RequisiteCost> possibleCost){
 		super(str,id);
+		this.possibleCost=new ArrayList<RequisiteCost>();
+		for(RequisiteCost el: possibleCost){
+			this.possibleCost.add(el.clone());
+		}
 	}
 
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace,
