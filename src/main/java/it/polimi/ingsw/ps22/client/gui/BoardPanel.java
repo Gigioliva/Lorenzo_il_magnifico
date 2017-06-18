@@ -2,13 +2,9 @@ package it.polimi.ingsw.ps22.client.gui;
 
 
 import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -256,6 +252,17 @@ public class BoardPanel extends JPanel{
 		sfondo.setBounds(0,0,(int) widthScreen,(int) heightScreen);
 		//sfondo.setText("Ciao");
 		layeredPane.add(sfondo, new Integer(0));
+		
+		
+		JLabel playerLab = new JLabel();
+		playerLab.setBounds((int)widthScreen - 150, 0, 120, 30);
+		Font fontlab = new Font("Papyrus", Font.ITALIC + Font.BOLD , playerLab.getHeight());
+		playerLab.setFont(fontlab);
+		playerLab.setForeground(model.getPlayers().get(username).getColor().getColor());
+		playerLab.setHorizontalAlignment(SwingConstants.CENTER);
+		playerLab.setText(username);
+		
+		layeredPane.add(playerLab, new Integer(20000));
 		
 		this.add(layeredPane);
         

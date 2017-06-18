@@ -44,6 +44,11 @@ public class AskEffectDialog extends MessageDialog {
 			group.add(b);
 			mainPanel.add(b);
 		}
+		
+		Button b = new Button(0, "Don't appply any effect");
+		buttons.add(b);
+		group.add(b);
+		mainPanel.add(b);
 
 		mainPanel.add(confirmButton);
 

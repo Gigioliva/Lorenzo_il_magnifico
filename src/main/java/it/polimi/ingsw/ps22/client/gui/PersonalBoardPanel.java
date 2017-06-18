@@ -47,7 +47,7 @@ public class PersonalBoardPanel extends JPanel {
 		ImageIcon personalBonus = MyImage.createImageIcon(pathPersonalBonus);
 	    
 	    Image imgBonus = personalBonus.getImage();
-	    Rectangle dimBonus = new Rectangle((int)(heightScreen*0.75) ,(int)(personalBonus.getIconWidth()/factorScalePersonalBoard + heightScreen*0.75),0, (int)(personalBonus.getIconHeight()/factorScalePersonalBoard));
+	    Rectangle dimBonus = new Rectangle((int)(heightScreen*0.71) ,(int)(personalBonus.getIconWidth()/factorScalePersonalBoard + heightScreen*0.71),0, (int)(personalBonus.getIconHeight()/factorScalePersonalBoard));
 		Image imageBonus = MyImage.getScaledImage(imgBonus, dimBonus);
 		ImageIcon personalB = new ImageIcon(imageBonus);		
 	    JLabel bonusLabel = new JLabel(personalB);
@@ -55,7 +55,7 @@ public class PersonalBoardPanel extends JPanel {
  	    personalBoard.add(bonusLabel, new Integer(30), 0);	
 	    
 		Image img = personal.getImage();
-		Rectangle dimBoard = new Rectangle((int)(heightScreen*0.75) + personalBonus.getIconWidth() ,(int)(personal.getIconWidth()/factorScalePersonalBoard + heightScreen*0.75 + personalBonus.getIconWidth()),0, (int)(personal.getIconHeight()/factorScalePersonalBoard));
+		Rectangle dimBoard = new Rectangle((int)(heightScreen*0.71) + personalBonus.getIconWidth() ,(int)(personal.getIconWidth()/factorScalePersonalBoard + heightScreen*0.71 + personalBonus.getIconWidth()),0, (int)(personal.getIconHeight()/factorScalePersonalBoard));
 		Image image = MyImage.getScaledImage(img, dimBoard);
 		ImageIcon board = new ImageIcon(image);
 		
@@ -117,7 +117,7 @@ public class PersonalBoardPanel extends JPanel {
 	    personalBoard.add(stoneLabel, new Integer(40));
 	    
 	  
-	    this.setBounds((int)(heightScreen*0.75), 0,(int)(personal.getIconWidth()/factorScalePersonalBoard) + bonusLabel.getWidth(),
+	    this.setBounds((int)(heightScreen*0.71), 0,(int)(personal.getIconWidth()/factorScalePersonalBoard) + bonusLabel.getWidth(),
 	    		+ PersonalBoardAdaptive.getCharacterCardSlot(resizeFactor, 1).getFinaly());
 	    
 	    this.setOpaque(false);;
