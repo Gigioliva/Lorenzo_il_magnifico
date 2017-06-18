@@ -58,6 +58,7 @@ public class BoardPanel extends JPanel{
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
 	private String username;
 	private ViewClient view;
+	private boolean setLeadersFlag = false;
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -310,6 +311,7 @@ public class BoardPanel extends JPanel{
 		updateCardExcomm(model);
 		updateFamiliars(model);
 		updateFamSpinner();
+		setLeaders(model);
 		repaint();
 	}
 	
@@ -432,13 +434,19 @@ public class BoardPanel extends JPanel{
 	}
 	
 	public void setLeaders(Model model){
-		for(int i = 0; i< NUMLEADERS; i++){
-			CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
-			LeaderButton b1 = new LeaderButton(i, personalBoard, card, username);
-			b1.addActionListener(new LeaderPlayingListener(view, username, card.getName()));
-			layeredPane.add(b1, new Integer(2500));
+		if(setLeadersFlag == true){
+			for(int i = 0; i< NUMLEADERS; i++){
+				CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
+				LeaderButton b1 = new LeaderButton(i, personalBoard, card, username);
+				b1.addActionListener(new LeaderPlayingListener(view, username, card.getName()));
+				layeredPane.add(b1, new Integer(2500));
+			}
 		}
+		this.setLeadersFlag = false;
 	}
 	
+	public void setLeadersFlag(){
+		this.setLeadersFlag = true;
+	}
 	
 }
