@@ -17,7 +17,7 @@ public class LeaderButton extends JButton {
 		String path = CardPath.getLeaderCardPathname(card);
 		this.setIcon(MyImage.getScaledImageinLabel(path, dim).getIcon());
 		this.addMouseListener(new MyMouse(BoardPanel.zoomedCard, path));
-		this.addChangeListener(new BorderEffect(this));
+		//this.addChangeListener(new BorderEffect(this));
 	}
 	
 	/*

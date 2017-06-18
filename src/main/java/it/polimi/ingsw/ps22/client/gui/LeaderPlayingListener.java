@@ -19,11 +19,11 @@ public class LeaderPlayingListener implements ActionListener {
 		this.view = view;
 	}
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		
+	public void actionPerformed(ActionEvent e) {
+		LeaderButton pressedButton = (LeaderButton)e.getSource();
 		LeaderPlaying move = new LeaderPlaying(username, nameCard);
 		view.send(move);
-		
+		System.out.println("Leader Move");
 	}
 
 }

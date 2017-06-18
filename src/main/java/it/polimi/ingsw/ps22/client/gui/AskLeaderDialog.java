@@ -29,7 +29,7 @@ public class AskLeaderDialog extends MessageDialog {
 		
 		mainPanel.setLayout(new GridLayout(0, 1));
 		
-		this.setTitle("Which leader card you want?");
+		this.setTitle("Which leader card you want? ");
 		
 		for(int i = 0; i < mex.getLeaders().size(); i++){
 			JRadioButton b1 = new JRadioButton(mex.getLeaders().get(i));
@@ -52,7 +52,6 @@ public class AskLeaderDialog extends MessageDialog {
 			for(JRadioButton b: buttons){
 				if (b.isSelected()){
 					view.send(new AnswerLeader(mex.getId(), b.getText()));
-					if(buttons.size() == 1)
 					AskLeaderDialog.this.dispose();
 				}
 			}
