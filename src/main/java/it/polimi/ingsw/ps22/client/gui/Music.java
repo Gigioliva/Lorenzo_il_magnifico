@@ -2,9 +2,6 @@ package it.polimi.ingsw.ps22.client.gui;
 
 import java.io.File;
 
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
