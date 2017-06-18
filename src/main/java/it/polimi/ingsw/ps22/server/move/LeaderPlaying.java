@@ -56,11 +56,10 @@ public class LeaderPlaying extends LeaderMove {
 					}
 				}
 			}
-		} else {
-			ErrorMove error = new ErrorMove();
-			model.notifyMessage(error);
-			model.notifyModel();
 		}
+		ErrorMove error = new ErrorMove();
+		model.notifyMessage(error);
+		model.notifyModel();
 	}
 
 	private ArrayList<CardLeader> getLeaderPlay(Model model) {
