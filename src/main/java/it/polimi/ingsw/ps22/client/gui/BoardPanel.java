@@ -191,7 +191,7 @@ public class BoardPanel extends JPanel{
 		spinServant();
 		
 		for(int i = 0 ; i < NUM_PLAYERS - 1; i++){
-			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, avver.get(i) ,i, personBonusPaths.get(i));
+			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, avver.get(i) ,i, personBonusPaths.get(i), model.getPlayers().get(avver.get(i)).getColor().getColor());
 			players.add(b1);
 			layeredPane.add(b1, new Integer(40));
 		}
