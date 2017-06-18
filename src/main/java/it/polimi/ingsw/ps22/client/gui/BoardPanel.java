@@ -19,6 +19,7 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
+import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.move.EndTurn;
@@ -32,6 +33,7 @@ public class BoardPanel extends JPanel{
 
 	private static final long serialVersionUID = -5630682030714330058L;
 
+	private final int NUMLEADERS = 4;
 	private int NUM_PLAYERS;
 	private static final int NUM_CARDEXCOMM = 3;
 	private ServantSpinner spinner;
@@ -54,7 +56,7 @@ public class BoardPanel extends JPanel{
 	private FamiliarButton fam3;
 	private FamiliarButton fam4;
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
-
+	private String username;
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -67,6 +69,8 @@ public class BoardPanel extends JPanel{
 		
 		ArrayList<String> avver = new ArrayList<String>(model.getPlayers().keySet());
 		avver.remove(username);
+		
+		this.username = username;
 		
 		ArrayList<String> personBonusPaths = new ArrayList<String>();
 		for(String user: avver){
@@ -262,7 +266,7 @@ public class BoardPanel extends JPanel{
 		playerLab.setHorizontalAlignment(SwingConstants.CENTER);
 		playerLab.setText(username);
 		
-		layeredPane.add(playerLab, new Integer(20000));
+		layeredPane.add(playerLab, new Integer(2000));
 		
 		this.add(layeredPane);
         
@@ -423,6 +427,14 @@ public class BoardPanel extends JPanel{
 	
 	private void updateFamSpinner(){
 		spinner.updateSpin();
+	}
+	
+	public void setLeaders(Model model){
+		for(int i = 0; i< NUMLEADERS; i++){
+			CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
+			LeaderButton b1 = new LeaderButton(i, personalBoard, card, username);
+			layeredPane.add(b1, new Integer(2500));
+		}
 	}
 	
 	

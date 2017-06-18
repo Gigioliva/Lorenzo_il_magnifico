@@ -140,6 +140,10 @@ public class Gui extends JFrame{
 		new AskLeaderDialog(view, mex);
 	}
 	
+	public void setLeaders(Model model){
+		board.setLeaders(model);
+	}
+	
 	public void errorMove(){
 		JOptionPane.showMessageDialog(this, "You can't do this move");
 	}
