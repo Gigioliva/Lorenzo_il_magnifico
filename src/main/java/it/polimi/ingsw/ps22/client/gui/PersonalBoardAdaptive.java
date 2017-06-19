@@ -12,7 +12,7 @@ public class PersonalBoardAdaptive {
 	private static final Rectangle woodSlot = new Rectangle(900, 1080, 2070, 2190);
 	private static final Rectangle stoneSlot = new Rectangle(1470, 1650, 2070, 2190);;
 	private static final Rectangle servantSlot = new Rectangle(2010, 2190, 2070, 2190);
-	private static final Rectangle blackDiceButtonSlot = new Rectangle(0, 400, 4000, 4600);
+	private static final Rectangle blackDiceButtonSlot = new Rectangle(0, 400, 4200, 4600);
 	private static final Rectangle basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 	private static final Rectangle chatSlot = new Rectangle(3630, 4300, 150, 2300);
 	private static final Rectangle servantRequestSlot = new Rectangle(3630, 4300, 2400, 2700);
