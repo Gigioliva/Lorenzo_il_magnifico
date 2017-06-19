@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.util.ArrayList;
 
 //	TUTTE LE POSIZIONI RITORNATE DA QUESTA CLASSE SONO DA RIFERIRSI AL FATTORE DI RISCALATURA
 //	DELLA PERSONAL BOARD E SONO IN POSIZIONE RELATIVA DALL'INIZIO DELLA PERSONAL BOARD 
@@ -17,10 +16,10 @@ public class PersonalBoardAdaptive {
 	private static final Rectangle basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 	private static final Rectangle chatSlot = new Rectangle(3630, 3900, 150, 2308);
 	private static final Rectangle servantRequestSlot = new Rectangle(3630, 4300, 2400, 2700);
-	private static final Rectangle excommSlot1 = new Rectangle(3630, 3900, 2400, 2700);
-	private static final Rectangle excommSlot2 = new Rectangle(3630, 3900, 2400, 2700);
-	private static final Rectangle excommSlot3 = new Rectangle(3630, 3900, 2400, 2700);
-	private static final Rectangle leaderSlot = new Rectangle(3630, 3800, 2730, 2980);
+	private static final Rectangle excommSlot1 = new Rectangle(0, 0, 0, 0);
+	private static final Rectangle excommSlot2 = new Rectangle(0, 0, 0, 0);
+	private static final Rectangle excommSlot3 = new Rectangle(0, 0, 0, 0);
+	private static final Rectangle leaderSlot = new Rectangle(3630, 4300, 2730, 2980);
 
 	private static final int cardOffsetX = 548;
 	private static final int cardTerritoryOffsetY = 1000;
@@ -29,9 +28,6 @@ public class PersonalBoardAdaptive {
 	private static final int diceButtonOffsetX = 500;
 	private static final int playerOffsetX = 600;
 	private static final int playerOffsetY = 315;
-	private static final int leaderOffsetX = 180;
-	private static final int leaderOffsetY = 320;
-
 	
 	public static Rectangle getChatSlot(double resizeFactor) {
 		return chatSlot.resize(resizeFactor);
@@ -51,23 +47,9 @@ public class PersonalBoardAdaptive {
 		return null;
 	}
 
-	public static ArrayList<Rectangle> getLeaderSlot(double resizeFactor) {
-		ArrayList<Rectangle> temp = new ArrayList<Rectangle>();
-		temp.add(leaderSlot);
-		temp.add(new Rectangle(leaderSlot.getInitx()+leaderOffsetX, 
-				leaderSlot.getFinalx()+leaderOffsetX,
-				leaderSlot.getInity(), leaderSlot.getFinaly()));
-		temp.add(new Rectangle(leaderSlot.getInitx(), leaderSlot.getFinalx(),
-				leaderSlot.getInity()+leaderOffsetY, 
-				leaderSlot.getFinaly()+leaderOffsetY));
-		temp.add(new Rectangle(leaderSlot.getInitx()+leaderOffsetX, 
-				leaderSlot.getFinalx()+leaderOffsetX,
-				leaderSlot.getInity()+leaderOffsetY, 
-				leaderSlot.getFinaly()+leaderOffsetY));
-		for(Rectangle rec: temp) {
-			rec.resize(resizeFactor);
-		}
-		return temp;
+	public static Rectangle getLeaderSlot(double resizeFactor) {
+		return leaderSlot.resize(resizeFactor);
+
 	}
 
 	public static Rectangle getBuildingCardSlot(double resizeFactor, int slot) {
