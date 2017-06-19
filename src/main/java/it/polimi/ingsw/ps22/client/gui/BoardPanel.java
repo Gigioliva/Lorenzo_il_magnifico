@@ -58,7 +58,9 @@ public class BoardPanel extends JPanel{
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
 	private String username;
 	private ViewClient view;
+	private ArrayList<LeaderButton> leaders = new ArrayList<LeaderButton>();
 	private boolean setLeadersFlag = false;
+	private ArrayList<LeaderAvverButton> avverLeaders = new  ArrayList<LeaderAvverButton>();
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -191,10 +193,9 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(personalBoard, new Integer(400),0);
 		
 		spinner = new ServantSpinner(actionSpaces);
-		
-		spinner.setBounds((int)(heightScreen*0.75) + personalBoard.getWidth(), (int)(heightScreen/2.5), 
-				(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth())),  
-					(int)(widthScreen - (heightScreen*0.75 + personalBoard.getWidth()))/3);
+		Rectangle dimSpinner = PersonalBoardAdaptive.getServantRequestSlot(personalBoard.resizeFactor);
+		spinner.setBounds(dimSpinner.getInitx()+ personalBoard.getWidth(), dimSpinner.getInity(), 
+				(int)widthScreen -dimSpinner.getInitx()- personalBoard.getWidth() ,dimSpinner.getOffsetY());
 		spinServant();
 		
 		for(int i = 0 ; i < NUM_PLAYERS - 1; i++){
@@ -271,6 +272,22 @@ public class BoardPanel extends JPanel{
 		
 		layeredPane.add(playerLab, new Integer(2000));
 		
+		
+		for(int i = 0; i<NUM_PLAYERS - 1; i++){
+			LeaderAvverButton b = new LeaderAvverButton(avver.get(i), resizeFactor, model.getPlayers().get(avver.get(i)).getColor().getColor(), 
+					model.getPlayers().get(avver.get(i)).getLeaders());
+			b.setBounds((int)widthScreen - 300 + 100*i,(int) heightScreen - 100,
+				100, 50);
+			avverLeaders.add(b);
+			layeredPane.add(b, new Integer(3000));
+		}
+		
+		JPanel chatpan = new JPanel();
+		Rectangle dimChat = PersonalBoardAdaptive.getChatSlot(resizeFactor);
+		chatpan.setBounds(dimChat.getInitx(), dimChat.getInity(), dimChat.getOffsetX(), dimChat.getOffsetY());
+		chatpan.setOpaque(true);
+		layeredPane.add(chatpan, new Integer(4000));
+		
 		this.add(layeredPane);
         
         
@@ -312,7 +329,9 @@ public class BoardPanel extends JPanel{
 		updateFamiliars(model);
 		updateFamSpinner();
 		setLeaders(model);
-		repaint();
+		updateLeaders(model);
+		updateAvverLeader(model);
+		//repaint();
 	}
 	
 	private void updateActionSpaces(Model model){
@@ -438,7 +457,16 @@ public class BoardPanel extends JPanel{
 			for(int i = 0; i< NUMLEADERS; i++){
 				CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
 				LeaderButton b1 = new LeaderButton(i, personalBoard, card, username);
-				b1.addActionListener(new LeaderPlayingListener(view, username, card.getName()));
+				leaders.add(b1);
+				b1.addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						LeaderButton b = (LeaderButton)e.getSource();
+						new AskLeaderMoveDialog(view, username, card.getName(), b);
+						
+					}
+				});
 				layeredPane.add(b1, new Integer(2500));
 			}
 		}
@@ -447,6 +475,23 @@ public class BoardPanel extends JPanel{
 	
 	public void setLeadersFlag(){
 		this.setLeadersFlag = true;
+	}
+	
+	private void updateLeaders(Model model){
+		if(leaders.size() == NUMLEADERS){
+			for(int i = 0; i< NUMLEADERS; i++){
+				leaders.get(i).updateLeader(model);
+			}
+		}
+		
+	}
+	
+	private void updateAvverLeader(Model model){
+		if(leaders.size() == NUMLEADERS){
+			for(LeaderAvverButton b: avverLeaders){
+				b.updateAvverLeaders(model);
+			}
+		}
 	}
 	
 }
