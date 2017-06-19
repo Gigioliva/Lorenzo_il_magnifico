@@ -2,7 +2,8 @@ package it.polimi.ingsw.ps22.client.gui;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.message.AskCard;
 import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
@@ -17,41 +18,45 @@ import it.polimi.ingsw.ps22.server.message.ChoiceMove;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 
-public class Gui extends JFrame{
-	
+public class Gui extends JFrame {
+
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	BoardPanel board;
 	ViewClient view;
-	
-	public Gui(ViewClient view){
-		this.view=view;
+
+	public Gui(ViewClient view) {
+		this.view = view;
 	}
 
-	
-	public void initGui(Model model){
-		
-		this.setExtendedState(JFrame.MAXIMIZED_BOTH); 
+	public void initGui(Model model) {
+		try {
+			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			e.printStackTrace();
+		}
+
+		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setUndecorated(true);
-		
-		
-		this.pack(); 
+
+		this.pack();
 		this.setVisible(true);
-		
-	
-		board = new BoardPanel(this.getWidth(), this.getHeight(), view.getUsername(), view, model); 
-		
-		//personalBoard = new PersonalBoardPanel(this.getWidth(), this.getHeight(), username);
-		
+
+		board = new BoardPanel(this.getWidth(), this.getHeight(), view.getUsername(), view, model);
+
+		// personalBoard = new PersonalBoardPanel(this.getWidth(),
+		// this.getHeight(), username);
+
 		this.add(board);
-		//this.add(personalBoard);
-		
-		if(System.getProperty("os.name").contains("Windows")){
+		// this.add(personalBoard);
+
+		if (System.getProperty("os.name").contains("Windows")) {
 			Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/Age_Of_Empires.mp3");
-		}else{
-			Thread temp=new Thread(new  Runnable(){
+		} else {
+			Thread temp = new Thread(new Runnable() {
 				@Override
 				public void run() {
 					Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/Age_Of_Empires.mp3");
@@ -60,106 +65,88 @@ public class Gui extends JFrame{
 			temp.start();
 		}
 	}
-	
-	public void updateGui(Model model){
+
+	public void updateGui(Model model) {
 		board.updateBoard(model);
 	}
-	
-	public void askPrivilege(AskCouncilPrivilege mex){
+
+	public void askPrivilege(AskCouncilPrivilege mex) {
 		new PrivilegeDialog(view, mex);
 		return;
 	}
-	/*
 
-	public void getCard(AskCard mex){
-		
-		JDialog d = new JDialog();
-		JTextField t = new JTextField();
-		t.setText("Puoi scegliere una carta extra ");
-		d.add(t);
-		
-		for(String tower: mex.getPossibleCard().keySet()){
-			
-			ArrayList<DevelopmentCard> cards = mex.getPossibleCard().get(tower);
-			
-			for(int i=0; i < cards.size(); i++){
-				String path = CardPath.getDevCardPathname(cards.get(i));
-				if (board.towers.get(toInt(tower)).get(i).path.equals(path)){
-					DevelopmentCard card = cards.get(i);
-					board.towers.get(toInt(tower)).get(i).b.addActionListener(new ActionListener() {
-						
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							view.send(new AnswerCard(mex.getId(), tower, card.getName()));
-						}
-					});
-				}
-			}
-		}
-	}
-	
-	private Integer toInt(String type){
-		switch(type){
-		case "Territory":
-			return 1;
-		case "Character":
-			return 2;
-		case "Building":
-			return 3;
-		case "Venture":
-			return 4;
-		default:
-			throw new IllegalArgumentException();
-		}
-		
-	}
-	*/
-	public void getCard(AskCard mex){
+	/*
+	 * 
+	 * public void getCard(AskCard mex){
+	 * 
+	 * JDialog d = new JDialog(); JTextField t = new JTextField();
+	 * t.setText("Puoi scegliere una carta extra "); d.add(t);
+	 * 
+	 * for(String tower: mex.getPossibleCard().keySet()){
+	 * 
+	 * ArrayList<DevelopmentCard> cards = mex.getPossibleCard().get(tower);
+	 * 
+	 * for(int i=0; i < cards.size(); i++){ String path =
+	 * CardPath.getDevCardPathname(cards.get(i)); if
+	 * (board.towers.get(toInt(tower)).get(i).path.equals(path)){
+	 * DevelopmentCard card = cards.get(i);
+	 * board.towers.get(toInt(tower)).get(i).b.addActionListener(new
+	 * ActionListener() {
+	 * 
+	 * @Override public void actionPerformed(ActionEvent e) { view.send(new
+	 * AnswerCard(mex.getId(), tower, card.getName())); } }); } } } }
+	 * 
+	 * private Integer toInt(String type){ switch(type){ case "Territory":
+	 * return 1; case "Character": return 2; case "Building": return 3; case
+	 * "Venture": return 4; default: throw new IllegalArgumentException(); }
+	 * 
+	 * }
+	 */
+	public void getCard(AskCard mex) {
 		new AskCardDialog(view, mex);
 	}
-	
-	public void askCosts(AskCosts mex){
+
+	public void askCosts(AskCosts mex) {
 		new AskCostDialog(view, mex);
 	}
-	
-	public void askEffect(AskEffect mex){
+
+	public void askEffect(AskEffect mex) {
 		new AskEffectDialog(view, mex);
 	}
-	
-	public void askFamily(AskFamily mex){
+
+	public void askFamily(AskFamily mex) {
 		new AskFamilyDialog(view, mex);
 	}
-	
-	public void askServants(AskServant mex){
+
+	public void askServants(AskServant mex) {
 		new AskServantDialog(view, mex);
 	}
-	
-	public void askCopyLeader(AskCopyLeader mex){
+
+	public void askCopyLeader(AskCopyLeader mex) {
 		new AskCopyLeaderDialog(view, mex);
 	}
-	
-	public void askLeader(AskLeader mex){
+
+	public void askLeader(AskLeader mex) {
 		new AskLeaderDialog(view, mex);
 	}
-	
-	public void setLeaders(){
+
+	public void setLeaders() {
 		board.setLeadersFlag();
 	}
-	
-	public void errorMove(){
+
+	public void errorMove() {
 		JOptionPane.showMessageDialog(this, "You can't do this move");
 	}
 
-	
-	public void askExcomm(AskExcomm mex){
+	public void askExcomm(AskExcomm mex) {
 		new AskExcommDialog(view, mex);
 	}
-	
-	public void yourTurn(ChoiceMove mex){
+
+	public void yourTurn(ChoiceMove mex) {
 		JOptionPane.showMessageDialog(this, mex.getString());
 	}
-	
-	public void genericMessage(GenericMessage mex){
+
+	public void genericMessage(GenericMessage mex) {
 		JOptionPane.showMessageDialog(this, mex.getString());
 	}
 
