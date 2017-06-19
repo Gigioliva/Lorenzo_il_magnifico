@@ -61,6 +61,20 @@ public class Rectangle {
 				(int) ((double) this.inity / factor), (int) ((double) this.finaly / factor));
 		return temp;
 	}
+	
+	public static Rectangle fillImageRatio(Rectangle rec, float heightWightRatio) { 
+		// ratio=altezza/larghezza
+		Rectangle temp;
+		if(rec.getOffsetY()>(rec.getOffsetX()*heightWightRatio))
+			temp = new Rectangle(
+					rec.getInitx(),rec.getFinalx(),rec.getInity(),
+					(int)((float)rec.getOffsetX()*heightWightRatio));
+		else
+			temp = new Rectangle(
+					rec.getInitx(),(int)((float)rec.getOffsetY()/heightWightRatio),
+					rec.getInity(),rec.getFinaly());
+		return temp;
+	}
 
 	public static ArrayList<Rectangle> divideRectangle(Rectangle toDivide) {
 		ArrayList<Rectangle> toReturn = new ArrayList<Rectangle>();
