@@ -28,7 +28,6 @@ public class CouncilLabel extends JLabel {
 		super.paintComponent(g);
 		
 		for(int i=0; i<familiars.size(); i++){
-			System.out.println("prova 3");
 			Rectangle dim = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, i);
 			Rectangle dim0 = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, 0);
 			String path = FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(), familiars.get(i).getColor());
@@ -41,7 +40,6 @@ public class CouncilLabel extends JLabel {
 	
 	public void updateCouncilLabel(ArrayList<Family> fam){
 		familiars = fam;
-		System.out.println("prova2");
 		this.repaint();
 	}
 

@@ -30,7 +30,6 @@ public class CouncilButton extends ActionButton {
 	public void updateButton(Model model){
 		ArrayList<Family> fam = model.getBoard().getCouncilPalace().getFamilies();
 		this.familiars = fam;
-		System.out.println("prova1");
 		lab.updateCouncilLabel(fam);
 	}
 }
