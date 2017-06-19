@@ -12,7 +12,7 @@ public class ClientSocket implements Observer {
 
 	public ClientSocket() {
 		try {
-			client = new Socket("169.254.112.228", 12345);
+			client = new Socket("localhost", 12345);
 			output = new ObjectOutputStream(client.getOutputStream());
 		} catch (IOException e) {
 			System.out.println("Errore apertura");

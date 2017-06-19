@@ -31,7 +31,6 @@ public class CouncilLabel extends JLabel {
 			Rectangle dim = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, i);
 			Rectangle dim0 = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, 0);
 			String path = FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(), familiars.get(i).getColor());
-			System.out.println("dim " + dim.getInitx() + " " + dim.getInity() + " " + dim.getOffsetX());
 			g.drawImage(MyImage.createScaledImageIcon(path, dim).getImage(), dim.getInitx() - dim0.getInitx(), 
 					dim.getInity() - dim0.getInity(), null);
 		}

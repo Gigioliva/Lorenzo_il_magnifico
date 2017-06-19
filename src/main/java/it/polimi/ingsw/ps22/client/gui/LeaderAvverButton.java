@@ -1,19 +1,14 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 import it.polimi.ingsw.ps22.server.card.CardLeader;
-import it.polimi.ingsw.ps22.server.model.Model;
 
-public class LeaderAvverButton extends JButton {
+public class LeaderAvverButton extends JPanel {
 	
 	/**
 	 * 
@@ -21,47 +16,34 @@ public class LeaderAvverButton extends JButton {
 	private static final long serialVersionUID = -8136957738988127711L;
 	//private final int NUMLEADERS = 4;
 	private final String leaderBackPath = "./image/leadercard/leadersback.jpg";
-	private String username;
-	private Rectangle cardDim;
+	Rectangle cardDim;
 	private ArrayList<CardLeader> leaders = new ArrayList<CardLeader>();
 	
 	public LeaderAvverButton(String username, double resizeFactor, java.awt.Color c, ArrayList<CardLeader> leaders){
-		super(username + " leaders");
-		this.username = username;
+		super();
+		this.setLayout(new GridLayout(2, 2));
 		this.leaders = leaders;
-		cardDim = AdaptiveLayout.getCardBuildingSpace(resizeFactor/2, 0);
-		this.setFont(new Font("Papyrus",Font.ITALIC + Font.BOLD , 20));
-		this.setForeground(c);
-		this.setText(username);
-		this.addActionListener(new ShowLeaders());
+		cardDim = AdaptiveLayout.getCardBuildingSpace(resizeFactor, 0);
+	
+		setLeaders();
+		
+		this.setMinimumSize(new Dimension(3*cardDim.getOffsetX(), 3*cardDim.getOffsetY()));
+			
 	}
 	
-	private class ShowLeaders implements ActionListener{
+	private void setLeaders(){
+		for(int i=0; i < 4 - leaders.size(); i++){
+			
+			this.add(MyImage.getScaledImageinLabel(leaderBackPath, new Rectangle(0,(int)(cardDim.getOffsetX()*2.5), 0 ,
+					(int)(cardDim.getOffsetY()*2.5))));
 
-		@Override
-		public void actionPerformed(ActionEvent arg0) {
-			JFrame frame = new JFrame(username);
-			frame.setLayout(new GridLayout(2,2));
-			
-			for(int i=0; i<leaders.size(); i++){
-				if(!leaders.get(i).isPlay())
-					frame.add(MyImage.getScaledImageinLabel(leaderBackPath, cardDim));
-				else{
-					String path = CardPath.getLeaderCardPathname(leaders.get(i));
-					frame.add(MyImage.getScaledImageinLabel(path, cardDim));
-				}
-			}
-				
-			
-			frame.setMinimumSize(new Dimension(200, 200));
-			frame.setVisible(true);
-			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
 		}
-	
+		
+		for(int i = 0; i<leaders.size(); i++){
+			String path = CardPath.getLeaderCardPathname(leaders.get(i));
+			this.add(MyImage.getScaledImageinLabel(path, new Rectangle(0,(int)(cardDim.getOffsetX()*2.5), 0 ,
+					(int)(cardDim.getOffsetY()*2.5))));
+		}
 	}
 	
-	public void updateAvverLeaders(Model model){
-		this.leaders = model.getPlayers().get(username).getLeaders();
-	}
 }

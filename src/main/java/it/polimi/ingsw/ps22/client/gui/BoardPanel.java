@@ -205,7 +205,8 @@ public class BoardPanel extends JPanel{
 		spinServant();
 		
 		for(int i = 0 ; i < NUM_PLAYERS - 1; i++){
-			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, avver.get(i) ,i, personBonusPaths.get(i), model.getPlayers().get(avver.get(i)).getColor().getColor());
+			PlayersButton b1 = new PlayersButton(widthScreen, heightScreen, resizeFactor, avver.get(i) ,i, personBonusPaths.get(i), 
+					model.getPlayers().get(avver.get(i)).getColor().getColor(), model.getPlayers().get(avver.get(i)).getLeaders());
 			players.add(b1);
 			layeredPane.add(b1, new Integer(40));
 		}
@@ -279,6 +280,7 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(playerLab, new Integer(2000));
 		
 		
+		/*
 		for(int i = 0; i<NUM_PLAYERS - 1; i++){
 			LeaderAvverButton b = new LeaderAvverButton(avver.get(i), resizeFactor, model.getPlayers().get(avver.get(i)).getColor().getColor(), 
 					model.getPlayers().get(avver.get(i)).getLeaders());
@@ -287,11 +289,12 @@ public class BoardPanel extends JPanel{
 			avverLeaders.add(b);
 			layeredPane.add(b, new Integer(3000));
 		}
+		*/
 		
 		JPanel chatpan = new JPanel();
 		Rectangle dimChat = PersonalBoardAdaptive.getChatSlot(personalBoard.resizeFactor);
 		chatpan.setBounds(dimChat.getInitx() + personalBoard.getWidth(), dimChat.getInity(), dimChat.getOffsetX(), dimChat.getOffsetY());
-		chatpan.setOpaque(true);
+		chatpan.setOpaque(false);
 		layeredPane.add(chatpan, new Integer(4000));
 		
 		this.add(layeredPane);
@@ -336,7 +339,7 @@ public class BoardPanel extends JPanel{
 		updateFamSpinner();
 		setLeaders(model);
 		updateLeaders(model);
-		updateAvverLeader(model);
+		//updateAvverLeader(model);
 		//repaint();
 	}
 	
@@ -491,6 +494,7 @@ public class BoardPanel extends JPanel{
 		}
 	}
 	
+	/*
 	private void updateAvverLeader(Model model){
 		if (model.getPlayers().get(username).getLeaders() != null){
 			for(LeaderAvverButton b: avverLeaders){
@@ -498,5 +502,7 @@ public class BoardPanel extends JPanel{
 			}
 		}
 	}
+	
+	*/
 	
 }
