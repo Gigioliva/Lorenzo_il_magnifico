@@ -16,9 +16,6 @@ public class PersonalBoardAdaptive {
 	private static final Rectangle basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 	private static final Rectangle chatSlot = new Rectangle(3630, 4300, 150, 2300);
 	private static final Rectangle servantRequestSlot = new Rectangle(3630, 4300, 2400, 2700);
-	private static final Rectangle excommSlot1 = new Rectangle(0, 0, 0, 0);
-	private static final Rectangle excommSlot2 = new Rectangle(0, 0, 0, 0);
-	private static final Rectangle excommSlot3 = new Rectangle(0, 0, 0, 0);
 	private static final Rectangle leaderSlot = new Rectangle(3630, 4300, 2745, 3750);
 
 	private static final int cardOffsetX = 548;
@@ -35,16 +32,6 @@ public class PersonalBoardAdaptive {
 
 	public static Rectangle getServantRequestSlot(double resizeFactor) {
 		return servantRequestSlot.resize(resizeFactor);
-	}
-
-	public static Rectangle getExcommSlot(double resizeFactor, int era) {
-		if (era == 1)
-			return excommSlot1.resize(resizeFactor);
-		if (era == 2)
-			return excommSlot2.resize(resizeFactor);
-		if (era == 3)
-			return excommSlot3.resize(resizeFactor);
-		return null;
 	}
 
 	public static Rectangle getLeaderSlot(double resizeFactor) {
@@ -125,7 +112,7 @@ public class PersonalBoardAdaptive {
 		return temp.resize(resizeFactor);
 	}
 
-	// DISTRIBUZIONE GIOCATORI: ESTENDIBILITA?
+	// DISTRIBUZIONE GIOCATORI: ESTENDIBILITA'
 	/*
 	 * GIOCATORE 1 GIOCATORE 3 GIOCATORE 5 GIOCATORE 2 GIOCATORE 4 ECC...
 	 */

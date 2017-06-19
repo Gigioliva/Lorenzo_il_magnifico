@@ -5,7 +5,8 @@ public class AdaptiveLayout {
 	private static final Rectangle orangeDice = new Rectangle(1876, 2005, 3414, 3540);
 	private static final Rectangle whiteDice = new Rectangle(1634, 1762, 3414, 3540);
 	private static final Rectangle blackDice = new Rectangle(1390, 1520, 3414, 3540);
-	private static final Rectangle councilPalace = new Rectangle(1410, 1830, 2140, 2290);
+	private static final Rectangle councilPalaceButton = new Rectangle(1410, 1830, 2140, 2290);
+	private static final Rectangle councilPalace = new Rectangle(1410, 1470, 2140, 2200);
 	private static final Rectangle harvestLeft = new Rectangle(162, 368, 3340, 3568);
 	private static final Rectangle harvestRight = new Rectangle(445, 975, 3340, 3568);
 	private static final Rectangle productionLeft = new Rectangle(162, 368, 3034, 3256);
@@ -32,6 +33,10 @@ public class AdaptiveLayout {
 	private static final Rectangle familiar = new Rectangle(512, 612, 360, 460);
 	private static final Rectangle militarySlotFrom1 = new Rectangle(2300, 2380, 3240, 3320);
 	private static final Rectangle militarySlot0 = new Rectangle(2300, 2380, 3400, 3480);
+	private static final Rectangle excommSlot1 = new Rectangle(534, 654, 2328, 2448);
+	private static final Rectangle excommSlot2 = new Rectangle(732, 852, 2360, 2480);
+	private static final Rectangle excommSlot3 = new Rectangle(930, 1050, 2328, 2448);
+
 	private static final int cardDevelopmentStartOffsetX = 183;
 	private static final int cardDevelopmentStartOffsetY = 193;
 	private static final int cardDevelopmentHeight = 446;
@@ -47,7 +52,18 @@ public class AdaptiveLayout {
 	private static final int militaryOffsetY = 127;
 	private static final int addingMilitaryOffsetY = 15;
 
-	public static Rectangle getMilitarySlotSpace(double resizeFactor, int slot) {
+	
+	public static Rectangle getExcommSlot(double boardResizeFactor, int era) {
+		if (era == 1)
+			return excommSlot1.resize(boardResizeFactor);
+		if (era == 2)
+			return excommSlot2.resize(boardResizeFactor);
+		if (era == 3)
+			return excommSlot3.resize(boardResizeFactor);
+		return null;
+	}
+	
+	public static Rectangle getMilitarySlotSpace(double boardResizeFactor, int slot) {
 		slot = slot % 26;
 		if (slot > 0) {
 			Rectangle temp = new Rectangle(militarySlotFrom1.getInitx(), militarySlotFrom1.getFinalx(),
@@ -69,9 +85,9 @@ public class AdaptiveLayout {
 				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
 				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
 			}
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		} else
-			return militarySlot0.resize(resizeFactor);
+			return militarySlot0.resize(boardResizeFactor);
 	}
 
 	public static Rectangle getFamiliarSpace(double resizeFactor, int towerNumber, int towerSlot) {
@@ -84,186 +100,196 @@ public class AdaptiveLayout {
 		return temp.resize(resizeFactor);
 	}
 
-	public static Rectangle getVictorySlotSpace(double resizeFactor, int slot) {
+	public static Rectangle getVictorySlotSpace(double boardResizeFactor, int slot) {
 		Rectangle temp;
 		slot = slot % 100;
 		if (slot == 0) {
-			return victorySlot0.resize(resizeFactor);
+			return victorySlot0.resize(boardResizeFactor);
 		}
 		if (slot == 20) {
-			return victorySlot20.resize(resizeFactor);
+			return victorySlot20.resize(boardResizeFactor);
 		}
 		if (slot == 50) {
-			return victorySlot50.resize(resizeFactor);
+			return victorySlot50.resize(boardResizeFactor);
 		}
 		if (slot == 70) {
-			return victorySlot70.resize(resizeFactor);
+			return victorySlot70.resize(boardResizeFactor);
 		}
 		if (slot > 0 && slot < 20) {
 			temp = new Rectangle((victorySlotFrom1To19.getInitx() + ((slot - 1) * victoryPointOffsetXY)),
 					(victorySlotFrom1To19.getFinalx() + ((slot - 1) * victoryPointOffsetXY)),
 					victorySlotFrom1To19.getInity(), victorySlotFrom1To19.getFinaly());
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		if (slot > 20 && slot < 50) {
 			temp = new Rectangle(victorySlotFrom21To49.getInitx(), victorySlotFrom21To49.getFinalx(),
 					(victorySlotFrom21To49.getInity() + ((slot - 21) * victoryPointOffsetXY)),
 					(victorySlotFrom21To49.getFinaly() + ((slot - 21) * victoryPointOffsetXY)));
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		if (slot > 50 && slot < 70) {
 			temp = new Rectangle((victorySlotFrom51To69.getInitx() - ((slot - 51) * victoryPointOffsetXY)),
 					(victorySlotFrom51To69.getFinalx() - ((slot - 51) * victoryPointOffsetXY)),
 					victorySlotFrom51To69.getInity(), victorySlotFrom51To69.getFinaly());
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		if (slot > 70 && slot < 100) {
 			temp = new Rectangle(victorySlotFrom71To99.getInitx(), victorySlotFrom71To99.getFinalx(),
 					(victorySlotFrom71To99.getInity() - ((slot - 71) * victoryPointOffsetXY)),
 					(victorySlotFrom71To99.getFinaly() - ((slot - 71) * victoryPointOffsetXY)));
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		return null;
 	}
 
-	public static Rectangle getFaithSlotSpace(double resizeFactor, int slot) {
+	public static Rectangle getFaithSlotSpace(double boardResizeFactor, int slot) {
 		Rectangle temp;
 		if (slot >= 0 && slot <= 2) {
 			temp = new Rectangle((faithSlotFrom1To3.getInitx() + (slot * outChurchOffsetX)),
 					(faithSlotFrom1To3.getFinalx() + (slot * outChurchOffsetX)), faithSlotFrom1To3.getInity(),
 					faithSlotFrom1To3.getFinaly());
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		if (slot >= 3 && slot <= 5) {
 			temp = new Rectangle((faithSlotFrom3To5.getInitx() + ((slot - 3) * inChurchOffsetX)),
 					(faithSlotFrom3To5.getFinalx() + ((slot - 3) * inChurchOffsetX)), faithSlotFrom3To5.getInity(),
 					faithSlotFrom3To5.getFinaly());
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		if (slot >= 6 && slot <= 15) {
 			temp = new Rectangle((faithSlotFrom6To15.getInitx() + ((slot - 6) * outChurchOffsetX)),
 					(faithSlotFrom6To15.getFinalx() + ((slot - 6) * outChurchOffsetX)), faithSlotFrom3To5.getInity(),
 					faithSlotFrom3To5.getFinaly());
-			return temp.resize(resizeFactor);
+			return temp.resize(boardResizeFactor);
 		}
 		return null;
 	}
 
-	public static Rectangle getChurchSpace(double resizeFactor, int era) {
+	public static Rectangle getChurchSpace(double boardResizeFactor, int era) {
 		// era deve essere 1, 2 o 3
 		if (era == 1)
-			return church1.resize(resizeFactor);
+			return church1.resize(boardResizeFactor);
 		if (era == 2)
-			return church2.resize(resizeFactor);
+			return church2.resize(boardResizeFactor);
 		if (era == 3)
-			return church3.resize(resizeFactor);
+			return church3.resize(boardResizeFactor);
 		return null;
 	}
 
-	public static Rectangle getPlayerGridSpace(double resizeFactor, int position) {
+	public static Rectangle getPlayerGridSpace(double boardResizeFactor, int position) {
 		// da 0 a 3 la position
 		// position--;
 		Rectangle temp = new Rectangle(playerGrid.getInitx(), playerGrid.getFinalx(),
 				(playerGrid.getInity() + (position * playerGridOffsetY)),
 				(playerGrid.getFinaly() + (position * playerGridOffsetY)));
-		return temp.resize(resizeFactor);
+		return temp.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getProdLeftSpace(double resizeFactor) {
-		return productionLeft.resize(resizeFactor);
+	public static Rectangle getProdLeftSpace(double boardResizeFactor) {
+		return productionLeft.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getProdRightSpace(double resizeFactor) {
-		return productionRight.resize(resizeFactor);
+	public static Rectangle getProdRightSpace(double boardResizeFactor) {
+		return productionRight.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getHarvestLeftSpace(double resizeFactor) {
-		return harvestLeft.resize(resizeFactor);
+	public static Rectangle getHarvestLeftSpace(double boardResizeFactor) {
+		return harvestLeft.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getHarvestRightSpace(double resizeFactor) {
-		return harvestRight.resize(resizeFactor);
+	public static Rectangle getHarvestRightSpace(double boardResizeFactor) {
+		return harvestRight.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getMarket1Space(double resizeFactor) {
-		return market1.resize(resizeFactor);
+	public static Rectangle getMarket1Space(double boardResizeFactor) {
+		return market1.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getMarket2Space(double resizeFactor) {
-		return market2.resize(resizeFactor);
+	public static Rectangle getMarket2Space(double boardResizeFactor) {
+		return market2.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getMarket3Space(double resizeFactor) {
-		return market3.resize(resizeFactor);
+	public static Rectangle getMarket3Space(double boardResizeFactor) {
+		return market3.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getMarket4Space(double resizeFactor) {
-		return market4.resize(resizeFactor);
+	public static Rectangle getMarket4Space(double boardResizeFactor) {
+		return market4.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getOrangeDiceSpace(double resizeFactor) {
-		return orangeDice.resize(resizeFactor);
+	public static Rectangle getOrangeDiceSpace(double boardResizeFactor) {
+		return orangeDice.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getBlackDiceSpace(double resizeFactor) {
-		return blackDice.resize(resizeFactor);
+	public static Rectangle getBlackDiceSpace(double boardResizeFactor) {
+		return blackDice.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getWhiteDiceSpace(double resizeFactor) {
-		return whiteDice.resize(resizeFactor);
+	public static Rectangle getWhiteDiceSpace(double boardResizeFactor) {
+		return whiteDice.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getCouncilPalaceSpace(double resizeFactor) {
-		return councilPalace.resize(resizeFactor);
+	public static Rectangle getCouncilPalaceSpace(double boardResizeFactor) {
+		return councilPalaceButton.resize(boardResizeFactor);
+	}
+	
+	public static Rectangle getCouncilPalaceFamSpace(double boardResizeFactor,int position) {
+		Rectangle temp = new Rectangle(
+				(councilPalace.getInitx()+(councilPalace.getOffsetX()*(position%8))),
+				(councilPalace.getFinalx()+(councilPalace.getOffsetX()*(position%8))),
+				(councilPalace.getInity()+(councilPalace.getOffsetY()*(position/8))),
+				(councilPalace.getFinaly()+(councilPalace.getOffsetY()*(position/8)))
+				);
+		return temp.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getCardTerritorySpace(double resizeFactor, int towerSlot) {
+	public static Rectangle getCardTerritorySpace(double boardResizeFactor, int towerSlot) {
 		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		inity += ((cardDevelopmentOffsetY + cardDevelopmentHeight) * towerSlot);
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
-		return temp.resize(resizeFactor);
+		return temp.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getCharacterSpace(double resizeFactor, int towerSlot) {
+	public static Rectangle getCharacterSpace(double boardResizeFactor, int towerSlot) {
 		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		initx += (cardDevelopmentOffsetX + cardDevelopmentWidth);
 		inity += ((cardDevelopmentOffsetY + cardDevelopmentHeight) * towerSlot);
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
-		return temp.resize(resizeFactor);
+		return temp.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getCardBuildingSpace(double resizeFactor, int towerSlot) {
+	public static Rectangle getCardBuildingSpace(double boardResizeFactor, int towerSlot) {
 		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		initx += ((cardDevelopmentOffsetX + cardDevelopmentWidth) * 2);
 		inity += ((cardDevelopmentOffsetY + cardDevelopmentHeight) * towerSlot);
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
-		return temp.resize(resizeFactor);
+		return temp.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getCardVentureSpace(double resizeFactor, int towerSlot) {
+	public static Rectangle getCardVentureSpace(double boardResizeFactor, int towerSlot) {
 		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		initx += ((cardDevelopmentOffsetX + cardDevelopmentWidth) * 3);
 		inity += ((cardDevelopmentOffsetY + cardDevelopmentHeight) * towerSlot);
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
-		return temp.resize(resizeFactor);
+		return temp.resize(boardResizeFactor);
 	}
 
-	public static Rectangle getCardDevelopmentSpace(double resizeFactor, int towerNumber, int towerSlot) {
+	public static Rectangle getCardDevelopmentSpace(double boardResizeFactor, int towerNumber, int towerSlot) {
 		towerSlot = 3 - towerSlot;
 		int initx = cardDevelopmentStartOffsetX;
 		int inity = cardDevelopmentStartOffsetY;
 		initx += ((cardDevelopmentOffsetX + cardDevelopmentWidth) * towerNumber);
 		inity += ((cardDevelopmentOffsetY + cardDevelopmentHeight) * towerSlot);
 		Rectangle temp = new Rectangle(initx, initx + cardDevelopmentWidth, inity, inity + cardDevelopmentHeight);
-		return temp.resize(resizeFactor);
+		return temp.resize(boardResizeFactor);
 	}
 
 }
