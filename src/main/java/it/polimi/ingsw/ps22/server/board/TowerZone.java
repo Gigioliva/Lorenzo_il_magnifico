@@ -88,7 +88,11 @@ public class TowerZone extends Zone {
 			towerSpace.applyBonus(player);
 			applyBonus = true;
 		}
-		result = towerSpace.getCard().takeCardControl(player);
+		if(towerSpace.getCard()!=null){
+			result = towerSpace.getCard().takeCardControl(player);
+		}else{
+			result=true;
+		}
 		if (payCoin)
 			player.getSpecificResource("Coin").addResource(new Coin(3));
 		if (applyBonus)

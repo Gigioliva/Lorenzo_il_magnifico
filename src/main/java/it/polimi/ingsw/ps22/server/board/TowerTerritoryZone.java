@@ -61,9 +61,11 @@ public class TowerTerritoryZone extends TowerZone {
 	}
 	
 	public void takeCard(int actionSpace, Player player){
-		towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
-		player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
-		towerSpaces[actionSpace].removeCard();
+		if(towerSpaces[actionSpace].getCard()!=null){
+			towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
+			player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].removeCard();
+		}
 	}
 	
 	@Override

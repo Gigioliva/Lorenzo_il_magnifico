@@ -61,11 +61,13 @@ public class TowerCharacterZone extends TowerZone {
 	}
 	
 	public void takeCard(int actionSpace, Player player){
-		towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
-		towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
-		towerSpaces[actionSpace].getCard().applyPermanentEffects(player);
-		player.getDevelopmentCard("Character").add(towerSpaces[actionSpace].getCard());
-		towerSpaces[actionSpace].removeCard();
+		if(towerSpaces[actionSpace].getCard()!=null){
+			towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
+			towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
+			towerSpaces[actionSpace].getCard().applyPermanentEffects(player);
+			player.getDevelopmentCard("Character").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].removeCard();
+		}
 	}
 	
 	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount){
