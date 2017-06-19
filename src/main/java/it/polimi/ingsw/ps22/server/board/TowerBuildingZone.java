@@ -15,19 +15,20 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 public class TowerBuildingZone extends TowerZone {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	public TowerBuildingZone() {
 		super();
-		HashMap<Integer, ArrayList<CardBuilding>> temp=CardSort.buildingSortByEra();
-		for(int i=0; i<6;i++){
-			ArrayList<DevelopmentCard> card=new ArrayList<DevelopmentCard>();
-			for(int j=0;j<4;j++){
-				card.add(temp.get((i/2)+1).remove(0));
+		HashMap<Integer, ArrayList<CardBuilding>> temp = CardSort.buildingSortByEra();
+		for (int i = 0; i < 6; i++) {
+			ArrayList<DevelopmentCard> card = new ArrayList<DevelopmentCard>();
+			for (int j = 0; j < 4; j++) {
+				card.add(temp.get((i / 2) + 1).remove(0));
 			}
-			cards.put(i+1,card);
+			cards.put(i + 1, card);
 		}
-		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
-		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/TowerBuilding.xml",bonus);
+		ArrayList<HashMap<String, ResourceAbstract>> bonus = new ArrayList<HashMap<String, ResourceAbstract>>();
+		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/TowerBuilding.xml",
+				bonus);
 		for (int i = 0; i < NUM_SPACES; i++) {
 			towerSpaces[i].addBonus(bonus.get(i));
 		}
@@ -37,15 +38,16 @@ public class TowerBuildingZone extends TowerZone {
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementBuilding").getQuantity();
-		if (0<=actionSpace && actionSpace<=NUM_SPACES && !(family.isPlaced())
+		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& (family.getColor()==Color.NEUTRAL || checkAllSpace(player)) && checkResources(player, towerSpaces[actionSpace])
+				&& (family.getColor() == Color.NEUTRAL || checkAllSpace(player))
+				&& checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void placeFamily(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
@@ -59,23 +61,25 @@ public class TowerBuildingZone extends TowerZone {
 		}
 		setOccupied();
 	}
-	
-	public void takeCard(int actionSpace, Player player){
-		towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
-		towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
-		player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());
-		towerSpaces[actionSpace].removeCard();
+
+	public void takeCard(int actionSpace, Player player) {
+		if (towerSpaces[actionSpace].getCard() != null) {
+			towerSpaces[actionSpace].getCard().applyCostToPlayer(player);
+			towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
+			player.getDevelopmentCard("Building").add(towerSpaces[actionSpace].getCard());
+			towerSpaces[actionSpace].removeCard();
+		}
 	}
-	
-	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount){
+
+	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount) {
 		applyDiscount(player, "Building", discount);
 		takeCard(actionSpace, player);
 		deApplyDiscount(player, "Building", discount);
 	}
-	
+
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("Building Tower \n" +  super.toString());
+		StringBuilder str = new StringBuilder("Building Tower \n" + super.toString());
 		return str.toString();
 	}
 

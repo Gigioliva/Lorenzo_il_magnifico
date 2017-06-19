@@ -20,18 +20,19 @@ public class TowerVentureZone extends TowerZone {
 
 	public TowerVentureZone() {
 		super();
-		HashMap<Integer, ArrayList<CardVenture>> temp=CardSort.ventureSortByEra();
-		for(int i=0; i<6;i++){
-			ArrayList<DevelopmentCard> card=new ArrayList<DevelopmentCard>();
-			for(int j=0;j<4;j++){
-				card.add(temp.get((i/2)+1).remove(0));
+		HashMap<Integer, ArrayList<CardVenture>> temp = CardSort.ventureSortByEra();
+		for (int i = 0; i < 6; i++) {
+			ArrayList<DevelopmentCard> card = new ArrayList<DevelopmentCard>();
+			for (int j = 0; j < 4; j++) {
+				card.add(temp.get((i / 2) + 1).remove(0));
 			}
-			cards.put(i+1,card);
+			cards.put(i + 1, card);
 		}
-		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
-		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/TowerVenture.xml",bonus);
+		ArrayList<HashMap<String, ResourceAbstract>> bonus = new ArrayList<HashMap<String, ResourceAbstract>>();
+		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/TowerVenture.xml",
+				bonus);
 		for (int i = 0; i < NUM_SPACES; i++) {
-			if(bonus.get(i)!=null){
+			if (bonus.get(i) != null) {
 				towerSpaces[i].addBonus(bonus.get(i));
 			}
 		}
@@ -44,7 +45,8 @@ public class TowerVentureZone extends TowerZone {
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementVenture").getQuantity();
 		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
-				&& (family.getColor()==Color.NEUTRAL || checkAllSpace(player)) && checkResources(player, towerSpaces[actionSpace])
+				&& (family.getColor() == Color.NEUTRAL || checkAllSpace(player))
+				&& checkResources(player, towerSpaces[actionSpace])
 				&& checkActionValue(numServant, towerSpaces[actionSpace], family, actionValue)) {
 			return true;
 		}
@@ -66,23 +68,27 @@ public class TowerVentureZone extends TowerZone {
 	}
 
 	public void takeCard(int actionSpace, Player player) {
-		ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
-		if (possibleCost.size() == 1) {
-			payCard(0, possibleCost, player, towerSpaces[actionSpace]);
-		} else {
-			AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace]);
-			ask.applyAsk();
+		if (towerSpaces[actionSpace].getCard() != null) {
+			ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
+			if (possibleCost.size() == 1) {
+				payCard(0, possibleCost, player, towerSpaces[actionSpace]);
+			} else {
+				AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace]);
+				ask.applyAsk();
+			}
 		}
 	}
 
 	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount) {
-		applyDiscount(player, "Venture", discount);
-		ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
-		if (possibleCost.size() == 1) {
-			payCard(0, possibleCost, player, towerSpaces[actionSpace], discount);
-		} else {
-			AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace], discount);
-			ask.applyAsk();
+		if (towerSpaces[actionSpace].getCard() != null) {
+			applyDiscount(player, "Venture", discount);
+			ArrayList<RequisiteCost> possibleCost = towerSpaces[actionSpace].getCard().getAffordableCosts(player);
+			if (possibleCost.size() == 1) {
+				payCard(0, possibleCost, player, towerSpaces[actionSpace], discount);
+			} else {
+				AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace], discount);
+				ask.applyAsk();
+			}
 		}
 	}
 

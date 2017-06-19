@@ -20,7 +20,9 @@ public class TowerSpace extends ActionSpace {
 	@Override
 	public TowerSpace clone(ArrayList<Family> family) {
 		TowerSpace temp = new TowerSpace(this.getActionCost(), this.getMulti(), this.plan);
-		temp.addCard(this.card.clone());
+		if(this.card!=null){
+			temp.addCard(this.card.clone());
+		}
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
