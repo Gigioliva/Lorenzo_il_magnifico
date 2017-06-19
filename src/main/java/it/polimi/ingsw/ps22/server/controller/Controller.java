@@ -31,6 +31,7 @@ public class Controller implements Observer {
 			if(((View)o).getUsername().equals(model.getPlayerGame())){
 				((Move)arg).applyMove(model);
 			}
+			System.out.println(model.getBoard().getCouncilPalace().toString());
 		}
 		if(o instanceof View && arg instanceof ChatMessage){
 			model.notifyMessage((ChatMessage)arg);

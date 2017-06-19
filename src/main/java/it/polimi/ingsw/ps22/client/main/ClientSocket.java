@@ -27,6 +27,7 @@ public class ClientSocket implements Observer {
 
 	public void send(Object ask) {
 		try {
+			output.reset();
 			output.writeObject(ask);
 			output.flush();
 		} catch (IOException e) {

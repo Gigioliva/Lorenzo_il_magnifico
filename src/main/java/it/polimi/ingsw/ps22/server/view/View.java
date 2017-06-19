@@ -21,7 +21,6 @@ public class View extends Observable implements Observer {
 	}
 	
 	protected void processChoice() {
-		//notifica i messaggi del cient al controller
 		setChanged();
 		notifyObservers();
 	}

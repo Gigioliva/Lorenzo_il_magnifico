@@ -24,11 +24,13 @@ public class TowerSpace extends ActionSpace {
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
-		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal model
+		// ora ho fam che sono quelli del palazzo e quelli che mi arrivano dal
+		// model
 		for (Family palFam : fam) {
 			for (Family gameFam : family) {
-				if(palFam.getPlayer().getUsername().equals(gameFam.getPlayer().getUsername()))
-				temp.addFamily(gameFam.clone(gameFam.getPlayer()));
+				if (palFam.getPlayer().getUsername().equals(gameFam.getPlayer().getUsername())
+						&& palFam.getColor() == gameFam.getColor())
+					temp.addFamily(gameFam.clone(gameFam.getPlayer()));
 			}
 		}
 		temp.setBonus(this.bonus.clone());

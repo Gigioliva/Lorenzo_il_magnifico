@@ -19,8 +19,6 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
-//per ora è serializable poi quando si fa il ModelView no
-
 public class Model extends Observable implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -37,10 +35,32 @@ public class Model extends Observable implements Serializable {
 	public Model() {
 		board = new Board();
 		this.players = new LinkedHashMap<String, Player>();
-		MessageAsk.setModel(this);
 		this.waitAnswer = new ArrayList<MessageAsk>();
 		cardLeaderStart = new LinkedHashMap<Player, ArrayList<CardLeader>>();
 		playerGame = null;
+	}
+	
+	public Model clone(String username){
+		Model temp=new Model();
+		temp.turn=this.turn;
+		temp.giro=this.giro;
+		for(String el: players.keySet()){
+			temp.players.put(el, players.get(el).clone(username));
+		}
+		temp.orderedPlayers=new ArrayList<String>();
+		for(String name: this.orderedPlayers){
+			temp.orderedPlayers.add(name);
+		}
+		temp.playerGame=this.playerGame;
+		ArrayList<Player> player=new ArrayList<Player>(temp.players.values());
+		ArrayList<Family> families=new ArrayList<Family>();
+		for(Player play:player){
+			for(Color col: Color.values()){
+				families.add(play.getFamily(col));
+			}
+		}
+		temp.board=this.board.clone(families);
+		return temp;
 	}
 
 	public Board getBoard() {
@@ -69,6 +89,7 @@ public class Model extends Observable implements Serializable {
 	}
 
 	public void startGame() {
+		MessageAsk.setModel(this);
 		board.setZone(players.size());
 		orderedPlayers = new ArrayList<String>(players.keySet());
 		for (int i = 0; i < orderedPlayers.size(); i++) {

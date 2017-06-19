@@ -19,6 +19,7 @@ import java.util.concurrent.Executors;
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.model.Model;
+import it.polimi.ingsw.ps22.server.model.ModelView;
 
 public class Server extends UnicastRemoteObject implements ServerRMI {
 
@@ -68,12 +69,14 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			timer=new Timer();
 			ArrayList<Connection> temp = new ArrayList<Connection>();
 			Model model = new Model();
+			ModelView modelView=new ModelView();
 			Controller controller = new Controller(model);
+			model.addObserver(modelView);
 			for (String el : waitingConnection.keySet()) {
 				Connection con = waitingConnection.get(el);
 				RemoteView player = new RemoteView(el, con);
 				model.addPlayers(el);
-				model.addObserver(player);
+				modelView.addObserver(player);
 				player.addObserver(controller);
 				temp.add(con);
 			}

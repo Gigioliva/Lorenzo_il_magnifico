@@ -34,7 +34,7 @@ public class CouncilPalaceSpace extends ActionSpace {
 		// model
 		for (Family palFam : fam) {
 			for (Family gameFam : family) {
-				if (palFam.getPlayer().getUsername().equals(gameFam.getPlayer().getUsername()))
+				if (palFam.getPlayer().getUsername().equals(gameFam.getPlayer().getUsername()) && palFam.getColor()==gameFam.getColor())
 					temp.addFamily(gameFam.clone(gameFam.getPlayer()));
 			}
 		}

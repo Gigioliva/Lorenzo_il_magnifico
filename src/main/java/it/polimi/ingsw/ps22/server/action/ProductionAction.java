@@ -62,7 +62,7 @@ public class ProductionAction extends Action {
 	public void applyAction(Player player, int servants) {
 		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> allEffects;
 		LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects;
-		Player clonedPlayer = player.clone();
+		Player clonedPlayer = player.clone(player.getUsername());
 		this.servants = servants;
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
 		player.getSpecificResource("Servant").subResource(new Servant(servants));

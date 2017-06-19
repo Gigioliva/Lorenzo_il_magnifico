@@ -27,9 +27,9 @@ import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Wood;
 
 public class Player implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
-	private HashMap<String, Resource> resources; 
+	private HashMap<String, Resource> resources;
 	private HashMap<String, Point> points;
 	private HashMap<String, ArrayList<DevelopmentCard>> cards;
 	private ArrayList<CardLeader> leaders;
@@ -40,7 +40,7 @@ public class Player implements Serializable {
 	private PersonalBoard personalBoard;
 	private String username;
 	private ColorPlayer color;
-	
+
 	public Player(String username, ColorPlayer color) {
 		resources = new HashMap<String, Resource>();
 		points = new HashMap<String, Point>();
@@ -56,7 +56,7 @@ public class Player implements Serializable {
 		cards.put("Character", new ArrayList<DevelopmentCard>());
 		cards.put("Territory", new ArrayList<DevelopmentCard>());
 		cards.put("Venture", new ArrayList<DevelopmentCard>());
-		leaders=new ArrayList<CardLeader>();
+		leaders = new ArrayList<CardLeader>();
 		bonusAcc = new BonusAcc();
 		specBonus = new SpecBonus();
 		family = new HashMap<Color, Family>();
@@ -68,22 +68,19 @@ public class Player implements Serializable {
 		personalBoard = new PersonalBoard();
 		endEffects = new ArrayList<EndEffect>();
 		ArrayList<PersonalBoard> temp = new ArrayList<PersonalBoard>();
-		PersonalBoardSaxParser.PersonalBoardRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/PersonalBoard.xml", temp);
-		Random random=new Random();
-		personalBoard=temp.get(random.nextInt(temp.size()));
-		this.color=color;
+		PersonalBoardSaxParser.PersonalBoardRead(
+				"src/main/java/it/polimi/ingsw/ps22/server/parser/resources/PersonalBoard.xml", temp);
+		Random random = new Random();
+		personalBoard = temp.get(random.nextInt(temp.size()));
+		this.color = color;
 	}
-	
-	@Override
-	public Player clone() {
+
+	public Player clone(String username) {
 		Player temp = new Player(this.username, this.color);
-		temp.bonusAcc=this.bonusAcc.clone();
-		temp.specBonus=this.specBonus.clone();
-		for(EndEffect el: endEffects){
+		temp.bonusAcc = this.bonusAcc.clone();
+		temp.specBonus = this.specBonus.clone();
+		for (EndEffect el : endEffects) {
 			temp.endEffects.add(el.clone());
-		}
-		for(CardLeader el: leaders){
-			temp.leaders.add(el.clone());
 		}
 		for (String el : resources.keySet()) {
 			temp.resources.put(el, this.resources.get(el).clone());
@@ -95,20 +92,31 @@ public class Player implements Serializable {
 			temp.family.put(el, this.family.get(el).clone(temp));
 		}
 		for (String el : cards.keySet()) {
-			ArrayList<DevelopmentCard> x=new ArrayList<DevelopmentCard>();
-			for(DevelopmentCard el2: this.cards.get(el)){
+			ArrayList<DevelopmentCard> x = new ArrayList<DevelopmentCard>();
+			for (DevelopmentCard el2 : this.cards.get(el)) {
 				x.add(el2.clone());
 			}
 			temp.cards.put(el, x);
 		}
+		if (this.username.equalsIgnoreCase(username)) {
+			for (CardLeader el : leaders) {
+				temp.leaders.add(el.clone());
+			}
+		} else {
+			for (CardLeader el : leaders) {
+				if (el.isPlay()) {
+					temp.leaders.add(el.clone());
+				}
+			}
+		}
 		return temp;
 	}
-	
-	public  HashMap<Color, Family> getAllFamily(){
+
+	public HashMap<Color, Family> getAllFamily() {
 		return family;
 	}
-	
-	public Player(Player player){
+
+	public Player(Player player) {
 		this.resources = player.cloneResources();
 		this.points = player.clonePoints();
 	}
@@ -116,46 +124,44 @@ public class Player implements Serializable {
 	public HashMap<String, Resource> getResources() {
 		return this.resources;
 	}
-	
-	public void addLeader(CardLeader leader){
+
+	public void addLeader(CardLeader leader) {
 		leaders.add(leader);
 	}
-	
-	public ArrayList<CardLeader> getLeaders(){
+
+	public ArrayList<CardLeader> getLeaders() {
 		return leaders;
 	}
-	
-	private HashMap<String, Resource> cloneResources(){
-		
+
+	private HashMap<String, Resource> cloneResources() {
+
 		HashMap<String, Resource> res = new HashMap<String, Resource>();
-		
-		for(String string: this.resources.keySet()){
+
+		for (String string : this.resources.keySet()) {
 			String newstring = new String(string);
 			Resource clonedResource = new Resource(this.resources.get(string).getQuantity());
 			res.put(newstring, clonedResource);
 		}
-		
+
 		return res;
 	}
-	
-	private HashMap<String, Point> clonePoints(){
-		
+
+	private HashMap<String, Point> clonePoints() {
+
 		HashMap<String, Point> res = new HashMap<String, Point>();
-		
-		for(String string: this.points.keySet()){
+
+		for (String string : this.points.keySet()) {
 			String newstring = new String(string);
 			Point clonedResource = new Point(this.points.get(string).getQuantity());
 			res.put(newstring, clonedResource);
 		}
-		
+
 		return res;
 	}
 
-	
-	public HashMap<String, Point> getPoints(){
+	public HashMap<String, Point> getPoints() {
 		return this.points;
 	}
-
 
 	public ArrayList<DevelopmentCard> getDevelopmentCard(String type) {
 		return this.cards.get(type);
@@ -181,19 +187,19 @@ public class Player implements Serializable {
 		return personalBoard;
 	}
 
-	//sottrae risorse o punti al giocatore se esso ha qualche effetto permanente che glielo impone
+	// sottrae risorse o punti al giocatore se esso ha qualche effetto
+	// permanente che glielo impone
 	public void applyMalusResource(ArrayList<String> resources) {
-		for(String type: resources){
+		for (String type : resources) {
 			BonusAbstract temp = this.bonusAcc.getBonus(type);
-			if(this.isPoint(type)){
+			if (this.isPoint(type)) {
 				this.points.get(type).addResource(temp);
-			}
-			else{
+			} else {
 				this.resources.get(type).addResource(temp);
 			}
 		}
 	}
-	
+
 	public void subResources(String type, Resource other) {
 		this.resources.get(type).subResource(other);
 	}
@@ -201,7 +207,7 @@ public class Player implements Serializable {
 	public void addPoints(String type, Point other) {
 		this.resources.get(type).addResource(other);
 	}
-	
+
 	public void addDevelopmentCard(String type, DevelopmentCard other) {
 		this.cards.get(type).add(other);
 	}
@@ -217,180 +223,181 @@ public class Player implements Serializable {
 	public void addSpecBonus(String type) {
 		this.specBonus.setSpecBonus(type);
 	}
-	
-	public void applyEndEffects(){
-		for(EndEffect effect: endEffects){
+
+	public void applyEndEffects() {
+		for (EndEffect effect : endEffects) {
 			effect.performEffect(this);
 		}
 	}
-	
-	public ArrayList<EndEffect> getEndEffects(){
+
+	public ArrayList<EndEffect> getEndEffects() {
 		return endEffects;
 	}
-	
-	public boolean isResource(String type){
+
+	public boolean isResource(String type) {
 		return this.resources.containsKey(type);
 	}
-	
-	private boolean isPoint(String type){
+
+	private boolean isPoint(String type) {
 		return this.points.containsKey(type);
 	}
 
-	public ResourceAbstract getSpecificResource(String type){
-		if(this.isResource(type)){
+	public ResourceAbstract getSpecificResource(String type) {
+		if (this.isResource(type)) {
 			return this.resources.get(type);
 		}
 		return this.points.get(type);
 	}
-	
-	public boolean isCard(String type){
+
+	public boolean isCard(String type) {
 		return (cards.containsKey(type));
 	}
-	
-	public void addSpecificResource(String type, ResourceAbstract other){
+
+	public void addSpecificResource(String type, ResourceAbstract other) {
 		this.getSpecificResource(type).addResource(other);
 	}
-	
-	public LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect,Integer>> cloneCardswithActionEffect(String cardType){
-		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect,Integer>> clonedCards = new LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect,Integer>>();
+
+	public LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> cloneCardswithActionEffect(
+			String cardType) {
+		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> clonedCards = new LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>>();
 		ArrayList<DevelopmentCard> cards = this.getDevelopmentCard(cardType);
-		for(DevelopmentCard card: cards){
-			clonedCards.put(card, new LinkedHashMap<ActionEffect,Integer>());
-			ArrayList<ActionEffect> effects = card.getActionEffects(); 
-			for(int i = 0; i< effects.size(); i++){
-				clonedCards.get(card).put(effects.get(i),i);
+		for (DevelopmentCard card : cards) {
+			clonedCards.put(card, new LinkedHashMap<ActionEffect, Integer>());
+			ArrayList<ActionEffect> effects = card.getActionEffects();
+			for (int i = 0; i < effects.size(); i++) {
+				clonedCards.get(card).put(effects.get(i), i);
 			}
 		}
 		return clonedCards;
 	}
-	
+
 	public void setFamily(Dice dice) {
 		for (Color el : family.keySet()) {
 			if (el != Color.NEUTRAL)
 				family.get(el).setValue(dice.getDice(el));
-			else family.get(el).setValue(0);
+			else
+				family.get(el).setValue(0);
 		}
 	}
-	
-	public void calcVicPoint(){
-		VictoryPoint temp=personalBoard.getBonusHarvest().get(cards.get("Harvest").size());
+
+	public void calcVicPoint() {
+		VictoryPoint temp = personalBoard.getBonusHarvest().get(cards.get("Harvest").size());
 		points.get("VictoryPoint").addResource(temp);
-		temp=personalBoard.getBonusCharacter().get(cards.get("Character").size());
+		temp = personalBoard.getBonusCharacter().get(cards.get("Character").size());
 		points.get("VictoryPoint").addResource(temp);
-		int res=0;
-		for(String el: resources.keySet()){
-			res=res+resources.get(el).getQuantity();
+		int res = 0;
+		for (String el : resources.keySet()) {
+			res = res + resources.get(el).getQuantity();
 		}
-		points.get("VictoryPoint").addResource(new VictoryPoint(res/5));
+		points.get("VictoryPoint").addResource(new VictoryPoint(res / 5));
 	}
-	
-	private String resourcesString(){
-		
+
+	private String resourcesString() {
+
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Resources: \n");
-		
-		for(String type: resources.keySet()){
+
+		for (String type : resources.keySet()) {
 			str.append("  " + resources.get(type).getQuantity() + " " + type + "\n");
 		}
-		
+
 		return str.toString();
 	}
-	
-	private String pointsString(){
-		
+
+	private String pointsString() {
+
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Points: \n");
-		
-		for(String type: points.keySet()){
+
+		for (String type : points.keySet()) {
 			str.append("  " + points.get(type).getQuantity() + " " + type + "\n");
 		}
-		
+
 		return str.toString();
 	}
-	
-	private String cardsString(){
-		
+
+	private String cardsString() {
+
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Cards: \n");
-		
-		for(String type: cards.keySet()){
-			ArrayList<DevelopmentCard> cardsArray = cards.get(type); 
+
+		for (String type : cards.keySet()) {
+			ArrayList<DevelopmentCard> cardsArray = cards.get(type);
 			str.append("  " + type + "\n");
-			for(DevelopmentCard card: cardsArray)
+			for (DevelopmentCard card : cardsArray)
 				str.append("    " + card.toString() + "\n");
 		}
-		
+
 		return str.toString();
 	}
-	
-	private String endEffectsString(){
-		
+
+	private String endEffectsString() {
+
 		StringBuilder str = new StringBuilder();
-		
-		if (endEffects.size() > 0){
+
+		if (endEffects.size() > 0) {
 			str.append("You have the following end effects \n");
-			for(EndEffect effect: endEffects){
+			for (EndEffect effect : endEffects) {
 				str.append(effect.toString() + "\n");
 			}
 		}
-		
+
 		return str.toString();
 	}
-	
+
 	private String familyString() {
-		
+
 		StringBuilder str = new StringBuilder();
-		
-		if(family.size() == 0)
+
+		if (family.size() == 0)
 			str.append("no more family members \n");
-		
-		else{
+
+		else {
 			str.append("You still have the following family memebers: \n");
-			for(Color col: family.keySet()){
+			for (Color col : family.keySet()) {
 				if (!family.get(col).isPlaced())
 					str.append("  " + family.get(col).toString() + "\n");
 			}
-				
+
 		}
-			
+
 		return str.toString();
 	}
-	
-	
+
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Player " + username + "\n");
 		str.append(resourcesString() + pointsString() + cardsString() + bonusAcc.toString() + specBonus.toString()
-			+ endEffectsString() + familyString() + personalBoard.toString());
-		
+				+ endEffectsString() + familyString() + personalBoard.toString());
+
 		return str.toString();
 	}
-	
-	public int getGenericValue(String type){
-		if(isResource(type)){
+
+	public int getGenericValue(String type) {
+		if (isResource(type)) {
 			return resources.get(type).getQuantity();
 		}
-		if(isPoint(type)){
+		if (isPoint(type)) {
 			return points.get(type).getQuantity();
 		}
-		if(isCard(type)){
+		if (isCard(type)) {
 			return getSizeCard(type);
 		}
 		return 0;
 	}
-	
-	public void resetLeader(){
-		for(CardLeader el: leaders){
+
+	public void resetLeader() {
+		for (CardLeader el : leaders) {
 			el.resetLeader();
 		}
 	}
-	
-	public ColorPlayer getColor(){
+
+	public ColorPlayer getColor() {
 		return color;
 	}
-	
+
 }
