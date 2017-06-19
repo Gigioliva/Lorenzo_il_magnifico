@@ -12,11 +12,11 @@ public class PersonalBoardAdaptive {
 	private static final Rectangle coinSlot = new Rectangle(330, 510, 2070, 2190);
 	private static final Rectangle woodSlot = new Rectangle(900, 1080, 2070, 2190);
 	private static final Rectangle stoneSlot = new Rectangle(1470, 1650, 2070, 2190);;
-	private static final Rectangle servantSlot = new Rectangle(2190, 2370, 2070, 2190);
+	private static final Rectangle servantSlot = new Rectangle(2010, 2190, 2070, 2190);
 	private static final Rectangle blackDiceButtonSlot = new Rectangle(0, 400, 4000, 4600);
 	private static final Rectangle basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 	private static final Rectangle chatSlot = new Rectangle(3630, 3900, 150, 2308);
-	private static final Rectangle servantRequestSlot = new Rectangle(3630, 3900, 2400, 2700);
+	private static final Rectangle servantRequestSlot = new Rectangle(3630, 4300, 2400, 2700);
 	private static final Rectangle excommSlot1 = new Rectangle(3630, 3900, 2400, 2700);
 	private static final Rectangle excommSlot2 = new Rectangle(3630, 3900, 2400, 2700);
 	private static final Rectangle excommSlot3 = new Rectangle(3630, 3900, 2400, 2700);
@@ -53,17 +53,20 @@ public class PersonalBoardAdaptive {
 
 	public static ArrayList<Rectangle> getLeaderSlot(double resizeFactor) {
 		ArrayList<Rectangle> temp = new ArrayList<Rectangle>();
-		temp.add(leaderSlot.resize(resizeFactor));
+		temp.add(leaderSlot);
 		temp.add(new Rectangle(leaderSlot.getInitx()+leaderOffsetX, 
 				leaderSlot.getFinalx()+leaderOffsetX,
-				leaderSlot.getInity(), leaderSlot.getFinaly()).resize(resizeFactor));
+				leaderSlot.getInity(), leaderSlot.getFinaly()));
 		temp.add(new Rectangle(leaderSlot.getInitx(), leaderSlot.getFinalx(),
 				leaderSlot.getInity()+leaderOffsetY, 
-				leaderSlot.getFinaly()+leaderOffsetY).resize(resizeFactor));
+				leaderSlot.getFinaly()+leaderOffsetY));
 		temp.add(new Rectangle(leaderSlot.getInitx()+leaderOffsetX, 
 				leaderSlot.getFinalx()+leaderOffsetX,
 				leaderSlot.getInity()+leaderOffsetY, 
-				leaderSlot.getFinaly()+leaderOffsetY).resize(resizeFactor));
+				leaderSlot.getFinaly()+leaderOffsetY));
+		for(Rectangle rec: temp) {
+			rec.resize(resizeFactor);
+		}
 		return temp;
 	}
 
