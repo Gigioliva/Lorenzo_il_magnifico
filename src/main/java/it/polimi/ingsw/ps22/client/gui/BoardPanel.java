@@ -121,26 +121,36 @@ public class BoardPanel extends JPanel{
 		addActionPanelToLayeredPane(mark3);
 		addActionPanelToLayeredPane(mark4);
 		
-		CouncilButton council = new CouncilButton(0, username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), new CouncilListener(view));
+		CouncilLabel labCou = new CouncilLabel(resizeFactor);
+		Rectangle dimLab = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, 0);
+		labCou.setBounds(dimLab.getInitx(), dimLab.getInity(),500,500);
+		
+		CouncilButton council = new CouncilButton(0, username, AdaptiveLayout.getCouncilPalaceSpace(factorScaleBoard), 
+				new CouncilListener(view), labCou);
+		layeredPane.add(labCou, new Integer(9000));
 		addActionPanelToLayeredPane(council);
 	
-		fam1 = new FamiliarButton(Color.BLACK, java.awt.Color.BLACK, new TakeFamiliarListener(actionSpaces),username);
 		Rectangle dimFam1 = PersonalBoardAdaptive.getBlackButtonSLot(personalBoard.resizeFactor);
+		fam1 = new FamiliarButton(Color.BLACK, model.getPlayers().get(username).getColor().getColor(), 
+				new TakeFamiliarListener(actionSpaces),username, dimFam1);
 		fam1.setBounds(personalBoard.getBounds().width, dimFam1.getInity(), dimFam1.getOffsetX(), dimFam1.getOffsetY());
 		fam1.setText("black");
 		
-		fam2 = new FamiliarButton(Color.ORANGE, java.awt.Color.ORANGE,new TakeFamiliarListener(actionSpaces), username);
 		Rectangle dimFam2 = PersonalBoardAdaptive.getOrangeButtonSLot(personalBoard.resizeFactor);
+		fam2 = new FamiliarButton(Color.ORANGE, model.getPlayers().get(username).getColor().getColor(),
+				new TakeFamiliarListener(actionSpaces), username, dimFam2);
 		fam2.setBounds(personalBoard.getBounds().width + dimFam2.getInitx(), dimFam2.getInity(), dimFam2.getOffsetX(), dimFam2.getOffsetY());
 		fam2.setText("orange");
 		
-		fam3 = new FamiliarButton(Color.WHITE, java.awt.Color.WHITE, new TakeFamiliarListener(actionSpaces), username);
 		Rectangle dimFam3 = PersonalBoardAdaptive.getWhiteButtonSLot(personalBoard.resizeFactor);
+		fam3 = new FamiliarButton(Color.WHITE, model.getPlayers().get(username).getColor().getColor(),
+				new TakeFamiliarListener(actionSpaces), username, dimFam3);
 		fam3.setBounds(personalBoard.getBounds().width + dimFam3.getInitx(), dimFam3.getInity(), dimFam3.getOffsetX(), dimFam3.getOffsetY());
 		fam3.setText("white");
 		
-		fam4 = new FamiliarButton(Color.NEUTRAL, java.awt.Color.lightGray, new TakeFamiliarListener(actionSpaces), username);
 		Rectangle dimFam4 = PersonalBoardAdaptive.getNeutralButtonSLot(personalBoard.resizeFactor);
+		fam4 = new FamiliarButton(Color.NEUTRAL, model.getPlayers().get(username).getColor().getColor(),
+				new TakeFamiliarListener(actionSpaces), username, dimFam4);
 		fam4.setBounds(personalBoard.getBounds().width + dimFam4.getInitx(), dimFam4.getInity(), dimFam4.getOffsetX(), dimFam4.getOffsetY());
 		fam4.setText("neutral");
 		
@@ -283,8 +293,8 @@ public class BoardPanel extends JPanel{
 		}
 		
 		JPanel chatpan = new JPanel();
-		Rectangle dimChat = PersonalBoardAdaptive.getChatSlot(resizeFactor);
-		chatpan.setBounds(dimChat.getInitx(), dimChat.getInity(), dimChat.getOffsetX(), dimChat.getOffsetY());
+		Rectangle dimChat = PersonalBoardAdaptive.getChatSlot(personalBoard.resizeFactor);
+		chatpan.setBounds(dimChat.getInitx() + personalBoard.getWidth(), dimChat.getInity(), dimChat.getOffsetX(), dimChat.getOffsetY());
 		chatpan.setOpaque(true);
 		layeredPane.add(chatpan, new Integer(4000));
 		
@@ -478,16 +488,15 @@ public class BoardPanel extends JPanel{
 	}
 	
 	private void updateLeaders(Model model){
-		if(leaders.size() == NUMLEADERS){
-			for(int i = 0; i< NUMLEADERS; i++){
-				leaders.get(i).updateLeader(model);
+		if (model.getPlayers().get(username).getLeaders() != null){
+			for(int i=0; i< model.getPlayers().get(username).getLeaders().size() ;i++){
+				leaders.get(i).updateLeader(model, i);
 			}
 		}
-		
 	}
 	
 	private void updateAvverLeader(Model model){
-		if(leaders.size() == NUMLEADERS){
+		if (model.getPlayers().get(username).getLeaders() != null){
 			for(LeaderAvverButton b: avverLeaders){
 				b.updateAvverLeaders(model);
 			}

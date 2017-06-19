@@ -17,7 +17,7 @@ public class FamiliarButton extends JButton {
 	private String username;
 	private static final long serialVersionUID = 8698619865338767712L;
 
-	public FamiliarButton(Color color, java.awt.Color c, TakeFamiliarListener listener, String username){
+	public FamiliarButton(Color color, java.awt.Color c, TakeFamiliarListener listener, String username, Rectangle dim){
 		super();
 		this.setEnabled(true);
 		this.setOpaque(false);
@@ -27,7 +27,9 @@ public class FamiliarButton extends JButton {
 		this.c = c;
 		
 		this.addActionListener(listener);
-	
+		
+		String path = FamilyPath.getFamilyPathname(c, color);
+		this.setIcon(MyImage.getScaledImageinLabel(path, dim).getIcon());
 		this.color = color;
 		this.username = username;
 		
@@ -52,11 +54,6 @@ public class FamiliarButton extends JButton {
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		if(this.isEnabled() == true){
-			g.setColor(c);
-			g.drawOval(0, 0, this.getWidth(), this.getHeight());
-			g.fillOval(0, 0, this.getWidth(), this.getHeight());
-		}
 
 	}
 	

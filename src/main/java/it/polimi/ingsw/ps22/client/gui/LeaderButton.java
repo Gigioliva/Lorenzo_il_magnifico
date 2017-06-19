@@ -14,13 +14,11 @@ public class LeaderButton extends JButton {
 	 */
 	private static final long serialVersionUID = 2049747823690383400L;
 	String username;
-	int slot;
 	private Rectangle dim;
 	private final static String pathPlayedLeader = "./image/leadercard/leadersback.jpg";
 	
 	public LeaderButton(int slot, PersonalBoardPanel p, CardLeader card, String username){
 		this.username = username;
-		this.slot = slot;
 		Rectangle dimR = PersonalBoardAdaptive.getLeaderSlot(p.resizeFactor);
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(dimR);
 		Rectangle dim = recs.get(slot);
@@ -32,11 +30,14 @@ public class LeaderButton extends JButton {
 	}
 	
 
-	public void updateLeader(Model model){
-		if(slot<model.getPlayers().get(username).getLeaders().size()){
-			if (model.getPlayers().get(username).getLeaders().get(slot).isPlay()){
-				this.setIcon(MyImage.getScaledImageinLabel(pathPlayedLeader, dim).getIcon());
-			}
+	public void updateLeader(Model model, int pos){
+		if (model.getPlayers().get(username).getLeaders().get(pos).isPlay()){
+			this.setIcon(MyImage.getScaledImageinLabel(pathPlayedLeader, dim).getIcon());
+		}
+		else{
+			CardLeader card = model.getPlayers().get(username).getLeaders().get(pos);
+			String path = CardPath.getLeaderCardPathname(card);
+			this.setIcon(MyImage.getScaledImageinLabel(path, dim).getIcon());
 		}
 			
 	}

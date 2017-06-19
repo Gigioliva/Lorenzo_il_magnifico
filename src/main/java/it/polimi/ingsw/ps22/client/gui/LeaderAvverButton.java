@@ -23,7 +23,7 @@ public class LeaderAvverButton extends JButton {
 	private final String leaderBackPath = "./image/leadercard/leadersback.jpg";
 	private String username;
 	private Rectangle cardDim;
-	private ArrayList<CardLeader> leaders;
+	private ArrayList<CardLeader> leaders = new ArrayList<CardLeader>();
 	
 	public LeaderAvverButton(String username, double resizeFactor, java.awt.Color c, ArrayList<CardLeader> leaders){
 		super(username + " leaders");
@@ -42,13 +42,16 @@ public class LeaderAvverButton extends JButton {
 		public void actionPerformed(ActionEvent arg0) {
 			JFrame frame = new JFrame(username);
 			frame.setLayout(new GridLayout(2,2));
-			if(leaders.size() == NUMLEADERS){
-				for(int i=0; i<NUMLEADERS; i++){
-					if(!leaders.get(i).isPlay())
-						frame.add(MyImage.getScaledImageinLabel(leaderBackPath, cardDim));
-					
+			
+			for(int i=0; i<leaders.size(); i++){
+				if(!leaders.get(i).isPlay())
+					frame.add(MyImage.getScaledImageinLabel(leaderBackPath, cardDim));
+				else{
+					String path = CardPath.getLeaderCardPathname(leaders.get(i));
+					frame.add(MyImage.getScaledImageinLabel(path, cardDim));
 				}
 			}
+				
 			
 			frame.setMinimumSize(new Dimension(200, 200));
 			frame.setVisible(true);

@@ -75,9 +75,9 @@ public class MyImage {
 		for(int i = 0 ; i < players.size(); i++){
 			g.setColor(players.get(i).getColor().getColor());
 			Rectangle rec = recs.get(i);
-			g.fillRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
-			g.setColor(players.get(i).getColor().getColor());
-			g.drawRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			g.fillOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			//g.setColor(players.get(i).getColor().getColor());
+			g.drawOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 		}
 	}
 	
