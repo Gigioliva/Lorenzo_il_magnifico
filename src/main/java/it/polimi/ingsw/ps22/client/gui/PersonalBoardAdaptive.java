@@ -19,7 +19,7 @@ public class PersonalBoardAdaptive {
 	private static final Rectangle excommSlot1 = new Rectangle(0, 0, 0, 0);
 	private static final Rectangle excommSlot2 = new Rectangle(0, 0, 0, 0);
 	private static final Rectangle excommSlot3 = new Rectangle(0, 0, 0, 0);
-	private static final Rectangle leaderSlot = new Rectangle(3630, 4300, 2730, 2980);
+	private static final Rectangle leaderSlot = new Rectangle(3630, 4300, 2745, 3750);
 
 	private static final int cardOffsetX = 548;
 	private static final int cardTerritoryOffsetY = 1000;
