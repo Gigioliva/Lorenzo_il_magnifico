@@ -32,7 +32,7 @@ public class AskCostDialog extends MessageDialog {
 		this.setTitle("Scegli tra i seguenti costi");
 		
 		for(int i = 0; i < mex.getPossibleCost().size(); i++){
-			Button b1 = new Button(i, mex.getPossibleCost().get(i).toString());
+			Button b1 = new Button(i + 1, mex.getPossibleCost().get(i).toString());
 			group.add(b1);
 			buttons.add(b1);
 		    mainPanel.add(b1);

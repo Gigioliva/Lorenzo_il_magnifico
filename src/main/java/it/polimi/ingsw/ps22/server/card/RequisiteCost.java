@@ -2,17 +2,19 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.io.Serializable;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
 public class RequisiteCost implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
-	private HashMap<String, ResourceAbstract> cost;
-	private HashMap<String, ResourceAbstract> requisite;
+	private LinkedHashMap<String, ResourceAbstract> cost;
+	private LinkedHashMap<String, ResourceAbstract> requisite;
 	
 	public RequisiteCost(){
-		this.cost=new HashMap<String, ResourceAbstract>();
-		this.requisite=new HashMap<String, ResourceAbstract>();
+		this.cost=new LinkedHashMap<String, ResourceAbstract>();
+		this.requisite=new LinkedHashMap<String, ResourceAbstract>();
 	}
 	
 	@Override
@@ -28,12 +30,16 @@ public class RequisiteCost implements Serializable{
 	}
 	
 	public void addCost(HashMap<String, ResourceAbstract> cost){
-		this.cost=cost;
+		for(String el: cost.keySet()){
+			this.cost.put(el, cost.get(el));
+		}
 	}
 	public void addRequisite(HashMap<String, ResourceAbstract> requisite){
-		this.requisite=requisite;
+		for(String el: requisite.keySet()){
+			this.requisite.put(el, requisite.get(el));
+		}
 	}
-	public HashMap<String, ResourceAbstract> getCost(){
+	public LinkedHashMap<String, ResourceAbstract> getCost(){
 		return this.cost;
 	}
 	
@@ -48,7 +54,7 @@ public class RequisiteCost implements Serializable{
 		return this.requisite.get(type).getQuantity();
 	}
 	
-	public HashMap<String, ResourceAbstract> getRequisite(){
+	public LinkedHashMap<String, ResourceAbstract> getRequisite(){
 		return this.requisite;
 	}
 	
