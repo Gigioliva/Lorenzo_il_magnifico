@@ -16,6 +16,10 @@ import it.polimi.ingsw.ps22.server.message.AskCard;
 public class AskCardDialog extends MessageDialog {
 	
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 727347642126013376L;
 	AskCard mex;
 	ButtonGroup group = new ButtonGroup();
 	ArrayList<Button> buttons = new ArrayList<Button>();

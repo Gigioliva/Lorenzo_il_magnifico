@@ -133,26 +133,22 @@ public class BoardPanel extends JPanel{
 		Rectangle dimFam1 = PersonalBoardAdaptive.getBlackButtonSLot(personalBoard.resizeFactor);
 		fam1 = new FamiliarButton(Color.BLACK, model.getPlayers().get(username).getColor().getColor(), 
 				new TakeFamiliarListener(actionSpaces),username, dimFam1);
-		fam1.setBounds(personalBoard.getBounds().width, dimFam1.getInity(), dimFam1.getOffsetX(), dimFam1.getOffsetY());
-		fam1.setText("black");
+		fam1.setBounds(personalBoard.getWidth(), dimFam1.getInity(), dimFam1.getOffsetX(), dimFam1.getOffsetY());
 		
 		Rectangle dimFam2 = PersonalBoardAdaptive.getOrangeButtonSLot(personalBoard.resizeFactor);
 		fam2 = new FamiliarButton(Color.ORANGE, model.getPlayers().get(username).getColor().getColor(),
 				new TakeFamiliarListener(actionSpaces), username, dimFam2);
 		fam2.setBounds(personalBoard.getBounds().width + dimFam2.getInitx(), dimFam2.getInity(), dimFam2.getOffsetX(), dimFam2.getOffsetY());
-		fam2.setText("orange");
 		
 		Rectangle dimFam3 = PersonalBoardAdaptive.getWhiteButtonSLot(personalBoard.resizeFactor);
 		fam3 = new FamiliarButton(Color.WHITE, model.getPlayers().get(username).getColor().getColor(),
 				new TakeFamiliarListener(actionSpaces), username, dimFam3);
 		fam3.setBounds(personalBoard.getBounds().width + dimFam3.getInitx(), dimFam3.getInity(), dimFam3.getOffsetX(), dimFam3.getOffsetY());
-		fam3.setText("white");
 		
 		Rectangle dimFam4 = PersonalBoardAdaptive.getNeutralButtonSLot(personalBoard.resizeFactor);
 		fam4 = new FamiliarButton(Color.NEUTRAL, model.getPlayers().get(username).getColor().getColor(),
 				new TakeFamiliarListener(actionSpaces), username, dimFam4);
 		fam4.setBounds(personalBoard.getBounds().width + dimFam4.getInitx(), dimFam4.getInity(), dimFam4.getOffsetX(), dimFam4.getOffsetY());
-		fam4.setText("neutral");
 		
 		layeredPane.add(fam1, new Integer(50), 0);
 		layeredPane.add(fam2, new Integer(50), 0);

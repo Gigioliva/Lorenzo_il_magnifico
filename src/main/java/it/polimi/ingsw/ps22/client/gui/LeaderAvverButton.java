@@ -19,7 +19,7 @@ public class LeaderAvverButton extends JButton {
 	 * 
 	 */
 	private static final long serialVersionUID = -8136957738988127711L;
-	private final int NUMLEADERS = 4;
+	//private final int NUMLEADERS = 4;
 	private final String leaderBackPath = "./image/leadercard/leadersback.jpg";
 	private String username;
 	private Rectangle cardDim;

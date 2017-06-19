@@ -5,7 +5,6 @@ import java.awt.event.ActionListener;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.move.CouncilMove;
-import it.polimi.ingsw.ps22.server.move.TowerCharacterMove;
 
 public class CouncilListener implements ActionListener{
 	

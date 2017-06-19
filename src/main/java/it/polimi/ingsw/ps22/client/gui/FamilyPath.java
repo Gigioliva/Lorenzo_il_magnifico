@@ -2,8 +2,6 @@ package it.polimi.ingsw.ps22.client.gui;
 
 
 import it.polimi.ingsw.ps22.server.model.Color;
-import it.polimi.ingsw.ps22.server.player.Family;
-import it.polimi.ingsw.ps22.server.player.Player;
 
 public class FamilyPath {
 

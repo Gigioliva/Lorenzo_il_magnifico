@@ -10,6 +10,10 @@ import it.polimi.ingsw.ps22.server.player.Player;
 
 public abstract class PointLabel extends JLabel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -8799499098340716847L;
 	ArrayList<Player> players;
 	
 	

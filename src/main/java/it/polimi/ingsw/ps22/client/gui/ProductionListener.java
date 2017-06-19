@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import it.polimi.ingsw.ps22.client.main.ViewClient;
-import it.polimi.ingsw.ps22.server.move.Move;
 import it.polimi.ingsw.ps22.server.move.ProductionMove;
 
 public class ProductionListener implements ActionListener {

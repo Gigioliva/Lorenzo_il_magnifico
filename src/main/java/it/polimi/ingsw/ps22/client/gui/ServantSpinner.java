@@ -19,25 +19,25 @@ public class ServantSpinner extends JPanel {
 	
 	public ServantSpinner() {
 		JLabel spinLab = new JLabel("servant");
+		this.setOpaque(false);
 		this.add(spinLab);
 		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1);  
 		spin = new JSpinner(model);
 		spinLab.setLabelFor(spin);
 		this.add(spin);
 		
-		this.setBackground(java.awt.Color.GRAY);
 	}
 	
 	public ServantSpinner( ArrayList<ActionButton> actionSpaces) {
 		JLabel spinLab = new JLabel("servant");
 		this.add(spinLab);
+		this.setOpaque(false);
 		this.actionSpaces = actionSpaces;
 		SpinnerModel model = new SpinnerNumberModel(0, 0, 1000, 1);  
 		spin = new JSpinner(model);
 		spinLab.setLabelFor(spin);
 		this.add(spin);
 		
-		this.setBackground(java.awt.Color.GRAY);
 	}
 	
 	public JSpinner getSpin(){

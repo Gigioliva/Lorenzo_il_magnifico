@@ -12,7 +12,6 @@ import javax.swing.JRadioButton;
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.answer.AnswerEffect;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
-import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
 
 public class AskEffectDialog extends MessageDialog {
@@ -91,7 +90,7 @@ public class AskEffectDialog extends MessageDialog {
 			if (close == true) {
 				mex.getListEffect().remove(card);
 				if (!mex.getListEffect().isEmpty()) {
-					AskEffectDialog d = new AskEffectDialog(view, mex);
+					new AskEffectDialog(view, mex);
 				} else {
 					view.send(new AnswerEffect(mex.getId(), choices));
 					choices.clear();

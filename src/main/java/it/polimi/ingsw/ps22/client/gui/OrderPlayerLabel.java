@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps22.server.model.Model;
 
 public class OrderPlayerLabel extends JLabel {
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 825229972480374761L;
 	private String username;
 	private java.awt.Color c;
 	private int pos;

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
 import java.util.ArrayList;
