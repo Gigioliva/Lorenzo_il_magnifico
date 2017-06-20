@@ -31,17 +31,15 @@ public class AskLeaderMoveDialog extends JDialog {
 	private JPanel mainPanel = new JPanel();
 	private ViewClient view;
 	private String username;
-	private String cardName;
 	private LeaderButton leaderB;
 	
-	public AskLeaderMoveDialog(ViewClient view, String username, String cardName, LeaderButton leaderB){
+	public AskLeaderMoveDialog(ViewClient view, String username, LeaderButton leaderB){
 		super();
 		
 		mainPanel.setLayout(new GridLayout(0, 1));
 		
 		this.setTitle("Which move do you wanna do? ");
 		this.username = username;
-		this.cardName = cardName;
 		this.view = view;
 		this.leaderB = leaderB;
 		
@@ -75,13 +73,15 @@ public class AskLeaderMoveDialog extends JDialog {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			if (b1.isSelected()){
-				view.send(new LeaderDiscarding(username, cardName));
+				view.send(new LeaderDiscarding(username, leaderB.getCardName()));
+				System.out.println(leaderB.getCardName());
 				leaderB.setEnabled(false);
 				leaderB.setVisible(false);
 				AskLeaderMoveDialog.this.dispose();
 			}
 			else if (b2.isSelected()){
-				view.send(new LeaderPlaying(username, cardName));
+				view.send(new LeaderPlaying(username, leaderB.getCardName()));
+				System.out.println("gioco " + leaderB.getCardName() );
 				AskLeaderMoveDialog.this.dispose();
 			}
 			
