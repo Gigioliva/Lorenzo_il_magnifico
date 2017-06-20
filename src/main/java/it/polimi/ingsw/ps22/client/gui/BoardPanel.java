@@ -33,6 +33,8 @@ public class BoardPanel extends JPanel{
 
 	private static final long serialVersionUID = -5630682030714330058L;
 
+	private final int NUMERE = 3;
+	private ArrayList<ExcommLabel> excomm = new ArrayList<ExcommLabel>();
 	private final int NUMLEADERS = 4;
 	private int NUM_PLAYERS;
 	private static final int NUM_CARDEXCOMM = 3;
@@ -60,7 +62,6 @@ public class BoardPanel extends JPanel{
 	private ViewClient view;
 	private ArrayList<LeaderButton> leaders = new ArrayList<LeaderButton>();
 	private boolean setLeadersFlag = false;
-	//private ArrayList<LeaderAvverButton> avverLeaders = new  ArrayList<LeaderAvverButton>();
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -101,13 +102,20 @@ public class BoardPanel extends JPanel{
         
         layeredPane.add(mapLabel, new Integer(20), 0);
 	
-		HarvestButton harvest1 = new HarvestButton(1, username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard), new HarvestListener(view));
+        HarvestLabel haLab = new HarvestLabel(resizeFactor);
+		HarvestRightButton harvest1 = new HarvestRightButton(1, username, AdaptiveLayout.getHarvestRightSpace(factorScaleBoard),
+				new HarvestListener(view), haLab);
 		addActionPanelToLayeredPane(harvest1);
+		layeredPane.add(haLab,new Integer(10000));
 		
 		HarvestButton harvest2 = new HarvestButton(0, username, AdaptiveLayout.getHarvestLeftSpace(factorScaleBoard), new HarvestListener(view));
 		addActionPanelToLayeredPane(harvest2);
 		
-		ProductionButton prod1 = new ProductionButton(1,username, AdaptiveLayout.getProdRightSpace(factorScaleBoard), new ProductionListener(view));
+		ProductionLabel prLab = new ProductionLabel(resizeFactor);
+		ProductionRightButton prod1 = new ProductionRightButton(1,username, AdaptiveLayout.getProdRightSpace(factorScaleBoard), 
+				new ProductionListener(view), prLab);
+		layeredPane.add(prLab, new Integer(10000));
+		
 		ProductionButton prod2 = new ProductionButton(0, username, AdaptiveLayout.getProdLeftSpace(factorScaleBoard), new ProductionListener(view));
 		addActionPanelToLayeredPane(prod1);
 		addActionPanelToLayeredPane(prod2);
@@ -160,7 +168,6 @@ public class BoardPanel extends JPanel{
 		towers.put(2, new ArrayList<TowerPanel>());
 		towers.put(3, new ArrayList<TowerPanel>());
 		
-		 //carta a caso (mi servono solo le dimensioni)
 		Rectangle dimCard = AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, 0);
 		zoomedCard = new JLabel();
 		zoomedCard.setBounds((int)(heightScreen*0.75),(int) heightScreen/2,(int)( dimCard.getOffsetX()*2.2),(int)( dimCard.getOffsetY()*2.2));
@@ -280,23 +287,35 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(playerLab, new Integer(2000));
 		
 		
-		/*
-		for(int i = 0; i<NUM_PLAYERS - 1; i++){
-			LeaderAvverButton b = new LeaderAvverButton(avver.get(i), resizeFactor, model.getPlayers().get(avver.get(i)).getColor().getColor(), 
-					model.getPlayers().get(avver.get(i)).getLeaders());
-			b.setBounds((int)widthScreen - 300 + 100*i,(int) heightScreen - 100,
-				100, 50);
-			avverLeaders.add(b);
-			layeredPane.add(b, new Integer(3000));
-		}
-		*/
-		
 		JPanel chatpan = new JPanel();
 		Rectangle dimChat = PersonalBoardAdaptive.getChatSlot(personalBoard.resizeFactor);
 		chatpan.setBounds(dimChat.getInitx() + personalBoard.getWidth(), dimChat.getInity(), dimChat.getOffsetX(), dimChat.getOffsetY());
 		chatpan.setOpaque(false);
 		layeredPane.add(chatpan, new Integer(4000));
 		
+		
+		for(int i =1; i<= NUMERE; i++){
+			ExcommLabel excomm1 = new ExcommLabel(resizeFactor, AdaptiveLayout.getChurchSpace(resizeFactor, i));
+			layeredPane.add(excomm1, new Integer(8000));
+			excomm.add(excomm1);
+		}
+		
+		if(model.getPlayers().size() == 2){
+			layeredPane.add(MyImage.getScaledImageinLabel("./image/cover/harvest.png", 
+					AdaptiveLayout.getHarvestRightCover(resizeFactor)), new Integer(8000));
+			layeredPane.add(MyImage.getScaledImageinLabel("./image/cover/prod.png", 
+					AdaptiveLayout.getProdRightCover(resizeFactor)), new Integer(8000));
+		}
+		
+		if(model.getPlayers().size() <= 3){
+			layeredPane.add(MyImage.getScaledImageinLabel("./image/cover/market3.png", 
+					AdaptiveLayout.getMarket3Cover(resizeFactor)), new Integer(8000));
+			layeredPane.add(MyImage.getScaledImageinLabel("./image/cover/market4.png", 
+					AdaptiveLayout.getMarket4Cover(resizeFactor)), new Integer(8000));
+		}
+		
+		setCardExcomm(model);
+	
 		this.add(layeredPane);
         
         
@@ -334,13 +353,11 @@ public class BoardPanel extends JPanel{
 		updateVictoryTrack(model);
 		updateDices(model);
 		updateOrderPlayers(model);
-		updateCardExcomm(model);
 		updateFamiliars(model);
 		updateFamSpinner();
 		setLeaders(model);
 		updateLeaders(model);
-		//updateAvverLeader(model);
-		//repaint();
+		updateExcomm(model);
 	}
 	
 	private void updateActionSpaces(Model model){
@@ -409,8 +426,8 @@ public class BoardPanel extends JPanel{
 		victory.clear();
 		for(Integer qty: tempPlay.keySet()){
 			VictoryPointLabel lab = new VictoryPointLabel(resizeFactor, qty, tempPlay.get(qty));
-			victory.add(lab);
 			lab.update(model);
+			victory.add(lab);
 			layeredPane.add(lab, new Integer(100));
 		}
 	}
@@ -440,11 +457,12 @@ public class BoardPanel extends JPanel{
 		}
 	}
 	
-	private void updateCardExcomm(Model model){
+	private void setCardExcomm(Model model){
 		
 		for(int i = 0; i < NUM_CARDEXCOMM; i++){
 			String path = CardPath.getExcommCardPathname(model.getBoard().getChurch((i+1)*2).getCardExcomm());
 			JLabel exCardLabel = MyImage.getScaledImageinLabel(path, AdaptiveLayout.getChurchSpace(resizeFactor, i + 1));
+			exCardLabel.addMouseListener(new MyMouse(BoardPanel.zoomedCard, path));
 			layeredPane.add(exCardLabel, new Integer(200));
 		}
 	
@@ -494,15 +512,11 @@ public class BoardPanel extends JPanel{
 		}
 	}
 	
-	/*
-	private void updateAvverLeader(Model model){
-		if (model.getPlayers().get(username).getLeaders() != null){
-			for(LeaderAvverButton b: avverLeaders){
-				b.updateAvverLeaders(model);
-			}
+	
+	private void updateExcomm(Model model){
+		for(ExcommLabel label: excomm){
+			label.update(model);
 		}
 	}
-	
-	*/
 	
 }

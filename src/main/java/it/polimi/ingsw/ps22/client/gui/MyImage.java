@@ -56,15 +56,11 @@ public class MyImage {
 		
 		for(int i = 0 ; i < familiars.size(); i++){
 			
-			//g.setColor(familiars.get(i).getPlayer().getColor().getColor());
 			Rectangle rec = recs.get(i);
 			ImageIcon img =MyImage.createScaledImageIcon(FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(),
 					familiars.get(i).getColor()), recs.get(i));
 
-			//g.fillOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 			g.drawImage(img.getImage(), rec.getInitx(), rec.getInity(), null);
-			//g.setColor(familiars.get(i).getColor().getColor());
-			//g.drawOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 		}
 	}
 	
@@ -78,6 +74,19 @@ public class MyImage {
 			g.fillOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 			//g.setColor(players.get(i).getColor().getColor());
 			g.drawOval(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+		}
+	}
+	
+	public static void updateExcommSpaces(ArrayList<java.awt.Color> players, JLabel b, Graphics g){
+		
+		ArrayList<Rectangle> recs = Rectangle.divideRectangle(new Rectangle(0,b.getWidth(),0,b.getHeight()));
+		
+		for(int i = 0 ; i < players.size(); i++){
+			g.setColor(players.get(i));
+			Rectangle rec = recs.get(i);
+			g.fillRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
+			//g.setColor(players.get(i).getColor().getColor());
+			g.drawRect(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 		}
 	}
 	

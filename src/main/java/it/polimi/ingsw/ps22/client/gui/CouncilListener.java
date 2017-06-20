@@ -20,8 +20,6 @@ public class CouncilListener implements ActionListener{
 		CouncilMove move = new CouncilMove(pressedButton.getUsername(), pressedButton.getColor(), 
 				pressedButton.getNumServants());
 		view.send(move);
-		System.out.println("creo council Move, color fam: " + pressedButton.getColor() +"  piano torre: " + 
-				" servitori aggiunti " + pressedButton.getNumServants());
 	}
 
 }

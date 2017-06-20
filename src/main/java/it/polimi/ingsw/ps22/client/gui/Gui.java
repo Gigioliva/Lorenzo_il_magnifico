@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.message.AskCard;
 import it.polimi.ingsw.ps22.server.message.AskCopyLeader;

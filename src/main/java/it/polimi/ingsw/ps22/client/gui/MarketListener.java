@@ -20,8 +20,6 @@ public class MarketListener implements ActionListener {
 		MarketMove move = new MarketMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace() + 1, 
 				pressedButton.getNumServants());
 		view.send(move);
-		System.out.println("creo Market Move, color fam: " + pressedButton.getColor() +"  spazio: " +   pressedButton.getSpace() + 
-				" servitori aggiunti " + pressedButton.getNumServants());
 		
 	}
 

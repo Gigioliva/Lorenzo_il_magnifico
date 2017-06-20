@@ -21,6 +21,7 @@ public class LeaderButton extends JButton {
 	public LeaderButton(int slot, PersonalBoardPanel p, CardLeader card, String username){
 		this.username = username;
 		Rectangle dimR = PersonalBoardAdaptive.getLeaderSlot(p.resizeFactor);
+		dimR = Rectangle.fillImageRatio(dimR, (float)1.5);
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(dimR);
 		Rectangle dim = recs.get(slot);
 		this.dim = dim;
