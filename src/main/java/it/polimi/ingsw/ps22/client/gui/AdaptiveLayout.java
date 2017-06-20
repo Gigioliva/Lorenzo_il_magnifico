@@ -2,8 +2,8 @@ package it.polimi.ingsw.ps22.client.gui;
 
 public class AdaptiveLayout {
 
-	private static final Rectangle whiteDice = new Rectangle(1876, 2005, 3414, 3540);
-	private static final Rectangle orangeDice = new Rectangle(1634, 1762, 3414, 3540);
+	private static final Rectangle orangeDice = new Rectangle(1876, 2005, 3414, 3540);
+	private static final Rectangle whiteDice = new Rectangle(1634, 1762, 3414, 3540);
 	private static final Rectangle blackDice = new Rectangle(1390, 1520, 3414, 3540);
 	private static final Rectangle councilPalaceButton = new Rectangle(1410, 1830, 2140, 2290);
 	private static final Rectangle councilPalace = new Rectangle(1410, 1470, 2140, 2200);
