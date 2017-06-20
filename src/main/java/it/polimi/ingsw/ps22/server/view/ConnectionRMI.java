@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.server.view;
 
 import java.rmi.RemoteException;
-
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.answer.AnswerUsername;
 import it.polimi.ingsw.ps22.server.message.AskUsername;
@@ -37,8 +36,6 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		server.rednezvous(this, name);
 		if (!active) {
 			run();
-		} else{
-			send(name);
 		}
 	}
 

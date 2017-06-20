@@ -29,15 +29,15 @@ public class Gui extends JFrame {
 
 	public Gui(ViewClient view) {
 		this.view = view;
-	}
-
-	public void initGui(Model model) {
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public void initGui(Model model) {
 
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 		this.setUndecorated(true);
@@ -143,7 +143,8 @@ public class Gui extends JFrame {
 	}
 
 	public void yourTurn(ChoiceMove mex) {
-		JOptionPane.showMessageDialog(this, mex.getString());
+		//JOptionPane.showMessageDialog(this, mex.getString());
+		new ShowMessage(view,mex);
 	}
 
 	public void genericMessage(GenericMessage mex) {

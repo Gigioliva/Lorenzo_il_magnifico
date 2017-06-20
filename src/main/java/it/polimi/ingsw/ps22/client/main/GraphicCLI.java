@@ -10,18 +10,14 @@ public class GraphicCLI extends Graphic {
 
 	@Override
 	public void printModel(Model model) {
-		//System.out.print("\033[H\033[2J");
-		/*StringBuilder temp=new StringBuilder();
+		System.out.print("\033[H\033[2J");
+		StringBuilder temp=new StringBuilder();
 		temp.append("DISEGNO MODEL\n");
 		for(String el: model.getPlayers().keySet()){
 			temp.append("GIOCATORE: "+ model.getPlayers().get(el).toString());
 		}
 		temp.append(model.getBoard().toString());
-		System.out.println(temp.toString());*/
-		/*for(String el: model.getPlayers().keySet()){
-			System.out.println(model.getPlayers().get(el).resourcesString());
-		}*/
-		System.out.println(model.getBoard().getChurch(2).toString());
+		System.out.println(temp.toString());
 	}
 
 	/*@Override

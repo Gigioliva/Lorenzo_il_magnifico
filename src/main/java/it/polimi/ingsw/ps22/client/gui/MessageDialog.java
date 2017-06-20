@@ -45,6 +45,7 @@ public abstract class MessageDialog extends JDialog {
 		pack();
 		setMinimumSize(new Dimension(300, 30));
 		setVisible(true);
+		setLocationRelativeTo(null);
 	}
 
 }

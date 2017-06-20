@@ -13,6 +13,9 @@
             </prodpersonalbonus>
         </personalbonus>
         <territorybonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+            <require>0</require>
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
@@ -63,6 +66,9 @@
             </prodpersonalbonus>
         </personalbonus>
         <territorybonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+            <require>0</require>
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
@@ -113,6 +119,9 @@
             </prodpersonalbonus>
         </personalbonus>
         <territorybonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+            <require>0</require>
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
@@ -163,6 +172,9 @@
             </prodpersonalbonus>
         </personalbonus>
         <territorybonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+            <require>0</require>
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>
@@ -213,6 +225,9 @@
             </prodpersonalbonus>
         </personalbonus>
         <territorybonus>
+            <value>0</value>
+            <victorypoint>0</victorypoint>
+            <require>0</require>
             <value>1</value>
             <victorypoint>0</victorypoint>
             <require>0</require>

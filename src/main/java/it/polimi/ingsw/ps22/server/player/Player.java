@@ -205,7 +205,7 @@ public class Player implements Serializable {
 	}
 
 	public void addPoints(String type, Point other) {
-		this.resources.get(type).addResource(other);
+		this.points.get(type).addResource(other);
 	}
 
 	public void addDevelopmentCard(String type, DevelopmentCard other) {
@@ -281,7 +281,7 @@ public class Player implements Serializable {
 	}
 
 	public void calcVicPoint() {
-		VictoryPoint temp = personalBoard.getBonusHarvest().get(cards.get("Harvest").size());
+		VictoryPoint temp = personalBoard.getBonusHarvest().get(cards.get("Territory").size());
 		points.get("VictoryPoint").addResource(temp);
 		temp = personalBoard.getBonusCharacter().get(cards.get("Character").size());
 		points.get("VictoryPoint").addResource(temp);

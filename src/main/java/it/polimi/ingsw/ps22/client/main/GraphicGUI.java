@@ -17,6 +17,7 @@ public class GraphicGUI extends Graphic {
 
 	@Override
 	public void printModel(Model model) {
+		System.out.println(model.getTurn());
 		if (flag) {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
