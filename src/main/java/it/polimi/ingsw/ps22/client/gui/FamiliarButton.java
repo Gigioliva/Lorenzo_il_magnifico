@@ -21,9 +21,31 @@ public class FamiliarButton extends JButton {
 		this.setEnabled(true);
 		this.setOpaque(false);
 		this.setContentAreaFilled(false);
-		this.setBorderPainted(false);
+		this.setBorderPainted(true);
 		
 		this.addActionListener(listener);
+		
+		/*
+		this.addChangeListener(new javax.swing.event.ChangeListener() {
+			
+			@Override
+			public void stateChanged(ChangeEvent e) {
+				FamiliarButton.this.setBorderPainted(true);
+				final Border raisedBevelBorder = BorderFactory.createRaisedBevelBorder();
+				final Insets insets = raisedBevelBorder.getBorderInsets(FamiliarButton.this);
+			    final EmptyBorder emptyBorder = new EmptyBorder(insets);
+				ButtonModel model = (ButtonModel) e.getSource();
+		        if (model.isRollover()) {
+		        	FamiliarButton.this.setBorder(raisedBevelBorder);
+		        } else {
+		        	FamiliarButton.this.setBorder(emptyBorder);
+		        }
+			}
+		});
+		*/
+		
+				
+	
 		
 		String path = FamilyPath.getFamilyPathname(c, color);
 		//this.setIcon(MyImage.getScaledImageinLabel(path, dim).getIcon());

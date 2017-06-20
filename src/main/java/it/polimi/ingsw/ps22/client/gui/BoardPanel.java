@@ -60,7 +60,7 @@ public class BoardPanel extends JPanel{
 	private ViewClient view;
 	private ArrayList<LeaderButton> leaders = new ArrayList<LeaderButton>();
 	private boolean setLeadersFlag = false;
-	private ArrayList<LeaderAvverButton> avverLeaders = new  ArrayList<LeaderAvverButton>();
+	//private ArrayList<LeaderAvverButton> avverLeaders = new  ArrayList<LeaderAvverButton>();
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -489,7 +489,7 @@ public class BoardPanel extends JPanel{
 	private void updateLeaders(Model model){
 		if (model.getPlayers().get(username).getLeaders() != null){
 			for(int i=0; i< model.getPlayers().get(username).getLeaders().size() ;i++){
-				leaders.get(i).updateLeader(model, i);
+				leaders.get(i).updateLeader(model);
 			}
 		}
 	}
