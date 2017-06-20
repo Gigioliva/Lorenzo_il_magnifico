@@ -7,11 +7,13 @@ public class AdaptiveLayout {
 	private static final Rectangle blackDice = new Rectangle(1390, 1520, 3414, 3540);
 	private static final Rectangle councilPalaceButton = new Rectangle(1410, 1830, 2140, 2290);
 	private static final Rectangle councilPalace = new Rectangle(1410, 1470, 2140, 2200);
-	private static final Rectangle harvestLeft = new Rectangle(162, 368, 3340, 3568);
-	private static final Rectangle harvestRight = new Rectangle(445, 975, 3340, 3568);
+	private static final Rectangle harvestLeftButton = new Rectangle(162, 368, 3340, 3568);
+	private static final Rectangle harvestRightButton = new Rectangle(500, 920, 3360, 3500); 
+	private static final Rectangle harvestRightFam = new Rectangle(590, 650, 3400, 3460); 
 	private static final Rectangle harvestRightCover = new Rectangle(445, 975, 3340, 3568);
-	private static final Rectangle productionLeft = new Rectangle(162, 368, 3034, 3256);
-	private static final Rectangle productionRight = new Rectangle(445, 975, 3034, 3256);
+	private static final Rectangle productionLeftButton = new Rectangle(162, 368, 3034, 3256);
+	private static final Rectangle productionRightButton = new Rectangle(500, 920, 3050, 3190);
+	private static final Rectangle productionRightFam = new Rectangle(590, 650, 3085, 3145); 
 	private static final Rectangle productionRightCover = new Rectangle(445, 975, 3034, 3256);
 	private static final Rectangle market1 = new Rectangle(1456, 1556, 3020, 3120);
 	private static final Rectangle market2 = new Rectangle(1690, 1790, 3020, 3120);
@@ -190,11 +192,11 @@ public class AdaptiveLayout {
 	}
 
 	public static Rectangle getProdLeftSpace(double boardResizeFactor) {
-		return productionLeft.resize(boardResizeFactor);
+		return productionLeftButton.resize(boardResizeFactor);
 	}
 
 	public static Rectangle getProdRightSpace(double boardResizeFactor) {
-		return productionRight.resize(boardResizeFactor);
+		return productionRightButton.resize(boardResizeFactor);
 	}
 	
 	public static Rectangle getProdRightCover(double boardResizeFactor) {
@@ -202,11 +204,11 @@ public class AdaptiveLayout {
 	}
 
 	public static Rectangle getHarvestLeftSpace(double boardResizeFactor) {
-		return harvestLeft.resize(boardResizeFactor);
+		return harvestLeftButton.resize(boardResizeFactor);
 	}
 
 	public static Rectangle getHarvestRightSpace(double boardResizeFactor) {
-		return harvestRight.resize(boardResizeFactor);
+		return harvestRightButton.resize(boardResizeFactor);
 	}
 	
 	public static Rectangle getHarvestRightCover(double boardResizeFactor) {
@@ -258,6 +260,26 @@ public class AdaptiveLayout {
 				(councilPalace.getFinalx()+(councilPalace.getOffsetX()*(position%8))),
 				(councilPalace.getInity()+(councilPalace.getOffsetY()*(position/8))),
 				(councilPalace.getFinaly()+(councilPalace.getOffsetY()*(position/8)))
+				);
+		return temp.resize(boardResizeFactor);
+	}
+	
+	public static Rectangle getProdRightFamSpace(double boardResizeFactor,int position) {
+		Rectangle temp = new Rectangle(
+				(productionRightFam.getInitx()+(productionRightFam.getOffsetX()*(position%8))),
+				(productionRightFam.getFinalx()+(productionRightFam.getOffsetX()*(position%8))),
+				(productionRightFam.getInity()+(productionRightFam.getOffsetY()*(position/8))),
+				(productionRightFam.getFinaly()+(productionRightFam.getOffsetY()*(position/8)))
+				);
+		return temp.resize(boardResizeFactor);
+	}
+	
+	public static Rectangle getHarvestRightFamSpace(double boardResizeFactor,int position) {
+		Rectangle temp = new Rectangle(
+				(harvestRightFam.getInitx()+(harvestRightFam.getOffsetX()*(position%8))),
+				(harvestRightFam.getFinalx()+(harvestRightFam.getOffsetX()*(position%8))),
+				(harvestRightFam.getInity()+(harvestRightFam.getOffsetY()*(position/8))),
+				(harvestRightFam.getFinaly()+(harvestRightFam.getOffsetY()*(position/8)))
 				);
 		return temp.resize(boardResizeFactor);
 	}

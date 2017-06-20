@@ -8,10 +8,10 @@ package it.polimi.ingsw.ps22.client.gui;
 public class PersonalBoardAdaptive {
 
 	private static final Rectangle cardBaseSlot = new Rectangle(251, 747, 56, 802);
-	private static final Rectangle coinSlot = new Rectangle(330, 510, 2070, 2190);
-	private static final Rectangle woodSlot = new Rectangle(900, 1080, 2070, 2190);
-	private static final Rectangle stoneSlot = new Rectangle(1470, 1650, 2070, 2190);;
-	private static final Rectangle servantSlot = new Rectangle(2010, 2190, 2070, 2190);
+	private static final Rectangle coinSlot = new Rectangle(420, 700, 1800, 1920);
+	private static final Rectangle woodSlot = new Rectangle(1020, 1200, 1800, 1920);
+	private static final Rectangle stoneSlot = new Rectangle(1540, 1820, 1800, 1920);;
+	private static final Rectangle servantSlot = new Rectangle(2020, 2200, 1900, 2020);
 	private static final Rectangle blackDiceButtonSlot = new Rectangle(0, 400, 4200, 4600);
 	private static final Rectangle basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 	private static final Rectangle chatSlot = new Rectangle(3630, 4300, 150, 2300);
