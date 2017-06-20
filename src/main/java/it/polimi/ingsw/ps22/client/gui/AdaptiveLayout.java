@@ -9,8 +9,10 @@ public class AdaptiveLayout {
 	private static final Rectangle councilPalace = new Rectangle(1410, 1470, 2140, 2200);
 	private static final Rectangle harvestLeft = new Rectangle(162, 368, 3340, 3568);
 	private static final Rectangle harvestRight = new Rectangle(445, 975, 3340, 3568);
+	private static final Rectangle harvestRightCover = new Rectangle(445, 975, 3340, 3568);
 	private static final Rectangle productionLeft = new Rectangle(162, 368, 3034, 3256);
 	private static final Rectangle productionRight = new Rectangle(445, 975, 3034, 3256);
+	private static final Rectangle productionRightCover = new Rectangle(445, 975, 3034, 3256);
 	private static final Rectangle market1 = new Rectangle(1456, 1556, 3020, 3120);
 	private static final Rectangle market2 = new Rectangle(1690, 1790, 3020, 3120);
 	private static final Rectangle market3 = new Rectangle(1914, 2014, 3090, 3190);
@@ -194,6 +196,10 @@ public class AdaptiveLayout {
 	public static Rectangle getProdRightSpace(double boardResizeFactor) {
 		return productionRight.resize(boardResizeFactor);
 	}
+	
+	public static Rectangle getProdRightCover(double boardResizeFactor) {
+		return productionRightCover.resize(boardResizeFactor);
+	}
 
 	public static Rectangle getHarvestLeftSpace(double boardResizeFactor) {
 		return harvestLeft.resize(boardResizeFactor);
@@ -201,6 +207,10 @@ public class AdaptiveLayout {
 
 	public static Rectangle getHarvestRightSpace(double boardResizeFactor) {
 		return harvestRight.resize(boardResizeFactor);
+	}
+	
+	public static Rectangle getHarvestRightCover(double boardResizeFactor) {
+		return harvestRightCover.resize(boardResizeFactor);
 	}
 
 	public static Rectangle getMarket1Space(double boardResizeFactor) {
