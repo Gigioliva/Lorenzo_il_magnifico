@@ -2,8 +2,8 @@ package it.polimi.ingsw.ps22.client.gui;
 
 public class AdaptiveLayout {
 
-	private static final Rectangle orangeDice = new Rectangle(1876, 2005, 3414, 3540);
-	private static final Rectangle whiteDice = new Rectangle(1634, 1762, 3414, 3540);
+	private static final Rectangle whiteDice = new Rectangle(1876, 2005, 3414, 3540);
+	private static final Rectangle orangeDice = new Rectangle(1634, 1762, 3414, 3540);
 	private static final Rectangle blackDice = new Rectangle(1390, 1520, 3414, 3540);
 	private static final Rectangle councilPalaceButton = new Rectangle(1410, 1830, 2140, 2290);
 	private static final Rectangle councilPalace = new Rectangle(1410, 1470, 2140, 2200);
@@ -15,12 +15,14 @@ public class AdaptiveLayout {
 	private static final Rectangle market2 = new Rectangle(1690, 1790, 3020, 3120);
 	private static final Rectangle market3 = new Rectangle(1914, 2014, 3090, 3190);
 	private static final Rectangle market4 = new Rectangle(2090, 2190, 3260, 3360);
+	private static final Rectangle marketCover3 = new Rectangle(1860, 2070, 3035, 3265);
+	private static final Rectangle marketCover4 = new Rectangle(2030, 2250, 3205, 3440);
 	private static final Rectangle playerGrid = new Rectangle(2042, 2148, 2000, 2106);
 	private static final Rectangle church1 = new Rectangle(508, 685, 2263, 2623);
 	private static final Rectangle church2 = new Rectangle(704, 883, 2307, 2654);
 	private static final Rectangle church3 = new Rectangle(901, 1078, 2263, 2623);
 	private static final Rectangle faithSlotFrom1To3 = new Rectangle(169, 274, 2738, 2845);
-	private static final Rectangle faithSlotFrom3To5 = new Rectangle(518, 693, 2738, 2845);
+	private static final Rectangle faithSlotFrom3To5 = new Rectangle(550, 657, 2738, 2845);
 	private static final Rectangle faithSlotFrom6To15 = new Rectangle(1077, 1182, 2738, 2845);
 	private static final Rectangle victorySlot0 = new Rectangle(50, 130, 35, 115);
 	private static final Rectangle victorySlotFrom1To19 = new Rectangle(195, 275, 5, 85);
@@ -71,19 +73,19 @@ public class AdaptiveLayout {
 					(militarySlotFrom1.getFinaly() - ((slot - 1) * militaryOffsetY)));
 			if (slot > 2) {
 				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
-				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setFinaly(temp.getFinaly() - addingMilitaryOffsetY);
 			}
 			if (slot > 6) {
 				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
-				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setFinaly(temp.getFinaly() - addingMilitaryOffsetY);
 			}
 			if (slot > 11) {
 				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
-				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setFinaly(temp.getFinaly() - addingMilitaryOffsetY);
 			}
 			if (slot > 17) {
 				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
-				temp.setInity(temp.getInity() - addingMilitaryOffsetY);
+				temp.setFinaly(temp.getFinaly() - addingMilitaryOffsetY);
 			}
 			return temp.resize(boardResizeFactor);
 		} else
@@ -211,6 +213,13 @@ public class AdaptiveLayout {
 
 	public static Rectangle getMarket3Space(double boardResizeFactor) {
 		return market3.resize(boardResizeFactor);
+	}
+	
+	public static Rectangle getMarket3Cover(double boardResizeFactor) {
+		return marketCover3.resize(boardResizeFactor);
+	}
+	public static Rectangle getMarket4Cover(double boardResizeFactor) {
+		return marketCover4.resize(boardResizeFactor);
 	}
 
 	public static Rectangle getMarket4Space(double boardResizeFactor) {

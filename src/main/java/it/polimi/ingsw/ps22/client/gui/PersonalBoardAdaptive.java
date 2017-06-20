@@ -91,14 +91,14 @@ public class PersonalBoardAdaptive {
 		return blackDiceButtonSlot.resize(resizeFactor);
 	}
 
-	public static Rectangle getOrangeButtonSLot(double resizeFactor) {
+	public static Rectangle getWhiteButtonSLot(double resizeFactor) {
 		Rectangle temp = new Rectangle((blackDiceButtonSlot.getInitx() + diceButtonOffsetX),
 				(blackDiceButtonSlot.getFinalx() + diceButtonOffsetX), blackDiceButtonSlot.getInity(),
 				blackDiceButtonSlot.getFinaly());
 		return temp.resize(resizeFactor);
 	}
 
-	public static Rectangle getWhiteButtonSLot(double resizeFactor) {
+	public static Rectangle getOrangeButtonSLot(double resizeFactor) {
 		Rectangle temp = new Rectangle((blackDiceButtonSlot.getInitx() + (2 * diceButtonOffsetX)),
 				(blackDiceButtonSlot.getFinalx() + (2 * diceButtonOffsetX)), blackDiceButtonSlot.getInity(),
 				blackDiceButtonSlot.getFinaly());
