@@ -7,11 +7,11 @@ public class AdaptiveLayout {
 	private static final Rectangle blackDice = new Rectangle(1390, 1520, 3414, 3540);
 	private static final Rectangle councilPalaceButton = new Rectangle(1410, 1830, 2140, 2290);
 	private static final Rectangle councilPalace = new Rectangle(1410, 1470, 2140, 2200);
-	private static final Rectangle harvestLeftButton = new Rectangle(162, 368, 3340, 3568);
+	private static final Rectangle harvestLeftButton = new Rectangle(195, 335, 3360, 3500);
 	private static final Rectangle harvestRightButton = new Rectangle(500, 920, 3360, 3500); 
 	private static final Rectangle harvestRightFam = new Rectangle(590, 650, 3400, 3460); 
 	private static final Rectangle harvestRightCover = new Rectangle(445, 975, 3340, 3568);
-	private static final Rectangle productionLeftButton = new Rectangle(162, 368, 3034, 3256);
+	private static final Rectangle productionLeftButton = new Rectangle(195, 335, 3050, 3190);
 	private static final Rectangle productionRightButton = new Rectangle(500, 920, 3050, 3190);
 	private static final Rectangle productionRightFam = new Rectangle(590, 650, 3085, 3145); 
 	private static final Rectangle productionRightCover = new Rectangle(445, 975, 3034, 3256);
