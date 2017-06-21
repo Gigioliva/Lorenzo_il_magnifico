@@ -33,11 +33,6 @@
         <requisite>
             <Coin>18</Coin>
         </requisite>
-        
-        <eachturnharvestaction>0</eachturnharvestaction>
-        <!-- sta a indicare il valore della azione -->
-        <eachturnprodaction>0</eachturnprodaction>
-        <!-- sta a indicare il valore della azione -->
         <gainresource>
             <FaithPoint>1</FaithPoint>
         </gainresource>

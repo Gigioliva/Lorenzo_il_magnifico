@@ -61,7 +61,6 @@ public class BoardPanel extends JPanel{
 	private String username;
 	private ViewClient view;
 	private ArrayList<LeaderButton> leaders = new ArrayList<LeaderButton>();
-	private boolean setLeadersFlag = false;
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -170,7 +169,7 @@ public class BoardPanel extends JPanel{
 		
 		Rectangle dimCard = AdaptiveLayout.getCardBuildingSpace(factorScaleBoard, 0);
 		zoomedCard = new JLabel();
-		zoomedCard.setBounds((int)(heightScreen*0.75),(int) heightScreen/2,(int)( dimCard.getOffsetX()*2.2),(int)( dimCard.getOffsetY()*2.2));
+		zoomedCard.setBounds((int)(heightScreen*0.7),(int) heightScreen/2,(int)( dimCard.getOffsetX()*2.2),(int)( dimCard.getOffsetY()*2.2));
 		layeredPane.add(zoomedCard, new Integer(2000));
 		
 		for(int i = 0; i < 4; i++){
@@ -315,6 +314,8 @@ public class BoardPanel extends JPanel{
 		}
 		
 		setCardExcomm(model);
+		
+		setLeaders(model);
 	
 		this.add(layeredPane);
         
@@ -355,7 +356,7 @@ public class BoardPanel extends JPanel{
 		updateOrderPlayers(model);
 		updateFamiliars(model);
 		updateFamSpinner();
-		setLeaders(model);
+		//setLeaders(model);
 		updateLeaders(model);
 		updateExcomm(model);
 	}
@@ -480,36 +481,56 @@ public class BoardPanel extends JPanel{
 	}
 	
 	public void setLeaders(Model model){
-		if(setLeadersFlag == true){
 			for(int i = 0; i< NUMLEADERS; i++){
-				CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
-				LeaderButton b1 = new LeaderButton(i, personalBoard, card, username);
+				//CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
+				LeaderButton b1 = new LeaderButton(i, personalBoard, username);
 				leaders.add(b1);
 				b1.addActionListener(new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						LeaderButton b = (LeaderButton)e.getSource();
-						new AskLeaderMoveDialog(view, username, card.getName(), b);
+						new AskLeaderMoveDialog(view, username, b);
 						
 					}
 				});
 				layeredPane.add(b1, new Integer(2500));
 			}
-		}
-		this.setLeadersFlag = false;
-	}
-	
-	public void setLeadersFlag(){
-		this.setLeadersFlag = true;
 	}
 	
 	private void updateLeaders(Model model){
 		if (model.getPlayers().get(username).getLeaders() != null){
-			for(int i=0; i< model.getPlayers().get(username).getLeaders().size() ;i++){
-				leaders.get(i).updateLeader(model);
+			int k = 0;
+			for(int i = 0; i< model.getPlayers().get(username).getLeaders().size(); i++){
+				//leaders.get(i).updateLeader(model);
+				k++;
+				CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
+				leaders.get(i).setCardName(card.getName());
+				
+				if (model.getPlayers().get(username).getLeaders().get(i).isPlay()){
+					leaders.get(i).setIcon(MyImage.getScaledImageinLabel("./image/leadercard/leadersback.jpg", 
+							leaders.get(i).getDim()).getIcon());
+					leaders.get(i).setVisible(true);
+				}
+					
+				else{
+					
+					String path = CardPath.getLeaderCardPathname(card);
+					leaders.get(i).setIcon(MyImage.getScaledImageinLabel(path, leaders.get(i).getDim()).getIcon());
+					leaders.get(i).addMouseListener(new MyMouse(BoardPanel.zoomedCard, path));
+					leaders.get(i).setEnabled(true);
+					leaders.get(i).setVisible(true);
+				}
+					
+			}
+			for(int j = k ; j< NUMLEADERS; j++){
+					leaders.get(j).setIcon(null);
+					leaders.get(j).setVisible(false);
+					leaders.get(j).setEnabled(false);
 			}
 		}
+			
+		
 	}
 	
 	
