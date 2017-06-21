@@ -15,6 +15,7 @@ public abstract class PointLabel extends JLabel {
 	 */
 	private static final long serialVersionUID = -8799499098340716847L;
 	ArrayList<Player> players;
+	static AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	
 	public PointLabel(double resizeFactor, int slot, ArrayList<Player> players, Rectangle dim){

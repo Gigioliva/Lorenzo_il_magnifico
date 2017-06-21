@@ -18,12 +18,13 @@ public class LeaderAvverButton extends JPanel {
 	private final String leaderBackPath = "./image/leadercard/leadersback.jpg";
 	Rectangle cardDim;
 	private ArrayList<CardLeader> leaders = new ArrayList<CardLeader>();
+	private AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public LeaderAvverButton(String username, double resizeFactor, java.awt.Color c, ArrayList<CardLeader> leaders){
 		super();
 		this.setLayout(new GridLayout(2, 2));
 		this.leaders = leaders;
-		cardDim = AdaptiveLayout.getCardBuildingSpace(resizeFactor, 0);
+		cardDim = layout.getCardBuildingSpace(resizeFactor, 0);
 	
 		setLeaders();
 		

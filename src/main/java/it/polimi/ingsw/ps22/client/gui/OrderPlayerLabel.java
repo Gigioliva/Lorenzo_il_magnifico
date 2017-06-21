@@ -15,11 +15,12 @@ public class OrderPlayerLabel extends JLabel {
 	private String username;
 	private java.awt.Color c;
 	private int pos;
+	private AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public OrderPlayerLabel(int pos, double resizeFactor){
 		super();
 		this.pos = pos;
-		Rectangle rec = AdaptiveLayout.getPlayerGridSpace(resizeFactor, pos);
+		Rectangle rec = layout.getPlayerGridSpace(resizeFactor, pos);
 		this.setBounds(rec.getInitx(), rec.getInity(), rec.getOffsetX(), rec.getOffsetY());
 	}
 	

@@ -16,6 +16,7 @@ public class CouncilLabel extends JLabel {
 	private static final long serialVersionUID = 1595555729187234344L;
 	ArrayList<Family> familiars = new ArrayList<Family>();
 	double resizeFactor;
+	private AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public CouncilLabel(double resizeFact) {
 		super();
@@ -28,8 +29,8 @@ public class CouncilLabel extends JLabel {
 		super.paintComponent(g);
 		
 		for(int i=0; i<familiars.size(); i++){
-			Rectangle dim = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, i);
-			Rectangle dim0 = AdaptiveLayout.getCouncilPalaceFamSpace(resizeFactor, 0);
+			Rectangle dim = layout.getCouncilPalaceFamSpace(resizeFactor, i);
+			Rectangle dim0 = layout.getCouncilPalaceFamSpace(resizeFactor, 0);
 			String path = FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(), familiars.get(i).getColor());
 			g.drawImage(MyImage.createScaledImageIcon(path, dim).getImage(), dim.getInitx() - dim0.getInitx(), 
 					dim.getInity() - dim0.getInity(), null);
