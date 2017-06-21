@@ -62,7 +62,7 @@ public class MainParser {
 		LeaderCardSaxParser.LeaderRead(pathnameLeader, leader);
 		System.out.println("\n\n\nCARD LEADER");
 		for (CardLeader card : leader)
-			System.out.println("\n" + card.getName());
+			System.out.println("\n" + card.toString());
 
 		ArrayList<HashMap<String, ResourceAbstract>> spaces = new ArrayList<HashMap<String, ResourceAbstract>>();
 		String pathnameSpace = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/MarketSpace.xml";

@@ -13,8 +13,8 @@ import org.xml.sax.helpers.DefaultHandler;
 import it.polimi.ingsw.ps22.server.action.HarvestAction;
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
-import it.polimi.ingsw.ps22.server.effect.BonusEffect;
 import it.polimi.ingsw.ps22.server.effect.ExtraAction;
+import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.ReduceCostEffect;
 import it.polimi.ingsw.ps22.server.effect.StrangeEffect;
 import it.polimi.ingsw.ps22.server.resource.Coin;
@@ -101,7 +101,7 @@ public class LeaderCardSaxParser {
 			DefaultHandler handler = new DefaultHandler() {
 				CardLeader card;
 				HashMap<String, Integer> req = new HashMap<String, Integer>();
-				BonusEffect gainTurnEffect = new BonusEffect();
+				GainResource gainTurnEffect = new GainResource();
 				String lastQName = "";
 				private boolean boolRequisite = false;
 				private boolean boolGainResource = false;
@@ -133,8 +133,8 @@ public class LeaderCardSaxParser {
 					}
 
 					if (qName.equalsIgnoreCase("gainresource")) {
-						card.addPermanentEffect(gainTurnEffect);
-						gainTurnEffect = new BonusEffect();
+						card.addImmediateEffect(gainTurnEffect);
+						gainTurnEffect = new GainResource();
 						boolGainResource = false;
 					}
 
@@ -167,28 +167,28 @@ public class LeaderCardSaxParser {
 
 					if (boolGainResource) {
 						if (lastQName.equalsIgnoreCase("coin")) {
-							gainTurnEffect.addBonus("Coin", new Coin(Integer.parseInt(str)));
+							gainTurnEffect.addGain("Coin", new Coin(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("stone")) {
-							gainTurnEffect.addBonus("Stone", new Stone(Integer.parseInt(str)));
+							gainTurnEffect.addGain("Stone", new Stone(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("wood")) {
-							gainTurnEffect.addBonus("Wood", new Wood(Integer.parseInt(str)));
+							gainTurnEffect.addGain("Wood", new Wood(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("servant")) {
-							gainTurnEffect.addBonus("Servant", new Servant(Integer.parseInt(str)));
+							gainTurnEffect.addGain("Servant", new Servant(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("militarypoint")) {
-							gainTurnEffect.addBonus("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
+							gainTurnEffect.addGain("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("faithpoint")) {
-							gainTurnEffect.addBonus("FaithPoint", new FaithPoint(Integer.parseInt(str)));
+							gainTurnEffect.addGain("FaithPoint", new FaithPoint(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("victorypoint")) {
-							gainTurnEffect.addBonus("VictoryPoint", new VictoryPoint(Integer.parseInt(str)));
+							gainTurnEffect.addGain("VictoryPoint", new VictoryPoint(Integer.parseInt(str)));
 						}
 						if (lastQName.equalsIgnoreCase("councilprivilege")) {
-							gainTurnEffect.addBonus("CouncilPrivilege", new CouncilPrivilege(Integer.parseInt(str)));
+							gainTurnEffect.addGain("CouncilPrivilege", new CouncilPrivilege(Integer.parseInt(str)));
 						}
 					}
 
