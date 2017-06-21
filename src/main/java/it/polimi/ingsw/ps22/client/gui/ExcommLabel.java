@@ -6,22 +6,18 @@ import java.util.ArrayList;
 import javax.swing.JLabel;
 
 import it.polimi.ingsw.ps22.server.model.Model;
-import it.polimi.ingsw.ps22.server.player.Player;
 
-public abstract class PointLabel extends JLabel {
-	
+public class ExcommLabel extends JLabel {
+
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8799499098340716847L;
-	ArrayList<Player> players;
-	static AdaptiveLayout layout = AdaptiveLayout.instance();
+	private static final long serialVersionUID = 8198698155682435615L;
+	ArrayList<java.awt.Color> players = new ArrayList<java.awt.Color>();
 	
-	
-	public PointLabel(double resizeFactor, int slot, ArrayList<Player> players, Rectangle dim){
+	public ExcommLabel(double resizeFactor, Rectangle dim){
 		super();
 		//this.setOpaque(false);
-		this.players = players;
 		setMeasures(dim);
 	}
 	
@@ -30,16 +26,15 @@ public abstract class PointLabel extends JLabel {
 	}
 	
 	public void update(Model model){
+		//model.getBoard().getChurch(1).get
 		repaint();
-		
+			
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		
-		MyImage.updatePlayersSpaces(players, this, g);
+		MyImage.updateExcommSpaces(players, this, g);
 	}
-	
-
 }

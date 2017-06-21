@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
 import it.polimi.ingsw.ps22.client.main.ViewClient;
 import it.polimi.ingsw.ps22.server.message.AskCard;
 import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
@@ -26,6 +27,7 @@ public class Gui extends JFrame {
 	private static final long serialVersionUID = 1L;
 	BoardPanel board;
 	ViewClient view;
+	Model model;
 
 	public Gui(ViewClient view) {
 		this.view = view;
@@ -45,6 +47,7 @@ public class Gui extends JFrame {
 		this.pack();
 		this.setVisible(true);
 
+		this.model = model;
 		board = new BoardPanel(this.getWidth(), this.getHeight(), view.getUsername(), view, model);
 
 		// personalBoard = new PersonalBoardPanel(this.getWidth(),
@@ -131,7 +134,7 @@ public class Gui extends JFrame {
 	}
 
 	public void setLeaders() {
-		board.setLeadersFlag();
+		board.setLeaders(model);
 	}
 
 	public void errorMove() {

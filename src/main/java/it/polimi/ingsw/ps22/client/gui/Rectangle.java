@@ -65,13 +65,14 @@ public class Rectangle {
 	public static Rectangle fillImageRatio(Rectangle rec, float heightWightRatio) { 
 		// ratio=altezza/larghezza
 		Rectangle temp;
-		if(rec.getOffsetY()>(rec.getOffsetX()*heightWightRatio))
+		float aux = (float)rec.getOffsetX()*heightWightRatio;
+		if((float)rec.getOffsetY()>aux)
 			temp = new Rectangle(
 					rec.getInitx(),rec.getFinalx(),rec.getInity(),
-					(int)((float)rec.getOffsetX()*heightWightRatio));
+					(rec.getInity()+(int)((float)rec.getOffsetX()*heightWightRatio)));
 		else
 			temp = new Rectangle(
-					rec.getInitx(),(int)((float)rec.getOffsetY()/heightWightRatio),
+					rec.getInitx(),(rec.getInitx()+(int)((float)rec.getOffsetY()/heightWightRatio)),
 					rec.getInity(),rec.getFinaly());
 		return temp;
 	}

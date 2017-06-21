@@ -13,6 +13,6 @@ public class FaithTrackLabel extends PointLabel {
 	
 	
 	public FaithTrackLabel(double resizeFactor, int slot, ArrayList<Player> players){
-		super(resizeFactor, slot, players, AdaptiveLayout.getFaithSlotSpace(resizeFactor, slot));
+		super(resizeFactor, slot, players, layout.getFaithSlotSpace(resizeFactor, slot));
 	}
 }

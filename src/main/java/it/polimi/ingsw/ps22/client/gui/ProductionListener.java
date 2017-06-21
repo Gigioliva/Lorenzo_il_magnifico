@@ -20,8 +20,6 @@ public class ProductionListener implements ActionListener {
 		ProductionMove move = new ProductionMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace() + 1, 
 				pressedButton.getNumServants());
 		view.send(move);
-		System.out.println("creo Production Move, color fam: " + pressedButton.getColor() +"  spazio: " +   pressedButton.getSpace() + 
-				" servitori aggiunti " + pressedButton.getNumServants());
 		
 	}
 	

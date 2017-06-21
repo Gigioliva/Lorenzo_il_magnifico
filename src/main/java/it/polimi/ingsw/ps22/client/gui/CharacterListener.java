@@ -20,7 +20,5 @@ public class CharacterListener implements ActionListener{
 		TowerCharacterMove move = new TowerCharacterMove(pressedButton.getUsername(), pressedButton.getColor(), pressedButton.getSpace() + 1, 
 				pressedButton.getNumServants());
 		view.send(move);
-		System.out.println("creo character Move, color fam: " + pressedButton.getColor() +"  piano torre: " +   pressedButton.getSpace() + 
-				" servitori aggiunti " + pressedButton.getNumServants());
 	}
 }

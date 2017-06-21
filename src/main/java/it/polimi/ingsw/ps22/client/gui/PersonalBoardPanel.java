@@ -96,7 +96,7 @@ public class PersonalBoardPanel extends JPanel {
 	    woodLabel.setOpaque(false);
 	    woodLabel.setBounds(dimWood.getInitx(), dimWood.getInity(), dimWood.getOffsetX(), dimWood.getOffsetY());
 	    woodLabel.setFont(font);
-	    woodLabel.setForeground(java.awt.Color.BLACK);
+	    woodLabel.setForeground(java.awt.Color.WHITE);
 	    personalBoard.add(woodLabel, new Integer(40));
 	    
 	    servantLabel = new JLabel("0", JLabel.CENTER);
@@ -104,7 +104,7 @@ public class PersonalBoardPanel extends JPanel {
 	    Rectangle dimServant = PersonalBoardAdaptive.getServantSlot(resizeFactor);
 	    servantLabel.setOpaque(false);
 	    servantLabel.setBounds(dimServant.getInitx(), dimServant.getInity(), dimServant.getOffsetX(), dimServant.getOffsetY());
-	    servantLabel.setForeground(java.awt.Color.BLACK);
+	    servantLabel.setForeground(java.awt.Color.WHITE);
 	    personalBoard.add(servantLabel, new Integer(40));
 	    
 	    stoneLabel = new JLabel("0", JLabel.CENTER);
@@ -112,7 +112,7 @@ public class PersonalBoardPanel extends JPanel {
 	    Rectangle dimStone = PersonalBoardAdaptive.getStoneSlot(resizeFactor);
 	    stoneLabel.setOpaque(false);
 	    stoneLabel.setBounds(dimStone.getInitx(), dimStone.getInity(), dimStone.getOffsetX(), dimStone.getOffsetY());
-	    stoneLabel.setForeground(java.awt.Color.BLACK);
+	    stoneLabel.setForeground(java.awt.Color.WHITE);
 	    personalBoard.add(stoneLabel, new Integer(40));
 	    
 	  

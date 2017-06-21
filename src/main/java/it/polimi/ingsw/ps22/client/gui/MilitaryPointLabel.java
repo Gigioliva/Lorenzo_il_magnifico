@@ -12,6 +12,6 @@ public class MilitaryPointLabel extends PointLabel {
 	private static final long serialVersionUID = 4779104419050097282L;
 
 	public MilitaryPointLabel(double resizeFactor, int slot, ArrayList<Player> players){
-		super(resizeFactor, slot, players, AdaptiveLayout.getMilitarySlotSpace(resizeFactor, slot));
+		super(resizeFactor, slot, players, layout.getMilitarySlotSpace(resizeFactor, slot));
 	}
 }

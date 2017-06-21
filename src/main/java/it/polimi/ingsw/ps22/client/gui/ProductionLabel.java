@@ -7,18 +7,17 @@ import javax.swing.JLabel;
 
 import it.polimi.ingsw.ps22.server.player.Family;
 
-public class CouncilLabel extends JLabel {
-	
+public class ProductionLabel extends JLabel {
 	
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 1595555729187234344L;
+	private static final long serialVersionUID = -221005325565851136L;
 	ArrayList<Family> familiars = new ArrayList<Family>();
 	double resizeFactor;
 	private AdaptiveLayout layout = AdaptiveLayout.instance();
 	
-	public CouncilLabel(double resizeFact) {
+	public ProductionLabel(double resizeFact) {
 		super();
 		this.resizeFactor = resizeFact;
 		this.setOpaque(false);
@@ -29,8 +28,8 @@ public class CouncilLabel extends JLabel {
 		super.paintComponent(g);
 		
 		for(int i=0; i<familiars.size(); i++){
-			Rectangle dim = layout.getCouncilPalaceFamSpace(resizeFactor, i);
-			Rectangle dim0 = layout.getCouncilPalaceFamSpace(resizeFactor, 0);
+			Rectangle dim = layout.getProdRightFamSpace(resizeFactor, i);
+			Rectangle dim0 = layout.getProdRightFamSpace(resizeFactor, 0);
 			String path = FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(), familiars.get(i).getColor());
 			g.drawImage(MyImage.createScaledImageIcon(path, dim).getImage(), dim.getInitx() - dim0.getInitx(), 
 					dim.getInity() - dim0.getInity(), null);
@@ -38,9 +37,10 @@ public class CouncilLabel extends JLabel {
 		
 	}
 	
-	public void updateCouncilLabel(ArrayList<Family> fam){
+	public void updateProdLabel(ArrayList<Family> fam){
 		familiars = fam;
 		this.repaint();
 	}
+
 
 }
