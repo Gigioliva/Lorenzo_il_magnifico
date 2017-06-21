@@ -115,7 +115,7 @@ public class AdaptiveLayout {
 		militaryOffsetY = 127;
 	}
 	
-	public AdaptiveLayout instance() {
+	public static AdaptiveLayout instance() {
 		if (instanceSing == null) {
 			instanceSing = new AdaptiveLayout();
 		}
