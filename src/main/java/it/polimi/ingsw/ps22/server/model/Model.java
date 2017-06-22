@@ -10,6 +10,7 @@ import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
+import it.polimi.ingsw.ps22.server.message.EndGame;
 import it.polimi.ingsw.ps22.server.message.EndDraft;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
@@ -31,9 +32,10 @@ public class Model extends Observable implements Serializable {
 	private transient boolean canFamilyMove;
 	private transient ArrayList<MessageAsk> waitAnswer;
 	private transient LinkedHashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
+	private transient boolean isActive=true;
 
 	public Model() {
-		board = new Board();
+		board = new Board(this);
 		this.players = new LinkedHashMap<String, Player>();
 		this.waitAnswer = new ArrayList<MessageAsk>();
 		cardLeaderStart = new LinkedHashMap<Player, ArrayList<CardLeader>>();
@@ -89,7 +91,6 @@ public class Model extends Observable implements Serializable {
 	}
 
 	public void startGame() {
-		MessageAsk.setModel(this);
 		board.setZone(players.size());
 		orderedPlayers = new ArrayList<String>(players.keySet());
 		for (int i = 0; i < orderedPlayers.size(); i++) {
@@ -206,18 +207,23 @@ public class Model extends Observable implements Serializable {
 
 	private void EndGame() {
 		for (String el : players.keySet()) { 
-			players.get(el).applyEndEffects();
+			players.get(el).applyEndEffects(this);
 		}
 		winMilitaryPoint();
 		for (String el : players.keySet()) {
 			players.get(el).calcVicPoint();
 		}
 		String winner=winGame().getUsername();
-		GenericMessage mex=new GenericMessage();
-		mex.setString("THE WINNER IS: " + winner);
+		EndGame mex=new EndGame(winner);
 		setChanged();
 		notifyObservers();
 		notifyMessage(mex);
+		isActive=false;
+		for(Player el: players.values()){
+			el.setConnected(false);
+		}
+		setChanged();
+		notifyObservers();
 	}
 
 	private void winMilitaryPoint() {
@@ -279,6 +285,11 @@ public class Model extends Observable implements Serializable {
 		setChanged();
 		notifyObservers(ask);
 	}
+	
+	public void sendModel(){
+		setChanged();
+		notifyObservers();
+	}
 
 	public boolean getCanFamilyMove() {
 		return canFamilyMove;
@@ -309,7 +320,7 @@ public class Model extends Observable implements Serializable {
 				draftLeader();
 				for (Player el : cardLeaderStart.keySet()) {
 					AskLeader mex = new AskLeader(cardLeaderStart.get(el), el);
-					mex.applyAsk();
+					notifyAsk(mex);
 				}
 			}
 		}
@@ -350,5 +361,9 @@ public class Model extends Observable implements Serializable {
 	
 	public String getOrderedPlayers(int pos){
 		return orderedPlayers.get(pos);
+	}
+	
+	public boolean getIsActive(){
+		return isActive;
 	}
 }

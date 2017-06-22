@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.board.TowerZone;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.message.AskCard;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
@@ -87,10 +88,10 @@ public class CardAction extends Action {
 	}
 
 	@Override
-	public void applyAction(Player player, Board board, int servants) {
+	public void applyAction(Player player, Board board, int servants, Model model) {
 		HashMap<String, ArrayList<DevelopmentCard>> possibleCards = getPossibleCards(player, board, servants);
 		AskCard mex = new AskCard(possibleCards, player, this);
-		mex.applyAsk();
+		model.notifyAsk(mex);
 	}
 
 	private int getRightFlat(DevelopmentCard chosenCard, String chosenType, Board board) {

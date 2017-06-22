@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class CardLeader extends Card {
@@ -69,15 +70,15 @@ public class CardLeader extends Card {
 		return name;
 	}
 
-	private void applyPermanentEffect(Player player) {
+	private void applyPermanentEffect(Player player, Model model) {
 		for(PermanentEffect el: permanentEffect){
-			el.performEffect(player);
+			el.performEffect(player, model);
 		}
 	}
 
-	private void applyActionEffect(Player player) {
+	private void applyActionEffect(Player player, Model model) {
 		for(ImmediateEffect el: immediateEffect){
-			el.performEffect(player);
+			el.performEffect(player, model);
 		}
 	}
 
@@ -89,10 +90,10 @@ public class CardLeader extends Card {
 		return requisite;
 	}
 
-	public void playLeader(Player player) {
+	public void playLeader(Player player, Model model) {
 		if (play == false) {
-			applyPermanentEffect(player);
-			applyActionEffect(player);
+			applyPermanentEffect(player, model);
+			applyActionEffect(player, model);
 			play = true;
 		}
 	}
@@ -113,5 +114,16 @@ public class CardLeader extends Card {
 	
 	public boolean isPlay(){
 		return play;
+	}
+	
+	public String toString(){
+		StringBuilder str=new StringBuilder("Card Leader: "+ name);
+		for(ImmediateEffect el: immediateEffect){
+			str.append("\nimmediate "+ el.toString());
+		}
+		for(PermanentEffect el: permanentEffect){
+			str.append("Permanent " +el.toString());
+		}
+		return str.toString();
 	}
 }

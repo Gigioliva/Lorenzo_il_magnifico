@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.server.player;
 import java.io.Serializable;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
@@ -74,8 +75,8 @@ public class PersonalBoard implements Serializable {
 		return bonusHarvest;
 	}
 	
-	public void applyPersonalBoardBonus(String actionType, Player player){
-		personalBonus.get(actionType).performEffect(player);	
+	public void applyPersonalBoardBonus(String actionType, Player player, Model model){
+		personalBonus.get(actionType).performEffect(player, model);	
 	}
 	
 	private String bonusCharString(){

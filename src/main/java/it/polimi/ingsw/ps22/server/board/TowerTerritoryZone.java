@@ -5,6 +5,7 @@ import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
@@ -16,8 +17,8 @@ public class TowerTerritoryZone extends TowerZone {
 	
 	private static final long serialVersionUID = 1L;
 
-	public TowerTerritoryZone() {
-		super();
+	public TowerTerritoryZone(Model model) {
+		super(model);
 		HashMap<Integer, ArrayList<CardTerritory>> temp=CardSort.territorySortByEra();
 		for(int i=0; i<6;i++){
 			ArrayList<DevelopmentCard> card=new ArrayList<DevelopmentCard>();
@@ -52,7 +53,7 @@ public class TowerTerritoryZone extends TowerZone {
 		towerSpaces[actionSpace].addFamily(family);
 		if (!(player.getSpecBonus().returnBool("GainTowers")
 				&& (towerSpaces[actionSpace].getPlan() == 3 || towerSpaces[actionSpace].getPlan() == 4))) {
-			towerSpaces[actionSpace].applyBonus(player);
+			towerSpaces[actionSpace].applyBonus(player, model);
 		}
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
@@ -62,7 +63,7 @@ public class TowerTerritoryZone extends TowerZone {
 	
 	public void takeCard(int actionSpace, Player player){
 		if(towerSpaces[actionSpace].getCard()!=null){
-			towerSpaces[actionSpace].getCard().applyImmediateEffects(player);
+			towerSpaces[actionSpace].getCard().applyImmediateEffects(player, model);
 			player.getDevelopmentCard("Territory").add(towerSpaces[actionSpace].getCard());
 			towerSpaces[actionSpace].removeCard();
 		}

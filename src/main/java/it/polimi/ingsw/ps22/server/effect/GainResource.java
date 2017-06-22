@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.message.AskCouncilPrivilege;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
@@ -34,7 +35,7 @@ public class GainResource implements ActionEffect, ImmediateEffect {
 	}
 
 	@Override
-	public void performEffect(Player player) {
+	public void performEffect(Player player, Model model) {
 		int cont = 0;
 		for (String type : gain.keySet()) {
 			if (type.equals("CouncilPrivilege")) {
@@ -48,7 +49,7 @@ public class GainResource implements ActionEffect, ImmediateEffect {
 		}
 		if (cont > 0) {
 			AskCouncilPrivilege mex = new AskCouncilPrivilege(cont, player);
-			mex.applyAsk();
+			model.notifyAsk(mex);
 		}
 	}
 

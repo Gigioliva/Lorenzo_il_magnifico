@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class CardTerritory extends DevelopmentCard {
@@ -43,9 +44,9 @@ public class CardTerritory extends DevelopmentCard {
 		this.actionEffects.add(effect);
 	}
 
-	public void applyImmediateEffects(Player player) {
+	public void applyImmediateEffects(Player player, Model model) {
 		for (ImmediateEffect el : immediateEffects) {
-			el.performEffect(player);
+			el.performEffect(player, model);
 			if (player.getSpecBonus().returnBool("DoubleGain") && el instanceof GainResource) {
 				((GainResource)el).doubleGain(player);
 			}
@@ -56,9 +57,9 @@ public class CardTerritory extends DevelopmentCard {
 		return this.actionEffects;
 	}
 
-	public void applyActionEffect(Player player, int number) {
+	public void applyActionEffect(Player player, int number, Model model) {
 		try{
-			this.actionEffects.get(number).performEffect(player);
+			this.actionEffects.get(number).performEffect(player, model);
 		}catch (IndexOutOfBoundsException e){
 			return;
 		}

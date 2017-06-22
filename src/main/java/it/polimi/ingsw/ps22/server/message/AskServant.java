@@ -22,10 +22,6 @@ public class AskServant extends MessageAsk {
 		return Action;
 	}
 	
-	public void applyAsk(){
-		model.notifyAsk(this);
-	}
-	
 	public AskServant accept(VisitorA visitor){
 		return visitor.visit(this);
 	}

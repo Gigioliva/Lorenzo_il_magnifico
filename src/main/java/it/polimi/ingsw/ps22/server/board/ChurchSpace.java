@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
 import it.polimi.ingsw.ps22.server.message.AskExcomm;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.FaithPointSaxParser;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -18,10 +19,14 @@ public class ChurchSpace implements Serializable {
 	private CardExcomm cardExcomm;
 	private FaithPointTrack faithPointTrack;
 	private HashMap<Integer, Integer> requisite;
+	private ArrayList<java.awt.Color> playerExcomm;
+	private Model model;
 
-	public ChurchSpace(int era) {
+	public ChurchSpace(int era, Model model) {
+		this.model=model;
 		this.era = era;
 		requisite = new HashMap<Integer, Integer>();
+		playerExcomm=new ArrayList<java.awt.Color>();
 		requisite.put(1, 3);
 		requisite.put(2, 4);
 		requisite.put(3, 5);
@@ -34,16 +39,24 @@ public class ChurchSpace implements Serializable {
 	public ChurchSpace(int era, FaithPointTrack track, CardExcomm card) {
 		this.era = era;
 		requisite = new HashMap<Integer, Integer>();
+		playerExcomm=new ArrayList<java.awt.Color>();
 		requisite.put(1, 3);
 		requisite.put(2, 4);
 		requisite.put(3, 5);
-		this.faithPointTrack = track; // passo gli oggetti già clpnati
-		this.cardExcomm = card;  // passo gli oggetti già clpnati
+		this.faithPointTrack = track;
+		this.cardExcomm = card;
 	}
 	
 	@Override
 	public ChurchSpace clone() {
-		return new ChurchSpace(this.era,this.faithPointTrack.clone(),this.cardExcomm.clone());
+		ChurchSpace temp=new ChurchSpace(this.era,this.faithPointTrack.clone(),this.cardExcomm.clone());
+		temp.playerExcomm.addAll(this.playerExcomm);
+		return temp;
+		
+	}
+	
+	public ArrayList<java.awt.Color> getExcomm(){
+		return playerExcomm;
 	}
 	
 	public void applyExcomm(ArrayList<Player> players) {
@@ -53,7 +66,7 @@ public class ChurchSpace implements Serializable {
 			} else {
 				AskExcomm ask = new AskExcomm();
 				ask.addPlayer(el);
-				ask.applyAsk();
+				model.notifyAsk(ask);
 			}
 		}
 	}
@@ -64,7 +77,7 @@ public class ChurchSpace implements Serializable {
 
 
 	public void excommunication(Player player) {
-		cardExcomm.applyPermanentEffects(player);
+		cardExcomm.applyPermanentEffects(player, model);
 	}
 
 	public void notExcommunication(Player player) {

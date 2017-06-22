@@ -14,7 +14,9 @@ public class EndTurn extends Move {
 	@Override
 	public void applyMove(Model model) {
 		if(model.getWaitAnswer().size()==0){
-			model.nextPlayer();
+			do{
+				model.nextPlayer();
+			}while(!model.getCurrentPlayer().getConnected());
 			model.notifyModel();
 		}else{
 			ErrorMove error = new ErrorMove();

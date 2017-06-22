@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
 import it.polimi.ingsw.ps22.server.message.AskCosts;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
@@ -18,8 +19,8 @@ public class TowerVentureZone extends TowerZone {
 
 	private static final long serialVersionUID = 1L;
 
-	public TowerVentureZone() {
-		super();
+	public TowerVentureZone(Model model) {
+		super(model);
 		HashMap<Integer, ArrayList<CardVenture>> temp = CardSort.ventureSortByEra();
 		for (int i = 0; i < 6; i++) {
 			ArrayList<DevelopmentCard> card = new ArrayList<DevelopmentCard>();
@@ -59,7 +60,7 @@ public class TowerVentureZone extends TowerZone {
 		towerSpaces[actionSpace].addFamily(family);
 		if (!(player.getSpecBonus().returnBool("GainTowers")
 				&& (towerSpaces[actionSpace].getPlan() == 3 || towerSpaces[actionSpace].getPlan() == 4))) {
-			towerSpaces[actionSpace].applyBonus(player);
+			towerSpaces[actionSpace].applyBonus(player, model);
 		}
 		if (occupied && !(player.getSpecBonus().returnBool("NoCostTower"))) {
 			player.getSpecificResource("Coin").subResource(new Coin(3));
@@ -74,7 +75,7 @@ public class TowerVentureZone extends TowerZone {
 				payCard(0, possibleCost, player, towerSpaces[actionSpace]);
 			} else {
 				AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace]);
-				ask.applyAsk();
+				model.notifyAsk(ask);
 			}
 		}
 	}
@@ -87,14 +88,14 @@ public class TowerVentureZone extends TowerZone {
 				payCard(0, possibleCost, player, towerSpaces[actionSpace], discount);
 			} else {
 				AskCosts ask = new AskCosts(possibleCost, player, towerSpaces[actionSpace], discount);
-				ask.applyAsk();
+				model.notifyAsk(ask);
 			}
 		}
 	}
 
 	public void payCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		towerSpace.getCard().applyCostToPlayer(player, possibleCost.get(choice));
-		towerSpace.getCard().applyImmediateEffects(player);
+		towerSpace.getCard().applyImmediateEffects(player, model);
 		towerSpace.getCard().loadEndEffects(player);
 		player.getDevelopmentCard("Venture").add(towerSpace.getCard());
 		towerSpace.removeCard();

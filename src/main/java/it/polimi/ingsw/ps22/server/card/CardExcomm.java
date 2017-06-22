@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class CardExcomm extends Card {
@@ -43,9 +44,9 @@ public class CardExcomm extends Card {
 		this.endEffects.add(effect);
 	}
 
-	public void applyPermanentEffects(Player player) {
+	public void applyPermanentEffects(Player player, Model model) {
 		for (PermanentEffect el : permanentEffects) {
-			el.performEffect(player);
+			el.performEffect(player, model);
 		}
 	}
 

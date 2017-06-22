@@ -43,14 +43,14 @@ public class LeaderPlaying extends LeaderMove {
 			}
 			if (playable == true) {
 				if (leader.getCopy() == false) {
-					leader.playLeader(player);
+					leader.playLeader(player, model);
 					player.setFamily(model.getBoard().getDice());
 					return;
 				} else {
 					ArrayList<CardLeader> leaderPlay=getLeaderPlay(model);
 					if(!leaderPlay.isEmpty()){
 						AskCopyLeader mex=new AskCopyLeader(leaderPlay, leader, player);
-						mex.applyAsk();
+						model.notifyAsk(mex);
 						leader.setCopy(false);
 						return;
 					}

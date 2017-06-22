@@ -9,36 +9,60 @@ import it.polimi.ingsw.ps22.server.model.ModelView;
 public class RemoteView extends View implements Observer {
 
 	private Connection connection;
+	private boolean isActive = true;
 
 	public RemoteView(String username, Connection connection) {
 		super(username);
 		this.connection = connection;
 		connection.addObserver(this);
 	}
+	
+	public void setConnection(Connection connection){
+		this.connection=connection;
+		reconnected();
+	}
+	
+	public void reconnected(){
+		isActive=true;
+		setChanged();
+		notifyObservers();
+	}
 
-	@Override
-	public void showModel(Model model) {
-		connection.send(model);
+	public void send(Object obj) {
+		if (isActive)
+			connection.send(obj);
+	}
+
+	public void close() {
+		isActive = false;
+		connection.close();
+		connection=null;
 	}
 
 	@Override
 	public void update(Observable o, Object arg) {
-		if (o instanceof ModelView && arg == null) {
-			Model temp = ((ModelView) o).getModel(username);
-			if (temp != null) {
-				showModel(temp);
+		if(isActive){
+			if (o instanceof ModelView && arg == null) {
+				Model temp = ((ModelView) o).getModel(username);
+				if (temp != null) {
+					if (temp.getPlayers().get(username).getConnected()) {
+						send(temp);
+					} else {
+						this.close();
+					}
+				}
 			}
-		}
-		if (o instanceof ModelView && arg instanceof GenericMessage) {
-			GenericMessage mex = ((GenericMessage) arg)
-					.accept(new VisitorA(username, ((ModelView) o).getCurrentPlayer()));
-			if (mex != null) {
-				connection.send(mex);
+			if (o instanceof ModelView && arg instanceof GenericMessage) {
+				GenericMessage mex = ((GenericMessage) arg)
+						.accept(new VisitorA(username, ((ModelView) o).getCurrentPlayer()));
+				if (mex != null) {
+					send(mex);
+				}
 			}
-		}
-		if (o instanceof Connection && arg != null) {
-			setChanged();
-			notifyObservers(arg);
+			if (o instanceof Connection && arg != null) {
+				setChanged();
+				notifyObservers(arg);
+			}
 		}
 	}
 

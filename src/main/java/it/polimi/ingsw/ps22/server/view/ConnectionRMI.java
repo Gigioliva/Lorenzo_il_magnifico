@@ -4,11 +4,13 @@ import java.rmi.RemoteException;
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.answer.AnswerUsername;
 import it.polimi.ingsw.ps22.server.message.AskUsername;
+import it.polimi.ingsw.ps22.server.message.CloseGame;
+import it.polimi.ingsw.ps22.server.message.GenericMessage;
 
 public class ConnectionRMI extends Connection implements ConnectionRMIinterface {
 
 	private Server server;
-	private boolean active;
+	private boolean active=false;
 	private String name;
 	private ClientInterface connection;
 
@@ -32,26 +34,47 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		}
 	}
 
-	public void join() {
-		server.rednezvous(this, name);
-		if (!active) {
+	public void join(String pass) {
+		if(server.login(name, pass)){
+			server.rednezvous(this, name);
+			active=true;
+		} else{
 			run();
 		}
 	}
 
 	public void receive(Object obj) {
-		if (!(obj instanceof AnswerUsername)) {
-			setChanged();
-			notifyObservers(obj);
+		if (active) {
+			if (!(obj instanceof AnswerUsername)) {
+				setChanged();
+				notifyObservers(obj);
+			}
 		} else {
-			name = ((AnswerUsername) obj).getAnswer();
-			join();
+			if (obj instanceof AnswerUsername) {
+				name = ((AnswerUsername) obj).getUsername();
+				String pass=((AnswerUsername) obj).getPassword();
+				join(pass);
+			}
 		}
 	}
 
 	@Override
 	public void setActive() {
 		active = true;
+	}
+	
+	public synchronized void closeConnection() {	
+		GenericMessage mex=new GenericMessage();
+		mex.setString("Connessione terminata!");
+		send(mex);
+		connection=null;
+		active = false;
+	}
+	
+	public void close() {
+		send(new CloseGame());
+		closeConnection();		
+		System.out.println("Deregistro il client!");
 	}
 
 }

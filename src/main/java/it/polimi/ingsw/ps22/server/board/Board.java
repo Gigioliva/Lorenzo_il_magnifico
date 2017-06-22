@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 
@@ -18,21 +19,21 @@ public class Board implements Serializable {
 	private HashMap<Integer, ChurchSpace> church;
 	private Dice dice;
 
-	public Board() {
-		market = new MarketZone();
-		prodZone = new ProductionZone();
-		harvestZone = new HarvestZone();
+	public Board(Model model) {
+		market = new MarketZone(model);
+		prodZone = new ProductionZone(model);
+		harvestZone = new HarvestZone(model);
 		councilPalace = new CouncilPalaceSpace();
 		church = new HashMap<Integer, ChurchSpace>();
-		church.put(2, new ChurchSpace(1));
-		church.put(4, new ChurchSpace(2));
-		church.put(6, new ChurchSpace(3));
+		church.put(2, new ChurchSpace(1, model));
+		church.put(4, new ChurchSpace(2, model));
+		church.put(6, new ChurchSpace(3, model));
 		dice = new Dice();
 		towers = new HashMap<String, TowerZone>();
-		towers.put("Building", new TowerBuildingZone());
-		towers.put("Character", new TowerCharacterZone());
-		towers.put("Territory", new TowerTerritoryZone());
-		towers.put("Venture", new TowerVentureZone());
+		towers.put("Building", new TowerBuildingZone(model));
+		towers.put("Character", new TowerCharacterZone(model));
+		towers.put("Territory", new TowerTerritoryZone(model));
+		towers.put("Venture", new TowerVentureZone(model));
 	}
 	
 /*
@@ -53,7 +54,7 @@ public class Board implements Serializable {
 */
 	
 	public Board clone(ArrayList<Family> family) {
-		Board temp = new Board();
+		Board temp = new Board(null);
 		temp.market = this.market.clone(family);
 		temp.prodZone = this.prodZone.clone(family);
 		temp.harvestZone = this.harvestZone.clone(family);

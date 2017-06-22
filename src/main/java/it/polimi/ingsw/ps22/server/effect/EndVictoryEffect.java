@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.effect;
 
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
@@ -19,7 +20,7 @@ public class EndVictoryEffect implements EndEffect {
 	}
 
 	@Override
-	public void performEffect(Player player) {
+	public void performEffect(Player player, Model model) {
 		player.addPoints("VictoryPoint", points);
 	}
 	

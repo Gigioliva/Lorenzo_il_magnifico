@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
@@ -18,7 +19,8 @@ public class TowerZone extends Zone {
 	protected transient boolean occupied;
 	protected HashMap<Integer, ArrayList<DevelopmentCard>> cards;
 
-	public TowerZone() {
+	public TowerZone(Model model) {
+		super(model);
 		towerSpaces = new TowerSpace[NUM_SPACES];
 		towerSpaces[0] = new TowerSpace(1, false, 1);
 		towerSpaces[1] = new TowerSpace(3, false, 2);
@@ -26,12 +28,13 @@ public class TowerZone extends Zone {
 		towerSpaces[3] = new TowerSpace(7, false, 4);
 		this.occupied = false;
 		cards = new HashMap<Integer, ArrayList<DevelopmentCard>>();
+		this.model=model;
 		// leggere da file le carte e bonus azione
 	}
 
 	@Override
 	public TowerZone clone(ArrayList<Family> family) {
-		TowerZone temp = new TowerZone();
+		TowerZone temp = new TowerZone(null);
 		ArrayList<DevelopmentCard> arr;
 		for (int i=0;i<NUM_SPACES;i++) {
 			temp.towerSpaces[i] = this.towerSpaces[i].clone(family);
@@ -85,7 +88,7 @@ public class TowerZone extends Zone {
 		}
 		if (!(player.getSpecBonus().returnBool("GainTowers")
 				&& (towerSpace.getPlan() == 3 || towerSpace.getPlan() == 4))) {
-			towerSpace.applyBonus(player);
+			towerSpace.applyBonus(player, model);
 			applyBonus = true;
 		}
 		if(towerSpace.getCard()!=null){

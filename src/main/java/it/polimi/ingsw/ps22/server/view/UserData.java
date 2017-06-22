@@ -1,4 +1,4 @@
-package it.polimi.ingsw.ps22.server.player;
+package it.polimi.ingsw.ps22.server.view;
 
 public class UserData {
 	private String password;

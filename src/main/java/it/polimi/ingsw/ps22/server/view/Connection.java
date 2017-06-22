@@ -7,5 +7,7 @@ public abstract class Connection extends Observable implements Runnable {
 	public abstract void send(Object obj);
 	
 	public abstract void setActive();
+	
+	public abstract void close();
 
 }

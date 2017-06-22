@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.ExchangeResource;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 
@@ -46,20 +47,20 @@ public class ProductionAction extends Action {
 		return possibleEffects;
 	}
 
-	private void applyNoExchangeEffect(Player player, int bonus) {
+	private void applyNoExchangeEffect(Player player, int bonus, Model model) {
 		ArrayList<DevelopmentCard> buildingCards = player.getDevelopmentCard("Building");
 		for (DevelopmentCard card : buildingCards) {
 			ArrayList<ActionEffect> effects = card.getActionEffects();
 			for (int i = 0; i < effects.size(); i++) {
 				if (!(effects.get(i) instanceof ExchangeResource)
 						&& card.getActionValue() <= super.getActionValue() + bonus)
-					effects.get(i).performEffect(player);
+					effects.get(i).performEffect(player, model);
 			}
 		}
 	}
 
 	@Override
-	public void applyAction(Player player, int servants) {
+	public void applyAction(Player player, int servants, Model model) {
 		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> allEffects;
 		LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects;
 		Player clonedPlayer = player.clone(player.getUsername());
@@ -75,11 +76,11 @@ public class ProductionAction extends Action {
 		// chosenEffect = askEffect...
 		if (!possibleEffects.isEmpty()) {
 			AskEffect mex = new AskEffect(possibleEffects, this, player);
-			mex.applyAsk();
+			model.notifyAsk(mex);
 		} else{
-			applyNoExchangeEffect(player, bonus);
+			applyNoExchangeEffect(player, bonus, model);
 			if (1 <= super.getActionValue() + bonus) {
-				player.getPersonalBoard().applyPersonalBoardBonus("Production", player);
+				player.getPersonalBoard().applyPersonalBoardBonus("Production", player, model);
 			}
 		}
 		// DevelopmentCard card = chosenEffect.keySet().iterator().next();
@@ -93,15 +94,15 @@ public class ProductionAction extends Action {
 		// player, board);
 	}
 
-	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects, Player player) {
+	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects, Player player, Model model) {
 		for (DevelopmentCard card : chosenEffects.keySet()) {
 			Integer chosenEffect = chosenEffects.get(card);
-			card.applyActionEffect(player, chosenEffect);
+			card.applyActionEffect(player, chosenEffect, model);
 		}
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
-		applyNoExchangeEffect(player, bonus);
+		applyNoExchangeEffect(player, bonus, model);
 		if (1 <= super.getActionValue() + bonus) {
-			player.getPersonalBoard().applyPersonalBoardBonus("Production", player);
+			player.getPersonalBoard().applyPersonalBoardBonus("Production", player, model);
 		}
 	}
 

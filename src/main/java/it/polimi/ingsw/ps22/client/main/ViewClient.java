@@ -6,6 +6,7 @@ import java.io.InputStreamReader;
 import java.util.Observable;
 import java.util.Observer;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
+import it.polimi.ingsw.ps22.server.message.CloseGame;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 
@@ -40,13 +41,15 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	public void update(Observable o, Object arg) {
 		if(arg instanceof String){
 			username=(String)arg;
-			System.out.println((String)arg);
 		}
 		if(arg instanceof GenericMessage){
 			graphic.getAnswer((GenericMessage)arg);
 		}
 		if(arg instanceof ChoiceMove){
 			graphic.getMove();
+		}
+		if(arg instanceof CloseGame){
+			close();
 		}
 		if(arg instanceof Model){
 			graphic.printModel((Model)arg);
@@ -60,6 +63,10 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	
 	public String getUsername(){
 		return username;
+	}
+	
+	public void close(){
+		System.exit(0);
 	}
 	
 	public void send(Object obj){

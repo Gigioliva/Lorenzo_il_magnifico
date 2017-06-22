@@ -21,7 +21,7 @@ public class VisitorCLI extends VisitorB {
 
 	@Override
 	public void visit(AskServant mex) {
-		System.out.println(mex.getString() + "prova");
+		System.out.println(mex.getString());
 		boolean correct = false;
 		int x = 0;
 		do {
@@ -185,15 +185,19 @@ public class VisitorCLI extends VisitorB {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String name = null;
+		String pass = null;
 		do {
 			try {
+				System.out.print("Username: ");
 				name = stdin.readLine();
+				System.out.print("Password: ");
+				pass=stdin.readLine();
 				correct = true;
 			} catch (IOException e) {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		client.send(new AnswerUsername(name));
+		client.send(new AnswerUsername(name, pass));
 	}
 	
 	public void visit(AskFamily mex){
@@ -210,6 +214,10 @@ public class VisitorCLI extends VisitorB {
 		} while (!correct);
 		client.send(new AnswerFamily(mex.getId(), color));
 		
+	}
+	
+	public void visit(EndGame mex){
+		System.out.println(mex.getString());
 	}
 
 	private static ArrayList<Integer> extractingNumbers(String s) {

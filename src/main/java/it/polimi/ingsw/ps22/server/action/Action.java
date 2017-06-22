@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.server.action;
 import java.io.Serializable;
 
 import it.polimi.ingsw.ps22.server.board.Board;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public abstract class Action implements Serializable {
@@ -19,12 +20,12 @@ public abstract class Action implements Serializable {
 		return actionValue;
 	}
 
-	public void applyAction(Player player, int servants){
+	public void applyAction(Player player, int servants, Model model){
 		
 	}
 
-	public void applyAction(Player player, Board board, int servants){
-		applyAction(player,servants);
+	public void applyAction(Player player, Board board, int servants, Model model){
+		applyAction(player,servants,model);
 	}
 	
 	public abstract Action clone();

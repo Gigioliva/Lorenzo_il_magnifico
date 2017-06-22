@@ -90,5 +90,10 @@ public class VisitorGUI extends VisitorB {
 	public void visit(AskFamily mex) {
 		gui.askFamily(mex);
 	}
+	
+	@Override
+	public void visit(EndGame mex){
+		
+	}
 
 }

@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.BonusAbstract;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
@@ -89,7 +90,7 @@ public class SubVictoryPoint implements EndEffect {
 	}
 	
 	@Override
-	public void performEffect(Player player) {
+	public void performEffect(Player player, Model model) {
 		if (player.isCard(loc)){
 			VictoryPoint subPoints = new VictoryPoint(-weightedSum(player,loc));
 			player.getSpecificResource("VictoryPoint").addResource(subPoints);

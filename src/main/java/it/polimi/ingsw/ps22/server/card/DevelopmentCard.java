@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.Resource;
@@ -68,7 +69,7 @@ public abstract class DevelopmentCard extends Card {
 
 	}
 
-	public void applyImmediateEffects(Player player) {
+	public void applyImmediateEffects(Player player, Model model) {
 
 	}
 
@@ -76,16 +77,20 @@ public abstract class DevelopmentCard extends Card {
 		// Accedi a player e caricali nel EndEffect Arraylist
 	}
 
-	public void applyActionEffect(Player player, int number) {
+	public void applyActionEffect(Player player, int number, Model model) {
 
 	}
 	
-	public void applyPermanentEffects(Player player){
+	public void applyPermanentEffects(Player player, Model model){
 		
 	}
 
 	public ArrayList<ActionEffect> getActionEffects() {
-		return null;
+		return new ArrayList<ActionEffect>();
+	}
+	
+	public ArrayList<EndEffect> getEndEffect(){
+		return new ArrayList<EndEffect>();
 	}
 
 	public int getActionValue() {

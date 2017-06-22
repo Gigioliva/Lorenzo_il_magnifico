@@ -31,7 +31,7 @@ public class LeaderDiscarding extends LeaderMove {
 			temp.remove(leader);
 			GainResource gain=new GainResource();
 			gain.addGain("CouncilPrivilege", new CouncilPrivilege(1));
-			gain.performEffect(player);
+			gain.performEffect(player, model);
 			return;
 		}
 		ErrorMove error = new ErrorMove();

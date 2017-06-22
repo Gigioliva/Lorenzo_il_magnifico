@@ -13,6 +13,7 @@ import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.ColorPlayer;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.parser.PersonalBoardSaxParser;
 import it.polimi.ingsw.ps22.server.resource.BonusAbstract;
 import it.polimi.ingsw.ps22.server.resource.Coin;
@@ -40,6 +41,7 @@ public class Player implements Serializable {
 	private PersonalBoard personalBoard;
 	private String username;
 	private ColorPlayer color;
+	private transient boolean connected=true;
 
 	public Player(String username, ColorPlayer color) {
 		resources = new HashMap<String, Resource>();
@@ -109,6 +111,7 @@ public class Player implements Serializable {
 				}
 			}
 		}
+		temp.connected=this.connected;
 		return temp;
 	}
 
@@ -224,9 +227,9 @@ public class Player implements Serializable {
 		this.specBonus.setSpecBonus(type);
 	}
 
-	public void applyEndEffects() {
+	public void applyEndEffects(Model model) {
 		for (EndEffect effect : endEffects) {
-			effect.performEffect(this);
+			effect.performEffect(this, model);
 		}
 	}
 
@@ -398,6 +401,14 @@ public class Player implements Serializable {
 
 	public ColorPlayer getColor() {
 		return color;
+	}
+	
+	public void setConnected(boolean conn){
+		connected=conn;
+	}
+	
+	public boolean getConnected(){
+		return connected;
 	}
 
 }

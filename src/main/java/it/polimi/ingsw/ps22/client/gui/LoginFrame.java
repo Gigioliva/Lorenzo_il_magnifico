@@ -23,11 +23,15 @@ public class LoginFrame extends JFrame {
 	
 	public LoginFrame(ViewClient view){
 		
-		mainPanel.setLayout(new GridLayout(2, 1));
+		mainPanel.setLayout(new GridLayout(3, 1));
 		
 		JTextField t = new JTextField();
 		
+		JTextField t2 = new JTextField();
+		
 		t.setMinimumSize(new Dimension(100, 20));
+		
+		t2.setMinimumSize(new Dimension(100, 20));
 		
 		JButton confirm = new JButton("Confirm");
 		
@@ -35,7 +39,7 @@ public class LoginFrame extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				view.send(new AnswerUsername(t.getText()));
+				view.send(new AnswerUsername(t.getText(), t2.getText()));
 				LoginFrame.this.dispose();
 			}
 		});
@@ -43,6 +47,7 @@ public class LoginFrame extends JFrame {
 		this.add(mainPanel);
 		
 		mainPanel.add(t);
+		mainPanel.add(t2);
 		mainPanel.add(confirm);
 		
 		this.setMinimumSize(new Dimension(150, 80));

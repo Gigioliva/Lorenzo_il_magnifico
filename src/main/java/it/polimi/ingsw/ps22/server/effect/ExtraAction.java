@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.effect;
 
 import it.polimi.ingsw.ps22.server.action.Action;
 import it.polimi.ingsw.ps22.server.message.AskServant;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class ExtraAction implements ImmediateEffect {
@@ -19,14 +20,10 @@ public class ExtraAction implements ImmediateEffect {
 		return temp;
 	}
 	
-	private void askForServant(){
-		AskServant mex = new AskServant(this.action);
-		mex.applyAsk();
-	}
-
 	@Override
-	public void performEffect(Player player) {
-		askForServant(); 
+	public void performEffect(Player player, Model model) {
+		AskServant mex = new AskServant(this.action);
+		model.notifyAsk(mex);
 	}
 	
 	@Override

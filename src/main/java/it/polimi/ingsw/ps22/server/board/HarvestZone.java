@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.action.HarvestAction;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 
@@ -14,14 +15,15 @@ public class HarvestZone extends Zone {
 	private transient static final int NUM_SPACES = 2;
 	private HarvestSpace[] harvestSpace;
 
-	public HarvestZone() {
+	public HarvestZone(Model model) {
+		super(model);
 		harvestSpace = new HarvestSpace[NUM_SPACES];
 		harvestSpace[0] = new HarvestSpace(1, false);
 		harvestSpace[1] = new HarvestSpace(1, true);
 	}
 	
 	public HarvestZone clone(ArrayList<Family> family) {
-		HarvestZone temp = new HarvestZone();
+		HarvestZone temp = new HarvestZone(null);
 		temp.harvestSpace[0] = this.harvestSpace[0].clone(family);
 		temp.harvestSpace[1] = this.harvestSpace[1].clone(family);
 		return temp;
@@ -47,7 +49,7 @@ public class HarvestZone extends Zone {
 			actionValue=actionValue-3;
 		} 
 		HarvestAction harvestAction = new HarvestAction(actionValue);
-		harvestAction.applyAction(player, 0);
+		harvestAction.applyAction(player, 0, model);
 	}
 
 	private boolean checkAllSpace(Player player) {

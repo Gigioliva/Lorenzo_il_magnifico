@@ -1,6 +1,11 @@
 package it.polimi.ingsw.ps22.server.effect;
 
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
+
+import java.util.ArrayList;
+
+import it.polimi.ingsw.ps22.server.card.DevelopmentCard;;
 
 public class NoPointsCard implements EndEffect {
 	
@@ -17,12 +22,17 @@ public class NoPointsCard implements EndEffect {
 		return temp;
 	}
 
-
-	//forse rimuovere non è la cosa migliore da fare
 	@Override
-	public void performEffect(Player player) { //cancella le carte cardType
-		for(int i=0; i<player.getDevelopmentCard(cardType).size(); i++)
-			player.getDevelopmentCard(cardType).remove(i);
+	public void performEffect(Player player, Model model) {
+		ArrayList<EndEffect> endPlayer=player.getEndEffects();
+		for(int i=0; i<player.getDevelopmentCard(cardType).size(); i++){
+			DevelopmentCard temp=player.getDevelopmentCard(cardType).remove(i);
+			for(EndEffect el: temp.getEndEffect()){
+				if(endPlayer.contains(el)){
+					endPlayer.remove(el);
+				}
+			}
+		}
 	}
 	
 	@Override

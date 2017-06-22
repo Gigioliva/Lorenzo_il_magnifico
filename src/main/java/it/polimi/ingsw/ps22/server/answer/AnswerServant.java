@@ -27,7 +27,7 @@ public class AnswerServant extends GenericAnswer {
 		if(ask!=null){
 			Player player=model.getCurrentPlayer();
 			if(answer>=0 && answer<=player.getSpecificResource("Servant").getQuantity()){
-				ask.getAction().applyAction(player, model.getBoard(), answer);
+				ask.getAction().applyAction(player, model.getBoard(), answer, model);
 				model.getWaitAnswer().remove(ask);
 				model.notifyModel();
 				return;

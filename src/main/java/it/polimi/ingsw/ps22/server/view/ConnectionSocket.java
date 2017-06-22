@@ -6,11 +6,12 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.NoSuchElementException;
 import it.polimi.ingsw.ps22.server.message.AskUsername;
+import it.polimi.ingsw.ps22.server.message.CloseGame;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.answer.AnswerUsername;;
 
 public class ConnectionSocket extends Connection {
-	
+
 	private Socket socket;
 	private ObjectInputStream in;
 	private ObjectOutputStream out;
@@ -19,33 +20,34 @@ public class ConnectionSocket extends Connection {
 	private boolean active = false;
 
 	public ConnectionSocket(Socket socket, Server server) {
-		this.socket=socket;
-		this.server=server;
+		this.socket = socket;
+		this.server = server;
 
 	}
 
 	@Override
 	public void run() {
-		try{
-			in = new ObjectInputStream(socket.getInputStream());  //ricordarsi di aprire prima l'output nel client
+		try {
+			in = new ObjectInputStream(socket.getInputStream());
 			out = new ObjectOutputStream(socket.getOutputStream());
-			do{
-				AskUsername mex=new AskUsername();
+			do {
+				AskUsername mex = new AskUsername();
 				send(mex);
-				name = ((AnswerUsername)in.readObject()).getAnswer();
-				System.out.println(name);
-				server.rednezvous(this, name);
-			}while(!active);
-			while(active){				
+				AnswerUsername answer=(AnswerUsername) in.readObject();
+				name = answer.getUsername();
+				String pass=answer.getPassword();
+				if(server.login(name, pass)){
+					active=true;
+					server.rednezvous(this, name);
+				}
+			} while (!active);
+			while (active) {
 				setChanged();
 				notifyObservers(in.readObject());
-			}			
+			}
 		} catch (IOException | NoSuchElementException | ClassNotFoundException e) {
 			System.err.println("Errore!");
-		}finally{
-			close();
 		}
-
 	}
 
 	@Override
@@ -59,26 +61,27 @@ public class ConnectionSocket extends Connection {
 		}
 
 	}
-	
-	public synchronized void closeConnection() {	
-		GenericMessage mex=new GenericMessage();
+
+	public synchronized void closeConnection() {
+		GenericMessage mex = new GenericMessage();
 		mex.setString("Connessione terminata!");
 		send(mex);
 		try {
 			socket.close();
 		} catch (IOException e) {
+			e.getStackTrace();
 		}
+	}
+
+	public void close() {
 		active = false;
-	}
-	
-	private void close() {
-		closeConnection();		
+		send(new CloseGame());
+		closeConnection();
 		System.out.println("Deregistro il client!");
-		server.deregisterConnection(this);
 	}
-	
-	public void setActive(){
-		active=true;
+
+	public void setActive() {
+		active = true;
 	}
 
 }

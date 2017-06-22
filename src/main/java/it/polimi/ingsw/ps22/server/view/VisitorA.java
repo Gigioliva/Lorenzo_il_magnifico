@@ -116,5 +116,9 @@ public class VisitorA {
 			return null;
 		}
 	}
+	
+	public EndGame visit(EndGame mex) {
+		return mex;
+	}
 
 }

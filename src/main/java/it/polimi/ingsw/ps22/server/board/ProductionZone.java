@@ -5,6 +5,7 @@ import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 
@@ -14,14 +15,15 @@ public class ProductionZone extends Zone {
 	private transient static final int NUM_SPACES = 2;
 	private ProductionSpace[] productionSpace;
 
-	public ProductionZone() {
+	public ProductionZone(Model model) {
+		super(model);
 		productionSpace = new ProductionSpace[NUM_SPACES];
 		productionSpace[0] = new ProductionSpace(1, false);
 		productionSpace[1] = new ProductionSpace(1, true);
 	}
 
 	public ProductionZone clone(ArrayList<Family> family) {
-		ProductionZone temp = new ProductionZone();
+		ProductionZone temp = new ProductionZone(null);
 		temp.productionSpace[0] = this.productionSpace[0].clone(family);
 		temp.productionSpace[1] = this.productionSpace[1].clone(family);
 		return temp;
@@ -50,7 +52,7 @@ public class ProductionZone extends Zone {
 			actionValue = actionValue - 3;
 		}
 		ProductionAction productionAction = new ProductionAction(actionValue);
-		productionAction.applyAction(player, 0);
+		productionAction.applyAction(player, 0, model);
 	}
 
 	private boolean checkAllSpace(Player player) {

@@ -70,7 +70,7 @@ public class AnswerEffect extends GenericAnswer {
 					}
 					
 				}
-				ask.getProdAction().applyAnswer(temp, player);
+				ask.getProdAction().applyAnswer(temp, player, model);
 				model.getWaitAnswer().remove(ask);
 				model.notifyModel();
 				return;

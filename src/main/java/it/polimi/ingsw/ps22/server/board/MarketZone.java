@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.server.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.parser.ZoneBonusSaxParser;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -14,7 +15,8 @@ public class MarketZone extends Zone {
 	private transient static final int NUM_SPACES = 4;
 	private MarketSpace[] marketSpace;
 
-	public MarketZone() {
+	public MarketZone(Model model) {
+		super(model);
 		marketSpace = new MarketSpace[NUM_SPACES];
 		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
 		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/MarketSpace.xml",bonus);
@@ -25,6 +27,7 @@ public class MarketZone extends Zone {
 	}
 
 	public MarketZone(MarketSpace[] marketSp, ArrayList<Family> family) {
+		super(null);
 		marketSpace = new MarketSpace[NUM_SPACES];
 		for (int i=0;i<NUM_SPACES;i++) {
 			this.marketSpace[i] = marketSp[i].clone(family);
@@ -53,7 +56,7 @@ public class MarketZone extends Zone {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		marketSpace[actionSpace].addFamily(family);
-		marketSpace[actionSpace].applyBonus(player);
+		marketSpace[actionSpace].applyBonus(player, model);
 	}
 	
 	

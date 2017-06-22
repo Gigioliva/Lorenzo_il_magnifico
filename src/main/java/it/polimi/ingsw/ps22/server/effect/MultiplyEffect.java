@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.effect;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 //  factor1								//factor2
@@ -17,7 +18,7 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 	//public MultiplyEffect(String multiplier, ResourceAbstract multiplicand, String multiplicandType){
 
 	@Override
-	public void performEffect(Player player) {
+	public void performEffect(Player player, Model model) {
 		ArrayList<String> resources = new ArrayList<String>();
 		resources.add(multiplicandType);
 		if (player.isCard(multiplier)){

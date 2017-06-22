@@ -15,7 +15,7 @@ import javax.xml.transform.stream.StreamResult;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
-import it.polimi.ingsw.ps22.server.player.UserData;
+import it.polimi.ingsw.ps22.server.view.UserData;
 
 /* 
 XML Structure

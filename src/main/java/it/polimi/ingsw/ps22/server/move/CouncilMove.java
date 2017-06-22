@@ -20,7 +20,7 @@ public class CouncilMove extends FamilyMove {
 			Player player = model.getPlayers().get(username);
 			Family family = player.getFamily(color);
 			if (model.getBoard().getCouncilPalace().Control(numServant, family)) {
-				model.getBoard().getCouncilPalace().applyMove(numServant, family);
+				model.getBoard().getCouncilPalace().applyMove(numServant, family, model);
 				model.setCantFamilyMove();
 				model.notifyModel();
 				return;

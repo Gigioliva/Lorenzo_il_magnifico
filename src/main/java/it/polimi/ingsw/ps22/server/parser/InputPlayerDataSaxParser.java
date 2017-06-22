@@ -9,7 +9,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import it.polimi.ingsw.ps22.server.player.UserData;
+import it.polimi.ingsw.ps22.server.view.UserData;
 
 /* 
  XML Structure

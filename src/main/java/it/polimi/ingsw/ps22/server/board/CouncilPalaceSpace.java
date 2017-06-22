@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.model.Color;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
@@ -66,11 +67,11 @@ public class CouncilPalaceSpace extends ActionSpace {
 		return false;
 	}
 
-	public void applyMove(int numServant, Family family) {
+	public void applyMove(int numServant, Family family, Model model) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
 		this.addFamily(family);
-		this.applyBonus(player);
+		this.applyBonus(player, model);
 	}
 
 	private void applyServant(Family family, int numServant) {

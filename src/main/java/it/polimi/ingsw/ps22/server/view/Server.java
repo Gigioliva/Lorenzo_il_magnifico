@@ -10,7 +10,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -20,38 +19,38 @@ import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.model.ModelView;
+import it.polimi.ingsw.ps22.server.parser.InputPlayerDataSaxParser;
 
 public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	private static final long serialVersionUID = 1L;
 	private static final int PORT = 12345;
-	private static final int TIMER=5000;
+	private static final int TIMER = 5000;
 	private ServerSocket serverSocket;
 	private ExecutorService executor = Executors.newFixedThreadPool(128);
-	private List<Connection> connections = new ArrayList<Connection>();
 	private Map<String, Connection> waitingConnection = new HashMap<>();
-	private Map<Integer, ArrayList<Connection>> playingConnection = new HashMap<>();
+	private Map<Model, ArrayList<RemoteView>> playingConnection = new HashMap<Model, ArrayList<RemoteView>>();
 	private Timer timer;
+	private HashMap<String, UserData> login;
 
-	private class Task extends TimerTask{
+	private class Task extends TimerTask {
 		@Override
 		public void run() {
 			startGame();
 		}
 	}
 	
-	
-	private synchronized void registerConnection(Connection c) {
-		connections.add(c);
-	}
-
-	public synchronized void deregisterConnection(Connection c) {
-		connections.remove(c);
+	public boolean login(String username, String pass){
+		if(pass.equals(login.get(username).getPassword())){
+			return true;
+		}else{
+			return false;
+		}
 	}
 
 	public synchronized void rednezvous(Connection c, String name) {
-		if (!waitingConnection.containsKey(name)) {
-			c.setActive();
+		ArrayList<String> players = getCurrentPlayer();
+		if (!players.contains(name)) {
 			waitingConnection.put(name, c);
 			c.send(name);
 			if (waitingConnection.size() == 2) {
@@ -60,16 +59,54 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			if (waitingConnection.size() == 4) {
 				startGame();
 			}
+		} else {
+			c.send(name);
+			reconnected(c, name);
 		}
 	}
 
+	private void reconnected(Connection c, String name) {
+		for (Model el : playingConnection.keySet()) {
+			if (el.getIsActive()) {
+				for (RemoteView client : playingConnection.get(el)) {
+					if (client.getUsername().equals(name)) {
+						client.setConnection(c);
+					}
+				}
+			}
+		}
+	}
+
+	private void removeEndGame() {
+		for (Model el : playingConnection.keySet()) {
+			if (!el.getIsActive()) {
+				/*ArrayList<RemoteView> temp = playingConnection.remove(el);
+				for (RemoteView user : temp) {
+					// salva le classifiche
+				}*/
+			}
+		}
+	}
+
+	private ArrayList<String> getCurrentPlayer() {
+		ArrayList<String> players = new ArrayList<String>();
+		for (Model el : playingConnection.keySet()) {
+			if (el.getIsActive()) {
+				for (RemoteView client : playingConnection.get(el)) {
+					players.add(client.getUsername());
+				}
+			}
+		}
+		return players;
+	}
+
 	public void startGame() {
-		if(waitingConnection.size()>1){
+		if (waitingConnection.size() > 1) {
 			timer.cancel();
-			timer=new Timer();
-			ArrayList<Connection> temp = new ArrayList<Connection>();
+			timer = new Timer();
+			ArrayList<RemoteView> temp = new ArrayList<RemoteView>();
 			Model model = new Model();
-			ModelView modelView=new ModelView();
+			ModelView modelView = new ModelView();
 			Controller controller = new Controller(model);
 			model.addObserver(modelView);
 			for (String el : waitingConnection.keySet()) {
@@ -78,17 +115,21 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				model.addPlayers(el);
 				modelView.addObserver(player);
 				player.addObserver(controller);
-				temp.add(con);
+				temp.add(player);
 			}
-			playingConnection.put(playingConnection.size(), temp);
+			playingConnection.put(model, temp);
 			waitingConnection.clear();
 			model.startGame();
+			removeEndGame();
 		}
 	}
 
 	public Server() throws IOException {
 		super(0);
-		timer=new Timer();
+		timer = new Timer();
+		login = new HashMap<String, UserData>();
+		InputPlayerDataSaxParser.PlayerRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml",
+				login);
 		this.serverSocket = new ServerSocket(PORT);
 		try {
 			LocateRegistry.createRegistry(1099);
@@ -107,7 +148,6 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			try {
 				Socket newSocket = serverSocket.accept();
 				ConnectionSocket connection = new ConnectionSocket(newSocket, this);
-				registerConnection(connection);
 				executor.submit(connection);
 			} catch (IOException e) {
 				System.out.println("Errore di connessione!");
@@ -117,7 +157,6 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	public ConnectionRMIinterface createRMI(ClientInterface connection) {
 		ConnectionRMI con = new ConnectionRMI(connection, this);
-		registerConnection(con);
 		executor.submit(con);
 		try {
 			ConnectionRMIinterface temp = (ConnectionRMIinterface) UnicastRemoteObject.exportObject(con, 0);

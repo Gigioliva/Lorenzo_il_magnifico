@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.server.effect;
 
 import it.polimi.ingsw.ps22.server.message.AskFamily;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
 public class StrangeEffect implements PermanentEffect, ImmediateEffect{
@@ -13,10 +14,10 @@ public class StrangeEffect implements PermanentEffect, ImmediateEffect{
 	}
 
 	@Override
-	public void performEffect(Player player) {
+	public void performEffect(Player player, Model model) {
 		if(type.equals("OneFamilyCol6")){
 			AskFamily mex=new AskFamily(player);
-			mex.applyAsk();
+			model.notifyAsk(mex);
 		}else{
 			player.getSpecBonus().setSpecBonus(type);
 		}

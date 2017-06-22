@@ -44,7 +44,7 @@ public class AnswerCopyLeader extends GenericAnswer {
 				for(PermanentEffect el: leadChoice.getPermanentEffect()){
 					lead.addPermanentEffect(el);
 				}
-				lead.playLeader(player);
+				lead.playLeader(player, model);
 				model.getWaitAnswer().remove(ask);
 				model.notifyModel();
 				return;

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.effect.GainResource;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
@@ -59,8 +60,8 @@ public abstract class ActionSpace implements Serializable {
 		this.bonus=bonus;
 	}
 	
-	public void applyBonus(Player player) {
-		bonus.performEffect(player);
+	public void applyBonus(Player player, Model model) {
+		bonus.performEffect(player, model);
 	}
 	
 	public void deapplyBonus(Player player) {
