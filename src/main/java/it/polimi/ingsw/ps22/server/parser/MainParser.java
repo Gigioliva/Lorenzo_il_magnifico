@@ -14,9 +14,9 @@ import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.CardVenture;
 import it.polimi.ingsw.ps22.server.player.PersonalBoard;
-import it.polimi.ingsw.ps22.server.player.UserData;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
+import it.polimi.ingsw.ps22.server.view.UserData;
 
 public class MainParser {
 
@@ -62,7 +62,7 @@ public class MainParser {
 		LeaderCardSaxParser.LeaderRead(pathnameLeader, leader);
 		System.out.println("\n\n\nCARD LEADER");
 		for (CardLeader card : leader)
-			System.out.println("\n" + card.getName());
+			System.out.println("\n" + card.toString());
 
 		ArrayList<HashMap<String, ResourceAbstract>> spaces = new ArrayList<HashMap<String, ResourceAbstract>>();
 		String pathnameSpace = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/MarketSpace.xml";
