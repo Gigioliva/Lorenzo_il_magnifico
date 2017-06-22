@@ -16,11 +16,12 @@ public class LeaderButton extends JButton {
 	String username;
 	private Rectangle dim;
 	private String cardName;
+	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	//private final static String pathPlayedLeader = "./image/leadercard/leadersback.jpg";
 	
 	public LeaderButton(int slot, PersonalBoardPanel p, String username){
 		this.username = username;
-		Rectangle dimR = PersonalBoardAdaptive.getLeaderSlot(p.resizeFactor);
+		Rectangle dimR = layoutPersonal.getLeaderSlot(p.resizeFactor);
 		dimR = Rectangle.fillImageRatio(dimR, (float)1.5);
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(dimR);
 		Rectangle dim = recs.get(slot);

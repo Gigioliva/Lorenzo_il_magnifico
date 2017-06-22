@@ -32,7 +32,7 @@ public class PersonalBoardPanel extends JPanel {
 	private JLabel servantLabel;
 	private JLabel woodLabel;
 	private String username;
-	
+	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
 	public PersonalBoardPanel(double widthScreen, double heightScreen, String username, String pathPersonalBonus){
 		
@@ -67,23 +67,23 @@ public class PersonalBoardPanel extends JPanel {
 	    }
 	    
 	    for(int i = 1; i < NUM_SLOT + 1; i++){
-	    	TowerPanel p = new TowerPanel(PersonalBoardAdaptive.getVentureCardSlot(resizeFactor, i), "Venture" , i);
+	    	TowerPanel p = new TowerPanel(layoutPersonal.getVentureCardSlot(resizeFactor, i), "Venture" , i);
 	    	personalBoard.add(p, new Integer(40));
 	    	cards.get(3).add(p);
-	    	TowerPanel p1 = new TowerPanel(PersonalBoardAdaptive.getCharacterCardSlot(resizeFactor, i), "Character" , i);
+	    	TowerPanel p1 = new TowerPanel(layoutPersonal.getCharacterCardSlot(resizeFactor, i), "Character" , i);
 	    	personalBoard.add(p1, new Integer(40));
 	    	cards.get(1).add(p1);
-	    	TowerPanel p2 = new TowerPanel(PersonalBoardAdaptive.getTerritoryCardSlot(resizeFactor, i), "Territory" , i);
+	    	TowerPanel p2 = new TowerPanel(layoutPersonal.getTerritoryCardSlot(resizeFactor, i), "Territory" , i);
 	    	personalBoard.add(p2, new Integer(40));
 	    	cards.get(0).add(p2);
-	    	TowerPanel p3 = new TowerPanel(PersonalBoardAdaptive.getBuildingCardSlot(resizeFactor, i), "Building", i);
+	    	TowerPanel p3 = new TowerPanel(layoutPersonal.getBuildingCardSlot(resizeFactor, i), "Building", i);
 	    	personalBoard.add(p3, new Integer(40));
 	    	cards.get(2).add(p3);
 	    }
 	    
 
 	    coinLabel = new JLabel("0",JLabel.CENTER);
-	    Rectangle dimCoin = PersonalBoardAdaptive.getCoinSlot(resizeFactor);
+	    Rectangle dimCoin = layoutPersonal.getCoinSlot(resizeFactor);
 	    coinLabel.setForeground(java.awt.Color.WHITE);
 	    coinLabel.setOpaque(false);
 	    coinLabel.setBounds(dimCoin.getInitx(), dimCoin.getInity(), dimCoin.getOffsetX(), dimCoin.getOffsetY());
@@ -92,7 +92,7 @@ public class PersonalBoardPanel extends JPanel {
 	    personalBoard.add(coinLabel, new Integer(40));
 	    
 	    woodLabel = new JLabel("0", JLabel.CENTER);
-	    Rectangle dimWood = PersonalBoardAdaptive.getWoodSlot(resizeFactor);
+	    Rectangle dimWood = layoutPersonal.getWoodSlot(resizeFactor);
 	    woodLabel.setOpaque(false);
 	    woodLabel.setBounds(dimWood.getInitx(), dimWood.getInity(), dimWood.getOffsetX(), dimWood.getOffsetY());
 	    woodLabel.setFont(font);
@@ -101,7 +101,7 @@ public class PersonalBoardPanel extends JPanel {
 	    
 	    servantLabel = new JLabel("0", JLabel.CENTER);
 	    servantLabel.setFont(font);
-	    Rectangle dimServant = PersonalBoardAdaptive.getServantSlot(resizeFactor);
+	    Rectangle dimServant = layoutPersonal.getServantSlot(resizeFactor);
 	    servantLabel.setOpaque(false);
 	    servantLabel.setBounds(dimServant.getInitx(), dimServant.getInity(), dimServant.getOffsetX(), dimServant.getOffsetY());
 	    servantLabel.setForeground(java.awt.Color.WHITE);
@@ -109,7 +109,7 @@ public class PersonalBoardPanel extends JPanel {
 	    
 	    stoneLabel = new JLabel("0", JLabel.CENTER);
 	    stoneLabel.setFont(font);
-	    Rectangle dimStone = PersonalBoardAdaptive.getStoneSlot(resizeFactor);
+	    Rectangle dimStone = layoutPersonal.getStoneSlot(resizeFactor);
 	    stoneLabel.setOpaque(false);
 	    stoneLabel.setBounds(dimStone.getInitx(), dimStone.getInity(), dimStone.getOffsetX(), dimStone.getOffsetY());
 	    stoneLabel.setForeground(java.awt.Color.WHITE);
@@ -117,7 +117,7 @@ public class PersonalBoardPanel extends JPanel {
 	    
 	  
 	    this.setBounds((int)(heightScreen*0.71), 0,(int)(personal.getIconWidth()/factorScalePersonalBoard) + bonusLabel.getWidth(),
-	    		+ PersonalBoardAdaptive.getCharacterCardSlot(resizeFactor, 1).getFinaly());
+	    		+ layoutPersonal.getCharacterCardSlot(resizeFactor, 1).getFinaly());
 	    
 	    this.setOpaque(false);;
 	    this.add(personalBoard);		

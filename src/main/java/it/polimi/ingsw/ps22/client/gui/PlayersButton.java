@@ -23,9 +23,10 @@ public class PlayersButton extends JButton {
 	private static final long serialVersionUID = 4395364097597264389L;
 	PersonalBoardPanel personalBoard;
 	ArrayList<CardLeader> leaders;
-	 double resizeFactor;
-	 java.awt.Color c;
-	 String username;
+	double resizeFactor;
+	java.awt.Color c;
+	String username;
+	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
 	public PlayersButton(double widthScreen, double heightScreen, double resizeFactor, String username, int pos, String pathPersonalBonus,
 			java.awt.Color c, ArrayList<CardLeader> leaders ){
@@ -36,7 +37,7 @@ public class PlayersButton extends JButton {
 		this.resizeFactor = resizeFactor;
 		this.c = c;
 		this.username = username;
-		Rectangle dim = PersonalBoardAdaptive.getPlayerButtonSLot(personalBoard.resizeFactor, pos);
+		Rectangle dim = layoutPersonal.getPlayerButtonSLot(personalBoard.resizeFactor, pos);
 		this.setBounds(dim.getInitx() + personalBoard.getBounds().width, dim.getInity(), dim.getOffsetX(), dim.getOffsetY()); 
 		
 		this.setFont(new Font("Papyrus",Font.ITALIC + Font.BOLD ,(int) (this.getHeight()/3) ));

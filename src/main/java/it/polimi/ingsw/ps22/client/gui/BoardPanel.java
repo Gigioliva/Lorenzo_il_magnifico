@@ -32,7 +32,7 @@ public class BoardPanel extends JPanel{
 	 */
 
 	private static final long serialVersionUID = -5630682030714330058L;
-
+	
 	private final int NUMERE = 3;
 	private ArrayList<ExcommLabel> excomm = new ArrayList<ExcommLabel>();
 	private final int NUMLEADERS = 4;
@@ -62,6 +62,7 @@ public class BoardPanel extends JPanel{
 	private ViewClient view;
 	private ArrayList<LeaderButton> leaders = new ArrayList<LeaderButton>();
 	private AdaptiveLayout layout = AdaptiveLayout.instance();
+	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -140,22 +141,22 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(labCou, new Integer(9000));
 		addActionPanelToLayeredPane(council);
 	
-		Rectangle dimFam1 = PersonalBoardAdaptive.getBlackButtonSLot(personalBoard.resizeFactor);
+		Rectangle dimFam1 = layoutPersonal.getBlackButtonSLot(personalBoard.resizeFactor);
 		fam1 = new FamiliarButton(Color.BLACK, model.getPlayers().get(username).getColor().getColor(), 
 				new TakeFamiliarListener(actionSpaces),username, dimFam1);
 		fam1.setBounds(personalBoard.getWidth(), dimFam1.getInity(), dimFam1.getOffsetX(), dimFam1.getOffsetY());
 		
-		Rectangle dimFam2 = PersonalBoardAdaptive.getOrangeButtonSLot(personalBoard.resizeFactor);
+		Rectangle dimFam2 = layoutPersonal.getOrangeButtonSLot(personalBoard.resizeFactor);
 		fam2 = new FamiliarButton(Color.ORANGE, model.getPlayers().get(username).getColor().getColor(),
 				new TakeFamiliarListener(actionSpaces), username, dimFam2);
 		fam2.setBounds(personalBoard.getBounds().width + dimFam2.getInitx(), dimFam2.getInity(), dimFam2.getOffsetX(), dimFam2.getOffsetY());
 		
-		Rectangle dimFam3 = PersonalBoardAdaptive.getWhiteButtonSLot(personalBoard.resizeFactor);
+		Rectangle dimFam3 = layoutPersonal.getWhiteButtonSLot(personalBoard.resizeFactor);
 		fam3 = new FamiliarButton(Color.WHITE, model.getPlayers().get(username).getColor().getColor(),
 				new TakeFamiliarListener(actionSpaces), username, dimFam3);
 		fam3.setBounds(personalBoard.getBounds().width + dimFam3.getInitx(), dimFam3.getInity(), dimFam3.getOffsetX(), dimFam3.getOffsetY());
 		
-		Rectangle dimFam4 = PersonalBoardAdaptive.getNeutralButtonSLot(personalBoard.resizeFactor);
+		Rectangle dimFam4 = layoutPersonal.getNeutralButtonSLot(personalBoard.resizeFactor);
 		fam4 = new FamiliarButton(Color.NEUTRAL, model.getPlayers().get(username).getColor().getColor(),
 				new TakeFamiliarListener(actionSpaces), username, dimFam4);
 		fam4.setBounds(personalBoard.getBounds().width + dimFam4.getInitx(), dimFam4.getInity(), dimFam4.getOffsetX(), dimFam4.getOffsetY());
@@ -208,7 +209,7 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(personalBoard, new Integer(400),0);
 		
 		spinner = new ServantSpinner(actionSpaces);
-		Rectangle dimSpinner = PersonalBoardAdaptive.getServantRequestSlot(personalBoard.resizeFactor);
+		Rectangle dimSpinner = layoutPersonal.getServantRequestSlot(personalBoard.resizeFactor);
 		spinner.setBounds(dimSpinner.getInitx()+ personalBoard.getWidth(), dimSpinner.getInity(), 
 				(int)widthScreen -dimSpinner.getInitx()- personalBoard.getWidth() ,dimSpinner.getOffsetY());
 		spinServant();
@@ -290,7 +291,7 @@ public class BoardPanel extends JPanel{
 		
 		
 		JPanel chatpan = new JPanel();
-		Rectangle dimChat = PersonalBoardAdaptive.getChatSlot(personalBoard.resizeFactor);
+		Rectangle dimChat = layoutPersonal.getChatSlot(personalBoard.resizeFactor);
 		chatpan.setBounds(dimChat.getInitx() + personalBoard.getWidth(), dimChat.getInity(), dimChat.getOffsetX(), dimChat.getOffsetY());
 		chatpan.setOpaque(false);
 		layeredPane.add(chatpan, new Integer(4000));
