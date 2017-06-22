@@ -52,8 +52,6 @@ public class Gui extends JFrame {
 
 		// personalBoard = new PersonalBoardPanel(this.getWidth(),
 		// this.getHeight(), username);
-		
-		System.out.println("permett");
 
 		this.add(board);
 		// this.add(personalBoard);

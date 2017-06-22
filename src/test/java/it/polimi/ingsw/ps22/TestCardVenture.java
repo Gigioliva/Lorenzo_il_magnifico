@@ -2,12 +2,15 @@ package it.polimi.ingsw.ps22;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import it.polimi.ingsw.ps22.server.card.CardVenture;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
+import it.polimi.ingsw.ps22.server.effect.EndEffect;
+import it.polimi.ingsw.ps22.server.effect.NoPointsCard;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
@@ -18,13 +21,18 @@ public class TestCardVenture {
 	private CardVenture card;
 	private HashMap<String, ResourceAbstract> cost;
 	private HashMap<String, ResourceAbstract> requisite;
-	private RequisiteCost reqCost;
+	private ArrayList<EndEffect> endEffects = new ArrayList<>();
+	private NoPointsCard eff = new NoPointsCard("Territory");
+	private RequisiteCost reqCost = new RequisiteCost();
+	private ArrayList<RequisiteCost> arr = new ArrayList<>();
 	
 	@Before
 	public void init(){
 		card = new CardVenture();
 		cost = new HashMap<String, ResourceAbstract>();
 		requisite = new HashMap<String, ResourceAbstract>();
+		
+		endEffects.add(new NoPointsCard("Territory"));
 		
 		ResourceAbstract r1 = new Coin(3);
 		cost.put("Coin", r1);
@@ -33,21 +41,35 @@ public class TestCardVenture {
 		ResourceAbstract r3 = new MilitaryPoint(1);
 		requisite.put("MilitaryPoint", r3);
 		
-		reqCost = new RequisiteCost();
 		reqCost.addCost(cost);
 		reqCost.addRequisite(requisite);
 		
-		ArrayList<RequisiteCost> arr = new ArrayList<>();
 		arr.add(reqCost);
+	}
+	
+	@Test
+	public void getEndEffectTest(){
+		card.addEndEffect(eff);
+		for(EndEffect effect: card.getEndEffect())
+			assert(effect == eff);
 	}
 
 	@Test
-	public void AddRequisiteCosttest() {
+	public void addRequisiteCostTest() {
 		
 		card.addRequisiteCost(cost, requisite);
 		assert(containsRequisiteCost(card.getRequisiteCost(), reqCost));
 		
 	}
+	
+	@Test
+	public void getRequisiteCostTest(){
+		card.addRequisiteCost(cost, requisite);
+		ArrayList<RequisiteCost> reqCosts = card.getRequisiteCost();
+		assert(equalsArrRequisiteCost(reqCosts, arr));
+	}
+	
+	
 	
 	private boolean equalsResource(ResourceAbstract r1, ResourceAbstract r2){
 		
@@ -76,8 +98,20 @@ public class TestCardVenture {
 		return( equalsCostOrRequisite(r1.getCost(), r2.getCost()) && equalsCostOrRequisite(r1.getRequisite(), r2.getRequisite()));
 	}
 	
+	private boolean equalsArrRequisiteCost(List<RequisiteCost> arr1, List<RequisiteCost> arr2){
+		for(RequisiteCost r: arr1){
+			if(!containsRequisiteCost(arr2, r))
+				return false;
+		}
+		for(RequisiteCost r:arr2){
+			if(!containsRequisiteCost(arr1, r))
+				return false;
+		}
+		return true;
+	}
 	
-	private boolean containsRequisiteCost(ArrayList<RequisiteCost> arr, RequisiteCost r){
+	
+	private boolean containsRequisiteCost(List<RequisiteCost> arr, RequisiteCost r){
 		for(RequisiteCost reqCost: arr){
 			if(equalsRequisiteCost(reqCost, r))
 				return true;

@@ -2,6 +2,8 @@ package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import it.polimi.ingsw.ps22.server.effect.Effect;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.ImmediateEffect;
@@ -9,7 +11,9 @@ import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+
 public class CardVenture extends DevelopmentCard {
+	
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<RequisiteCost> requisiteCost;
@@ -39,10 +43,19 @@ public class CardVenture extends DevelopmentCard {
 		return temp;
 	}
 	
+	/**
+	 * 
+	 * @return It returns an {@link ArrayList} containing all the {@link RequisiteCost} of the card
+	 */
 	public ArrayList<RequisiteCost> getRequisiteCost(){
 		return this.requisiteCost;
 	}
 	
+	
+	/**It adds to the card a new {@link RequisiteCost}.
+	 * @param cost : {@link HashMap} containing a possible cost of the card. 
+	 * @param requisite : {@link HashMap} containing the corresponding requisite. 
+	 */
 	public void addRequisiteCost(HashMap<String, ResourceAbstract> cost, HashMap<String, ResourceAbstract> requisite){
 		RequisiteCost temp=new RequisiteCost();
 		temp.addCost(cost);
@@ -58,6 +71,7 @@ public class CardVenture extends DevelopmentCard {
 		this.endEffects.add(effect);
 	}
 	
+
 	public void applyImmediateEffects(Player player, Model model) {
 		for (ImmediateEffect el : immediateEffects) {
 			el.performEffect(player, model);
@@ -72,14 +86,21 @@ public class CardVenture extends DevelopmentCard {
 		try{
 			player.getEndEffects().addAll(endEffects);
 		}
-		catch (NullPointerException e){ //lancia eccezione se endEffect è vuota, in tal caso semplicemente ritorno al chiamante
+		catch (NullPointerException e){ 
 			return;
 		}
 	}
 	
+	/**
+	 * It calculates all the {@link Effect} that the player can afford to pay for the given card.
+	 * In particular a player can afford a cost if 
+	 * he has in his resources all the resources required by the requisite and by the cost. 
+	 * @param player the {@link Player} for which you want to get the possible costs
+	 * @return an ArrayList containing all the affordable {@link RequisiteCost}
+	 */
 	@Override
 	public ArrayList<RequisiteCost> getAffordableCosts(Player player){
-		ArrayList<RequisiteCost> affordableCosts = new ArrayList<RequisiteCost>();
+		ArrayList<RequisiteCost> affordableCosts = new ArrayList<>();
 		for(RequisiteCost item: requisiteCost){
 			if (canAffordCostRequisite(item,player))
 				affordableCosts.add(item);
@@ -110,8 +131,8 @@ public class CardVenture extends DevelopmentCard {
 	//controlla singolo requisiteCost, ritorna vero se il giocatore può permetterselo
 	private boolean canAffordCostRequisite(RequisiteCost item, Player player){
 
-		ArrayList<String> costkeys = new ArrayList<String>(item.getCost().keySet());
-		ArrayList<String> requisitekeys = new ArrayList<String>(item.getRequisite().keySet());
+		ArrayList<String> costkeys = new ArrayList<>(item.getCost().keySet());
+		ArrayList<String> requisitekeys = new ArrayList<>(item.getRequisite().keySet());
 		for (String type: costkeys){
 			//se il giocatore non si può permettere il costo della carta, ritorna false
 			if (!controlSingleCost(item, type, player))
@@ -126,10 +147,18 @@ public class CardVenture extends DevelopmentCard {
 
 	}
 	
+	/**
+	 * It returns the cost that the {@link Player} has to pay considering the malus and bonus 
+	 * that the player accumulated during the game
+	 * @param player for which you want to get the actual costs
+	 * @return an ArrayList containing the {@link RequisiteCost} updated according to bonus and malus
+	 */
 	public ArrayList<RequisiteCost> getActualCost(Player player){
-		ArrayList<RequisiteCost> actualCosts = new ArrayList<RequisiteCost>();
+		
+		ArrayList<RequisiteCost> actualCosts = new ArrayList<>();
+		
 		for(RequisiteCost requisiteCost: requisiteCost){
-			HashMap<String,ResourceAbstract> newCost = new HashMap<String,ResourceAbstract>();
+			HashMap<String,ResourceAbstract> newCost = new HashMap<>();
 			for(String type: requisiteCost.getCost().keySet()){
 				ResourceAbstract specificCost = requisiteCost.getCost().get(type);
 				ResourceAbstract reduction = player.getBonusAcc().getSaleVenture().get(type);
@@ -148,6 +177,12 @@ public class CardVenture extends DevelopmentCard {
 		return actualCosts;
 	}
 	
+	/**
+	 * It applies the cost given in input to the given {@link Player}.
+	 * @requires that the player can afford the card
+	 * @param chosenCost the {@link RequisiteCost} to apply to the player
+	 * @param player the player to which you want to apply the cost
+	 */
 	@Override
 	public void applyCostToPlayer(Player player, RequisiteCost chosenCost){
 		 for(String type: chosenCost.getCost().keySet()){
@@ -156,7 +191,11 @@ public class CardVenture extends DevelopmentCard {
 	}
 	
 	
-	//ritorna vero se esiste un costo-requisito che il player si può permettere
+	/**
+	 *  The method returns true if a {@link Player} can afford to take the card. 
+	 *  A player can afford to take a card if exists at least one {@link RequisiteCost} that he can afford.
+	 * @param player the player for which you want to do the control
+	 */
 	@Override
 	public boolean takeCardControl(Player player){
 		ArrayList<RequisiteCost> actualCosts = getActualCost(player);
@@ -201,15 +240,11 @@ public class CardVenture extends DevelopmentCard {
 		return str.toString();
 	}
 	
+	/**
+	 * @return an ArrayList containing all the {@link EndEffect} of the card
+	 */
 	public ArrayList<EndEffect> getEndEffect(){
 		return endEffects;
 	}
-	
-	
-	/*
-	public void applyAllEffects(Player player, Board board){
-		loadEndEffects(player,board);
-		applyImmediateEffects(player, board);
-	}*/
 
 }
