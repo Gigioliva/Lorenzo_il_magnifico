@@ -21,7 +21,7 @@ public class PrivilegeDialog extends MessageDialog {
 	private static final long serialVersionUID = -5295328520342279302L;
 	ButtonGroup group = new ButtonGroup();
 	AskCouncilPrivilege mex;
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	ArrayList<Button> buttons = new ArrayList<>();
 	
 	public PrivilegeDialog(ViewClient view, AskCouncilPrivilege mex){
 		super(view);

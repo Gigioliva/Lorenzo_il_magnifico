@@ -24,7 +24,7 @@ public class PersonalBoardPanel extends JPanel {
 	private static final int NUM_SLOT = 6;
 	private static final int NUM_TOWERS = 4;
 	JLayeredPane personalBoard = new JLayeredPane();
-	HashMap<Integer, ArrayList<TowerPanel>> cards = new HashMap<Integer, ArrayList<TowerPanel>>();
+	HashMap<Integer, ArrayList<TowerPanel>> cards = new HashMap<>();
 	double resizeFactor;
 	private final ImageIcon personal = MyImage.createImageIcon("./image/PersonalBoard.png");
 	private JLabel coinLabel;

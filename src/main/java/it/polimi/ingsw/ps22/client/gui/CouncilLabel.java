@@ -14,7 +14,7 @@ public class CouncilLabel extends JLabel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1595555729187234344L;
-	ArrayList<Family> familiars = new ArrayList<Family>();
+	ArrayList<Family> familiars = new ArrayList<>();
 	double resizeFactor;
 	private AdaptiveLayout layout = AdaptiveLayout.instance();
 	

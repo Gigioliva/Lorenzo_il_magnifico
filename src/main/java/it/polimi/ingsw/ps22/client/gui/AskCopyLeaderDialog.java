@@ -21,7 +21,7 @@ public class AskCopyLeaderDialog extends MessageDialog {
 	private static final long serialVersionUID = 4218985052105525888L;
 	AskCopyLeader mex;
 	ButtonGroup group = new ButtonGroup();
-	ArrayList<JRadioButton> buttons = new ArrayList<JRadioButton>();
+	ArrayList<JRadioButton> buttons = new ArrayList<>();
 	
 	public AskCopyLeaderDialog(ViewClient view, AskCopyLeader mex ){
 		super(view);

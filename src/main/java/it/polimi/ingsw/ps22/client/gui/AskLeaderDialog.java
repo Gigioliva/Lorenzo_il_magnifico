@@ -21,7 +21,7 @@ public class AskLeaderDialog extends MessageDialog {
 	private static final long serialVersionUID = 1L;
 	AskLeader mex;
 	ButtonGroup group = new ButtonGroup();
-	ArrayList<JRadioButton> buttons = new ArrayList<JRadioButton>();
+	ArrayList<JRadioButton> buttons = new ArrayList<>();
 	
 	public AskLeaderDialog(ViewClient view, AskLeader mex ){
 		super(view);

@@ -37,7 +37,7 @@ public class TestCardVenture {
 		reqCost.addCost(cost);
 		reqCost.addRequisite(requisite);
 		
-		ArrayList<RequisiteCost> arr = new ArrayList<RequisiteCost>();
+		ArrayList<RequisiteCost> arr = new ArrayList<>();
 		arr.add(reqCost);
 	}
 

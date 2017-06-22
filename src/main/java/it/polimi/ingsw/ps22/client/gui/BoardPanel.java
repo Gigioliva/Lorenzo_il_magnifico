@@ -34,22 +34,22 @@ public class BoardPanel extends JPanel{
 	private static final long serialVersionUID = -5630682030714330058L;
 	
 	private final int NUMERE = 3;
-	private ArrayList<ExcommLabel> excomm = new ArrayList<ExcommLabel>();
+	private ArrayList<ExcommLabel> excomm = new ArrayList<>();
 	private final int NUMLEADERS = 4;
 	private int NUM_PLAYERS;
 	private static final int NUM_CARDEXCOMM = 3;
 	private ServantSpinner spinner;
 	private final ImageIcon board = MyImage.createImageIcon("./image/gameboard.jpg");
-	private ArrayList<ActionButton> actionSpaces = new ArrayList<ActionButton>();
-	 HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<Integer,ArrayList<TowerPanel>>();
+	private ArrayList<ActionButton> actionSpaces = new ArrayList<>();
+	 HashMap<Integer,ArrayList<TowerPanel>> towers = new HashMap<>();
 	protected static JLabel zoomedCard;
 	private PersonalBoardPanel personalBoard;
 	private JLayeredPane layeredPane;
-	private ArrayList<PlayersButton> players = new ArrayList<PlayersButton>();
+	private ArrayList<PlayersButton> players = new ArrayList<>();
 	private double resizeFactor; 
-	private ArrayList<VictoryPointLabel> victory = new ArrayList<VictoryPointLabel>();
-	private ArrayList<MilitaryPointLabel> military = new ArrayList<MilitaryPointLabel>();
-	private ArrayList<FaithTrackLabel> faith = new ArrayList<FaithTrackLabel>();
+	private ArrayList<VictoryPointLabel> victory = new ArrayList<>();
+	private ArrayList<MilitaryPointLabel> military = new ArrayList<>();
+	private ArrayList<FaithTrackLabel> faith = new ArrayList<>();
 	private JLabel dice1;
 	private JLabel dice2;
 	private JLabel dice3;
@@ -57,12 +57,12 @@ public class BoardPanel extends JPanel{
 	private FamiliarButton fam2;
 	private FamiliarButton fam3;
 	private FamiliarButton fam4;
-	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<OrderPlayerLabel>();
+	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<>();
 	private String username;
 	private ViewClient view;
-	private ArrayList<LeaderButton> leaders = new ArrayList<LeaderButton>();
-	private AdaptiveLayout layout = AdaptiveLayout.instance();
-	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
+	private ArrayList<LeaderButton> leaders = new ArrayList<>();
+	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
+	private transient PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
 	
 	public double resizeFactor(ImageIcon c, double heightScreen){
@@ -75,13 +75,13 @@ public class BoardPanel extends JPanel{
 		
 		
 		
-		ArrayList<String> avver = new ArrayList<String>(model.getPlayers().keySet());
+		ArrayList<String> avver = new ArrayList<>(model.getPlayers().keySet());
 		avver.remove(username);
 		
 		this.username = username;
 		this.view = view;
 		
-		ArrayList<String> personBonusPaths = new ArrayList<String>();
+		ArrayList<String> personBonusPaths = new ArrayList<>();
 		for(String user: avver){
 			personBonusPaths.add(CardPath.getPersonalBoardPathname(model.getPlayers().get(user).getPersonalBoard()));
 		}
@@ -166,10 +166,10 @@ public class BoardPanel extends JPanel{
 		layeredPane.add(fam3, new Integer(50), 0);
 		layeredPane.add(fam4, new Integer(50), 0);
 		
-		towers.put(0, new ArrayList<TowerPanel>());
-		towers.put(1, new ArrayList<TowerPanel>());
-		towers.put(2, new ArrayList<TowerPanel>());
-		towers.put(3, new ArrayList<TowerPanel>());
+		towers.put(0, new ArrayList<>());
+		towers.put(1, new ArrayList<>());
+		towers.put(2, new ArrayList<>());
+		towers.put(3, new ArrayList<>());
 		
 		Rectangle dimCard = layout.getCardBuildingSpace(factorScaleBoard, 0);
 		zoomedCard = new JLabel();
@@ -438,12 +438,12 @@ public class BoardPanel extends JPanel{
 	}
 	
 	private HashMap<Integer, ArrayList<Player>> updatePointTrack(Model model, String type){
-		HashMap<Integer, ArrayList<Player>> tempPlay = new HashMap<Integer, ArrayList<Player>>();
+		HashMap<Integer, ArrayList<Player>> tempPlay = new HashMap<>();
 		
 		for(String user: model.getPlayers().keySet()){
 			int qty = model.getPlayers().get(user).getSpecificResource(type).getQuantity();
 			if(!tempPlay.containsKey(qty))
-				tempPlay.put(qty, new ArrayList<Player>());
+				tempPlay.put(qty, new ArrayList<>());
 			tempPlay.get(qty).add(model.getPlayers().get(user));
 		}
 		return tempPlay;

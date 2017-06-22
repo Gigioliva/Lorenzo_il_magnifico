@@ -13,7 +13,7 @@ public class ExcommLabel extends JLabel {
 	 * 
 	 */
 	private static final long serialVersionUID = 8198698155682435615L;
-	ArrayList<java.awt.Color> players = new ArrayList<java.awt.Color>();
+	ArrayList<java.awt.Color> players = new ArrayList<>();
 	
 	public ExcommLabel(double resizeFactor, Rectangle dim){
 		super();

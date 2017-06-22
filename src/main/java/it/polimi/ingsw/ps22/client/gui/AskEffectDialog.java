@@ -22,9 +22,9 @@ public class AskEffectDialog extends MessageDialog {
 	private static final long serialVersionUID = 8937673487954589420L;
 	AskEffect mex;
 	DevelopmentCard card;
-	static ArrayList<Integer> choices = new ArrayList<Integer>();
+	static ArrayList<Integer> choices = new ArrayList<>();
 	ButtonGroup group = new ButtonGroup();
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	ArrayList<Button> buttons = new ArrayList<>();
 
 	public AskEffectDialog(ViewClient view, AskEffect mex) {
 		super(view);
@@ -87,7 +87,7 @@ public class AskEffectDialog extends MessageDialog {
 					close = true;
 				}
 			}
-			if (close == true) {
+			if (close) {
 				mex.getListEffect().remove(card);
 				if (!mex.getListEffect().isEmpty()) {
 					new AskEffectDialog(view, mex);

@@ -3,6 +3,7 @@ package it.polimi.ingsw.ps22.client.gui;
 import java.awt.Graphics;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 
@@ -19,9 +20,9 @@ public abstract class ActionButton extends JButton  {
 	Color color;
 	int numServants;
 	String username;
-	Rectangle dim;
+	transient Rectangle dim;
 	
-	ArrayList<Family> familiars = new ArrayList<Family>();
+	List<Family> familiars = new ArrayList<>();
 	
 	
 	
@@ -45,8 +46,6 @@ public abstract class ActionButton extends JButton  {
 			this.getModel().addChangeListener(new BorderEffect(this));
 			
 			setMeasures(dim);
-			
-			this.familiars = new ArrayList<Family>();
 		}
 
 		
@@ -78,9 +77,7 @@ public abstract class ActionButton extends JButton  {
 			return username;
 		}
 		
-		public void updateButton(Model model){
-			return;
-		}
+		public abstract void updateButton(Model model);
 		
 		private void setMeasures(Rectangle dim){
 			this.setBounds(dim.getInitx(), dim.getInity(), dim.getOffsetX(), dim.getOffsetY());

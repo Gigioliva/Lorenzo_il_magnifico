@@ -4,9 +4,6 @@ import java.util.ArrayList;
 
 import javax.swing.JButton;
 
-import it.polimi.ingsw.ps22.server.card.CardLeader;
-import it.polimi.ingsw.ps22.server.model.Model;
-
 public class LeaderButton extends JButton {
 	
 	/**

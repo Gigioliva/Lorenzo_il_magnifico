@@ -52,6 +52,8 @@ public class Gui extends JFrame {
 
 		// personalBoard = new PersonalBoardPanel(this.getWidth(),
 		// this.getHeight(), username);
+		
+		System.out.println("permett");
 
 		this.add(board);
 		// this.add(personalBoard);
@@ -74,63 +76,37 @@ public class Gui extends JFrame {
 	}
 
 	public void askPrivilege(AskCouncilPrivilege mex) {
-		new PrivilegeDialog(view, mex);
+		(new PrivilegeDialog(view, mex)).setVisible(true);
 		return;
 	}
 
-	/*
-	 * 
-	 * public void getCard(AskCard mex){
-	 * 
-	 * JDialog d = new JDialog(); JTextField t = new JTextField();
-	 * t.setText("Puoi scegliere una carta extra "); d.add(t);
-	 * 
-	 * for(String tower: mex.getPossibleCard().keySet()){
-	 * 
-	 * ArrayList<DevelopmentCard> cards = mex.getPossibleCard().get(tower);
-	 * 
-	 * for(int i=0; i < cards.size(); i++){ String path =
-	 * CardPath.getDevCardPathname(cards.get(i)); if
-	 * (board.towers.get(toInt(tower)).get(i).path.equals(path)){
-	 * DevelopmentCard card = cards.get(i);
-	 * board.towers.get(toInt(tower)).get(i).b.addActionListener(new
-	 * ActionListener() {
-	 * 
-	 * @Override public void actionPerformed(ActionEvent e) { view.send(new
-	 * AnswerCard(mex.getId(), tower, card.getName())); } }); } } } }
-	 * 
-	 * private Integer toInt(String type){ switch(type){ case "Territory":
-	 * return 1; case "Character": return 2; case "Building": return 3; case
-	 * "Venture": return 4; default: throw new IllegalArgumentException(); }
-	 * 
-	 * }
-	 */
+	
 	public void getCard(AskCard mex) {
-		new AskCardDialog(view, mex);
+		(new AskCardDialog(view, mex)).setVisible(true);
 	}
 
 	public void askCosts(AskCosts mex) {
-		new AskCostDialog(view, mex);
+		(new AskCostDialog(view, mex)).setVisible(true);
 	}
 
 	public void askEffect(AskEffect mex) {
-		new AskEffectDialog(view, mex);
+		(new AskEffectDialog(view, mex)).setVisible(true);
 	}
 
 	public void askFamily(AskFamily mex) {
-		new AskFamilyDialog(view, mex);
+		(new AskFamilyDialog(view, mex)).setVisible(true);
 	}
 
 	public void askServants(AskServant mex) {
-		new AskServantDialog(view, mex);
+		(new AskServantDialog(view, mex)).setVisible(true);
 	}
 
 	public void askCopyLeader(AskCopyLeader mex) {
-		new AskCopyLeaderDialog(view, mex);
+		(new AskCopyLeaderDialog(view, mex)).setVisible(true);
 	}
 
 	public void askLeader(AskLeader mex) {
-		new AskLeaderDialog(view, mex);
+		(new AskLeaderDialog(view, mex)).setVisible(true);
 	}
 
 	public void setLeaders() {
@@ -142,12 +118,12 @@ public class Gui extends JFrame {
 	}
 
 	public void askExcomm(AskExcomm mex) {
-		new AskExcommDialog(view, mex);
+		(new AskExcommDialog(view, mex)).b1.setVisible(true);
 	}
 
 	public void yourTurn(ChoiceMove mex) {
 		//JOptionPane.showMessageDialog(this, mex.getString());
-		new ShowMessage(view,mex);
+		(new ShowMessage(view,mex)).setVisible(true);
 	}
 
 	public void genericMessage(GenericMessage mex) {

@@ -17,7 +17,7 @@ public class LeaderAvverButton extends JPanel {
 	//private final int NUMLEADERS = 4;
 	private final String leaderBackPath = "./image/leadercard/leadersback.jpg";
 	Rectangle cardDim;
-	private ArrayList<CardLeader> leaders = new ArrayList<CardLeader>();
+	private ArrayList<CardLeader> leaders = new ArrayList<>();
 	private AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public LeaderAvverButton(String username, double resizeFactor, java.awt.Color c, ArrayList<CardLeader> leaders){

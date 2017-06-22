@@ -78,7 +78,7 @@ public class Rectangle {
 	}
 
 	public static ArrayList<Rectangle> divideRectangle(Rectangle toDivide) {
-		ArrayList<Rectangle> toReturn = new ArrayList<Rectangle>();
+		ArrayList<Rectangle> toReturn = new ArrayList<>();
 		toReturn.add(new Rectangle(toDivide.getInitx(),(toDivide.getInitx()+toDivide.getOffsetX()/2),
 									toDivide.getInity(),(toDivide.getInity()+toDivide.getOffsetY()/2)));
 		toReturn.add(new Rectangle((toDivide.getInitx()+toDivide.getOffsetX()/2),toDivide.getFinalx(),

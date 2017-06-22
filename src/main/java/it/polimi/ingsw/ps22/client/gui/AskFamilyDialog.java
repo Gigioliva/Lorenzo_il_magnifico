@@ -21,7 +21,7 @@ public class AskFamilyDialog extends MessageDialog {
 	private static final long serialVersionUID = -7560062916449308874L;
 	ButtonGroup group = new ButtonGroup();
 	AskFamily mex;
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	ArrayList<Button> buttons = new ArrayList<>();
 	
 	public AskFamilyDialog(ViewClient view, AskFamily mex){
 		super(view);

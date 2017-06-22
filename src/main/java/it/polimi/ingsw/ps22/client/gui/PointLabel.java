@@ -1,7 +1,7 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import java.awt.Graphics;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JLabel;
 
@@ -14,11 +14,11 @@ public abstract class PointLabel extends JLabel {
 	 * 
 	 */
 	private static final long serialVersionUID = -8799499098340716847L;
-	ArrayList<Player> players;
+	private List<Player> players;
 	static AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	
-	public PointLabel(double resizeFactor, int slot, ArrayList<Player> players, Rectangle dim){
+	public PointLabel(double resizeFactor, int slot, List<Player> players, Rectangle dim){
 		super();
 		//this.setOpaque(false);
 		this.players = players;

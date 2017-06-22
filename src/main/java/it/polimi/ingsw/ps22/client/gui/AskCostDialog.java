@@ -21,7 +21,7 @@ public class AskCostDialog extends MessageDialog {
 	private static final long serialVersionUID = 7092751202658591700L;
 	AskCosts mex;
 	ButtonGroup group = new ButtonGroup();
-	ArrayList<Button> buttons = new ArrayList<Button>();
+	ArrayList<Button> buttons = new ArrayList<>();
 	
 	public AskCostDialog(ViewClient view, AskCosts mex ){
 		super(view);

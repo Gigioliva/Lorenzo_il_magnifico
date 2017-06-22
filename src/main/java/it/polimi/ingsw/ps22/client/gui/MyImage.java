@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -50,7 +51,7 @@ public class MyImage {
         }
     }
 	
-	public static void updatePlayersSpaces(ArrayList<Family> familiars, ActionButton b, Graphics g){
+	public static void updatePlayersSpaces(List<Family> familiars, ActionButton b, Graphics g){
 		
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(new Rectangle(0,b.getWidth(),0,b.getHeight()));
 		
@@ -64,7 +65,7 @@ public class MyImage {
 		}
 	}
 	
-	public static void updatePlayersSpaces(ArrayList<Player> players, JLabel b, Graphics g){
+	public static void updatePlayersSpaces(List<Player> players, JLabel b, Graphics g){
 		
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(new Rectangle(0,b.getWidth(),0,b.getHeight()));
 		
