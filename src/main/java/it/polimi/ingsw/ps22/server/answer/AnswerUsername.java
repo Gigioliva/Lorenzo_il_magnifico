@@ -7,11 +7,13 @@ public class AnswerUsername extends GenericAnswer {
 	private static final long serialVersionUID = 1L;
 	private String username;
 	private String pass;
+	private int numPlayer;
 	
-	public AnswerUsername(String answer, String pass){
+	public AnswerUsername(String answer, String pass, int numPlayer){
 		super(0);
 		this.username=answer;
 		this.pass=pass;
+		this.numPlayer=numPlayer;
 	}
 	
 	public String getUsername(){
@@ -20,6 +22,10 @@ public class AnswerUsername extends GenericAnswer {
 	
 	public String getPassword(){
 		return pass;
+	}
+	
+	public int getNumPlayer(){
+		return numPlayer;
 	}
 
 	@Override

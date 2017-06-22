@@ -8,8 +8,8 @@ public class HarvestSpace extends ActionSpace {
 
 	private static final long serialVersionUID = 1L;
 
-	public HarvestSpace(int actionCost, boolean multi) {
-		super(actionCost, multi);
+	public HarvestSpace(int actionCost, boolean multi, int maxSize) {
+		super(actionCost, multi, maxSize);
 	}
 
 	@Override
@@ -20,7 +20,7 @@ public class HarvestSpace extends ActionSpace {
 
 	@Override
 	public HarvestSpace clone(ArrayList<Family> family) {
-		HarvestSpace temp = new HarvestSpace(this.getActionCost(), this.getMulti());
+		HarvestSpace temp = new HarvestSpace(this.getActionCost(), this.getMulti(), maxSize);
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();

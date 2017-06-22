@@ -29,7 +29,6 @@ public class TowerZone extends Zone {
 		this.occupied = false;
 		cards = new HashMap<Integer, ArrayList<DevelopmentCard>>();
 		this.model=model;
-		// leggere da file le carte e bonus azione
 	}
 
 	@Override

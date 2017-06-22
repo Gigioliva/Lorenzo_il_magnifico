@@ -21,7 +21,7 @@ public class MarketZone extends Zone {
 		ArrayList<HashMap<String, ResourceAbstract>> bonus=new ArrayList<HashMap<String, ResourceAbstract>>();
 		ZoneBonusSaxParser.BonusRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/MarketSpace.xml",bonus);
 		for (int i = 0; i < NUM_SPACES; i++) {
-			marketSpace[i] = new MarketSpace(1, false);
+			marketSpace[i] = new MarketSpace(1, false,1);
 			marketSpace[i].addBonus(bonus.get(i));
 		}
 	}
@@ -85,6 +85,12 @@ public class MarketZone extends Zone {
 		if (num < 4) {
 			marketSpace[2].setNotPlayable();
 			marketSpace[3].setNotPlayable();
+		}
+		if(num==5){
+			marketSpace[0].setFivePlayer();
+			marketSpace[1].setFivePlayer();
+			marketSpace[2].setFivePlayer();
+			marketSpace[3].setFivePlayer();
 		}
 
 	}

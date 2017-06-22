@@ -10,7 +10,7 @@ import it.polimi.ingsw.ps22.server.message.GenericMessage;
 public class ConnectionRMI extends Connection implements ConnectionRMIinterface {
 
 	private Server server;
-	private boolean active=false;
+	private boolean active = false;
 	private String name;
 	private ClientInterface connection;
 
@@ -21,8 +21,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 
 	@Override
 	public void run() {
-		AskUsername mex = new AskUsername();
-		send(mex);
+		send(new AskUsername());
 	}
 
 	@Override
@@ -34,11 +33,16 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		}
 	}
 
-	public void join(String pass) {
-		if(server.login(name, pass)){
-			server.rednezvous(this, name);
-			active=true;
-		} else{
+	public void join(String pass, int num) {
+		if (server.login(name, pass) && (num==4 || num==5)) {
+			if (num == 4) {
+				server.lobbyFour(this, name);
+			}
+			if (num == 5) {
+				server.lobbyFive(this, name);
+			}
+			active = true;
+		} else {
 			run();
 		}
 	}
@@ -52,8 +56,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		} else {
 			if (obj instanceof AnswerUsername) {
 				name = ((AnswerUsername) obj).getUsername();
-				String pass=((AnswerUsername) obj).getPassword();
-				join(pass);
+				join(((AnswerUsername) obj).getPassword(), ((AnswerUsername) obj).getNumPlayer());
 			}
 		}
 	}
@@ -62,18 +65,18 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 	public void setActive() {
 		active = true;
 	}
-	
-	public synchronized void closeConnection() {	
-		GenericMessage mex=new GenericMessage();
+
+	public synchronized void closeConnection() {
+		GenericMessage mex = new GenericMessage();
 		mex.setString("Connessione terminata!");
 		send(mex);
-		connection=null;
+		connection = null;
 		active = false;
 	}
-	
+
 	public void close() {
 		send(new CloseGame());
-		closeConnection();		
+		closeConnection();
 		System.out.println("Deregistro il client!");
 	}
 

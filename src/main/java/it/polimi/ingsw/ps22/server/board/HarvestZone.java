@@ -18,8 +18,8 @@ public class HarvestZone extends Zone {
 	public HarvestZone(Model model) {
 		super(model);
 		harvestSpace = new HarvestSpace[NUM_SPACES];
-		harvestSpace[0] = new HarvestSpace(1, false);
-		harvestSpace[1] = new HarvestSpace(1, true);
+		harvestSpace[0] = new HarvestSpace(1, false, 1);
+		harvestSpace[1] = new HarvestSpace(1, true, 0);
 	}
 	
 	public HarvestZone clone(ArrayList<Family> family) {
@@ -90,6 +90,9 @@ public class HarvestZone extends Zone {
 	public void setZone(int num){
 		if(num<3){
 			harvestSpace[1].setNotPlayable();
+		}
+		if(num==5){
+			harvestSpace[0].setFivePlayer();
 		}
 		
 	}

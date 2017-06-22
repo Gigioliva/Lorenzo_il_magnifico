@@ -8,8 +8,8 @@ public class MarketSpace extends ActionSpace {
 
 	private static final long serialVersionUID = 1L;
 
-	public MarketSpace(int actionCost, boolean multi) {
-		super(actionCost, multi);
+	public MarketSpace(int actionCost, boolean multi, int maxSize) {
+		super(actionCost, multi, maxSize);
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class MarketSpace extends ActionSpace {
 
 	@Override
 	public MarketSpace clone(ArrayList<Family> family) {
-		MarketSpace temp = new MarketSpace(this.getActionCost(), this.getMulti());
+		MarketSpace temp = new MarketSpace(this.getActionCost(), this.getMulti(), maxSize);
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();

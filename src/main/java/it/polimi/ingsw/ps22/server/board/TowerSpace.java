@@ -13,7 +13,7 @@ public class TowerSpace extends ActionSpace {
 	private int plan;
 
 	public TowerSpace(int actionCost, boolean multi, int plan) {
-		super(actionCost, multi);
+		super(actionCost, multi,1);
 		this.plan = plan;
 	}
 

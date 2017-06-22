@@ -18,13 +18,15 @@ public abstract class ActionSpace implements Serializable {
 	private boolean playable;
 	private ArrayList<Family> family;
 	protected GainResource bonus;
+	protected int maxSize;
 
-	public ActionSpace(int actionCost, boolean multi) {
+	public ActionSpace(int actionCost, boolean multi, int maxSize) {
 		this.actionCost = actionCost;
 		this.multi = multi;
 		playable = true;
 		family = new ArrayList<Family>();
 		bonus = new GainResource();
+		this.maxSize=maxSize;
 	}
 
 	public void addFamily(Family family) {
@@ -44,10 +46,14 @@ public abstract class ActionSpace implements Serializable {
 	}
 
 	public boolean controlPlacement() {
-		if ((!multi && this.family.size() == 0) || multi){
+		if ((!multi && this.family.size() < maxSize) || multi){
 			return true;
 		}else
 			return false;
+	}
+	
+	public void setFivePlayer(){
+		maxSize=2;
 	}
 
 	public void addBonus(HashMap<String,ResourceAbstract> other) {

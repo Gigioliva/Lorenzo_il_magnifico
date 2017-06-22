@@ -18,8 +18,8 @@ public class ProductionZone extends Zone {
 	public ProductionZone(Model model) {
 		super(model);
 		productionSpace = new ProductionSpace[NUM_SPACES];
-		productionSpace[0] = new ProductionSpace(1, false);
-		productionSpace[1] = new ProductionSpace(1, true);
+		productionSpace[0] = new ProductionSpace(1, false,1);
+		productionSpace[1] = new ProductionSpace(1, true,0);
 	}
 
 	public ProductionZone clone(ArrayList<Family> family) {
@@ -93,6 +93,9 @@ public class ProductionZone extends Zone {
 	public void setZone(int num) {
 		if (num < 3) {
 			productionSpace[1].setNotPlayable();
+		}
+		if(num==5){
+			productionSpace[0].setFivePlayer();
 		}
 	}
 	

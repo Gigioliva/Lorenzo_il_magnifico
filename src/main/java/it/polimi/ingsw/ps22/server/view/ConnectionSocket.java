@@ -31,14 +31,19 @@ public class ConnectionSocket extends Connection {
 			in = new ObjectInputStream(socket.getInputStream());
 			out = new ObjectOutputStream(socket.getOutputStream());
 			do {
-				AskUsername mex = new AskUsername();
-				send(mex);
+				send(new AskUsername());
 				AnswerUsername answer=(AnswerUsername) in.readObject();
 				name = answer.getUsername();
 				String pass=answer.getPassword();
 				if(server.login(name, pass)){
-					active=true;
-					server.rednezvous(this, name);
+					if(answer.getNumPlayer()==4){
+						server.lobbyFour(this, name);
+						active=true;
+					}
+					if(answer.getNumPlayer()==5){
+						server.lobbyFive(this, name);
+						active=true;	
+					}
 				}
 			} while (!active);
 			while (active) {

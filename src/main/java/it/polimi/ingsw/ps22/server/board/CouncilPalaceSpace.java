@@ -18,7 +18,7 @@ public class CouncilPalaceSpace extends ActionSpace {
 	private transient final static int ACTIONCOST = 1;
 
 	public CouncilPalaceSpace() {
-		super(ACTIONCOST, true);
+		super(ACTIONCOST, true, 0);
 		HashMap<String, ResourceAbstract> bonus = new HashMap<String, ResourceAbstract>();
 		bonus.put("Coin", new Coin(1));
 		bonus.put("CouncilPrivilege", new CouncilPrivilege(1));

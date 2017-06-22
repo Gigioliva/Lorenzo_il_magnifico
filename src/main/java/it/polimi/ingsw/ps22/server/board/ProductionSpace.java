@@ -8,8 +8,8 @@ public class ProductionSpace extends ActionSpace {
 
 	private static final long serialVersionUID = 1L;
 
-	public ProductionSpace(int actionCost, boolean multi) {
-		super(actionCost, multi);
+	public ProductionSpace(int actionCost, boolean multi, int maxSize) {
+		super(actionCost, multi, maxSize);
 	}
 
 	@Override
@@ -19,7 +19,7 @@ public class ProductionSpace extends ActionSpace {
 
 	@Override
 	public ProductionSpace clone(ArrayList<Family> family) {
-		ProductionSpace temp = new ProductionSpace(this.getActionCost(), this.getMulti());
+		ProductionSpace temp = new ProductionSpace(this.getActionCost(), this.getMulti(), maxSize);
 		if (!this.isPlayable())
 			temp.setNotPlayable();
 		ArrayList<Family> fam = this.getFamilies();
