@@ -20,7 +20,7 @@ import it.polimi.ingsw.ps22.server.view.UserData;
 
 public class MainParser {
 
-	public static void mainParser(String[] args) {
+	public static void main(String[] args) {
 		
 		ArrayList<CardBuilding> building = new ArrayList<CardBuilding>();
 		String pathnameBuilding = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Building.xml";
@@ -146,8 +146,14 @@ public class MainParser {
 			count++;
 			System.out.println("Card number: " + count + "\tVerifica l'altezza di 436: " + card.getIconHeight());
 		}
-		
 		System.out.println("\nDevelopment card pathname check finished");
+		
+		System.out.println("\n\n\n TIMERS");
+		String pathnameTimer = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
+		System.out.println("Server: "+TimerSaxParser.ServerTimer(pathnameTimer));
+		System.out.println("Controller: "+TimerSaxParser.ControllerTimer(pathnameTimer));
+		
+		
 	}
 
 }
