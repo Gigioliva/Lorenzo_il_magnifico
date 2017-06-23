@@ -13,8 +13,8 @@ public class AskEffect extends MessageAsk {
 	
 	private static final long serialVersionUID = 1L;
 	private LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect;
-	private transient ProductionAction prodAction;
-	private transient Player player;
+	private ProductionAction prodAction;
+	private Player player;
 	
 	public AskEffect(LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect, ProductionAction prodAction, Player player){
 		this.listEffect=listEffect;

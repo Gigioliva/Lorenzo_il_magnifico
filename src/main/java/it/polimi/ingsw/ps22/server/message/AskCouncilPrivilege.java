@@ -8,7 +8,7 @@ public class AskCouncilPrivilege extends MessageAsk {
 	
 	private static final long serialVersionUID = 1L;
 	private int numChoice;
-	private transient Player player;
+	private Player player;
 	
 	public AskCouncilPrivilege(int numChoice, Player player){
 		this.numChoice=numChoice;

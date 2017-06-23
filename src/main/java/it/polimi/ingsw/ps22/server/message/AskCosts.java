@@ -11,11 +11,11 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 
 public class AskCosts extends MessageAsk {
 	private static final long serialVersionUID = 1L;
-	private transient int numChoice;
+	private int numChoice;
 	private ArrayList<RequisiteCost> possibleCost;
-	private transient HashMap<String, ResourceAbstract> discount;
-	private transient Player player;
-	private transient TowerSpace towerSpace;
+	private HashMap<String, ResourceAbstract> discount;
+	private Player player;
+	private TowerSpace towerSpace;
 
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		super();

@@ -10,10 +10,6 @@ public class UserData {
 		this.numPlayedGame = 0;
 		this.numVictory = 0;
 	}
-	
-	public boolean checkPassword(String pass) {
-		return this.password.equals(pass);
-	}
 
 	public int getNumPlayedGame() {
 		return this.numPlayedGame;

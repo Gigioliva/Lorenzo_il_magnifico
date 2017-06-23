@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 public class MarketZone extends Zone {
 	
 	private static final long serialVersionUID = 1L;
-	private transient static final int NUM_SPACES = 4;
+	private static final int NUM_SPACES = 4;
 	private MarketSpace[] marketSpace;
 
 	public MarketZone(Model model) {

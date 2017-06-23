@@ -14,7 +14,7 @@ public abstract class ActionSpace implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	private final int actionCost;
-	private transient boolean multi;
+	private boolean multi;
 	private boolean playable;
 	private ArrayList<Family> family;
 	protected GainResource bonus;

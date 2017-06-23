@@ -15,7 +15,7 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 public class CouncilPalaceSpace extends ActionSpace {
 
 	private static final long serialVersionUID = 1L;
-	private transient final static int ACTIONCOST = 1;
+	private final static int ACTIONCOST = 1;
 
 	public CouncilPalaceSpace() {
 		super(ACTIONCOST, true, 0);

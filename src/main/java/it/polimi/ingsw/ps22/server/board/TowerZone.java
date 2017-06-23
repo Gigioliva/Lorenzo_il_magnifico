@@ -14,9 +14,9 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 public class TowerZone extends Zone {
 
 	private static final long serialVersionUID = 1L;
-	protected transient static final int NUM_SPACES = 4;
+	protected static final int NUM_SPACES = 4;
 	protected TowerSpace[] towerSpaces;
-	protected transient boolean occupied;
+	protected boolean occupied;
 	protected HashMap<Integer, ArrayList<DevelopmentCard>> cards;
 
 	public TowerZone(Model model) {

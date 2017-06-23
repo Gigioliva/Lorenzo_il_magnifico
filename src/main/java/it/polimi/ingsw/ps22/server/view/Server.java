@@ -1,6 +1,11 @@
 package it.polimi.ingsw.ps22.server.view;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -20,6 +25,7 @@ import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.model.ModelView;
 import it.polimi.ingsw.ps22.server.parser.InputPlayerDataSaxParser;
+import it.polimi.ingsw.ps22.server.parser.OutputPlayerDataDomParser;
 
 public class Server extends UnicastRemoteObject implements ServerRMI {
 
@@ -31,6 +37,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	private Map<String, Connection> waitingFour = new HashMap<>();
 	private Map<String, Connection> waitingFive = new HashMap<>();
 	private Map<Model, ArrayList<RemoteView>> playingConnection = new HashMap<Model, ArrayList<RemoteView>>();
+	private Map<Model, ArrayList<RemoteView>> savePlaying = new HashMap<Model, ArrayList<RemoteView>>();
 	private Timer timerFour;
 	private Timer timerFive;
 	private HashMap<String, UserData> login;
@@ -41,18 +48,18 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			startGameFour();
 		}
 	}
-	
+
 	private class TaskFive extends TimerTask {
 		@Override
 		public void run() {
 			startGameFive();
 		}
 	}
-	
-	public boolean login(String username, String pass){
-		if(pass.equals(login.get(username).getPassword())){
+
+	public boolean login(String username, String pass) {
+		if (pass.equals(login.get(username).getPassword())) {
 			return true;
-		}else{
+		} else {
 			return false;
 		}
 	}
@@ -69,11 +76,13 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				startGameFour();
 			}
 		} else {
-			c.send(name);
-			reconnected(c, name);
+			if(players.contains(name)){
+				c.send(name);
+				reconnected(c, name);
+			}
 		}
 	}
-	
+
 	public synchronized void lobbyFive(Connection c, String name) {
 		ArrayList<String> players = getCurrentPlayer();
 		if (!players.contains(name) && !waitingFour.containsKey(name) && !waitingFive.containsKey(name)) {
@@ -86,11 +95,13 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				startGameFive();
 			}
 		} else {
-			c.send(name);
-			reconnected(c, name);
+			if(players.contains(name)){
+				c.send(name);
+				reconnected(c, name);
+			}
 		}
 	}
-	
+
 	private void reconnected(Connection c, String name) {
 		for (Model el : playingConnection.keySet()) {
 			if (el.getIsActive()) {
@@ -101,15 +112,57 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				}
 			}
 		}
+		Model temp=searchGameForPlayer(name);
+		if(temp!=null){
+			ModelView modelView = new ModelView();
+			Controller controller = new Controller(temp);
+			temp.addObserver(modelView);
+			ArrayList<RemoteView> players = savePlaying.remove(temp);
+			for (RemoteView user : players) {
+				modelView.addObserver(user);
+				user.addObserver(controller);
+				if (user.getUsername().equals(name)) {
+					user.setConnection(c);
+				}
+			}
+			playingConnection.put(temp, players);
+		}
+	}
+	
+	private Model searchGameForPlayer(String name){
+		for (Model el : savePlaying.keySet()) {
+			if (el.getIsActive()) {
+				for (RemoteView client : savePlaying.get(el)) {
+					if (client.getUsername().equals(name)) {
+						return el;
+					}
+				}
+			}
+		}
+		return null;
 	}
 
 	private void removeEndGame() {
 		for (Model el : playingConnection.keySet()) {
 			if (!el.getIsActive()) {
-				/*ArrayList<RemoteView> temp = playingConnection.remove(el);
+				ArrayList<RemoteView> temp = playingConnection.remove(el);
 				for (RemoteView user : temp) {
-					// salva le classifiche
-				}*/
+					login.get(user.username).setNumPlayedGame(1 + login.get(user.username).getNumPlayedGame());
+					if (el.getPlayerGame().equals(user.username)) {
+						login.get(user.username).setNumVictory(1 + login.get(user.username).getNumVictory());
+					}
+				}
+			}
+		}
+		for (Model el : savePlaying.keySet()) {
+			if (!el.getIsActive()) {
+				ArrayList<RemoteView> temp = savePlaying.remove(el);
+				for (RemoteView user : temp) {
+					login.get(user.username).setNumPlayedGame(1 + login.get(user.username).getNumPlayedGame());
+					if (el.getPlayerGame().equals(user.username)) {
+						login.get(user.username).setNumVictory(1 + login.get(user.username).getNumVictory());
+					}
+				}
 			}
 		}
 	}
@@ -119,6 +172,13 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		for (Model el : playingConnection.keySet()) {
 			if (el.getIsActive()) {
 				for (RemoteView client : playingConnection.get(el)) {
+					players.add(client.getUsername());
+				}
+			}
+		}
+		for (Model el : savePlaying.keySet()) {
+			if (el.getIsActive()) {
+				for (RemoteView client : savePlaying.get(el)) {
 					players.add(client.getUsername());
 				}
 			}
@@ -147,9 +207,10 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			waitingFour.clear();
 			model.startGame();
 			removeEndGame();
+			saveGame();
 		}
 	}
-	
+
 	private void startGameFive() {
 		if (waitingFive.size() > 1) {
 			timerFive.cancel();
@@ -171,6 +232,23 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			waitingFive.clear();
 			model.startGame();
 			removeEndGame();
+			saveGame();
+		}
+	}
+
+	private void saveGame() {
+		OutputPlayerDataDomParser
+				.PlayerDataWrite("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml", login);
+		FileOutputStream out;
+		ObjectOutputStream output;
+		try {
+			out = new FileOutputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
+			output=new ObjectOutputStream(out);
+			output.writeObject(playingConnection);
+			output.close();
+			out.close();
+		} catch (IOException e) {
+			System.out.println("Errore salvataggio");
 		}
 	}
 
@@ -181,6 +259,17 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		login = new HashMap<String, UserData>();
 		InputPlayerDataSaxParser.PlayerRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml",
 				login);
+		try{
+			FileInputStream in=new FileInputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
+			ObjectInputStream input=new ObjectInputStream(in);
+			@SuppressWarnings("unchecked")
+			Map<Model, ArrayList<RemoteView>> readObject = (Map<Model, ArrayList<RemoteView>>)input.readObject();
+			savePlaying=readObject;
+			input.close();
+			in.close();
+		}catch(FileNotFoundException | ClassNotFoundException e){
+			System.out.println("Nessuna partita salvata");
+		}
 		this.serverSocket = new ServerSocket(PORT);
 		try {
 			LocateRegistry.createRegistry(1099);

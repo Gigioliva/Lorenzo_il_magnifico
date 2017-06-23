@@ -9,7 +9,7 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskLeader extends MessageAsk {
 
 	private static final long serialVersionUID = 1L;
-	private transient Player player;
+	private Player player;
 	private ArrayList<CardLeader> leaders;
 	
 	public AskLeader(ArrayList<CardLeader> leaders, Player player){

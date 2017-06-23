@@ -95,7 +95,7 @@ public class VisitorA {
 
 	public AskCopyLeader visit(AskCopyLeader mex) {
 		if (user.equals(user_mex)) {
-			return new AskCopyLeader(mex.getString(), mex.getId());
+			return new AskCopyLeader(mex.getString(), mex.getId(), mex.getLeaders());
 		} else {
 			return null;
 		}

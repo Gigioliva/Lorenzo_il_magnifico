@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskServant extends MessageAsk {
 	
 	private static final long serialVersionUID = 1L;
-	private transient Action Action;
+	private Action Action;
 	
 	public AskServant(Action Action){
 		this.Action=Action;

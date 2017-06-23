@@ -12,8 +12,8 @@ public class AskCard extends MessageAsk{
 	
 	private static final long serialVersionUID = 1L;
 	private HashMap<String,ArrayList<DevelopmentCard>> possibleCard;
-	private transient Player player;
-	private transient CardAction cardAction;
+	private Player player;
+	private CardAction cardAction;
 	
 	public AskCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard, Player player, CardAction cardAction){
 		this.player=player;

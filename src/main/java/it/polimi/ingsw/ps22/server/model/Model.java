@@ -29,10 +29,10 @@ public class Model extends Observable implements Serializable {
 	private LinkedHashMap<String, Player> players;
 	private ArrayList<String> orderedPlayers;
 	private String playerGame;
-	private transient boolean canFamilyMove;
-	private transient ArrayList<MessageAsk> waitAnswer;
-	private transient LinkedHashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
-	private transient boolean isActive=true;
+	private boolean canFamilyMove;
+	private ArrayList<MessageAsk> waitAnswer;
+	private LinkedHashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
+	private boolean isActive=true;
 
 	public Model() {
 		board = new Board(this);
@@ -46,6 +46,7 @@ public class Model extends Observable implements Serializable {
 		Model temp=new Model();
 		temp.turn=this.turn;
 		temp.giro=this.giro;
+		temp.canFamilyMove=this.canFamilyMove;
 		for(String el: players.keySet()){
 			temp.players.put(el, players.get(el).clone(username));
 		}
@@ -218,12 +219,13 @@ public class Model extends Observable implements Serializable {
 		setChanged();
 		notifyObservers();
 		notifyMessage(mex);
-		isActive=false;
 		for(Player el: players.values()){
 			el.setConnected(false);
 		}
 		setChanged();
 		notifyObservers();
+		playerGame=winner;
+		isActive=false;
 	}
 
 	private void winMilitaryPoint() {

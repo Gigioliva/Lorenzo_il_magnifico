@@ -9,9 +9,9 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskCopyLeader extends MessageAsk {
 
 	private static final long serialVersionUID = 1L;
-	private transient CardLeader leader;
-	private transient Player player;
-	private transient ArrayList<CardLeader> leaders;
+	private CardLeader leader;
+	private Player player;
+	private ArrayList<CardLeader> leaders;
 	
 	public AskCopyLeader(ArrayList<CardLeader> leaders, CardLeader leader, Player player){
 		super();
@@ -26,8 +26,12 @@ public class AskCopyLeader extends MessageAsk {
 		setString(temp.toString());
 	}
 	
-	public AskCopyLeader(String str, int id){
+	public AskCopyLeader(String str, int id, ArrayList<CardLeader> leaders){
 		super(str,id);
+		this.leaders=new ArrayList<CardLeader>();
+		for(CardLeader el: leaders){
+			this.leaders.add(el.clone());
+		}
 	}
 	
 	public Player getPlayer(){

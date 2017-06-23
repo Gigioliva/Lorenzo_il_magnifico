@@ -7,7 +7,7 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class AskFamily extends MessageAsk {
 
 	private static final long serialVersionUID = 1L;
-	private transient Player player;
+	private Player player;
 	
 	public AskFamily(Player player){
 		this.player=player;

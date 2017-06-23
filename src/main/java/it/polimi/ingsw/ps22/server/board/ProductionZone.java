@@ -12,7 +12,7 @@ import it.polimi.ingsw.ps22.server.player.Player;
 public class ProductionZone extends Zone {
 	
 	private static final long serialVersionUID = 1L;
-	private transient static final int NUM_SPACES = 2;
+	private static final int NUM_SPACES = 2;
 	private ProductionSpace[] productionSpace;
 
 	public ProductionZone(Model model) {

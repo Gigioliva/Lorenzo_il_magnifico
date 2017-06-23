@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps22.server.message;
 public class MessageAsk extends GenericMessage{
 	
 	private static final long serialVersionUID = 1L;
-	private transient static int id;
+	private static int id;
 	protected int id_ask;
 
 	public MessageAsk() {

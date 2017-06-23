@@ -41,7 +41,7 @@ public class Player implements Serializable {
 	private PersonalBoard personalBoard;
 	private String username;
 	private ColorPlayer color;
-	private transient boolean connected=true;
+	private boolean connected=true;
 
 	public Player(String username, ColorPlayer color) {
 		resources = new HashMap<String, Resource>();

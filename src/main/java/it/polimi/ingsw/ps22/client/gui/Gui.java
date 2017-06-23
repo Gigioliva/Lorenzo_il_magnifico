@@ -31,6 +31,7 @@ public class Gui extends JFrame {
 
 	public Gui(ViewClient view) {
 		this.view = view;
+		this.setUndecorated(true);
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
@@ -42,7 +43,6 @@ public class Gui extends JFrame {
 	public void initGui(Model model) {
 
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
-		this.setUndecorated(true);
 
 		this.pack();
 		this.setVisible(true);

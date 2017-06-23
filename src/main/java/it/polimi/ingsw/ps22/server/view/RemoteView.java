@@ -8,7 +8,8 @@ import it.polimi.ingsw.ps22.server.model.ModelView;
 
 public class RemoteView extends View implements Observer {
 
-	private Connection connection;
+	private static final long serialVersionUID = 1L;
+	private transient Connection connection;
 	private boolean isActive = true;
 
 	public RemoteView(String username, Connection connection) {
@@ -19,6 +20,7 @@ public class RemoteView extends View implements Observer {
 	
 	public void setConnection(Connection connection){
 		this.connection=connection;
+		connection.addObserver(this);
 		reconnected();
 	}
 	
