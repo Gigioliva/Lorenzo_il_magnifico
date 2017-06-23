@@ -50,7 +50,7 @@ public class VisitorGUI extends VisitorB {
 
 	@Override
 	public void visit(ErrorMove mex) {
-		gui.errorMove();
+		gui.errorMove(mex);
 	}
 
 	@Override

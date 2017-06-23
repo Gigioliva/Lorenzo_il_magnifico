@@ -11,7 +11,13 @@ import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
-
+/**
+ * 
+ * Extension of the abstract class {@link DevelopmentCard}, it implements a representation of the Venture Card. 
+ * For this type of card, we may have multiple {@link RequisiteCost}, multiple {@link EndEffect} and multiple {@link ImmediateEffect}.
+ * No more type of effect are allowed.
+ *
+ */
 public class CardVenture extends DevelopmentCard {
 	
 	
@@ -20,12 +26,19 @@ public class CardVenture extends DevelopmentCard {
 	private ArrayList<EndEffect> endEffects;
 	private ArrayList<ImmediateEffect> immediateEffects;
 	
+	/**
+	 * it creates an empty Venture Card, with no {@link RequisiteCost}, no {@link EndEffect}, no {@link ImmediateEffect}
+	 */
 	public CardVenture(){
-		this.requisiteCost=new ArrayList<RequisiteCost>();
-		this.endEffects=new ArrayList<EndEffect>();
-		this.immediateEffects=new ArrayList<ImmediateEffect>();
+		this.requisiteCost=new ArrayList<>();
+		this.endEffects=new ArrayList<>();
+		this.immediateEffects=new ArrayList<>();
 	}
 	
+	/**
+	 * It creates a copy of the CardVenture.
+	 * @return an instance of {@link CardVenture}, with the same effects as the given one.
+	 */
 	@Override
 	public CardVenture clone() {
 		CardVenture temp=new CardVenture();
@@ -47,6 +60,7 @@ public class CardVenture extends DevelopmentCard {
 	 * 
 	 * @return It returns an {@link ArrayList} containing all the {@link RequisiteCost} of the card
 	 */
+	@Override
 	public ArrayList<RequisiteCost> getRequisiteCost(){
 		return this.requisiteCost;
 	}
@@ -56,6 +70,7 @@ public class CardVenture extends DevelopmentCard {
 	 * @param cost : {@link HashMap} containing a possible cost of the card. 
 	 * @param requisite : {@link HashMap} containing the corresponding requisite. 
 	 */
+	@Override
 	public void addRequisiteCost(HashMap<String, ResourceAbstract> cost, HashMap<String, ResourceAbstract> requisite){
 		RequisiteCost temp=new RequisiteCost();
 		temp.addCost(cost);
@@ -63,15 +78,30 @@ public class CardVenture extends DevelopmentCard {
 		requisiteCost.add(temp);
 	}
 	
+	/**
+	 * it adds the given {@link ImmediateEffect} to the card
+	 * @param the effect to be added to the card
+	 */
+	@Override
 	public void addImmediateEffect(ImmediateEffect effect) {
 		this.immediateEffects.add(effect);
 	}
 	
+	/**
+	 * it adds the given {@link EndEffect} to the card
+	 * @param the effect to be added to the card
+	 */
+	@Override
 	public void addEndEffect(EndEffect effect) {
 		this.endEffects.add(effect);
 	}
 	
-
+	/**
+	 * It applies all the {@link ImmediateEffect} of the card to the player
+	 * @param player the {@link Player} to which you want to apply the effects
+	 * @param model an instance of {@link Model}
+	 */
+	@Override
 	public void applyImmediateEffects(Player player, Model model) {
 		for (ImmediateEffect el : immediateEffects) {
 			el.performEffect(player, model);
@@ -81,6 +111,11 @@ public class CardVenture extends DevelopmentCard {
 		}
 	}
 	
+	/**
+	 * It adds to {@link EndEffect} of the player all the {@link EndEffect} of the card
+	 * @parm player the {@link Player} to which you want to add the effects
+	 */
+	@Override
 	public void loadEndEffects(Player player) {
 		//Accedi a player e caricali nel EndEffect Arraylist
 		try{
@@ -153,7 +188,7 @@ public class CardVenture extends DevelopmentCard {
 	 * @param player for which you want to get the actual costs
 	 * @return an ArrayList containing the {@link RequisiteCost} updated according to bonus and malus
 	 */
-	public ArrayList<RequisiteCost> getActualCost(Player player){
+	private ArrayList<RequisiteCost> getActualCost(Player player){
 		
 		ArrayList<RequisiteCost> actualCosts = new ArrayList<>();
 		
@@ -206,6 +241,10 @@ public class CardVenture extends DevelopmentCard {
 		return false;
 	}
 	
+	/**
+	 * Returns a string representation of this card. 
+	 * @return a string containing information about the name, the era, the costs and the effects of the given card
+	 */
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();

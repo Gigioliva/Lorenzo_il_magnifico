@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -16,6 +15,7 @@ import it.polimi.ingsw.ps22.server.message.AskFamily;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.AskServant;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
+import it.polimi.ingsw.ps22.server.message.ErrorMove;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 
@@ -111,21 +111,20 @@ public class Gui extends JFrame {
 		board.setLeaders(model);
 	}
 
-	public void errorMove() {
-		JOptionPane.showMessageDialog(this, "You can't do this move");
+	public void errorMove(ErrorMove mex) {
+		(new ShowMessage(view, mex)).setVisible(true);
 	}
 
 	public void askExcomm(AskExcomm mex) {
 		(new AskExcommDialog(view, mex)).b1.setVisible(true);
 	}
 
-	public void yourTurn(ChoiceMove mex) {
-		//JOptionPane.showMessageDialog(this, mex.getString());
+	public void yourTurn(ChoiceMove mex){
 		(new ShowMessage(view,mex)).setVisible(true);
 	}
 
 	public void genericMessage(GenericMessage mex) {
-		JOptionPane.showMessageDialog(this, mex.getString());
+		(new ShowMessage(view, mex)).setVisible(true);
 	}
 
 }
