@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ButtonGroup;
@@ -100,7 +101,11 @@ public class PrivilegeDialog extends MessageDialog {
 	}
 	
 	
-	private class ExchangeElem{
+	private class ExchangeElem implements Serializable{
+		/**
+		 * 
+		 */
+		private static final long serialVersionUID = 594424576799604086L;
 		private int id;
 		private String str;
 		

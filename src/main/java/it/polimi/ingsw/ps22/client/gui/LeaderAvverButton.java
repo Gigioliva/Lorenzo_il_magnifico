@@ -16,9 +16,9 @@ public class LeaderAvverButton extends JPanel {
 	private static final long serialVersionUID = -8136957738988127711L;
 	//private final int NUMLEADERS = 4;
 	private final String leaderBackPath = "./image/leadercard/leadersback.jpg";
-	Rectangle cardDim;
+	protected transient Rectangle cardDim;
 	private ArrayList<CardLeader> leaders = new ArrayList<>();
-	private AdaptiveLayout layout = AdaptiveLayout.instance();
+	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public LeaderAvverButton(String username, double resizeFactor, java.awt.Color c, ArrayList<CardLeader> leaders){
 		super();
@@ -46,5 +46,6 @@ public class LeaderAvverButton extends JPanel {
 					(int)(cardDim.getOffsetY()*2.5))));
 		}
 	}
+
 	
 }

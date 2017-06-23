@@ -32,7 +32,7 @@ public class PersonalBoardPanel extends JPanel {
 	private JLabel servantLabel;
 	private JLabel woodLabel;
 	private String username;
-	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
+	private transient PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
 	public PersonalBoardPanel(double widthScreen, double heightScreen, String username, String pathPersonalBonus){
 		

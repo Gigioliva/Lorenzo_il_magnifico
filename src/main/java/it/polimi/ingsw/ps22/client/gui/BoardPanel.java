@@ -494,7 +494,7 @@ public class BoardPanel extends JPanel{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						LeaderButton b = (LeaderButton)e.getSource();
-						new AskLeaderMoveDialog(view, username, b);
+						(new AskLeaderMoveDialog(view, username, b)).setVisible(true);;
 						
 					}
 				});

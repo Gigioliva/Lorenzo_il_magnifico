@@ -90,7 +90,7 @@ public class AskEffectDialog extends MessageDialog {
 			if (close) {
 				mex.getListEffect().remove(card);
 				if (!mex.getListEffect().isEmpty()) {
-					new AskEffectDialog(view, mex);
+					(new AskEffectDialog(view, mex)).setVisible(true);;
 				} else {
 					view.send(new AnswerEffect(mex.getId(), choices));
 					choices.clear();

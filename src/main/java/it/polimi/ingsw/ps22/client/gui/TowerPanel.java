@@ -15,13 +15,12 @@ public class TowerPanel extends JPanel{
 	 */
 	private static final long serialVersionUID = -4631811818202113054L;
 	
-	JButton b;
-	Rectangle dim;
-	String path;
-	String tower;
-	int space;
+	private JButton b;
+	private transient Rectangle dim;
+	private String tower;
+	private int space;
 	
-	ChangeListener listener;
+	private ChangeListener listener;
 	
 
 	public TowerPanel(Rectangle dim, String tower, int space){
@@ -50,7 +49,6 @@ public class TowerPanel extends JPanel{
 	}
 	
 	public void setCard(String path){
-		this.path = path;
 		ImageIcon cardIcon = MyImage.createScaledImageIcon(path, dim);
 		b.setIcon(cardIcon);
 		b.addMouseListener(new MyMouse(BoardPanel.zoomedCard, path));

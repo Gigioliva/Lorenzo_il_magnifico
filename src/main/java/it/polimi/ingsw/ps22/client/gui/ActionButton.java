@@ -16,13 +16,13 @@ public abstract class ActionButton extends JButton  {
 		/**
 	 * 
 	 */
-	int space;
-	Color color;
-	int numServants;
-	String username;
-	transient Rectangle dim;
+	protected int space;
+	protected Color color;
+	protected int numServants;
+	protected String username;
+	protected transient Rectangle dim;
 	
-	List<Family> familiars = new ArrayList<>();
+	protected List<Family> familiars = new ArrayList<>();
 	
 	
 	

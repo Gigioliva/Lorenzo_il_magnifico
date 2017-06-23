@@ -10,9 +10,9 @@ import it.polimi.ingsw.ps22.server.player.Family;
 public class HarvestLabel extends JLabel {
 
 	private static final long serialVersionUID = -221005325565851136L;
-	ArrayList<Family> familiars = new ArrayList<>();
-	double resizeFactor;
-	private AdaptiveLayout layout = AdaptiveLayout.instance();
+	private ArrayList<Family> familiars = new ArrayList<>();
+	private double resizeFactor;
+	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public HarvestLabel(double resizeFact) {
 		super();

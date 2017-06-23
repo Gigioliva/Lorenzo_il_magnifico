@@ -21,12 +21,12 @@ public class PlayersButton extends JButton {
 	 * 
 	 */
 	private static final long serialVersionUID = 4395364097597264389L;
-	PersonalBoardPanel personalBoard;
-	ArrayList<CardLeader> leaders;
-	double resizeFactor;
-	java.awt.Color c;
-	String username;
-	private PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
+	private PersonalBoardPanel personalBoard;
+	private ArrayList<CardLeader> leaders;
+	private double resizeFactor;
+	private java.awt.Color c;
+	private String username;
+	private transient PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
 	public PlayersButton(double widthScreen, double heightScreen, double resizeFactor, String username, int pos, String pathPersonalBonus,
 			java.awt.Color c, ArrayList<CardLeader> leaders ){
