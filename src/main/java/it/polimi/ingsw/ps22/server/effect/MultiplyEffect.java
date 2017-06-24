@@ -28,7 +28,8 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 		}
 		else{
 			ResourceAbstract playerResource = player.getSpecificResource(multiplicandType);
-			playerResource.addResource(new ResourceAbstract(playerResource.getQuantity() * multiplicand.getQuantity() / multiplierQty));
+			ResourceAbstract playerMultiplier = player.getSpecificResource(multiplier);
+			playerResource.addResource(new ResourceAbstract((playerMultiplier.getQuantity() / multiplierQty) * multiplicand.getQuantity() ));
 		}
 		player.applyMalusResource(resources);
 	}

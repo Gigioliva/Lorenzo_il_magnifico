@@ -11,11 +11,11 @@ import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 public class ReduceCostEffect implements PermanentEffect {
 	
 	private static final long serialVersionUID = 1L;
-	 private HashMap<String,ResourceAbstract> bonus;  //accedere alla classe bonus di player e aggiungere
+	 private HashMap<String,ResourceAbstract> bonus; 
 	 private String cardType;
 	 
 	 public ReduceCostEffect(String cardType){
-		 bonus=new HashMap<String,ResourceAbstract>();
+		 bonus=new HashMap<>();
 		 this.cardType = cardType;
 	 }
 	 
@@ -28,10 +28,20 @@ public class ReduceCostEffect implements PermanentEffect {
 			return temp;
 		}
 	 
+	 /**
+	  * It adds a key-value pair to the bonus of the effect
+	  * @param type the type of {@link Resource} 
+	  * @param value the corresponding {@link Resource}
+	  */
 	 public void addBonus(String type,Resource value){
 		 bonus.put(type, value);
 	 }
 	 
+	/**
+	 * This function apply the effect of the card by adding it to the corresponding player
+	 * @param player the player that activated the effect
+	 * @param model
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		player.getBonusAcc().addSales(bonus,cardType);

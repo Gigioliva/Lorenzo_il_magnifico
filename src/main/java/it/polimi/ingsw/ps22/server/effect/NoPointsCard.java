@@ -25,8 +25,9 @@ public class NoPointsCard implements EndEffect {
 	@Override
 	public void performEffect(Player player, Model model) {
 		ArrayList<EndEffect> endPlayer=player.getEndEffects();
-		for(int i=0; i<player.getDevelopmentCard(cardType).size(); i++){
-			DevelopmentCard temp=player.getDevelopmentCard(cardType).remove(i);
+		int size = player.getDevelopmentCard(cardType).size();
+		for(int i=0; i<size; i++){
+			DevelopmentCard temp=player.getDevelopmentCard(cardType).remove(0);
 			for(EndEffect el: temp.getEndEffect()){
 				if(endPlayer.contains(el)){
 					endPlayer.remove(el);

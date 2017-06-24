@@ -53,6 +53,10 @@ public class GainResource implements ActionEffect, ImmediateEffect {
 		}
 	}
 
+	/**
+	 * Give to the {@link Player} a double gain of resources.
+	 * @param player the player to which apply the effect
+	 */
 	public void doubleGain(Player player) {
 		ArrayList<String> temp=new ArrayList<String>();
 		for (String type : gain.keySet()) {

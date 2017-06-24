@@ -82,13 +82,19 @@ public class SubVictoryPoint implements EndEffect {
 		else{
 			HashMap<String,ResourceAbstract> ventureCosts = getVentureCost(player);
 				for(String cost: ventureCosts.keySet()){
-					if(weights.containsKey(cost))
+					if(weights.containsKey(cost)){
 						sum = sum + ventureCosts.get(cost).getQuantity() / weights.get(cost).getQuantity();
+					}
 				}
 			return sum;
 			}
 	}
 	
+	/**
+	 * It performs the effect of the card by subtracting the {@link VictoryPoint} from the target player's points
+	 * @param player the {@link Player} that activated the effect
+	 * @param model
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		if (player.isCard(loc)){

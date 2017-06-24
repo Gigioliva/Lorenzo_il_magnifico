@@ -13,6 +13,11 @@ public class StrangeEffect implements PermanentEffect, ImmediateEffect{
 		this.type = type;
 	}
 
+	/**
+	 * This function apply the effect of the card by adding it to the specBonus of the target player
+	 * @param player the {@link Player} that activated the effect
+	 * @param model
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		if(type.equals("OneFamilyCol6")){

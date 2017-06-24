@@ -29,8 +29,8 @@ public class TestCardVenture {
 	@Before
 	public void init(){
 		card = new CardVenture();
-		cost = new HashMap<String, ResourceAbstract>();
-		requisite = new HashMap<String, ResourceAbstract>();
+		cost = new HashMap<>();
+		requisite = new HashMap<>();
 		
 		endEffects.add(new NoPointsCard("Territory"));
 		
