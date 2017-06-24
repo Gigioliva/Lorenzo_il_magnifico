@@ -70,7 +70,6 @@ public class BonusAcc implements Serializable {
 		ArrayList<String> temp = new ArrayList<String>(bonus.keySet());
 		for (String el : temp) {
 			this.accumulator.get(el).addResource(bonus.get(el));
-			;
 		}
 	}
 

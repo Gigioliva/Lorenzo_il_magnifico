@@ -2,10 +2,18 @@ package it.polimi.ingsw.ps22.server.view;
 
 import java.util.Observable;
 import java.util.Observer;
+
+import it.polimi.ingsw.ps22.server.controller.Controller;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.model.ModelView;
 
+/**
+ * RemoteView represents the player on the server side. This class observes the {@link Connection} and is observed
+ * by the {@link Controller} (considering MVC architecture)
+ * 
+ *
+ */
 public class RemoteView extends View implements Observer {
 
 	private static final long serialVersionUID = 1L;
