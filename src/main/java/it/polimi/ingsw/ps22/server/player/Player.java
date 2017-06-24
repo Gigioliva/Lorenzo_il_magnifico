@@ -111,6 +111,7 @@ public class Player implements Serializable {
 				}
 			}
 		}
+		temp.personalBoard=this.personalBoard.clone();
 		temp.connected=this.connected;
 		return temp;
 	}

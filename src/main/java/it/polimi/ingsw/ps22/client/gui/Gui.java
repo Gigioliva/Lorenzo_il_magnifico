@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.util.logging.Logger;
+
 import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -25,9 +27,9 @@ public class Gui extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	BoardPanel board;
-	ViewClient view;
-	Model model;
+	private BoardPanel board;
+	private transient ViewClient view;
+	private Model model;
 
 	public Gui(ViewClient view) {
 		this.view = view;
@@ -36,7 +38,8 @@ public class Gui extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(Gui.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 

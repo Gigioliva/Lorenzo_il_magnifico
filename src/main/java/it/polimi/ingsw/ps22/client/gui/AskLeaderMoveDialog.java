@@ -29,7 +29,7 @@ public class AskLeaderMoveDialog extends JDialog {
 	private JRadioButton b2;
 	private JButton confirmButton = new JButton("Confirm");
 	private JPanel mainPanel = new JPanel();
-	private ViewClient view;
+	private transient ViewClient view;
 	private String username;
 	private LeaderButton leaderB;
 	

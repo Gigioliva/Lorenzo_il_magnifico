@@ -4,7 +4,7 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
 import java.util.TimerTask;
-
+import java.util.logging.Logger;
 import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.server.message.ChatMessage;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
@@ -47,7 +47,8 @@ public class Controller implements Observer {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(Controller.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 

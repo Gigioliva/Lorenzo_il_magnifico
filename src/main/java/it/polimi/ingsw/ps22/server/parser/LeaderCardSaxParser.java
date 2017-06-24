@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.parser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -156,7 +157,6 @@ public class LeaderCardSaxParser {
 								|| lastQName.equalsIgnoreCase("stone")
 								|| lastQName.equalsIgnoreCase("wood") 
 								|| lastQName.equalsIgnoreCase("servant")
-								|| lastQName.equalsIgnoreCase("coin") 
 								|| lastQName.equalsIgnoreCase("militarypoint")
 								|| lastQName.equalsIgnoreCase("faithpoint")
 								|| lastQName.equalsIgnoreCase("councilprivilege")
@@ -259,7 +259,8 @@ public class LeaderCardSaxParser {
 
 			saxParser.parse(pathname, handler);
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(LeaderCardSaxParser.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 }

@@ -15,7 +15,7 @@ public class OrderPlayerLabel extends JLabel {
 	private String username;
 	private java.awt.Color c;
 	private int pos;
-	private AdaptiveLayout layout = AdaptiveLayout.instance();
+	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
 	
 	public OrderPlayerLabel(int pos, double resizeFactor){
 		super();

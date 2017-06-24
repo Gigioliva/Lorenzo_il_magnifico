@@ -7,6 +7,7 @@ import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import it.polimi.ingsw.ps22.server.action.CardAction;
 import it.polimi.ingsw.ps22.server.action.HarvestAction;
@@ -238,7 +239,8 @@ public class VentureCardSaxParser {
 			saxParser.parse(pathname, handler);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(VentureCardSaxParser.class.getName());
+			logger.info(e.getMessage());
 		}
 
 	}

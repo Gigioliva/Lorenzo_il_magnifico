@@ -21,7 +21,7 @@ public class LoginFrame extends JFrame {
 	 */
 	private static final long serialVersionUID = -1941598498652425988L;
 	JPanel mainPanel = new JPanel();
-	ViewClient view;
+	transient ViewClient view;
 	JTextField t;
 	JTextField t2;
 	JRadioButton confirm4;

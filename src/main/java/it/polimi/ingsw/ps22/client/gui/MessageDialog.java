@@ -20,7 +20,7 @@ public abstract class MessageDialog extends JDialog {
 	private static final long serialVersionUID = 7332960474426750029L;
 	protected JButton confirmButton;
 	protected JPanel mainPanel;
-	protected ViewClient view;
+	protected transient ViewClient view;
 	
 	
 	public MessageDialog(ViewClient view){

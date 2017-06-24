@@ -21,6 +21,10 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 
 	@Override
 	public void run() {
+		setUp();
+	}
+	
+	public void setUp(){
 		send(new AskUsername());
 	}
 
@@ -43,7 +47,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 			}
 			active = true;
 		} else {
-			run();
+			setUp();
 		}
 	}
 

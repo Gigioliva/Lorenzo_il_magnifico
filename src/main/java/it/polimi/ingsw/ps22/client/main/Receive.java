@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.util.Observable;
+import java.util.logging.Logger;
 
 public class Receive extends Observable implements Runnable {
 	private Socket client;
@@ -14,18 +15,26 @@ public class Receive extends Observable implements Runnable {
 		try {
 			input = new ObjectInputStream(this.client.getInputStream());
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(Receive.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 
 	@Override
 	public void run() {
-		while (true) {
+		boolean flag=true;
+		while (flag) {
 			try {
 				Object temp = input.readObject();
 				setChanged();
 				notifyObservers(temp);
-			} catch (ClassNotFoundException | IOException e) {
+			} catch (ClassNotFoundException e) {
+				Logger logger = Logger.getLogger(Receive.class.getName());
+				logger.info(e.getMessage());
+			} catch(IOException e){
+				Logger logger = Logger.getLogger(Receive.class.getName());
+				logger.info(e.getMessage());
+				flag=false;
 			}
 		}
 	}

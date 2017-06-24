@@ -15,7 +15,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -32,14 +31,14 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	private static final long serialVersionUID = 1L;
 	private static final int PORT = 12345;
 	private static final int TIMER = 5000;
-	private ServerSocket serverSocket;
-	private ExecutorService executor = Executors.newFixedThreadPool(128);
-	private Map<String, Connection> waitingFour = new HashMap<>();
-	private Map<String, Connection> waitingFive = new HashMap<>();
-	private Map<Model, ArrayList<RemoteView>> playingConnection = new HashMap<Model, ArrayList<RemoteView>>();
-	private Map<Model, ArrayList<RemoteView>> savePlaying = new HashMap<Model, ArrayList<RemoteView>>();
-	private Timer timerFour;
-	private Timer timerFive;
+	private transient ServerSocket serverSocket;
+	private transient ExecutorService executor = Executors.newFixedThreadPool(128);
+	private transient HashMap<String, Connection> waitingFour = new HashMap<>();
+	private transient HashMap<String, Connection> waitingFive = new HashMap<>();
+	private HashMap<Model, ArrayList<RemoteView>> playingConnection = new HashMap<Model, ArrayList<RemoteView>>();
+	private HashMap<Model, ArrayList<RemoteView>> savePlaying = new HashMap<Model, ArrayList<RemoteView>>();
+	private transient Timer timerFour;
+	private transient Timer timerFive;
 	private HashMap<String, UserData> login;
 
 	private class TaskFour extends TimerTask {
@@ -91,7 +90,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			if (waitingFive.size() == 2) {
 				timerFive.schedule(new TaskFive(), TIMER);
 			}
-			if (waitingFive.size() == 4) {
+			if (waitingFive.size() == 5) {
 				startGameFive();
 			}
 		} else {
@@ -126,6 +125,12 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				}
 			}
 			playingConnection.put(temp, players);
+			if(temp.getPlayerGame()==null){
+				while(!temp.getWaitAnswer().isEmpty()){
+					temp.getWaitAnswer().remove(0);
+				}
+				temp.draftStart();
+			}
 		}
 	}
 	
@@ -242,9 +247,12 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		FileOutputStream out;
 		ObjectOutputStream output;
 		try {
+			HashMap<Model, ArrayList<RemoteView>> temp= new HashMap<>();
+			temp.putAll(playingConnection);
+			temp.putAll(savePlaying);
 			out = new FileOutputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
 			output=new ObjectOutputStream(out);
-			output.writeObject(playingConnection);
+			output.writeObject(temp);
 			output.close();
 			out.close();
 		} catch (IOException e) {
@@ -263,7 +271,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			FileInputStream in=new FileInputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
 			ObjectInputStream input=new ObjectInputStream(in);
 			@SuppressWarnings("unchecked")
-			Map<Model, ArrayList<RemoteView>> readObject = (Map<Model, ArrayList<RemoteView>>)input.readObject();
+			HashMap<Model, ArrayList<RemoteView>> readObject = (HashMap<Model, ArrayList<RemoteView>>)input.readObject();
 			savePlaying=readObject;
 			input.close();
 			in.close();

@@ -40,6 +40,7 @@ XML Structure
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -263,7 +264,8 @@ public class PersonalBoardSaxParser {
 			saxParser.parse(pathname, handler);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(PersonalBoardSaxParser.class.getName());
+			logger.info(e.getMessage());
 		}
 
 	}

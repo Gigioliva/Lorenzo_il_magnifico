@@ -22,7 +22,7 @@ public abstract class ActionButton extends JButton  {
 	protected String username;
 	protected transient Rectangle dim;
 	
-	protected List<Family> familiars = new ArrayList<>();
+	protected transient List<Family> familiars = new ArrayList<>();
 	
 	
 	

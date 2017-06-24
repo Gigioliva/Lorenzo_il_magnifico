@@ -59,7 +59,7 @@ public class BoardPanel extends JPanel{
 	private FamiliarButton fam4;
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<>();
 	private String username;
-	private ViewClient view;
+	private transient ViewClient view;
 	private ArrayList<LeaderButton> leaders = new ArrayList<>();
 	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
 	private transient PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();

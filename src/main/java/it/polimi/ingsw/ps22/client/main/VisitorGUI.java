@@ -83,7 +83,7 @@ public class VisitorGUI extends VisitorB {
 
 	@Override
 	public void visit(AskUsername mex) {
-		new LoginFrame(view);
+		(new LoginFrame(view)).getClass();
 	}
 
 	@Override

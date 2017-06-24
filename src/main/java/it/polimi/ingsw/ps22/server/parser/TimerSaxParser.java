@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.server.parser;
 
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
@@ -44,7 +45,8 @@ public class TimerSaxParser {
 			saxParser.parse(pathname, handler);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(TimerSaxParser.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 	

@@ -5,6 +5,7 @@ import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Observable;
 import java.util.Observer;
+import java.util.logging.Logger;
 
 public class ClientSocket implements Observer {
 	private Socket client;
@@ -15,7 +16,8 @@ public class ClientSocket implements Observer {
 			client = new Socket("localhost", 12345);
 			output = new ObjectOutputStream(client.getOutputStream());
 		} catch (IOException e) {
-			System.out.println("Errore apertura");
+			Logger logger = Logger.getLogger(ClientSocket.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 
@@ -31,7 +33,8 @@ public class ClientSocket implements Observer {
 			output.writeObject(ask);
 			output.flush();
 		} catch (IOException e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(ClientSocket.class.getName());
+			logger.info(e.getMessage());
 		}
 	}
 

@@ -19,6 +19,10 @@ public class PersonalBoard implements Serializable {
 	@Override
 	public PersonalBoard clone() {
 		PersonalBoard temp = new PersonalBoard();
+		temp.personalBonus=new HashMap<>();
+		temp.bonusCharacter=new HashMap<>();
+		temp.requirementHarvest=new HashMap<>();
+		temp.bonusHarvest=new HashMap<>();
 		temp.pathname=this.pathname;
 		for (String el : personalBonus.keySet()) {
 			temp.personalBonus.put(el, this.personalBonus.get(el).clone());

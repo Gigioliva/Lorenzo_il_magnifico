@@ -19,6 +19,8 @@ XML Structure:
  */
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -101,7 +103,8 @@ public class ZoneBonusSaxParser {
 			saxParser.parse(pathname, handler);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(ZoneBonusSaxParser.class.getName());
+			logger.info(e.getMessage());
 		}
 
 	}

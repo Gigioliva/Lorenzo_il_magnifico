@@ -1,6 +1,8 @@
 package it.polimi.ingsw.ps22.server.parser;
 
 import java.util.ArrayList;
+import java.util.logging.Logger;
+
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 import org.xml.sax.Attributes;
@@ -384,7 +386,8 @@ public class CharacterCardSaxParser {
 			saxParser.parse(pathname, handler);
 
 		} catch (Exception e) {
-			e.printStackTrace();
+			Logger logger = Logger.getLogger(CharacterCardSaxParser.class.getName());
+			logger.info(e.getMessage());
 		}
 
 	}

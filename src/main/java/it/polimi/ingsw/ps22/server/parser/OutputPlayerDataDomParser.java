@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.parser;
 
 import java.io.File;
 import java.util.HashMap;
+import java.util.logging.Logger;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -82,10 +83,9 @@ public class OutputPlayerDataDomParser {
 
 			System.out.println("Player data saved on Server!");
 
-		} catch (ParserConfigurationException pce) {
-			pce.printStackTrace();
-		} catch (TransformerException tfe) {
-			tfe.printStackTrace();
+		} catch (ParserConfigurationException | TransformerException pce) {
+			Logger logger = Logger.getLogger(OutputPlayerDataDomParser.class.getName());
+			logger.info(pce.getMessage());
 		}
 	}
 }

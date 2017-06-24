@@ -20,7 +20,7 @@ public class TowerPanel extends JPanel{
 	private String tower;
 	private int space;
 	
-	private ChangeListener listener;
+	private transient ChangeListener listener;
 	
 
 	public TowerPanel(Rectangle dim, String tower, int space){
