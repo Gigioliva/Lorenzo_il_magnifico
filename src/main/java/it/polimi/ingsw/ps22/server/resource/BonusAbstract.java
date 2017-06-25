@@ -23,5 +23,7 @@ public abstract class BonusAbstract implements Serializable {
 		this.quantity = this.quantity - other.getQuantity();
 	}
 	
+	@Override
 	public abstract BonusAbstract clone();
+	
 }

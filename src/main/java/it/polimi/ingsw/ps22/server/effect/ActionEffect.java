@@ -6,5 +6,6 @@ public interface ActionEffect extends Effect {
 
 	public boolean canAffordCost(Player player);
 	
+	@Override
 	public ActionEffect clone();
 }

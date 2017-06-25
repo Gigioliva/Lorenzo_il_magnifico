@@ -90,8 +90,8 @@ public class CardExcomm extends Card {
 			int i = 1;
 			for (EndEffect effect : endEffects) {
 				str.append("  " + "[" + i + "] " + effect.toString());
+				i++;
 			}
-			i++;
 		}
 
 		return str.toString();

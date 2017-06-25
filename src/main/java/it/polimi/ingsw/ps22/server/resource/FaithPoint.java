@@ -8,6 +8,7 @@ public class FaithPoint extends Point {
 		super(faithpoint);
 	}
 	
+	@Override
 	public String getName() {
 		return "FaithPoint";
 	}

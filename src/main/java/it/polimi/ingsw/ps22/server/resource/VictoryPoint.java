@@ -8,6 +8,7 @@ public class VictoryPoint extends Point {
 		super(victorypoint);
 	}
 	
+	@Override
 	public String getName() {
 		return "VictoryPoint";
 	}

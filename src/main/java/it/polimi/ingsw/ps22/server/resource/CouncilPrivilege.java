@@ -53,6 +53,7 @@ public class CouncilPrivilege extends ResourceAbstract {
 		return resourcesForPlayer;
 	}
 		
+	@Override
 	public String getName() {
 		return "CouncilPrivilege";
 	}

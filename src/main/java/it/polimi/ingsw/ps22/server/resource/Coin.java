@@ -8,6 +8,7 @@ public class Coin extends Resource {
 		super(coin);
 	}
 	
+	@Override
 	public String getName() {
 		return "Coin";
 	}

@@ -8,6 +8,7 @@ public class MilitaryPoint extends Point {
 		super(militarypoint);
 	}
 	
+	@Override
 	public String getName() {
 		return "MilitaryPoint";
 	}

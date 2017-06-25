@@ -13,7 +13,7 @@ public class EndTurn extends Move {
 
 	@Override
 	public void applyMove(Model model) {
-		if(model.getWaitAnswer().size()==0){
+		if(model.getWaitAnswer().isEmpty()){
 			do{
 				model.nextPlayer();
 			}while(!model.getCurrentPlayer().getConnected());
