@@ -1,7 +1,6 @@
 package it.polimi.ingsw.ps22.server.card;
 
 import java.util.ArrayList;
-import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.effect.EndEffect;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.model.Model;
@@ -50,7 +49,7 @@ public class CardExcomm extends Card {
 		}
 	}
 
-	public void loadEndEffects(Player player, Board board) {
+	public void loadEndEffects(Player player) {
 		for (EndEffect effect : endEffects) {
 			player.getEndEffects().add(0, effect);
 		}

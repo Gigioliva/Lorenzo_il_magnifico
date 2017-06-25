@@ -78,6 +78,7 @@ public class ChurchSpace implements Serializable {
 
 	public void excommunication(Player player) {
 		cardExcomm.applyPermanentEffects(player, model);
+		cardExcomm.loadEndEffects(player);
 	}
 
 	public void notExcommunication(Player player) {

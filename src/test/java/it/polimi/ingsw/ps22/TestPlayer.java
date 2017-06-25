@@ -10,6 +10,8 @@ import it.polimi.ingsw.ps22.server.board.Dice;
 import it.polimi.ingsw.ps22.server.card.CardCharacter;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.card.CardTerritory;
+import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.effect.EndVictoryEffect;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.ColorPlayer;
 import it.polimi.ingsw.ps22.server.player.Family;
@@ -133,18 +135,31 @@ public class TestPlayer {
 				flag=false;
 		}
 		assert(flag);
+		player.addSpecBonus("FamilyCol+2");
+		player.setFamily(dice);
+		for(Color el: Color.values()){
+			if(player.getFamily(el).getValue()!=dice.getDice(el)+2 && el!=Color.NEUTRAL)
+				flag=false;
+		}
+		assert(flag);
+		player.addSpecBonus("Neutral+3");
+		player.setFamily(dice);
+		assert(player.getFamily(Color.NEUTRAL).getValue()==3);
+		player.getFamily(Color.NEUTRAL).incrementValue(2);
+		assert(player.getFamily(Color.NEUTRAL).getValue()==5);
 	}
 	
 	@Test
 	public void testMalus(){
 		HashMap<String, BonusAbstract> bonus=new HashMap<>();
 		bonus.put("Coin", new Coin(-2));
-		player.getBonusAcc().addBonus(bonus);
+		player.addBonusAcc(bonus);
 		player.addSpecificResource("Coin", new Coin(3));
 		ArrayList<String> temp=new ArrayList<String>();
 		temp.add("Coin");
 		player.applyMalusResource(temp);
 		assert(player.getSpecificResource("Coin").getQuantity()==1);
+		assert(player.getBonusAcc().getBonus("Coin").getQuantity()==-2);
 	}
 	
 	@Test
@@ -153,5 +168,56 @@ public class TestPlayer {
 		player.addSpecBonus("NoMarket");
 		assert(player.getSpecBonus().returnBool("NoMarket"));
 		assert(player.getSpecBonus().returnBool("DoubleServant"));
+	}
+	
+	@Test
+	public void testClone(){
+		CardTerritory temp= new CardTerritory();
+		CardLeader leader=new CardLeader("Carta leader");
+		temp.setName("Carta prova");
+		player.addDevelopmentCard("Territory", temp);
+		player.addLeader(leader);
+		EndVictoryEffect eff=new EndVictoryEffect(2);
+		player.getEndEffects().add(eff);
+		Player clone=player.clone(player.getUsername());
+		assert(clone.getUsername().equals(player.getUsername()));
+		for(String el: player.getResources().keySet()){
+			assert(clone.getSpecificResource(el).getQuantity()==player.getSpecificResource(el).getQuantity());
+		}
+		for(String el: player.getPoints().keySet()){
+			assert(clone.getSpecificResource(el).getQuantity()==player.getSpecificResource(el).getQuantity());
+		}
+		assert(player.getColor()==clone.getColor());
+		for(DevelopmentCard el: player.getDevelopmentCard("Territory")){
+			assert(searchCard(el.getName(),clone.getDevelopmentCard("Territory")));
+		}
+		assert(clone.toString().equals(player.toString()));
+	}
+	
+	@Test
+	public void checkEndEffect(){
+		EndVictoryEffect eff=new EndVictoryEffect(2);
+		player.getEndEffects().add(eff);
+		player.applyEndEffects(null);
+		assert(player.getSpecificResource("VictoryPoint").getQuantity()==2);
+	}
+	
+	@Test
+	public void checkResetLeader(){
+		CardLeader leader=new CardLeader("Carta leader");
+		player.addLeader(leader);
+		leader.playLeader(player, null);
+		player.resetLeader();
+		for(CardLeader el: player.getLeaders()){
+			assert(el.isPlay()==false);
+		}
+	}
+	
+	private boolean searchCard(String name, ArrayList<DevelopmentCard> cards){
+		for(DevelopmentCard el: cards){
+			if(el.getName().equals(name))
+				return true;
+		}
+		return false;
 	}
 }

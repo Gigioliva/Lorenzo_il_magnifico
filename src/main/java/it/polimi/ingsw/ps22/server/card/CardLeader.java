@@ -99,7 +99,7 @@ public class CardLeader extends Card {
 	}
 
 	public void resetLeader() {
-		if (permanentEffect.size() != 0) {
+		if (permanentEffect.size() == 0) {
 			play = false;
 		}
 	}
