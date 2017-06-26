@@ -97,6 +97,22 @@ public class CardLeader extends Card {
 			play = true;
 		}
 	}
+	
+	public boolean takeCardControl(Player player){
+		boolean playable = false;
+		for (HashMap<String, Integer> el : requisite) {
+			playable = true;
+			for (String type : el.keySet()) {
+				if (el.get(type) > player.getGenericValue(type)) {
+					playable = false;
+				}
+			}
+			if (playable == true) {
+				break;
+			}
+		}
+		return playable;
+	}
 
 	public void resetLeader() {
 		if (permanentEffect.size() == 0) {

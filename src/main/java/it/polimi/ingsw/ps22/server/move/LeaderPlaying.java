@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps22.server.move;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.message.AskCopyLeader;
 import it.polimi.ingsw.ps22.server.message.ErrorMove;
@@ -28,20 +26,7 @@ public class LeaderPlaying extends LeaderMove {
 			}
 		}
 		if (leader != null) {
-			boolean playable = false;
-			ArrayList<HashMap<String, Integer>> requisite = leader.getRequisite();
-			for (HashMap<String, Integer> el : requisite) {
-				playable = true;
-				for (String type : el.keySet()) {
-					if (el.get(type) > player.getGenericValue(type)) {
-						playable = false;
-					}
-				}
-				if (playable == true) {
-					break;
-				}
-			}
-			if (playable == true) {
+			if (leader.takeCardControl(player)) {
 				if (leader.getCopy() == false) {
 					leader.playLeader(player, model);
 					player.setFamily(model.getBoard().getDice());
