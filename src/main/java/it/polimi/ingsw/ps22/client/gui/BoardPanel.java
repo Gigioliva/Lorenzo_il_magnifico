@@ -360,7 +360,6 @@ public class BoardPanel extends JPanel{
 		updateOrderPlayers(model);
 		updateFamiliars(model);
 		updateFamSpinner();
-		//setLeaders(model);
 		updateLeaders(model);
 		updateExcomm(model);
 	}
@@ -426,6 +425,7 @@ public class BoardPanel extends JPanel{
 		
 		HashMap<Integer, ArrayList<Player>> tempPlay = updatePointTrack(model, "VictoryPoint");
 		for(VictoryPointLabel lab: victory){
+			lab.setVisible(false);
 			layeredPane.remove(lab);
 		}
 		victory.clear();
@@ -486,7 +486,6 @@ public class BoardPanel extends JPanel{
 	
 	public void setLeaders(Model model){
 			for(int i = 0; i< NUMLEADERS; i++){
-				//CardLeader card = model.getPlayers().get(username).getLeaders().get(i);
 				LeaderButton b1 = new LeaderButton(i, personalBoard, username);
 				leaders.add(b1);
 				b1.addActionListener(new ActionListener() {
