@@ -17,6 +17,12 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 						//Territory	(factor2)		Coin	(factor1)				// Coin come 
 	//public MultiplyEffect(String multiplier, ResourceAbstract multiplicand, String multiplicandType){
 
+	/**
+	 * It performs the effect by adding to the player the right amount of {@link ResourceAbstract}. This is calculated in the following way:
+	 * The player gains multiplicand multiplicandType every multiplierQty multiplier. 
+	 * @param player affected by the effect
+	 * @param model that represent the state of the game
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		ArrayList<String> resources = new ArrayList<String>();
@@ -57,18 +63,35 @@ public class MultiplyEffect implements ActionEffect, ImmediateEffect {
 		return true;
 	}
 
+	
+	/**
+	 * it sets the quantity of the multiplier
+	 * @param qty
+	 */
 	public void setMultiplierQty(int qty){
 		this.multiplierQty = qty;
 	}
 	
+	/**
+	 * It sets the type of the multiplier
+	 * @param multiplier
+	 */
 	public void setMultiplier(String multiplier) {
 		this.multiplier = multiplier;
 	}
 
+	/**
+	 * It sets the {@link ResourceAbstract} of the multiplicand
+	 * @param multiplicand
+	 */
 	public void setMultiplicand(ResourceAbstract multiplicand) {
 		this.multiplicand = multiplicand;
 	}
 
+	/**
+	 * It sets the type of the multiplicand
+	 * @param multiplicandType
+	 */
 	public void setMultiplicandType(String multiplicandType) {
 		this.multiplicandType = multiplicandType;
 	}

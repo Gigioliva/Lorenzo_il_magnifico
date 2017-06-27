@@ -38,7 +38,7 @@ public class ReduceCostEffect implements PermanentEffect {
 	 }
 	 
 	/**
-	 * This function apply the effect of the card by adding it to the corresponding player
+	 * This function applies the effect of the card by adding it to the corresponding player
 	 * @param player the player that activated the effect
 	 * @param model
 	 */

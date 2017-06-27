@@ -34,6 +34,11 @@ public class GainResource implements ActionEffect, ImmediateEffect {
 		return gain;
 	}
 
+	/**
+	 * It performs the effect by adding to the {@link Player} the {@link ResourceAbstract} provided by the effect. 
+	 * @param player affected by the effect
+	 * @param model that represent the state of the game
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		int cont = 0;

@@ -8,6 +8,7 @@ import it.polimi.ingsw.ps22.server.card.RequisiteCost;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.BonusAbstract;
+import it.polimi.ingsw.ps22.server.resource.Resource;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
@@ -24,6 +25,11 @@ public class SubVictoryPoint implements EndEffect {
 		this.loc = loc;
 	}
 	
+	 /**
+	  * It adds a key-value pair to the weights of the effect
+	  * @param type the type of {@link Resource} 
+	  * @param value the corresponding {@link Resource}
+	  */
 	public void addBonus(String type,BonusAbstract value){
 		 weights.put(type, value);
 	 }
