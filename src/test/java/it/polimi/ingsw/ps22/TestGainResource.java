@@ -14,7 +14,6 @@ public class TestGainResource {
 
 	Player player;
 	GainResource eff;
-	GainResource eff2;
 	
 	@Before
 	public void init(){
