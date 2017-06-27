@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -142,7 +143,7 @@ public class LoginFrame extends JFrame {
 
 	}
 	
-	private class ConfirmListener implements ActionListener{
+	private class ConfirmListener implements ActionListener {
 
 		@SuppressWarnings("deprecation")
 		@Override
@@ -158,4 +159,21 @@ public class LoginFrame extends JFrame {
 		}
 		
 	}
+	
+	private void updateTopPlayers(ArrayList<String> topPlayers) {
+		StringBuilder temp = new StringBuilder("Top Players:");
+		for(String str: topPlayers) {
+			temp.append("\n"+str);
+		}
+		topPlayersLabel.setText(temp.toString());
+	}
+	
+	private void updateLobbyMembers(ArrayList<String> members) {
+		StringBuilder temp = new StringBuilder("Players in your lobby:");
+		for(String str: members) {
+			temp.append("\n"+str);
+		}
+		lobbyMembersLabel.setText(temp.toString());
+	}
+	
 }
