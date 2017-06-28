@@ -2,11 +2,9 @@ package it.polimi.ingsw.ps22.server.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.board.TowerZone;
-import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.message.AskCard;

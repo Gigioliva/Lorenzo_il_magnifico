@@ -2,10 +2,10 @@ package it.polimi.ingsw.ps22.server.model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Observable;
+import java.util.stream.Collectors;
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
@@ -229,12 +229,12 @@ public class Model extends Observable implements Serializable {
 	}
 
 	private void winMilitaryPoint() {
-		HashMap<Player, Integer> temp = new HashMap<Player, Integer>();
+		LinkedHashMap<Player, Integer> temp = new LinkedHashMap<Player, Integer>();
 		for(String el: players.keySet()){
 			temp.put(players.get(el),players.get(el).getSpecificResource("MilitaryPoint").getQuantity());
 		}
 		ArrayList<Integer> point=new ArrayList<Integer>(temp.values());
-		Collections.sort(point);
+		point=(ArrayList<Integer>) point.stream().sorted((a,b)->b.compareTo(a)).collect(Collectors.toList());
 		int i=point.get(0);
 		Player player=searchPlayMil(temp,i);
 		player.addPoints("VictoryPoint", new VictoryPoint(5));
@@ -252,10 +252,9 @@ public class Model extends Observable implements Serializable {
 		}
 	}
 	
-	private Player searchPlayMil(HashMap<Player, Integer> temp, int i){
+	private Player searchPlayMil(LinkedHashMap<Player, Integer> temp, int i){
 		for(Player el: temp.keySet()){
 			if(temp.get(el)==i){
-				el.addPoints("VictoryPoint", new VictoryPoint(5));
 				 temp.remove(el);
 				 return el;
 			}
@@ -362,7 +361,10 @@ public class Model extends Observable implements Serializable {
 	}
 	
 	public String getOrderedPlayers(int pos){
-		return orderedPlayers.get(pos);
+		if(0<=pos && pos<players.size()){
+			return orderedPlayers.get(pos);
+		}
+		return null;
 	}
 	
 	public boolean getIsActive(){
