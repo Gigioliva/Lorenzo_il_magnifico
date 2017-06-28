@@ -134,7 +134,7 @@ public class LoginFrame extends JFrame {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
 				| UnsupportedLookAndFeelException e) {
-			e.printStackTrace();
+			System.out.println("Error Login Frame");
 		}
 		this.setUndecorated(true);
 		this.setResizable(false);

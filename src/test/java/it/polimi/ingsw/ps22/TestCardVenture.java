@@ -1,16 +1,13 @@
 package it.polimi.ingsw.ps22;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import it.polimi.ingsw.ps22.server.card.CardVenture;
-import it.polimi.ingsw.ps22.server.card.RequisiteCost;
-import it.polimi.ingsw.ps22.server.effect.EndEffect;
+import it.polimi.ingsw.ps22.server.effect.GainResource;
 import it.polimi.ingsw.ps22.server.effect.NoPointsCard;
+import it.polimi.ingsw.ps22.server.model.ColorPlayer;
+import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
@@ -21,103 +18,60 @@ public class TestCardVenture {
 	private CardVenture card;
 	private HashMap<String, ResourceAbstract> cost;
 	private HashMap<String, ResourceAbstract> requisite;
-	private ArrayList<EndEffect> endEffects = new ArrayList<>();
-	private NoPointsCard eff = new NoPointsCard("Territory");
-	private RequisiteCost reqCost = new RequisiteCost();
-	private ArrayList<RequisiteCost> arr = new ArrayList<>();
+	private Player player;
 	
 	@Before
 	public void init(){
+		player=new Player("Gigi", ColorPlayer.RED);
+		player.getSpecBonus().setSpecBonus("DoubleGain");
 		card = new CardVenture();
 		cost = new HashMap<>();
 		requisite = new HashMap<>();
-		
-		endEffects.add(new NoPointsCard("Territory"));
-		
 		ResourceAbstract r1 = new Coin(3);
 		cost.put("Coin", r1);
 		ResourceAbstract r2 = new Stone(4);
 		cost.put("Stone", r2);
 		ResourceAbstract r3 = new MilitaryPoint(1);
 		requisite.put("MilitaryPoint", r3);
-		
-		reqCost.addCost(cost);
-		reqCost.addRequisite(requisite);
-		
-		arr.add(reqCost);
-	}
-	
-	@Test
-	public void getEndEffectTest(){
-		card.addEndEffect(eff);
-		for(EndEffect effect: card.getEndEffect())
-			assert(effect == eff);
-	}
-
-	@Test
-	public void addRequisiteCostTest() {
-		
 		card.addRequisiteCost(cost, requisite);
-		assert(containsRequisiteCost(card.getRequisiteCost(), reqCost));
-		
+		card.addEndEffect(new NoPointsCard("Territory"));
+		GainResource eff=new GainResource();
+		eff.addGain("Coin", new Coin(3));
+		card.addImmediateEffect(eff);
 	}
 	
 	@Test
-	public void getRequisiteCostTest(){
-		card.addRequisiteCost(cost, requisite);
-		ArrayList<RequisiteCost> reqCosts = card.getRequisiteCost();
-		assert(equalsArrRequisiteCost(reqCosts, arr));
+	public void testClone(){
+		CardVenture clone=card.clone();
+		assert(clone.toString().equals(card.toString()));
 	}
 	
-	
-	
-	private boolean equalsResource(ResourceAbstract r1, ResourceAbstract r2){
-		
-		return (r1.getName().equals(r2.getName()) && r1.getQuantity() == r2.getQuantity() );
+	@Test
+	public void testApplyEffect(){
+		card.applyImmediateEffects(player, null);
+		card.loadEndEffects(player);
+		assert(player.getSpecificResource("Coin").getQuantity()==6);
+		assert(player.getEndEffects().size()==1);
 	}
 	
-	private boolean equalsCostOrRequisite(HashMap<String, ResourceAbstract> r1, HashMap<String, ResourceAbstract> r2){
-		
-		for(String type: r1.keySet()){
-			if(!r2.containsKey(type))
-				return false;
-			if(!equalsResource(r1.get(type), r2.get(type)))
-				return false;
-		}
-		
-		for(String type: r2.keySet()){
-			if(!r1.containsKey(type))
-				return false;
-		}
-		
-		return true;
-		
-		
-	}
-	private boolean equalsRequisiteCost(RequisiteCost r1, RequisiteCost r2){
-		return( equalsCostOrRequisite(r1.getCost(), r2.getCost()) && equalsCostOrRequisite(r1.getRequisite(), r2.getRequisite()));
+	@Test
+	public void testTakeCard(){
+		player.addSpecificResource("Coin", new Coin(3));
+		player.addSpecificResource("Stone", new Stone(2));
+		player.addSpecificResource("MilitaryPoint", new MilitaryPoint(1));
+		assert(card.takeCardControl(player));
 	}
 	
-	private boolean equalsArrRequisiteCost(List<RequisiteCost> arr1, List<RequisiteCost> arr2){
-		for(RequisiteCost r: arr1){
-			if(!containsRequisiteCost(arr2, r))
-				return false;
-		}
-		for(RequisiteCost r:arr2){
-			if(!containsRequisiteCost(arr1, r))
-				return false;
-		}
-		return true;
+	@Test
+	public void testPayCard(){
+		player.addSpecificResource("Coin", new Coin(4));
+		player.addSpecificResource("Stone", new Stone(2));
+		player.addSpecificResource("MilitaryPoint", new MilitaryPoint(1));
+		card.applyCostToPlayer(player, card.getRequisiteCost().get(0));
+		assert(player.getSpecificResource("Coin").getQuantity()==1);
+		assert(player.getSpecificResource("Stone").getQuantity()==0);
+		assert(player.getSpecificResource("Wood").getQuantity()==2);
+		assert(player.getSpecificResource("Servant").getQuantity()==3);
+		assert(player.getSpecificResource("MilitaryPoint").getQuantity()==1);
 	}
-	
-	
-	private boolean containsRequisiteCost(List<RequisiteCost> arr, RequisiteCost r){
-		for(RequisiteCost reqCost: arr){
-			if(equalsRequisiteCost(reqCost, r))
-				return true;
-		}
-		return false;
-	}
-	
-
 }

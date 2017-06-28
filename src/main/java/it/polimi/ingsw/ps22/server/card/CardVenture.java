@@ -157,7 +157,7 @@ public class CardVenture extends DevelopmentCard {
 	private boolean controlSingleRequisite(RequisiteCost requisite, String type, Player player){
 
 		int playerResource = player.getSpecificResource(type).getQuantity();
-		int requisiteResource = requisite.getSpecificCost(type);
+		int requisiteResource = requisite.getSpecificRequisite(type);
 		if (requisiteResource>playerResource)
 			return false;
 		return true;
