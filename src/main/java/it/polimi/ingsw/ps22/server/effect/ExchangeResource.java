@@ -15,8 +15,8 @@ public class ExchangeResource implements ActionEffect{
 	private HashMap<String,ResourceAbstract> gain;
 	
 	public ExchangeResource(){
-		cost=new HashMap<String, ResourceAbstract>();
-		gain=new HashMap<String, ResourceAbstract>();
+		cost=new HashMap<>();
+		gain=new HashMap<>();
 	}
 	
 	@Override

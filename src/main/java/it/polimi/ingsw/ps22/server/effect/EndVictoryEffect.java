@@ -19,6 +19,11 @@ public class EndVictoryEffect implements EndEffect {
 		return temp;
 	}
 
+	/**
+	 * it performs the effect by adding to the {@link Player} the gained {@link VictoryPoint}.
+	 * @param player affected by the effect
+	 * @param model that represent the state of the game
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		player.addPoints("VictoryPoint", points);

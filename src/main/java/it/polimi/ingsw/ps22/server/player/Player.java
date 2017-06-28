@@ -43,6 +43,11 @@ public class Player implements Serializable {
 	private ColorPlayer color;
 	private boolean connected=true;
 
+	/**
+	 * It creates an instance of Player, with 2 {@link Stone}, 2 {@link Wood}, 3 {@link Servant} and random personal bonuses. 
+	 * @param username the name of the player
+	 * @param color the color assigned to the player
+	 */
 	public Player(String username, ColorPlayer color) {
 		resources = new HashMap<String, Resource>();
 		points = new HashMap<String, Point>();
@@ -116,52 +121,102 @@ public class Player implements Serializable {
 		return temp;
 	}
 
+	/**
+	 * 
+	 * @return all the familiars of the player
+	 */
 	public HashMap<Color, Family> getAllFamily() {
 		return family;
 	}
 
+	/**
+	 * 
+	 * @return An HashMap<String, Resource> containing the resources of the player
+	 */
 	public HashMap<String, Resource> getResources() {
 		return this.resources;
 	}
 
+	/**
+	 * It adds the leader to the leader cards of the player
+	 * @param leader the card to be added to the player
+	 */
 	public void addLeader(CardLeader leader) {
 		leaders.add(leader);
 	}
 
+	/**
+	 * 
+	 * @return An {@link ArrayList} containing the {@link CardLeader} of the player
+	 */
 	public ArrayList<CardLeader> getLeaders() {
 		return leaders;
 	}
 
+	/**
+	 * 
+	 * @return an HashMap<String, Point> containing the {@link Point} of the player
+	 */
 	public HashMap<String, Point> getPoints() {
 		return this.points;
 	}
 
+	/**
+	 * 
+	 * @param type the type of the cards to retrieve
+	 * @return an {@link ArrayList} containing the {@link DevelopmentCard} of the type chosen by input
+	 */
 	public ArrayList<DevelopmentCard> getDevelopmentCard(String type) {
 		return this.cards.get(type);
 	}
 
+	/**
+	 * 
+	 * @return the {@link BonusAcc} of the player containing all the permanent bonus/malus by which he is affected
+	 */
 	public BonusAcc getBonusAcc() {
 		return bonusAcc;
 	}
 
+	/**
+	 * 
+	 * @return the {@link SpecBonus} containing some constraints by which the player is affected
+	 */
 	public SpecBonus getSpecBonus() {
 		return specBonus;
 	}
 
+	/**
+	 * 
+	 * @param color the color of the familiar to be retrieved
+	 * @return the familiar of the selected {@link Color}
+	 */
 	public Family getFamily(Color color) {
 		return this.family.get(color);
 	}
 
+	/**
+	 * 
+	 * @return a {@link String} containing the username of the player
+	 */
 	public String getUsername() {
 		return username;
 	}
 
+	/**
+	 * 
+	 * @return the {@link PersonalBoard} of the player
+	 */
 	public PersonalBoard getPersonalBoard() {
 		return personalBoard;
 	}
 
 	// sottrae risorse o punti al giocatore se esso ha qualche effetto
 	// permanente che glielo impone
+	/**
+	 * It applies the permanent effects contained in the {@link BonusAcc} indicated by the ArrayList of String passes as parameter
+	 * @param resources the types of resources for which you want to apply the malus/bonus of the {@link BonusAcc}
+	 */
 	public void applyMalusResource(ArrayList<String> resources) {
 		for (String type : resources) {
 			BonusAbstract temp = this.bonusAcc.getBonus(type);
@@ -173,48 +228,99 @@ public class Player implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 * @param type the type of {@link Resource} to sub to the player
+	 * @param other the {@link Resource} you want to sub
+	 */
 	public void subResources(String type, Resource other) {
 		this.resources.get(type).subResource(other);
 	}
 
+	/**
+	 * 
+	 * @param type the type of {@link Resource} to add to the player
+	 * @param other the {@link Resource} you want to add
+	 */
 	public void addPoints(String type, Point other) {
 		this.points.get(type).addResource(other);
 	}
 
+	/**
+	 * 
+	 * @param type the type of the card to add to the player
+	 * @param other the {@link DevelopmentCard} to add
+	 */
 	public void addDevelopmentCard(String type, DevelopmentCard other) {
 		this.cards.get(type).add(other);
 	}
 
+	/**
+	 * 
+	 * @param bonus an HashMap<String, BonusAbstract> containing the bonuses to add to the {@link BonusAcc} of the player
+	 */
 	public void addBonusAcc(HashMap<String, BonusAbstract> bonus) {
 		this.bonusAcc.addBonus(bonus);
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @return the number of cards of the type selected
+	 */
 	public int getSizeCard(String type) {
 		return this.cards.get(type).size();
 	}
 
+	/**
+	 * 
+	 * @param type the type of bonus of the {@link SpecBonus} you want to set
+	 */
 	public void addSpecBonus(String type) {
 		this.specBonus.setSpecBonus(type);
 	}
 
+	/**
+	 * It applies all the {@link EndEffect} accumulated by the player during the game
+	 * @param model
+	 */
 	public void applyEndEffects(Model model) {
 		for (EndEffect effect : endEffects) {
 			effect.performEffect(this, model);
 		}
 	}
 
+	/**
+	 * 
+	 * @return all the {@link EndEffect} of the player in an {@link ArrayList}
+	 */
 	public ArrayList<EndEffect> getEndEffects() {
 		return endEffects;
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @return it returns true if the type passed as parameter is a resource
+	 */
 	public boolean isResource(String type) {
 		return this.resources.containsKey(type);
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @return it returns true if the type passed as parameter is a point
+	 */
 	public boolean isPoint(String type) {
 		return this.points.containsKey(type);
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @return the {@link ResourceAbstract} of the type passed as parameter
+	 */
 	public ResourceAbstract getSpecificResource(String type) {
 		if (this.isResource(type)) {
 			return this.resources.get(type);
@@ -222,14 +328,25 @@ public class Player implements Serializable {
 		return this.points.get(type);
 	}
 
+	/**
+	 * 
+	 * @param type
+	 * @return true if the type passed as parameter is a valid name for a card
+	 */
 	public boolean isCard(String type) {
 		return (cards.containsKey(type));
 	}
 
+	/**
+	 * It add a resource to the player
+	 * @param type of the {@link ResourceAbstract}
+	 * @param other the {@link ResourceAbstract} to be added
+	 */
 	public void addSpecificResource(String type, ResourceAbstract other) {
 		this.getSpecificResource(type).addResource(other);
 	}
 
+	
 	public LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> cloneCardswithActionEffect(
 			String cardType) {
 		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> clonedCards = new LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>>();
@@ -244,6 +361,10 @@ public class Player implements Serializable {
 		return clonedCards;
 	}
 
+	/**
+	 * It sets the value of the familiars according to the values of the dices
+	 * @param dice the dices of that are currently in the game
+	 */
 	public void setFamily(Dice dice) {
 		for (Color el : family.keySet()) {
 			if (el != Color.NEUTRAL)
@@ -363,6 +484,7 @@ public class Player implements Serializable {
 		return 0;
 	}
 
+	
 	public void resetLeader() {
 		for (CardLeader el : leaders) {
 			el.resetLeader();
@@ -373,10 +495,18 @@ public class Player implements Serializable {
 		return color;
 	}
 	
+	/**
+	 * 
+	 * @param conn if this boolean is true, the player will be considered a connected.
+	 */
 	public void setConnected(boolean conn){
 		connected=conn;
 	}
 	
+	/**
+	 * 
+	 * @return a boolean that is true if and only if the player is connected
+	 */
 	public boolean getConnected(){
 		return connected;
 	}
