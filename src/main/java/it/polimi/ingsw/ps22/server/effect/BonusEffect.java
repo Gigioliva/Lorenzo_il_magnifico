@@ -29,6 +29,11 @@ public class BonusEffect implements PermanentEffect {
 		return temp;
 	}
 
+	/**
+	 * It adds to the bonus accumulator of the {@link Player} the permanent bonus-malus of the effect
+	 * @param player affected by the effect
+	 * @param model that represent the state of the game
+	 */
 	@Override
 	public void performEffect(Player player, Model model) {
 		player.getBonusAcc().addBonus(bonus);

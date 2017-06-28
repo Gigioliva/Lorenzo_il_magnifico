@@ -63,17 +63,17 @@ public class ProductionAction extends Action {
 	public void applyAction(Player player, int servants, Model model) {
 		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> allEffects;
 		LinkedHashMap<DevelopmentCard, ArrayList<ActionEffect>> possibleEffects;
+		
 		Player clonedPlayer = player.clone(player.getUsername());
 		this.servants = servants;
+		
 		int bonus = player.getBonusAcc().getBonus("IncrementProduction").getQuantity() + servants;
 		player.getSpecificResource("Servant").subResource(new Servant(servants));
+		
 		allEffects = player.cloneCardswithActionEffect("Building");
-		// do{
+		
 		possibleEffects = getPossibleEffects(clonedPlayer, bonus, allEffects);
-		// HashMap<DevelopmentCard,Integer> chosenEffect = new
-		// HashMap<DevelopmentCard,Integer>();
-		// passa a utente lista di carte ed effetti possibili ad ogni carta
-		// chosenEffect = askEffect...
+		
 		if (!possibleEffects.isEmpty()) {
 			AskEffect mex = new AskEffect(possibleEffects, this, player);
 			model.notifyAsk(mex);
@@ -83,15 +83,6 @@ public class ProductionAction extends Action {
 				player.getPersonalBoard().applyPersonalBoardBonus("Production", player, model);
 			}
 		}
-		// DevelopmentCard card = chosenEffect.keySet().iterator().next();
-		// card.applyActionEffect(player, board, chosenEffect.get(card));
-		// allEffects.remove(card);
-
-		// }while(!possibleEffects.isEmpty());
-
-		// applyNoExchangeEffect(player, board, bonus);
-		// player.getPersonalBoard().applyPersonalBoardBonus("Production",
-		// player, board);
 	}
 
 	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects, Player player, Model model) {
