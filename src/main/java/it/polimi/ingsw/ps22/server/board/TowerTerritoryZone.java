@@ -71,7 +71,7 @@ public class TowerTerritoryZone extends TowerZone {
 	
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("Territory Tower \n" +  super.toString());
+		StringBuilder str = new StringBuilder(super.toString());
 		return str.toString();
 	}
 

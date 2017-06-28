@@ -10,15 +10,17 @@ import it.polimi.ingsw.ps22.server.message.ChatMessage;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.move.Move;
+import it.polimi.ingsw.ps22.server.parser.TimerSaxParser;
 import it.polimi.ingsw.ps22.server.view.View;
 
 public class Controller implements Observer {
-	private static final int TIMER = 9000000;
+	private static int TIMER = 9000000;
 	private Model model;
 	private Timer timer;
 
 	public Controller(Model model) {
 		this.model = model;
+		TIMER=TimerSaxParser.ControllerTimer();
 		this.timer = new Timer();
 		timer.schedule(new Task(), TIMER);
 	}

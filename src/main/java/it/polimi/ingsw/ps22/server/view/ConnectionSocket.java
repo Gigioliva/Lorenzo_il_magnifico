@@ -35,7 +35,8 @@ public class ConnectionSocket extends Connection {
 				AnswerUsername answer=(AnswerUsername) in.readObject();
 				name = answer.getUsername();
 				String pass=answer.getPassword();
-				if(server.login(name, pass)){
+				boolean reg=answer.getReg();
+				if(server.login(name, pass, reg)){
 					if(answer.getNumPlayer()==4){
 						server.lobbyFour(this, name);
 						active=true;

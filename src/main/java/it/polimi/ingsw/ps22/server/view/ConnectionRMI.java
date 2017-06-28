@@ -23,8 +23,8 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 	public void run() {
 		setUp();
 	}
-	
-	public void setUp(){
+
+	public void setUp() {
 		send(new AskUsername());
 	}
 
@@ -37,8 +37,8 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		}
 	}
 
-	public void join(String pass, int num) {
-		if (server.login(name, pass) && (num==4 || num==5)) {
+	public void join(String pass, int num, boolean reg) {
+		if (server.login(name, pass, reg) && (num == 4 || num == 5)) {
 			if (num == 4) {
 				server.lobbyFour(this, name);
 			}
@@ -60,7 +60,8 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		} else {
 			if (obj instanceof AnswerUsername) {
 				name = ((AnswerUsername) obj).getUsername();
-				join(((AnswerUsername) obj).getPassword(), ((AnswerUsername) obj).getNumPlayer());
+				join(((AnswerUsername) obj).getPassword(), ((AnswerUsername) obj).getNumPlayer(),
+						((AnswerUsername) obj).getReg());
 			}
 		}
 	}

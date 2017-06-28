@@ -141,7 +141,7 @@ public class Board implements Serializable {
 		str.append("Towers: \n");
 
 		for (String type : towers.keySet()) {
-			str.append(towers.get(type).toString() + "\n");
+			str.append(type +" Tower \n" + towers.get(type).toString() + "\n");
 		}
 
 		return str.toString();

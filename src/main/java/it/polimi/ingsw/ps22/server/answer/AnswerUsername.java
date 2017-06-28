@@ -8,12 +8,14 @@ public class AnswerUsername extends GenericAnswer {
 	private String username;
 	private String pass;
 	private int numPlayer;
+	private boolean reg;
 	
-	public AnswerUsername(String answer, String pass, int numPlayer){
+	public AnswerUsername(String answer, String pass, int numPlayer, boolean reg){
 		super(0);
 		this.username=answer;
 		this.pass=pass;
 		this.numPlayer=numPlayer;
+		this.reg=reg;
 	}
 	
 	public String getUsername(){
@@ -26,6 +28,10 @@ public class AnswerUsername extends GenericAnswer {
 	
 	public int getNumPlayer(){
 		return numPlayer;
+	}
+	
+	public boolean getReg(){
+		return reg;
 	}
 
 	@Override

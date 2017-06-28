@@ -50,13 +50,15 @@ public class TimerSaxParser {
 		}
 	}
 	
-	public static int ServerTimer(String pathname) {
+	public static int ServerTimer() {
+		String pathname="src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 		TimerRead(pathname, temp);
 		return temp.get("Server");
 	}
 	
-	public static int ControllerTimer(String pathname) {
+	public static int ControllerTimer() {
+		String pathname="src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 		TimerRead(pathname, temp);
 		return temp.get("Controller");

@@ -3,7 +3,7 @@ package it.polimi.ingsw.ps22.server.model;
 
 public enum ColorPlayer {
 	RED(1, java.awt.Color.RED), BLUE(2, java.awt.Color.BLUE), GREEN(3, java.awt.Color.GREEN), YELLOW(4,
-			java.awt.Color.YELLOW);
+			java.awt.Color.YELLOW), ORANGE(5, java.awt.Color.ORANGE);
 
 	private int x;
 

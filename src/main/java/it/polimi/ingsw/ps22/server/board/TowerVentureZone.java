@@ -109,7 +109,7 @@ public class TowerVentureZone extends TowerZone {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("Venture Tower \n" + super.toString());
+		StringBuilder str = new StringBuilder(super.toString());
 		return str.toString();
 	}
 }

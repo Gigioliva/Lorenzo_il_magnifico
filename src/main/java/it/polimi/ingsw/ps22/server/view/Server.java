@@ -25,12 +25,13 @@ import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.model.ModelView;
 import it.polimi.ingsw.ps22.server.parser.InputPlayerDataSaxParser;
 import it.polimi.ingsw.ps22.server.parser.OutputPlayerDataDomParser;
+import it.polimi.ingsw.ps22.server.parser.TimerSaxParser;
 
 public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	private static final long serialVersionUID = 1L;
 	private static final int PORT = 12345;
-	private static final int TIMER = 5000;
+	private static int TIMER = 5000;
 	private transient ServerSocket serverSocket;
 	private transient ExecutorService executor = Executors.newFixedThreadPool(128);
 	private transient HashMap<String, Connection> waitingFour = new HashMap<>();
@@ -55,11 +56,22 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 	}
 
-	public boolean login(String username, String pass) {
-		if (pass.equals(login.get(username).getPassword())) {
-			return true;
-		} else {
-			return false;
+	public synchronized boolean login(String username, String pass, boolean reg) {
+		if(reg==false){
+			if (pass.equals(login.get(username).getPassword())) {
+				return true;
+			} else {
+				return false;
+			}
+		}else{
+			if(!login.containsKey(username)){
+				login.put(username, new UserData(pass));
+				OutputPlayerDataDomParser
+				.PlayerDataWrite("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml", login);
+				return true;
+			}else{
+				return false;
+			}
 		}
 	}
 
@@ -262,6 +274,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	public Server() throws IOException {
 		super(0);
+		TIMER=TimerSaxParser.ServerTimer();
 		timerFour = new Timer();
 		timerFive = new Timer();
 		login = new HashMap<String, UserData>();

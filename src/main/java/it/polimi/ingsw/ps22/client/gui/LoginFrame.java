@@ -155,10 +155,10 @@ public class LoginFrame extends JFrame {
 		public void actionPerformed(ActionEvent e) {
 			String temp = new String(passText.getPassword());
 			if (confirm4.isSelected()) {
-				view.send(new AnswerUsername(userText.getText(), temp, 4));
+				view.send(new AnswerUsername(userText.getText(), temp, 4, false));
 			}
 			if (confirm5.isSelected()) {
-				view.send(new AnswerUsername(userText.getText(), temp, 5));
+				view.send(new AnswerUsername(userText.getText(), temp, 5, false));
 			}
 
 		}

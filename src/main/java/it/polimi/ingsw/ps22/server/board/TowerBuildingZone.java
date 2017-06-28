@@ -80,7 +80,7 @@ public class TowerBuildingZone extends TowerZone {
 
 	@Override
 	public String toString() {
-		StringBuilder str = new StringBuilder("Building Tower \n" + super.toString());
+		StringBuilder str = new StringBuilder(super.toString());
 		return str.toString();
 	}
 

@@ -187,6 +187,7 @@ public class VisitorCLI extends VisitorB {
 		String name = null;
 		String pass = null;
 		int x=0;
+		boolean reg=false;
 		do {
 			try {
 				System.out.print("Username: ");
@@ -195,12 +196,14 @@ public class VisitorCLI extends VisitorB {
 				pass=stdin.readLine();
 				System.out.print("Numero Giocatori: ");
 				x=Integer.parseInt(stdin.readLine());
+				System.out.print("New User?: ");
+				reg=Boolean.parseBoolean(stdin.readLine());
 				correct = true;
 			} catch (IOException e) {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		client.send(new AnswerUsername(name, pass, x));
+		client.send(new AnswerUsername(name, pass, x, reg));
 	}
 	
 	public void visit(AskFamily mex){
