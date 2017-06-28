@@ -43,9 +43,8 @@ public class LoginFrame extends JFrame {
 	public LoginFrame(ViewClient view) {
 
 		this.view = view;
-
-		JLabel allLabel = new JLabel(new ImageIcon(
-				"/Users/marco/git/Lorenzo_il_magnifico/src/main/java/it/polimi/ingsw/ps22/client/gui/image/persboardback.png"));
+		ImageIcon boardBack = MyImage.createImageIcon("./image/persboardback.png");
+		JLabel allLabel = new JLabel(boardBack);
 		allLabel.setMinimumSize(this.getSize());
 		userText = new JTextField();
 		passText = new JPasswordField();
@@ -168,7 +167,7 @@ public class LoginFrame extends JFrame {
 	public void closeLoginWindow() {
 		LoginFrame.this.dispose();
 	}
-	
+
 	private void updateTopPlayers(ArrayList<String> topPlayers) {
 		StringBuilder temp = new StringBuilder("Top Players:");
 		for (String str : topPlayers) {
