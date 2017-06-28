@@ -7,6 +7,7 @@ import java.util.LinkedHashMap;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.ExchangeResource;
+import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.message.AskEffect;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -59,6 +60,14 @@ public class ProductionAction extends Action {
 		}
 	}
 
+	/**
+	 * It performs a {@link ProductionAction} by selecting all the {@link ActionEffect} that the player can afford according
+	 * to the action value, added servants and eventual {@link PermanentEffect}. If an effect is of type {@link ExchangeResource} and/or
+	 * has a choice that the player has to make, an interaction with the player is needed.
+	 * @param player the {@link Player} that performs the action
+	 * @param servants the number of {@link Servant} to increment the action value
+	 * @param model that represent the state of the game.
+	 */
 	@Override
 	public void applyAction(Player player, int servants, Model model) {
 		LinkedHashMap<DevelopmentCard, LinkedHashMap<ActionEffect, Integer>> allEffects;
@@ -85,6 +94,13 @@ public class ProductionAction extends Action {
 		}
 	}
 
+	/**
+	 * Once the player has chosen the effects he wants to perform, this method is called to apply them to him.
+	 * Also effect that didn't require interaction with the player are processed now
+	 * @param chosenEffects the effects chosen by the player
+	 * @param player the player that performs the action
+	 * @param model that represents the state of the game.
+	 */
 	public void applyAnswer(HashMap<DevelopmentCard, Integer> chosenEffects, Player player, Model model) {
 		for (DevelopmentCard card : chosenEffects.keySet()) {
 			Integer chosenEffect = chosenEffects.get(card);

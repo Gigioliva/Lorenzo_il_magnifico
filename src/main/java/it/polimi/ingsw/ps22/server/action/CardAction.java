@@ -6,11 +6,14 @@ import java.util.HashMap;
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.board.TowerZone;
+import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.message.AskCard;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.server.resource.Servant;
 
 public class CardAction extends Action {
 
@@ -86,7 +89,15 @@ public class CardAction extends Action {
 		}
 		return possibleCards;
 	}
-
+	
+	/**
+	 *it performs the {@link CardAction}. So it will propose to the player a list of card that he can take considering eventual
+	 *{@link Servant}, {@link PermanentEffect} by which he is affected. 
+	 * @param player the {@link Player} that performs the action
+	 * @param board to get the affordable cards
+	 * @param servants the number of {@link Servant} to increment the action value
+	 * @param model that represent the state of the game.
+	 */
 	@Override
 	public void applyAction(Player player, Board board, int servants, Model model) {
 		HashMap<String, ArrayList<DevelopmentCard>> possibleCards = getPossibleCards(player, board, servants);
@@ -104,11 +115,14 @@ public class CardAction extends Action {
 		return -1;
 	}
 
+	/**
+	 * Once the player has chosen the card he wants, this method is called to take it and give it to him.
+	 * @param chosenCard the card the player has chosen
+	 * @param player the player that performs the action
+	 * @param model that represents the state of the game.
+	 */
 	public void applyAnswer(HashMap<String, DevelopmentCard> chosenCard, Player player, Board board) {
-		/*
-		 * quando risponde trovo il piano relativo alla carta e applica il
-		 * prendi carta della torre
-		 */
+		
 		String chosenType = chosenCard.keySet().iterator().next();
 		int flat = getRightFlat(chosenCard.get(chosenType), chosenType, board);
 		board.getTower(chosenType).takeCard(flat, player, discount);

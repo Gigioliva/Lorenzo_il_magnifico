@@ -2,8 +2,10 @@ package it.polimi.ingsw.ps22.server.action;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
+import it.polimi.ingsw.ps22.server.effect.PermanentEffect;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Servant;
@@ -24,7 +26,14 @@ public class HarvestAction extends Action {
 		return temp;
 	}
 
-	//suppongo che gli effetti delle carte territorio vengano eseguiti tutti, in quanto in genere sono solo di tipo GainResource
+	/**
+	 *it performs the {@link HarvestAction}. So it will apply to the {@link Player} all the effects of the {@link CardTerritory} 
+	 *that he can afford according to the action value, added servants and eventual {@link PermanentEffect}.
+	 *It requires the effect not to interact with the player.
+	 * @param player the {@link Player} that performs the action
+	 * @param servants the number of {@link Servant} to increment the action value
+	 * @param model that represent the state of the game.
+	 */
 	@Override
 	public void applyAction(Player player, int servants, Model model) {
 		ArrayList<DevelopmentCard> cards = player.getDevelopmentCard("Territory");
