@@ -44,7 +44,7 @@ public class TowerVentureZone extends TowerZone {
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue() + player.getBonusAcc().getBonus("IncrementVenture").getQuantity();
-		if (0 <= actionSpace && actionSpace <= NUM_SPACES && !(family.isPlaced())
+		if (0 <= actionSpace && actionSpace < NUM_SPACES && !(family.isPlaced())
 				&& (towerSpaces[actionSpace].controlPlacement() || player.getSpecBonus().returnBool("OccupiedSpace"))
 				&& (family.getColor() == Color.NEUTRAL || checkAllSpace(player))
 				&& checkResources(player, towerSpaces[actionSpace])
