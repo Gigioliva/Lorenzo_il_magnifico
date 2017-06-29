@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22.server.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-
 import it.polimi.ingsw.ps22.server.board.Board;
 import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.board.TowerZone;
