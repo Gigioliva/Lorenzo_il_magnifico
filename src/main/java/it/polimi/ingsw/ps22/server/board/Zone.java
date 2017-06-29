@@ -30,15 +30,6 @@ public abstract class Zone implements Serializable {
 	public void reset(int turn) {
 
 	}
-	
-	//return true if a specific family member can't be placed in a space of a zone
-	public boolean cantPlaceSpace(int numServants, int actionSpace, Family family){
-		return !Control(numServants, actionSpace, family);
-	}
-	
-	public boolean cantPlaceZone(Player player){
-		return false;
-	}
 
 	protected boolean checkActionValue(int numServant, ActionSpace actionSpace, Family family, int actionValue) {
 		Player player = family.getPlayer();

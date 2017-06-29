@@ -119,22 +119,6 @@ public class Board implements Serializable {
 		}
 	}
 
-	// per ogni torre, il familiare non può piazzare alcun familiare
-	private boolean cantPlaceTowerZones(Player player) {
-
-		for (String type : towers.keySet()) {
-			if (!towers.get(type).cantPlaceZone(player)) {
-				return false;
-			}
-		}
-		return true;
-	}
-
-	public boolean cantPlaceAllZones(Player player) {
-		return harvestZone.cantPlaceZone(player) && cantPlaceTowerZones(player) && prodZone.cantPlaceZone(player)
-				&& market.cantPlaceZone(player) && councilPalace.cantPlaceCouncilPalace(player);
-	}
-
 	private String towersString() {
 		StringBuilder str = new StringBuilder();
 

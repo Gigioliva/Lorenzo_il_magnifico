@@ -3,7 +3,6 @@ package it.polimi.ingsw.ps22.server.board;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
@@ -83,17 +82,6 @@ public class CouncilPalaceSpace extends ActionSpace {
 			player.getResources().get("Servant").subResource(new Servant(numServant));
 			family.incrementValue(numServant);
 		}
-	}
-
-	public boolean cantPlaceCouncilPalace(Player player) {
-		HashMap<Color, Family> family = player.getAllFamily();
-		if (Control(player.getSpecificResource("Servant").getQuantity(), family.get(Color.NEUTRAL)))
-			return false;
-		for (Color color : family.keySet()) {
-			if (!family.get(color).isPlaced() && Color.NEUTRAL != color)
-				return false;
-		}
-		return true;
 	}
 
 	@Override

@@ -101,22 +101,7 @@ public class TowerZone extends Zone {
 			towerSpace.deapplyBonus(player);
 		return result;
 	}
-	
-	//it returns false if for all flats of the tower, it exists a family member (that is not already placed) that is placeable
-	//so it returns true if the player can't place any family member in the tower
-	@Override
-	public boolean cantPlaceZone(Player player){
-		 HashMap<Color, Family> family = player.getAllFamily();
-		 for(int i=0; i<NUM_SPACES; i++){
-			 for(Color color: family.keySet()){
-				 if(!family.get(color).isPlaced())
-					 if(cantPlaceSpace(player.getSpecificResource("Servant").getQuantity(), i, family.get(color)))
-						 return false;
-			 }
-		 }
-		 return true;
-	}
-	
+
 	
 	public void placeFamily(int numServant, int actionSpace, Family family) {
 	}
