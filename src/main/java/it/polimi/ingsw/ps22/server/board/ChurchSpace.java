@@ -5,13 +5,23 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.CardExcomm;
+import it.polimi.ingsw.ps22.server.effect.Effect;
 import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.parser.CardSort;
 import it.polimi.ingsw.ps22.server.parser.FaithPointSaxParser;
 import it.polimi.ingsw.ps22.server.player.Player;
+import it.polimi.ingsw.ps22.server.resource.FaithPoint;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
+/**
+ * 
+ * The church space is a space that the players have to take into account in order not to be excommunicated.
+ * Every ChurchSpace corresponds to an era, it has some requisite to be satisfied ( in {@link VictoryPoint}).
+ * If a player cannot or doesn't want to satisfy the church, he will be affected by the {@link Effect} indicated by
+ * the {@link CardExcomm}
+ *
+ */
 public class ChurchSpace implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -55,10 +65,19 @@ public class ChurchSpace implements Serializable {
 		
 	}
 	
+	/**
+	 * 
+	 * @return an {@link ArrayList} containing the colors of the excommunicated players
+	 */
 	public ArrayList<java.awt.Color> getExcomm(){
 		return playerExcomm;
 	}
 	
+	/**
+	 * It applies the excommunication to the {@link Player} that haven't satisfied the church requirements.
+	 * If a player can choose whether being excommunicated or not, he will be asked now.
+	 * @param players the players participating to the game
+	 */
 	public void applyExcomm(ArrayList<Player> players) {
 		for (Player el : players) {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {
@@ -71,17 +90,30 @@ public class ChurchSpace implements Serializable {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return the updated {@link FaithPointTrack}
+	 */
 	public FaithPointTrack getFaithTrack(){
 		return faithPointTrack;
 	}
 
 
+	/**
+	 * this method applies the effect of the excommunication to a given {@link Player}
+	 * @param player that has been excommunicated
+	 */
 	public void excommunication(Player player) {
 		cardExcomm.applyPermanentEffects(player, model);
 		cardExcomm.loadEndEffects(player);
 		playerExcomm.add(player.getColor().getColor());
 	}
 
+	/**
+	 * If a {@link Player} has satisfied the church requirements, all of his {@link FaithPoint} will be detracted 
+	 * and converted into {@link VictoryPoint}
+	 * @param player that has satisfied the church requirements
+	 */
 	public void notExcommunication(Player player) {
 		player.getSpecificResource("VictoryPoint")
 				.addResource(faithPointTrack.getVictoryBonus(player.getSpecificResource("FaithPoint").getQuantity()));
@@ -101,6 +133,10 @@ public class ChurchSpace implements Serializable {
 		return str.toString();
 	}
 	
+	/**
+	 * 
+	 * @return the {@link CardExcomm} related to this {@link ChurchSpace}
+	 */
 	public CardExcomm getCardExcomm() {
 		return cardExcomm;
 	}

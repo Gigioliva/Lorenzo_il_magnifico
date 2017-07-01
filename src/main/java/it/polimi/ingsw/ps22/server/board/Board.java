@@ -4,10 +4,16 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 
+/**
+ * 
+ * This class represent the Board of the game, where all the zones playable by the {@link Player}s are.
+ *
+ */
 public class Board implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -19,6 +25,11 @@ public class Board implements Serializable {
 	private HashMap<Integer, ChurchSpace> church;
 	private Dice dice;
 
+	/**
+	 * It instantiate a new object of type {@link Board}, containing {@link MarketZone}, {@link ProductionZone}, {@link HarvestZone},
+	 * {@link CouncilPalaceSpace}, {@link ChurchSpace} , {@link Dice} and the {@link TowerZone}s
+	 * @param model an instance of {@link Model}
+	 */
 	public Board(Model model) {
 		market = new MarketZone(model);
 		prodZone = new ProductionZone(model);
@@ -69,36 +80,74 @@ public class Board implements Serializable {
 		return temp;
 	}
 
+	/**
+	 * This method lets you take a {@link TowerZone} 
+	 * @param type a string that is the name of the tower you want to retrieve
+	 * @return the {@link TowerZone} of the corresponding name that you have provided
+	 */
 	public TowerZone getTower(String type) {
 		return towers.get(type);
 	}
 
+	/**
+	 * 
+	 * @return an instance of the current {@link MarketZone}
+	 */
 	public MarketZone getMarket() {
 		return market;
 	}
 
+	/**
+	 *
+	 * @return the {@link HarvestZone} updated
+	 */
 	public HarvestZone getHarvestZone() {
 		return harvestZone;
 	}
 
+	/**
+	 *
+	 * @return the {@link ProductionZone} updated
+	 */
 	public ProductionZone getProdZone() {
 		return prodZone;
 	}
 
+	/**
+	 *
+	 * @return the {@link CouncilPalaceSpace} updated
+	 */
 	public CouncilPalaceSpace getCouncilPalace() {
 		return councilPalace;
 	}
 
+	/**
+	 *
+	 * @return an object of type {@link Dice} containing the updated values of the dices
+	 */
 	public Dice getDice() {
 		return dice;
 	}
 
+	/**
+	 * This function set the playable and not playable zones of the board according to the number of player that are participating to 
+	 * the game. 
+	 * @param num the number of {@link Player}
+	 */
 	public void setZone(int num) {
 		market.setZone(num);
 		prodZone.setZone(num);
 		harvestZone.setZone(num);
 	}
 
+	/**
+	 * This method reset the board and all the {@link Player} of the game according
+	 * to the current turn. For instance if we are at end of the second turn (first era)
+	 * it reset all the board ( remove familiars, new {@link DevelopmentCard}, etc) and 
+	 * ask for excommunication if necessary.
+	 * @param turn the current turn of the game
+	 * @param players the {@link Player} that are participating to the game.
+	 */
 	public void reset(int turn, ArrayList<Player> players) {
 		if (turn < 7) {
 			dice.setDice();
@@ -166,6 +215,11 @@ public class Board implements Serializable {
 		return str.toString();
 	}
 
+	/**
+	 * 
+	 * @param id the turn
+	 * @return the corresponding {@link ChurchSpace}, if the parameter id represents a possible era
+	 */
 	public ChurchSpace getChurch(int id) {
 		if (church.containsKey(id)) {
 			return church.get(id);
