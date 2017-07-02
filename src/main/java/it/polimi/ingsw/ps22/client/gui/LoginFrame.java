@@ -6,7 +6,6 @@ import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -33,12 +32,15 @@ public class LoginFrame extends JFrame {
 	JLabel passLabel;
 	JLabel newUserLabel;
 	JCheckBox newUser;
-	JLabel lobbyLabel;
+	JLabel matchmakingLabel;
+	JLabel inProgressLabel;
+	JLabel errorLabel;
 	JRadioButton confirm4;
 	JRadioButton confirm5;
 	ButtonGroup radioGroup;
-	JLabel lobbyMembersLabel;
 	JLabel topPlayersLabel;
+	JLabel lobbyLabel;
+	//JLabel lobbyMembersLabel;
 
 	public LoginFrame(ViewClient view) {
 
@@ -52,41 +54,51 @@ public class LoginFrame extends JFrame {
 		passLabel = new JLabel("Password:");
 		newUser = new JCheckBox();
 		newUserLabel = new JLabel("New user?");
-		lobbyLabel = new JLabel("Lobby:");
+		matchmakingLabel = new JLabel("Matchmaking");
+		inProgressLabel = new JLabel("in progress");
+		errorLabel = new JLabel("Error!");
 		confirm4 = new JRadioButton("4 Players");
 		confirm5 = new JRadioButton("5 Players");
 		radioGroup = new ButtonGroup();
-		lobbyMembersLabel = new JLabel("Lobby Members:");
 		topPlayersLabel = new JLabel("Top Players:");
 		JButton confirm = new JButton("Confirm");
+		lobbyLabel = new JLabel("Lobby:");
+		//lobbyMembersLabel = new JLabel("Lobby Members:");
 
 		userLabel.setFont(new Font("Colibri", Font.BOLD, 16));
 		userLabel.setForeground(Color.WHITE);
 		userLabel.setOpaque(false);
-		// userText.setOpaque(false);
 		passLabel.setFont(new Font("Colibri", Font.BOLD, 16));
 		passLabel.setForeground(Color.WHITE);
 		passLabel.setOpaque(false);
-		// passText.setOpaque(false);
 		newUserLabel.setFont(new Font("Colibri", Font.BOLD, 16));
 		newUserLabel.setForeground(Color.WHITE);
 		newUserLabel.setOpaque(false);
-		lobbyLabel.setFont(new Font("Colibri", Font.BOLD, 16));
-		lobbyLabel.setForeground(Color.WHITE);
 		confirm4.setFont(new Font("Colibri", Font.BOLD, 16));
 		confirm4.setForeground(Color.WHITE);
 		confirm4.setOpaque(false);
 		confirm5.setFont(new Font("Colibri", Font.BOLD, 16));
 		confirm5.setForeground(Color.WHITE);
 		confirm5.setOpaque(false);
-		lobbyMembersLabel.setFont(new Font("Colibri", Font.BOLD, 16));
-		lobbyMembersLabel.setForeground(Color.WHITE);
-		lobbyMembersLabel.setOpaque(true);
 		topPlayersLabel.setFont(new Font("Colibri", Font.BOLD, 16));
 		topPlayersLabel.setForeground(Color.WHITE);
-		topPlayersLabel.setOpaque(true);
+		topPlayersLabel.setOpaque(false);
+		matchmakingLabel.setFont(new Font("Colibri", Font.BOLD, 26));
+		matchmakingLabel.setForeground(Color.WHITE);
+		matchmakingLabel.setOpaque(false);
+		inProgressLabel.setFont(new Font("Colibri", Font.BOLD, 26));
+		inProgressLabel.setForeground(Color.WHITE);
+		inProgressLabel.setOpaque(false);
+		errorLabel.setFont(new Font("Colibri", Font.BOLD, 26));
+		errorLabel.setForeground(Color.WHITE);
+		errorLabel.setOpaque(false);
 		newUser.setOpaque(false);
 		confirm.setOpaque(false);
+		//lobbyMembersLabel.setFont(new Font("Colibri", Font.BOLD, 16));
+		//lobbyMembersLabel.setForeground(Color.WHITE);
+		//lobbyMembersLabel.setOpaque(true);
+		lobbyLabel.setFont(new Font("Colibri", Font.BOLD, 16));
+		lobbyLabel.setForeground(Color.WHITE);
 
 		userText.setBounds(120, 30, 160, 40);
 		passText.setBounds(120, 80, 160, 40);
@@ -97,9 +109,12 @@ public class LoginFrame extends JFrame {
 		lobbyLabel.setBounds(30, 160, 120, 40);
 		confirm4.setBounds(90, 160, 110, 40);
 		confirm5.setBounds(200, 160, 110, 40);
-		lobbyMembersLabel.setBounds(30, 250, 230, 120);
 		topPlayersLabel.setBounds(320, 30, 245, 340);
-		confirm.setBounds(50, 200, 200, 40);
+		matchmakingLabel.setBounds(60, 270, 200, 40);
+		inProgressLabel.setBounds(70, 320, 200, 40);
+		errorLabel.setBounds(115, 280, 200, 40);
+		confirm.setBounds(50, 220, 210, 40);
+		//lobbyMembersLabel.setBounds(30, 250, 230, 120);
 
 		allLabel.add(userText);
 		allLabel.add(passText);
@@ -107,14 +122,17 @@ public class LoginFrame extends JFrame {
 		allLabel.add(passLabel);
 		allLabel.add(newUserLabel);
 		allLabel.add(newUser);
-		allLabel.add(lobbyLabel);
 		allLabel.add(confirm4);
 		allLabel.add(confirm5);
-		allLabel.add(lobbyMembersLabel);
 		allLabel.add(topPlayersLabel);
+		allLabel.add(matchmakingLabel);
+		allLabel.add(errorLabel);
+		allLabel.add(inProgressLabel);
 		allLabel.add(confirm);
 		radioGroup.add(confirm4);
 		radioGroup.add(confirm5);
+		allLabel.add(lobbyLabel);
+		//allLabel.add(lobbyMembersLabel);
 
 		userText.setVisible(true);
 		passText.setVisible(true);
@@ -122,12 +140,15 @@ public class LoginFrame extends JFrame {
 		passLabel.setVisible(true);
 		newUser.setVisible(true);
 		newUserLabel.setVisible(true);
-		lobbyLabel.setVisible(true);
 		confirm4.setVisible(true);
 		confirm5.setVisible(true);
-		lobbyMembersLabel.setVisible(true);
 		topPlayersLabel.setVisible(true);
 		confirm.setVisible(true);
+		matchmakingLabel.setVisible(false);
+		inProgressLabel.setVisible(false);
+		errorLabel.setVisible(false);
+		lobbyLabel.setVisible(true);
+		//lobbyMembersLabel.setVisible(true);
 		this.add(allLabel);
 
 		this.setMinimumSize(new Dimension(600, 400));
@@ -155,9 +176,14 @@ public class LoginFrame extends JFrame {
 			String temp = new String(passText.getPassword());
 			if (confirm4.isSelected()) {
 				view.send(new AnswerUsername(userText.getText(), temp, 4, newUser.isSelected()));
+				matchmakingLabel.setVisible(true);
+				inProgressLabel.setVisible(true);
+				
 			}
 			if (confirm5.isSelected()) {
 				view.send(new AnswerUsername(userText.getText(), temp, 5, newUser.isSelected()));
+				matchmakingLabel.setVisible(true);
+				inProgressLabel.setVisible(true);
 			}
 
 		}
@@ -167,11 +193,18 @@ public class LoginFrame extends JFrame {
 	public void closeLoginWindow() {
 		LoginFrame.this.dispose();
 	}
+	
+	public void notifyErrorForm() {
+		matchmakingLabel.setVisible(false);
+		inProgressLabel.setVisible(false);
+		errorLabel.setVisible(true);
+	}
 
 	public void updateTopPlayers(String str) {
 		topPlayersLabel.setText(str);
 	}
 
+	/*
 	private void updateLobbyMembers(ArrayList<String> members) {
 		StringBuilder temp = new StringBuilder("Players in your lobby:");
 		for (String str : members) {
@@ -179,5 +212,6 @@ public class LoginFrame extends JFrame {
 		}
 		lobbyMembersLabel.setText(temp.toString());
 	}
+	*/
 
 }

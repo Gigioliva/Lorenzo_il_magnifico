@@ -47,7 +47,8 @@ public class LeaderPlaying extends LeaderMove {
 		model.notifyModel();
 	}
 
-	private ArrayList<CardLeader> getLeaderPlay(Model model) {
+	private ArrayList<CardLeader> getLeaderPlay(Model model) {		
+		//ritorna tutte le carte in gioco di tutti i giocatori
 		ArrayList<CardLeader> temp = new ArrayList<CardLeader>();
 		ArrayList<Player> players = new ArrayList<Player>(model.getPlayers().values());
 		for (Player el : players) {

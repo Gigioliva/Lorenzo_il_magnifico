@@ -61,32 +61,53 @@ public class Rectangle {
 				(int) ((double) this.inity / factor), (int) ((double) this.finaly / factor));
 		return temp;
 	}
-	
-	public static Rectangle fillImageRatio(Rectangle rec, float heightWightRatio) { 
+
+	public static Rectangle fillImageRatio(Rectangle rec, float heightWightRatio) {
 		// ratio=altezza/larghezza
 		Rectangle temp;
-		float aux = (float)rec.getOffsetX()*heightWightRatio;
-		if((float)rec.getOffsetY()>aux)
-			temp = new Rectangle(
-					rec.getInitx(),rec.getFinalx(),rec.getInity(),
-					(rec.getInity()+(int)((float)rec.getOffsetX()*heightWightRatio)));
+		float aux = (float) rec.getOffsetX() * heightWightRatio;
+		if ((float) rec.getOffsetY() > aux)
+			temp = new Rectangle(rec.getInitx(), rec.getFinalx(), rec.getInity(),
+					(rec.getInity() + (int) ((float) rec.getOffsetX() * heightWightRatio)));
 		else
-			temp = new Rectangle(
-					rec.getInitx(),(rec.getInitx()+(int)((float)rec.getOffsetY()/heightWightRatio)),
-					rec.getInity(),rec.getFinaly());
+			temp = new Rectangle(rec.getInitx(), (rec.getInitx() + (int) ((float) rec.getOffsetY() / heightWightRatio)),
+					rec.getInity(), rec.getFinaly());
 		return temp;
 	}
 
 	public static ArrayList<Rectangle> divideRectangle(Rectangle toDivide) {
 		ArrayList<Rectangle> toReturn = new ArrayList<>();
-		toReturn.add(new Rectangle(toDivide.getInitx(),(toDivide.getInitx()+toDivide.getOffsetX()/2),
-									toDivide.getInity(),(toDivide.getInity()+toDivide.getOffsetY()/2)));
-		toReturn.add(new Rectangle((toDivide.getInitx()+toDivide.getOffsetX()/2),toDivide.getFinalx(),
-									toDivide.getInity(),(toDivide.getInity()+toDivide.getOffsetY()/2)));
-		toReturn.add(new Rectangle(toDivide.getInitx(),(toDivide.getInitx()+toDivide.getOffsetX()/2),
-									(toDivide.getInity()+toDivide.getOffsetY()/2),toDivide.getFinaly()));
-		toReturn.add(new Rectangle((toDivide.getInitx()+toDivide.getOffsetX()/2),toDivide.getFinalx(),
-									(toDivide.getInity()+toDivide.getOffsetY()/2),toDivide.getFinaly()));
+		if (toDivide.getOffsetX() > toDivide.getOffsetY()) {
+			toReturn.add(new Rectangle(toDivide.getInitx(), (toDivide.getInitx() + toDivide.getOffsetX() / 3),
+					toDivide.getInity(), (toDivide.getInity() + toDivide.getOffsetY() / 2)));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() / 3),
+					(toDivide.getInitx() + toDivide.getOffsetX() * 2 / 3), toDivide.getInity(),
+					(toDivide.getInity() + toDivide.getOffsetY() / 2)));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() * 2 / 3), toDivide.getFinalx(),
+					toDivide.getInity(), (toDivide.getInity() + toDivide.getOffsetY() / 2)));
+			toReturn.add(new Rectangle(toDivide.getInitx(), (toDivide.getInitx() + toDivide.getOffsetX() / 3),
+					(toDivide.getInity() + toDivide.getOffsetY() / 2), toDivide.getFinaly()));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() / 3),
+					(toDivide.getInitx() + toDivide.getOffsetX() * 2 / 3),
+					(toDivide.getInity() + toDivide.getOffsetY() / 2), toDivide.getFinaly()));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() * 2 / 3), toDivide.getFinalx(),
+					(toDivide.getInity() + toDivide.getOffsetY() / 2), toDivide.getFinaly()));
+		} else {
+			toReturn.add(new Rectangle(toDivide.getInitx(), (toDivide.getInitx() + toDivide.getOffsetX() / 2),
+					toDivide.getInity(), (toDivide.getInity() + toDivide.getOffsetY() / 3)));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() / 2), toDivide.getFinalx(),
+					toDivide.getInity(), (toDivide.getInity() + toDivide.getOffsetY() / 3)));
+			toReturn.add(new Rectangle(toDivide.getInitx(), (toDivide.getInitx() + toDivide.getOffsetX() / 2),
+					(toDivide.getInity() + toDivide.getOffsetY() / 3),
+					(toDivide.getInity() + toDivide.getOffsetY() * 2 / 3)));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() / 2), toDivide.getFinalx(),
+					(toDivide.getInity() + toDivide.getOffsetY() / 3),
+					(toDivide.getInity() + toDivide.getOffsetY() * 2 / 3)));
+			toReturn.add(new Rectangle(toDivide.getInitx(), (toDivide.getInitx() + toDivide.getOffsetX() / 2),
+					(toDivide.getInity() + toDivide.getOffsetY() * 2 / 3), toDivide.getFinaly()));
+			toReturn.add(new Rectangle((toDivide.getInitx() + toDivide.getOffsetX() / 2), toDivide.getFinalx(),
+					(toDivide.getInity() + toDivide.getOffsetY() * 2 / 3), toDivide.getFinaly()));
+		}
 		return toReturn;
 	}
 }
