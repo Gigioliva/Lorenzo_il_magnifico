@@ -8,6 +8,7 @@ import java.util.NoSuchElementException;
 import it.polimi.ingsw.ps22.server.message.AskUsername;
 import it.polimi.ingsw.ps22.server.message.CloseGame;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
+import it.polimi.ingsw.ps22.server.message.RankingMessage;
 import it.polimi.ingsw.ps22.server.answer.AnswerUsername;;
 
 public class ConnectionSocket extends Connection {
@@ -32,6 +33,7 @@ public class ConnectionSocket extends Connection {
 			out = new ObjectOutputStream(socket.getOutputStream());
 			do {
 				send(new AskUsername());
+				send(new RankingMessage(server.getRank()));
 				AnswerUsername answer=(AnswerUsername) in.readObject();
 				name = answer.getUsername();
 				String pass=answer.getPassword();

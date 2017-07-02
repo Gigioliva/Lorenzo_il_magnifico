@@ -7,6 +7,7 @@ import it.polimi.ingsw.ps22.server.message.*;
 public class VisitorGUI extends VisitorB {
 	
 	private Gui gui;
+	protected LoginFrame login;
 	private ViewClient view;
 	
 	public VisitorGUI(Gui gui,ViewClient view){
@@ -83,7 +84,7 @@ public class VisitorGUI extends VisitorB {
 
 	@Override
 	public void visit(AskUsername mex) {
-		(new LoginFrame(view)).getClass();
+		login=new LoginFrame(view);
 	}
 
 	@Override
@@ -93,7 +94,12 @@ public class VisitorGUI extends VisitorB {
 	
 	@Override
 	public void visit(EndGame mex){
-		
+		gui.genericMessage(mex);
+	}
+	
+	@Override
+	public void visit(RankingMessage mex){
+		login.updateTopPlayers(mex.getString());
 	}
 
 }

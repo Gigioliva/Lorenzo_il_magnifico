@@ -26,7 +26,4 @@ public abstract class Graphic {
 	}
 	
 	public abstract void printModel(Model model);
-	
-	/*public abstract String getChat();*/
-
 }

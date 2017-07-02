@@ -237,4 +237,9 @@ public class VisitorCLI extends VisitorB {
 		}
 		return numbers;
 	}
+	
+	@Override
+	public void visit(RankingMessage mex){
+		System.out.println(mex.getString());
+	}
 }

@@ -35,5 +35,7 @@ public abstract class VisitorB {
 	public abstract void visit(EndDraft mex);
 	
 	public abstract void visit(EndGame mex);
+	
+	public abstract void visit(RankingMessage mex);
 
 }

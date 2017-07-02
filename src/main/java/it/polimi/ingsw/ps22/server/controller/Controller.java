@@ -14,7 +14,7 @@ import it.polimi.ingsw.ps22.server.parser.TimerSaxParser;
 import it.polimi.ingsw.ps22.server.view.View;
 
 public class Controller implements Observer {
-	private static int TIMER = 9000000;
+	private static int TIMER;
 	private Model model;
 	private Timer timer;
 
@@ -63,7 +63,7 @@ public class Controller implements Observer {
 			mex.setString("Il giocatore "+ model.getPlayerGame() + " si è disconnesso");
 			do{
 				model.nextPlayer();
-			}while(!model.getCurrentPlayer().getConnected());
+			}while(!model.getCurrentPlayer().getConnected() && model.getIsActive());
 			model.notifyModel();
 			model.notifyMessage(mex);
 			timer.cancel();

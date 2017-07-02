@@ -80,7 +80,7 @@ public class ChurchSpace implements Serializable {
 	 */
 	public void applyExcomm(ArrayList<Player> players) {
 		for (Player el : players) {
-			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era)) {
+			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era) || !el.getConnected()) {
 				excommunication(el);
 			} else {
 				AskExcomm ask = new AskExcomm();
