@@ -14,10 +14,13 @@ public class ExcommLabel extends JLabel {
 	 */
 	private static final long serialVersionUID = 8198698155682435615L;
 	ArrayList<java.awt.Color> players = new ArrayList<>();
+	private static int count = 0;
+	private int era;
 	
 	public ExcommLabel(double resizeFactor, Rectangle dim){
 		super();
-		//this.setOpaque(false);
+		count = count +2;
+		this.era = count;
 		setMeasures(dim);
 	}
 	
@@ -26,7 +29,7 @@ public class ExcommLabel extends JLabel {
 	}
 	
 	public void update(Model model){
-		//model.getBoard().getChurch(1).get
+		players =  model.getBoard().getChurch(era).getExcomm();
 		repaint();
 			
 	}
@@ -34,7 +37,6 @@ public class ExcommLabel extends JLabel {
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
 		MyImage.updateExcommSpaces(players, this, g);
 	}
 }

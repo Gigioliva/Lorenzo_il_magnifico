@@ -2,9 +2,16 @@ package it.polimi.ingsw.ps22.server.board;
 
 import java.util.ArrayList;
 
+import it.polimi.ingsw.ps22.server.action.CardAction;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.player.Family;
 
+/**
+ * 
+ * The TowerSpace is the space where familiars can be placed
+ * in order to perform a {@link CardAction}. It extends the {@link ActionSpace} class.
+ *
+ */
 public class TowerSpace extends ActionSpace {
 
 	private static final long serialVersionUID = 1L;

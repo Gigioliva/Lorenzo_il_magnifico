@@ -298,7 +298,7 @@ public class BoardPanel extends JPanel{
 		
 		
 		for(int i =1; i<= NUMERE; i++){
-			ExcommLabel excomm1 = new ExcommLabel(resizeFactor, layout.getChurchSpace(resizeFactor, i));
+			ExcommLabel excomm1 = new ExcommLabel(resizeFactor, layout.getExcommSlot(resizeFactor, i));
 			layeredPane.add(excomm1, new Integer(8000));
 			excomm.add(excomm1);
 		}
