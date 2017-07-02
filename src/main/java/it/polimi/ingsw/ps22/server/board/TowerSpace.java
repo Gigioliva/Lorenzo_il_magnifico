@@ -12,6 +12,12 @@ public class TowerSpace extends ActionSpace {
 	private DevelopmentCard card;
 	private int plan;
 
+	/**
+	 * It instantiate the class by setting the following parameters
+	 * @param actionCost the action value of the action space
+	 * @param multi a boolean that is true if more than one familiar can be placed 
+	 * @param plan the position of this space inside the {@link TowerZone}
+	 */
 	public TowerSpace(int actionCost, boolean multi, int plan) {
 		super(actionCost, multi,1);
 		this.plan = plan;
@@ -40,18 +46,33 @@ public class TowerSpace extends ActionSpace {
 		return temp;
 	}
 
+	/**
+	 * 
+	 * @param card the {@link DevelopmentCard} to be added to this space
+	 */
 	public void addCard(DevelopmentCard card) {
 		this.card = card;
 	}
 
+	/**
+	 * 
+	 * @return The {@link DevelopmentCard} associated to this space
+	 */
 	public DevelopmentCard getCard() {
 		return card;
 	}
 
+	/**
+	 * It removes the card associated to this space
+	 */
 	public void removeCard() {
 		card = null;
 	}
 
+	/**
+	 * 
+	 * @return the position of this space inside the {@link TowerZone}
+	 */
 	public int getPlan() {
 		return plan;
 	}

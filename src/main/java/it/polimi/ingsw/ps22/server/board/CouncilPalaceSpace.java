@@ -11,11 +11,20 @@ import it.polimi.ingsw.ps22.server.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 
+/**
+ * 
+ * The CouncilPalaceSpace is a space where any number of familiar can be placed. It extends the {@link ActionSpace} class.
+ *
+ */
 public class CouncilPalaceSpace extends ActionSpace {
 
 	private static final long serialVersionUID = 1L;
 	private final static int ACTIONCOST = 1;
 
+	/**
+	 * It instantiate the CouncilPalaceSpace and sets the bonus of the space to 1 {@link Coin} and 1 {@link CouncilPrivilege}.
+	 * The action cost for this space is 1.
+	 */
 	public CouncilPalaceSpace() {
 		super(ACTIONCOST, true, 0);
 		HashMap<String, ResourceAbstract> bonus = new HashMap<String, ResourceAbstract>();
@@ -42,6 +51,12 @@ public class CouncilPalaceSpace extends ActionSpace {
 		return temp;
 	}
 
+	/**
+	 * It checks whether a certain {@link Family} can be placed in the council palace or not
+	 * @param numServant number of {@link Servant} to add to the action value
+	 * @param family the familiar to be placed
+	 * @return true if the family can be place, false otherwise
+	 */
 	public boolean Control(int numServant, Family family) {
 		Player player = family.getPlayer();
 		int actionValue = family.getValue();
@@ -66,6 +81,12 @@ public class CouncilPalaceSpace extends ActionSpace {
 		return false;
 	}
 
+	/**
+	 * It applies the effects of the placement to the {@link Player} (adding bonus, sub servants, etc .. )
+	 * @param numServant the number of {@link Servant} to increment the action
+	 * @param family the {@link Family} to be placed
+	 * @param model an instance of the model of the game
+	 */
 	public void applyMove(int numServant, Family family, Model model) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
