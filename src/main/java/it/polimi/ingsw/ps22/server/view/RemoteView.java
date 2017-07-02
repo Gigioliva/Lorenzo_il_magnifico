@@ -44,9 +44,13 @@ public class RemoteView extends View implements Observer {
 	}
 
 	public void close() {
-		isActive = false;
+		setInactive();
 		connection.close();
 		connection=null;
+	}
+	
+	public void setInactive(){
+		isActive = false;
 	}
 
 	@Override

@@ -168,12 +168,8 @@ public class LoginFrame extends JFrame {
 		LoginFrame.this.dispose();
 	}
 
-	private void updateTopPlayers(ArrayList<String> topPlayers) {
-		StringBuilder temp = new StringBuilder("Top Players:");
-		for (String str : topPlayers) {
-			temp.append("\n" + str);
-		}
-		topPlayersLabel.setText(temp.toString());
+	public void updateTopPlayers(String str) {
+		topPlayersLabel.setText(str);
 	}
 
 	private void updateLobbyMembers(ArrayList<String> members) {

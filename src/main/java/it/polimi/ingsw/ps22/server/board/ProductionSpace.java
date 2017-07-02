@@ -1,8 +1,6 @@
 package it.polimi.ingsw.ps22.server.board;
 
 import java.util.ArrayList;
-
-import it.polimi.ingsw.ps22.server.action.HarvestAction;
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.player.Family;
 

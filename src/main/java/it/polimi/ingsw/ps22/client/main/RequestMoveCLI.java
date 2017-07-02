@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.move.*;
 
-public class RequestMoveCLI implements RequestMove {
+public class RequestMoveCLI implements RequestMove, Runnable {
 	
 	private static BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
 	private ViewClient view;
@@ -15,8 +15,13 @@ public class RequestMoveCLI implements RequestMove {
 	public RequestMoveCLI(ViewClient view){
 		this.view=view;
 	}
-
+	
 	public void requestMove() {
+		(new Thread(this)).start();
+	}
+	
+	@Override
+	public void run(){
 		boolean corretto=false;
 		do {
 			try {

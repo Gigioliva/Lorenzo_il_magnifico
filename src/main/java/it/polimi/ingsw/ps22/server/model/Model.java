@@ -264,8 +264,8 @@ public class Model extends Observable implements Serializable {
 
 	private Player winGame() {
 		Player player = null;
-		int i = 0;
-		for (String el : orderedPlayers) {
+		int i = -1;
+		for (String el : players.keySet()) {
 			if (players.get(el).getSpecificResource("VictoryPoint").getQuantity() > i) {
 				player = players.get(el);
 				i = players.get(el).getSpecificResource("VictoryPoint").getQuantity();

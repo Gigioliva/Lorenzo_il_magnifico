@@ -10,7 +10,7 @@ public class GraphicCLI extends Graphic {
 
 	@Override
 	public void printModel(Model model) {
-		System.out.print("\033[H\033[2J");
+		/*System.out.print("\033[H\033[2J");*/
 		StringBuilder temp=new StringBuilder();
 		temp.append("DISEGNO MODEL\n");
 		for(String el: model.getPlayers().keySet()){

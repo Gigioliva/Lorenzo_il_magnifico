@@ -43,8 +43,8 @@ public class Gui extends JFrame {
 		}
 	}
 
-	public void initGui(Model model) {
-
+	public void initGui(Model model, LoginFrame login) {
+		login.closeLoginWindow();
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 
 		this.pack();
@@ -115,7 +115,7 @@ public class Gui extends JFrame {
 	}
 
 	public void errorMove(ErrorMove mex) {
-		(new ShowMessage(view, mex)).setVisible(true);
+		(new ShowMessage(view, mex,this)).setVisible(true);
 	}
 
 	public void askExcomm(AskExcomm mex) {
@@ -123,11 +123,14 @@ public class Gui extends JFrame {
 	}
 
 	public void yourTurn(ChoiceMove mex){
-		(new ShowMessage(view,mex)).setVisible(true);
+		(new ShowMessage(view,mex,this)).setVisible(true);
 	}
 
 	public void genericMessage(GenericMessage mex) {
-		(new ShowMessage(view, mex)).setVisible(true);
+		(new ShowMessage(view, mex,this)).setVisible(true);
 	}
-
+	
+	public void close(){
+		this.dispose();
+	}
 }

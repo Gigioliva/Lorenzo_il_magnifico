@@ -16,7 +16,7 @@ public class EndTurn extends Move {
 		if(model.getWaitAnswer().isEmpty()){
 			do{
 				model.nextPlayer();
-			}while(!model.getCurrentPlayer().getConnected());
+			}while(!model.getCurrentPlayer().getConnected() && model.getIsActive());
 			model.notifyModel();
 		}else{
 			ErrorMove error = new ErrorMove();

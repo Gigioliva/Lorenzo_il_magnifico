@@ -6,6 +6,7 @@ import it.polimi.ingsw.ps22.server.answer.AnswerUsername;
 import it.polimi.ingsw.ps22.server.message.AskUsername;
 import it.polimi.ingsw.ps22.server.message.CloseGame;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
+import it.polimi.ingsw.ps22.server.message.RankingMessage;
 
 public class ConnectionRMI extends Connection implements ConnectionRMIinterface {
 
@@ -22,6 +23,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 	@Override
 	public void run() {
 		setUp();
+		send(new RankingMessage(server.getRank()));
 	}
 
 	public void setUp() {

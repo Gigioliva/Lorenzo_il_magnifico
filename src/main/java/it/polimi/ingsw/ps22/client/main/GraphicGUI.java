@@ -21,7 +21,7 @@ public class GraphicGUI extends Graphic {
 			SwingUtilities.invokeLater(new Runnable() {
 				@Override
 				public void run() {
-					gui.initGui(model);
+					gui.initGui(model, ((VisitorGUI)visitor).login);
 					gui.updateGui(model);
 					flag = false;
 				}

@@ -9,7 +9,7 @@ public class EndGame extends GenericMessage {
 	
 	public EndGame(String username){
 		super();
-		setString("THE WINNER IS" + username);
+		setString("THE WINNER IS " + username);
 	}
 	
 	public EndGame accept(VisitorA visitor){

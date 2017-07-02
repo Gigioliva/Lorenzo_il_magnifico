@@ -21,6 +21,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.controller.Controller;
+import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.model.ModelView;
 import it.polimi.ingsw.ps22.server.parser.InputPlayerDataSaxParser;
@@ -130,6 +131,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			temp.addObserver(modelView);
 			ArrayList<RemoteView> players = savePlaying.remove(temp);
 			for (RemoteView user : players) {
+				user.setInactive();
 				modelView.addObserver(user);
 				user.addObserver(controller);
 				if (user.getUsername().equals(name)) {
@@ -137,11 +139,8 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				}
 			}
 			playingConnection.put(temp, players);
-			if(temp.getPlayerGame()==null){
-				while(!temp.getWaitAnswer().isEmpty()){
-					temp.getWaitAnswer().remove(0);
-				}
-				temp.draftStart();
+			for(MessageAsk el:temp.getWaitAnswer()){
+				temp.notifyAsk(el);
 			}
 		}
 	}
@@ -252,6 +251,10 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			saveGame();
 		}
 	}
+	
+	public HashMap<String, UserData> getRank(){
+		return login;
+	}
 
 	private void saveGame() {
 		OutputPlayerDataDomParser
@@ -260,7 +263,11 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		ObjectOutputStream output;
 		try {
 			HashMap<Model, ArrayList<RemoteView>> temp= new HashMap<>();
-			temp.putAll(playingConnection);
+			for(Model el: playingConnection.keySet()){
+				if(el.getPlayerGame()!=null){
+					temp.put(el, playingConnection.get(el));
+				}
+			}
 			temp.putAll(savePlaying);
 			out = new FileOutputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
 			output=new ObjectOutputStream(out);
