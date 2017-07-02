@@ -18,7 +18,7 @@ public class TestBonusAcc {
 	}
 	
 	@Test
-	public void testAddBounus(){
+	public void testAddBonus(){
 		HashMap<String, ResourceAbstract> discChar=new HashMap<>();
 		discChar.put("Coin", new Coin(2));
 		HashMap<String, ResourceAbstract> discVenture=new HashMap<>();
