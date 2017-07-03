@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
@@ -19,6 +20,10 @@ public class TowerZone extends Zone {
 	protected boolean occupied;
 	protected HashMap<Integer, ArrayList<DevelopmentCard>> cards;
 
+	/**
+	 * It instantiates a new TowerZone with his {@link TowerSpace}s
+	 * @param model
+	 */
 	public TowerZone(Model model) {
 		super(model);
 		towerSpaces = new TowerSpace[NUM_SPACES];
@@ -53,6 +58,10 @@ public class TowerZone extends Zone {
 		this.occupied = true;
 	}
 	
+	/**
+	 * 
+	 * @return an array containing the {@link TowerSpace}s of this Zone
+	 */
 	public TowerSpace[] getTowerSpaces(){
 		return this.towerSpaces;
 	}
@@ -62,6 +71,12 @@ public class TowerZone extends Zone {
 		return false;
 	}
 
+	/**
+	 * It checks whether a {@link Player} has already placed a {@link Family}
+	 * in the {@link TowerZone}.
+	 * @param player the target {@link Player}
+	 * @return true if the player didn't place any {@link Family}, false otherwise
+	 */
 	protected boolean checkAllSpace(Player player) {
 		boolean control = true;
 		ArrayList<Family> allFamily = new ArrayList<Family>();
@@ -75,6 +90,14 @@ public class TowerZone extends Zone {
 		return control;
 	}
 
+	/**
+	 * It checks whether a {@link Player} is allowed to place the {@link Family} in the {@link TowerSpace} 
+	 * and if he can afford to take the corresponding {@link DevelopmentCard}
+	 * @param player the target {@link Player}
+	 * @param towerSpace the specific {@link TowerSpace} of the zone
+	 * @return true if the {@link Player} can afford to to place a familiar in the space and can afford
+	 * to take the {@link DevelopmentCard}
+	 */
 	protected boolean checkResources(Player player, TowerSpace towerSpace) {
 		boolean applyBonus = false;
 		boolean payCoin = false;
@@ -106,10 +129,23 @@ public class TowerZone extends Zone {
 	public void placeFamily(int numServant, int actionSpace, Family family) {
 	}
 	
+	/**
+	 * This method assigns the card to the {@link Player}. Before doing it, it may ask to the {@link Player}
+	 * which of the possible costs of the card he wants to pay and then applies all the effects of the card
+	 * @param actionSpace the specific {@link ActionSpace}.
+	 * @param player the target {@link Player}
+	 */
 	public void takeCard(int actionSpace, Player player){
 		
 	}
 	
+	/**
+	 * This method assigns the card to the {@link Player}. Before doing it, it may ask to the {@link Player}
+	 * which of the possible costs of the card he wants to pay and then applies all the effects of the card
+	 * @param actionSpace the specific {@link ActionSpace}.
+	 * @param player the target {@link Player}
+	 * @param discount a possible discount on resources to take the card
+	 */
 	public void takeCard(int actionSpace, Player player, HashMap<String, ResourceAbstract> discount){
 		if(discount==null || discount.isEmpty()){
 			takeCard(actionSpace,player);

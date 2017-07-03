@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.board;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
@@ -7,6 +8,7 @@ import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
+import it.polimi.ingsw.ps22.server.resource.Servant;
 
 public class ProductionZone extends Zone {
 	
@@ -14,6 +16,10 @@ public class ProductionZone extends Zone {
 	private static final int NUM_SPACES = 2;
 	private ProductionSpace[] productionSpace;
 
+	/**
+	 * It instantiates a new ProductionZone with two {@link ProductionSpace}s.
+	 * @param model that represents the state of the game
+	 */
 	public ProductionZone(Model model) {
 		super(model);
 		productionSpace = new ProductionSpace[NUM_SPACES];
@@ -28,6 +34,14 @@ public class ProductionZone extends Zone {
 		return temp;
 	}
 	
+	/**
+	 * It controls that the {@link Player} has not placed any colorful {@link Family} in this zone,
+	 * the action value, permanent effects, etc ...
+	 * @param numServant the number of {@link Servant} to increase the action value
+	 * @param actionSpace an integer representing the target specific {@link ActionSpace}
+	 * @param family the family to be placed.
+	 * @return true if the family can be placed, false otherwise
+	 */
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
@@ -42,6 +56,13 @@ public class ProductionZone extends Zone {
 		return false;
 	}
 
+	/**
+	 * It applies the move to the player by decrementing the used {@link Servant}s, adding the family to the space,
+	 * applying eventual specific effects and performing a {@link ProductionAction}
+	 * @param numServant
+	 * @param actionSpace
+	 * @param family
+	 */
 	public void applyMove(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();
 		applyServant(family, numServant);
@@ -85,6 +106,10 @@ public class ProductionZone extends Zone {
 		}
 	}
 	
+	/**
+	 * 
+	 * @return an {@link Array} containing the {@link ProductionSpace}s of this zone
+	 */
 	public ProductionSpace[] getProdSpaces(){
 		return this.productionSpace;
 	}

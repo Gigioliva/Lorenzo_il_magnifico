@@ -15,7 +15,7 @@ public class ProductionSpace extends ActionSpace {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * It instantiate the class by setting the following parameters
+	 * It instantiates the class by setting the following parameters
 	 * @param actionCost the action value of the action space
 	 * @param multi a boolean that is true if more than one familiar can be placed 
 	 * @param maxSize the maximum number of familiars that can be placed here
