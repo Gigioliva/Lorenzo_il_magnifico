@@ -178,12 +178,14 @@ public class LoginFrame extends JFrame {
 				view.send(new AnswerUsername(userText.getText(), temp, 4, newUser.isSelected()));
 				matchmakingLabel.setVisible(true);
 				inProgressLabel.setVisible(true);
+				errorLabel.setVisible(false);
 				
 			}
 			if (confirm5.isSelected()) {
 				view.send(new AnswerUsername(userText.getText(), temp, 5, newUser.isSelected()));
 				matchmakingLabel.setVisible(true);
 				inProgressLabel.setVisible(true);
+				errorLabel.setVisible(false);
 			}
 
 		}

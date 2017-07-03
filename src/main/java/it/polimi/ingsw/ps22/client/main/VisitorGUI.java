@@ -84,7 +84,11 @@ public class VisitorGUI extends VisitorB {
 
 	@Override
 	public void visit(AskUsername mex) {
-		login=new LoginFrame(view);
+		if(login==null){
+			login=new LoginFrame(view);
+		}else{
+			login.notifyErrorForm();
+		}
 	}
 
 	@Override
