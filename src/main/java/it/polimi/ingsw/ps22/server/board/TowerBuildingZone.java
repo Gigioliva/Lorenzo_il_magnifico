@@ -2,6 +2,7 @@ package it.polimi.ingsw.ps22.server.board;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
 import it.polimi.ingsw.ps22.server.card.CardBuilding;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.model.Color;
@@ -13,10 +14,20 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+/**
+ * 
+ * This class extends the {@link TowerZone} implementing the specific
+ * characteristics that the {@link CardBuilding} require.
+ *
+ */
 public class TowerBuildingZone extends TowerZone {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * It instantiates a new Tower Building
+	 * @param model
+	 */
 	public TowerBuildingZone(Model model) {
 		super(model);
 		HashMap<Integer, ArrayList<CardBuilding>> temp = CardSort.buildingSortByEra();

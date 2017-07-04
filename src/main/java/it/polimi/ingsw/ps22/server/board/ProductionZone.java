@@ -10,6 +10,12 @@ import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 
+/**
+ * 
+ * The harvest zone is the zone containing the {@link ProductionSpace}s. It is responsible
+ * for applying the {@link ProductionAction}
+ *
+ */
 public class ProductionZone extends Zone {
 	
 	private static final long serialVersionUID = 1L;
@@ -59,9 +65,9 @@ public class ProductionZone extends Zone {
 	/**
 	 * It applies the move to the player by decrementing the used {@link Servant}s, adding the family to the space,
 	 * applying eventual specific effects and performing a {@link ProductionAction}
-	 * @param numServant
-	 * @param actionSpace
-	 * @param family
+	 * @param numServant the {@link Servant}s to increase the action value
+	 * @param actionSpace the specific {@link ActionSpace}
+	 * @param family the {@link Family} to be placed
 	 */
 	public void applyMove(int numServant, int actionSpace, Family family) {
 		Player player = family.getPlayer();

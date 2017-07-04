@@ -4,13 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
-import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
+import it.polimi.ingsw.ps22.server.resource.Servant;
 
 public class TowerZone extends Zone {
 
@@ -66,6 +66,15 @@ public class TowerZone extends Zone {
 		return this.towerSpaces;
 	}
 
+	/**
+	 * It performs all the controls necessary to place the familiar
+	 * in the specific {@link ActionSpace} of this tower,
+	 * considering the {@link Servant}s added. It will be overridden in
+	 * each specific tower
+	 * @param numServant the number of {@link Servant}
+	 * @param actionSpace the specific action space
+	 * @param family the {@link Family} to be placed
+	 */
 	@Override
 	public boolean Control(int numServant, int actionSpace, Family family) {
 		return false;
@@ -126,6 +135,13 @@ public class TowerZone extends Zone {
 	}
 
 	
+	/**
+	 * this method performs the actual placement of the {@link Family} in the 
+	 * specific {@link ActionSpace} of this tower
+	 * @param numServant {@link Servant}s used to increase the action value
+	 * @param actionSpace the specific {@link ActionSpace}
+	 * @param family the {@link Family} to be placed
+	 */
 	public void placeFamily(int numServant, int actionSpace, Family family) {
 	}
 	
@@ -152,6 +168,11 @@ public class TowerZone extends Zone {
 		}
 	}
 
+	/**
+	 * this method resets all the {@link ActionSpace}s of this tower, and adds new cards 
+	 * to those spaces
+	 * @param turn an int representing the current turn
+	 */
 	@Override
 	public void reset(int turn) {
 		this.occupied=false;

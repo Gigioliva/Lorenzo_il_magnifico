@@ -15,10 +15,20 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+/**
+ * 
+ * This class extends the {@link TowerZone} implementing the specific
+ * characteristics that the {@link CardVenture} require.
+ *
+ */
 public class TowerVentureZone extends TowerZone {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * It instantiates a new Tower Venture
+	 * @param model
+	 */
 	public TowerVentureZone(Model model) {
 		super(model);
 		HashMap<Integer, ArrayList<CardVenture>> temp = CardSort.ventureSortByEra();
@@ -93,6 +103,15 @@ public class TowerVentureZone extends TowerZone {
 		}
 	}
 
+	/**
+	 * This method is called to pay the {@link CardVenture} previously chosen. In particular
+	 * it applies the cost of the card to the {@link Player}. 
+	 * Finally it applies all the effects of the card
+	 * @param choice an int representing the choice of the player among the possible costs
+	 * @param possibleCost an ArrayList containing the costs that the player can afford
+	 * @param player the target {@link Player}
+	 * @param towerSpace the specific {@link TowerSpace}
+	 */
 	public void payCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		towerSpace.getCard().applyCostToPlayer(player, possibleCost.get(choice));
 		towerSpace.getCard().applyImmediateEffects(player, model);
@@ -101,6 +120,16 @@ public class TowerVentureZone extends TowerZone {
 		towerSpace.removeCard();
 	}
 
+	/**
+	 * This method is called to pay the {@link CardVenture} previously chosen. In particular
+	 * it applies the cost of the card to the {@link Player}, considering eventual discount. 
+	 * Finally it applies all the effects of the card
+	 * @param choice an int representing the choice of the player among the possible costs
+	 * @param possibleCost an ArrayList containing the costs that the player can afford
+	 * @param player the target {@link Player}
+	 * @param towerSpace the specific {@link TowerSpace}
+	 * @param discount eventual discount for the card
+	 */
 	public void payCard(int choice, ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace,
 			HashMap<String, ResourceAbstract> discount) {
 		payCard(choice, possibleCost, player, towerSpace);
