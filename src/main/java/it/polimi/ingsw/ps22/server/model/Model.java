@@ -34,6 +34,9 @@ public class Model extends Observable implements Serializable {
 	private LinkedHashMap<Player, ArrayList<CardLeader>> cardLeaderStart;
 	private boolean isActive=true;
 
+	/**
+	 * 
+	 */
 	public Model() {
 		board = new Board(this);
 		this.players = new LinkedHashMap<String, Player>();
@@ -66,31 +69,61 @@ public class Model extends Observable implements Serializable {
 		return temp;
 	}
 
+	/**
+	 * 
+	 * @return the updated {@link Board}
+	 */
 	public Board getBoard() {
 		return this.board;
 	}
 
+	/**
+	 * 
+	 * @return the current turn of the game
+	 */
 	public int getTurn() {
 		return turn;
 	}
 
+	/**
+	 * 
+	 * @return the {@link Player} of the game. The key is a String representing the name of the Player
+	 */
 	public HashMap<String, Player> getPlayers() {
 		return players;
 	}
 
+	/**
+	 * It adds to the the players of the game a new {@link Player}
+	 * @param username the name of the new player
+	 */
 	public void addPlayers(String username) {
 		Player player = new Player(username, ColorPlayer.getColor(players.size()+1));
 		this.players.put(username, player);
 	}
 
+	/**
+	 * 
+	 * @return the username of the player that is currently playing
+	 */
 	public String getPlayerGame() {
 		return playerGame;
 	}
 
+	/**
+	 * 
+	 * @return the {@link Player} that is currently playing
+	 */
 	public Player getCurrentPlayer() {
 		return players.get(playerGame);
 	}
 
+	/**
+	 * This method initializes the game. It sets the playable and not playable zones of the 
+	 * board, it gives to the player the right amount of {@link Coin} according to order, 
+	 * it starts the procedure of assigning the {@link CardLeader} to the players. 
+	 * It notifies the {@link ModelView}
+	 */
 	public void startGame() {
 		board.setZone(players.size());
 		orderedPlayers = new ArrayList<String>(players.keySet());
@@ -115,6 +148,11 @@ public class Model extends Observable implements Serializable {
 		draftStart();
 	}
 
+	/**
+	 * It notifies the {@link ModelView} that there are no messages
+	 * in waiting state, and then it notify the {@link ModelView}
+	 * with new {@link ChoiceMove} message
+	 */
 	public void notifyModel() {
 		if (waitAnswer.isEmpty()) {
 			setChanged();
@@ -123,6 +161,9 @@ public class Model extends Observable implements Serializable {
 		}
 	}
 
+	/**
+	 * 
+	 */
 	public void nextPlayer() {
 		canFamilyMove = true;
 		int i;
@@ -274,6 +315,10 @@ public class Model extends Observable implements Serializable {
 		return player;
 	}
 
+	/**
+	 * It notifies the {@link ModelView} sending a {@link MessageAsk} message
+	 * @param ask the message to send
+	 */
 	public void notifyAsk(MessageAsk ask) {
 		if(!waitAnswer.contains(ask)){
 			waitAnswer.add(ask);
@@ -282,20 +327,36 @@ public class Model extends Observable implements Serializable {
 		notifyObservers(ask);
 	}
 
+	/**
+	 * It notifies the {@link ModelView} sending a {@link GenericMessage}
+	 * @param ask the message to send
+	 */
 	public void notifyMessage(GenericMessage ask) {
 		setChanged();
 		notifyObservers(ask);
 	}
 	
+	/**
+	 * It sends notify the {@link ModelView} that it has to
+	 * do something with the whole {@link Model}
+	 */
 	public void sendModel(){
 		setChanged();
 		notifyObservers();
 	}
 
+	/**
+	 * 
+	 * @return
+	 */
 	public boolean getCanFamilyMove() {
 		return canFamilyMove;
 	}
 
+	/**
+	 * 
+	 * @return all the messages that are in wainting state
+	 */
 	public ArrayList<MessageAsk> getWaitAnswer() {
 		return waitAnswer;
 	}
@@ -304,6 +365,13 @@ public class Model extends Observable implements Serializable {
 		this.canFamilyMove = false;
 	}
 
+	/**
+	 * This method actually performs the procedure of assigning 
+	 * to the {@link Player}s the {@link CardLeader}s. First it 
+	 *	sending to each player 4 Leader card, then each player chooses
+	 * one card and send the three more to the other player. The procedures
+	 * ends when 4 cards are assigned to each player 
+	 */
 	public void draftStart() {
 		boolean end = true;
 		for (Player el : cardLeaderStart.keySet()) {
