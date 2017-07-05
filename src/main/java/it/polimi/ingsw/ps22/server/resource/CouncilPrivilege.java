@@ -3,12 +3,20 @@ package it.polimi.ingsw.ps22.server.resource;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+/**
+ * Extension of the class {@link ResourceAbstract}, it implements a
+ * representation of the Council Privilege.
+ */
 public class CouncilPrivilege extends ResourceAbstract {
 	
 	private static final long serialVersionUID = 1L;
 	
 	private transient static HashMap<Integer, HashMap<String,ResourceAbstract>> possibleExchanges;
 	
+	/**
+	 * Create a new {@link CouncilPrivilege}
+	 * @param councilprivilege is the quantity to which the resource is set
+	 */
 	public CouncilPrivilege(int councilprivilege){
 		super(councilprivilege);
 		
