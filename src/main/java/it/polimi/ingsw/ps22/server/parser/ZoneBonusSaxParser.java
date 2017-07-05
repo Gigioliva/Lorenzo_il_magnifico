@@ -37,7 +37,15 @@ import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
 public class ZoneBonusSaxParser {
-
+	/**
+	 * This method read data to create board's bonus zone from XML file
+	 * 
+	 * @param pathname
+	 *            is the pathname of the file to read
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link HashMap} to fill with XML
+	 *            data
+	 */
 	public static void BonusRead(String pathname, ArrayList<HashMap<String, ResourceAbstract>> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();

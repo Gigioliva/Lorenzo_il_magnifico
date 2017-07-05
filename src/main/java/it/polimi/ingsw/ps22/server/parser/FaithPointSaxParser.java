@@ -23,8 +23,18 @@ XML Structure
  */
 
 public class FaithPointSaxParser {
-	
-	public static void FaithRead(String pathname, HashMap<Integer,VictoryPoint> parsedData) {
+
+	/**
+	 * Return data to create the FaithPoint track of the board from XML file
+	 * 
+	 * @param pathname
+	 *            is the relative pathname of the file to read
+	 * @param parsedData
+	 *            is a {@link HashMap} that contains a {@link Integer} as key
+	 *            which represent the number of the box and as object the
+	 *            {@link VictoryPoint} you receive at the end of the game
+	 */
+	public static void FaithRead(String pathname, HashMap<Integer, VictoryPoint> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
@@ -37,7 +47,7 @@ public class FaithPointSaxParser {
 						throws SAXException {
 					lastQName = qName.toLowerCase();
 				}
-				
+
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 					lastQName = "";
 					if (qName.equalsIgnoreCase("slot")) {

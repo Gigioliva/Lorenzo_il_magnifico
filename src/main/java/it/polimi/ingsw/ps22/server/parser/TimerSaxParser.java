@@ -12,6 +12,16 @@ import org.xml.sax.helpers.DefaultHandler;
 
 public class TimerSaxParser {
 
+	/**
+	 * This method read data to set the correct interval in the timer of the
+	 * server and of the controller
+	 * 
+	 * @param pathname
+	 *            is the pathname of the file you want to read
+	 * @param parsedData
+	 *            is the {@link HashMap} of timers, the {@link Integer}
+	 *            represent time in milliseconds
+	 */
 	private static void TimerRead(String pathname, HashMap<String, Integer> timers) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -34,7 +44,7 @@ public class TimerSaxParser {
 					if (lastQName.equalsIgnoreCase("server")) {
 						timers.put("Server", Integer.parseInt(str));
 					}
-					
+
 					if (lastQName.equalsIgnoreCase("controller")) {
 						timers.put("Controller", Integer.parseInt(str));
 					}
@@ -49,19 +59,19 @@ public class TimerSaxParser {
 			logger.info(e.getMessage());
 		}
 	}
-	
+
 	public static int ServerTimer() {
-		String pathname="src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
+		String pathname = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 		TimerRead(pathname, temp);
 		return temp.get("Server");
 	}
-	
+
 	public static int ControllerTimer() {
-		String pathname="src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
+		String pathname = "src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Timers.xml";
 		HashMap<String, Integer> temp = new HashMap<String, Integer>();
 		TimerRead(pathname, temp);
 		return temp.get("Controller");
 	}
-	
+
 }

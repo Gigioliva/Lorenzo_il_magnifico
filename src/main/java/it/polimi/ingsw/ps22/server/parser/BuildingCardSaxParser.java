@@ -64,7 +64,7 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
     		<servant>0</servant>
     		<military>0</military>
     		<faithpoint>0</faithpoint>	
-    		<councilpoint>0</councilpoint>					//verificare
+    		<councilpoint>0</councilpoint>
     		<victorypoint>0</victorypoint>	
 		</exchangeprodeffect>
 		<cardmoltprodeffect>														
@@ -82,6 +82,17 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
 */
 
 public class BuildingCardSaxParser {
+
+	/**
+	 * This method parse a XML file to read the {@link ArrayList} of
+	 * {@link CardBuilding}
+	 * 
+	 * @param pathname
+	 *            is the path of the file to read to load the card
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link CardBuilding} you want to
+	 *            fill with XML data
+	 */
 
 	public static void BuildingRead(String pathname, ArrayList<CardBuilding> parsedData) {
 		try {
@@ -232,6 +243,15 @@ public class BuildingCardSaxParser {
 
 				}
 
+				/**
+				 * 
+				 * @param res
+				 *            is a resource (Coin, Stone, Wood, Servant) to
+				 *            process and add in the correct place in the card
+				 *            (as a cost, as an immediate gain or as a
+				 *            production effect)
+				 */
+
 				private void processElementResource(Resource res) {
 					if (boolCost) {
 						card.addCost(res.getName(), res);
@@ -259,6 +279,14 @@ public class BuildingCardSaxParser {
 					}
 				}
 
+				/**
+				 * 
+				 * @param point
+				 *            is a generic point (FaithPoint, VictoryPoint,
+				 *            MilitaryPoint) to process and add in the correct
+				 *            place in the card (as a cost, as an immediate gain
+				 *            or as a production effect)
+				 */
 				private void processElementPoint(Point point) {
 
 					if (boolGainImm) {
@@ -282,6 +310,14 @@ public class BuildingCardSaxParser {
 						}
 					}
 				}
+
+				/**
+				 * 
+				 * @param value
+				 *            is the number of CouncilPriviledge to add in the
+				 *            correct place in the card (as a cost, as an
+				 *            immediate gain or as a production effect)
+				 */
 
 				private void processElementCouncilPrivilege(int value) {
 

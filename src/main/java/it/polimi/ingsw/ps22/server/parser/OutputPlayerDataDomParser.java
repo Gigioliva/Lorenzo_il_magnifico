@@ -34,6 +34,16 @@ XML Structure
 
 public class OutputPlayerDataDomParser {
 
+	/**
+	 * This method write on persistent memory the data of the player with their
+	 * statistics
+	 * 
+	 * @param pathname
+	 *            is the pathname of the file in which you want to write
+	 * @param toWrite
+	 *            is the {@link HashMap} which contains the usersData to write
+	 *            on XML file
+	 */
 	public static void PlayerDataWrite(String pathname, HashMap<String, UserData> toWrite) {
 		try {
 
@@ -63,7 +73,7 @@ public class OutputPlayerDataDomParser {
 				str = Integer.toString(toWrite.get(userNm).getNumVictory());
 				numvict.appendChild(doc.createTextNode(str));
 				user.appendChild(numvict);
-				
+
 				Element numgame = doc.createElement("numgame");
 				str = Integer.toString(toWrite.get(userNm).getNumPlayedGame());
 				numgame.appendChild(doc.createTextNode(str));

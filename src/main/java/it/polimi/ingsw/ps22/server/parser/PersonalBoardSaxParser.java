@@ -63,6 +63,16 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
 
 public class PersonalBoardSaxParser {
 
+	/**
+	 * This method read data to create personal boards of the player from XML
+	 * file
+	 * 
+	 * @param pathname
+	 *            is the pathname of the file you want to read
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link PersonalBoard} to fill with
+	 *            XML data
+	 */
 	public static void PersonalBoardRead(String pathname, ArrayList<PersonalBoard> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -157,11 +167,11 @@ public class PersonalBoardSaxParser {
 				public void characters(char ch[], int start, int length) throws SAXException {
 
 					String str = new String(ch, start, length);
-					
+
 					if (lastQName.equalsIgnoreCase("pathname")) {
 						toAdd.setPathname(str);
 					}
-					
+
 					if (boolHarvestBonus) {
 						if (lastQName.equalsIgnoreCase("coin")) {
 							lastInt = Integer.parseInt(str);

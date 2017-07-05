@@ -64,13 +64,23 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
 
 public class ExcommCardSaxParser {
 
+	/**
+	 * This method parse a XML file to read the {@link ArrayList} of
+	 * {@link CardExcomm}
+	 * 
+	 * @param pathname
+	 *            is the path of the file to read to load the card
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link CardExcomm} you want to
+	 *            fill with XML data
+	 */
 	public static void ExcommRead(String pathname, ArrayList<CardExcomm> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
 			SAXParser saxParser = factory.newSAXParser();
 			DefaultHandler handler = new DefaultHandler() {
 				CardExcomm card = new CardExcomm();
-				BonusEffect permResEff =new BonusEffect();
+				BonusEffect permResEff = new BonusEffect();
 				SubVictoryPoint subEff;
 				String lastQName = "";
 
@@ -103,7 +113,7 @@ public class ExcommCardSaxParser {
 					if (lastQName.equalsIgnoreCase("pathname")) {
 						card.setPathname(str);
 					}
-					
+
 					if (lastQName.equalsIgnoreCase("militaryincrement")) {
 						permResEff.addBonus("MilitaryPoint", new MilitaryPoint(Integer.parseInt(str)));
 					}
@@ -177,26 +187,26 @@ public class ExcommCardSaxParser {
 					}
 
 					if (lastQName.equalsIgnoreCase("endvictorylose")) {
-						subEff= new SubVictoryPoint("player");
+						subEff = new SubVictoryPoint("player");
 						subEff.addBonus("VictoryPoint", new VictoryPoint(5));
 						card.addEndEffect(subEff);
 					}
 
 					if (lastQName.equalsIgnoreCase("militarydecrementvictory")) {
-						subEff= new SubVictoryPoint("player");
+						subEff = new SubVictoryPoint("player");
 						subEff.addBonus("MilitaryPoint", new MilitaryPoint(1));
 						card.addEndEffect(subEff);
 					}
 
 					if (lastQName.equalsIgnoreCase("endlosevictorybuildingstonewood")) {
-						subEff= new SubVictoryPoint("Building");
+						subEff = new SubVictoryPoint("Building");
 						subEff.addBonus("Wood", new Wood(1));
 						subEff.addBonus("Stone", new Stone(1));
 						card.addEndEffect(subEff);
 					}
 
 					if (lastQName.equalsIgnoreCase("endlosevictoryforallresource")) {
-						subEff= new SubVictoryPoint("player");
+						subEff = new SubVictoryPoint("player");
 						subEff.addBonus("Coin", new Coin(1));
 						subEff.addBonus("Stone", new Stone(1));
 						subEff.addBonus("Wood", new Wood(1));

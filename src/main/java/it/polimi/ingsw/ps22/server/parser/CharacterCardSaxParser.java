@@ -99,6 +99,16 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
 
 public class CharacterCardSaxParser {
 
+	/**
+	 * This method parse a XML file to read the {@link ArrayList} of
+	 * {@link CardCharacter}
+	 * 
+	 * @param pathname
+	 *            is the path of the file to read to load the card
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link CardCharacter} you want to
+	 *            fill with XML data
+	 */
 	public static void CharacterRead(String pathname, ArrayList<CardCharacter> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -150,7 +160,7 @@ public class CharacterCardSaxParser {
 				public void endElement(String uri, String localName, String qName) throws SAXException {
 
 					lastQName = "";
-					
+
 					if (qName.equals("card")) {
 						card.addPermanentEffect(bonus);
 						parsedData.add(card);
@@ -377,8 +387,8 @@ public class CharacterCardSaxParser {
 							reduce.addBonus("Wood", new Wood(Integer.parseInt(str)));
 					}
 
-					lastQName = "";	
-					
+					lastQName = "";
+
 				}
 
 			};

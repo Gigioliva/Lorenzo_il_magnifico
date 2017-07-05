@@ -28,6 +28,14 @@ import it.polimi.ingsw.ps22.server.view.UserData;
 
 public class InputPlayerDataSaxParser {
 
+	/**
+	 * This method load players' data from XML file
+	 * 
+	 * @param pathname
+	 *            is the pathname of the file you want to read
+	 * @param parsedData
+	 *            is the {@link HashMap} to fill with XML data
+	 */
 	public static void PlayerRead(String pathname, HashMap<String, UserData> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();

@@ -8,10 +8,18 @@ import java.util.Random;
 
 public class CardSort {
 
+	/**
+	 * Read the Character cards, sort they random and group by era
+	 * 
+	 * @return a {@link HashMap} with as a key an {@link Integer} that represent
+	 *         the era and as object the {@link ArrayList} of
+	 *         {@link CardCharacter} of the relative era
+	 */
 	public static HashMap<Integer, ArrayList<CardCharacter>> characterSortByEra() {
 		HashMap<Integer, ArrayList<CardCharacter>> card = new HashMap<Integer, ArrayList<CardCharacter>>();
 		ArrayList<CardCharacter> allCard = new ArrayList<CardCharacter>();
-		CharacterCardSaxParser.CharacterRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Character.xml", allCard);
+		CharacterCardSaxParser.CharacterRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Character.xml",
+				allCard);
 		for (CardCharacter el : allCard) {
 			if (card.containsKey(el.getEra())) {
 				card.get(el.getEra()).add(el);
@@ -32,10 +40,18 @@ public class CardSort {
 		return card;
 	}
 
+	/**
+	 * Read the Venture cards, sort they random and group by era
+	 * 
+	 * @return a {@link HashMap} with as a key an {@link Integer} that represent
+	 *         the era and as object the {@link ArrayList} of
+	 *         {@link CardVenture} of the relative era
+	 */
 	public static HashMap<Integer, ArrayList<CardVenture>> ventureSortByEra() {
 		HashMap<Integer, ArrayList<CardVenture>> card = new HashMap<Integer, ArrayList<CardVenture>>();
 		ArrayList<CardVenture> allCard = new ArrayList<CardVenture>();
-		VentureCardSaxParser.VentureRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Venture.xml", allCard);
+		VentureCardSaxParser.VentureRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Venture.xml",
+				allCard);
 		for (CardVenture el : allCard) {
 			if (card.containsKey(el.getEra())) {
 				card.get(el.getEra()).add(el);
@@ -56,10 +72,18 @@ public class CardSort {
 		return card;
 	}
 
+	/**
+	 * Read the Building cards, sort they random and group by era
+	 * 
+	 * @return a {@link HashMap} with as a key an {@link Integer} that represent
+	 *         the era and as object the {@link ArrayList} of
+	 *         {@link CardBuilding} of the relative era
+	 */
 	public static HashMap<Integer, ArrayList<CardBuilding>> buildingSortByEra() {
 		HashMap<Integer, ArrayList<CardBuilding>> card = new HashMap<Integer, ArrayList<CardBuilding>>();
 		ArrayList<CardBuilding> allCard = new ArrayList<CardBuilding>();
-		BuildingCardSaxParser.BuildingRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Building.xml", allCard);
+		BuildingCardSaxParser.BuildingRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Building.xml",
+				allCard);
 		for (CardBuilding el : allCard) {
 			if (card.containsKey(el.getEra())) {
 				card.get(el.getEra()).add(el);
@@ -80,10 +104,18 @@ public class CardSort {
 		return card;
 	}
 
+	/**
+	 * Read the Territory cards, sort they random and group by era
+	 * 
+	 * @return a {@link HashMap} with as a key an {@link Integer} that represent
+	 *         the era and as object the {@link ArrayList} of
+	 *         {@link CardTerritory} of the relative era
+	 */
 	public static HashMap<Integer, ArrayList<CardTerritory>> territorySortByEra() {
 		HashMap<Integer, ArrayList<CardTerritory>> card = new HashMap<Integer, ArrayList<CardTerritory>>();
 		ArrayList<CardTerritory> allCard = new ArrayList<CardTerritory>();
-		TerritoryCardSaxParser.TerritoryRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Territory.xml", allCard);
+		TerritoryCardSaxParser.TerritoryRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Territory.xml",
+				allCard);
 		for (CardTerritory el : allCard) {
 			if (card.containsKey(el.getEra())) {
 				card.get(el.getEra()).add(el);
@@ -103,11 +135,19 @@ public class CardSort {
 		}
 		return card;
 	}
-	
+
+	/**
+	 * Read the Excomm cards, sort they random and group by era
+	 * 
+	 * @return a {@link HashMap} with as a key an {@link Integer} that represent
+	 *         the era and as object the {@link ArrayList} of {@link CardExcomm}
+	 *         of the relative era
+	 */
 	public static HashMap<Integer, ArrayList<CardExcomm>> excommSortByEra() {
 		HashMap<Integer, ArrayList<CardExcomm>> card = new HashMap<Integer, ArrayList<CardExcomm>>();
 		ArrayList<CardExcomm> allCard = new ArrayList<CardExcomm>();
-		ExcommCardSaxParser.ExcommRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Excomm.xml", allCard);
+		ExcommCardSaxParser.ExcommRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Excomm.xml",
+				allCard);
 		for (CardExcomm el : allCard) {
 			if (card.containsKey(el.getEra())) {
 				card.get(el.getEra()).add(el);
@@ -127,13 +167,18 @@ public class CardSort {
 		}
 		return card;
 	}
-	
+
+	/**
+	 * Read the Leader cards and sort they random
+	 * 
+	 * @return an {@link ArrayList} of {@link CardLeader}
+	 */
 	public static ArrayList<CardLeader> leaderSort() {
-		ArrayList<CardLeader> temp=new ArrayList<CardLeader>();
-		ArrayList<CardLeader> allCard=new ArrayList<CardLeader>();
+		ArrayList<CardLeader> temp = new ArrayList<CardLeader>();
+		ArrayList<CardLeader> allCard = new ArrayList<CardLeader>();
 		LeaderCardSaxParser.LeaderRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/Leader.xml", temp);
 		Random random = new Random();
-		while(!temp.isEmpty()){
+		while (!temp.isEmpty()) {
 			allCard.add(temp.remove(random.nextInt(temp.size())));
 		}
 		return allCard;

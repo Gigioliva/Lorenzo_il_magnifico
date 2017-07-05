@@ -53,6 +53,17 @@ import it.polimi.ingsw.ps22.server.resource.Wood;
 
 public class TerritoryCardSaxParser {
 
+	/**
+	 * This method parse a XML file to read the {@link ArrayList} of
+	 * {@link CardTerritory}
+	 * 
+	 * @param pathname
+	 *            is the path of the file to read to load the card
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link CardTerritory} you want to
+	 *            fill with XML data
+	 */
+
 	public static void TerritoryRead(String pathname, ArrayList<CardTerritory> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();

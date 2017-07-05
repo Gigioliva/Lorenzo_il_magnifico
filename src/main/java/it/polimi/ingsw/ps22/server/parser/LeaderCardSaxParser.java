@@ -95,6 +95,16 @@ XML Structure
 
 public class LeaderCardSaxParser {
 
+	/**
+	 * This method parse a XML file to read the {@link ArrayList} of
+	 * {@link CardLeader}
+	 * 
+	 * @param pathname
+	 *            is the path of the file to read to load the card
+	 * @param parsedData
+	 *            is the {@link ArrayList} of {@link CardLeader} you want to
+	 *            fill with XML data
+	 */
 	public static void LeaderRead(String pathname, ArrayList<CardLeader> parsedData) {
 		try {
 			SAXParserFactory factory = SAXParserFactory.newInstance();
@@ -149,14 +159,10 @@ public class LeaderCardSaxParser {
 					}
 
 					if (boolRequisite) {
-						if (lastQName.equalsIgnoreCase("territory") 
-								|| lastQName.equalsIgnoreCase("venture")
-								|| lastQName.equalsIgnoreCase("building") 
-								|| lastQName.equalsIgnoreCase("character")
-								|| lastQName.equalsIgnoreCase("coin") 
-								|| lastQName.equalsIgnoreCase("stone")
-								|| lastQName.equalsIgnoreCase("wood") 
-								|| lastQName.equalsIgnoreCase("servant")
+						if (lastQName.equalsIgnoreCase("territory") || lastQName.equalsIgnoreCase("venture")
+								|| lastQName.equalsIgnoreCase("building") || lastQName.equalsIgnoreCase("character")
+								|| lastQName.equalsIgnoreCase("coin") || lastQName.equalsIgnoreCase("stone")
+								|| lastQName.equalsIgnoreCase("wood") || lastQName.equalsIgnoreCase("servant")
 								|| lastQName.equalsIgnoreCase("militarypoint")
 								|| lastQName.equalsIgnoreCase("faithpoint")
 								|| lastQName.equalsIgnoreCase("councilprivilege")
