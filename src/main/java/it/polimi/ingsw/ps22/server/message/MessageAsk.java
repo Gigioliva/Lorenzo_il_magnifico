@@ -1,5 +1,7 @@
 package it.polimi.ingsw.ps22.server.message;
 
+import it.polimi.ingsw.ps22.server.model.Model;
+
 public class MessageAsk extends GenericMessage{
 	
 	private static final long serialVersionUID = 1L;
@@ -28,6 +30,10 @@ public class MessageAsk extends GenericMessage{
 	
 	public String getUser(){
 		return user;
+	}
+	
+	public void applyDefault(Model model){
+		return;
 	}
 
 }

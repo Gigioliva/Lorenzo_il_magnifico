@@ -438,4 +438,12 @@ public class Model extends Observable implements Serializable {
 	public boolean getIsActive(){
 		return isActive;
 	}
+	
+	public void setNullPlayerGame(){
+		this.playerGame=null;
+	}
+	
+	public void setPlayerGame(){
+		this.playerGame=orderedPlayers.get(0);
+	}
 }

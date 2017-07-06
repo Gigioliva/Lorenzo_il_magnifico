@@ -18,7 +18,6 @@ public class AnswerExcomm extends GenericAnswer {
 
 	@Override
 	public void applyAnswer(Model model) {
-		System.out.println(answer);
 		AskExcomm ask=null;
 		for(MessageAsk el: model.getWaitAnswer()){
 			if(el.getId()==id){
@@ -32,12 +31,14 @@ public class AnswerExcomm extends GenericAnswer {
 				if(answer.equalsIgnoreCase("SI")){
 					temp.notExcommunication(ask.getPlayer());
 					model.getWaitAnswer().remove(ask);
+					temp.setPlayerGame();
 					model.notifyModel();
 					return;
 				}
 				if(answer.equalsIgnoreCase("NO")){
 					temp.excommunication(ask.getPlayer());
 					model.getWaitAnswer().remove(ask);
+					temp.setPlayerGame();
 					model.notifyModel();
 					return;
 				}

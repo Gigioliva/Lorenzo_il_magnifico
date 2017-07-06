@@ -1,5 +1,6 @@
 package it.polimi.ingsw.ps22.server.controller;
 
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 import java.util.Timer;
@@ -63,15 +64,23 @@ public class Controller implements Observer {
 	private class Task extends TimerTask {
 		@Override
 		public void run() {
-			model.getWaitAnswer().removeAll(model.getWaitAnswer());
-			model.getCurrentPlayer().setConnected(false);
-			GenericMessage mex=new GenericMessage();
-			mex.setString("Il giocatore "+ model.getPlayerGame() + " si è disconnesso");
-			do{
-				model.nextPlayer();
-			}while(!model.getCurrentPlayer().getConnected() && model.getIsActive());
-			model.notifyModel();
-			model.notifyMessage(mex);
+			if(model.getCurrentPlayer()!=null){
+				model.getWaitAnswer().removeAll(model.getWaitAnswer());
+				model.getCurrentPlayer().setConnected(false);
+				GenericMessage mex=new GenericMessage();
+				mex.setString("Il giocatore "+ model.getPlayerGame() + " si è disconnesso");
+				do{
+					model.nextPlayer();
+				}while(!model.getCurrentPlayer().getConnected() && model.getIsActive());
+				model.notifyModel();
+				model.notifyMessage(mex);
+			}else{
+				ArrayList<MessageAsk> temp=new ArrayList<>();
+				temp.addAll(model.getWaitAnswer());
+				for(MessageAsk el: temp){
+					el.applyDefault(model);
+				}
+			}
 			timer.cancel();
 			timer = new Timer();
 			timer.schedule(new Task(), TIMER);

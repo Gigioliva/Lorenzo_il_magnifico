@@ -16,14 +16,15 @@ import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
 /**
  * 
- * The church space is a space that the players have to take into account in order not to be excommunicated.
- * Every ChurchSpace corresponds to an era, it has some requisite to be satisfied ( in {@link VictoryPoint}).
- * If a player cannot or doesn't want to satisfy the church, he will be affected by the {@link Effect} indicated by
- * the {@link CardExcomm}
+ * The church space is a space that the players have to take into account in
+ * order not to be excommunicated. Every ChurchSpace corresponds to an era, it
+ * has some requisite to be satisfied ( in {@link VictoryPoint}). If a player
+ * cannot or doesn't want to satisfy the church, he will be affected by the
+ * {@link Effect} indicated by the {@link CardExcomm}
  *
  */
 public class ChurchSpace implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 	private int era;
 	private CardExcomm cardExcomm;
@@ -33,50 +34,55 @@ public class ChurchSpace implements Serializable {
 	private Model model;
 
 	public ChurchSpace(int era, Model model) {
-		this.model=model;
+		this.model = model;
 		this.era = era;
 		requisite = new HashMap<Integer, Integer>();
-		playerExcomm=new ArrayList<java.awt.Color>();
+		playerExcomm = new ArrayList<java.awt.Color>();
 		requisite.put(1, 3);
 		requisite.put(2, 4);
 		requisite.put(3, 5);
-		HashMap<Integer,VictoryPoint> track=new HashMap<Integer,VictoryPoint>();
-		FaithPointSaxParser.FaithRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/FaithPointTrack.xml", track);
-		this.faithPointTrack=new FaithPointTrack(track);
-		this.cardExcomm=CardSort.excommSortByEra().get(era).get(0);
+		HashMap<Integer, VictoryPoint> track = new HashMap<Integer, VictoryPoint>();
+		FaithPointSaxParser.FaithRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/FaithPointTrack.xml",
+				track);
+		this.faithPointTrack = new FaithPointTrack(track);
+		this.cardExcomm = CardSort.excommSortByEra().get(era).get(0);
 	}
-	
+
 	public ChurchSpace(int era, FaithPointTrack track, CardExcomm card) {
 		this.era = era;
 		requisite = new HashMap<Integer, Integer>();
-		playerExcomm=new ArrayList<java.awt.Color>();
+		playerExcomm = new ArrayList<java.awt.Color>();
 		requisite.put(1, 3);
 		requisite.put(2, 4);
 		requisite.put(3, 5);
 		this.faithPointTrack = track;
 		this.cardExcomm = card;
 	}
-	
+
 	@Override
 	public ChurchSpace clone() {
-		ChurchSpace temp=new ChurchSpace(this.era,this.faithPointTrack.clone(),this.cardExcomm.clone());
+		ChurchSpace temp = new ChurchSpace(this.era, this.faithPointTrack.clone(), this.cardExcomm.clone());
 		temp.playerExcomm.addAll(this.playerExcomm);
 		return temp;
-		
+
 	}
-	
+
 	/**
 	 * 
-	 * @return an {@link ArrayList} containing the colors of the excommunicated players
+	 * @return an {@link ArrayList} containing the colors of the excommunicated
+	 *         players
 	 */
-	public ArrayList<java.awt.Color> getExcomm(){
+	public ArrayList<java.awt.Color> getExcomm() {
 		return playerExcomm;
 	}
-	
+
 	/**
-	 * It applies the excommunication to the {@link Player} that haven't satisfied the church requirements.
-	 * If a player can choose whether being excommunicated or not, he will be asked now.
-	 * @param players the players participating to the game
+	 * It applies the excommunication to the {@link Player} that haven't
+	 * satisfied the church requirements. If a player can choose whether being
+	 * excommunicated or not, he will be asked now.
+	 * 
+	 * @param players
+	 *            the players participating to the game
 	 */
 	public void applyExcomm(ArrayList<Player> players) {
 		for (Player el : players) {
@@ -87,20 +93,25 @@ public class ChurchSpace implements Serializable {
 				model.notifyAsk(ask);
 			}
 		}
+		if (!model.getWaitAnswer().isEmpty()) {
+			model.setNullPlayerGame();
+		}
 	}
-	
+
 	/**
 	 * 
 	 * @return the updated {@link FaithPointTrack}
 	 */
-	public FaithPointTrack getFaithTrack(){
+	public FaithPointTrack getFaithTrack() {
 		return faithPointTrack;
 	}
 
-
 	/**
-	 * this method applies the effect of the excommunication to a given {@link Player}
-	 * @param player that has been excommunicated
+	 * this method applies the effect of the excommunication to a given
+	 * {@link Player}
+	 * 
+	 * @param player
+	 *            that has been excommunicated
 	 */
 	public void excommunication(Player player) {
 		cardExcomm.applyPermanentEffects(player, model);
@@ -109,29 +120,38 @@ public class ChurchSpace implements Serializable {
 	}
 
 	/**
-	 * If a {@link Player} has satisfied the church requirements, all of his {@link FaithPoint} will be detracted 
-	 * and converted into {@link VictoryPoint}
-	 * @param player that has satisfied the church requirements
+	 * If a {@link Player} has satisfied the church requirements, all of his
+	 * {@link FaithPoint} will be detracted and converted into
+	 * {@link VictoryPoint}
+	 * 
+	 * @param player
+	 *            that has satisfied the church requirements
 	 */
 	public void notExcommunication(Player player) {
 		player.getSpecificResource("VictoryPoint")
 				.addResource(faithPointTrack.getVictoryBonus(player.getSpecificResource("FaithPoint").getQuantity()));
 		player.getSpecificResource("FaithPoint").subResource(player.getSpecificResource("FaithPoint"));
-		if(player.getSpecBonus().returnBool("PointVicChurch+5")){
+		if (player.getSpecBonus().returnBool("PointVicChurch+5")) {
 			player.getSpecificResource("VictoryPoint").addResource(new VictoryPoint(5));
 		}
 	}
-	
-	private String requisiteString(){
+
+	public void setPlayerGame() {
+		if (model.getWaitAnswer().isEmpty()) {
+			model.setPlayerGame();
+		}
+	}
+
+	private String requisiteString() {
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Excommunication requisite: ");
-		
+
 		str.append(requisite.get(era) + " faith points\n");
-		
+
 		return str.toString();
 	}
-	
+
 	/**
 	 * 
 	 * @return the {@link CardExcomm} related to this {@link ChurchSpace}
@@ -139,22 +159,20 @@ public class ChurchSpace implements Serializable {
 	public CardExcomm getCardExcomm() {
 		return cardExcomm;
 	}
-	
+
 	@Override
 	public String toString() {
-		
+
 		StringBuilder str = new StringBuilder();
-		
+
 		str.append("Era: " + era + "\n");
-		
+
 		str.append("Card: \n" + "  " + cardExcomm.toString() + "\n");
-		
-		
+
 		str.append(requisiteString());
-		
-		
+
 		return str.toString();
-		
+
 	}
 
 }

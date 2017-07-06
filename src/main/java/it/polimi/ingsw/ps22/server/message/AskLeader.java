@@ -2,7 +2,9 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.AnswerLeader;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
@@ -46,6 +48,12 @@ public class AskLeader extends MessageAsk {
 		for(CardLeader el: leaders){
 			this.leaders.add(el.clone());
 		}
+	}
+	
+	@Override
+	public void applyDefault(Model model){
+		AnswerLeader ans=new AnswerLeader(this.getId(), leaders.get(0).getName());
+		ans.applyAnswer(model);
 	}
 	
 	public AskLeader accept(VisitorA visitor){
