@@ -203,7 +203,7 @@ public class LeaderCardSaxParser {
 					}
 
 					if (lastQName.equalsIgnoreCase("eachturnonefamdefvalue6")) {
-						card.addPermanentEffect(new StrangeEffect("OneFamilyCol6"));
+						card.addImmediateEffect(new StrangeEffect("OneFamilyCol6"));
 					}
 
 					if (lastQName.equalsIgnoreCase("canplaceinocupatedspace")) {
