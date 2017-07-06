@@ -9,16 +9,33 @@ import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
+/**
+ * 
+ * at the beginning of the game each player is required to choose
+ * four cards. This class implements the answer of the player about
+ * one chosen {@link CardLeader}
+ *
+ */
 public class AnswerLeader extends GenericAnswer {
 	
 	private String answer;
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * 
+	 * @param id the id of the message
+	 * @param name the name of the chosen {@link CardLeader}
+	 */
 	public AnswerLeader(int id, String name) {
 		super(id);
 		this.answer=name;
 	}
 
+	/**
+	 * It applies the answer by adding the chosen card to the player,
+	 * removing the card from the available {@link CardLeader} list and
+	 * finally go on with the draft by asking the next player
+	 */
 	@Override
 	public void applyAnswer(Model model) {
 		AskLeader ask=null;

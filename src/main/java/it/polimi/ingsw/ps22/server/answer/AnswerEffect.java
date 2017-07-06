@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 
+import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
 import it.polimi.ingsw.ps22.server.effect.ActionEffect;
 import it.polimi.ingsw.ps22.server.effect.ExchangeResource;
@@ -14,16 +15,36 @@ import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+/**
+ * 
+ * When performing a {@link ProductionAction} a player
+ * may be asked to choose among different {@link ExchangeResource} effects.
+ * This class implements the answer of the client to this question. 
+ *
+ */
 public class AnswerEffect extends GenericAnswer {
 
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Integer> answer;
 
+	/**
+	 * 
+	 * @param id the id of the message
+	 * @param answer an arrayList containing integer 
+	 * representing the choices of the player
+	 */
 	public AnswerEffect(int id, ArrayList<Integer> answer) {
 		super(id);
 		this.answer = answer;
 	}
 
+	/**
+	 * It applies the answer by first checking that the total cost
+	 * is affordable by the player, and the performing the
+	 * {@link ProductionAction}
+	 * 
+	 * @param model
+	 */
 	@Override
 	public void applyAnswer(Model model) {
 		AskEffect ask = null;
