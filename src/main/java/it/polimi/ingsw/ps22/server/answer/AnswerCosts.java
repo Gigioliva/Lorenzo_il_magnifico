@@ -9,16 +9,34 @@ import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 
+/**
+ * 
+ * It may happen that a card has multiple costs that the player can afford.
+ * This class implements the answer of the client that specifies the cost he
+ * wants to pay
+ *
+ */
 public class AnswerCosts extends GenericAnswer {
 	
 	private static final long serialVersionUID = 1L;
 	private int answer;
 	
+	/**
+	 * 
+	 * @param id the id of the message
+	 * @param answer an int representing the chosen cost
+	 */
 	public AnswerCosts(int id, int answer){
 		super(id);
 		this.answer=answer;
 	}
 
+	/**
+	 * It applies the answer by applying the cost to the player. 
+	 * Eventual discounts and other permanent effects are taken
+	 * into account
+	 * @param model
+	 */
 	@Override
 	public void applyAnswer(Model model) {
 		AskCosts ask=null;

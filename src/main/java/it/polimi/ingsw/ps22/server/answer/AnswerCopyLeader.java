@@ -9,16 +9,32 @@ import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
+/**
+ * 
+ * This class implements the choice of the client
+ * about the leader card he wants to copy.
+ *
+ */
 public class AnswerCopyLeader extends GenericAnswer {
 
 	private static final long serialVersionUID = 1L;
 	private String answer;
 
+	/**
+	 * 
+	 * @param id the id of the message
+	 * @param answer the name of the card leader copied
+	 */
 	public AnswerCopyLeader(int id, String answer) {
 		super(id);
 		this.answer = answer;
 	}
 
+	/**
+	 * It applies the answer by adding to leader card all the effects of the copied card
+	 * and then by playing this card (in order to activate the effects)
+	 * @param model
+	 */
 	@Override
 	public void applyAnswer(Model model) {
 		AskCopyLeader ask=null;

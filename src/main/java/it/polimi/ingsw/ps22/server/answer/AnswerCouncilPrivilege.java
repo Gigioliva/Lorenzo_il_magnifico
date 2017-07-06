@@ -11,16 +11,35 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.CouncilPrivilege;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+/**
+ * 
+ * A {@link CouncilPrivilege} must exchanged with some {@link ResourceAbstract}. 
+ * This class implements the answer of the client to the question aboout the 
+ * resource to take in exchange of the council privilege
+ *
+ */
 public class AnswerCouncilPrivilege extends GenericAnswer {
 	
 	private static final long serialVersionUID = 1L;
 	private ArrayList<Integer> answer;
 	
+	/**
+	 * 
+	 * @param id the id of the message
+	 * @param answer an ArrayList representing the choices of the player about the reosurces
+	 * to take
+	 */
 	public AnswerCouncilPrivilege(int id, ArrayList<Integer> answer){
 		super(id);
 		this.answer=answer;
 	}
 
+	/**
+	 * It applies the answer by adding to the player the 
+	 * resources he has chosen. Eventual bonus/malus and
+	 * other permanent effects are taken into account
+	 * @param model
+	 */
 	@Override
 	public void applyAnswer(Model model) {
 		AskCouncilPrivilege ask=null;
