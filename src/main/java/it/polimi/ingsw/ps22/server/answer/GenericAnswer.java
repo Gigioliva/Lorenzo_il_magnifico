@@ -18,6 +18,10 @@ public abstract class GenericAnswer implements Serializable {
 	private static final long serialVersionUID = 1L;
 	protected int id;
 	
+	/**
+	 * 
+	 * @param id the id of the message
+	 */
 	public GenericAnswer(int id){
 		this.id=id;
 	}

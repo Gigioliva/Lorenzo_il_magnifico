@@ -35,6 +35,7 @@ public class AnswerLeader extends GenericAnswer {
 	 * It applies the answer by adding the chosen card to the player,
 	 * removing the card from the available {@link CardLeader} list and
 	 * finally go on with the draft by asking the next player
+	 * @param model
 	 */
 	@Override
 	public void applyAnswer(Model model) {
