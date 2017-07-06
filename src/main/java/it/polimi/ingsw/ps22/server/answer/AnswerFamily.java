@@ -58,6 +58,8 @@ public class AnswerFamily extends GenericAnswer {
 				model.notifyModel();
 				return;
 			}
+			model.notifyAsk(ask);
+			return;
 		}
 		GenericMessage mex=new GenericMessage();
 		mex.setString("risposta errata");

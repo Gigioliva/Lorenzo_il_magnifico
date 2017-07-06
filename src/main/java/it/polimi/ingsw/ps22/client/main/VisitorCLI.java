@@ -213,7 +213,9 @@ public class VisitorCLI extends VisitorB {
 		do {
 			try {
 				color = Color.Conversion(stdin.readLine());
-				correct = true;
+				if(color!=Color.NEUTRAL){
+					correct = true;
+				}
 			} catch (IOException | IllegalArgumentException e) {
 				System.out.println("Errato.");
 			}
