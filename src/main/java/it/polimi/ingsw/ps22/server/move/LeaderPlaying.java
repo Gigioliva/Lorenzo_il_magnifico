@@ -7,14 +7,29 @@ import it.polimi.ingsw.ps22.server.message.ErrorMove;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 
+/**
+ * Move that permit to Play a {@link CardLeader}
+ */
 public class LeaderPlaying extends LeaderMove {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * @param username
+	 *            is the username of the player which is creating the move
+	 * @param nameCard
+	 *            is the name of the {@link CardLeader} the player want to play
+	 */
 	public LeaderPlaying(String username, String nameCard) {
 		super(username, nameCard);
 	}
 
+	/**
+	 * Apply the move which call this method to the model, if is possible
+	 * 
+	 * @param model
+	 *            is the model to which apply the move
+	 */
 	@Override
 	public void applyMove(Model model) {
 		Player player = model.getPlayers().get(username);
@@ -33,9 +48,9 @@ public class LeaderPlaying extends LeaderMove {
 					model.notifyModel();
 					return;
 				} else {
-					ArrayList<CardLeader> leaderPlay=getLeaderPlay(model);
-					if(!leaderPlay.isEmpty()){
-						AskCopyLeader mex=new AskCopyLeader(leaderPlay, leader, player);
+					ArrayList<CardLeader> leaderPlay = getLeaderPlay(model);
+					if (!leaderPlay.isEmpty()) {
+						AskCopyLeader mex = new AskCopyLeader(leaderPlay, leader, player);
 						model.notifyAsk(mex);
 						leader.setCopy(false);
 						return;
