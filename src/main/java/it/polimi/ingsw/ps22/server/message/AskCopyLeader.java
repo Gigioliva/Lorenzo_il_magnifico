@@ -14,7 +14,7 @@ public class AskCopyLeader extends MessageAsk {
 	private ArrayList<CardLeader> leaders;
 	
 	public AskCopyLeader(ArrayList<CardLeader> leaders, CardLeader leader, Player player){
-		super();
+		super(player.getUsername());
 		this.leader=leader;
 		this.player=player;
 		this.leaders=leaders;

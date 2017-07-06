@@ -5,14 +5,16 @@ public class MessageAsk extends GenericMessage{
 	private static final long serialVersionUID = 1L;
 	private static int id;
 	protected int id_ask;
+	private String user;
 
-	public MessageAsk() {
+	public MessageAsk(String user) {
 		if (id == 0) {
 			id_ask = 1;
 		} else {
 			id_ask = id + 1;
 		}
 		id = id_ask;
+		this.user=user;
 	}
 	
 	public MessageAsk(String ask, int id){
@@ -22,6 +24,10 @@ public class MessageAsk extends GenericMessage{
 	
 	public int getId(){
 		return id_ask;
+	}
+	
+	public String getUser(){
+		return user;
 	}
 
 }

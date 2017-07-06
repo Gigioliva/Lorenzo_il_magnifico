@@ -28,7 +28,7 @@ public class ExtraAction implements ImmediateEffect {
 	 */
 	@Override
 	public void performEffect(Player player, Model model) {
-		AskServant mex = new AskServant(this.action);
+		AskServant mex = new AskServant(this.action, player);
 		model.notifyAsk(mex);
 	}
 	

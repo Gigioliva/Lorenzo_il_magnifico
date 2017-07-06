@@ -83,8 +83,7 @@ public class ChurchSpace implements Serializable {
 			if (el.getSpecificResource("FaithPoint").getQuantity() < requisite.get(era) || !el.getConnected()) {
 				excommunication(el);
 			} else {
-				AskExcomm ask = new AskExcomm();
-				ask.addPlayer(el);
+				AskExcomm ask = new AskExcomm(el);
 				model.notifyAsk(ask);
 			}
 		}

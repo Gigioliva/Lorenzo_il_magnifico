@@ -30,6 +30,7 @@ public class LeaderPlaying extends LeaderMove {
 				if (leader.getCopy() == false) {
 					leader.playLeader(player, model);
 					player.setFamily(model.getBoard().getDice());
+					model.notifyModel();
 					return;
 				} else {
 					ArrayList<CardLeader> leaderPlay=getLeaderPlay(model);
@@ -47,8 +48,7 @@ public class LeaderPlaying extends LeaderMove {
 		model.notifyModel();
 	}
 
-	private ArrayList<CardLeader> getLeaderPlay(Model model) {		
-		//ritorna tutte le carte in gioco di tutti i giocatori
+	private ArrayList<CardLeader> getLeaderPlay(Model model) {
 		ArrayList<CardLeader> temp = new ArrayList<CardLeader>();
 		ArrayList<Player> players = new ArrayList<Player>(model.getPlayers().values());
 		for (Player el : players) {

@@ -8,6 +8,7 @@ import java.util.logging.Logger;
 import it.polimi.ingsw.ps22.server.answer.GenericAnswer;
 import it.polimi.ingsw.ps22.server.message.ChatMessage;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
+import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.move.Move;
 import it.polimi.ingsw.ps22.server.parser.TimerSaxParser;
@@ -46,6 +47,11 @@ public class Controller implements Observer {
 				if (o instanceof View && arg==null) {
 					model.getPlayers().get(((View)o).getUsername()).setConnected(true);;
 					model.sendModel();
+					for(MessageAsk el: model.getWaitAnswer()){
+						if(el.getUser().equals(((View)o).getUsername())){
+							model.notifyAsk(el);
+						}
+					}
 				}
 			}
 		} catch (Exception e) {

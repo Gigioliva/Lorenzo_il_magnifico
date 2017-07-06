@@ -17,6 +17,7 @@ public class AskEffect extends MessageAsk {
 	private Player player;
 	
 	public AskEffect(LinkedHashMap<DevelopmentCard,ArrayList<ActionEffect>> listEffect, ProductionAction prodAction, Player player){
+		super(player.getUsername());
 		this.listEffect=listEffect;
 		this.prodAction=prodAction;
 		this.player=player;

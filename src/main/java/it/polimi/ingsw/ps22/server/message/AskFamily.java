@@ -10,6 +10,7 @@ public class AskFamily extends MessageAsk {
 	private Player player;
 	
 	public AskFamily(Player player){
+		super(player.getUsername());
 		this.player=player;
 		String ask="A quale famigliare assegni valore 6?";
 		setString(ask);

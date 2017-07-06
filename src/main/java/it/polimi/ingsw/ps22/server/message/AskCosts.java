@@ -18,7 +18,7 @@ public class AskCosts extends MessageAsk {
 	private TowerSpace towerSpace;
 
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
-		super();
+		super(player.getUsername());
 		this.possibleCost = possibleCost;
 		this.player = player;
 		this.towerSpace = towerSpace;

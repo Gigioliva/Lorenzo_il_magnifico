@@ -16,6 +16,7 @@ public class AskCard extends MessageAsk{
 	private CardAction cardAction;
 	
 	public AskCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard, Player player, CardAction cardAction){
+		super(player.getUsername());
 		this.player=player;
 		this.possibleCard=possibleCard;
 		this.cardAction=cardAction;

@@ -9,16 +9,13 @@ public class AskExcomm extends MessageAsk{
 	private static final long serialVersionUID = 1L;
 	private Player player;
 
-	public AskExcomm() {
+	public AskExcomm(Player player) {
+		super(player.getUsername());
 		setString("Appoggi la chiesa?");
 	}
 	
 	public AskExcomm(String str,int id) {
 		super(str,id);
-	}
-
-	public void addPlayer(Player player) {
-		this.player=player;
 	}
 
 	public Player getPlayer() {

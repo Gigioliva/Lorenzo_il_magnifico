@@ -11,6 +11,7 @@ public class AskCouncilPrivilege extends MessageAsk {
 	private Player player;
 	
 	public AskCouncilPrivilege(int numChoice, Player player){
+		super(player.getUsername());
 		this.numChoice=numChoice;
 		this.player=player;
 		StringBuilder str = new StringBuilder();

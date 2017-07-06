@@ -13,6 +13,7 @@ public class AskLeader extends MessageAsk {
 	private ArrayList<CardLeader> leaders;
 	
 	public AskLeader(ArrayList<CardLeader> leaders, Player player){
+		super(player.getUsername());
 		this.player=player;
 		this.leaders = leaders;
 		StringBuilder temp=new StringBuilder();
