@@ -303,7 +303,7 @@ public class BoardPanel extends JPanel{
 			excomm.add(excomm1);
 		}
 		
-		if(model.getPlayers().size() == 2){
+		if(model.getPlayers().size() <= 2){
 			layeredPane.add(MyImage.getScaledImageinLabel("./image/cover/harvest.png", 
 					layout.getHarvestRightCover(resizeFactor)), new Integer(8000));
 			layeredPane.add(MyImage.getScaledImageinLabel("./image/cover/prod.png", 
