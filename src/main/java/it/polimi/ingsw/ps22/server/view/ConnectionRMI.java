@@ -8,6 +8,10 @@ import it.polimi.ingsw.ps22.server.message.CloseGame;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.RankingMessage;
 
+/**
+ * This class represents a concrete Connection implemented using RMI technology
+ */
+
 public class ConnectionRMI extends Connection implements ConnectionRMIinterface {
 
 	private Server server;
@@ -26,7 +30,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		send(new RankingMessage(server.getRank()));
 	}
 
-	public void setUp() {
+	private void setUp() {
 		send(new AskUsername());
 	}
 
@@ -39,7 +43,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		}
 	}
 
-	public void join(String pass, int num, boolean reg) {
+	private void join(String pass, int num, boolean reg) {
 		if (server.login(name, pass, reg) && (num == 4 || num == 5)) {
 			if (num == 4) {
 				server.lobbyFour(this, name);
@@ -53,6 +57,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		}
 	}
 
+	@Override
 	public void receive(Object obj) {
 		if (active) {
 			if (!(obj instanceof AnswerUsername)) {
@@ -81,6 +86,7 @@ public class ConnectionRMI extends Connection implements ConnectionRMIinterface 
 		active = false;
 	}
 
+	@Override
 	public void close() {
 		send(new CloseGame());
 		closeConnection();
