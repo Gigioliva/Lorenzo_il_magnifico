@@ -21,18 +21,24 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import it.polimi.ingsw.ps22.client.main.ClientInterface;
 import it.polimi.ingsw.ps22.server.controller.Controller;
-import it.polimi.ingsw.ps22.server.message.MessageAsk;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.model.ModelView;
 import it.polimi.ingsw.ps22.server.parser.InputPlayerDataSaxParser;
 import it.polimi.ingsw.ps22.server.parser.OutputPlayerDataDomParser;
 import it.polimi.ingsw.ps22.server.parser.TimerSaxParser;
 
+/**
+ * This class represents the Server that creates and manages all player
+ * connections and keeps all current and finished matches in memory, as well as
+ * player statistics and their login data.
+ *
+ */
 public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	private static final long serialVersionUID = 1L;
 	private static final int PORT = 12345;
-	private static int TIMER = 5000;
+	private static int TIMER;
+	private static final int TIMER_SAVE = 180000;
 	private transient ServerSocket serverSocket;
 	private transient ExecutorService executor = Executors.newFixedThreadPool(128);
 	private transient HashMap<String, Connection> waitingFour = new HashMap<>();
@@ -41,8 +47,13 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	private HashMap<Model, ArrayList<RemoteView>> savePlaying = new HashMap<Model, ArrayList<RemoteView>>();
 	private transient Timer timerFour;
 	private transient Timer timerFive;
+	private transient Timer timerSave;
 	private HashMap<String, UserData> login;
 
+	/**
+	 * This class represents a Task that will begin after the expiration of time
+	 * by launching games with at least 2 players and paused for a certain time.
+	 */
 	private class TaskFour extends TimerTask {
 		@Override
 		public void run() {
@@ -57,24 +68,62 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 	}
 
+	private class TaskSave extends TimerTask {
+		@Override
+		public void run() {
+			removeEndGame();
+			saveGame();
+			timerSave.cancel();
+			timerSave = new Timer();
+			timerSave.schedule(new TaskSave(), TIMER_SAVE);
+
+		}
+	}
+
+	/**
+	 * This method allows you to log in by checking the entered data or
+	 * registering a new player by verifying the uniqueness of the username
+	 * 
+	 * @param username
+	 *            of the player logging in
+	 * @param pass
+	 *            of the player logging in
+	 * @param reg
+	 *            flag indicating if the player wants to register or make a
+	 *            simple login
+	 * @return boolean that indicates whether or not the procedure was
+	 *         successful
+	 */
+
 	public synchronized boolean login(String username, String pass, boolean reg) {
-		if(reg==false){
+		if (reg == false) {
 			if (pass.equals(login.get(username).getPassword())) {
 				return true;
 			} else {
 				return false;
 			}
-		}else{
-			if(!login.containsKey(username)){
+		} else {
+			if (!login.containsKey(username)) {
 				login.put(username, new UserData(pass));
-				OutputPlayerDataDomParser
-				.PlayerDataWrite("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml", login);
+				OutputPlayerDataDomParser.PlayerDataWrite(
+						"src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml", login);
 				return true;
-			}else{
+			} else {
 				return false;
 			}
 		}
 	}
+
+	/**
+	 * This method allows the player to enter the lobby for 4-player games by
+	 * starting the timer if the number of players is 2 or the game if the
+	 * maximum number of players (4) in the lobby is reached
+	 * 
+	 * @param c
+	 *            player connection entered the lobby
+	 * @param name
+	 *            player name entered lobby
+	 */
 
 	public synchronized void lobbyFour(Connection c, String name) {
 		ArrayList<String> players = getCurrentPlayer();
@@ -88,12 +137,23 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				startGameFour();
 			}
 		} else {
-			if(players.contains(name)){
+			if (players.contains(name)) {
 				c.send(name);
 				reconnected(c, name);
 			}
 		}
 	}
+
+	/**
+	 * This method allows the player to enter the lobby for 5-player games by
+	 * starting the timer if the number of players is 2 or the game if the
+	 * maximum number of players (5) in the lobby is reached
+	 * 
+	 * @param c
+	 *            player connection entered the lobby
+	 * @param name
+	 *            player name entered lobby
+	 */
 
 	public synchronized void lobbyFive(Connection c, String name) {
 		ArrayList<String> players = getCurrentPlayer();
@@ -107,13 +167,22 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				startGameFive();
 			}
 		} else {
-			if(players.contains(name)){
+			if (players.contains(name)) {
 				c.send(name);
 				reconnected(c, name);
 			}
 		}
 	}
 
+	/**
+	 * This method reconnects a player disconnected to a match in progress or to
+	 * a saved match
+	 * 
+	 * @param c
+	 *            player connection entered the lobby
+	 * @param name
+	 *            player name entered lobby
+	 */
 	private void reconnected(Connection c, String name) {
 		for (Model el : playingConnection.keySet()) {
 			if (el.getIsActive()) {
@@ -124,8 +193,8 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				}
 			}
 		}
-		Model temp=searchGameForPlayer(name);
-		if(temp!=null){
+		Model temp = searchGameForPlayer(name);
+		if (temp != null) {
 			ModelView modelView = new ModelView();
 			Controller controller = new Controller(temp);
 			temp.addObserver(modelView);
@@ -139,13 +208,19 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				}
 			}
 			playingConnection.put(temp, players);
-			for(MessageAsk el:temp.getWaitAnswer()){
-				temp.notifyAsk(el);
-			}
 		}
 	}
-	
-	private Model searchGameForPlayer(String name){
+
+	/**
+	 * This method searches for a saved game based on the name of a player who
+	 * is part of it
+	 * 
+	 * @param name
+	 *            of the player to search the game
+	 * @return a {@link Model} corresponding to the match searched
+	 */
+
+	private Model searchGameForPlayer(String name) {
 		for (Model el : savePlaying.keySet()) {
 			if (el.getIsActive()) {
 				for (RemoteView client : savePlaying.get(el)) {
@@ -157,6 +232,10 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 		return null;
 	}
+
+	/**
+	 * This method removes completed matches by updating the player rankings
+	 */
 
 	private void removeEndGame() {
 		for (Model el : playingConnection.keySet()) {
@@ -183,6 +262,12 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 	}
 
+	/**
+	 * This method searches for all present players in saved and not finished
+	 * matches
+	 * 
+	 * @return a {@link ArrayList} containing players username
+	 */
 	private ArrayList<String> getCurrentPlayer() {
 		ArrayList<String> players = new ArrayList<String>();
 		for (Model el : playingConnection.keySet()) {
@@ -201,6 +286,11 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 		return players;
 	}
+
+	/**
+	 * This method starts a game with a maximum number of 4 players by stopping
+	 * the timer and putting all lobbyFour players into a new game
+	 */
 
 	private void startGameFour() {
 		if (waitingFour.size() > 1) {
@@ -222,10 +312,13 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			playingConnection.put(model, temp);
 			waitingFour.clear();
 			model.startGame();
-			removeEndGame();
-			saveGame();
 		}
 	}
+
+	/**
+	 * This method starts a game with a maximum number of 5 players by stopping
+	 * the timer and putting all lobbyFive players into a new game
+	 */
 
 	private void startGameFive() {
 		if (waitingFive.size() > 1) {
@@ -247,14 +340,17 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			playingConnection.put(model, temp);
 			waitingFive.clear();
 			model.startGame();
-			removeEndGame();
-			saveGame();
 		}
 	}
-	
-	public HashMap<String, UserData> getRank(){
+
+	public HashMap<String, UserData> getRank() {
 		return login;
 	}
+
+	/**
+	 * This method saves the current status of matches in a local file so that
+	 * it can be reloaded to the next server startup.
+	 */
 
 	private void saveGame() {
 		OutputPlayerDataDomParser
@@ -262,15 +358,15 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		FileOutputStream out;
 		ObjectOutputStream output;
 		try {
-			HashMap<Model, ArrayList<RemoteView>> temp= new HashMap<>();
-			for(Model el: playingConnection.keySet()){
-				if(el.getPlayerGame()!=null){
+			HashMap<Model, ArrayList<RemoteView>> temp = new HashMap<>();
+			for (Model el : playingConnection.keySet()) {
+				if (el.getPlayerGame() != null || el.getIsActive() == false) {
 					temp.put(el, playingConnection.get(el));
 				}
 			}
 			temp.putAll(savePlaying);
 			out = new FileOutputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
-			output=new ObjectOutputStream(out);
+			output = new ObjectOutputStream(out);
 			output.writeObject(temp);
 			output.close();
 			out.close();
@@ -279,23 +375,34 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 	}
 
+	/**
+	 * Create an instance of {@link Server} by reading from the file the waiting
+	 * time to start the games and any saved games; Then creates a
+	 * {@link ServerSocket} and initializes a Registry on port 1099 to create
+	 * RMI connections
+	 */
+
 	public Server() throws IOException {
 		super(0);
-		TIMER=TimerSaxParser.ServerTimer();
+		TIMER = TimerSaxParser.ServerTimer();
 		timerFour = new Timer();
 		timerFive = new Timer();
+		timerSave = new Timer();
+		timerSave.schedule(new TaskSave(), TIMER_SAVE);
 		login = new HashMap<String, UserData>();
 		InputPlayerDataSaxParser.PlayerRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml",
 				login);
-		try{
-			FileInputStream in=new FileInputStream("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
-			ObjectInputStream input=new ObjectInputStream(in);
+		try {
+			FileInputStream in = new FileInputStream(
+					"src/main/java/it/polimi/ingsw/ps22/server/parser/resources/SavePlaying.ser");
+			ObjectInputStream input = new ObjectInputStream(in);
 			@SuppressWarnings("unchecked")
-			HashMap<Model, ArrayList<RemoteView>> readObject = (HashMap<Model, ArrayList<RemoteView>>)input.readObject();
-			savePlaying=readObject;
+			HashMap<Model, ArrayList<RemoteView>> readObject = (HashMap<Model, ArrayList<RemoteView>>) input
+					.readObject();
+			savePlaying = readObject;
 			input.close();
 			in.close();
-		}catch(FileNotFoundException | ClassNotFoundException e){
+		} catch (FileNotFoundException | ClassNotFoundException e) {
 			System.out.println("Nessuna partita salvata");
 		}
 		this.serverSocket = new ServerSocket(PORT);
@@ -305,6 +412,11 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			System.out.println("Registry già presente!");
 		}
 	}
+
+	/**
+	 * Register the server in the Registry to accept RMI connections and put the
+	 * ServerSocket in contact whit new Socket connections
+	 */
 
 	public void run() {
 		try {
@@ -322,6 +434,13 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 			}
 		}
 	}
+
+	/**
+	 * Create a new {@link ConnectionRMI} exporting it with
+	 * {@link UnicastRemoteObject}
+	 * 
+	 * @return a {@link ConnectionRMIinterface} that allows server communication
+	 */
 
 	public ConnectionRMIinterface createRMI(ClientInterface connection) {
 		ConnectionRMI con = new ConnectionRMI(connection, this);
