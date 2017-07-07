@@ -4,7 +4,7 @@ public class RequestMoveGUI implements RequestMove {
 
 	@Override
 	public void requestMove() {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

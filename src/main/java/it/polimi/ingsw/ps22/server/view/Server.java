@@ -97,7 +97,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 
 	public synchronized boolean login(String username, String pass, boolean reg) {
 		if (reg == false) {
-			if (pass.equals(login.get(username).getPassword())) {
+			if (login.containsKey(username) && pass.equals(login.get(username).getPassword())) {
 				return true;
 			} else {
 				return false;

@@ -7,6 +7,10 @@ import java.util.Observable;
 import java.util.Observer;
 import java.util.logging.Logger;
 
+/**
+ * This class represents a client Connection, used to send objects, implemented using Socket technology
+ */
+
 public class ClientSocket implements Observer {
 	private Socket client;
 	private ObjectOutputStream output;
@@ -27,6 +31,13 @@ public class ClientSocket implements Observer {
 		(new Thread(e)).start();
 	}
 
+	/**
+	 * This method allows you to send objects to the server
+	 * 
+	 * @param obj
+	 *            To receive
+	 */
+	
 	public void send(Object ask) {
 		try {
 			output.reset();
