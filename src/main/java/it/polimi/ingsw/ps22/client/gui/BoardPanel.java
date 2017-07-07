@@ -60,6 +60,7 @@ public class BoardPanel extends JPanel {
 	private FamiliarButton fam4;
 	private ArrayList<OrderPlayerLabel> orederPlayers = new ArrayList<>();
 	private String username;
+	private JLabel isYourTurn;
 	private transient ViewClient view;
 	private ArrayList<LeaderButton> leaders = new ArrayList<>();
 	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
@@ -75,7 +76,7 @@ public class BoardPanel extends JPanel {
 		ArrayList<String> avver = new ArrayList<>(model.getPlayers().keySet());
 		avver.remove(username);
 
-		this.heightScreen=heightScreen;
+		this.heightScreen = heightScreen;
 		this.username = username;
 		this.view = view;
 
@@ -235,12 +236,20 @@ public class BoardPanel extends JPanel {
 
 		turnLabel = new JLabel("Turn: 0", JLabel.CENTER);
 		turnLabel.setForeground(java.awt.Color.WHITE);
-		turnLabel.setBounds((int)(widthScreen - 140), 30, 100, 30);
+		turnLabel.setBounds((int) (widthScreen - 140), 30, 100, 30);
 		Font fontTurn = new Font("Papyrus", Font.ITALIC + Font.BOLD, turnLabel.getHeight());
 		turnLabel.setFont(fontTurn);
 		turnLabel.setOpaque(false);
 		layeredPane.add(turnLabel, new Integer(100000));
 		turnLabel.setVisible(true);
+
+		isYourTurn = new JLabel("It's your turn!", JLabel.CENTER);
+		isYourTurn.setForeground(java.awt.Color.WHITE);
+		isYourTurn.setBounds((int) (widthScreen - 160), 65, 140, 20);
+		isYourTurn.setFont(fontTurn);
+		isYourTurn.setOpaque(false);
+		layeredPane.add(isYourTurn, new Integer(100000));
+		isYourTurn.setVisible(false);
 
 		JButton quitTurn = new JButton("End turn");
 		quitTurn.setBackground(java.awt.Color.BLACK);
@@ -253,6 +262,7 @@ public class BoardPanel extends JPanel {
 				view.setFlag(true);
 				EndTurn end = new EndTurn(username);
 				view.send(end);
+				isYourTurn.setVisible(false);
 
 			}
 		});
@@ -582,4 +592,7 @@ public class BoardPanel extends JPanel {
 		turnLabel.setText(str.toString());
 	}
 
+	public void setIsYourTurn() {
+		isYourTurn.setVisible(true);
+	}
 }

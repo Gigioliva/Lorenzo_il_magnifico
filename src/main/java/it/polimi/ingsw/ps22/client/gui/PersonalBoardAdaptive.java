@@ -35,8 +35,8 @@ public class PersonalBoardAdaptive {
 		blackDiceButtonSlot = new Rectangle(0, 400, 4200, 4600);
 		basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 		chatSlot = new Rectangle(3630, 4300, 150, 2300);
-		servantRequestSlot = new Rectangle(3630, 4300, 2400, 2700);
-		leaderSlot = new Rectangle(3700, 4500, 2700, 3705);
+		servantRequestSlot = new Rectangle(3700, 4900, 1800, 2100);
+		leaderSlot = new Rectangle(3700, 4900, 2250, 4000);
 		cardOffsetX = 548;
 		cardTerritoryOffsetY = 1000;
 		cardVentureOffsetY = 2350;

@@ -29,7 +29,7 @@ public class ServantSpinner extends JPanel {
 	}
 	
 	public ServantSpinner( ArrayList<ActionButton> actionSpaces) {
-		JLabel spinLab = new JLabel("servant");
+		JLabel spinLab = new JLabel("Add servant:");
 		this.add(spinLab);
 		this.setOpaque(false);
 		this.actionSpaces = actionSpaces;

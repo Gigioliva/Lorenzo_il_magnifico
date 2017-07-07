@@ -85,7 +85,6 @@ public class Gui extends JFrame {
 		return;
 	}
 
-	
 	public void getCard(AskCard mex) {
 		(new AskCardDialog(view, mex)).setVisible(true);
 	}
@@ -119,22 +118,23 @@ public class Gui extends JFrame {
 	}
 
 	public void errorMove(ErrorMove mex) {
-		(new ShowMessage(view, mex,this)).setVisible(true);
+		(new ShowMessage(view, mex, this)).setVisible(true);
 	}
 
 	public void askExcomm(AskExcomm mex) {
 		(new AskExcommDialog(view, mex)).b1.setVisible(true);
 	}
 
-	public void yourTurn(ChoiceMove mex){
-		(new ShowMessage(view,mex,this)).setVisible(true);
+	public void yourTurn(ChoiceMove mex) {
+		board.setIsYourTurn();
+		(new ShowMessage(view, mex, this)).setVisible(true);
 	}
 
 	public void genericMessage(GenericMessage mex) {
-		(new ShowMessage(view, mex,this)).setVisible(true);
+		(new ShowMessage(view, mex, this)).setVisible(true);
 	}
-	
-	public void close(){
+
+	public void close() {
 		this.dispose();
 	}
 

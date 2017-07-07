@@ -72,7 +72,7 @@ public class AdaptiveLayout {
 		productionLeftButton = new Rectangle(160, 370, 3050, 3190);
 		productionRightButton = new Rectangle(500, 920, 3050, 3190);
 		productionRightFam = new Rectangle(590, 650, 3085, 3145);
-		productionRightCover = new Rectangle(445, 975, 3034, 3256);
+		productionRightCover = new Rectangle(395, 1025, 3000, 3280);
 		market1 = new Rectangle(1431, 1581, 3020, 3120);
 		market2 = new Rectangle(1665, 1815, 3020, 3120);
 		market3 = new Rectangle(1890, 2040, 3090, 3190);
@@ -94,7 +94,7 @@ public class AdaptiveLayout {
 		victorySlotFrom51To69 = new Rectangle(2350, 2470, 3660, 3740);
 		victorySlot70 = new Rectangle(30, 150, 3630, 3710);
 		victorySlotFrom71To99 = new Rectangle(5, 125, 3490, 3570);
-		familiar = new Rectangle(512, 612, 360, 460);
+		familiar = new Rectangle(485, 635, 360, 460);
 		militarySlotFrom1 = new Rectangle(2280, 2400, 3240, 3320);
 		militarySlot0 = new Rectangle(2280, 2400, 3400, 3480);
 		excommSlot1 = new Rectangle(534, 654, 2298, 2478);
