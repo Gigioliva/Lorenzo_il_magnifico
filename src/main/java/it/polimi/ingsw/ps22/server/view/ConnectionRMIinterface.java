@@ -9,7 +9,7 @@ public interface ConnectionRMIinterface extends Remote {
 	 * This method allows you to receive objects from the client
 	 * 
 	 * @param obj
-	 *            To receive
+	 *            to receive
 	 */
 	public void receive(Object obj) throws RemoteException;
 

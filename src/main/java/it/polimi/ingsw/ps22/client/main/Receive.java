@@ -6,6 +6,10 @@ import java.net.Socket;
 import java.util.Observable;
 import java.util.logging.Logger;
 
+/**
+ * This class represents a client Connection, used to receive objects, implemented using Socket technology
+ */
+
 public class Receive extends Observable implements Runnable {
 	private Socket client;
 	private ObjectInputStream input;

@@ -25,6 +25,13 @@ public class ClientRMI extends Observable implements ClientInterface, Observer {
 		notifyObservers(object);
 	}
 	
+	/**
+	 * This method allows you to send objects to the server
+	 * 
+	 * @param obj
+	 *            To receive
+	 */
+	
 	public void send(Object obj){
 		try {
 			server.receive(obj);

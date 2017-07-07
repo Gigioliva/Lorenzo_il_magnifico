@@ -11,6 +11,10 @@ import it.polimi.ingsw.ps22.server.message.GenericMessage;
 import it.polimi.ingsw.ps22.server.message.RankingMessage;
 import it.polimi.ingsw.ps22.server.answer.AnswerUsername;;
 
+/**
+ * This class represents a concrete Connection implemented using Socket technology
+ */
+
 public class ConnectionSocket extends Connection {
 
 	private Socket socket;

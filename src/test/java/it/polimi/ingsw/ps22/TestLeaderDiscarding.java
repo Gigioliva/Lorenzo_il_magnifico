@@ -2,16 +2,9 @@ package it.polimi.ingsw.ps22;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.move.LeaderDiscarding;
-import it.polimi.ingsw.ps22.server.resource.Coin;
-import it.polimi.ingsw.ps22.server.resource.FaithPoint;
-import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
-import it.polimi.ingsw.ps22.server.resource.Servant;
-import it.polimi.ingsw.ps22.server.resource.Stone;
-import it.polimi.ingsw.ps22.server.resource.Wood;
 
 public class TestLeaderDiscarding {
 
