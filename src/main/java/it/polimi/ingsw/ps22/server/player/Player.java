@@ -429,7 +429,7 @@ public class Player implements Serializable {
 		str.append("Resources: \n");
 
 		for (String type : resources.keySet()) {
-			str.append("  " + resources.get(type).getQuantity() + " " + type + "\n");
+			str.append("  " + resources.get(type).getQuantity() + " " + type + "\t");
 		}
 
 		return str.toString();
@@ -442,7 +442,7 @@ public class Player implements Serializable {
 		str.append("Points: \n");
 
 		for (String type : points.keySet()) {
-			str.append("  " + points.get(type).getQuantity() + " " + type + "\n");
+			str.append("  " + points.get(type).getQuantity() + " " + type + "\t");
 		}
 
 		return str.toString();
@@ -452,7 +452,7 @@ public class Player implements Serializable {
 
 		StringBuilder str = new StringBuilder();
 
-		str.append("Cards: \n");
+		str.append("\nCards: \n");
 
 		for (String type : cards.keySet()) {
 			ArrayList<DevelopmentCard> cardsArray = cards.get(type);
