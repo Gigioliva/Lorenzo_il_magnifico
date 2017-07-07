@@ -257,7 +257,7 @@ public class CardVenture extends DevelopmentCard {
 			str.append(cost.toString());
 			str.append("or\n");
 		}
-		
+		/*
 		if(immediateEffects.size() > 0){
 			str.append("immediate effects: \n");
 			int i = 1;
@@ -275,7 +275,7 @@ public class CardVenture extends DevelopmentCard {
 				i++;
 			}
 		}
-		
+		*/
 		return str.toString();
 	}
 	

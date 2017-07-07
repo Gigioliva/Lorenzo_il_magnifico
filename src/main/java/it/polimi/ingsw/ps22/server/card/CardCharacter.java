@@ -102,6 +102,7 @@ public class CardCharacter extends DevelopmentCard {
 
 		str.append("Cost: " + cost.getQuantity() + " Coin ");
 
+		/*
 		if (immediateEffects.size() > 0) {
 			str.append("\nimmediate effects: \n");
 			int i = 1;
@@ -118,8 +119,7 @@ public class CardCharacter extends DevelopmentCard {
 				str.append("  " + "[" + i + "] " + effect.toString());
 				i++;
 			}
-		}
-
+		}*/
 		return str.toString();
 	}
 

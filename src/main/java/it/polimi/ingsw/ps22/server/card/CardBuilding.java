@@ -132,6 +132,7 @@ public class CardBuilding extends DevelopmentCard {
 
 		str.append("valore azione = " + actionValue + "\n");
 
+		/*
 		str.append("costo: \n");
 		for (String type : cost.keySet()) {
 			str.append("  " + cost.get(type).getQuantity() + " " + type + "\n");
@@ -147,7 +148,7 @@ public class CardBuilding extends DevelopmentCard {
 		str.append("Action effects: \n");
 		for (int i = 0; i < actionEffects.size(); i++) {
 			str.append("  [" + (i + 1) + "]" + actionEffects.get(i).toString() + "\n");
-		}
+		}*/
 		return str.toString();
 	}
 

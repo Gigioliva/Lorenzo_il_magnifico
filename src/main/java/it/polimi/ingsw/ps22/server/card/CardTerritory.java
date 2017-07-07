@@ -157,7 +157,7 @@ public class CardTerritory extends DevelopmentCard {
 		str.append("era: " + super.getEra() + "\n");
 		
 		str.append("valore azione = " + actionValue + "\n");
-		
+		/*
 		if(immediateEffects.size() > 0){
 			str.append("Immediate effects: \n");
 			for(int i = 0; i < immediateEffects.size(); i++){
@@ -168,7 +168,7 @@ public class CardTerritory extends DevelopmentCard {
 		str.append("Action effects: \n");
 		for(int i = 0; i < actionEffects.size(); i++){
 			str.append("  [" + (i+1) + "]" + actionEffects.get(i).toString() + "\n");
-		}
+		}*/
 		return str.toString();
 	}
 

@@ -26,6 +26,7 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Wood;
+
 /**
  * Class that contains all player's data
  */
@@ -499,9 +500,9 @@ public class Player implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("Player " + username + "\n");
-		str.append(resourcesString() + pointsString() + cardsString() + bonusAcc.toString() + specBonus.toString()
-				+ endEffectsString() + familyString() + personalBoard.toString());
+		str.append("PLAYER " + username + "\n");
+		str.append(resourcesString() + pointsString() + cardsString() + endEffectsString() + familyString()
+				+ personalBoard.toString());
 
 		return str.toString();
 	}

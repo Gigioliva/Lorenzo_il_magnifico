@@ -87,7 +87,7 @@ public class Family implements Serializable {
 	public String toString() {
 		StringBuilder str = new StringBuilder();
 
-		str.append(color.toString() + " of value " + value + "\n");
+		str.append(color.toString() + " of value " + value);
 		
 		return str.toString();
 	}

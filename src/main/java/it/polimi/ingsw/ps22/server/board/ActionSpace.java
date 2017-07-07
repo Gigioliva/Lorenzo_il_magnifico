@@ -188,7 +188,7 @@ public abstract class ActionSpace implements Serializable {
 		
 		str.append("\n"+ familyString() + "\n");
 		
-		str.append(bonus.toString() + "\n");
+		str.append(bonus.toString());
 		
 		return str.toString();
 	}

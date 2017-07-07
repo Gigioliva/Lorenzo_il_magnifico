@@ -202,9 +202,7 @@ public class Board implements Serializable {
 
 		str.append(churchString());
 
-		str.append(church.get(2).getFaithTrack().toString());
-
-		str.append(councilPalace.toString());
+		str.append("Council Palace" + councilPalace.toString());
 
 		str.append(harvestZone.toString());
 

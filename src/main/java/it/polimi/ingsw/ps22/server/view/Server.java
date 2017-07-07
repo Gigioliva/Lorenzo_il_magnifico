@@ -98,6 +98,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	public synchronized boolean login(String username, String pass, boolean reg) {
 		if (reg == false) {
 			if (login.containsKey(username) && pass.equals(login.get(username).getPassword())) {
+				System.out.println("Trovato utente");
 				return true;
 			} else {
 				return false;
@@ -107,6 +108,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 				login.put(username, new UserData(pass));
 				OutputPlayerDataDomParser.PlayerDataWrite(
 						"src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml", login);
+				System.out.println("Trovato utente");
 				return true;
 			} else {
 				return false;

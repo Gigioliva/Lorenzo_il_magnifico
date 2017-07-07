@@ -92,7 +92,7 @@ public class PersonalBoard implements Serializable {
 	 * @return string useful to print all end bonus that can be give from
 	 *         {@link CardCharacter}
 	 */
-	private String bonusCharString() {
+	public String bonusCharString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Characters end victory points: \n");
 		for (Integer index : bonusCharacter.keySet()) {
@@ -106,7 +106,7 @@ public class PersonalBoard implements Serializable {
 	/**
 	 * @return string useful to print all bonus given by {@link HarvestAction}
 	 */
-	private String bonusHarvestString() {
+	public String bonusHarvestString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Territory end victory points: \n");
 		for (Integer index : bonusHarvest.keySet()) {
@@ -121,7 +121,7 @@ public class PersonalBoard implements Serializable {
 	 * @return string useful to print all requisite to take
 	 *         {@link CardTerritory}
 	 */
-	private String reqHarvestString() {
+	public String reqHarvestString() {
 		StringBuilder str = new StringBuilder();
 		str.append("Requirements for terriory cards: \n");
 		for (Integer index : bonusHarvest.keySet()) {
@@ -149,8 +149,7 @@ public class PersonalBoard implements Serializable {
 	@Override
 	public String toString() {
 		StringBuilder str = new StringBuilder();
-		str.append("Personal Board: \n" + bonusHarvestString() + reqHarvestString() + bonusCharString()
-				+ personalBonusString());
+		str.append("Personal Board: \n" + personalBonusString());
 		return str.toString();
 	}
 
