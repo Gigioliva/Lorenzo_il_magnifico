@@ -1,10 +1,20 @@
 package it.polimi.ingsw.ps22.server.view;
 
+/**
+ * This class represents the login parameters and player statistics
+ */
+
 public class UserData {
 	private String password;
 	private int numPlayedGame;
 	private int numVictory;
-	
+
+	/**
+	 * This method creates a new instance of UserData by setting all statistics
+	 * to 0 and the password as a parameter
+	 * 
+	 * @param password
+	 */
 	public UserData(String password) {
 		this.password = password;
 		this.numPlayedGame = 0;
@@ -22,7 +32,7 @@ public class UserData {
 	public String getPassword() {
 		return this.password;
 	}
-	
+
 	public int getNumVictory() {
 		return this.numVictory;
 	}
@@ -34,9 +44,9 @@ public class UserData {
 	@Override
 	public String toString() {
 		StringBuilder temp = new StringBuilder();
-		temp.append("Password: " + this.password + "\nNumero vittorie: " 
-		+ this.numVictory + "\nNumero partite giocate: " + this.numPlayedGame);
+		temp.append("Password: " + this.password + "\nNumero vittorie: " + this.numVictory
+				+ "\nNumero partite giocate: " + this.numPlayedGame);
 		return temp.toString();
 	}
-	
+
 }

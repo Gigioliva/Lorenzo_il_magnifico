@@ -435,13 +435,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		}
 	}
 
-	/**
-	 * Create a new {@link ConnectionRMI} exporting it with
-	 * {@link UnicastRemoteObject}
-	 * 
-	 * @return a {@link ConnectionRMIinterface} that allows server communication
-	 */
-
+	@Override
 	public ConnectionRMIinterface createRMI(ClientInterface connection) {
 		ConnectionRMI con = new ConnectionRMI(connection, this);
 		executor.submit(con);
