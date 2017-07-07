@@ -26,7 +26,9 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Wood;
-
+/**
+ * Class that contains all player's data
+ */
 public class Player implements Serializable {
 
 	private static final long serialVersionUID = 1L;

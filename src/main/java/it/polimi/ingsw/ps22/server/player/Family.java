@@ -4,6 +4,9 @@ import java.io.Serializable;
 
 import it.polimi.ingsw.ps22.server.model.Color;
 
+/**
+ * Is the concrete representation of the Family in the game
+ */
 public class Family implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -12,6 +15,11 @@ public class Family implements Serializable {
 	private int value;
 	private boolean placed=false;
 
+	/**
+	 * Constructor of Family
+	 * @param color is the color of the Family associated to a relative dice
+	 * @param player is the owner of the family 
+	 */
 	public Family(Color color, Player player) {
 		this.color = color;
 		this.player = player;
@@ -24,18 +32,31 @@ public class Family implements Serializable {
 		return temp;
 	}
 
+	/**
+	 * @return the color of this {@link Family}
+	 */
 	public Color getColor() {
 		return color;
 	}
 
+	/**
+	 * @return the player owner of this {@link Family}
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 	
+	/**
+	 * @return the value of the {@link Action} that this {@link Family} can do
+	 */
 	public int getValue(){
 		return this.value;
 	}
 	
+	/**
+	 * Method that set the correct value to the {@link Family}
+	 * @param value is the value added by the the bonus that the player have
+	 */
 	public void setValue(int value){
 		this.value=value;
 		if(player.getSpecBonus().returnBool("AllFamilyCol5") && color!=Color.NEUTRAL)
@@ -47,6 +68,10 @@ public class Family implements Serializable {
 		this.value=this.value-player.getBonusAcc().getBonus("IncrementDice").getQuantity();
 	}
 	
+	/**
+	 * Increment action value of the number given by parameters
+	 * @param valueis the value of the increment
+	 */
 	public void incrementValue(int value){
 		this.value=this.value+value;
 	}
