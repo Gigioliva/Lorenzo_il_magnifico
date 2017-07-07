@@ -7,10 +7,21 @@ import java.util.stream.Collectors;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.view.UserData;
 
+/**
+ * 
+ * This message is used to show to the client the top players of the game
+ * (num of victory, victory ratio, etc .. )
+ *
+ */
 public class RankingMessage extends GenericMessage {
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * It instantiate a new message, ranking the given players and users data
+	 * @param login an HashMap containing a string as key representing
+	 * the player and {@link UserData} which represents the corresponding statistics
+	 */
 	public RankingMessage(HashMap<String, UserData> login) {
 		StringBuilder str = new StringBuilder();
 		int vict;
