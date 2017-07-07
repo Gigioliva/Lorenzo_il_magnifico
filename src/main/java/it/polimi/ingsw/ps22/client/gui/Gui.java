@@ -51,7 +51,7 @@ public class Gui extends JFrame {
 		this.setVisible(true);
 
 		this.model = model;
-		board = new BoardPanel(this.getWidth(), this.getHeight(), view.getUsername(), view, model);
+		board = new BoardPanel(this.getWidth(), this.getHeight(), view.getUsername(), view, model, this.getGui());
 
 		// personalBoard = new PersonalBoardPanel(this.getWidth(),
 		// this.getHeight(), username);
@@ -70,6 +70,10 @@ public class Gui extends JFrame {
 			});
 			temp.start();
 		}
+	}
+
+	private Gui getGui() {
+		return this;
 	}
 
 	public void updateGui(Model model) {
@@ -133,4 +137,5 @@ public class Gui extends JFrame {
 	public void close(){
 		this.dispose();
 	}
+
 }

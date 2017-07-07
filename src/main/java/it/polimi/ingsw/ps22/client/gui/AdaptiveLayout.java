@@ -68,7 +68,7 @@ public class AdaptiveLayout {
 		harvestLeftButton = new Rectangle(160, 370, 3360, 3500);
 		harvestRightButton = new Rectangle(500, 920, 3360, 3500);
 		harvestRightFam = new Rectangle(590, 650, 3400, 3460);
-		harvestRightCover = new Rectangle(445, 975, 3340, 3568);
+		harvestRightCover = new Rectangle(395, 1025, 3315, 3595);
 		productionLeftButton = new Rectangle(160, 370, 3050, 3190);
 		productionRightButton = new Rectangle(500, 920, 3050, 3190);
 		productionRightFam = new Rectangle(590, 650, 3085, 3145);

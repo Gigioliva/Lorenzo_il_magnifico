@@ -14,14 +14,14 @@ public class LeaderButton extends JButton {
 	private String cardName;
 	private transient PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
 	
-	public LeaderButton(int slot, PersonalBoardPanel p, String username){
+	public LeaderButton(int slot, PersonalBoardPanel p, String username, double heightScreen){
 		
 		Rectangle dimR = layoutPersonal.getLeaderSlot(p.resizeFactor);
-		dimR = Rectangle.fillImageRatio(dimR, (float)1.5);
+		dimR = Rectangle.fillImageRatio(dimR, (float)2);
 		ArrayList<Rectangle> recs = Rectangle.divideRectangle(dimR);
 		Rectangle dim = recs.get(slot);
 		this.dim = dim;
-		this.setBounds(dim.getInitx() + (int)p.getBounds().getWidth(), dim.getInity(), dim.getOffsetX(), dim.getOffsetY());
+		this.setBounds(dim.getInitx() + (int)(heightScreen * 0.71), dim.getInity(), dim.getOffsetX(), dim.getOffsetY());
 		
 		this.setEnabled(false);
 		this.setVisible(false);

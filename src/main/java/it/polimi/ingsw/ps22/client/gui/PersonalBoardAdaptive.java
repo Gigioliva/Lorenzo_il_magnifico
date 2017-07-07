@@ -1,6 +1,5 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-
 //	TUTTE LE POSIZIONI RITORNATE DA QUESTA CLASSE SONO DA RIFERIRSI AL FATTORE DI RISCALATURA
 //	DELLA PERSONAL BOARD E SONO IN POSIZIONE RELATIVA DALL'INIZIO DELLA PERSONAL BOARD 
 //  COMPRESA DI SPAZIO BONUS PERSONALI LE CUI MISURE REALI SONO UNIFORMATE A 220*1836
@@ -24,20 +23,20 @@ public class PersonalBoardAdaptive {
 	private final int diceButtonOffsetX;
 	private final int playerOffsetX;
 	private final int playerOffsetY;
-	
+
 	private static PersonalBoardAdaptive instance = null;
-	
+
 	private PersonalBoardAdaptive() {
 		cardBaseSlot = new Rectangle(251, 747, 56, 802);
 		coinSlot = new Rectangle(420, 700, 1800, 1920);
 		woodSlot = new Rectangle(1020, 1200, 1800, 1920);
-		stoneSlot = new Rectangle(1540, 1820, 1800, 1920);;
+		stoneSlot = new Rectangle(1540, 1820, 1800, 1920);
 		servantSlot = new Rectangle(2020, 2200, 1900, 2020);
 		blackDiceButtonSlot = new Rectangle(0, 400, 4200, 4600);
 		basicPlayerButtonSlot = new Rectangle(2100, 2600, 4000, 4280);
 		chatSlot = new Rectangle(3630, 4300, 150, 2300);
 		servantRequestSlot = new Rectangle(3630, 4300, 2400, 2700);
-		leaderSlot = new Rectangle(3630, 4300, 2745, 3750);
+		leaderSlot = new Rectangle(3700, 4500, 2700, 3705);
 		cardOffsetX = 548;
 		cardTerritoryOffsetY = 1000;
 		cardVentureOffsetY = 2350;
@@ -46,13 +45,13 @@ public class PersonalBoardAdaptive {
 		playerOffsetX = 600;
 		playerOffsetY = 315;
 	}
-	
+
 	public static PersonalBoardAdaptive instance() {
 		if (instance == null)
 			instance = new PersonalBoardAdaptive();
 		return instance;
 	}
-	
+
 	public Rectangle getChatSlot(double resizeFactor) {
 		return chatSlot.resize(resizeFactor);
 	}

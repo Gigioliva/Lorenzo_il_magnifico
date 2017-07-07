@@ -65,7 +65,7 @@ public class PlayersButton extends JButton {
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
 			JFrame frame = new JFrame(username);
-			
+			frame.setMinimumSize(new Dimension((int)(4000/resizeFactor),(int)(2000/resizeFactor)));
 			JPanel panel = new JPanel();
 			panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 			JLayeredPane p = new JLayeredPane();
