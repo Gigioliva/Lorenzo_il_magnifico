@@ -9,6 +9,11 @@ import it.polimi.ingsw.ps22.server.move.ProductionMove;
 import it.polimi.ingsw.ps22.server.player.Family;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 
+/**
+ * 
+ * This class test the {@link ProductionMove} class
+ *
+ */
 public class TestProductionMove {
 
 	private ProductionMove productionMove;
@@ -16,6 +21,10 @@ public class TestProductionMove {
 	private ProductionMove productionMoveFail;
 	private Model modelFail;
 	
+	/**
+	 * this method initialize the {@link Model}, the {@link ProductionMove}
+	 * 
+	 */
 	@Before
 	public void init() {
 		model = new Model();
@@ -30,6 +39,9 @@ public class TestProductionMove {
 		productionMoveFail = new ProductionMove(modelFail.getPlayers().get("Marco").getUsername(),Color.NEUTRAL,1,0);
 	}
 	
+	/**
+	 * this method tests the applyMove method in {@link ProductionMove}
+	 */
 	@Test
 	public void testApplyMove() {
 		productionMove.applyMove(model);
@@ -37,6 +49,9 @@ public class TestProductionMove {
 		assert(fam.getColor()==Color.NEUTRAL && fam.getPlayer().getUsername().equals("Marco"));
 	}
 	
+	/**
+	 * this method checks that applyMove correctly fails
+	 */
 	@Test
 	public void testApplyMoveFail() {
 		productionMoveFail.applyMove(modelFail);
