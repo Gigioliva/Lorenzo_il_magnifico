@@ -246,7 +246,8 @@ public class BoardPanel extends JPanel {
 		isYourTurn = new JLabel("It's your turn!", JLabel.CENTER);
 		isYourTurn.setForeground(java.awt.Color.WHITE);
 		isYourTurn.setBounds((int) (widthScreen - 160), 65, 140, 20);
-		isYourTurn.setFont(fontTurn);
+		Font fontIsYoutTurn = new Font("Papyrus", Font.ITALIC + Font.BOLD, isYourTurn.getHeight());
+		isYourTurn.setFont(fontIsYoutTurn);
 		isYourTurn.setOpaque(false);
 		layeredPane.add(isYourTurn, new Integer(100000));
 		isYourTurn.setVisible(false);
