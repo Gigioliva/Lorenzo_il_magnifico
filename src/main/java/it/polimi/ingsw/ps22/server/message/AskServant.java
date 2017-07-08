@@ -2,14 +2,28 @@ package it.polimi.ingsw.ps22.server.message;
 
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.Action;
+import it.polimi.ingsw.ps22.server.effect.ExtraAction;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
+/**
+ * 
+ * Sometimes it's necessary to ask the player if he wants 
+ * to add some servants to increase the action value. This is necessary,
+ * for instance, when a player takes a card which has an {@link ExtraAction}
+ * effect. 
+ *
+ */
 public class AskServant extends MessageAsk {
 	
 	private static final long serialVersionUID = 1L;
 	private Action Action;
 	
+	/**
+	 * 
+	 * @param Action the {@link Action} whose action value may be increased
+	 * @param player the target player
+	 */
 	public AskServant(Action Action, Player player){
 		super(player.getUsername());
 		this.Action=Action;
@@ -20,6 +34,10 @@ public class AskServant extends MessageAsk {
 		super(str,id);
 	}
 	
+	/**
+	 * 
+	 * @return the {@link Action} performed
+	 */
 	public Action getAction(){
 		return Action;
 	}
