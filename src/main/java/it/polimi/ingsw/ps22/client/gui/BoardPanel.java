@@ -236,7 +236,9 @@ public class BoardPanel extends JPanel {
 
 		turnLabel = new JLabel("Turn: 0", JLabel.CENTER);
 		turnLabel.setForeground(java.awt.Color.WHITE);
-		turnLabel.setBounds((int) (widthScreen - 140), 30, 100, 30);
+		Rectangle turnNumberSlot = layout.getTurnNumberSlot(resizeFactor);
+		turnLabel.setBounds(turnNumberSlot.getInitx(), turnNumberSlot.getInity(), turnNumberSlot.getOffsetX(),
+				turnNumberSlot.getOffsetY());
 		Font fontTurn = new Font("Papyrus", Font.ITALIC + Font.BOLD, turnLabel.getHeight());
 		turnLabel.setFont(fontTurn);
 		turnLabel.setOpaque(false);
@@ -245,7 +247,9 @@ public class BoardPanel extends JPanel {
 
 		isYourTurn = new JLabel("It's your turn!", JLabel.CENTER);
 		isYourTurn.setForeground(java.awt.Color.WHITE);
-		isYourTurn.setBounds((int) (widthScreen - 160), 65, 140, 20);
+		Rectangle isYourTurnSlot = layout.getIsYourTurnSlot(resizeFactor);
+		isYourTurn.setBounds(isYourTurnSlot.getInitx(), isYourTurnSlot.getInity(), isYourTurnSlot.getOffsetX(),
+				isYourTurnSlot.getOffsetY());
 		Font fontIsYoutTurn = new Font("Papyrus", Font.ITALIC + Font.BOLD, isYourTurn.getHeight());
 		isYourTurn.setFont(fontIsYoutTurn);
 		isYourTurn.setOpaque(false);
@@ -253,9 +257,11 @@ public class BoardPanel extends JPanel {
 		isYourTurn.setVisible(false);
 
 		JButton quitTurn = new JButton("End turn");
+		Rectangle quitTurnDim = layout.getEndTurnDim(resizeFactor);
 		quitTurn.setBackground(java.awt.Color.BLACK);
 		quitTurn.setForeground(java.awt.Color.WHITE);
-		quitTurn.setBounds((int) widthScreen - 120, (int) heightScreen - 120, 110, 110);
+		quitTurn.setBounds((int) widthScreen - quitTurnDim.getOffsetX(), (int) heightScreen - (2*quitTurnDim.getOffsetY()),
+				quitTurnDim.getOffsetX(), quitTurnDim.getOffsetY());
 		quitTurn.addActionListener(new ActionListener() {
 
 			@Override
@@ -270,9 +276,12 @@ public class BoardPanel extends JPanel {
 		layeredPane.add(quitTurn, new Integer(2000));
 
 		JButton closeGame = new JButton("Close Game");
-		closeGame.setBackground(java.awt.Color.BLACK);
+		Rectangle closeGameDim = layout.getCloseGameDim(resizeFactor);
+		closeGame.setBackground(java.awt.Color.RED);
 		closeGame.setForeground(java.awt.Color.WHITE);
-		closeGame.setBounds((int) widthScreen - 120, (int) heightScreen - 180, 110, 50);
+		closeGame.setBounds((int) widthScreen - (closeGameDim.getOffsetX()),
+				(int) heightScreen - closeGameDim.getOffsetY(), closeGameDim.getOffsetX(),
+				closeGameDim.getOffsetY());
 		closeGame.addActionListener(new ActionListener() {
 
 			@Override
@@ -320,16 +329,16 @@ public class BoardPanel extends JPanel {
 		JLabel sfondo = MyImage.getScaledImageinLabel("./image/sfondo.png",
 				new Rectangle(0, (int) widthScreen + 300, 0, (int) heightScreen + 300));
 		sfondo.setBounds(0, 0, (int) widthScreen, (int) heightScreen);
-		// sfondo.setText("Ciao");
 		layeredPane.add(sfondo, new Integer(0));
 
-		JLabel playerLab = new JLabel();
-		playerLab.setBounds((int) widthScreen - 150, 0, 120, 30);
+		JLabel playerLab = new JLabel(username, JLabel.LEFT);
+		Rectangle playerNameSlot = layout.getPlayerNameSlot(resizeFactor);
+		playerLab.setBounds(playerNameSlot.getInitx(), playerNameSlot.getInity(), playerNameSlot.getOffsetX(),
+				playerNameSlot.getOffsetY());
 		Font fontlab = new Font("Papyrus", Font.ITALIC + Font.BOLD, playerLab.getHeight());
 		playerLab.setFont(fontlab);
 		playerLab.setForeground(model.getPlayers().get(username).getColor().getColor());
 		playerLab.setHorizontalAlignment(SwingConstants.CENTER);
-		playerLab.setText(username);
 
 		layeredPane.add(playerLab, new Integer(2000));
 
@@ -388,7 +397,7 @@ public class BoardPanel extends JPanel {
 
 	private void addActionPanelToLayeredPane(ActionButton c) {
 		actionSpaces.add(c);
-		layeredPane.add(c, new Integer(100));
+		layeredPane.add(c, new Integer(30));
 	}
 
 	public void updateBoard(Model model) {
