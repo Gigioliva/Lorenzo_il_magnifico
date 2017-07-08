@@ -42,6 +42,11 @@ public class AdaptiveLayout {
 	private final Rectangle excommSlot1;
 	private final Rectangle excommSlot2;
 	private final Rectangle excommSlot3;
+	private final Rectangle playerNameSlot;
+	private final Rectangle turnNumberSlot;
+	private final Rectangle isYourTurnSlot;
+	private final Rectangle closeGameDim;
+	private final Rectangle endTurnDim;
 	private final int cardDevelopmentStartOffsetX;
 	private final int cardDevelopmentStartOffsetY;
 	private final int cardDevelopmentHeight;
@@ -100,6 +105,11 @@ public class AdaptiveLayout {
 		excommSlot1 = new Rectangle(534, 654, 2298, 2478);
 		excommSlot2 = new Rectangle(732, 852, 2330, 2510);
 		excommSlot3 = new Rectangle(930, 1050, 2298, 2478);
+		turnNumberSlot = new Rectangle(5650, 6450, 260, 460);
+		playerNameSlot = new Rectangle(5650, 6450, 50, 250);
+		isYourTurnSlot = new Rectangle(5650, 6450, 470, 600);
+		closeGameDim = new Rectangle(0, 700, 0, 300);
+		endTurnDim = new Rectangle(0, 700, 0, 400);
 		cardDevelopmentStartOffsetX = 183;
 		cardDevelopmentStartOffsetY = 193;
 		cardDevelopmentHeight = 446;
@@ -133,6 +143,26 @@ public class AdaptiveLayout {
 		return null;
 	}
 
+	public Rectangle getCloseGameDim(double boardResizeFactor) {
+		return closeGameDim.resize(boardResizeFactor);
+	}
+	
+	public Rectangle getEndTurnDim(double boardResizeFactor) {
+		return endTurnDim.resize(boardResizeFactor);
+	}
+	
+	public Rectangle getTurnNumberSlot(double boardResizeFactor) {
+		return turnNumberSlot.resize(boardResizeFactor);
+	}
+	
+	public Rectangle getPlayerNameSlot(double boardResizeFactor) {
+		return playerNameSlot.resize(boardResizeFactor);
+	}
+	
+	public Rectangle getIsYourTurnSlot(double boardResizeFactor) {
+		return isYourTurnSlot.resize(boardResizeFactor);
+	}
+	
 	public Rectangle getMilitarySlotSpace(double boardResizeFactor, int slot) {
 		slot = slot % 26;
 		if (slot > 0) {
