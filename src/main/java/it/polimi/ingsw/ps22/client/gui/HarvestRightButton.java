@@ -17,6 +17,7 @@ public class HarvestRightButton  extends ActionButton{
 
 	public HarvestRightButton(int space, String username, Rectangle dim, ActionListener actionListener, HarvestLabel lab){
 		super(space, username, dim, actionListener);
+		lab.setBounds(dim.getInitx(), dim.getInity(), 500, 500);
 		this.lab = lab;
 	}
 	

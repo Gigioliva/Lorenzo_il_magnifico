@@ -17,7 +17,7 @@ public class ClientSocket implements Observer {
 
 	public ClientSocket() {
 		try {
-			client = new Socket("2.233.222.188", 12345);
+			client = new Socket("localhost", 12345);
 			output = new ObjectOutputStream(client.getOutputStream());
 		} catch (IOException e) {
 			Logger logger = Logger.getLogger(ClientSocket.class.getName());

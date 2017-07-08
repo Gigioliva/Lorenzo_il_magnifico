@@ -17,6 +17,7 @@ public class ProductionRightButton extends ActionButton{
 
 	public ProductionRightButton(int space, String username, Rectangle dim, ActionListener actionListener, ProductionLabel lab){
 		super(space, username, dim, actionListener);
+		lab.setBounds(dim.getInitx(), dim.getInity(), 500, 500);
 		this.lab = lab;
 	}
 	
