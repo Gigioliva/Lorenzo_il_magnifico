@@ -119,10 +119,10 @@ public class CardTerritory extends DevelopmentCard {
 	
 	/**
 	 * It sets the action value.
-	 * @param actionVal the action value of the card
+	 * @param actionValue the action value of the card
 	 */
-	public void setActionValue(int actionVal) {
-		this.actionValue=actionVal;
+	public void setActionValue(int actionValue) {
+		this.actionValue=actionValue;
 	}
 	
 	/**
@@ -146,7 +146,7 @@ public class CardTerritory extends DevelopmentCard {
 	
 	/**
 	 * Returns a string representation of this card. 
-	 * @return a string containing information about the name, the era, the action value and the effects of the given card
+	 * @return a string containing the most important informations about this card
 	 */
 	@Override
 	public String toString(){

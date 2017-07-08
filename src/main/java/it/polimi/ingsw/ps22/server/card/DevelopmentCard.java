@@ -12,24 +12,41 @@ import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.Resource;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+/**
+ * Abstraction of all the Development Cards in the game
+ */
 public abstract class DevelopmentCard extends Card {
 	
 	private static final long serialVersionUID = 1L;
 	private int era;
 	private String name;
 
+	/**
+	 * Set the era of the card
+	 * @param era is the era that must be set
+	 */
 	public void setEra(int era) {
 		this.era = era;
 	}
 
+	/**
+	 * Set the name of the card
+	 * @param name is the era that must be set
+	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
+	/**
+	 * Get the era of the card
+	 */
 	public int getEra() {
 		return this.era;
 	}
 
+	/**
+	 * Get the name of the card
+	 */
 	public String getName() {
 		return this.name;
 	}
