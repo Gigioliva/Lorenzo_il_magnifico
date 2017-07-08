@@ -26,7 +26,7 @@ public class ProductionRightButton extends ActionButton{
 	
 	@Override
 	public void updateButton(Model model){
-		ArrayList<Family> fam = model.getBoard().getCouncilPalace().getFamilies();
+		ArrayList<Family> fam = model.getBoard().getProdZone().getProdSpaces()[1].getFamilies();
 		this.familiars = fam;
 		lab.updateProdLabel(fam);
 	}

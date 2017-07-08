@@ -25,8 +25,8 @@ public class HarvestLabel extends JLabel {
 		super.paintComponent(g);
 		
 		for(int i=0; i<familiars.size(); i++){
-			Rectangle dim = layout.getProdRightFamSpace(resizeFactor, i);
-			Rectangle dim0 = layout.getProdRightFamSpace(resizeFactor, 0);
+			Rectangle dim = layout.getHarvestRightFamSpace(resizeFactor, i);
+			Rectangle dim0 = layout.getHarvestRightFamSpace(resizeFactor, 0);
 			String path = FamilyPath.getFamilyPathname(familiars.get(i).getPlayer().getColor().getColor(), familiars.get(i).getColor());
 			g.drawImage(MyImage.createScaledImageIcon(path, dim).getImage(), dim.getInitx() - dim0.getInitx(), 
 					dim.getInity() - dim0.getInity(), null);
