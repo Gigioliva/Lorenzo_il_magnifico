@@ -261,6 +261,9 @@ public class CardVenture extends DevelopmentCard {
 	 */
 	@Override
 	public boolean takeCardControl(Player player) {
+		if(player.getSizeCard("Venture")>=6){
+			return false;
+		}
 		ArrayList<RequisiteCost> actualCosts = getActualCost(player);
 		for (RequisiteCost item : actualCosts) {
 			if (canAffordCostRequisite(item, player))

@@ -139,7 +139,7 @@ public class CardTerritory extends DevelopmentCard {
 		else{
 			int requirementHarvest = player.getPersonalBoard().getRequirementHarvest().get(size+1).getQuantity();
 			int harvestPoint = player.getSpecificResource("MilitaryPoint").getQuantity();
-			return requirementHarvest <= harvestPoint;
+			return (requirementHarvest <= harvestPoint || player.getSpecBonus().returnBool("NoTerritoryReq"));
 		}
 	}
 	

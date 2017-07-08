@@ -167,6 +167,9 @@ public class CardCharacter extends DevelopmentCard {
 	 */
 	@Override
 	public boolean takeCardControl(Player player) {
+		if(player.getSizeCard("Character")>=6){
+			return false;
+		}
 		int requiredCost = getActualCost(player).getQuantity();
 		int playerCoin = player.getResources().get("Coin").getQuantity();
 		return (playerCoin >= requiredCost);

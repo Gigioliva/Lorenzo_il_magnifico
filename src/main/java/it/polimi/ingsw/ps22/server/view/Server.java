@@ -73,9 +73,6 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		public void run() {
 			removeEndGame();
 			saveGame();
-			timerSave.cancel();
-			timerSave = new Timer();
-			timerSave.schedule(new TaskSave(), TIMER_SAVE);
 
 		}
 	}
@@ -390,7 +387,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		timerFour = new Timer();
 		timerFive = new Timer();
 		timerSave = new Timer();
-		timerSave.schedule(new TaskSave(), TIMER_SAVE);
+		timerSave.schedule(new TaskSave(),0, TIMER_SAVE);
 		login = new HashMap<String, UserData>();
 		InputPlayerDataSaxParser.PlayerRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml",
 				login);

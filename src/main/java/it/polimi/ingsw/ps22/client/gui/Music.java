@@ -6,9 +6,16 @@ import javafx.scene.media.MediaPlayer;
 
 @SuppressWarnings("restriction")
 public class Music {
+	
+	private static MediaPlayer c;
+	
 	static void playMP3(String fileName) {
-	    (new javafx.embed.swing.JFXPanel()).getClass();
-	    String uriString = new File(fileName).toURI().toString();
-	    new MediaPlayer(new Media(uriString)).play();
+		(new javafx.embed.swing.JFXPanel()).getClass();
+		String uriString1 = new File(fileName).toURI().toString();
+		Media temp1=new Media(uriString1);
+		c=new MediaPlayer(temp1);
+		c.setAutoPlay(true);
+		c.setCycleCount(MediaPlayer.INDEFINITE);
+		c.play();
 	}
 }

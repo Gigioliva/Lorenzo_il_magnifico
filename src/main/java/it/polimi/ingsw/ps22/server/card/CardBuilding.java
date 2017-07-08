@@ -171,6 +171,9 @@ public class CardBuilding extends DevelopmentCard {
 	 */
 	@Override
 	public boolean takeCardControl(Player player) {
+		if(player.getSizeCard("Building")>=6){
+			return false;
+		}
 		HashMap<String, ResourceAbstract> actualCosts = getActualCost(player);
 		for (String type : actualCosts.keySet()) {
 			int costRequired = actualCosts.get(type).getQuantity();
