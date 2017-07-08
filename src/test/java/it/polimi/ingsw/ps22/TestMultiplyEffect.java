@@ -10,12 +10,21 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
+/**
+ * 
+ * This class checks whether the {@link MultiplyEffect} works
+ * properly or not
+ *
+ */
 public class TestMultiplyEffect {
 
 	Player player;
 	MultiplyEffect eff;
 	MultiplyEffect eff2;
 	
+	/**
+	 * This method initializes a new {@link Player}, and effects themselves
+	 */
 	@Before
 	public void init(){
 		player = new Player("Marco", ColorPlayer.BLUE);
@@ -41,12 +50,20 @@ public class TestMultiplyEffect {
 		
 	}
 
+	/**
+	 * this method checks whether the performEffect method works
+	 * correctly
+	 */
 	@Test
 	public void testPerformEffect() {
 		eff.performEffect(player, null);
 		assert(player.getSpecificResource("VictoryPoint").getQuantity() == 6);
 	}
 	
+	/**
+	 * this method checks whether the performEffect method works
+	 * correctly
+	 */
 	@Test
 	public void testPerformEffect2() {
 		eff2.performEffect(player, null);

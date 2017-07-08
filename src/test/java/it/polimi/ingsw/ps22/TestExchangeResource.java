@@ -14,12 +14,21 @@ import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 import it.polimi.ingsw.ps22.server.resource.Wood;
 
+/**
+ * 
+ * This class check whether the {@link ExchangeResource} class 
+ * works properly or not
+ *
+ */
 public class TestExchangeResource {
 
 	Player player;
 	ExchangeResource eff;
 	ExchangeResource eff2;
 	
+	/**
+	 * It initializes the {@link Player} and effect itself
+	 */
 	@Before
 	public void init(){
 		player = new Player("Marco", ColorPlayer.BLUE);
@@ -43,6 +52,10 @@ public class TestExchangeResource {
 		
 	}
 
+	/**
+	 * this method checks whether the performEffect method works
+	 * correctly
+	 */
 	@Test
 	public void testPerformEffect() {
 		eff.performEffect(player, null);
@@ -54,6 +67,10 @@ public class TestExchangeResource {
 
 	}
 	
+	/**
+	 * this method checks whether the performEffect method works
+	 * correctly
+	 */
 	@Test
 	public void testPerformEffect2() {
 		eff2.performEffect(player, null);
