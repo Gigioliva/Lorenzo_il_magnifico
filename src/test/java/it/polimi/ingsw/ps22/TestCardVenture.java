@@ -13,12 +13,24 @@ import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 
+/**
+ * 
+ * This class checks whether the {@link CardVenture} class works properly or
+ * not
+ *
+ */
+
 public class TestCardVenture {
 	
 	private CardVenture card;
 	private HashMap<String, ResourceAbstract> cost;
 	private HashMap<String, ResourceAbstract> requisite;
 	private Player player;
+	
+	/**
+	 * this method initialize the {@link CardVenture} and the {@link Player}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
@@ -40,11 +52,19 @@ public class TestCardVenture {
 		card.addImmediateEffect(eff);
 	}
 	
+	/**
+	 * this method tests the Clone method in {@link CardVenture}
+	 */
+	
 	@Test
 	public void testClone(){
 		CardVenture clone=card.clone();
 		assert(clone.toString().equals(card.toString()));
 	}
+	
+	/**
+	 * this method tests the applyEffect method in {@link CardVenture}
+	 */
 	
 	@Test
 	public void testApplyEffect(){
@@ -54,6 +74,10 @@ public class TestCardVenture {
 		assert(player.getEndEffects().size()==1);
 	}
 	
+	/**
+	 * this method tests the TakeCardControl method in {@link CardVenture}
+	 */
+	
 	@Test
 	public void testTakeCard(){
 		player.addSpecificResource("Coin", new Coin(3));
@@ -61,6 +85,10 @@ public class TestCardVenture {
 		player.addSpecificResource("MilitaryPoint", new MilitaryPoint(1));
 		assert(card.takeCardControl(player));
 	}
+	
+	/**
+	 * this method tests the applyCostToPlayer method in {@link CardVenture}
+	 */
 	
 	@Test
 	public void testPayCard(){
