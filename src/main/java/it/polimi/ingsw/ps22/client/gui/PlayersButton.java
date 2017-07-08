@@ -5,13 +5,12 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JLayeredPane;
 import javax.swing.JPanel;
-
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.model.Model;
 
@@ -77,10 +76,13 @@ public class PlayersButton extends JButton {
 			b.setBounds(personalBoard.getWidth(), 0, b.cardDim.getOffsetX()*3, b.cardDim.getOffsetY()*3);
 			p.add(personalBoard, new Integer(1));
 			p.add(b, new Integer(2));
-			
-		
 			panel.add(p);
 			//frame.setBounds(0,0,personalBoard.getWidth(), personalBoard.getHeight());
+			JLabel sfondo = MyImage.getScaledImageinLabel("./image/sfondo.png",
+					new Rectangle(0, (int)(4200/resizeFactor), 0, (int) (4000/resizeFactor)));
+			sfondo.setBounds(-100, -100, (int) (5000/resizeFactor), (int) (5000/resizeFactor));
+			// sfondo.setText("Ciao");
+			p.add(sfondo, new Integer(0));
 			
 			frame.add(panel);
 			frame.setMinimumSize(new Dimension(600, 600));
