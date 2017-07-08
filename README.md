@@ -19,6 +19,12 @@ Quando inizia il gioco verrà visualizzato lo stato corrente della partita e, ne
 Avviando il gioco in GUI si aprirà una finestra di login in cui si richiede l'inserimento dell'username, della password, se si tratta di un nuovo utente e in quale lobby vogliamo entrare. Una volta premuto il tasto confirm il server verificherà i dati inseriti mostrando un messaggio di matching o di errore. Nella finestra di login è presente anche un classifica dei giocatori ordinata in base al rapporto vittorie/partite.
 Una volta inziata la partita si aprirà una finestra contenente la board principale, la board personale del giocatore, i familiari selezionabili e i nomi degli avversari. Premendo sui nomi degli avversari è possibile vedere le loro board personali.
 
+![image_alt](http://imgur.com/TgXMzbZ.png)
+
+![image_alt](http://imgur.com/gZeml7J.png)
+
+![image_alt](http://imgur.com/CmKahbV.png)
+
 ## **Lettura da file**
 Tutti i parametri di gioco, come ad esempio l'elenco delle carte, bonus azione e bonus finali, vengono letti da file salvando tutte le informazioni in formato XML. La lettura avviene mediante le classi contenute del package it/polimi/ingsw/ps22/server/parser che sfuttano la tecnica del Sax Parser. Le strutture dei file XML viene illustrato nelle singole classi che realizzano il parser.
 
