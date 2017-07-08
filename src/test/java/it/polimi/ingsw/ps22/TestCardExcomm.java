@@ -9,10 +9,22 @@ import it.polimi.ingsw.ps22.server.model.ColorPlayer;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.IncrementBuilding;
 
+/**
+ * 
+ * This class checks whether the {@link CardExcomm} class works properly or
+ * not
+ *
+ */
+
 public class TestCardExcomm {
 	
 	private CardExcomm card;
 	private Player player;
+	
+	/**
+	 * this method initialize the {@link CardExcomm} and the {@link Player}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
@@ -27,6 +39,10 @@ public class TestCardExcomm {
 		card.setPathname("prova.jpg");
 	}
 	
+	/**
+	 * this method tests the Clone method in {@link CardExcomm}
+	 */
+	
 	@Test
 	public void testClone(){
 		CardExcomm clone=card.clone();
@@ -34,6 +50,10 @@ public class TestCardExcomm {
 		assert(card.getEra()==1);
 		assert(card.getPathname().equals("prova.jpg"));
 	}
+	
+	/**
+	 * this method tests the applyEffect method in {@link CardExcomm}
+	 */
 	
 	@Test
 	public void testApplyEffect(){

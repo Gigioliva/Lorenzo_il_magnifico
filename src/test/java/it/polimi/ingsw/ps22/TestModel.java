@@ -8,9 +8,21 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
+/**
+ * 
+ * This class checks whether the {@link Model} class works properly or
+ * not
+ *
+ */
+
 public class TestModel {
 	
 	private Model model;
+	
+	/**
+	 * this method initialize the {@link Model} by adding four {@link Player}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
@@ -20,6 +32,10 @@ public class TestModel {
 		model.addPlayers("Dr.Culocane");
 		model.addPlayers("Giovacchino");
 	}
+	
+	/**
+	 * this method tests the StartGame method in {@link Model}
+	 */
 	
 	@Test
 	public void testStartGame(){
@@ -42,6 +58,10 @@ public class TestModel {
 		}
 	}
 	
+	/**
+	 * this method tests the Clone method in {@link Model}
+	 */
+	
 	@Test
 	public void testClone(){
 		model.startGame();
@@ -51,6 +71,10 @@ public class TestModel {
 			assert(model.getPlayers().get(el).toString().equals(temp.getPlayers().get(el).toString()));
 		}
 	}
+	
+	/**
+	 * this method tests the NextPlayer method in {@link Model}
+	 */
 	
 	@Test
 	public void testNextPlayer(){
@@ -65,6 +89,10 @@ public class TestModel {
 		model.nextPlayer();
 		assert(model.getPlayerGame().equals("Pastafizia"));
 	}
+	
+	/**
+	 * this method tests the EndGame method in {@link Model}
+	 */
 	
 	@Test
 	public void testEndGame(){
@@ -91,6 +119,10 @@ public class TestModel {
 		assert(model.getPlayerGame().equals("Sigismondo"));
 		assert(!model.getIsActive());
 	}
+	
+	/**
+	 * this method tests the correct initialization of the {@link Model}
+	 */
 	
 	@Test
 	public void testSet(){

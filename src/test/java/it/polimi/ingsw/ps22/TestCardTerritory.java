@@ -9,10 +9,22 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 
+/**
+ * 
+ * This class checks whether the {@link CardTerritory} class works properly or
+ * not
+ *
+ */
+
 public class TestCardTerritory {
 	
 	private CardTerritory card;
 	private Player player;
+	
+	/**
+	 * this method initialize the {@link CardTerritory} and the {@link Player}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
@@ -29,11 +41,19 @@ public class TestCardTerritory {
 		card.setActionValue(2);
 	}
 	
+	/**
+	 * this method tests the Clone method in {@link CardTerritory}
+	 */
+	
 	@Test
 	public void testClone(){
 		CardTerritory clone=card.clone();
 		assert(clone.toString().equals(card.toString()));
 	}
+	
+	/**
+	 * this method tests the applyEffect method in {@link CardTerritory}
+	 */
 	
 	@Test
 	public void testEffect(){
@@ -43,6 +63,10 @@ public class TestCardTerritory {
 		assert(player.getSpecificResource("Stone").getQuantity()==3);
 	}
 	
+	/**
+	 * this method tests the correct initialization of the {@link CardTerritory}
+	 */
+	
 	@Test
 	public void testSetCard(){
 		assert(card.getActionValue()==2);
@@ -50,13 +74,13 @@ public class TestCardTerritory {
 		assert(card.getEra()==1);
 	}
 	
+	/**
+	 * this method tests the TakeCardControl method in {@link CardTerritory}
+	 */
+	
 	@Test
 	public void testTakeCard(){
 		assert(card.takeCardControl(player));
-	}
-	
-	@Test
-	public void testTakeCard2(){
 		CardTerritory c1=new CardTerritory();
 		c1.setName("Carta prova1");
 		c1.setEra(1);

@@ -9,10 +9,22 @@ import it.polimi.ingsw.ps22.server.model.ColorPlayer;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 
+/**
+ * 
+ * This class checks whether the {@link CardLeader} class works properly or
+ * not
+ *
+ */
+
 public class TestCardLeader {
 	
 	private CardLeader card;
 	private Player player;
+	
+	/**
+	 * this method initialize the {@link CardLeader} and the {@link Player}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
@@ -30,6 +42,10 @@ public class TestCardLeader {
 		card.addRequisite(req2);
 	}
 	
+	/**
+	 * this method tests the Clone method in {@link CardLeader}
+	 */
+	
 	@Test
 	public void testClone(){
 		CardLeader clone=card.clone();
@@ -37,10 +53,18 @@ public class TestCardLeader {
 		assert(card.getName().equals("Carta Prova"));
 	}
 	
+	/**
+	 * this method tests the TakeCardControl method in {@link CardLeader}
+	 */
+	
 	@Test
 	public void testTakeCard(){
 		assert(card.takeCardControl(player));
 	}
+	
+	/**
+	 * this method tests the applyEffect method in {@link CardLeader}
+	 */
 	
 	@Test
 	public void testApplyEffect(){

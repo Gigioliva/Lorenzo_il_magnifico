@@ -4,13 +4,21 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import it.polimi.ingsw.ps22.server.board.Board;
+import it.polimi.ingsw.ps22.server.board.ChurchSpace;
+import it.polimi.ingsw.ps22.server.board.TowerCharacterZone;
+import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.model.Color;
-import it.polimi.ingsw.ps22.server.model.ColorPlayer;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.Wood;
+
+/**
+ * 
+ * This class checks whether the {@link Board} class works properly or not
+ *
+ */
 
 public class TestBoard {
 
@@ -18,20 +26,41 @@ public class TestBoard {
 	private Player player;
 	private Model model;
 
+	/**
+	 * this method initialize the {@link Model}, the {@link Board} and add one
+	 * {@link Player} to the game
+	 * 
+	 */
+
 	@Before
 	public void init() {
 		model = new Model();
 		board = new Board(model);
 		board.reset(1, new ArrayList<Player>());
-		player = new Player("Gigi", ColorPlayer.RED);
+		model.addPlayers("Gigi");
+		player = model.getPlayers().get("Gigi");
 		player.setFamily(board.getDice());
 	}
+
+	/**
+	 * this method tests the correct initialization of the various objects
+	 * [{@link Model}, {@link Board}, {@link Player}]
+	 */
 
 	@Test
 	public void testSet() {
 		assert (board.getTower("Building").getTowerSpaces().length == 4);
+		assert (board.getTower("Territory").getTowerSpaces().length == 4);
+		assert (board.getTower("Venture").getTowerSpaces().length == 4);
+		assert (board.getTower("Character").getTowerSpaces().length == 4);
 		assert (!player.getFamily(Color.BLACK).isPlaced());
+		assert (model.getPlayers().containsKey("Gigi"));
 	}
+
+	/**
+	 * this method tests the Council class in the package
+	 * {@link it.polimi.ingsw.ps22.server.board}
+	 */
 
 	@Test
 	public void testCouncil() {
@@ -41,6 +70,10 @@ public class TestBoard {
 		assert (player.getSpecificResource("Coin").getQuantity() == 1);
 		assert (player.getSpecificResource("Servant").getQuantity() == 1);
 	}
+
+	/**
+	 * this method tests the Control method in {@link TowerSpace}
+	 */
 
 	@Test
 	public void testControl() {
@@ -55,6 +88,10 @@ public class TestBoard {
 		assert (board.getTower("Territory").getTowerSpaces()[0].getFamilies().contains(player.getFamily(Color.BLACK)));
 	}
 
+	/**
+	 * this method tests the applyExcomm method in {@link ChurchSpace}
+	 */
+
 	@Test
 	public void testExcomm() {
 		ArrayList<Player> temp = new ArrayList<>();
@@ -62,6 +99,11 @@ public class TestBoard {
 		board.getChurch(2).applyExcomm(temp);
 		assert (board.getChurch(2).getExcomm().contains(player.getColor().getColor()));
 	}
+
+	/**
+	 * this method tests the {@link TowerCharacterZone} class in the package
+	 * {@link it.polimi.ingsw.ps22.server.board}
+	 */
 
 	@Test
 	public void testCharacterTower() {
@@ -74,6 +116,11 @@ public class TestBoard {
 		assert (player.getDevelopmentCard("Character").size() == 1);
 	}
 
+	/**
+	 * this method tests the {@link TowerBuildingZone} class in the package
+	 * {@link it.polimi.ingsw.ps22.server.board}
+	 */
+	
 	@Test
 	public void testBuildingTower() {
 		player.addSpecificResource("Coin", new Coin(7));
@@ -87,6 +134,11 @@ public class TestBoard {
 		assert (player.getDevelopmentCard("Building").size() == 1);
 	}
 
+	/**
+	 * this method tests the {@link TowerVentureZone} class in the package
+	 * {@link it.polimi.ingsw.ps22.server.board}
+	 */
+	
 	@Test
 	public void testVentureTower() {
 		player.addSpecificResource("Coin", new Coin(8));
