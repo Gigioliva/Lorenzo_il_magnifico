@@ -387,7 +387,6 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		timerFour = new Timer();
 		timerFive = new Timer();
 		timerSave = new Timer();
-		timerSave.schedule(new TaskSave(),0, TIMER_SAVE);
 		login = new HashMap<String, UserData>();
 		InputPlayerDataSaxParser.PlayerRead("src/main/java/it/polimi/ingsw/ps22/server/parser/resources/UserData.xml",
 				login);
@@ -410,6 +409,7 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 		} catch (RemoteException e) {
 			System.out.println("Registry già presente!");
 		}
+		timerSave.schedule(new TaskSave(),0, TIMER_SAVE);
 	}
 
 	/**
