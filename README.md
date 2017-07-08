@@ -33,3 +33,18 @@ Il Server è implementato nella classe Server.java del package it/polimi/ingsw/p
 Quando una lobby raggiunge i 2 giocatori, il server avvia un Timer di 30 secondi oltre i quali viene avviata la partita indipendentemente dal numero di giocatori raggiunti; questo timer viene stoppato quando si raggiunge il massimo numero di giocatori della lobby corrispondente.
 Se durante una partita un giocatore si disconnette, il gioco continua normalmente con gli altri giocatori; il giocatore disconnesso ha 15 minuti per potersi riconnettere e riprendere il suo turno, altrimenti il gioco lo salterà in automatico finchè il giocatore non si riconnetterà.
 Il server salva lo stato dei tutte le partite ogni 3 minuti su file permettendo di riprendere tutte le partite all'avvio successivo del server. Il server inoltre tiene traccia di tutte le partite in corso.
+
+## **5 Giocatore**
+Il gioco viene esteso a 5 giocatori cambiando il limite di familiari massimi negli spazi azione del mercato e degli spazi azione "piccoli" delle zone produzione e raccolto. In questo modo si viene a risolvere il problema dell'affollamento del tabellone senza apportare modifiche a quest'ultimo. Tutti gli spazi vengono riadattati per poter contenere il numero massimo di familiari.
+
+## **Lista requisiti sviluppati**
+* Regole Complete
+* Grafica
+  * GUI
+  * CLI
+* Network
+  * Socket
+  * RMI
+* Funzionalità Avanzate
+  * Quinto Giocatore
+  * Persistenza
