@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22.server.message;
 
 import java.util.ArrayList;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
-import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;

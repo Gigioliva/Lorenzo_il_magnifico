@@ -60,12 +60,12 @@ public class Gui extends JFrame {
 		// this.add(personalBoard);
 
 		if (System.getProperty("os.name").contains("Windows")) {
-			Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/Age_Of_Empires.mp3");
+			Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/sound.mp3");
 		} else {
 			Thread temp = new Thread(new Runnable() {
 				@Override
 				public void run() {
-					Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/Age_Of_Empires.mp3");
+					Music.playMP3("src/main/java/it/polimi/ingsw/ps22/client/gui/music/sound.mp3");
 				}
 			});
 			temp.start();

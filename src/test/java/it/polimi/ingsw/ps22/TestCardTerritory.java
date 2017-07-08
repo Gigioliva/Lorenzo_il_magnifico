@@ -54,4 +54,30 @@ public class TestCardTerritory {
 	public void testTakeCard(){
 		assert(card.takeCardControl(player));
 	}
+	
+	@Test
+	public void testTakeCard2(){
+		CardTerritory c1=new CardTerritory();
+		c1.setName("Carta prova1");
+		c1.setEra(1);
+		CardTerritory c2=new CardTerritory();
+		c2.setName("Carta prova2");
+		c2.setEra(1);
+		CardTerritory c3=new CardTerritory();
+		c3.setName("Carta prova3");
+		c3.setEra(1);
+		CardTerritory c4=new CardTerritory();
+		c4.setName("Carta prova4");
+		c4.setEra(1);
+		CardTerritory c5=new CardTerritory();
+		c5.setName("Carta prova5");
+		c5.setEra(1);
+		player.addDevelopmentCard("Territory", c1);
+		player.addDevelopmentCard("Territory", c2);
+		player.addDevelopmentCard("Territory", c3);
+		player.addDevelopmentCard("Territory", c4);
+		player.addDevelopmentCard("Territory", c5);
+		player.addSpecBonus("NoTerritoryReq");
+		assert(card.takeCardControl(player));
+	}
 }

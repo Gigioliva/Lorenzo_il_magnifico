@@ -134,7 +134,7 @@ public class CardTerritory extends DevelopmentCard {
 	public boolean takeCardControl(Player player){
 		int size = player.getSizeCard("Territory");
 		//se il giocatore ha già raggiunto il limite di carte territorio non può prendere la carta
-		if (size >= player.getPersonalBoard().getRequirementHarvest().size())
+		if (size >= 6)
 			return false;
 		else{
 			int requirementHarvest = player.getPersonalBoard().getRequirementHarvest().get(size+1).getQuantity();
