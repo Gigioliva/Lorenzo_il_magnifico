@@ -137,6 +137,7 @@ public class Gui extends JFrame {
 	public void close() {
 		this.dispose();
 		Music.stopMP3();
+		view.close();
 	}
 
 }

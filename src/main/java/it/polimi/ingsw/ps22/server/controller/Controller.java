@@ -69,11 +69,11 @@ public class Controller implements Observer {
 				model.getCurrentPlayer().setConnected(false);
 				GenericMessage mex=new GenericMessage();
 				mex.setString("Il giocatore "+ model.getPlayerGame() + " si è disconnesso");
+				model.notifyModel();
+				model.notifyMessage(mex);
 				do{
 					model.nextPlayer();
 				}while(!model.getCurrentPlayer().getConnected() && model.getIsActive());
-				model.notifyModel();
-				model.notifyMessage(mex);
 			}else{
 				ArrayList<MessageAsk> temp=new ArrayList<>();
 				temp.addAll(model.getWaitAnswer());

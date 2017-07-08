@@ -196,7 +196,7 @@ public class VisitorCLI extends VisitorB {
 				pass=stdin.readLine();
 				System.out.print("Numero Giocatori: ");
 				x=Integer.parseInt(stdin.readLine());
-				System.out.print("New User?: ");
+				System.out.print("New User?: [true,false] ");
 				reg=Boolean.parseBoolean(stdin.readLine());
 				correct = true;
 			} catch (IOException e) {
@@ -225,6 +225,11 @@ public class VisitorCLI extends VisitorB {
 	
 	public void visit(EndGame mex){
 		System.out.println(mex.getString());
+	}
+	
+	public void visit(CloseGame mex){
+		System.out.println(mex.getString());
+		client.close();
 	}
 
 	private static ArrayList<Integer> extractingNumbers(String s) {

@@ -21,6 +21,7 @@ public class Music {
 	
 	static void stopMP3(){
 		c.stop();
+		c.dispose();
 		c=null;
 	}
 }

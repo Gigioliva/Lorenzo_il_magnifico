@@ -91,5 +91,9 @@ public class ViewClient extends Observable implements Observer, Runnable {
 	public void setFlag(boolean flag) {
 		this.myTurn = flag;
 	}
+	
+	public void close(){
+		System.exit(0);
+	}
 
 }
