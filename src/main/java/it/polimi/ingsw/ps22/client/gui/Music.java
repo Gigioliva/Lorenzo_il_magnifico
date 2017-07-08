@@ -18,4 +18,9 @@ public class Music {
 		c.setCycleCount(MediaPlayer.INDEFINITE);
 		c.play();
 	}
+	
+	static void stopMP3(){
+		c.stop();
+		c=null;
+	}
 }
