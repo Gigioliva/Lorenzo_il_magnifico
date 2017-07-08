@@ -9,6 +9,12 @@ import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
+/**
+ * 
+ * Some cards have different costs that can be paid to take it. 
+ * This message ask the player which cost he wants to pay
+ *
+ */
 public class AskCosts extends MessageAsk {
 	private static final long serialVersionUID = 1L;
 	private int numChoice;
@@ -17,6 +23,12 @@ public class AskCosts extends MessageAsk {
 	private Player player;
 	private TowerSpace towerSpace;
 
+	/**
+	 * It creates a new {@link AskCosts}
+	 * @param possibleCost a list of {@link RequisiteCost} among which the player has to choose
+	 * @param player the target player
+	 * @param towerSpace the target {@link TowerSpace} to which the card belongs
+	 */
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace) {
 		super(player.getUsername());
 		this.possibleCost = possibleCost;
@@ -39,6 +51,12 @@ public class AskCosts extends MessageAsk {
 		setString(str.toString());
 	}
 	
+	/**
+	 * 
+	 * @param str the text of the message
+	 * @param id the id of the message
+	 * @param possibleCost a list of {@link RequisiteCost} among which the player has to choose
+	 */
 	public AskCosts(String str, int id, ArrayList<RequisiteCost> possibleCost){
 		super(str,id);
 		this.possibleCost=new ArrayList<RequisiteCost>();
@@ -47,32 +65,63 @@ public class AskCosts extends MessageAsk {
 		}
 	}
 
+	/**
+	 * 
+	 * @param possibleCost a list of {@link RequisiteCost} among which the player has to choose
+	 * @param player the target player
+	 * @param towerSpace the target {@link TowerSpace} to which the card belongs
+	 * @param discount eventual discount for the card
+	 */
 	public AskCosts(ArrayList<RequisiteCost> possibleCost, Player player, TowerSpace towerSpace,
 			HashMap<String, ResourceAbstract> discount) {
 		this(possibleCost, player, towerSpace);
 		this.discount = discount;
 	}
 
+	/**
+	 * 
+	 * @return the id of the message
+	 */
 	public int getIdAsk() {
 		return id_ask;
 	}
 
+	/**
+	 * 
+	 * @return a list of {@link RequisiteCost} among which the player has to choose
+	 */
 	public ArrayList<RequisiteCost> getPossibleCost() {
 		return possibleCost;
 	}
 
+	/**
+	 * 
+	 * @return the target player
+	 */
 	public Player getPlayer() {
 		return player;
 	}
 
+	/**
+	 * 
+	 * @return the target {@link TowerSpace} to which the card belongs
+	 */
 	public TowerSpace getTowerSpace() {
 		return towerSpace;
 	}
 
+	/**
+	 * 
+	 * @return the number of choices that the player has to make
+	 */
 	public int getNumChoice() {
 		return numChoice;
 	}
 
+	/**
+	 * 
+	 * @return the discount for the card
+	 */
 	public HashMap<String, ResourceAbstract> getDiscount() {
 		if (discount != null)
 			return discount;

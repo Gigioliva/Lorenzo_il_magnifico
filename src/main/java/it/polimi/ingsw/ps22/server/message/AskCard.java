@@ -5,9 +5,18 @@ import java.util.HashMap;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.CardAction;
 import it.polimi.ingsw.ps22.server.card.DevelopmentCard;
+import it.polimi.ingsw.ps22.server.effect.ExtraAction;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
+/**
+ * 
+ * A card may have an {@link ExtraAction} effect that allows the player to 
+ * take another card, given a certain action value. This message propose
+ * to the player a list of cards that he can afford, and the player will
+ * have to choose one
+ *
+ */
 public class AskCard extends MessageAsk{
 	
 	private static final long serialVersionUID = 1L;
@@ -15,6 +24,12 @@ public class AskCard extends MessageAsk{
 	private Player player;
 	private CardAction cardAction;
 	
+	/**
+	 * It creates a new {@link AskCard} message
+	 * @param possibleCard all the possible {@link DevelopmentCard} the the player can afford
+	 * @param player the target player
+	 * @param cardAction the card the invoked the action
+	 */
 	public AskCard(HashMap<String,ArrayList<DevelopmentCard>> possibleCard, Player player, CardAction cardAction){
 		super(player.getUsername());
 		this.player=player;
@@ -31,6 +46,12 @@ public class AskCard extends MessageAsk{
 		setString(str.toString());
 	}
 	
+	/**
+	 * 
+	 * @param str the text of the message
+	 * @param id the id of the message
+	 * @param possibleCard all the possible {@link DevelopmentCard} the the player can afford
+	 */
 	public AskCard(String str, int id,HashMap<String,ArrayList<DevelopmentCard>> possibleCard){
 		super(str,id);
 		HashMap<String,ArrayList<DevelopmentCard>> temp=new HashMap<String,ArrayList<DevelopmentCard>>();
@@ -43,14 +64,26 @@ public class AskCard extends MessageAsk{
 		this.possibleCard=temp;
 	}
 	
+	/**
+	 * 
+	 * @return all the possible {@link DevelopmentCard} the the player can afford
+	 */
 	public HashMap<String,ArrayList<DevelopmentCard>> getPossibleCard(){
 		return possibleCard;
 	}
 	
+	/**
+	 * 
+	 * @return the target player
+	 */
 	public Player getPlayer(){
 		return player;
 	}
 	
+	/**
+	 * 
+	 * @return  the card the invoked the action
+	 */
 	public CardAction getCardAction(){
 		return cardAction;
 	}
