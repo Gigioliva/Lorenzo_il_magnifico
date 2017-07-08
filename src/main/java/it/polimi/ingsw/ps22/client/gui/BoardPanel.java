@@ -599,6 +599,8 @@ public class BoardPanel extends JPanel {
 	private void updateTurn(int turn) {
 		StringBuilder str = new StringBuilder("Turn: ");
 		str.append(turn);
+		if (turn==7)
+			str = new StringBuilder("The End");
 		turnLabel.setText(str.toString());
 	}
 

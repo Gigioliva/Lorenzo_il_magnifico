@@ -105,9 +105,9 @@ public class AdaptiveLayout {
 		excommSlot1 = new Rectangle(534, 654, 2298, 2478);
 		excommSlot2 = new Rectangle(732, 852, 2330, 2510);
 		excommSlot3 = new Rectangle(930, 1050, 2298, 2478);
-		turnNumberSlot = new Rectangle(5650, 6450, 260, 460);
-		playerNameSlot = new Rectangle(5650, 6450, 50, 250);
-		isYourTurnSlot = new Rectangle(5650, 6450, 470, 600);
+		turnNumberSlot = new Rectangle(5650, 6600, 240, 420);
+		playerNameSlot = new Rectangle(5650, 6600, 50, 230);
+		isYourTurnSlot = new Rectangle(5650, 6600, 430, 550);
 		closeGameDim = new Rectangle(0, 700, 0, 300);
 		endTurnDim = new Rectangle(0, 700, 0, 400);
 		cardDevelopmentStartOffsetX = 183;
