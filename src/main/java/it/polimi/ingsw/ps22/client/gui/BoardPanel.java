@@ -280,7 +280,7 @@ public class BoardPanel extends JPanel {
 				gui.close();
 			}
 		});
-		closeGame.setVisible(false);
+		closeGame.setVisible(true);
 		layeredPane.add(closeGame, new Integer(10000));
 
 		dice1 = new JLabel();
