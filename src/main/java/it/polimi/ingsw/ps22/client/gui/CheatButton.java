@@ -1,7 +1,5 @@
 package it.polimi.ingsw.ps22.client.gui;
 
-import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
@@ -22,15 +20,13 @@ public class CheatButton extends JButton {
 		@Override
 		public void actionPerformed(ActionEvent e) {
 			JFrame temp = new JFrame("Cheats");
-			ImageIcon img = new ImageIcon("./image/zeb.jpg");
+			ImageIcon img = new ImageIcon("src/main/java/it/polimi/ingsw/ps22/client/gui/image/zeb.jpg");
 			JLabel sfondo = new JLabel(img);
-			sfondo.setBounds(0, 0, 600, 400);
 			sfondo.setMinimumSize(temp.getSize());
 			temp.add(sfondo);
-			sfondo.setVisible(true);
-			temp.setMinimumSize(new Dimension(600, 400));
-			Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-			temp.setLocation(dim.width / 2 - temp.getSize().width / 2, dim.height / 2 - temp.getSize().height / 2);
+			temp.setSize(img.getIconWidth(), img.getIconHeight());
+			temp.setResizable(false);
+			temp.setLocationRelativeTo(null);
 			temp.setVisible(true);
 		}
 	}

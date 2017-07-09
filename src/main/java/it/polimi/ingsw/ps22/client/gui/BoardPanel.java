@@ -268,7 +268,7 @@ public class BoardPanel extends JPanel {
 		Rectangle recCheat = layout.getCheatButtonSlot(resizeFactor);
 		cheat.setBounds(recCheat.getInitx(), recCheat.getInity(), 
 				recCheat.getOffsetX(), recCheat.getOffsetY());
-		cheat.setBackground(java.awt.Color.GREEN);
+		cheat.setBackground(new java.awt.Color(154, 92, 43));
 		layeredPane.add(cheat, new Integer(100000));
 		cheat.setVisible(true);
 
