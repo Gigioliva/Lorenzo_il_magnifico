@@ -263,13 +263,22 @@ public class BoardPanel extends JPanel {
 		chat.setOpaque(false);
 		layeredPane.add(chat, new Integer(100000));
 		chat.setVisible(true);
-		
+
+		CheatButton cheat = new CheatButton();
+		Rectangle recCheat = layout.getCheatButtonSlot(resizeFactor);
+		cheat.setBounds(recCheat.getInitx(), recCheat.getInity(), 
+				recCheat.getOffsetX(), recCheat.getOffsetY());
+		cheat.setBackground(java.awt.Color.GREEN);
+		layeredPane.add(cheat, new Integer(100000));
+		cheat.setVisible(true);
+
 		JButton quitTurn = new JButton("End turn");
 		Rectangle quitTurnDim = layout.getEndTurnDim(resizeFactor);
 		quitTurn.setBackground(java.awt.Color.BLACK);
 		quitTurn.setForeground(java.awt.Color.WHITE);
-		quitTurn.setBounds((int) widthScreen - quitTurnDim.getOffsetX(), (int) heightScreen - (2*quitTurnDim.getOffsetY()),
-				quitTurnDim.getOffsetX(), quitTurnDim.getOffsetY());
+		quitTurn.setBounds((int) widthScreen - quitTurnDim.getOffsetX(),
+				(int) heightScreen - (2 * quitTurnDim.getOffsetY()), quitTurnDim.getOffsetX(),
+				quitTurnDim.getOffsetY());
 		quitTurn.addActionListener(new ActionListener() {
 
 			@Override
@@ -288,8 +297,7 @@ public class BoardPanel extends JPanel {
 		closeGame.setBackground(java.awt.Color.RED);
 		closeGame.setForeground(java.awt.Color.WHITE);
 		closeGame.setBounds((int) widthScreen - (closeGameDim.getOffsetX()),
-				(int) heightScreen - closeGameDim.getOffsetY(), closeGameDim.getOffsetX(),
-				closeGameDim.getOffsetY());
+				(int) heightScreen - closeGameDim.getOffsetY(), closeGameDim.getOffsetX(), closeGameDim.getOffsetY());
 		closeGame.addActionListener(new ActionListener() {
 
 			@Override
@@ -607,7 +615,7 @@ public class BoardPanel extends JPanel {
 	private void updateTurn(int turn) {
 		StringBuilder str = new StringBuilder("Turn: ");
 		str.append(turn);
-		if (turn==7)
+		if (turn == 7)
 			str = new StringBuilder("The End");
 		turnLabel.setText(str.toString());
 	}
@@ -615,8 +623,8 @@ public class BoardPanel extends JPanel {
 	public void setIsYourTurn() {
 		isYourTurn.setVisible(true);
 	}
-	
-	public void addChatMessage(String str){
+
+	public void addChatMessage(String str) {
 		chat.addMex(str);
 	}
 }
