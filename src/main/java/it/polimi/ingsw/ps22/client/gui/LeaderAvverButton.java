@@ -30,8 +30,8 @@ public class LeaderAvverButton extends JPanel {
 
 		setLeaders();
 
-		this.setMinimumSize(new Dimension((int) (2 * cardDim.getOffsetX() * resizeFactor / 3),
-				(int) (2 * cardDim.getOffsetX() * resizeFactor / 3)));
+		this.setMinimumSize(new Dimension((int) (cardDim.getOffsetX() / resizeFactor * 16),
+				(int) (cardDim.getOffsetX() / resizeFactor * 16)));
 
 	}
 
@@ -39,16 +39,16 @@ public class LeaderAvverButton extends JPanel {
 		for (int i = 0; i < 4 - leaders.size(); i++) {
 
 			this.add(MyImage.getScaledImageinLabel(leaderBackPath,
-					new Rectangle(0, (int) (cardDim.getOffsetX() * resizeFactor / 3), 0,
-							(int) (cardDim.getOffsetY() * resizeFactor / 3))));
+					new Rectangle(0, (int) (cardDim.getOffsetX() / resizeFactor * 8), 0,
+							(int) (cardDim.getOffsetY() / resizeFactor * 8))));
 
 		}
 
 		for (int i = 0; i < leaders.size(); i++) {
 			String path = CardPath.getLeaderCardPathname(leaders.get(i));
 			this.add(MyImage.getScaledImageinLabel(path,
-					new Rectangle(0, (int) (cardDim.getOffsetX() * resizeFactor / 3), 0,
-							(int) (cardDim.getOffsetY() * resizeFactor / 3))));
+					new Rectangle(0, (int) (cardDim.getOffsetX() / resizeFactor * 8), 0,
+							(int) (cardDim.getOffsetY() / resizeFactor * 8))));
 		}
 	}
 
