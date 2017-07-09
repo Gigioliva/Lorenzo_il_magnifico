@@ -9,7 +9,7 @@
 
 Per avviare il gioco eseguire prima il main della classe Server.java del package it/polimi/ingsw/ps22/server/view.
 Quindi avviare il main della classe Client del package it/polimi/ingsw/ps22/client/main; all'avvio di quest'ultimo verrà richiesto quale tecnologia di network usare [Socket o RMI] e quale grafica usare [GUI o CLI].
-[Link regole del gioco](https://piazza-resources.s3.amazonaws.com/j0r6g91w2e1kk/j0raol8gxxi30b/RegoleGioco.pdf?AWSAccessKeyId=AKIAIEDNRLJ4AZKBW6HA&Expires=1499453556&Signature=SI3XGaAcGaiCEv%2BzJAzJ6fOd3TM%3D).
+[Link regole del gioco](https://drive.google.com/file/d/0B8V6Ym98C30OR3o1UEtiQnRLTXM/view?usp=sharing).
 
 ## **CLI**
 Avviando il gioco in CLI verrà richiesto di effettuare un login, inserendo un username ed una password, e successivamente verrà chiesto se si tratta di un utente già registrato o di uno nuovo e in quanti giocatori si vorrebbe giocare. Nel caso si trattasse di un utente già registrato il server controllerà la correttezza della password inserita; se il controllo dà esito positivo allora il client si metterà in attesa del raggiungimento del numero massimo di giocatori o dello scadere del timer, altrimenti verrà richiesto di effettuare nuovamente il login.
@@ -35,7 +35,7 @@ Se durante una partita un giocatore si disconnette, il gioco continua normalment
 Il server salva lo stato dei tutte le partite ogni 3 minuti su file permettendo di riprendere tutte le partite all'avvio successivo del server. Il server inoltre tiene traccia di tutte le partite in corso.
 
 ## **5 Giocatore**
-Il gioco viene esteso a 5 giocatori cambiando il limite di familiari massimi negli spazi azione del mercato e degli spazi azione "piccoli" delle zone produzione e raccolto. In questo modo si viene a risolvere il problema dell'affollamento del tabellone senza apportare modifiche a quest'ultimo. Tutti gli spazi vengono riadattati per poter contenere il numero massimo di familiari.
+Il gioco viene esteso a 5 giocatori cambiando il limite di familiari massimi negli spazi azione del mercato e degli spazi azione "piccoli" delle zone produzione e raccolto, passando da 1 a massimo 2 familiari. In questo modo si viene a risolvere il problema dell'affollamento del tabellone senza apportare modifiche a quest'ultimo. Tutti gli spazi vengono riadattati per poter contenere il numero massimo di familiari.
 
 ## **Lista requisiti sviluppati**
 * Regole Complete
