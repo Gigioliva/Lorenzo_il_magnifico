@@ -270,7 +270,7 @@ public class BoardPanel extends JPanel {
 				recCheat.getOffsetX(), recCheat.getOffsetY());
 		cheat.setBackground(new java.awt.Color(154, 92, 43));
 		layeredPane.add(cheat, new Integer(100000));
-		cheat.setVisible(true);
+		cheat.setVisible(false);
 
 		JButton quitTurn = new JButton("End turn");
 		Rectangle quitTurnDim = layout.getEndTurnDim(resizeFactor);
