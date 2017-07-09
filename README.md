@@ -21,7 +21,7 @@ Una volta inziata la partita si aprirà una finestra contenente la board princip
 
 ![image_alt](http://imgur.com/TgXMzbZ.png)
 
-![image_alt](http://imgur.com/gZeml7J.png)
+![image_alt](http://imgur.com/SezJP36.png)
 
 ![image_alt](http://imgur.com/CmKahbV.png)
 
@@ -36,6 +36,9 @@ Il server salva lo stato dei tutte le partite ogni 3 minuti su file permettendo 
 
 ## **5 Giocatore**
 Il gioco viene esteso a 5 giocatori cambiando il limite di familiari massimi negli spazi azione del mercato e degli spazi azione "piccoli" delle zone produzione e raccolto, passando da 1 a massimo 2 familiari. In questo modo si viene a risolvere il problema dell'affollamento del tabellone senza apportare modifiche a quest'ultimo. Tutti gli spazi vengono riadattati per poter contenere il numero massimo di familiari.
+
+## **Login**
+Il tempo di attesa per l'avvio di una partita (se non si raggiungono i 4/5 giocatori) è impostato ad 1 minuti. Alcuni utenti già registrati sono user1 [pass1], user2 [pass2], user3 [pass3].
 
 ## **Lista requisiti sviluppati**
 * Regole Complete
