@@ -14,9 +14,9 @@ public class VisitorCLI extends VisitorB {
 
 	private static BufferedReader stdin = new BufferedReader(new InputStreamReader(System.in));
 	private ViewClient client;
-	
-	public VisitorCLI(ViewClient client){
-		this.client=client;
+
+	public VisitorCLI(ViewClient client) {
+		this.client = client;
 	}
 
 	@Override
@@ -125,7 +125,7 @@ public class VisitorCLI extends VisitorB {
 
 	@Override
 	public void visit(ChatMessage mex) {
-		System.out.println(mex.getString());
+		System.out.println("Message Chat by " + mex.getUser() + ": " + mex.getString() + "\n");
 	}
 
 	@Override
@@ -137,7 +137,7 @@ public class VisitorCLI extends VisitorB {
 	public void visit(GenericMessage mex) {
 		System.out.println(mex.getString());
 	}
-	
+
 	@Override
 	public void visit(EndDraft mex) {
 		System.out.println(mex.getString());
@@ -179,25 +179,25 @@ public class VisitorCLI extends VisitorB {
 	public void visit(ChoiceMove mex) {
 		System.out.println(mex.getString());
 	}
-	
+
 	@Override
-	public void visit(AskUsername mex){
+	public void visit(AskUsername mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		String name = null;
 		String pass = null;
-		int x=0;
-		boolean reg=false;
+		int x = 0;
+		boolean reg = false;
 		do {
 			try {
 				System.out.print("Username: ");
 				name = stdin.readLine();
 				System.out.print("Password: ");
-				pass=stdin.readLine();
+				pass = stdin.readLine();
 				System.out.print("Numero Giocatori: ");
-				x=Integer.parseInt(stdin.readLine());
+				x = Integer.parseInt(stdin.readLine());
 				System.out.print("New User?: [true,false] ");
-				reg=Boolean.parseBoolean(stdin.readLine());
+				reg = Boolean.parseBoolean(stdin.readLine());
 				correct = true;
 			} catch (IOException e) {
 				System.out.println("Errato.");
@@ -205,29 +205,29 @@ public class VisitorCLI extends VisitorB {
 		} while (!correct);
 		client.send(new AnswerUsername(name, pass, x, reg));
 	}
-	
-	public void visit(AskFamily mex){
+
+	public void visit(AskFamily mex) {
 		System.out.println(mex.getString());
 		boolean correct = false;
 		Color color = null;
 		do {
 			try {
 				color = Color.Conversion(stdin.readLine());
-				if(color!=Color.NEUTRAL){
+				if (color != Color.NEUTRAL) {
 					correct = true;
 				}
 			} catch (IOException | IllegalArgumentException e) {
 				System.out.println("Errato.");
 			}
 		} while (!correct);
-		client.send(new AnswerFamily(mex.getId(), color));	
+		client.send(new AnswerFamily(mex.getId(), color));
 	}
-	
-	public void visit(EndGame mex){
+
+	public void visit(EndGame mex) {
 		System.out.println(mex.getString());
 	}
-	
-	public void visit(CloseGame mex){
+
+	public void visit(CloseGame mex) {
 		System.out.println(mex.getString());
 		client.close();
 	}
@@ -244,9 +244,9 @@ public class VisitorCLI extends VisitorB {
 		}
 		return numbers;
 	}
-	
+
 	@Override
-	public void visit(RankingMessage mex){
+	public void visit(RankingMessage mex) {
 		System.out.println(mex.getString());
 	}
 }

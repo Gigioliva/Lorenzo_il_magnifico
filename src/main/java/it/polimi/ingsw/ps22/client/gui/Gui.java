@@ -136,7 +136,7 @@ public class Gui extends JFrame {
 	}
 	
 	public void showChatMessage(ChatMessage mex){
-		board.addChatMessage(mex.getString());
+		board.addChatMessage(mex.getUser() +": "+ mex.getString());
 	}
 
 	public void close() {

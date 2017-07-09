@@ -11,15 +11,20 @@ import it.polimi.ingsw.ps22.server.view.VisitorA;
 public class ChatMessage extends GenericMessage {
 	
 	private static final long serialVersionUID = 1L;
+	private String user;
 
 	/**
 	 * 
 	 * @param str a string representing the content of the message
 	 */
-	public ChatMessage(String str) {
+	public ChatMessage(String str, String user) {
 		setString(str);
+		this.user=user;
 	}
 	
+	public String getUser(){
+		return user;
+	}
 	public GenericMessage accept(VisitorA visitor){
 		return visitor.visit(this);
 	}
