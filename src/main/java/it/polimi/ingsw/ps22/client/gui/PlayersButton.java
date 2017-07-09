@@ -63,6 +63,7 @@ public class PlayersButton extends JButton {
 
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			
 			JFrame frame = new JFrame(username);
 			frame.setMinimumSize(new Dimension((int)(3800/resizeFactor),(int)(3400/resizeFactor)));
 			JPanel panel = new JPanel();
@@ -81,7 +82,6 @@ public class PlayersButton extends JButton {
 			JLabel sfondo = MyImage.getScaledImageinLabel("./image/sfondo.png",
 					new Rectangle(0, (int)(4200/resizeFactor), 0, (int) (4000/resizeFactor)));
 			sfondo.setBounds(-100, -100, (int) (5000/resizeFactor), (int) (5000/resizeFactor));
-			// sfondo.setText("Ciao");
 			p.add(sfondo, new Integer(0));
 			
 			frame.add(panel);
