@@ -1,6 +1,7 @@
 package it.polimi.ingsw.ps22.client.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,10 +28,16 @@ public class Chat extends JPanel {
 	public Chat(ViewClient view, double resizeFactor){
 		this.view = view;
 		//this.resizeFactor = resizeFactor;
-		this.setOpaque(false);
+		//this.setOpaque(true);
+		this.setBackground(new java.awt.Color(154, 92, 43));
 		this.setLayout(new BorderLayout());
 		this.add(mex, BorderLayout.CENTER);
-		this.add(new JLabel("Chat"), BorderLayout.PAGE_START);
+		JLabel title=new JLabel("CHAT");
+		title.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 20));
+		send.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 15));
+		mex.setFont(new Font("Arial", Font.ITALIC + Font.BOLD, 12));
+		this.add(title, BorderLayout.PAGE_START);
+		send.setBackground(new java.awt.Color(154, 92, 43));
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
 		panel.add(userText);
