@@ -1,9 +1,14 @@
 package it.polimi.ingsw.ps22.client.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -26,10 +31,14 @@ public class Chat extends JPanel {
 	public Chat(ViewClient view, double resizeFactor){
 		this.view = view;
 		//this.resizeFactor = resizeFactor;
-		this.setLayout(new GridLayout(3, 1));
-		this.add(mex);
-		this.add(userText);
-		this.add(send);
+		this.setOpaque(false);
+		this.setLayout(new BorderLayout());
+		this.add(mex, BorderLayout.CENTER);
+		JPanel panel = new JPanel();
+		panel.setLayout(new GridLayout(2, 1));
+		panel.add(userText);
+		panel.add(send);
+		this.add(panel, BorderLayout.PAGE_END);
 		send.addActionListener(new SendListener());
 	}
 
