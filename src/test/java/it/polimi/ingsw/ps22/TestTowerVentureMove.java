@@ -4,7 +4,6 @@ import java.util.HashMap;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import it.polimi.ingsw.ps22.server.card.CardVenture;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
@@ -18,6 +17,12 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.Wood;
 
+/**
+ * 
+ * This class checks whether the {@link TowerVentureMove} class works properly or not
+ *
+ */
+
 public class TestTowerVentureMove {
 
 	 
@@ -25,6 +30,12 @@ public class TestTowerVentureMove {
 	private Model model;
 	private TowerVentureMove ventureMoveFail;
 	private Model modelFail;
+	
+	/**
+	 * This method initializes a {@link TowerVentureMove} and {@link Model}, to test
+	 * success, and two others to test failure
+	 * 
+	 */
 	
 	@Before
 	public void init() {
@@ -61,12 +72,20 @@ public class TestTowerVentureMove {
 		ventureMoveFail = new TowerVentureMove(modelFail.getPlayers().get("Marco").getUsername(),Color.NEUTRAL,1,0);
 	}
 	
+	/**
+	 * this method tests the success applyMove method in {@link TowerVentureMove}
+	 */
+	
 	@Test
 	public void testApplyMove() {
 		ventureMove.applyMove(model);
 		Family fam = model.getBoard().getTower("Venture").getTowerSpaces()[0].getFamilies().get(0);
 		assert(fam.getColor()==Color.NEUTRAL && fam.getPlayer().getUsername().equals("Marco"));
 	}
+	
+	/**
+	 * this method tests the failure applyMove method in {@link TowerVentureMove}
+	 */
 	
 	@Test
 	public void testApplyMoveFail() {

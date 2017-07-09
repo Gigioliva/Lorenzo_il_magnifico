@@ -1,10 +1,8 @@
 package it.polimi.ingsw.ps22;
 
 import java.util.HashMap;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import it.polimi.ingsw.ps22.server.action.ProductionAction;
 import it.polimi.ingsw.ps22.server.card.CardBuilding;
 import it.polimi.ingsw.ps22.server.effect.GainResource;
@@ -17,12 +15,25 @@ import it.polimi.ingsw.ps22.server.resource.MilitaryPoint;
 import it.polimi.ingsw.ps22.server.resource.Servant;
 import it.polimi.ingsw.ps22.server.resource.VictoryPoint;
 
+/**
+ * 
+ * This class checks whether the {@link ProductionAction} class works properly or
+ * not
+ *
+ */
+
 public class TestProductionAction {
 
 	Player player;
 	Model model;
 	int servants;
 	ProductionAction action;
+	
+	/**
+	 * This method initializes a {@link ProductionAction}, {@link Model} and
+	 * {@link Player}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
@@ -61,6 +72,10 @@ public class TestProductionAction {
 		player.addDevelopmentCard("Building", card1);
 		player.addDevelopmentCard("Building", card2);
 	}
+	
+	/**
+	 * this method tests the applyAction method in {@link ProductionAction}
+	 */
 	
 	@Test
 	public void testApplyAction() {

@@ -8,14 +8,30 @@ import it.polimi.ingsw.ps22.server.player.BonusAcc;
 import it.polimi.ingsw.ps22.server.resource.Coin;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 
+/**
+ * 
+ * This class checks whether the {@link BonusAcc} class works properly or
+ * not
+ *
+ */
+
 public class TestBonusAcc {
 	
 	private BonusAcc bonus;
+	
+	/**
+	 * this method initialize the {@link BonusAcc}
+	 * 
+	 */
 	
 	@Before
 	public void init(){
 		bonus=new BonusAcc();
 	}
+	
+	/**
+	 * this method tests the set/get methods in {@link BonusAcc}
+	 */
 	
 	@Test
 	public void testAddBonus(){

@@ -2,7 +2,6 @@ package it.polimi.ingsw.ps22;
 
 import org.junit.Before;
 import org.junit.Test;
-
 import it.polimi.ingsw.ps22.server.card.CardTerritory;
 import it.polimi.ingsw.ps22.server.model.Color;
 import it.polimi.ingsw.ps22.server.model.Model;
@@ -15,11 +14,23 @@ import it.polimi.ingsw.ps22.server.resource.Servant;
 import it.polimi.ingsw.ps22.server.resource.Stone;
 import it.polimi.ingsw.ps22.server.resource.Wood;
 
+/**
+ * 
+ * This class checks whether the {@link TowerTerritoryMove} class works properly or not
+ *
+ */
+
 public class TestTowerTerritoryMove {
 	private TowerTerritoryMove territoryMove;
 	private Model model;
 	private TowerTerritoryMove territoryMoveFail;
 	private Model modelFail;
+	
+	/**
+	 * This method initializes a {@link TowerTerritoryMove} and {@link Model}, to test
+	 * success, and two others to test failure
+	 * 
+	 */
 	
 	@Before
 	public void init() {
@@ -50,12 +61,20 @@ public class TestTowerTerritoryMove {
 		territoryMoveFail = new TowerTerritoryMove(modelFail.getPlayers().get("Marco").getUsername(),Color.NEUTRAL,1,0);
 	}
 	
+	/**
+	 * this method tests the success applyMove method in {@link TowerTerritoryMove}
+	 */
+	
 	@Test
 	public void testApplyMove() {
 		territoryMove.applyMove(model);
 		Family fam = model.getBoard().getTower("Territory").getTowerSpaces()[0].getFamilies().get(0);
 		assert(fam.getColor()==Color.NEUTRAL && fam.getPlayer().getUsername().equals("Marco"));
 	}
+	
+	/**
+	 * this method tests the failure applyMove method in {@link TowerTerritoryMove}
+	 */
 	
 	@Test
 	public void testApplyMoveFail() {

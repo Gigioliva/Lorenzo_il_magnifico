@@ -6,12 +6,24 @@ import it.polimi.ingsw.ps22.server.card.CardLeader;
 import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.move.LeaderDiscarding;
 
+/**
+ * 
+ * This class checks whether the {@link LeaderDiscarding} class works properly or not
+ *
+ */
+
 public class TestLeaderDiscarding {
 
 	private LeaderDiscarding leaderDisc;
 	private Model model;
 	private LeaderDiscarding leaderDiscFail;
 	private Model modelFail;
+	
+	/**
+	 * This method initializes a {@link LeaderDiscarding} and {@link Model}, to test
+	 * success, and two others to test failure
+	 * 
+	 */
 	
 	@Before
 	public void init() {
@@ -30,12 +42,20 @@ public class TestLeaderDiscarding {
 		leaderDiscFail = new LeaderDiscarding(modelFail.getPlayers().get("Marco").getUsername(),"Giovanni dalle Bande Nere");
 	}
 	
+	/**
+	 * this method tests the success applyMove method in {@link LeaderDiscarding}
+	 */
+	
 	@Test
 	public void testApplyMove() {
 		assert(model.getPlayers().get("Marco").getLeaders().size()==2);
 		leaderDisc.applyMove(model);
 		assert(model.getPlayers().get("Marco").getLeaders().size()==1);
 	}
+	
+	/**
+	 * this method tests the failure applyMove method in {@link LeaderDiscarding}
+	 */
 	
 	@Test
 	public void testApplyMoveFail() {
