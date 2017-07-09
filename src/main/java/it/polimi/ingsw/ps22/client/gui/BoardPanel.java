@@ -65,6 +65,7 @@ public class BoardPanel extends JPanel {
 	private ArrayList<LeaderButton> leaders = new ArrayList<>();
 	private transient AdaptiveLayout layout = AdaptiveLayout.instance();
 	private transient PersonalBoardAdaptive layoutPersonal = PersonalBoardAdaptive.instance();
+	private Chat chat;
 
 	public double resizeFactor(ImageIcon c, double heightScreen) {
 		double factorScaleX = (double) c.getIconHeight() / (heightScreen);
@@ -256,7 +257,7 @@ public class BoardPanel extends JPanel {
 		layeredPane.add(isYourTurn, new Integer(100000));
 		isYourTurn.setVisible(false);
 
-		Chat chat = new Chat(view, resizeFactor);
+		chat = new Chat(view, resizeFactor);
 		Rectangle chatSlot = layout.getChatSlot(resizeFactor);
 		chat.setBounds(chatSlot.getInitx(), chatSlot.getInity(), chatSlot.getOffsetX(), chatSlot.getOffsetY());
 		chat.setOpaque(true);
@@ -613,5 +614,9 @@ public class BoardPanel extends JPanel {
 
 	public void setIsYourTurn() {
 		isYourTurn.setVisible(true);
+	}
+	
+	public void addChatMessage(String str){
+		chat.addMex(str);
 	}
 }

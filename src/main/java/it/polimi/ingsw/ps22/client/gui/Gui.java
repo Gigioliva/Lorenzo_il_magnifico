@@ -16,6 +16,7 @@ import it.polimi.ingsw.ps22.server.message.AskExcomm;
 import it.polimi.ingsw.ps22.server.message.AskFamily;
 import it.polimi.ingsw.ps22.server.message.AskLeader;
 import it.polimi.ingsw.ps22.server.message.AskServant;
+import it.polimi.ingsw.ps22.server.message.ChatMessage;
 import it.polimi.ingsw.ps22.server.message.ChoiceMove;
 import it.polimi.ingsw.ps22.server.message.ErrorMove;
 import it.polimi.ingsw.ps22.server.message.GenericMessage;
@@ -132,6 +133,10 @@ public class Gui extends JFrame {
 
 	public void genericMessage(GenericMessage mex) {
 		(new ShowMessage(view, mex, this)).setVisible(true);
+	}
+	
+	public void showChatMessage(ChatMessage mex){
+		board.addChatMessage(mex.getString());
 	}
 
 	public void close() {

@@ -47,6 +47,7 @@ public class VisitorGUI extends VisitorB {
 
 	@Override
 	public void visit(ChatMessage mex) {
+		gui.showChatMessage(mex);
 	}
 
 	@Override
