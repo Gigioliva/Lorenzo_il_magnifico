@@ -34,6 +34,7 @@ public class Chat extends JPanel {
 		this.setOpaque(false);
 		this.setLayout(new BorderLayout());
 		this.add(mex, BorderLayout.CENTER);
+		this.add(new JLabel("Chat"), BorderLayout.PAGE_START);
 		JPanel panel = new JPanel();
 		panel.setLayout(new GridLayout(2, 1));
 		panel.add(userText);
