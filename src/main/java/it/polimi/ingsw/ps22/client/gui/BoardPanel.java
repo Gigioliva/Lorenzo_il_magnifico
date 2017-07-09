@@ -256,6 +256,13 @@ public class BoardPanel extends JPanel {
 		layeredPane.add(isYourTurn, new Integer(100000));
 		isYourTurn.setVisible(false);
 
+		Chat chat = new Chat(view, resizeFactor);
+		Rectangle chatSlot = layout.getChatSlot(resizeFactor);
+		chat.setBounds(chatSlot.getInitx(), chatSlot.getInity(), chatSlot.getOffsetX(), chatSlot.getOffsetY());
+		chat.setOpaque(true);
+		layeredPane.add(chat, new Integer(100000));
+		chat.setVisible(true);
+		
 		JButton quitTurn = new JButton("End turn");
 		Rectangle quitTurnDim = layout.getEndTurnDim(resizeFactor);
 		quitTurn.setBackground(java.awt.Color.BLACK);

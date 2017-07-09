@@ -47,6 +47,7 @@ public class AdaptiveLayout {
 	private final Rectangle isYourTurnSlot;
 	private final Rectangle closeGameDim;
 	private final Rectangle endTurnDim;
+	private final Rectangle chatSlot;
 	private final int cardDevelopmentStartOffsetX;
 	private final int cardDevelopmentStartOffsetY;
 	private final int cardDevelopmentHeight;
@@ -110,6 +111,7 @@ public class AdaptiveLayout {
 		isYourTurnSlot = new Rectangle(5650, 6600, 430, 550);
 		closeGameDim = new Rectangle(0, 700, 0, 300);
 		endTurnDim = new Rectangle(0, 700, 0, 400);
+		chatSlot = new Rectangle(5650, 6550, 600, 1500);
 		cardDevelopmentStartOffsetX = 183;
 		cardDevelopmentStartOffsetY = 193;
 		cardDevelopmentHeight = 446;
@@ -149,6 +151,10 @@ public class AdaptiveLayout {
 	
 	public Rectangle getEndTurnDim(double boardResizeFactor) {
 		return endTurnDim.resize(boardResizeFactor);
+	}
+	
+	public Rectangle getChatSlot(double boardResizeFactor) {
+		return chatSlot.resize(boardResizeFactor);
 	}
 	
 	public Rectangle getTurnNumberSlot(double boardResizeFactor) {
