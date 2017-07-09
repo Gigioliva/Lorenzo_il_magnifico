@@ -260,7 +260,7 @@ public class BoardPanel extends JPanel {
 		chat = new Chat(view, resizeFactor);
 		Rectangle chatSlot = layout.getChatSlot(resizeFactor);
 		chat.setBounds(chatSlot.getInitx(), chatSlot.getInity(), chatSlot.getOffsetX(), chatSlot.getOffsetY());
-		chat.setOpaque(true);
+		chat.setOpaque(false);
 		layeredPane.add(chat, new Integer(100000));
 		chat.setVisible(true);
 		
