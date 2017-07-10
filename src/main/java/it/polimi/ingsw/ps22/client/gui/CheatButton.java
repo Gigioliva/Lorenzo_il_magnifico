@@ -13,6 +13,7 @@ public class CheatButton extends JButton {
 
 	public CheatButton() {
 		super("Cheat");
+		this.setVisible(false);
 		this.addActionListener(new ButtonListener());
 	}
 
