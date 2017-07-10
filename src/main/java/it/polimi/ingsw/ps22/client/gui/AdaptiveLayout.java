@@ -122,11 +122,11 @@ public class AdaptiveLayout {
 		cardDevelopmentOffsetY = 24;
 		playerGridOffsetY = 136;
 		inChurchOffsetX = 186;
-		outChurchOffsetX = 116;
+		outChurchOffsetX = 122;
 		victoryPointOffsetXY = 120;
 		familiarOffsetX = 508;
 		familiarOffsetY = 473;
-		militaryOffsetY = 127;
+		militaryOffsetY = 120;
 		addingMilitaryOffsetY = 15;
 	}
 	
