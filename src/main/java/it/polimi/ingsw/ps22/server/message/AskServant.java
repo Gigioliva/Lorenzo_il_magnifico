@@ -2,7 +2,9 @@ package it.polimi.ingsw.ps22.server.message;
 
 import it.polimi.ingsw.ps22.client.main.VisitorB;
 import it.polimi.ingsw.ps22.server.action.Action;
+import it.polimi.ingsw.ps22.server.answer.AnswerServant;
 import it.polimi.ingsw.ps22.server.effect.ExtraAction;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
@@ -40,6 +42,12 @@ public class AskServant extends MessageAsk {
 	 */
 	public Action getAction(){
 		return Action;
+	}
+	
+	@Override
+	public void applyDefault(Model model) {
+		AnswerServant ans = new AnswerServant(this.getId(), 0);
+		ans.applyAnswer(model);
 	}
 	
 	public AskServant accept(VisitorA visitor){

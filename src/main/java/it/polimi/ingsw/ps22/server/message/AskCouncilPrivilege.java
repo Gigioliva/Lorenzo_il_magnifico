@@ -1,6 +1,9 @@
 package it.polimi.ingsw.ps22.server.message;
 
+import java.util.ArrayList;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.AnswerCouncilPrivilege;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
 
@@ -59,6 +62,16 @@ public class AskCouncilPrivilege extends MessageAsk {
 	 */
 	public int getNumChoice(){
 		return numChoice;
+	}
+	
+	@Override
+	public void applyDefault(Model model) {
+		ArrayList<Integer> eff = new ArrayList<>();
+		for (int i = 0; i < numChoice; i++) {
+			eff.add(i+1);
+		}
+		AnswerCouncilPrivilege ans = new AnswerCouncilPrivilege(this.getId(), eff);
+		ans.applyAnswer(model);
 	}
 	
 	public AskCouncilPrivilege accept(VisitorA visitor){

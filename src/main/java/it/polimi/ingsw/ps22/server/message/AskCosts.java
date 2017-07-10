@@ -3,8 +3,10 @@ package it.polimi.ingsw.ps22.server.message;
 import java.util.ArrayList;
 import java.util.HashMap;
 import it.polimi.ingsw.ps22.client.main.VisitorB;
+import it.polimi.ingsw.ps22.server.answer.AnswerCosts;
 import it.polimi.ingsw.ps22.server.board.TowerSpace;
 import it.polimi.ingsw.ps22.server.card.RequisiteCost;
+import it.polimi.ingsw.ps22.server.model.Model;
 import it.polimi.ingsw.ps22.server.player.Player;
 import it.polimi.ingsw.ps22.server.resource.ResourceAbstract;
 import it.polimi.ingsw.ps22.server.view.VisitorA;
@@ -127,6 +129,12 @@ public class AskCosts extends MessageAsk {
 			return discount;
 		else
 			return new HashMap<String, ResourceAbstract>();
+	}
+	
+	@Override
+	public void applyDefault(Model model) {
+		AnswerCosts ans = new AnswerCosts(this.getId(), 1);
+		ans.applyAnswer(model);
 	}
 	
 	public AskCosts accept(VisitorA visitor){

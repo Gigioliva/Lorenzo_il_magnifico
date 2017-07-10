@@ -65,7 +65,9 @@ public class Controller implements Observer {
 		@Override
 		public void run() {
 			if(model.getCurrentPlayer()!=null){
-				model.getWaitAnswer().removeAll(model.getWaitAnswer());
+				while(!model.getWaitAnswer().isEmpty()){
+					model.getWaitAnswer().get(0).applyDefault(model);
+				}
 				model.getCurrentPlayer().setConnected(false);
 				GenericMessage mex=new GenericMessage();
 				mex.setString("Il giocatore "+ model.getPlayerGame() + " si è disconnesso");
@@ -74,6 +76,7 @@ public class Controller implements Observer {
 				do{
 					model.nextPlayer();
 				}while(!model.getCurrentPlayer().getConnected() && model.getIsActive());
+				model.notifyModel();
 			}else{
 				ArrayList<MessageAsk> temp=new ArrayList<>();
 				temp.addAll(model.getWaitAnswer());
