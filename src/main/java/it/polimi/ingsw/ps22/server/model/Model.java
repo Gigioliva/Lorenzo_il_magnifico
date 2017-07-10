@@ -267,6 +267,7 @@ public class Model extends Observable implements Serializable {
 		notifyObservers();
 		playerGame=winner;
 		isActive=false;
+		System.out.println(mex.getString());
 	}
 
 	private void winMilitaryPoint() {
@@ -304,8 +305,9 @@ public class Model extends Observable implements Serializable {
 	}
 
 	private Player winGame() {
-		Player player = null;
-		int i = -1;
+		ArrayList<String> play=new ArrayList<>(players.keySet());
+		Player player = players.get(play.get(0));
+		int i=player.getSpecificResource("VictoryPoint").getQuantity();
 		for (String el : players.keySet()) {
 			if (players.get(el).getSpecificResource("VictoryPoint").getQuantity() > i) {
 				player = players.get(el);

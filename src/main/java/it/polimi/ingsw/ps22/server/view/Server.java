@@ -15,6 +15,7 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ExecutorService;
@@ -41,8 +42,8 @@ public class Server extends UnicastRemoteObject implements ServerRMI {
 	private static final int TIMER_SAVE = 180000;
 	private transient ServerSocket serverSocket;
 	private transient ExecutorService executor = Executors.newFixedThreadPool(128);
-	private transient HashMap<String, Connection> waitingFour = new HashMap<>();
-	private transient HashMap<String, Connection> waitingFive = new HashMap<>();
+	private transient LinkedHashMap<String, Connection> waitingFour = new LinkedHashMap<>();
+	private transient LinkedHashMap<String, Connection> waitingFive = new LinkedHashMap<>();
 	private HashMap<Model, ArrayList<RemoteView>> playingConnection = new HashMap<Model, ArrayList<RemoteView>>();
 	private HashMap<Model, ArrayList<RemoteView>> savePlaying = new HashMap<Model, ArrayList<RemoteView>>();
 	private transient Timer timerFour;

@@ -21,7 +21,7 @@ public class Chat extends JPanel {
 	private JButton send = new JButton("Send");
 	private JLabel mex = new JLabel();
 	private ArrayList<String> messagge = new ArrayList<>();
-	private ViewClient view;
+	private transient ViewClient view;
 	// da utilizzare per dimensioni corrette
 	//private double resizeFactor;
 	
